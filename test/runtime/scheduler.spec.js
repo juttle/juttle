@@ -26,4 +26,16 @@ describe('Scheduler', function() {
             }
         }, 100);
     });
+
+    it('runs periodic jobs', function(done) {
+        var ticks  = 0;
+
+        scheduler.schedule_every(10, function() { ticks += 1; });
+
+        var check = setTimeout(function() {
+            clearTimeout(check);
+            expect(ticks).to.gte(5);
+            done();
+        }, 70);
+    });
 });
