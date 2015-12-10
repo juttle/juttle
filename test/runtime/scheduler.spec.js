@@ -38,4 +38,16 @@ describe('Scheduler', function() {
             done();
         }, 70);
     });
+
+    it('schedule throws after scheduler stopped', function() {
+        scheduler.stop();
+        expect(scheduler.schedule.bind(scheduler, Date.now(), function() {})).to.throw(/Cannot schedule callbacks/);
+        scheduler.start();
+    });
+
+    it('schedule every throws after scheduler stopped', function() {
+        scheduler.stop();
+        expect(scheduler.schedule_every.bind(scheduler, 1000, function() {})).to.throw(/Cannot schedule callbacks/);
+        scheduler.start();
+    });
 });
