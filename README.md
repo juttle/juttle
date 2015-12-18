@@ -1,6 +1,6 @@
 # Juttle
 
-[![Build Status](https://magnum.travis-ci.com/juttle/juttle.svg?token=y7186y8XHjB7CcxwUcoX&branch=master)](https://magnum.travis-ci.com/juttle/juttle)
+[![Build Status](https://travis-ci.org/juttle/juttle.svg)](https://travis-ci.org/juttle/juttle)
 
 Juttle is an analytics system for developers built upon
 a stream-processing core and a
