@@ -1,0 +1,7 @@
+const QUARTILES = [0, 0.25, 0.5, 0.75, 1];
+emit -limit 10001 -from Date.new(0)
+| put x = count() - 1 // our data value ranges from 0 to 10000
+| reduce Q = percentile(x, QUARTILES)
+| put min = Q[0], Q1 = Q[1], Q2 = Q[2], Q3 = Q[3], max = Q[4]
+| remove Q
+| view table

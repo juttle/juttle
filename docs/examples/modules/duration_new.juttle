@@ -1,0 +1,3 @@
+emit -limit 1 
+| put this_minute = Duration.new(60), that_minute = Duration.new("00:01:00")
+| put diff = that_minute - this_minute

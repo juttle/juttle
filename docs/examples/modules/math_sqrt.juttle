@@ -1,0 +1,4 @@
+emit -from :0: -limit 100 
+| put a = count() 
+| put b = Math.floor(Math.sqrt(a)) 
+| uniq b

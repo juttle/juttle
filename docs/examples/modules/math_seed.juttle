@@ -1,0 +1,5 @@
+const ignored = Math.seed(42);
+emit -limit 1
+| put pick_a_number = Math.random()
+| put lucky_guess = 0.0016341939679719736
+| put amazed = (pick_a_number == lucky_guess)

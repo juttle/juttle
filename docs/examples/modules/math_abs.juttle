@@ -1,0 +1,3 @@
+emit -limit 1 
+| put step1 = 3.1415, step2 = 0.5772
+| put delta = Math.abs(step2 - step1)

@@ -1,0 +1,29 @@
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  apt:
+    sources:
+        - ubuntu-toolchain-r-test
+    packages:
+        - g++-4.8
+
+before_install:
+  - export CXX="g++-4.8"
+
+node_js:
+    - '4.2'
+    - '5.0'
+
+before_script:
+    - npm install -g gulp
+
+script:
+    - gulp lint examples-check test-coverage
+
+notifications:
+  slack:
+    secure: lwSV6wTYgL40rf1v5etOPlGDGv7KhUM+6hPglirzGzjm6kYVmpeuAoUZEYyPz3buD4YwRl3eMigdwPdmRAU0nSu19doTuofVZiJqR3VBIWiswx7c6PQOuUykHtKuf33EUTAxp3r8D/n0HDcF6ZARpnK8jJCXtu26T08WzgIb66zNpcgKLOmWl8j47/P0o748VOGelePav1BZUjqwjMH3n8KN+TlgmD+aMPKL4wAXEdqHGSObb3V90Um4aQNxFcJCSm/6kzpKzJ1BkXmejrWI07Upw+ivgzN4REQMZKbn5EVNMX6T8T/ra2wGBtWcFkvpNScgY3f5jX5qkeGWkdhYppEgfSGJG5fMO6+bU2jjDAvY2tiF7ugl7sG8JWfBvKgqH3j8x4ZF7yE9Rhi6w21ssScEmcDie/VorvaPrOuSvc0us/MjeqcYwd/V38edb3/HEuKKJl/5v55vm1n3zA/bpl1LG4a186JAlOQXftgx6nSY1TRjq2MYztMM+J69xJU71CC6VnkYnefHRQ2ER/f/ifsqbF0aZajbn9/XXbDYaAu+74Nzqz++KB0aLnp5I8fF5fKGnxHg5SNQuoLb9Q4B4hX1h2SYl2L1QgotD0LsBs6gCHYvad8hD7xQrjoaeC6JzeT6bPFvEpurBRxcuUxTzAlYBM1pQZQWY3Kpe+LFD8c=

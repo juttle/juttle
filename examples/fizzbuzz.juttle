@@ -1,0 +1,26 @@
+//
+// Juttle version of the fizzbuzz programmer test
+//
+// The number of runs is configurable with an input control, e.g:
+//
+//    bin/juttle examples/fizzbuzz.juttle --input N=30
+//
+
+input N: number -default 100;
+
+function fizzbuzz(x) {
+    if (x % 3 == 0 && x % 5 == 0) {
+        return "fizzbuzz";
+    } else if (x % 3 == 0) {
+        return "fizz";
+    } else if (x % 5 == 0) {
+        return "buzz";
+    } else {
+        return x;
+    }
+}
+
+emit -from :0: -limit N
+  | put i=count() - 1, x=fizzbuzz(i)
+  | keep i, x
+  | view table

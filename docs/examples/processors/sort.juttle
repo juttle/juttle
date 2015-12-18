@@ -1,0 +1,4 @@
+emit -from :0: 
+| put value = Math.random() 
+| sort value 
+| view table

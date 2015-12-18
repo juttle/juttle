@@ -1,0 +1,5 @@
+const name = "host-a341-4a29";
+emit -limit 1 
+| put id = String.slice(name, -9) 
+| view text
+

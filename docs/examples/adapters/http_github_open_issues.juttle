@@ -1,0 +1,27 @@
+/*
+ * List issues on github 
+ *
+ * Input parameters:
+ * 
+ *  owner: repository owner, ie 'nodejs'
+ *  repo: repository name, ie 'node'
+ *  page: which of the n pages of issues to display, default: 1
+ *  perPage: how many results per page to pull, default 10
+ *  state: which state of the bugs you're interested in, default 'all'
+ * 
+ * For more information on the github Issues API, see: 
+ *  https://developer.github.com/v3/issues/ 
+ * 
+ */
+
+input owner: text -default 'nodejs';
+input repo: text -default 'node';
+input page: number -default 1;
+input perPage: number -default 10;
+input state: text -default 'all'; 
+
+read http -url "https://api.github.com/repos/${owner}/${repo}/issues?page=${page}&per_page=${perPage}&state=${state}&direction=asc&sort=created"
+          -headers { 'User-Agent': 'http-adapter-example' }
+| keep title, created_at, state, number
+| put time=Date.new(created_at)
+| view text

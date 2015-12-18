@@ -1,0 +1,8 @@
+// convert a long identifier into a short label
+
+emit -points [
+  {name: "f79ca0aed8914533269a", value: 123},
+  {name: "15adb9cced74531343b8", value: 456}
+]
+| put label = String.substr(name, 0, 6)
+| keep time, label, value 

@@ -1,0 +1,32 @@
+// On historical data, you can apply reducer to get a single computation,
+// or batch your historical data by time, then reduce per batch period.
+
+sub historical_points() {
+  emit -from :0: -limit 10 
+  | put value = count()
+}
+historical_points 
+| reduce sum(value) 
+| view table -title "Historical sum total"
+;
+historical_points 
+| batch 5 
+| reduce sum(value) 
+| view table
+    -update "append" 
+    -title "Historical 5-second subtotals"
+;
+
+// On live streaming data, you must batch by time, then reduce per batch period.
+
+sub live_points() {
+  emit -limit 10 
+  | put value = count()
+}
+live_points 
+| batch 3 
+| reduce sum(value)
+| view table 
+    -update "append" 
+    -title "Live 3-second subtotals"
+;

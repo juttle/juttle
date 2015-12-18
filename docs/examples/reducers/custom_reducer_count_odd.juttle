@@ -1,0 +1,25 @@
+reducer count_odd(fieldname) {
+    var count = 0;
+
+    function update() {
+        if (*fieldname % 2 != 0) {
+            count = count + 1;
+        }
+    }
+    function expire() {
+        if (*fieldname % 2 != 0) {
+            count = count - 1;
+        }
+    }
+    function result() {
+        return count;
+    }
+}
+
+emit -from :-1d: -every :1m: -limit 100 | put value=count() 
+| (
+  reduce -every :10m: count_odd_last10m = count_odd(value);
+  reduce -every :10m: -over :1h: count_odd_last1h = count_odd(value) 
+  ) 
+| join
+| view table

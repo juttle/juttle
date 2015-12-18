@@ -1,0 +1,4 @@
+emit -limit 1 
+| put A = 5, B = 10, X = 'hello', Y = 'world', Z = 'boo' 
+| split A,B 
+| view text

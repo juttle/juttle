@@ -1,0 +1,30 @@
+// Call Record billing example:
+//
+// Call records arrive as a stream of points indicating duration in minutes.
+// Your phone bill is the total of these, charged at $.05/minute, from the
+// 20th of each month.
+//
+// This program displays a day-by-day running total of your bill:
+//
+sub call_record() {
+  emit -from :2014-01-01: -limit 4000 -every :h:
+  | put name = 'duration'
+  | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
+}
+call_record
+| batch 
+    -every :month:  
+    -on :day 20: 
+| put name = 'total', value = sum(value) * 0.05
+| view timechart
+;
+//
+// This program displays a table with monthly totals
+//
+call_record
+| reduce 
+    -every :month:
+    -on :day 20: value = sum(value) * 0.05
+| put name = "total", value = Math.floor(value * 100) / 100 
+| view table 
+

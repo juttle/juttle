@@ -1,0 +1,126 @@
+site_name: Juttle Language Reference
+
+docs_dir: docs
+
+repo_url: https://github.com/juttle/juttle
+repo_docs_dir: docs
+
+dev_addr: '0.0.0.0:8000'
+
+theme: readthedocs
+theme_dir: docs/custom_theme
+extra_css: [ custom_theme/extra.css ]
+
+markdown_extensions:
+    - markdown_include.include
+    - unimoji:
+        span_class: 'custom_emoji'
+        emoji: 
+         '<img alt="bulb" src="/images/emoji/bulb.png" width="30" height="30"/>': [ ':bulb:' ]
+         '<img alt="construction" src="/images/emoji/construction.png" width="30" height="30"/>': [ ':construction:' ]
+         '<img alt="warning" src="/images/emoji/warning.png" width="30" height="30"/>': [ ':warning:' ]
+         '<img alt="baby_symbol" src="/images/emoji/baby_symbol.png" width="30" height="30"/>': [ ':baby_symbol:' ]
+         '<img alt="information_source" src="/images/emoji/information_source.png" width="30" height="30"/>': [ ':information_source:' ]
+
+use_directory_urls: true
+
+pages:
+
+# Pages with ___Title are hidden from left sidebar menu.
+
+- Introduction:
+   - 'About': 'index.md'
+   - '____ Docs README': 'README.md'
+   - '____ Doc Template': 'doc_templates/template.md'
+   - '____ Juttle Doc Template': 'doc_templates/juttle_TEMPLATE.md'
+   - '____ Sample Datasets': 'examples/datasets/README.md'
+
+- Concepts:
+
+   - 'Overview': 'concepts/overview.md'
+   - 'Dataflow': 'concepts/dataflow.md'
+   - 'Programming Constructs': 'concepts/programming_constructs.md'
+   - 'Fields': 'concepts/fields.md'
+   - 'Filtering': 'concepts/filtering.md'
+   - 'Inputs': 'concepts/inputs.md'
+   - 'Views': 'concepts/views.md'
+
+   - '____ Data Types': 'reference/data_types.md'
+
+   - 'Tutorial': 'concepts/juttle_tutorial.md'
+
+   - '____ Juttle Terminology': 'concepts/terminology.md'
+
+
+   - '____ Standard Library': 'concepts/juttle_standard_library.md'
+
+- Reference: 
+
+   - 'Sources': 'sources/index.md'
+   - '____ emit': 'sources/emit.md'
+   - '____ read': 'sources/read.md'
+
+   - 'Processors': 'processors/index.md'
+   - '____ batch': 'processors/batch.md'
+   - '____ filter': 'processors/filter.md'
+   - '____ head': 'processors/head.md'
+   - '____ join': 'processors/join.md'
+   - '____ keep': 'processors/keep.md'
+   - '____ pace': 'processors/pace.md'
+   - '____ pass': 'processors/pass.md'
+   - '____ put': 'processors/put.md'
+   - '____ reduce': 'processors/reduce.md'
+   - '____ remove': 'processors/remove.md'
+   - '____ reorder': 'processors/reorder.md'
+   - '____ skip': 'processors/skip.md'
+   - '____ sort': 'processors/sort.md'
+   - '____ split': 'processors/split.md'
+   - '____ tail': 'processors/tail.md'
+   - '____ unbatch': 'processors/unbatch.md'
+   - '____ uniq': 'processors/uniq.md'
+
+   - 'Sinks': 'sinks/index.md'
+   - '____ view': 'sinks/view.md'
+   - '____ view_text.md': 'sinks/view_text.md'
+   - '____ view_table.md': 'sinks/view_table.md'
+   - '____ write': 'sinks/write.md'
+
+   - 'Adapters': 'adapters/index.md'
+   - '____ File Adapter': 'adapters/file.md'
+   - '____ HTTP Adapter': 'adapters/http.md'
+   - '____ Stochastic Adapter': 'adapters/stochastic.md'
+   - '____ CDN Source': 'adapters/stochastic_cdn.md'
+   - '____ Logs Source': 'adapters/stochastic_logs.md'
+   - '____ Search Cluster Source': 'adapters/stochastic_search_cluster.md'
+
+   - 'Reducers': 'reducers/index.md'
+   - '____ Time Windowed Reducers': 'reducers/juttle_reducers_timewindows.md'
+   - '____ User-defined Reducers': 'reducers/juttle_reducers_user-defined.md'
+   - '____ avg': 'reducers/avg.md'
+   - '____ count': 'reducers/count.md'
+   - '____ count_unique': 'reducers/count_unique.md'
+   - '____ delta': 'reducers/delta.md'
+   - '____ first': 'reducers/first.md'
+   - '____ last': 'reducers/last.md'
+   - '____ mad': 'reducers/mad.md'
+   - '____ max': 'reducers/max.md'
+   - '____ min': 'reducers/min.md'
+   - '____ percentile': 'reducers/percentile.md'
+   - '____ pluck': 'reducers/pluck.md'
+   - '____ sigma': 'reducers/sigma.md'
+   - '____ sum': 'reducers/sum.md'
+
+   - 'Modules': 'modules/index.md'
+   - '____ Array': 'modules/array.md'
+   - '____ Date': 'modules/date.md'
+   - '____ Duration': 'modules/duration.md'
+   - '____ Math': 'modules/math.md'
+   - '____ Number': 'modules/number.md'
+   - '____ Object': 'modules/object.md'
+   - '____ String': 'modules/string.md'
+
+   - 'Time': 'reference/time.md'
+   - 'Data Types': 'reference/data_types.md'
+   - 'Operators': 'reference/operators.md'
+   - 'Conditionals': 'reference/conditionals.md'
+   - 'Style Guide': 'reference/style_guide.md'

@@ -1,0 +1,2 @@
+emit -limit 1 | put a=Math.random(), b=Math.random()
+| put c = "a > b: " + Boolean.toString(a > b)

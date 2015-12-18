@@ -1,0 +1,16 @@
+/*
+ * Calculate the list of top contributions to a given github repository.
+ * To run this against another repo just set the necessary inputs like so:
+ *
+ * > juttle examples/http/github_top_contributors.juttle --input owner=npm --input repo=npm
+ *
+ */
+input owner: text -default 'nodejs';
+input repo:  text -default 'node';
+input since: date -default :1 week ago:;
+
+read http -url 'https://api.github.com/repos/${owner}/${repo}/commits?since=${since}'
+| put username = author['login']
+| reduce count() by username
+| sort count -desc
+| view text -format 'csv'

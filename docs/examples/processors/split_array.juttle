@@ -1,0 +1,4 @@
+emit -limit 1 
+| put a = [1,2,3], b = "foo" 
+| split a,b
+| view text

@@ -1,0 +1,1 @@
+read stochastic -source 'cdn' -host_names ["fenge", "geruth", "amled"] -daily 3.0  name ~ '*cpu*'

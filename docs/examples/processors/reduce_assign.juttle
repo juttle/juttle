@@ -1,0 +1,3 @@
+emit -hz 10 -limit 10 
+| reduce x = 3 * 4, count() 
+| view text

@@ -1,0 +1,78 @@
+// stdlib.random demos:
+//
+import "random.juttle" as random;
+
+export sub poissonHisto() {
+    // render draws from 3 poisson distributions as a scatter chart.
+    // see https://en.wikipedia.org/wiki/Poisson_distribution
+    emit -limit 10000 -from 0
+        | put lambda_1=random.poisson(1), lambda_4=random.poisson(4), lambda_10=random.poisson(10)
+        | split lambda_1, lambda_4, lambda_10
+        | reduce n = count() by name,value
+        | view scatterchart -controlField 'value' -valueField 'n' -keyField 'name' -title 'poisson distributions'
+}
+
+reducer xdp(y, P) {
+    // given a list of data values and corresponding percentiles, return the
+    // derivative. This numerically differentiates  the EDF to get an approximate
+    // PDF. It can be a bumpy ride.
+    //
+    var Y = [];
+    function update() {
+        Y = *y; //P = *pct;
+    }
+    function iter(X, dPdX, n) {
+        if (X == null || X[n+1] == null) {
+            return dPdX;
+        } else if (n > 0) {
+            dPdX[n] = [(X[n+1]+X[n])/2, (P[n+1] - P[n]) / (X[n+1] - X[n])];
+        }
+        return iter(X, dPdX, n+1);
+    }
+    function result() {
+        return iter(Y, [0], 0);
+    }
+}
+
+export sub pdfChart(x, by, title) {
+    // compute percentiles for a metric stream (an approximate
+    // empirical distribution function), differentiate them to get an
+    // approximate probability distribution, then make a scatter chart.
+    //
+    const PCT = [0, .01, .02, .03, .04,.05,.06,.07, .1, .15, .2, .25, .3, .35, .4, .45, .5,
+                 .55, .6, .65, .7, .75, .8, .85, .9, .92,.93,.94,.95,.96, .97, .98, .99, 1];
+    reduce px = percentile(x, PCT) by by
+    | put dpx = xdp(px, PCT) by by
+    | split dpx
+    | put x=value[0], dp=value[1]
+    | view scatterchart -controlField 'x' -valueField 'dp' -keyField by -title title
+}
+
+export sub normalHisto() {
+    // render draws from some normal distributions as a scatter chart.
+    // see https://en.wikipedia.org/wiki/Normal_distribution
+    //
+    emit -limit 50000 -from 0
+        | put x = random.normal(0,Math.sqrt(0.2)), y = random.normal(0, 1), z = random.normal(-2, Math.sqrt(0.5))
+        | split x, y, z
+        | put series = name
+        | pdfChart -x 'value' -by 'series' -title 'normal distributions'
+}
+
+export sub expHisto() {
+    // render draws from some exponential distributions as a scatter chart.
+    // see https://en.wikipedia.org/wiki/Exponential_distribution
+    //
+    emit -limit 50000 -from 0
+        | put lambda_05=random.exponential(2), lambda_1=random.exponential(1), lambda_15=random.exponential(1/1.5)
+        | split lambda_05, lambda_1, lambda_15
+        | put series = name
+        | filter value < 8
+        | pdfChart -x 'value' -by 'series' -title 'exponential distributions'
+}
+
+export sub demo() {
+    poissonHisto;
+    normalHisto;
+    expHisto;
+}

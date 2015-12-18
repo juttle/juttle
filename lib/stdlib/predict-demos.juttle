@@ -1,0 +1,96 @@
+// predict demos: trend and seasonality
+//
+// the following metric sources all work with the default predict interval of :w:
+// all reads are from jx3 or j4qa as indicated.
+//
+import "predict.juttle" as predict
+
+input last: duration -default :30 days: -label 'Show this duration:';
+
+export sub live_juttle_runs(dur1=:3M:) {
+    read -from (:now: + :1d: - dur1) -space 'prod'
+    event = 'run-juttle' AND
+    properties_page_currentPage ='https://app.jut.io/#explorer' AND
+    context_ip != '207.141.12.50'
+    | reduce -every :h: run_count = count()
+    | (view timechart -title "Weekly App Juttle Program Runs" -valueField 'run_count' -display.dataDensity 0; put value=run_count)
+}
+
+export sub live_pageviews() {
+    read -from :now: - last -space 'prod' type = 'page' properties_url ~ 'http://docs.jut.io/*'
+        NOT (context_ip in ['207.141.12.50','54.149.158.203','54.68.207.93','52.10.135.75','54.148.36.156','52.24.101.163'])
+    | reduce -every :h: pageviews = count(), users = count_unique(anonymousId)
+    | (view timechart -title "live pageviews" -valueField 'pageviews' -display.dataDensity 0; put value=pageviews)
+}
+
+export sub live_users() {
+    read -from :now: - last -space 'prod' type = 'page' properties_url ~ 'http://docs.jut.io/*'
+        NOT (context_ip in ['207.141.12.50','54.149.158.203','54.68.207.93','52.10.135.75','54.148.36.156','52.24.101.163'])
+    | reduce -every :h: pageviews = count(), users = count_unique(anonymousId)
+    | (view timechart -title "live users" -valueField 'users' -display.dataDensity 0; put value=users)
+}
+
+export sub slack_messages() {
+    // this runs in j4qa rather than jx3
+    read -from :-M: -space "slack"
+        type = "message" and user_name != null
+    | reduce -every :h: name="slack_messages", value = count()
+    | (view timechart -title "slack messages" -display.dataDensity 0; pass)
+}
+
+sub pulse(field, value, start, dur) {
+  put *field = *field + ((time >= start && time < start + dur) ? value : 0)
+}
+
+sub slide(field, value, start, dur) {
+    put *field = *field + (
+        (time >= start && time < start + dur)
+            ? ((time - start) / dur) * value
+            : 0)
+}
+
+export sub series(from, to, every, over, trend = 1, season = 10, alpha = 0.5, sigma=0.1, initial=0) {
+    // generate a series of values having given trend, seasonality, noise, and autocorrelation (ewma alpha)
+    emit -from from -to to -every every
+    | put n = count(), dy = (time - Date.new(0)) / over, cycle = Math.sin(dy * 2 * Math.PI)
+    | put step = sigma * (2 * Math.random() - 1)
+    | put step = ewma("step", alpha, initial)
+    | put value = n * trend + season * cycle + step
+    | slide -field 'value' -value -20 -start from + 5.25 * over -dur 4*every
+}
+
+export sub posSeries(from, to, every, over, trend = 1, season = 10, alpha = 0.5, sigma=0.1, initial=0) {
+    // like series, but keep it positive
+    emit -from from -to to -every every
+    | put n = count(), dy = (time - Date.new(0)) / over, cycle = Math.abs(Math.sin(dy * 2 * Math.PI))
+    | put step = sigma * (2 * Math.random() - 1)
+    | put step = ewma("step", alpha, initial)
+    | put value = n * trend + season * cycle + step
+    | slide -field 'value' -value -20 -start from + 5.25 * over -dur 4*every
+    | put value = Math.abs(value)
+}
+
+// null invocation of predict that uses the previous value as the
+// prediction of the next value. not bad.
+//
+export sub dontPredict(field = "value", over = :w:, every=null, pct=0.5, nonneg=true) {
+    predict.predict -field field -over over -every every -pct pct -nonneg nonneg
+        -detrend false -deseason false -denoise false -revise false
+}
+
+const over = :w:;
+const every = subdivide_duration(over);
+// uncomment any one of the following sources:
+posSeries -from Date.new(0) -to Date.new(0)+ 8*over -every every -over over -trend .05 -season 20 -alpha 0.5 -sigma 4
+//live_juttle_runs
+//live_pageviews
+//live_users
+//slack_messages
+//  | dontPredict
+    | predict.predict
+    | (
+        put name="stderr", value = sigma("E") | view tile;
+        split value, P, T, S, Y   | view timechart -keyField 'name' -display.dataDensity 0;
+        split E   | view timechart -keyField 'name' -display.dataDensity 0;
+        split Z   | view timechart -keyField 'name' -display.dataDensity 0;
+    )

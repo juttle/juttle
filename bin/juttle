@@ -1,0 +1,420 @@
+#!/usr/bin/env node
+
+var JuttleLogger = require('../lib/logger');
+var log4js = require('log4js');
+
+// Set up logging to use log4js loggers
+JuttleLogger.getLogger = log4js.getLogger;
+if (! process.env.DEBUG) {
+    log4js.setGlobalLogLevel('info');
+}
+
+// Node will return errors on process.stdout if the standard output is
+// piped to a program that doesn't read all of the output (for
+// example, "bin/juttle .... | head"). So when process.stdout gets an
+// EPIPE, simply exit.
+process.stdout.on('error', function( err ) {
+    if (err.code === 'EPIPE') {
+        process.exit(0);
+    } else {
+        throw err;
+    }
+});
+
+var _ = require('underscore');
+var fs = require('fs');
+var path = require('path');
+var cline = require('cline');
+var minimist = require('minimist');
+var Promise = require('bluebird');
+var sinks = require('../lib/sinks');
+var read_config = require('../lib/config/read-config');
+
+var LocationStripper = require('../lib/cli/location-stripper');
+var ClientSinkManager = require('../lib/sinks/client-sink-mgr.js');
+var CliErrors = require('../lib/cli/errors');
+var parseInputs = require('../lib/cli/inputs').parseInputs;
+var URLResolver = require('../lib/module-resolvers/url-resolver');
+var FileResolver = require('../lib/module-resolvers/file-resolver');
+var resolver_utils = require('../lib/module-resolvers/resolver-utils');
+var compiler = require('../lib/compiler');
+var optimize = require('../lib/compiler/optimize');
+var implicit_views = require('../lib/compiler/flowgraph/implicit_views');
+
+var modes = _.without(compiler.stageNames, 'eval').concat('run');
+
+function usage() {
+    console.log('usage: juttle [--version] [--mode <mode>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
+    console.log('     --version show juttle CLI version');
+    console.log('     --mode <mode>: one of ' + modes.map(JSON.stringify).join(', '));
+    console.log('     --config <config>: path to the juttle interpreter configuration file');
+    console.log('     --optimize runs optimization');
+    console.log("     --show-locations displays locations in the parse tree");
+    console.log('     --color/--no-color turns CLI output coloring on and off');
+    console.log('     --input name=val defines input `name` with value `val`');
+    console.log('     --e <juttle-src>: run the juttle source and exit');
+    console.log('     [juttle-file]: run the provided juttle file and exit');
+    process.exit(1);
+}
+
+var defaults = {
+    optimize: false,
+    input: false,
+    e: '',
+    mode: 'run',
+    config: null
+};
+
+var opts = minimist(process.argv.slice(2), {boolean: ['optimize']});
+
+_.defaults(opts, defaults);
+
+var show_locations = opts['show-locations'] || false;
+var inputs = parseInputs(opts.input);
+
+if (opts.version || opts.v) {
+    console.log(require('../package.json').version);
+    process.exit(0);
+}
+
+if (opts.help) {
+    usage();
+}
+
+var cli;
+var JUTTLE_DIR = path.join(process.env.HOME, '.juttle');
+var history_file = path.join(JUTTLE_DIR, 'history');
+
+var mode = opts.mode;
+var in_multi_line = false;
+var multi_line_src = '';
+var prompt = 'juttle> ';
+
+if (!_.contains(modes, mode)) {
+    console.error('error: invalid mode: ' + mode);
+    usage();
+}
+
+if (mode !== 'run') {
+    prompt = 'juttle (' + mode + ')> ';
+}
+
+var config = read_config({config_path: opts.config});
+_.defaults(config, {
+    adapters: {},
+    color: true,
+    show_locations: true,
+    implicit_sink: 'table'
+});
+
+var sink_classes = {
+    table: sinks.TableSink,
+    text: sinks.TextSink,
+    file: sinks.FileSink
+};
+
+var Juttle = require('../lib/runtime').Juttle;
+Juttle.adapters.load(config.adapters);
+
+function format_js(code) {
+    var beautify = require('js-beautify').js_beautify;
+    return(beautify(code, { indent_size: 2 }));
+}
+
+function showcode(code) {
+    console.log(format_js(code));
+}
+
+function showobj(obj) {
+    console.log(JSON.stringify(obj, null, 1));
+}
+
+function show(thing) {
+    if (thing === undefined) {
+        return;
+    }
+    if (typeof thing === 'string') {
+        showcode(thing);
+    } else {
+        showobj(thing);
+    }
+}
+
+function perform_compile(options) {
+    var compile_options = {
+        stage: options.stage,
+        moduleResolver: options.resolver,
+        fg_processors: [implicit_views(config.implicit_sink || 'table'), optimize],
+        inputs: options.inputs
+    };
+
+    return compiler.compile(options.juttle_src, compile_options);
+}
+
+function perform_run(options) {
+    // We break this into compile and run phases. After compiling
+    // and before running, we get the list of sinks and create
+    // appropriate objects for each.
+
+    return perform_compile(options).then(function(program) {
+        var sink_mgr = new ClientSinkManager({
+            program: program,
+            sink_classes: sink_classes
+        },{ // env
+            color: (opts.color ? true : false) && (opts.no_color ? false : true)
+        });
+
+        var sinks_done = sink_mgr.setup(program);
+
+        // Start listening for callbacks from the program and client sink
+        // manager for errors/warnings/sink data.
+        program.events.on('error', function(msg, err) {
+            console.error(msg, err);
+        });
+
+        program.events.on('warning', function(msg, warn) {
+            console.warn(warn, msg);
+        });
+
+        sink_mgr.events.on('error', function(msg, err) {
+            console.error(msg, err);
+        });
+
+        sink_mgr.events.on('warning', function(msg, warn) {
+            console.warn(warn, msg);
+        });
+
+        // Start the program.
+        program.activate();
+
+        return program.done()
+        .then(function() {
+            return sinks_done;
+        })
+        .then(function() {
+            program.events.off();
+        });
+    });
+}
+
+function is_juttle_error(e)
+{
+    return (_.has(e.info, 'location') && _.has(e.info.location, 'start'));
+}
+
+function perform_mode(options)
+{
+    if (options.prompt_when_done === undefined) {
+        options.prompt_when_done = true;
+    }
+
+    var promise;
+    var modules = {};
+
+    // Create a wrapper function around the resolver that saves the
+    // results in a hash, so we have access to the modules in the
+    // error handler.
+    var file_resolver = new FileResolver();
+    var url_resolver = new URLResolver();
+
+    var resolver = resolver_utils.multiple([
+        file_resolver.resolve,
+        url_resolver.resolve,
+    ]);
+
+    var perform_options = {
+        juttle_src: options.juttle_src,
+        resolver: function(module_name) {
+            return resolver(module_name)
+                .then(function(module) {
+                    modules[module.name] = module.source;
+                    return module;
+                });
+        },
+        inputs: inputs
+    };
+
+    if (options.action === 'run') {
+        promise = perform_run(perform_options);
+    } else {
+        promise = perform_compile(_.extend({}, perform_options, { stage: options.action }));
+    }
+
+    if ((options.action === 'parse' || options.action === 'semantic') && !show_locations) {
+        promise = promise.then(function(ast) {
+            var stripper = new LocationStripper();
+            stripper.strip(ast);
+            return ast;
+        });
+    }
+
+    return promise.then(show).then(function() {
+        if (options.prompt_when_done) {
+            cli.prompt(prompt);
+        }
+    }).catch(function(e) {
+        // If the error doesn't have a location, it's not a juttle error. Just re-throw it.
+        if (is_juttle_error(e)) {
+            console.error(CliErrors.show_in_context({
+                err: e,
+                program: options.juttle_src,
+                modules: modules,
+                filename: options.filename
+            }));
+
+            if (options.prompt_when_done) {
+                cli.prompt(prompt);
+            } else {
+                return Promise.reject(e);
+            }
+        } else {
+            console.error(e.message);
+            return Promise.reject(e);
+        }
+    });
+}
+
+function setupCline() {
+    cli = cline();
+
+    // Remove the last line from history
+    function trim_history()
+    {
+        var history = cli.history();
+        cli.history(history.slice(1).reverse());
+    }
+
+    function add_history(item)
+    {
+        var history = cli.history();
+        history.unshift(item);
+        cli.history(history.reverse());
+    }
+
+    if (fs.existsSync(history_file)) {
+        var hist = JSON.parse(fs.readFileSync(history_file, 'utf8'));
+        cli.history(hist.reverse());
+    }
+
+    cli.command('mode {mode}', 'change mode', {mode: '(?:' + modes.join('|') + ')'}, function(input, args) {
+        mode = args.mode;
+        if (mode === 'run') {
+            prompt = 'juttle> ';
+        } else {
+            prompt = 'juttle (' + mode + ')> ';
+        }
+
+        cli.prompt(prompt);
+    });
+
+    cli.command('src {path}', 'source file as juttle program', {path: '.*'}, function(input, args) {
+        var juttle_src;
+        try {
+            juttle_src = fs.readFileSync(args.path, 'utf8');
+        } catch (e) {
+            console.error('Error: Could not read file "' + args.path + '": ' + e.toString());
+            cli.prompt(prompt);
+            return;
+        }
+        perform_mode({
+            action: mode,
+            juttle_src: juttle_src,
+            filename: args.path
+        });
+    });
+
+    cli.command('<', 'start multi-line input', {}, function(input, args) {
+        console.log('Starting multi-line input. End input with a line containing a single ".":');
+        multi_line_src = '';
+        in_multi_line = true;
+        trim_history();
+    });
+
+    cli.command('{juttle}', 'evaluate juttle program', {juttle: '(?!(help|clear|exit)|\\.).*'}, function(input, args) {
+        if (in_multi_line) {
+            multi_line_src += input + '\n';
+        } else {
+            perform_mode({
+                action: mode,
+                juttle_src: input
+            });
+        }
+    });
+
+    cli.command('.', 'end multi-line input', {}, function(input, args) {
+        if (!in_multi_line) {
+            cli.prompt(prompt);
+        } else {
+            in_multi_line = false;
+            add_history(multi_line_src);
+            perform_mode({
+                action: mode,
+                juttle_src: multi_line_src
+            });
+        }
+    });
+
+    cli.on('history', function(item) {
+        // If in multi-line input mode, don't add to
+        // history. Unfortunately, we can't suppress history additions,
+        // but we can rewrite it to remove the item just added.
+        if (in_multi_line) {
+            trim_history();
+        }
+    });
+
+    cli.on('close', function() {
+        fs.stat(JUTTLE_DIR, function(err, stats) {
+            if (err) {
+                fs.mkdirSync(JUTTLE_DIR);
+            }
+            fs.writeFileSync(history_file, JSON.stringify(cli.history()));
+            process.exit(0);
+        });
+    });
+
+    cli.on('usage', function(usage_str) {
+        cli.prompt(prompt);
+    });
+}
+
+if (opts._.length > 1) {
+    console.log(process.argv);
+    usage();
+} else if (opts._.length === 1) {
+    var juttle_src;
+    try {
+        juttle_src = fs.readFileSync(opts._[0], 'utf8');
+    } catch (e) {
+        console.error(e.message);
+        process.exit(1);
+    }
+    perform_mode({
+        action: mode,
+        juttle_src: juttle_src,
+        prompt_when_done: false,
+        filename: opts._[0]
+    })
+    .then(function() {
+        process.exit(0);
+    })
+    .catch(function(e) {
+        process.exit(1);
+    });
+} else if (opts.e !== '') {
+    perform_mode({
+        action: mode,
+        juttle_src: opts.e,
+        prompt_when_done: false
+    })
+    .then(function() {
+        process.exit(0);
+    })
+    .catch(function(e) {
+        process.exit(1);
+    });
+} else {
+    setupCline();
+    // This starts off the main cli loop.
+    cli.prompt(prompt);
+}

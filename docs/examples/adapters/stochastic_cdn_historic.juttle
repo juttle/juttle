@@ -1,0 +1,17 @@
+read stochastic -source 'cdn' -from :1 week ago: -to :now: -source_type 'metric'
+name = 'requests' OR name = 'cpu' OR name = 'response_ms' OR name = 'disk'
+| (
+  filter service = 'search' AND name = 'requests'
+  | reduce requests_per_sec = avg(value) by host;
+
+  filter name = 'cpu'
+  | reduce cpu = avg(value) by host;
+
+  filter service = 'search' AND name = 'response_ms'
+  | reduce response_ms = avg(value) by host;
+  
+  filter name = 'disk'
+  | reduce disk = avg(value) by host;
+)
+| join host
+| view table -title 'Host Metrics (Last Week)' -columnOrder [ 'host' ]

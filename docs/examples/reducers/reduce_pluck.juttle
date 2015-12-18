@@ -1,0 +1,32 @@
+// On historical data, you can apply reducer to get a single computation,
+// or batch your historical data by time, then reduce per batch period.
+
+sub historical_points() {
+  emit -from :0: -limit 10 
+  | put value = Math.floor(Math.random() * 100)
+} 
+historical_points 
+| reduce values = pluck(value)
+| view table -title "List values of all historical points"
+;
+historical_points 
+| batch 5 
+| reduce values = pluck(value) 
+| view table
+    -update "append" 
+    -title "List values of points per 5-second batch, historical"
+;
+
+// On live streaming data, you must batch by time, then reduce per batch period.
+
+sub live_points() {
+emit -limit 10 
+| put value = Math.floor(Math.random() * 100)
+}
+live_points 
+| batch 3 
+| reduce values = pluck(value)
+| view table 
+    -update "append" 
+    -title "List values of points per 3-second batch, live"
+;

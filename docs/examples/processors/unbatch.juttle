@@ -1,0 +1,6 @@
+emit -from :2015-01-01: -limit 20
+| batch :5s: 
+| reduce count()
+| unbatch 
+| reduce count()
+| view text

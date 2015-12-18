@@ -1,0 +1,82 @@
+[
+  {
+    "time": "2014-05-28T00:15:54.699Z",
+    "value": 86.89435452688485,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server2",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:54.699Z",
+    "value": 51.51528539136052,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server1",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:54.799Z",
+    "value": 69.61534135043621,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server0",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:55.399Z",
+    "value": 65.7509105745703,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server1",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:55.699Z",
+    "value": 86.53959247749299,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server2",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:55.699Z",
+    "value": 16.140376590192318,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server0",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:55.749Z",
+    "value": 45.50091333221644,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server2",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:55.799Z",
+    "value": 90.40425342973322,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server1",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:56.099Z",
+    "value": 71.42875657882541,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server0",
+    "space": "default"
+  },
+  {
+    "time": "2014-05-28T00:15:56.599Z",
+    "value": 86.92704201675951,
+    "name": "juttle.write1",
+    "source_type": "metric",
+    "host": "server1",
+    "space": "default"
+  }
+]

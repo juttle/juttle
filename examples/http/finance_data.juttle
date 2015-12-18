@@ -1,0 +1,20 @@
+/*
+ * Reading stock quote data with http adapter
+ *
+ * > juttle examples/http/finance_data.juttle --input symbol=goog
+ */
+
+input symbol: text -default 'YHOO';
+const start=Date.format(:1 month ago:, 'YYYY-MM-DD');
+const end=Date.format(:now:, 'YYYY-MM-DD');
+const yqlQuery='select * from yahoo.finance.historicaldata where symbol="${symbol}" and startDate="${start}" and endDate="${end}"';
+
+read http -url 'http://query.yahooapis.com/v1/public/yql?q=${yqlQuery}&format=json&env=store://datatables.org/alltableswithkeys'
+| put quotes=query['results']['quote']
+| remove query
+| split quotes
+| put date = Date.new(value['Date']), name=value['Symbol'], value=value['Close']
+| sort date
+| put time=date
+| remove date
+| view text

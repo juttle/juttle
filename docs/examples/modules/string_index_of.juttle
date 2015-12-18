@@ -1,0 +1,4 @@
+emit -limit 1 
+| put name="The voodoo that you voodoo"
+| put newname=String.indexOf(name, "voodoo")
+| view text

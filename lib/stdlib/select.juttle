@@ -1,0 +1,61 @@
+// Select points from a stream satisfying particular properties
+//
+//   * min(field, by): sub, returns point(s) containing the minimum value of field.
+//   * max(field, by): sub, returns point(s) containing the maximum value of field.
+//   * median(field, by): sub, returns point(s) containing the median value of field.
+//   * percentile(field, p, by): sub, returns point(s) at the pth percentile of field.
+
+//
+// forward points whose field's value is the maximum
+//
+// Parameters:
+//
+//   * field: field to test
+//   * by: (opt) field to group by
+//
+export sub max(field, by=[]) {
+  ( reduce -groupby by __mp = max(field) ; pass )
+  | join by
+  | put __femp = *field == __mp | filter __femp == true | remove __mp, __femp
+}
+
+//
+// forward points whose field's value is the minimum
+//
+// Parameters:
+//
+//   * field: field to test
+//   * by: (opt) field to group by
+//
+export sub min(field, by=[]) {
+  ( reduce -groupby by __mp = min(field) ; pass )
+  | join by
+  | put __femp = *field == __mp | filter __femp == true | remove __mp, __femp
+}
+
+//
+// forward points whose field's value is the pth percentile value
+//
+// Parameters:
+//
+//   * field: field to test
+//   * by: (opt) field to group by
+//
+export sub percentile(field, p, by=[]) {
+    ( reduce -groupby by __pp = percentile(field, p); pass )
+    | join by
+    | put __flepp = *field <= __pp | filter __flepp == true | remove __pp, __flepp
+    | max -field field -by by
+}
+
+//
+// forward points whose field's value is the median value
+//
+// Parameters:
+//
+//   * field: field to test
+//   * by: (opt) field to group by
+//
+export sub median(field, by=[]) {
+    percentile -field field -p 0.5 -by by
+}

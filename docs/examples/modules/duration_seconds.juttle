@@ -1,0 +1,3 @@
+emit -limit 1 
+| put normal_year_seconds = Duration.seconds(:365 days:), 
+      leap_year_seconds = Duration.seconds(:366 days:)

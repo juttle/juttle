@@ -1,0 +1,17 @@
+// Day over Day graph example:
+//
+// display a graph of cpu usage superimposed over the previous day
+// by using a moving window to get the value from 24 hours ago.
+//
+// The graph will begin at 2014-01-01, but we need to start the data
+// source a day earlier so the windowed reducer can produce a point
+// for 2014-01-01
+//
+read stochastic -source 'cdn' -from :2013-12-31: -to :2014-01-05: -daily .5 -source_type 'metric' name = 'cpu'
+| reduce 
+    -every :2h: value = avg(value)
+| put 
+    -over :25h: prev = first(value)
+| filter time >= :2014-01-01: // discard unfilled window points from Dec.
+| split value,prev
+| view timechart

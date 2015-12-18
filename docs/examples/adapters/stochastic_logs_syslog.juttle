@@ -1,0 +1,2 @@
+read stochastic -source 'logs' -logType "syslog" -errp 0.4
+| view text

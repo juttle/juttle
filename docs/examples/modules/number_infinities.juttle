@@ -1,0 +1,6 @@
+const pos_inf = Number.POSITIVE_INFINITY;
+emit 
+| put div_by_zero = 1 / 0, inf = pos_inf
+| filter div_by_zero = pos_inf
+| filter inf > Number.MAX_VALUE
+| put nan = inf / inf

@@ -1,0 +1,2 @@
+const sixtyaught = Date.unixms(Date.new("2014-09-22T00:01:00")) - Date.unixms(Date.new("2014-09-22"));
+emit -limit 1 | put ms_in_minute = sixtyaught

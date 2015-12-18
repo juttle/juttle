@@ -1,0 +1,4 @@
+emit -limit 10
+| (view text ; pass)
+| put value=Math.random()
+| view timechart

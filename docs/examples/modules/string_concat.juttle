@@ -1,0 +1,5 @@
+emit -limit 1 
+| put host = "jupiter", domain = "milkyway.org" 
+| put fqdn = String.concat(host, ".", domain) 
+| view text
+

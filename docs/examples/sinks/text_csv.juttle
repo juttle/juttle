@@ -1,0 +1,4 @@
+emit -limit 5
+| put value = Math.round(Math.random() * 1000)
+| view text
+    -format 'csv'

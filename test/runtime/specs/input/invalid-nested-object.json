@@ -1,0 +1,8 @@
+[
+    { "time": 1, "rate": { "nested": true }},
+    { "time": 2, "rate": 5},
+    { "time": 3, "rate": 2},
+    { "time": 4, "rate": 7},
+    { "time": 5, "rate": 1},
+    { "time": 6, "rate": 3}
+]

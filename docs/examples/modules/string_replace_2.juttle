@@ -1,0 +1,3 @@
+emit -from :0: -limit 1 
+| put result = String.replace("hayneeeeeeedlehay", /ne+dle/, "FOUND") 
+| view text

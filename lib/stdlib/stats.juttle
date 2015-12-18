@@ -1,0 +1,229 @@
+// Streaming statistics for juttle data flows
+//
+// The stdlib stats module offers "standardization" of metric
+// timeseries -- shifting and re-scaling based on estimates of their
+// center and scale. This places streams into a standard form for
+// comparison with others, or for thresholding based on deviations
+// from the center. Besides "z-score" standardization using the sample
+// mean and estimated standard deviation, there is a robust variant
+// (MAD) and mean-relative (CV).
+//
+// Three kinds of standardization are offered:
+//
+//   * z-scores (based on estimated mean and standard deviation)
+//   * MAD (based on median absoulte deviation from the median)
+//   * CV (based on coefficient of variation)
+//
+// These are offered as moving-window computations that operate on a
+// batched stream or point-by-point, advancing the window with each point.
+//
+// Reducers:
+//
+//   * demean(field): de-mean the field
+//   * stddev(field): standard deviation of the field
+//   * z(field): standardized z-score wrt sample mean and stddev
+//   * relMean(field): field as a percentage of field mean
+//   * cv(field): coefficent of variation
+//
+
+// Return true if x is a reasonable number
+//
+// Parameters:
+//
+//   * x:   input value
+//
+function isFinite(x) {
+    return (x == x && x != null && x != x + 1);
+}
+// Return x, or a specified default if x is not a reasonable number
+//
+// Parameters:
+//
+//   * x:   input value
+//   * default: value to return when x is unpleasant
+//
+// replace unpleasant values with a specified default. Mostly needed for
+// NaN replacement, as timecharts do not ingest NaNs yet and we need to
+// decontaminate our output.
+//
+function finite(x, default) {
+    return isFinite(x) ? x : default;
+}
+
+// Return the difference between the last observed value and the
+// batch average.
+//
+// Parameters:
+//
+//   * field:   fieldname to demean
+//
+export reducer demean(field) {
+    var sum = 0;
+    var n = 0;
+    var latest = null;
+    function result() {
+        return (n > 0) ? latest - sum / n : null;
+    }
+    function update() {
+        var v = *field;
+        if (v != null) {
+            latest = v;
+            sum = sum + v;
+            n = n + 1;
+        }
+    }
+    function expire() {
+        var v = *field;
+        if (v != null) {
+            sum = sum - v;
+            n = n - 1;
+        }
+    }
+};
+
+// Return the standard deviation of a specified field over a batch
+//
+// Parameters:
+//
+//   * field:   fieldname
+//
+export reducer stddev(field) {
+    var sum = 0;
+    var ssum = 0;
+    var n = 0;
+    function update() {
+        var v = *field;
+        if (v != null) {
+            sum = sum + v;
+            ssum = ssum + v*v;
+            n = n + 1;
+        }
+    }
+    function result() {
+        if (n < 2 ) {
+            return null;
+        } else {
+            return Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+        }
+    }
+    function expire() {
+        var v = *field;
+        if (v != null) {
+            sum = sum - v;
+            ssum = ssum - v*v;
+            n = n - 1;
+        }
+    }
+};
+
+// Return the sample Z-score of the specified field.
+//
+// Parameters:
+//
+//   * field:   fieldname
+//
+// compute an approximate Z-score for an input value, using sample
+// estimates of population mean and stddev:
+//     (value - sample mean) / sample stddev
+//
+export reducer z(field) {
+    var sum = 0;
+    var ssum = 0;
+    var n = 0;
+    var latest = null;
+    function update() {
+        var v = *field;
+        if (v != null) {
+            latest = v;
+            sum = sum + v;
+            ssum = ssum + v*v;
+            n = n + 1;
+        }
+    }
+    function result() {
+        if (n < 2 ) {
+            return null;
+        } else {
+            var mean = sum / n;
+            var stddev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            return (latest - mean) / stddev;
+        }
+    }
+    function expire() {
+        var v = *field;
+        if (v != null) {
+            sum = sum - v;
+            ssum = ssum - v*v;
+            n = n - 1;
+        }
+    }
+};
+
+// Return the last observed value as a percentage of the batch mean
+//
+// Parameters:
+//
+//   * field:   input fieldname
+//
+export reducer relMean(field) {
+    var sum = 0;
+    var n = 0;
+    var latest = null;
+    function result() {
+        return (n > 0) ? latest / (sum / n) : null;
+    }
+    function update() {
+        var v = *field;
+        if (v != null) {
+            latest = v;
+            sum = sum + v;
+            n = n + 1;
+        }
+    }
+    function expire() {
+        var v = *field;
+        if (v != null) {
+            sum = sum - v;
+            n = n - 1;
+        }
+    }
+};
+
+// Return the coefficient of variation (stddev / mean) of the batch
+//
+// Parameters:
+//
+//   * field:   input fieldname
+//
+export reducer cv(field) {
+    var sum = 0;
+    var ssum = 0;
+    var n = 0;
+    var latest = null;
+    function update() {
+        var v = *field;
+        if (v != null) {
+            latest = v;
+            sum = sum + v;
+            ssum = ssum + v*v;
+            n = n + 1;
+        }
+    }
+    function result() {
+        if (n < 2 ) {
+            return null;
+        } else {
+            var mean = sum / n;
+            var stddev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            return stddev / mean;
+        }
+    }
+    function expire() {
+        var v = *field;
+        if (v != null) {
+            sum = sum - v;
+            ssum = ssum - v*v;
+            n = n - 1;
+        }
+    }
+};

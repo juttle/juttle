@@ -1,0 +1,6 @@
+emit -from :0: -limit 10
+| put x = Math.random() * 3
+| put y = Math.floor(x)
+| uniq
+| skip 1
+| view text

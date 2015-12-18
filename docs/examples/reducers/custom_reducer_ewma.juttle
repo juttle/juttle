@@ -1,0 +1,13 @@
+reducer ewma(fieldname, alpha = 0.5) {
+ var ma = 0;
+ function update() {
+ 	ma = ma * (1 - alpha) + * fieldname * alpha;
+ }
+ function result() { 
+ 	return ma; 
+ }
+}
+emit -limit 1 
+| put cnt = Math.random() * 10 
+| put ma_fast = ewma(cnt, 0.9), ma_slow = ewma(cnt, 0.1) 
+| view table

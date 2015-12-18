@@ -1,0 +1,12 @@
+function myfunc(which) {
+  var my_array = [0,1,2,3,4];
+  var two = my_array[2];
+  return (which == "all") ? my_array : two;
+}
+emit
+| put v = myfunc("one"), a = myfunc("all"), b = myfunc("all")[0]
+
+// Expected Output:
+// {a: [0,1,2,3,4]}
+// {b: 0}
+// {v: 2}

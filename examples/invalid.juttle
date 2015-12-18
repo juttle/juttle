@@ -1,0 +1,4 @@
+//
+// Example of an invalid juttle program
+//
+emit -limit 1 | invalid()

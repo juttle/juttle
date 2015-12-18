@@ -1,0 +1,4 @@
+{ "time": "2015-11-06T04:28:32.304Z", "hostname": "lemoncake", "state": "ok" }
+{ "time": "2015-11-06T04:28:32.304Z", "hostname": "applepie", "state": "warn" }
+{ "time": "2015-11-06T04:28:42.405Z", "hostname": "lemoncake", "state": "ok" }
+{ "time": "2015-11-06T04:28:42.502Z", "hostname": "applepie", "state": "ok" }

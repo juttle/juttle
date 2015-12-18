@@ -1,0 +1,35 @@
+/*
+ * Create a Gist on Github
+ *
+ * Input parameters:
+ * 
+ *  oauthToken: required  
+ * 
+ * For more information on the github Issues API, see: 
+ *  https://developer.github.com/v3/issues/ 
+ * 
+ * Usage:
+ * > ./bin/juttle docs/examples/adapters/http_post_to_a_gist.juttle --input oauthToken=XXX
+ * 
+ */
+
+input oauthToken: text -default 'FILL_ME_IN';
+
+const date = :now:;
+
+emit -limit 5
+| put value=count()
+| put description='Test Gist ${date} #${value}',
+      public=true,
+      files = {
+        'main.juttle' : {
+            'content': 'emit -limit 1 | put message "hello world"'
+        } 
+      }
+| keep description, public, files
+| write http -url "https://api.github.com/gists"
+             -method 'POST'
+             -headers {
+                'User-Agent': 'http-adapter-example',
+                'Authorization': 'token ${oauthToken}'
+             }

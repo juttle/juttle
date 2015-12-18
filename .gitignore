@@ -1,0 +1,23 @@
+.DS_Store
+/node_modules
+
+coverage
+site
+
+# IntelliJ specific files/directories
+.idea
+*.ipr
+*.iws
+*.iml
+
+*~
+.*.swp
+
+# auto-generated files
+lib/parser/parser.js
+lib/moment/parser.js
+test/runtime/specs/juttle-spec/**/*.spec.js
+extlib/points-parser/points-parser.js
+
+.juttle-config.json
+.juttle-config.js

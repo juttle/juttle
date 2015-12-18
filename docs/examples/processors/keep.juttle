@@ -1,0 +1,5 @@
+emit -hz 10 -limit 10 
+| put a = 1, b = 2 
+| keep a 
+| view text
+

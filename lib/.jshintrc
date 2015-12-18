@@ -1,0 +1,28 @@
+{
+    "globals": {
+        "clearTimeout": false,
+        "clearInterval" : false,
+        "module" : false,
+        "require" : true,
+        "setInterval" : false,
+        "setTimeout" : false
+    },
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq" : true,
+    "expr" : true,
+    "immed": true,
+    "latedef" : false,
+    "laxbreak": true,
+    "loopfunc" : true,
+    "newcap" : false,
+    "noarg": true,
+    "node": false,
+    "predef": [ "-Promise" ],
+    "scripturl" : true,
+    "strict" : false,
+    "smarttabs": true,
+    "sub": true,
+    "undef" : true,
+    "unused": "vars"
+}

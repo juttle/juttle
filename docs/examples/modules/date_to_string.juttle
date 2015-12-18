@@ -1,0 +1,3 @@
+emit
+| put now_moment = :now:, now_string = Date.toString(:now:)
+| put time_string = "Current time: " + now_string

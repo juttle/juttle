@@ -1,0 +1,12 @@
+function host_type(host) {
+	if (String.search(host, /^(web|db)?server$/) >= 0) {
+	return "server";
+	}
+	if (String.search(host, /switch/) >= 0) {
+	return "switch";
+	}
+	return "unknown";
+}
+emit -limit 1 
+| put a = host_type("webserver"), b = host_type("dbserver"), c=host_type("switch") 
+| view text

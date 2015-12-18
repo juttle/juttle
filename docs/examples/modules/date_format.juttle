@@ -1,0 +1,5 @@
+emit -from :0: -limit 1
+| put pacific = Date.format(:2015-01-01T00:00:00:,null,"PDT")
+| put mountain = Date.format(:2015-01-01T00:00:00:,"HH-z")
+| put central = Date.format(:2015-01-01T00:00:00:,"HH Z","CDT")
+| put eastern = Date.format(:2015-01-01T00:00:00:,null,"Eastern")

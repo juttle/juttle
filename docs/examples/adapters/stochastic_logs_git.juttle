@@ -1,0 +1,2 @@
+read stochastic -source 'logs' -logType "git" -mergep 0.5
+| view text

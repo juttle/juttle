@@ -1,0 +1,7 @@
+emit -limit 1
+| put duration = :2 months and 2 weeks and 2 days and 1 hour and 3 minutes:
+| put default=Duration.format(duration)              // approximate, depends on duration magnitude
+| put asdays=Duration.format(duration, "DD [days]")  // rounded to nearest whole day
+| put dotnet=Duration.format(duration,"dd.hh:mm:ss") // in .NET format, to nearest second.
+| remove time, duration // duration would display precisely, in a nonstandard mixed calendar/time format
+| view table

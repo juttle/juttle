@@ -1,0 +1,4 @@
+emit -limit 1 
+| put len = String.length("jupiter.milkway.org") 
+| view text
+

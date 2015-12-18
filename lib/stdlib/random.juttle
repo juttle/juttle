@@ -1,0 +1,100 @@
+// Functions and reducers to generate random samples from common probability
+// distributions:
+//
+//   * exponential(scale): exponential distribution
+//   * normal(loc, scale): normal distribution
+//   * poisson(lam):       poisson counts with rate lambda
+//   * uniform(low, high): uniform distribution
+//
+// Note: normal and poisson are implemented as reducers rather than functions,
+// and may only be used in stream context. They will eventually be offered as
+// plain functions.
+
+// Return x ~ Exp(scale).
+//
+// Parameters:
+//
+//   * scale: 1 / lambda
+//
+export function exponential(scale) {
+    return -Math.log(Math.random()) * scale;
+}
+
+// Return x ~ N(loc, scale).
+//
+// Parameters:
+//
+//   * loc:   mean
+//   * scale: standard deviation
+//
+// Uses Marsaglia polar method (improved Box-Muller transform) [1] for the
+// computation.
+//
+// This is written as a custom reducer because generated values come in pairs,
+// and we want to save one for next time. We also need to work around not being
+// able to call a function recursively in stream context.
+//
+// [1] https://en.wikipedia.org/wiki/Marsaglia_polar_method
+//
+export reducer normal(loc, scale) {
+    var leftover = null;
+
+    function update() { }
+
+    function result() {
+        if (leftover != null) {
+            var result = loc + scale * leftover;
+            leftover = null;
+            return result;
+        } else {
+            var u = 2 * Math.random() - 1;
+            var v = 2 * Math.random() - 1;
+            var s = u * u + v * v;
+            if (s == 0 || s > 1) {
+                // out of bounds, try again
+                return result();
+            }
+            var c = Math.sqrt(-2 * Math.log(s) / s);
+            leftover = u * c;
+            return loc + scale * v * c;
+        }
+    }
+}
+
+// Return x ~ Poisson(lam).
+//
+// Parameters:
+//
+//   * lam: average events per draw, should be >= 0
+//
+// Uses Knuth's algorithm for the computation.
+//
+// This is written as a custom reducer to work around not being able to call a
+// function recursively in stream context.
+//
+export reducer poisson(lam) {
+    function _poisson(L, p, k) {
+        if (p <= L) {
+            return k;
+        } else {
+            return _poisson(L, p * Math.random(), k + 1);
+        }
+    }
+
+    function update() { }
+
+    function result() {
+        return _poisson(Math.exp(-lam), Math.random(), 0);
+    }
+}
+
+// Return x ~ U(low..high).
+//
+// Parameters:
+//
+//   * low:  lower bound
+//   * high: upper bound
+//
+export function uniform(low, high) {
+    return Math.random() * (high - low) + low;
+}

@@ -1,0 +1,6 @@
+function get_integer(x) { 
+  return (x >= 0) ? Math.floor(x) : Math.ceil(x); 
+}
+emit -limit 1 
+| put a = get_integer(3.1415), b = get_integer(-0.5772)
+| view table
