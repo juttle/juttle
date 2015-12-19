@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Programming Constructs - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Programming Constructs";
+    var mkdocs_page_input_path = "concepts/programming_constructs.md";
+    var mkdocs_page_url = "/concepts/programming_constructs/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Concepts &raquo;</li>
+        
+      
+    
+    <li>Programming Constructs</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/concepts/programming_constructs.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="programming-constructs">Programming Constructs</h1>
+<p>Juttle supports several programming constructs that are similar to other programming languages and make it easier to write and compose Juttle flowgraphs.</p>
+<p>If you already know JavaScript and UNIX command-line tools, then elements of of Juttle will look familiar to you. Functions, variables, <em>if</em> statements, and other elements of the Juttle syntax are similar to their JavaScript equivalents.
+At the same time Juttle also borrows elements from UNIX command-line tools, with pipes and options that look like -option arguments to shell programs.</p>
+<div class="toc">
+<ul>
+<li><a href="#programming-constructs">Programming Constructs</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#string-templating">String Templating</a></li>
+<li><a href="#modules">Modules</a><ul>
+<li><a href="#exporting-symbols">Exporting symbols</a></li>
+<li><a href="#importing-modules">Importing modules</a></li>
+<li><a href="#module-behavior">Module Behavior</a></li>
+</ul>
+</li>
+<li><a href="#subgraphs">Subgraphs</a></li>
+</ul>
+</div>
+<h1 id="constants">Constants</h1>
+<p>You can write constants in Juttle and use them in context within the flowgraph. By their nature, constants can't be assigned to or modified after being defined.</p>
+<p>Juttle uses lexical scoping, so constants are scoped to the context in which
+they're written.</p>
+<p>For example:</p>
+<pre><code class="juttle">const n = 10;
+emit -limit n -from :0: | reduce count() | view table -title &quot;10 points&quot;;
+
+const n2 = n * n;
+emit -limit n -from :0: | reduce count() |  view table -title &quot;100 points&quot;;
+</code></pre>
+
+<h1 id="functions">Functions</h1>
+<p>A Juttle function performs a calculation based on provided inputs and returns a
+single result. Juttle comes with some built-in functions exposed through the built-in <a href="../../modules/">modules</a>, and you can also define your own functions.</p>
+<p>A function can operate over any number of arguments, and can be invoked
+with literals, variables, or field values as the arguments to the function.</p>
+<p>For example, the following computes a point count and the square of the point count using the function <code>Math.pow</code>:</p>
+<pre><code class="juttle">emit -limit 10
+| put num_points=count(),
+      points_squared=Math.pow(num_points, 2),
+      points_cubed=Math.pow(num_points, 3)
+</code></pre>
+
+<p>Users can define their own Juttle functions, using the <code>function</code> keyword. The syntax is similar to Javascript functions, although parameters can be given default values.</p>
+<pre><code>function functionName(parameter1[=default_value1], parameter2[=default_value2]...) {
+   code to execute
+}
+</code></pre>
+
+<p>Functions can contain variable or constant declarations, assignments,
+<em>if</em> statements, and <em>return</em> statements. Juttle functions can also be
+nested by declaring one function inside another function.</p>
+<p>For example, the following is a recursive implementation of <code>Math.pow</code> with a default exponent of 2:</p>
+<pre><code class="juttle">function pow(value, exponent=2) {
+    if (exponent == 1) {
+        return value;
+    } else {
+        return value * pow(value, exponent - 1);
+    }
+}
+
+emit -limit 10
+| put points=count(),
+      points_2=pow(points), // default exponent = 2
+      points_3=pow(points, 3)
+</code></pre>
+
+<h1 id="variables">Variables</h1>
+<p>Variables can be defined inside reducers and functions, but not inside
+subgraphs or at the top level of a flowgraph. Since Juttle uses lexical
+scoping, variables are scoped to the reducer or function in which
+they're defined.</p>
+<p>Unlike constants, variables support assignment after they are defined:</p>
+<p>For example:</p>
+<pre><code class="juttle">const x = 5;
+function xplus(y) {
+    var z = x;
+    z = x + y;
+    return z;
+}
+emit | put value=xplus(10);
+</code></pre>
+
+<h1 id="string-templating">String Templating</h1>
+<p>Strings in Juttle support template syntax to enable embedded expressions to be evaluated and converted to a string more conveniently.</p>
+<p>The syntax for embedded expressions is <code>${expression}</code>, where the referenced expression can be a <a href="#constants">constant</a>, variable, literal, a value from a field in the point, or the result of an expression.</p>
+<p>For example, the following juttle builds the same text string using both templating and manual construction of the string values.</p>
+<pre><code class="juttle">const N = 10;
+emit -limit N
+| put text1=&quot;point ${count()} of ${N}, elapsed time ${time - :now:}&quot;
+| put text2=&quot;point &quot; + Number.toString(count())  + &quot; of &quot; + Number.toString(N) +
+            &quot;, elapsed time &quot; + Duration.toString(time - :now:);
+</code></pre>
+
+<h1 id="modules">Modules</h1>
+<p>Juttle modules are a way of reusing code across multiple Juttle programs.</p>
+<h2 id="exporting-symbols">Exporting symbols</h2>
+<p>Any saved juttle program can be used as a module if it exports functions, <a href="#constants">constants</a>, <a href="../inputs/">inputs</a>, <a href="#subgraphs">subgraphs</a>, or <a href="../../reducers/">reducers</a> by prefixing them with the <code>export</code> keyword.</p>
+<p>For example:</p>
+<pre><code>    export const answer = 42;
+    export function ask(question) { return answer; }
+    export sub elucidate { put a = answer }
+    export reducer answerable(q) { /* ... */ }
+</code></pre>
+
+<h2 id="importing-modules">Importing modules</h2>
+<p>Given a juttle program containing exported symbols that is saved at a known
+location, then in another program you can import it as a module, using the
+<code>import</code> keyword:</p>
+<pre><code>    import &quot;&lt;module_path&gt;&quot; as local_name;
+</code></pre>
+
+<p>How the <code>&lt;module_path&gt;</code> is resolved depends on the specific capabilities of the
+application in which Juttle is running. For the Juttle CLI, it can be either a
+relative or absolute filesystem path or a URL to a remote Juttle file containing
+exported code.</p>
+<p>Once it is resolved, the import statement pulls all exported symbols from the
+specified Juttle module and makes them available under the specified local
+namespace.</p>
+<p>You can reference the imported symbol(s) like this:</p>
+<pre><code>    local_name.symbol_name
+</code></pre>
+
+<ul>
+<li>local_name is the local name from the import command above.</li>
+<li>symbol_name is the name of the exported subgraph, constant, function, 
+   or other code fragment from the imported program file.</li>
+</ul>
+<h2 id="module-behavior">Module Behavior</h2>
+<p>When defining or importing modules:</p>
+<ul>
+<li>
+<p>An <code>import</code> or <code>export</code> statement is only valid in the top-level context of a program. This means that an import or export statement cannot be used inside
+    <a href="#subgraphs">subgraphs</a>,
+    <a href="#functions">functions</a>,
+    or
+    <a href="../../reducers/">reducers</a>.</p>
+</li>
+<li>
+<p>Cyclic module dependencies are forbidden. For example, a compilation error occurs if module1 imports module2 and module2 also imports module1.</p>
+</li>
+<li>
+<p>Top-level flowgraph statements are not exported, instantiated, or executed upon module import.</p>
+<p>In the first example above, <code>emit | stamper -mark "test"</code> is not exported.</p>
+</li>
+</ul>
+<p><em>Example: export from module</em></p>
+<p>This juttle module exports a function, a subgraph, and a constant. </p>
+<pre><code class="juttle">export const pi = 3.14;                                // exported constant
+const not_exported = 2;                                     // not exported
+export function double(x) { return x * not_exported; } // exported function
+
+export sub stamper(mark) {                             // exported subgraph
+    put stamp = mark
+    | put stamp2 = mark
+}
+
+// top-level flowgraph is not exported
+emit
+| stamper -mark &quot;test&quot;
+| view table;
+</code></pre>
+
+<p><em>Example: import by filename</em></p>
+<p>This example assumes that the program with exports is saved at path
+<code>docs/examples/concepts/export_module.juttle</code>.</p>
+<pre><code>// This program is runnable from CLI from the juttle repo root,
+// node ./bin/juttle docs/examples/concepts/import_module.juttle
+
+import 'docs/examples/concepts/export_module.juttle' as my_module;
+emit
+| my_module.stamper -mark 'test'
+</code></pre>
+
+<h1 id="subgraphs">Subgraphs</h1>
+<p>Subgraphs are reusable Juttle fragments that can be invoked within the
+current program or exported as modules that other programs can import.</p>
+<p>Subgraphs are declared with the <code>sub</code> keyword, like this:</p>
+<pre><code>sub sub_name([arg1,arg2]) {
+     juttle code
+}
+</code></pre>
+
+<p>A subgraph can take as many arguments as it needs, or none.</p>
+<p><em>Example: simple sub with no arguments</em></p>
+<pre><code class="juttle">// declare a subgraph called &quot;my_viz&quot; with no params
+sub my_viz() {
+  put num_points = count()
+  | (view table; view timechart)
+};
+
+emit -limit 2
+| put message = &quot;Hello World!&quot;
+| my_viz; // invoke the subgraph here
+</code></pre>
+
+<p><img src="/images/diagrams/juttleOverviewDiagrams/overview5.png" alt="overview5" style="width: 400px;"/></p>
+<p>With this approach, experienced coders can express complex business
+logic and rich visualizations, then make them available to other Juttle
+authors to reuse.</p>
+<p><em>Example: sub with optional argument</em></p>
+<p>Here the default value will be used if the program that invokes the subgraph
+does not specify a different value:</p>
+<pre><code class="juttle">sub banner(title='Generic title') {
+  emit -limit 1 | put value=title | view tile -timeField '';
+}
+banner -title 'Custom title';
+</code></pre>
+
+<p>See <a href="../fields/#referencing">Field referencing</a>
+for tips on working with the contents of fields from within a subgraph.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../fields/" class="btn btn-neutral float-right" title="Fields"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../dataflow/" class="btn btn-neutral" title="Dataflow"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../dataflow/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../fields/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+const max = Math.max(Math.random(), Math.random(), Math.random());
+emit -limit 1 
+| put max = max 
+| view table
+

@@ -1,0 +1,5 @@
+emit -from Date.new(0) -limit 9
+  | put id = Math.ceil(count() / 3)
+  | skip 2 by id
+  | remove time
+  | view table

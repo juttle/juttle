@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Processors - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Processors";
+    var mkdocs_page_input_path = "processors/index.md";
+    var mkdocs_page_url = "/processors/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>Processors</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/index.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="processors">Processors</h1>
+<p>Processor nodes reside in the middle of a Juttle flowgraph, modifying streams as they pass through.</p>
+<pre><code class="text">(source; source) | processor | (processor; processor) | processor | (sink; sink)
+</code></pre>
+
+<p>Example modifications include transforming, reducing, and filtering.</p>
+<p><strong><a href="batch/">batch</a></strong></p>
+<p>Create batches by segmenting a sequence of points ordered by time stamp,
+each segment spanning a specified interval of time.</p>
+<p><strong><a href="filter/">filter</a></strong></p>
+<p>Output only the points for which the given filtering expression
+evaluates to true.</p>
+<p><strong><a href="head/">head</a></strong></p>
+<p>Only emit the first limit points from each batch.</p>
+<p><strong><a href="join/">join</a></strong></p>
+<p>Create new points from the points of multiple input streams.</p>
+<p><strong><a href="keep/">keep</a></strong></p>
+<p>Prune the input stream by removing all fields except the specified ones.</p>
+<p><strong><a href="pace/">pace</a></strong></p>
+<p>Play back historic points in real time or at the specified pace.</p>
+<p><strong><a href="put/">put</a></strong></p>
+<p>Set the specified field of each point to the result of an expression.</p>
+<p><strong><a href="reduce/">reduce</a></strong></p>
+<p>Accumulate collections of points and aggregate them using reducers,
+optionally within a moving time window.</p>
+<p><strong><a href="remove/">remove</a></strong></p>
+<p>Prune the input stream by removing the specified fields.</p>
+<p><strong><a href="sort/">sort</a></strong></p>
+<p>Sort points in order based on values of one or more specified fields.</p>
+<p><strong><a href="split/">split</a></strong></p>
+<p>Split each incoming point, emitting one new point for each of the
+specified fields in the original point.</p>
+<p><strong><a href="tail/">tail</a></strong></p>
+<p>Only emit the last limit points from each batch.</p>
+<p><strong><a href="unbatch/">unbatch</a></strong></p>
+<p>Turn a batched stream into an unbatched stream.</p>
+<p><strong><a href="uniq/">uniq</a></strong></p>
+<p>Compare adjacent points and discard any duplicates.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="batch/" class="btn btn-neutral float-right" title="____ batch"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../sources/read/" class="btn btn-neutral" title="____ read"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../sources/read/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="batch/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

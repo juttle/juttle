@@ -1,0 +1,31 @@
+// On historical data, you can apply reducer to get a single computation,
+// or batch your historical data by time, then reduce per batch period.
+
+sub historical_points() {
+  emit -from :0: -limit 10 | put cnt = count(), value = Math.random()
+}
+historical_points 
+| reduce first(cnt), first_val = first(value), last(cnt), last_val = last(value)
+| view table -title "First and last historical points"
+;
+historical_points 
+| batch 5 
+| reduce first(cnt), last(cnt) 
+| view table
+    -update "append" 
+    -title "First and last points per 5-second batch, historical"
+;
+
+// On live streaming data, you must batch by time, then reduce per batch period.
+
+sub live_points() {
+  emit -limit 10 
+  | put cnt = count(), value = Math.random()
+}
+live_points 
+| batch 3 
+| reduce first(cnt), last(cnt) 
+| view table
+    -update "append" 
+    -title "First and last points per 3-second batch, live"
+;

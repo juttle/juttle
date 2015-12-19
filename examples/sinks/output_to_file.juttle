@@ -1,0 +1,3 @@
+emit -limit 1 
+| put v = "A" 
+| view file -filename 'someOutput.json'

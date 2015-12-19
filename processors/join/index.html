@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ join - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ join";
+    var mkdocs_page_input_path = "processors/join.md";
+    var mkdocs_page_url = "/processors/join/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ join</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/join.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="join">join</h1>
+<p>Create new points from the points of multiple input streams.</p>
+<pre><code>join
+   [-nearest :duration: | -zip (true | :duration:) | -once true]
+   [-table inputNumber, inputNumber, ...]
+   [-outer inputNumber]
+   [fieldName1, fieldName2,...fieldNameN]
+</code></pre>
+
+<p>It should be placed after a merge point in a parallel Juttle expression,
+like this:</p>
+<pre><code>(... ; ...) | join ...
+</code></pre>
+
+<p>In its simplest form, join aligns its input streams by time stamp and
+produces new output points by unioning the fields of successive matching
+input points.</p>
+<p>If used on a single stream, its points are grouped by their time stamp
+or batch, and all points in a group are unioned to create an output
+point. If optional joinFields are specified for the single stream, they
+act like group-by fields, and there is an output point for each distinct
+value of the joinFields among the points.</p>
+<p>Options to <code>join</code> can cause it to
+operate like an SQL relational join across multiple input streams, where
+batches of points on an input are analogous to SQL tables, and
+individual points are analogous to rows in those tables. An optional
+list of fieldNames specifies relational join keys between the input
+batches. When points with matching key values appear on each input, new
+points are produced containing the union of these matching points'
+fields.</p>
+<p>Streaming joins are computed continually as points or batches of points
+arrive at the inputs. When a stream is batched, all points in a batch
+are treated as a group for joining (as if they all had the batch's
+ending time stamp). For an unbatched stream, all points having the same
+time stamp are treated as a batch. It is okay to join a batched stream
+with an unbatched stream.</p>
+<p>To require exact time stamp matching for batches to be joined, specify
+time as a join key along with any other join keys. If time is not listed
+as a join key, inexact time matches are allowed. Equivalent time stamps
+will always be joined when they are present. A streaming one-to-one join
+without exact time stamp matching is specified with -zip true or -zip
+:duration:. A streaming many-to-one join with -nearest :duration: (or
+simply as join with no options). A one-to-one join matches each
+successive input batch with one on its other inputs, matching by nearest
+time stamp, and drops any extra input batches that do not have matches.
+A many-to-one join performs a similar matching, but will re-use an input
+batch if it remains the best match. 
+Both <code>-zip</code> and <code>-nearest</code> accept a duration limiting the
+difference in time stamps allowed between matched batches, with :0:
+behaving as if time had been specified as a join key. When time stamps
+do not match exactly, an output point will be given the maximum time
+stamp of its input points. A join without <code>-zip</code> or <code>-nearest</code> or time as a join key is
+implicitly a <code>-nearest</code> join with no limiting duration.</p>
+<p>A streaming join can treat some of its input batches as passive tables
+with no associated time stamp. For example, this is useful for joining a
+stream of event points having user IDs against a table of user names,
+annotating the event point with its particular user name. 
+The <code>-table</code> option lists which inputs are to be
+treated in this way. A batch on a table input remains there until
+updated by a later batch, and joins are always performed against the
+most recently received complete batch. Joins are only triggered by the
+arrival of new points on a timeful input. Because tables are timeless, a
+join is never triggered by an update to a table, and no guarantees can
+be made about precisely when (in stream time) an update will displace a
+current table batch.</p>
+<p>A non-streaming join over all points at once (at the end of the run) can
+be specified by the <code>-once</code> flag. 
+The join is not computed until all points have arrived at the inputs (that
+is, it only makes sense for historic queries or bounded live queries).
+Time stamps will be ignored unless the time field is specified as a join
+field, which forces time stamps to be matched exactly between the input
+sets.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-nearest :duration:</code></td>
+<td>Streaming many-to-one join of each input point or batch with the points or batches on the other inputs having the nearest time stamp. <p>If one stream has fewer points than the others, its points may be joined multiple times as needed so that all points or batches on the other inputs participate in a join. The duration is the maximum acceptable difference in time stamps between matched groups of points, and will cause points to be dropped rather than joined if the gap in time is too large.</p><p>:information_source: <code>Note:</code>-nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</p></td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-zip true</code>\</td>
+<td><code>:duration:</code></td>
+<td align="right">Streaming one-to-one join of each input point or batch with the points or batched on the other inputs having the nearest time stamp. <p>If one stream has more points than the others, extra points are dropped, such that any point is joined at most once. </p><p>If specified, the <code>duration</code>is the maximum acceptable difference in time stamps between matched groups of points. If instead <code>-zip true</code>is specified, there is no limit to the difference in time stamps. </p><p>:information_source: <code>Note:</code>-nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</td>
+</tr>
+<tr>
+<td><code>-once true</code></td>
+<td>Non-streaming join over the entire set of input points, after all points have been received. <p>The time field may be specified as a join field if desired, giving results similar to a streaming one-to-one join with exactly matching time stamps. There is no analogue to the duration parameter of -zip and -nearest for non-streaming joins. </p><p>:information_source: <code>Note:</code>nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</p></td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-table</code></td>
+<td>Treat the specified input streams as passive tables with no associated time stamp; input streams are numbered top to bottom (or left to right) from 1 in the program. <p>:baby_symbol: <code>experimental:</code> We're still working on this feature. Try it and see what you think, then <a href="http://www.jut.io">chat with us</a> to provide feedback. </p></td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-outer inputNumber</code></td>
+<td>Perform an outer join preserving the specified input stream. Input streams are numbered top to bottom (or left to right) from 1 in the program (that is, <code>-outer 1</code>specifies an outer left join where the first series in the flowgraph is preserved). When a point on the outer input does not have a matching join key on the other inputs, <code>-outer</code>forwards it unchanged, or partially joined against any matching inputs. Without <code>-outer</code> an inner join is performed, which only produces a points when all inputs match.</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>fieldnameN</code></td>
+<td>The fields to match when joining points.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: merging metric points</em></p>
+<p>One use for join is with a source that provides several different
+metrics as name/value pairs on separate points having identical time
+stamps. Use join to merge these onto a single point for each time stamp:</p>
+<pre><code>emit -points [
+  {time:&quot;2015-11-26T11:22:33.000Z&quot;, &quot;name&quot;:&quot;furlongs&quot;, value:25},
+  {time:&quot;2015-11-26T11:22:33.000Z&quot;, &quot;name&quot;:&quot;fortnights&quot;, value:7},
+  {time:&quot;2015-11-27T10:20:50.000Z&quot;, &quot;name&quot;:&quot;furlongs&quot;, value:34},
+  {time:&quot;2015-11-27T10:20:50.000Z&quot;, &quot;name&quot;:&quot;fortnights&quot;, value:5}
+]
+  | put *name = value      // turn {name:&quot;furlongs&quot;, value:20} into {furlongs:20}
+  | remove name, value       // those fields are no longer needed
+  | join                   // combine points that have the same time value
+  | put speed = furlongs/fortnights
+</code></pre>
+
+<p><em>Example: streaming one-to-one relational join</em></p>
+<p>In this example, two input streams containing distance and time
+measurements are joined so that a rate can be computed:</p>
+<pre><code>// Join 1-1
+//
+// This demonstrates a synchronized join between two metric
+// streams, allowing us to &quot;divide&quot; one stream by another
+// to create a new metric. It does this by creating new points
+// containing one metric from each input stream.
+//
+// one-to-one joining is triggered by 'join -zip &lt;duration&gt;'.
+// an input point is matched to the point on the other
+// input that is nearest (within &lt;duration&gt;) without being in the future.
+// If we had specified &lt;duration&gt; of :0s:, timestamps would need to be equal.
+// We instead specified -zip true, so any offset is allowed (but exact
+// matches will always be made when they are present)
+//
+( emit 
+  | put furlongs = Math.random()
+  ; 
+  emit -from :+0.5 s: 
+  | put fortnights = Math.random()
+) | join -zip true 
+| put speed = furlongs / fortnights 
+| view table
+</code></pre>
+
+<p>The output is the result of the join: points containing a new metric:
+"speed".</p>
+<p><em>Example: streaming many-to-one relational join</em></p>
+<p>In this example, two emits create two input streams for the join:</p>
+<ul>
+<li>A stream of "parts" that include a board-ID</li>
+<li>A "table" of board-id -&gt; board name mappings. The example strips
+   their time stamps away so that they are treated as a group (similar
+   results occur if they all have the same time stamp)</li>
+</ul>
+<p>Joining the stream of parts against the table of board IDs creates
+output points containing both the part name and its board name.</p>
+<pre><code>// 9 parts having board_ids are joined against table of board_id-&gt;boardname
+( emit -hz 1000 -limit 9
+  | put part = &quot;part-&quot;+Number.toString(count()), board_id = count()%3 + 1, t = time-:now:  
+  ; 
+  emit -from :0: -hz 1000 -limit 3 
+| put board = &quot;board-&quot; + Number.toString(count()), board_id = count() 
+| remove time
+) | join board_id 
+| batch 100 
+| keep t, part, board 
+| view table
+</code></pre>
+
+<p>The input to the join is two tables: 3 rows of board_id-&gt;board
+names, and 9 rows of parts (table commands are not included in the
+Juttle above).</p>
+<p>The output is the result of the join: points containing part names and
+board names.</p>
+<p><em>Example: streaming four-way right outer join</em></p>
+<p>In this example, a stream of IDs (on points replayed by emit -points) is
+simultaneously outer joined against three tables of personal
+information.</p>
+<p>Joining the stream of parts against the table of board IDs creates
+output points containing both the part name and its board name.</p>
+<pre><code>// 4-way right outer join of a point stream of ids against  tables of personal information.
+//
+// The points in the &quot;tables&quot; all have the same timestamp.
+// For the join, the ID in each emit point
+// is matched against each table, and an output point is created that is the union of all 
+// matching points. This demonstrates partial joins when not all tables have an entry for 
+// an ID. There are no matches at all for ID 5, so that point is passed through unchanged.
+//---------------------------------------------------------------------------
+    const name = [
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:1, &quot;name&quot;:&quot;fred&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:2, &quot;name&quot;:&quot;wilma&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:3, &quot;name&quot;:&quot;dino&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:4, &quot;name&quot;:&quot;barney&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:6, &quot;name&quot;:&quot;bambam&quot;},
+       ]
+    ;
+    const haircolor = [
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:1, &quot;haircolor&quot;:&quot;black&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:2, &quot;haircolor&quot;:&quot;orange&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:4, &quot;haircolor&quot;:&quot;blonde&quot;},
+      {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:6, &quot;haircolor&quot;:&quot;blonde&quot;}
+       ]
+    ;
+    const hobby = [
+       {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:1, &quot;hobby&quot;:&quot;bowling&quot;},
+       {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:3, &quot;hobby&quot;:&quot;singing&quot;},
+       {time:&quot;1970-01-01T00:00:00.000Z&quot;, &quot;id&quot;:6, &quot;hobby&quot;:&quot;home improvement&quot;},
+       ]
+    ;
+    ( emit -points name
+      ;
+      emit -points haircolor
+      ;
+      emit -points hobby
+      ;
+      emit -from :0: -limit 6
+      | put id = count()
+    ) | join -outer 4 id
+    | remove time, type
+    | view table
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../keep/" class="btn btn-neutral float-right" title="____ keep"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../head/" class="btn btn-neutral" title="____ head"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../head/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../keep/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

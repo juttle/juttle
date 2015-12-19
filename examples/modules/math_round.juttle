@@ -1,0 +1,3 @@
+emit -limit 1
+| put a = Math.round(3.1415), b = Math.round(-0.5772), c = Math.round(1.5), d = Math.round(42)
+| view table

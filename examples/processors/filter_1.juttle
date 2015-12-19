@@ -1,0 +1,3 @@
+read stochastic -source 'cdn' -nhosts 3 -dos 0.5 -last :5 minutes: -source_type 'metrics' name = 'requests' OR name = 'response_ms' OR name = 'responses'
+| filter name = "requests" value > 10 host !~ /^(web|db)?servers?$/ 
+| view table -limit 20

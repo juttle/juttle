@@ -1,0 +1,4 @@
+emit -limit 1 
+| put oh_pluto = Date.new("2006-09-13")
+| put that_month = Date.quantize(oh_pluto, :M:), that_year = Date.quantize(oh_pluto, :y:) 
+| keep oh_pluto, that_month, that_year

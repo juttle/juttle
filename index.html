@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="./img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
+  <link href="./custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "None";
+    var mkdocs_page_input_path = "index.md";
+    var mkdocs_page_url = "/";
+  </script>
+  
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script>
+  <script src="./js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href=".">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href=".">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Introduction &raquo;</li>
+        
+      
+    
+    <li>About</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/index.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="juttle-documentation">Juttle Documentation</h1>
+<p>Welcome to the documentation for Juttle, a dataflow programming language!</p>
+<h2 id="about-juttle">About Juttle</h2>
+<p>Juttle is an analytics system and language for developers built upon
+a stream-processing core and targeted for <em>presentation-layer</em> scale.
+Juttle gives you an agile way to query,
+analyze, and visualize live and historical data from many different
+big data backends or other web services.
+Using the Juttle <em>dataflow</em> language,
+you can specify your presentation analytics in a single place with a
+syntax modeled after the classic unix shell pipeline.  There is no need
+to program against data query and visualization libraries.  Juttle scripts,
+or <em>juttles</em>, tie everything together and abstract away the details.</p>
+<p>While the Juttle syntax embraces the simplicity of the
+unix pipeline design pattern,
+it also includes a number of more powerful language concepts including
+functions, dataflow subgraph notation, native expressions, modules, scoping,
+and special aggregation functions called <em>reducers</em>.  The details of
+the language and the dataflow model are desribed in the
+<a href="http://juttle.github.io/juttle">Juttle Language Reference</a>.</p>
+<p>In Juttle, you read data from a backend service, analyze it using
+<em>dataflow processors</em>, and send derived data or synthesized events to
+some output, e.g., streaming results to a browser view,
+writing data to a storage backend, posting http events to
+slack, hipchat, pagerduty, etc.</p>
+<p>Juttle presently includes a number of adapters for various big-data backends
+and we are continually adding more.
+This means that you can interoperate with
+your existing infrastructure, whether it is a cassandra cluster, elastic
+search, a SQL database, something from the hadoop ecosystem, and so forth.
+If a particular backend is not yet supported, an adapter for it can be
+added in a relatively straightforward manner using
+Juttle's backend adapter API.</p>
+<p>Under the hood, the Juttle compiler generates javascript
+output that implements the Juttle dataflow computation by
+executing alongside the Juttle runtime, either in node or the
+browser.  The Juttle optimizer figures out the pattern of queries
+needed to run on the various big-data backends to perform
+the analytics specified in your Juttle programs.  This greatly
+simplifies the development of presentation-layer analytics since you
+can simply specify a high-level Juttle program and don't have to worry about
+all the details involved in querying the big-data backends.</p>
+<h2 id="use-cases">Use Cases</h2>
+<p>Here are some ideas of what you can do with Juttle:</p>
+<ul>
+<li>embedding analytics-driven visualization in your application,</li>
+<li>providing users of your software with highly customizable views by
+  tapping into data residing in your system's storage backends,</li>
+<li>composing custom dashboards or "wallboards" that run continuously for
+  your internal users (ops teams, dev teams, business users, etc),</li>
+<li>building custom dataflow microservices around a specific
+  analytics workflow like smart alerting, anomaly detection, or
+  custom application logic,</li>
+<li>exploring your data interactively using Juttle's rapid prototyping model,</li>
+<li>introspecting and debugging your big-data pipeline, and</li>
+<li>prototyping and experimenting with dataflow concepts applied to
+  your data before implementing them in detail and in production using other
+  stream-processing systems like Spark or Storm.</li>
+</ul>
+<h2 id="stream-processing-systems">Stream-processing Systems</h2>
+<p>Juttle was inspired by modern, stream-processing systems like
+<a href="http://storm.apache.org/">Storm</a>
+and
+<a href="http://spark.apache.org/streaming">Spark Streaming</a>.
+While Juttle
+can do a lot of what these other systems do, it is not intended
+as an outright replacement for them nor does it have their
+properties of parallelizability, durability, or checkpointing.
+Rather, Juttle's strengths are centered around interactive visualizations,
+i.e., performing analytics at a scale
+where data is interactively viewed and complements systems like Spark where
+the output of Spark can feed the input of Juttle (the Juttle Spark adapter
+is currently under development).
+An interesting future extension for Juttle would be to adapt
+the Juttle compiler and runtime to generate scala in addition to
+javascript as a target output langauge and leverage the Spark infrastructure
+for Juttle programs.</p>
+<h2 id="how-to-navigate">How To Navigate</h2>
+<p>Use the left sidebar menu for navigating the sections. Getting started with the <a href="concepts/overview/">Juttle Overview</a> should orient you reasonably well; the rest of the Concepts section has background information on the language design.</p>
+<p>The search feature (powered by lunr.js in mkdocs) can be helpful too, see the search box in upper left corner.</p>
+<p>Juttle examples are provided as code snippets; copy them to run in your own environment.</p>
+<p><img alt="construction" class="custom_emoji" height="30" src="./images/emoji/construction.png" width="30" /> Embedded Juttle examples are coming soon.</p>
+<h2 id="maintaining-docs">Maintaining Docs</h2>
+<p><img alt="baby_symbol" class="custom_emoji" height="30" src="./images/emoji/baby_symbol.png" width="30" /> These docs are just coming together.</p>
+<p>If you find a problem in the documentation, members of juttle GitHub project can edit the articles inline by following "Edit on GitHub" link. Small obvious fixes may be committed directly to master. If discussion is needed, please put up a PR on a branch.</p>
+<p><img alt="information_source" class="custom_emoji" height="30" src="./images/emoji/information_source.png" width="30" /> This documentation was produced with <a href="http://mkdocs.org">mkdocs</a>, see details in <a href="README/">README</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="README/" class="btn btn-neutral float-right" title="____ Docs README"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+        <span style="margin-left: 15px"><a href="README/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 0.15.0.dev
+Build Date UTC : 2015-12-19 00:03:29.233519
+-->

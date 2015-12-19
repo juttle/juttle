@@ -1,0 +1,5 @@
+emit -limit 10 -every :.1 second:
+| put values=(Math.round(Math.random()*10))
+| reduce pluck(values)
+| put searchvalue=(Math.round(Math.random()*10))
+| put index=Array.indexOf(pluck, searchvalue)

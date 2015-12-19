@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Fields - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Fields";
+    var mkdocs_page_input_path = "concepts/fields.md";
+    var mkdocs_page_url = "/concepts/fields/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Concepts &raquo;</li>
+        
+      
+    
+    <li>Fields</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/concepts/fields.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="fields">Fields</h1>
+<p>Each Juttle data point consists of a set of named fields. The name of a field is always a string, but the value can be of various <a href="../../reference/data_types/">types</a>.</p>
+<p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> This needs to be updated to clarify stream context vs function context.</p>
+<h1 id="referencing">Referencing</h1>
+<p>Juttle includes two operators for field referencing -- the <code>*</code> operator and the <code>#</code> operator.</p>
+<p>Consider this simple Juttle:</p>
+<pre><code class="juttle">emit
+| put apple='fuji'
+| put fruit = apple
+| view text
+</code></pre>
+
+<p>The left-hand side (LHS) of this put expression is expressing "I want to
+set the contents of the field called fruit to… ." This is an example of
+what we call field referencing.</p>
+<p>We could have written the above instead as:</p>
+<pre><code class="juttle">emit
+| put apple = 'fuji'
+| put *'fruit' = *'apple'
+| view text
+</code></pre>
+
+<p>In this case, 'fruit' is actually a string literal, and the <code>*</code> operator
+tells Juttle to affect the contents of a field with the name shown in
+that string. Similarly 'apple' is also a string literal and the <code>*</code> operator tells Juttle to read from the specified field.</p>
+<p>Alternatively, we could have omitted the quotes and written it as:</p>
+<pre><code class="juttle">emit
+| put apple = 'fuji'
+| put #fruit = #apple
+| view text
+</code></pre>
+
+<p>The <code>#</code> operator functions similarly to the <code>*</code> operator except that what follows is an identifier and not a quoted string.</p>
+<p>However, Juttle recognizes that the LHS of a put expression
+always becomes a field reference, and so a bare identifier such as <code>fruit</code>
+that doesn't match a const or var that is in scope is assumed to be a field
+dereference and is always treated the same as if we'd typed the explicit <code>*'fruit'</code> or <code>#fruit.</code></p>
+<p>The use of explicit field referencing operators becomes apparent when there is a const or var with the same name as a field in scope:</p>
+<pre><code class="juttle">const apple='gala';
+emit -limit 2
+| put apple='fuji'
+| (
+    put fruit='apple' | view text;     // fruit will be set to 'apple'
+    put fruit=apple | view text;       // fruit will be set to 'gala'
+    put fruit=*'apple' | view text;    // fruit will be set to 'fuji'
+    put fruit=#apple | view text;      // fruit will be set to 'fuji'
+  )
+</code></pre>
+
+<p>The rules above apply to the LHS of
+<a href="../../processors/put/">put</a>,
+<a href="../../processors/reduce/">reduce</a>,
+and
+<a href="../../processors/filter/">filter</a>
+expressions and the RHS of put and filter expressions.</p>
+<p>There can be other cases where explicit field referencing is
+necessary. The first is within
+<a href="../programming_constructs/#subgraphs">subgraphs</a>
+that take field names as parameters. In this case, what's being passed
+in as a parameter is just a string that is the name of the field, so the <code>*</code> operator allows access to the field of that name.</p>
+<pre><code class="juttle">sub cp(to, from) { put *to = *from }
+emit | put apple = 'fuji' | cp -to &quot;fruit&quot; -from &quot;apple&quot; | view text
+</code></pre>
+
+<p>Another place is when the "update" function of a
+<a href="../../reducers/">reducer</a>
+needs to access the contents of a field.</p>
+<p>A handy side-effect of the explicit field referencing is that
+it can allow us to work with fields whose names would not be legal as
+bare identifiers.</p>
+<pre><code class="juttle">emit
+| put *':) my favorite!' = 'honeycrisp'
+| view text
+</code></pre>
+
+<p>To summarize, this is how field referencing works in Juttle:</p>
+<ul>
+<li>On the LHS of put, reduce, and filter expressions, a bare identifier
+    x is treated the same as the explicit <code>*'x'</code> or #x unless a variable <code>x</code> is in scope.</li>
+<li>On the RHS of put and filter expressions, a bare identifier x is
+    treated the same as the explicit <code>*'x'</code>, unless a const/variable
+    named x is in scope, in which case the contents of const/variable x
+    is used.</li>
+<li>Inside a subgraph, or reducer "update" function, the <code>*</code> operator
+    refers to the value of the field whose name follows the <code>*</code> operator,
+    on the current point.</li>
+<li>The <code>*</code> operator can be used with any string (literal, const,
+    variable), which allows reference to a field name that would be
+    invalid as a bare identifier.</li>
+</ul>
+<h1 id="time-field">Time Field</h1>
+<p>The field named <code>time</code> is treated specially in the Juttle language as it is the field that is used by various processors to order points and group them into appropriate time intervals.</p>
+<p>The time field must be a Moment (see <a href="../../reference/data_types/">data types</a> that represents the time at which the event occurred. Successive points in the same stream must have time values that are monotonically increasing.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../filtering/" class="btn btn-neutral float-right" title="Filtering"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../programming_constructs/" class="btn btn-neutral" title="Programming Constructs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../programming_constructs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../filtering/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

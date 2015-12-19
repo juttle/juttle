@@ -1,0 +1,9 @@
+// Get data from 2 minutes ago and ingest live data and et response_ms metrics from our search demo data
+
+read stochastic -source 'srch_cluster' -from :2 minutes ago: name ='response_ms'
+| batch :2 seconds:   // Group into 2 second intervals
+| reduce p90 = percentile('value', .9) by service   // Calculate p90 response time
+| view timechart
+   -valueField 'p90'   // Plot data on a chart
+   -keyField 'service'   // Every service should be a line on the chart
+   -title 'Response time (ms) by Service'

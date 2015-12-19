@@ -1,0 +1,36 @@
+emit
+| put date_in = "Thu Oct 29 2015 16:46:35 -0700",
+      date_format = "ddd MMM DD YYYY HH:mm:ss Z",
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = "Thu Oct 29 2015 16:46:35-0700",
+      date_format = "ddd MMM DD YYYY HH:mm:ssZ",
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = "Thu Oct 29 2015 16:46:35 +07:00",
+      date_format = "ddd MMM DD YYYY HH:mm:ss Z",
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = "10/29/15 16:46:35.000Z",
+      date_format = "MM/DD/YY HH:mm:ss.SSSZ",
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = "2015-10-29 16-0700",
+      date_format = "YYYY-MM-DD HHZ",
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = "2015-10-29 16:46:35-0700",
+      date_format = "//default: ISO8601",
+      date_out = Date.parse(date_in);
+emit
+| put date_in = "2015-10-29T16:46:35.000Z",
+      date_format = "//default: ISO8601",
+      date_out = Date.parse(date_in);
+emit
+| put date_in = "2014-09-22Z+08:00",
+      date_format = "//default: Date fallback with timezone",
+      date_out = Date.parse(date_in);
+emit
+| put date_in = "Wed Dec 2 18:56:48 2015 UTC",
+      date_format = "//default: acceptable non-ISO8601",
+      date_out = Date.parse(date_in);

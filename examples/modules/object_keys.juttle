@@ -1,0 +1,2 @@
+emit -from :0: -limit 1
+| put result = Object.keys({'a': 1, 'b': 2})

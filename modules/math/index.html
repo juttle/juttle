@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ Math - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ Math";
+    var mkdocs_page_input_path = "modules/math.md";
+    var mkdocs_page_url = "/modules/math/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ Math</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/modules/math.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="math">Math</h1>
+<p>Juttle Math module provides functions and constants for mathematical operations.</p>
+<div class="toc">
+<ul>
+<li><a href="#math">Math</a><ul>
+<li><a href="#math-constants">Math constants</a></li>
+<li><a href="#mathabs">Math.abs</a></li>
+<li><a href="#mathacos">Math.acos</a></li>
+<li><a href="#mathasin">Math.asin</a></li>
+<li><a href="#mathatan">Math.atan</a></li>
+<li><a href="#mathatan2">Math.atan2</a></li>
+<li><a href="#mathceil">Math.ceil</a></li>
+<li><a href="#mathcos">Math.cos</a></li>
+<li><a href="#mathexp">Math.exp</a></li>
+<li><a href="#mathfloor">Math.floor</a></li>
+<li><a href="#mathlog">Math.log</a></li>
+<li><a href="#mathmax">Math.max</a></li>
+<li><a href="#mathmin">Math.min</a></li>
+<li><a href="#mathrandom">Math.random</a></li>
+<li><a href="#mathpow">Math.pow</a></li>
+<li><a href="#mathround">Math.round</a></li>
+<li><a href="#mathseed">Math.seed</a></li>
+<li><a href="#mathsin">Math.sin</a></li>
+<li><a href="#mathsqrt">Math.sqrt</a></li>
+<li><a href="#mathtan">Math.tan</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="math-constants">Math constants</h2>
+<p>Juttle supports these Math constants as well as <a href="../number/#number-constants">Number constants</a>. As all exports from Math module, they can be referenced without an import directive in a Juttle program.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Math.E</td>
+<td>Euler's constant, the base of natural logarithms, approximately 2.718</td>
+</tr>
+<tr>
+<td>Math.LN10</td>
+<td>The natural logarithm of 10, approximately 2.302</td>
+</tr>
+<tr>
+<td>Math.LN2</td>
+<td>The natural logarithm of 2, approximately 0.693</td>
+</tr>
+<tr>
+<td>Math.LOG2E</td>
+<td>The base 2 logarithm of Euler's constant, approximately 1.442</td>
+</tr>
+<tr>
+<td>Math.Log10E</td>
+<td>The base 10 logarithm of Euler's constant, approximately 0.434</td>
+</tr>
+<tr>
+<td>Math.PI</td>
+<td>Pi, the ratio of the circumference of a circle to its diameter, approximately 3.14159</td>
+</tr>
+<tr>
+<td>Math.SQRT1_2</td>
+<td>The square root of 1/2, approximately 0.707</td>
+</tr>
+<tr>
+<td>Math.SQRT2</td>
+<td>The square root of 2, approximately 1.414</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit
+| put radius = 7
+| put area = Math.round(Math.PI * Math.pow(radius, 2))
+</code></pre>
+
+<hr />
+<h2 id="mathabs">Math.abs</h2>
+<p>Return the absolute value of a number.</p>
+<pre><code>Math.abs(number)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>emit -limit 1 
+| put step1 = 3.1415, step2 = 0.5772
+| put delta = Math.abs(step2 - step1)
+</code></pre>
+
+<hr />
+<h2 id="mathacos">Math.acos</h2>
+<p>Return the arccosine of a specified number, in radians.</p>
+<pre><code>Math.acos(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number between -1 and 1</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathasin">Math.asin</h2>
+<p>Return the arcsine of a specified number, in radians.</p>
+<pre><code>Math.asin(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number between -1 and 1</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathatan">Math.atan</h2>
+<p>Return the arctangent of a specified number, in radians.</p>
+<pre><code>Math.atan(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathatan2">Math.atan2</h2>
+<p>Return the arctangent of the quotient of two numbers, in radians.</p>
+<pre><code>Math.atan2(y,x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>y</code></td>
+<td>A number representing the Y coordinate of a point</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>A number representing the X coordinate of a point</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> The Y coordinate must be specified before the X coordinate.</p>
+<hr />
+<h2 id="mathceil">Math.ceil</h2>
+<p>Return the smallest integer greater than or equal to a specified number.</p>
+<pre><code>Math.ceil(number)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>function get_integer(x) { 
+  return (x &gt;= 0) ? Math.floor(x) : Math.ceil(x); 
+}
+emit -limit 1 
+| put a = get_integer(3.1415), b = get_integer(-0.5772)
+| view table
+</code></pre>
+
+<hr />
+<h2 id="mathcos">Math.cos</h2>
+<p>Return the cosine of a specified number.</p>
+<pre><code>Math.cos(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number, in radians</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathexp">Math.exp</h2>
+<p>Return e<super>x</super>, where x is a specified number and <em>e</em> is Euler's constant,
+the base of the natural logarithms.</p>
+<pre><code>Math.exp(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathfloor">Math.floor</h2>
+<p>Return the largest integer less than or equal to a number.</p>
+<pre><code>Math.floor(number)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>function get_integer(x) { 
+  return (x &gt;= 0) ? Math.floor(x) : Math.ceil(x); 
+}
+emit -limit 1 
+| put a = get_integer(3.1415), b = get_integer(-0.5772)
+| view table
+</code></pre>
+
+<hr />
+<h2 id="mathlog">Math.log</h2>
+<p>Return the natural logarithm of the specified number.</p>
+<pre><code>Math.log(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathmax">Math.max</h2>
+<p>Return the largest of one or more numbers.</p>
+<pre><code>Math.max(x[, y[, .. ]])
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>const max = Math.max(Math.random(), Math.random(), Math.random());
+emit -limit 1 
+| put max = max 
+| view table
+
+</code></pre>
+
+<hr />
+<h2 id="mathmin">Math.min</h2>
+<p>Return the smallest of one or more numbers.</p>
+<pre><code>Math.min(x[, y[, .. ]])
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>emit -limit 1 
+| put a = 1, b = 2, c = 3, d = Math.min(a, b, c) 
+| view table
+</code></pre>
+
+<hr />
+<h2 id="mathrandom">Math.random</h2>
+<p>Return a floating-point, pseudo-random number in the range [0, 1); that
+is, from 0 (inclusive) up to but not including 1 (exclusive), which you
+can then scale to your desired range.</p>
+<pre><code>Math.random()
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> The implementation selects the initial seed to the random number generation algorithm. Use <a href="./#mathseed">Math.seed</a> to choose your own.</p>
+<p><em>Example: Return a random integer between 1 and max</em></p>
+<pre><code>function randomInt(max) {
+    return Math.ceil(Math.random() * max);
+}
+
+emit -limit 10 
+| put r = randomInt(10) 
+| view table
+
+</code></pre>
+
+<p><em>Example: Throw rock, paper, or scissors at random</em></p>
+<pre><code>const paper = 'PAPER';
+const rock = 'ROCK';
+const scissors = 'SCISSORS';
+
+function compute_result(you_threw, i_threw){
+    if(you_threw == i_threw){
+        return &quot;A DRAW!!&quot;;
+    }
+    if(you_threw == paper){
+        if(i_threw == rock){
+            return &quot;You have defeated me.&quot;;
+        }
+        else{
+            return &quot;The victory is mine!&quot;;
+        }
+    }
+    if(you_threw == rock){
+        if(i_threw == paper){
+            return &quot;I win again!&quot;;
+        }
+        else{
+            return &quot;You have bested me once more.&quot;;
+        }
+    }
+    if(you_threw == scissors){
+        if(i_threw == paper){
+            return &quot;Your skill is greatest.&quot;;
+        }
+        else{
+            return &quot;My superior talent has given me the victory.&quot;;
+        }
+    }
+    // If we get here without returning, then we didn't have a pair of arguments
+    // that we recognize.
+    return &quot;I'm not sure what happened there.&quot;;
+}
+
+function what_did_i_throw(){
+    var rando = Math.random();
+    if(rando &lt; .33){
+        return rock;
+    }
+    if(rando &gt;= .33 &amp;&amp; rando &lt; .67){
+        return paper;
+    }
+    if(rando &gt;= .67){
+        return scissors;
+    }
+}
+
+input selection :dropdown
+    -items [rock, paper, scissors]
+    -label &quot;Choose your weapon&quot;
+    -default rock;
+
+emit -limit 1
+| put you_threw = selection,
+    i_threw = what_did_i_throw(),
+    result = compute_result(you_threw, i_threw)
+| view table
+    -title &quot;The duel&quot;
+    -columnOrder &quot;time&quot;, &quot;you_threw&quot;, &quot;i_threw&quot;, &quot;result&quot;
+</code></pre>
+
+<hr />
+<h2 id="mathpow">Math.pow</h2>
+<p>Return base to the exponent power, that is, base<super>exponent</super>.</p>
+<pre><code>Math.pow(base, exponent)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>emit -limit 5 
+| put c = count(), power = Math.pow(2, c) 
+| keep power 
+| view table -title &quot;Powers of two&quot;
+</code></pre>
+
+<hr />
+<h2 id="mathround">Math.round</h2>
+<p>Return the value of a number rounded to the nearest integer.</p>
+<pre><code>Math.round(number)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>emit -limit 1
+| put a = Math.round(3.1415), b = Math.round(-0.5772), c = Math.round(1.5), d = Math.round(42)
+| view table
+</code></pre>
+
+<hr />
+<h2 id="mathseed">Math.seed</h2>
+<p>Initialize the random number generator to a known value. Subsequent
+calls to
+<a href="./#mathrandom">Math.random</a>
+will always generate the same pseudo-random sequence for a given seed
+value</p>
+<pre><code>Math.seed(seed)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>seed</code></td>
+<td>Random number generator seed value. A number.</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Do something predictably random</em></p>
+<pre><code>const ignored = Math.seed(42);
+emit -limit 1
+| put pick_a_number = Math.random()
+| put lucky_guess = 0.0016341939679719736
+| put amazed = (pick_a_number == lucky_guess)
+</code></pre>
+
+<hr />
+<h2 id="mathsin">Math.sin</h2>
+<p>Return the sine of the specified number.</p>
+<pre><code>Math.sin(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number, in radians</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mathsqrt">Math.sqrt</h2>
+<p>Return the positive square root of a number.</p>
+<pre><code>Math.sqrt(number)
+</code></pre>
+
+<p><em>Example: find numbers with whole square roots</em></p>
+<pre><code>emit -from :0: -limit 100 
+| put a = count() 
+| put b = Math.floor(Math.sqrt(a)) 
+| uniq b
+</code></pre>
+
+<hr />
+<h2 id="mathtan">Math.tan</h2>
+<p>Return the tangent of the specified number.</p>
+<pre><code>Math.tan(x)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x</code></td>
+<td>A number, in radians</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../number/" class="btn btn-neutral float-right" title="____ Number"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../duration/" class="btn btn-neutral" title="____ Duration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../duration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../number/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

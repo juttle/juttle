@@ -1,0 +1,46 @@
+//
+// Example of using grouping with reduce with both historical
+// and live sources
+//
+
+
+// Classify the point into either side given the parameter c
+function choose_side(c) {
+  return (c%2 == 0) ? "left" : "right";
+}
+
+// Generate synthetic historical data with a value and a grouping
+sub historical_points() {
+  emit -from :0: -limit 10
+  | put value=10 * count(), group=choose_side(count())
+}
+
+// Generate similar synthetic data but starting at now so it runs live
+sub live_points() {
+  emit -limit 10
+  | put value=count(), group=choose_side(count())
+}
+
+// Read the historical points in one big batch and reduce all points to a
+// single result table.
+historical_points
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'group','cnt','sum','avg','stdev'
+    -title "Historical statistics by group";
+
+// Read the historical points in 5 second batches
+historical_points
+| batch :5 seconds:
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'time','group','cnt','sum','avg','stdev'
+    -title "Historical 5-second statistics by group";
+
+// Read the live points and divide into 3 second batches
+live_points
+| batch :3 seconds:
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'time','group','cnt','sum','avg','stdev'
+    -title "Live 3-second statistics by group";

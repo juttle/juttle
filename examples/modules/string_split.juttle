@@ -1,0 +1,5 @@
+emit -limit 1 
+| put host = "alphaserver-22" 
+| put parts = String.split(host, '-') 
+| put id = parts[0] 
+| view text

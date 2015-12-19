@@ -1,0 +1,4 @@
+emit -limit 1 
+| put name="NorthDakota"
+| put newname=String.toUpperCase(name)
+| view text

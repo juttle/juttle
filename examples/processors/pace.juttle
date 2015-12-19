@@ -1,0 +1,2 @@
+emit -from :0: -limit 10
+| pace

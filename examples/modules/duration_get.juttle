@@ -1,0 +1,10 @@
+const millenial = :now: - Date.new("2001-01-01");
+emit -limit 1 
+| put y = Duration.get(millenial, "years"), 
+      M = Duration.get(millenial, "months"), 
+      d = Duration.get(millenial, "days"),
+      h = Duration.get(millenial, "hours"),
+      m = Duration.get(millenial, "minutes"),
+      s = Duration.get(millenial, "seconds")
+| put ticker = "Time lived in this millenium: ${y}y ${M}m ${d}d ${h}h:${m}m:${s}s" 
+| keep ticker

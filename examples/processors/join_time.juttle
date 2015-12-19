@@ -1,0 +1,10 @@
+emit -points [
+  {time:"2015-11-26T11:22:33.000Z", "name":"furlongs", value:25},
+  {time:"2015-11-26T11:22:33.000Z", "name":"fortnights", value:7},
+  {time:"2015-11-27T10:20:50.000Z", "name":"furlongs", value:34},
+  {time:"2015-11-27T10:20:50.000Z", "name":"fortnights", value:5}
+]
+  | put *name = value      // turn {name:"furlongs", value:20} into {furlongs:20}
+  | remove name, value       // those fields are no longer needed
+  | join                   // combine points that have the same time value
+  | put speed = furlongs/fortnights

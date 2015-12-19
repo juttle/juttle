@@ -1,0 +1,1 @@
+emit -limit 1 | put hours_wasted_today = Date.elapsed(:today:) / 3600;

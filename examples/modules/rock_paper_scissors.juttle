@@ -1,0 +1,62 @@
+const paper = 'PAPER';
+const rock = 'ROCK';
+const scissors = 'SCISSORS';
+
+function compute_result(you_threw, i_threw){
+    if(you_threw == i_threw){
+        return "A DRAW!!";
+    }
+    if(you_threw == paper){
+        if(i_threw == rock){
+            return "You have defeated me.";
+        }
+        else{
+            return "The victory is mine!";
+        }
+    }
+    if(you_threw == rock){
+        if(i_threw == paper){
+            return "I win again!";
+        }
+        else{
+            return "You have bested me once more.";
+        }
+    }
+    if(you_threw == scissors){
+        if(i_threw == paper){
+            return "Your skill is greatest.";
+        }
+        else{
+            return "My superior talent has given me the victory.";
+        }
+    }
+    // If we get here without returning, then we didn't have a pair of arguments
+    // that we recognize.
+    return "I'm not sure what happened there.";
+}
+
+function what_did_i_throw(){
+    var rando = Math.random();
+    if(rando < .33){
+        return rock;
+    }
+    if(rando >= .33 && rando < .67){
+        return paper;
+    }
+    if(rando >= .67){
+        return scissors;
+    }
+}
+
+input selection :dropdown
+    -items [rock, paper, scissors]
+    -label "Choose your weapon"
+    -default rock;
+    
+emit -limit 1
+| put you_threw = selection,
+    i_threw = what_did_i_throw(),
+    result = compute_result(you_threw, i_threw)
+| view table
+    -title "The duel"
+    -columnOrder "time", "you_threw", "i_threw", "result"

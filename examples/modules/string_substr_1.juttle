@@ -1,0 +1,6 @@
+emit 
+| put s = "Hello World!" 
+| put ss0 = String.substr(s, 0),       // Hello World!
+      ss6 = String.substr(s, 6),       // World!
+      ss05 = String.substr(s, 0, 5),   // Hello 
+      ss_65 = String.substr(s, -6, 5)  // World

@@ -1,0 +1,2 @@
+emit -limit 100
+| view text

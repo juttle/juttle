@@ -1,0 +1,4 @@
+emit -hz 10 -limit 10 
+| put a = 1, b = 2, c = 3 
+| remove b, c 
+| view text

@@ -1,0 +1,16 @@
+{% if nav_item.children %}
+    <ul class="subnav">
+    <li><span>{{ nav_item.title }}</span></li>
+
+        {% for nav_item in nav_item.children %}
+            {% include 'toc.html' %}
+        {% endfor %}
+    </ul>
+{% else %}
+  {% if not nav_item.title.startswith("_") %}
+    <li class="toctree-l1 {% if nav_item.active%}current{%endif%}">
+        <a class="{% if nav_item.active%}current{%endif%}" href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  {% endif %}
+{% endif %}

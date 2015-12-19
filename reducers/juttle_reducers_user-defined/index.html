@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ User-defined Reducers - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ User-defined Reducers";
+    var mkdocs_page_input_path = "reducers/juttle_reducers_user-defined.md";
+    var mkdocs_page_url = "/reducers/juttle_reducers_user-defined/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ User-defined Reducers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/juttle_reducers_user-defined.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="user-defined-reducers">User-defined reducers</h1>
+<p>Juttle includes <a href="../">built-in reducers</a>,
+but users can also define their own reducers by using the reducer keyword.</p>
+<p>A custom reducer is composed of two required functions and two optional
+functions:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>update</code></td>
+<td>This function is called once for each point in a stream.</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>result</code></td>
+<td>This function is called at the end of a batch or stream in order to retrieve the final computed value from the reducer.</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>expire</code></td>
+<td>This function is only needed if the reducer is to be used in a windowed reduce or put.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<p>In addition, a reducer can define local variables that are used in its computation.</p>
+<hr />
+<h3 id="time-windows-with-user-defined-reducers">Time windows with user-defined reducers</h3>
+<p>If a user-defined reducer is to be used with a <a href="../juttle_reducers_timewindows/">moving time window</a> (in a <code>reduce</code>, or <code>put -over</code>), then it may include an optional expire function.</p>
+<p>An expire function is called once for each point as it leaves the
+window. It is considered the "opposite" of the update function, and it
+should undo what update did when the point entered the window.</p>
+<p>It it not always possible to define an expire function (for example,
+there is no way to write expire for max or min functions). An expire
+function should be though of as an optimization -- without it, the
+computation is redone for all points in the current window each time
+result is called. The same result should be achieved whether or not
+expire is defined.</p>
+<hr />
+<p><em>Example: this reducer counts the number of times a field has an odd value, and can be used with -over</em></p>
+<pre><code>reducer count_odd(fieldname) {
+    var count = 0;
+
+    function update() {
+        if (*fieldname % 2 != 0) {
+            count = count + 1;
+        }
+    }
+    function expire() {
+        if (*fieldname % 2 != 0) {
+            count = count - 1;
+        }
+    }
+    function result() {
+        return count;
+    }
+}
+
+emit -from :-1d: -every :1m: -limit 100 | put value=count() 
+| (
+  reduce -every :10m: count_odd_last10m = count_odd(value);
+  reduce -every :10m: -over :1h: count_odd_last1h = count_odd(value) 
+  ) 
+| join
+| view table
+</code></pre>
+
+<p><em>Example: let's define an exponentially weighted moving average (EWMA) reducer</em></p>
+<pre><code>reducer ewma(fieldname, alpha = 0.5) {
+ var ma = 0;
+ function update() {
+    ma = ma * (1 - alpha) + * fieldname * alpha;
+ }
+ function result() { 
+    return ma; 
+ }
+}
+emit -limit 1 
+| put cnt = Math.random() * 10 
+| put ma_fast = ewma(cnt, 0.9), ma_slow = ewma(cnt, 0.1) 
+| view table
+</code></pre>
+
+<ol>
+<li>
+<p>The first line declares the reducer name and indicates that the
+    reducer takes two arguments: a field name (fieldname) and a
+    weighting value (alpha). The alpha argument is optional because it
+    is defined with a default value.</p>
+</li>
+<li>
+<p>The second line defines a variable (ma) that we'll use to store the
+    running value of the moving average.</p>
+</li>
+<li>
+<p>The update() function updates the moving average each time it is
+    invoked (for example, for each point passing through the reducer). </p>
+<p>See <a href="../../concepts/fields/#referencing">Field referencing</a>
+for an explanation of why we used the <code>*</code> operator to
+reference <code>*fieldname</code>.</p>
+</li>
+<li>
+<p>The result() function simply returns that moving average.</p>
+</li>
+<li>
+<p>Then we have a flowgraph that emits a synthetic data point, sets the
+    cnt field to a random number, invokes the ewma reducer twice, and
+    outputs a point with two fields: ma_fast and ma_slow. Each is
+    computed over the values of the cnt field, with a different
+    alpha parameter.</p>
+<p>Note that ma_fast and ma_slow are computed independently, by
+separate instances of the reducer. A single reducer instance is
+created for each assignment expression, and each reducer instance
+has its own variables and state.</p>
+</li>
+</ol>
+<p>The alpha parameter is used by the reducer like a regular function
+argument. The fieldname parameter is used differently. Specifically, in
+the update() function, the fieldname parameter is de-referenced to
+obtain the value of the field whose name was passed in via the fieldname
+parameter. This allows reducers to be used generally over arbitrary
+field names, by having the user of a reducer specify which fields the
+reducer should use in its computation. In the above example, the field
+of interest is cnt, and is the first argument passed to the EWMA
+reducer.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../avg/" class="btn btn-neutral float-right" title="____ avg"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../juttle_reducers_timewindows/" class="btn btn-neutral" title="____ Time Windowed Reducers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../juttle_reducers_timewindows/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../avg/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

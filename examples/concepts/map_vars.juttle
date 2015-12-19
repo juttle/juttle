@@ -1,0 +1,11 @@
+function myfunc(which) {
+  var my_map = {'foo': 'bar', 'baz': 'duh'};
+  var foo = my_map['foo'];
+  return (which == "all") ? my_map : foo;
+}
+emit
+| put v = myfunc("one"), a = myfunc("all")['baz']
+
+// Expected Output:
+// {a: 'duh'}
+// {v: 'bar'}

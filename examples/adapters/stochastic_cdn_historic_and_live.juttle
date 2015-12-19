@@ -1,0 +1,18 @@
+read stochastic -source 'cdn' -nhosts 3 -dos 0.5 -from :1 minute ago: -source_type 'metric'
+  name = 'requests' OR name = 'response_ms' OR name = 'responses' OR name = 'disk'
+| (
+  filter service = 'search' AND name = 'requests'
+  | reduce -every :10s: requests_per_sec = avg(value) by host;
+
+  filter name = 'cpu'
+  | reduce -every :10s: cpu = avg(value) by host;
+
+  filter service = 'search' AND name = 'response_ms'
+  | reduce -every :10s: response_ms = avg(value) by host;
+
+  filter name = 'disk'
+  | reduce -every :10s: disk = avg(value) by host;
+)
+| pass // required to make the following join work
+| join host
+

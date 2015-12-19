@@ -1,0 +1,10 @@
+emit -limit 100 -from Date.new(0)
+| put position = count() * count()
+| put dt = Duration.seconds(delta(time, :0s:))
+| put speed = delta(position) / dt
+| put acceleration = delta(speed) / dt
+| (
+  view timechart -valueField 'position';
+  view timechart -valueField 'speed';
+  view timechart -valueField 'acceleration';
+  )

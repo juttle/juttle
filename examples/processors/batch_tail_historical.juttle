@@ -1,0 +1,5 @@
+emit -from :0: -hz 5 -limit 20 
+| batch 1 
+| tail 1 
+| view text
+

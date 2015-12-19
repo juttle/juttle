@@ -1,0 +1,4 @@
+emit -hz 10 -limit 100 
+| batch 1
+| tail 2 
+| view text

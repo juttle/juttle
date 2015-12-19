@@ -1,0 +1,32 @@
+// On historical data, you can apply reducer to get a single computation,
+// or batch your historical data by time, then reduce per batch period.
+
+sub historical_points() {
+  emit -from :0: -limit 10 | put cnt = count(), value = Math.random()
+}
+historical_points 
+| reduce min(cnt), min_val = min(value), max(cnt), max_val = max(value)
+| view table 
+    -columnOrder "min","min_val","max","max_val"
+    -title "Min and max of historical points"
+  ;
+historical_points 
+| batch 5 
+| reduce min(cnt), max(cnt) 
+| view table
+    -columnOrder "min","max" 
+    -update "append" 
+    -title "Min and max per 5-second batch, historical"
+;
+
+// On live streaming data, you must batch by time, then reduce per batch period.
+
+sub live_points() {
+  emit -limit 10 | put cnt = count(), value = Math.random()
+}
+live_points 
+| batch 3 
+| reduce min(cnt), max(cnt) 
+| view table 
+  -columnOrder "min","max" -update "append"
+  -title "Min and max per 3-second batch, live";

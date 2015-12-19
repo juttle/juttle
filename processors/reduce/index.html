@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ reduce - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ reduce";
+    var mkdocs_page_input_path = "processors/reduce.md";
+    var mkdocs_page_url = "/processors/reduce/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ reduce</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/reduce.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="reduce">reduce</h1>
+<p>Accumulate collections of points and aggregate them using reducers,
+optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving time window</a></p>
+<pre><code>reduce [-every duration [-on duration-or-calendar-offset]]
+  [-over duration]
+  [-reset true|false]
+  [-forget false]
+  fieldname1=expr1 [, fieldnameN=exprN]
+  [by field1, [field2, ...]]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-every</code></td>
+<td>The interval at which values will be computed, as a duration literal. A new result is produced each time this duration passes.</td>
+<td align="right">No; if not specified, the upstream batch interval is used. If there is no upstream batch, a single result is produced after the stream has ended.</td>
+</tr>
+<tr>
+<td><code>over</code></td>
+<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <p>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> </p><p>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. </p><p>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-reset</code></td>
+<td>Set this to 'false' to emit results cumulatively, over all points seen so far.</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-forget</code></td>
+<td>When grouping reducer results with 'by', set this to 'false' to cause results to be emitted for every value of 'by' that has been seen in previous batches. Values that do not appear in the current batch will report their 'empty' value (for example, count() will produce 0, avg() will produce null)</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-from</code></td>
+<td>When used with <code>-over</code> the start time of the earliest full window of data.</td>
+<td align="right">No; if not specified, the earliest window begins with the earliest point or batch received.</td>
+</tr>
+<tr>
+<td><code>-to</code></td>
+<td>When used with <code>-over</code> the end time of the last full window of data.</td>
+<td align="right">No; if not specified, the last point or batch time stamp received is assumed.</td>
+</tr>
+<tr>
+<td><code>-on</code></td>
+<td>A time alignment for <code>-every</code> It may be a duration or a calendar offset less than <code>-every</code> For example, <code>-every :hour: -on :00:30:00:</code>runs every hour on the half-hour, while <code>-every :month: -on :day 10:</code>runs a monthly computation on day 10 of the month.</td>
+<td align="right">No; if <code>-on</code>is not specified, output batches are aligned with the UNIX epoch, as if from a batch node.</td>
+</tr>
+<tr>
+<td><code>fieldname=expr</code></td>
+<td>An assignment expression, where expr can be a <a href="../../reducers/">reducer</a>. Each assignment expression results in an output field that has the left-hand side of the expression as its name and the computed right-hand side as its value.</td>
+<td align="right">At least one</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>One or more fields for which the assignment expression is computed separately. <p>If grouping fields are present, then the assignment expression is computed independently for each unique combination of values present in the grouping fields. See <a href="../">Processors</a> for more about grouping with by.  </p></td>
+<td align="right">No; if no grouping fields are present, then the assignment expression is computed over all points in the batch.</td>
+</tr>
+</tbody>
+</table>
+<p>The output points contain:</p>
+<ul>
+<li>All the fields specified as assignment expressions or grouping fields in the arguments</li>
+<li>Each of the grouping fields with the unique value(s) for which the assignment expressions were computed</li>
+<li>When operating on batched points, every output point contains a time field containing the end time of the incoming batch.</li>
+</ul>
+<p>When reduce operates on batched points (that is, when there is a
+<a href="../batch/">batch</a> processor preceding <code>reduce</code>), it generates a set of output points for each incoming batch of points, resetting its internal state after each
+batch. When the points flowing into reduce are not batched, output
+points are generated for all points when the stream ends.</p>
+<p>See <a href="../../concepts/fields/#referencing">Field referencing</a> for additional information relevant to this processor.</p>
+<p><em>Example: Trailing ten-minute average</em></p>
+<pre><code>// Trailing average example:
+//
+// Smooth a stream of random values occurring every 10 seconds
+// by computing a trailing 10 minute average
+// 
+sub random() {
+    emit 
+      -from :2014-01-01: 
+      -limit 500 
+      -every :10s:
+    | put name = 'random'
+    | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
+}
+random
+| reduce 
+    -every :m: 
+    -over :10m: avg = avg(value), value = last(value)
+| split value, avg
+| view timechart
+</code></pre>
+
+<p><em>Example: Superimposing yesterday's CPU usage over today's</em></p>
+<pre><code>// Day over Day graph example:
+//
+// display a graph of cpu usage superimposed over the previous day
+// by using a moving window to get the value from 24 hours ago.
+//
+// The graph will begin at 2014-01-01, but we need to start the data
+// source a day earlier so the windowed reducer can produce a point
+// for 2014-01-01
+//
+read stochastic -source 'cdn' -from :2013-12-31: -to :2014-01-05: -daily .5 -source_type 'metric' name = 'cpu'
+| reduce 
+    -every :2h: value = avg(value)
+| put 
+    -over :25h: prev = first(value)
+| filter time &gt;= :2014-01-01: // discard unfilled window points from Dec.
+| split value,prev
+| view timechart
+</code></pre>
+
+<p><em>Example: Call records, day by day</em></p>
+<pre><code>// Call Record billing example:
+//
+// Call records arrive as a stream of points indicating duration in minutes.
+// Your phone bill is the total of these, charged at $.05/minute, from the
+// 20th of each month.
+//
+// This program displays a day-by-day running total of your bill:
+//
+sub call_record() {
+  emit -from :2014-01-01: -limit 4000 -every :h:
+  | put name = 'duration'
+  | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
+}
+call_record
+| batch 
+    -every :month:  
+    -on :day 20: 
+| put name = 'total', value = sum(value) * 0.05
+| view timechart
+;
+//
+// This program displays a table with monthly totals
+//
+call_record
+| reduce 
+    -every :month:
+    -on :day 20: value = sum(value) * 0.05
+| put name = &quot;total&quot;, value = Math.floor(value * 100) / 100 
+| view table 
+
+</code></pre>
+
+<p><em>Example: Output a single point that counts the number of points in the data set (in this case 10)</em></p>
+<pre><code>emit -hz 10 -limit 10 
+| reduce count() 
+| view text
+</code></pre>
+
+<p><em>Example: Any number of assignments can be used and they can be any expression</em></p>
+<pre><code>emit -hz 10 -limit 10 
+| reduce x = 3 * 4, count() 
+| view text
+</code></pre>
+
+<p><em>Example: Aggregate the points in batches of three seconds</em></p>
+<pre><code>emit -every :0.1s: -limit 100 
+| batch :2s:
+| reduce count()
+| view text
+</code></pre>
+
+<p><em>Example: Aggregate the ten points by unique values of y</em></p>
+<pre><code>emit -from :0: -limit 10
+| put x = Math.random() * 2, y = Math.floor(x)
+| reduce by y 
+| view text
+</code></pre>
+
+<p><em>Example: Count the number of points per unique value of y (over the entire stream of points)</em></p>
+<pre><code>emit -from :0: -limit 10 
+| put x = Math.random() * 2, y = Math.floor(x) 
+| reduce cnt = count() by y 
+| view text
+
+</code></pre>
+
+<p><em>Example: Count the number of points per unique value of y (over batches of five seconds of points)</em></p>
+<pre><code>emit -from :0: -limit 10 
+| put x = Math.random() * 2, y = Math.floor(x) 
+| batch :5s: 
+| reduce cnt = count() by y 
+| view text
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../remove/" class="btn btn-neutral float-right" title="____ remove"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../put/" class="btn btn-neutral" title="____ put"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../put/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../remove/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

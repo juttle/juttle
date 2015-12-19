@@ -1,0 +1,8 @@
+function randomInt(max) {
+	return Math.ceil(Math.random() * max);
+}
+		
+emit -limit 10 
+| put r = randomInt(10) 
+| view table
+

@@ -1,0 +1,3 @@
+const START = :2 months ago:;
+const DURATION = :now: - START; 
+emit -every :1 hour: -from START -to :now: | reduce points_per_week = (count() / (DURATION / :w:))

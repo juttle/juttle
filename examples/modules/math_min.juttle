@@ -1,0 +1,3 @@
+emit -limit 1 
+| put a = 1, b = 2, c = 3, d = Math.min(a, b, c) 
+| view table

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ CDN Source - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ CDN Source";
+    var mkdocs_page_input_path = "adapters/stochastic_cdn.md";
+    var mkdocs_page_url = "/adapters/stochastic_cdn/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ CDN Source</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/stochastic_cdn.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="read-stochastic-source-cdn">read stochastic -source 'cdn'</h1>
+<p>Simulate hosts and services in a content
+distribution network (CDN), providing metric and event streams that vary
+with demand throughout the day.</p>
+<pre><code>read stochastic -source 'cdn' source-params read-params
+</code></pre>
+
+<h4 id="demo-parameters">Demo parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-every</code></td>
+<td>Historic points are downsampled at the specified interval <p>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. </p></td>
+<td align="right">No; default is the same as <code>-max_samples</code></td>
+</tr>
+<tr>
+<td><code>-max_samples</code></td>
+<td>Historic points are downsampled at an interval calculated so that there are no more than int intervals</td>
+<td align="right">No; default is 100</td>
+</tr>
+<tr>
+<td><code>-nhosts</code></td>
+<td>The number of hosts to simulate</td>
+<td align="right">No; the default is 1</td>
+</tr>
+<tr>
+<td><code>-pops</code></td>
+<td>A list of Point of Presence (PoP) names to use with -nhosts <p>Host names are generated by assigning numbers to PoPs in a round-robin fashion, such as pop1.1, pop2.2, pop1.3, pop1.4, and so on. </p></td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-host_names</code></td>
+<td>A list of host names to use, in which case <code>-nhosts</code>is ignored and the number of hosts equals the number of specified host names</td>
+<td align="right">No; when nhosts is more than 1, and -host_names is omitted, host names are randomly generated</td>
+</tr>
+<tr>
+<td><code>-service_names</code></td>
+<td>A list of service names to use, including one or more of the following:  <ul><li>search</li><li>index</li><li>authentication</li></ul></td>
+<td align="right">No; the default is all three service names</td>
+</tr>
+<tr>
+<td><code>-host_capacities</code></td>
+<td>The relative capacities of hosts. Daily CDN demand are divided among them by these proportions.</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-daily</code></td>
+<td>The scale factor for daily demand wave. A value of n will max out n hosts during peak hours.</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-dos</code></td>
+<td>The scale of DOS demand load on a host, between 0 and 1. A value of 1 will max out any host it hits.</td>
+<td align="right">No; the default is 0</td>
+</tr>
+<tr>
+<td><code>-dos_dur</code></td>
+<td>The average time that an attack spends on a host before moving to another host <p>Simulation times increase with this number; keep it to seconds or small minutes.</p></td>
+<td align="right">No; defaults to 15 seconds</td>
+</tr>
+<tr>
+<td><code>-dos_id</code></td>
+<td>The customer ID of the DOS attacker</td>
+<td align="right">No; default is 13</td>
+</tr>
+<tr>
+<td><code>-dos_router</code></td>
+<td>The method for selecting the next host for the DOS demand <p>Roundrobin cycles through the host list, each for dos_dur seconds. markov is more interesting. </p></td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>-errp</code></td>
+<td>The syslog error percentage at peak demand</td>
+<td align="right">No; defaults to 0.02</td>
+</tr>
+<tr>
+<td><code>-lpm</code></td>
+<td>The average number of syslog lines per minute per host</td>
+<td align="right">No; defaults to 60</td>
+</tr>
+<tr>
+<td><code>-debug</code></td>
+<td>"1" to emit additional points with behind-the-scenes information</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="read-parameters">Read parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-from</code></td>
+<td>Stream points whose time stamps are greater than or equal to the specified moment <p>See <a href="../../reference/time/">Time notation in Juttle</a>  for syntax information. </p></td>
+<td align="right">Required only if -to is present; defaults to :now:</td>
+</tr>
+<tr>
+<td><code>-to</code></td>
+<td>Stream points whose time stamps are less than the specified moment, which is less than or equal to :now:  <p>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. </p><p>:information_source: <code>Note:</code>To stream live data only, omit -from and -to. To combine historical and live data, specify a -from value in the past and omit -to.</td>
+<td align="right">No; defaults to forever</td>
+</tr>
+<tr>
+<td><code>filter-expression</code></td>
+<td>A field comparison, where multiple terms are joined with AND, OR, or NOT <p>See <a href="../../concepts/filtering/">Filtering</a> for additional details.  </p></td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<h4 id="characteristics-of-a-simulated-cdn">Characteristics of a simulated CDN</h4>
+<p>Each host in the simulated CDN runs two services:</p>
+<ul>
+<li>
+<p>An index service. Demand for the index services is constant.</p>
+</li>
+<li>
+<p>An auth service. Demand for the authentication service is constant.</p>
+</li>
+<li>
+<p>A search service. Search demand varies through the day (generally highest from noon
+   to six).</p>
+</li>
+</ul>
+<p>The default "network" is a single host experiencing the full daily
+demand for the CDN. You can increase the number of hosts with <code>-nhosts</code> or <code>-host_names</code>. When nhosts is more than 1, host names are randomly generated, though you can provide an explicit list of names with the <code>-host_names</code>
+option. The daily demand is divided among these hosts in random
+proportions unless you specify an explicit list of <code>-host_capacities</code>. The daily demand level can be increased to keep all hosts busier with the <code>-daily</code> scale factor.</p>
+<p>In addition to the daily demand cycle, you can enable a
+Denial-of-Service (DoS) agent that hops from host to host with blasts of
+requests. When hosts are under high load, their services begin to
+degrade and the frequency of error responses increases. Its demand
+factor ranges from 0 to 1, configured with the <code>-dos</code> option . The default, 0, disables
+the agent. You can also control how fast this load shifts between hosts
+(<code>-dos_dur</code>) and how predictable the shifts are (<code>-dos_router</code>).</p>
+<p><em>Example: Live and historical streams in a simulated CDN</em></p>
+<p>To simulate live data, start the interval now and omit the <code>-to</code> parameter:</p>
+<pre><code>read stochastic -source 'cdn' ... -from :now:
+</code></pre>
+
+<p>To simulate historical data, start the interval anytime in the past and
+specify <code>-to</code> as either another past moment or <code>:now:</code>:</p>
+<pre><code>read stochastic -source 'cdn' ... -from :past_moment: -to :now:
+</code></pre>
+
+<p>To combine historical and live data, start the interval in the past and
+do not include the -to argument:</p>
+<pre><code>read stochastic -source 'cdn' ... -from :2 days ago:
+</code></pre>
+
+<p>When you combine historical and live data, all data from the <code>-from</code> moment until the present moment is delivered immediately. Then, all subsequent data is delivered in real
+time.</p>
+<p>Data points are produced each time the network is sampled:</p>
+<ul>
+<li>For live data, a sample is emitted each second.</li>
+<li>For historical data, 60 samples are emitted to cover the specified time range unless you provide a sampling interval with the <code>-every</code> parameter.</li>
+</ul>
+<h4 id="fields-in-data-points-in-a-simulated-cdn">Fields in data points in a simulated CDN</h4>
+<p>All points include these fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time :moment:</code></td>
+<td>The point's time stamp</td>
+</tr>
+<tr>
+<td><code>host hostname</code></td>
+<td>The host that emitted this point</td>
+</tr>
+<tr>
+<td><code>service index|search</code></td>
+<td>The service type to which this point belongs; see <a href="#stochastic_cdn__char">Characteristics of a simulated CDN</a></td>
+</tr>
+<tr>
+<td><code>source_type metric|event</code></td>
+<td>The data type for this point</td>
+</tr>
+<tr>
+<td><code>name string</code></td>
+<td>The name of this data point</td>
+</tr>
+<tr>
+<td><code>value float</code></td>
+<td>This data point's value</td>
+</tr>
+</tbody>
+</table>
+<p>In metrics data streams generated by cdn source, the value of the value
+field depends on the metric:</p>
+<table>
+<thead>
+<tr>
+<th>Metric name</th>
+<th>Value field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>requests</code></td>
+<td>The number of HTTP requests for this service over this period</td>
+</tr>
+<tr>
+<td><code>responses</code></td>
+<td>The number of HTTP responses for this service <p>This metric type also includes a <code>code</code>field that is one of 200, 404, or 500. The <code>value</code>is the event count for this period.</td>
+</tr>
+<tr>
+<td><code>response_ms</code></td>
+<td>The average response time for a request to this service in this period, in milliseconds</td>
+</tr>
+<tr>
+<td><code>cpu</code></td>
+<td>The CPU load percentage for this host, 0..1</td>
+</tr>
+<tr>
+<td><code>disk</code></td>
+<td>The disk load percentage for this host, 0..1</td>
+</tr>
+</tbody>
+</table>
+<p>Similarly, in events data streams generated by cdn source, the value of the
+value field depends on the event type:</p>
+<table>
+<thead>
+<tr>
+<th>Event type</th>
+<th>Value field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>server_error</code></td>
+<td>For server response events, only HTTP error events are emitted and "value" is the HTTP error code (500) <p>An additional <code>cust_id</code>field contains the ID of the requestor.</td>
+</tr>
+<tr>
+<td><code>syslog</code></td>
+<td>The log message text</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: set up a CDN source using different options</em></p>
+<pre><code>read stochastic -source 'cdn' -nhosts 3 -dos 0.5 -dos_dur :10 seconds:
+</code></pre>
+
+<pre><code>read stochastic -source 'cdn' -host_names [&quot;fenge&quot;, &quot;geruth&quot;, &quot;amled&quot;] -daily 3.0  name ~ '*cpu*'
+</code></pre>
+
+<p><em>Example: historic query for a week of data on one host, with graphs</em></p>
+<pre><code>read stochastic -source 'cdn' -from :1 week ago: -to :now: -source_type 'metric'
+name = 'requests' OR name = 'cpu' OR name = 'response_ms' OR name = 'disk'
+| (
+  filter service = 'search' AND name = 'requests'
+  | reduce requests_per_sec = avg(value) by host;
+
+  filter name = 'cpu'
+  | reduce cpu = avg(value) by host;
+
+  filter service = 'search' AND name = 'response_ms'
+  | reduce response_ms = avg(value) by host;
+
+  filter name = 'disk'
+  | reduce disk = avg(value) by host;
+)
+| join host
+| view table -title 'Host Metrics (Last Week)' -columnOrder [ 'host' ]
+</code></pre>
+
+<p><em>Example: historic and real-time query of three hosts with some chaos from a DoS attack</em></p>
+<p>The simulation renders the past data, then continues ticking along each second with a new sample.</p>
+<pre><code>read stochastic -source 'cdn' -nhosts 3 -dos 0.5 -from :1 minute ago: -source_type 'metric'
+  name = 'requests' OR name = 'response_ms' OR name = 'responses' OR name = 'disk'
+| (
+  filter service = 'search' AND name = 'requests'
+  | reduce -every :10s: requests_per_sec = avg(value) by host;
+
+  filter name = 'cpu'
+  | reduce -every :10s: cpu = avg(value) by host;
+
+  filter service = 'search' AND name = 'response_ms'
+  | reduce -every :10s: response_ms = avg(value) by host;
+
+  filter name = 'disk'
+  | reduce -every :10s: disk = avg(value) by host;
+)
+| pass // required to make the following join work
+| join host
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../stochastic_logs/" class="btn btn-neutral float-right" title="____ Logs Source"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../stochastic/" class="btn btn-neutral" title="____ Stochastic Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../stochastic/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../stochastic_logs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ String - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ String";
+    var mkdocs_page_input_path = "modules/string.md";
+    var mkdocs_page_url = "/modules/string/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ String</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/modules/string.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="string">String</h1>
+<p>String module provides Juttle functions to manipulate strings and convert from/to other data types to String. Juttle strings are subject to string coercion and interpolation rules, also described here.</p>
+<div class="toc">
+<ul>
+<li><a href="#string">String</a><ul>
+<li><a href="#string-interpolation">String Interpolation</a></li>
+<li><a href="#string-coercion">String Coercion</a></li>
+<li><a href="#tostring-conversion">toString Conversion</a><ul>
+<li><a href="#datetostring">Date.toString()</a></li>
+<li><a href="#durationtostring">Duration.toString()</a></li>
+<li><a href="#numbertostring">Number.toString()</a></li>
+<li><a href="#booleantostring">Boolean.toString()</a></li>
+<li><a href="#regexptostring">RegExp.toString()</a></li>
+</ul>
+</li>
+<li><a href="#stringconcat">String.concat</a></li>
+<li><a href="#stringindexof">String.indexOf</a></li>
+<li><a href="#stringlength">String.length</a></li>
+<li><a href="#stringreplace">String.replace</a></li>
+<li><a href="#stringsearch">String.search</a></li>
+<li><a href="#stringslice">String.slice</a></li>
+<li><a href="#stringsplit">String.split</a></li>
+<li><a href="#stringsubstr">String.substr</a></li>
+<li><a href="#stringtolowercase">String.toLowerCase</a></li>
+<li><a href="#stringtouppercase">String.toUpperCase</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="string-interpolation">String Interpolation</h2>
+<p>In Juttle, your string literals can include placeholders that contain
+expressions that generate variable values. Values that aren't originally
+strings are automatically converted.</p>
+<p>Placeholders have this format:</p>
+<pre><code>${expression}
+</code></pre>
+
+<p><em>Example: simple string interpolation</em></p>
+<pre><code>const total = 3;
+emit -limit total
+| put count = count()
+| put message = &quot;finished ${count} of ${total}&quot;
+</code></pre>
+
+<p>Because the values of count and total are numbers, Jut automatically
+converts them to strings.</p>
+<p>Placeholders can include more complex expressions, too.</p>
+<p><em>Example: complex string interpolation</em></p>
+<pre><code>const total = 3;
+emit -limit total
+| put count = count()
+| put message = &quot;finished ${Math.round((count / total) * 100)}%&quot;
+</code></pre>
+
+<hr />
+<h2 id="string-coercion">String Coercion</h2>
+<p>These are the basic string coercion rules:</p>
+<ul>
+<li>
+<p>Values for Juttle options are not subject to string coercion.</p>
+<p>That is, if you specify an option like <code>-option myvalue</code> then myvalue
+must be defined somewhere in your program as a constant or
+a variable. If the value of the option should be literally
+"myvalue", use <code>-option 'myvalue'</code>.</p>
+</li>
+<li>
+<p>Arguments for reducer calls are not subject to string coercion</p>
+<p>For example, if your program includes <code>reduce count(host)</code> then host
+must be defined elsewhere in your program. If you want to reduce by
+counting the instances of each value of your data's host field, use
+<code>reduce count('host')</code>.</p>
+</li>
+</ul>
+<hr />
+<h2 id="tostring-conversion">toString Conversion</h2>
+<p>While not part of the String module, these functions are listed here for convenience.</p>
+<h3 id="datetostring"><a href="../date/#datetostring">Date.toString()</a></h3>
+<h3 id="durationtostring"><a href="../duration/#durationtostring">Duration.toString()</a></h3>
+<h3 id="numbertostring"><a href="../number/#numbertostring">Number.toString()</a></h3>
+<h3 id="booleantostring">Boolean.toString()</h3>
+<p>Convert a value of type Boolean to type String.</p>
+<pre><code>Boolean.toString(boolean)
+</code></pre>
+
+<p><em>Example: print a true/false statement</em></p>
+<pre><code>emit -limit 1 | put a=Math.random(), b=Math.random()
+| put c = &quot;a &gt; b: &quot; + Boolean.toString(a &gt; b)
+</code></pre>
+
+<h3 id="regexptostring">RegExp.toString()</h3>
+<p>Convert a value of type RegExp to type String.</p>
+<pre><code>RegExp.toString(regular_expression)
+</code></pre>
+
+<p>This function replaces the first string it finds. To replace globally,
+append the <a href="http://www.w3schools.com/jsref/jsref_regexp_g.asp">/g modifier</a> to your
+regular expression, like this:</p>
+<pre><code>/hi/g
+</code></pre>
+
+<hr />
+<h2 id="stringconcat">String.concat</h2>
+<p>Combine two or more strings and return a new string.</p>
+<pre><code>String.concat(string1, string2 [, string3 [, ..] ])
+</code></pre>
+
+<p><img alt="bulb" class="custom_emoji" height="30" src="../../images/emoji/bulb.png" width="30" /> <code>Tip:</code> There are simpler ways to combine
+strings; see <a href="./#string-interpolation">String interpolation</a>.
+Strings can also be concatenated via the + operator; in the example
+below, <code>String.concat</code> could also be replaced by <code>host + "." + domain</code>.</p>
+<p><em>Example</em></p>
+<pre><code>emit -limit 1 
+| put host = &quot;jupiter&quot;, domain = &quot;milkyway.org&quot; 
+| put fqdn = String.concat(host, &quot;.&quot;, domain) 
+| view text
+
+</code></pre>
+
+<hr />
+<h2 id="stringindexof">String.indexOf</h2>
+<p>Perform a substring search and return the index of the first match, or
+-1 if there is no match. See also
+<a href="./#stringsearch">String.search</a>
+for regex-based searches.</p>
+<pre><code>String.indexOf(string, searchstring)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string in which to perform the search</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>searchstring</code></td>
+<td>The string to search for</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Find the first instance of "voodoo"</em></p>
+<pre><code>emit -limit 1 
+| put name=&quot;The voodoo that you voodoo&quot;
+| put newname=String.indexOf(name, &quot;voodoo&quot;)
+| view text
+</code></pre>
+
+<hr />
+<h2 id="stringlength">String.length</h2>
+<p>Return the length of a string.</p>
+<pre><code>String.length(string)
+</code></pre>
+
+<p><em>Example</em></p>
+<pre><code>emit -limit 1 
+| put len = String.length(&quot;jupiter.milkway.org&quot;) 
+| view text
+
+</code></pre>
+
+<hr />
+<h2 id="stringreplace">String.replace</h2>
+<p>Replace all or part of a string with another string.</p>
+<pre><code>String.replace(&quot;original_string&quot;, &quot;string_to_replace&quot;, &quot;replacement_string&quot;)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>original_string</code></td>
+<td>The original string to manipulate</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>string_to_replace</code></td>
+<td>The segment of the string to replace; this can be a regular expression</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>replacement_string</code></td>
+<td>The new string</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Transform "hayneedlehay" into "hayFOUNDhay"</em></p>
+<pre><code>emit -from :0: -limit 1 
+| put result = String.replace(&quot;hayneedlehay&quot;, &quot;needle&quot;, &quot;FOUND&quot;)
+| view text
+</code></pre>
+
+<p><em>Example: Transform "hayneeeeeeedlehay" (or a similar string with one or more "e" characters) into "hayFOUNDhay"</em> </p>
+<pre><code>emit -from :0: -limit 1 
+| put result = String.replace(&quot;hayneeeeeeedlehay&quot;, /ne+dle/, &quot;FOUND&quot;) 
+| view text
+</code></pre>
+
+<hr />
+<h2 id="stringsearch">String.search</h2>
+<p>Search for a match between a regular expression and a string. See also
+<a href="./#stringindexof">String.indexOf</a>
+for simple substring searches.</p>
+<pre><code>String.search(string, regexp)
+</code></pre>
+
+<p>If successful, this function returns the index of the first match of the
+regular expression inside the string. Otherwise, it returns -1. Regular
+expression syntax follows common conventions; see for example the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#Constructor">JavaScript documentation</a>.</p>
+<p><em>Example</em></p>
+<pre><code>function host_type(host) {
+    if (String.search(host, /^(web|db)?server$/) &gt;= 0) {
+    return &quot;server&quot;;
+    }
+    if (String.search(host, /switch/) &gt;= 0) {
+    return &quot;switch&quot;;
+    }
+    return &quot;unknown&quot;;
+}
+emit -limit 1 
+| put a = host_type(&quot;webserver&quot;), b = host_type(&quot;dbserver&quot;), c=host_type(&quot;switch&quot;) 
+| view text
+</code></pre>
+
+<hr />
+<h2 id="stringslice">String.slice</h2>
+<p>Extract a section of a string and return it as a new string. See also <a href="./#stringsubstr">String.substr</a> for length-based extraction.</p>
+<pre><code>String.slice(string, beginSlice[, endSlice])
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string from which to extract the slice</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>beginSlice</code></td>
+<td>The zero-based index at which to begin extraction <p>If this value is negative, it is treated as `(sourceLength+beginSlice)`` where sourceLength is the length of the string. For example, if beginSlice is -3 it is treated as sourceLength-3, or three characters before the end of the string. </p></td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>endSlice</code></td>
+<td>The zero-based index at which to end extraction <p>If negative, it is treated as (sourceLength-endSlice) where sourceLength is the length of the string.  </p></td>
+<td align="right">No; defaults to the end of the string</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>const name = &quot;host-a341-4a29&quot;;
+emit -limit 1 
+| put id = String.slice(name, -9) 
+| view text
+
+</code></pre>
+
+<hr />
+<h2 id="stringsplit">String.split</h2>
+<p>Split a string into an array of strings by separating the string into
+substrings.</p>
+<pre><code>String.split(string, separator)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to split. String is converted to an array of characters.</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>One or more characters to use for separating the string. The separator is treated as if it is an empty string.</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -limit 1 
+| put host = &quot;alphaserver-22&quot; 
+| put parts = String.split(host, '-') 
+| put id = parts[0] 
+| view text
+</code></pre>
+
+<hr />
+<h2 id="stringsubstr">String.substr</h2>
+<p>Extract a portion of a string beginning at the <code>start</code> location through the specified <code>length</code> number of characters. Similar to <a href="./#stringslice">String.slice</a>, except the optional parameter is <code>length</code> rather than ending offset.</p>
+<pre><code>String.substr(string, start[, length])
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string from which to extract the substring</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>The character index at which to begin extraction. <br><br>The <code>start</code>location of zero (0) maps to the first character of the string; the index of the last character is <code>String.length - 1</code>. <br><br>If <code>start</code>is positive, it is used as character index counting from the start of the string. If <code>start</code>equals or exceeds the length of the string, an empty string will be returned. <br><br>If <code>start</code>value is negative, it is used as character index counting from the end of the string. If the absolute value of a negative <code>start</code>exceeds the length of the string, zero will be used as the starting index.</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>The number of characters to extract. <br><br>If <code>length</code>extends beyond the end of the string, fewer characters than <code>length</code>will be returned. If <code>length</code>is zero or negative, an empty string will be returned.</td>
+<td align="right">No; defaults to extracting until the end of the string is reached.</td>
+</tr>
+</tbody>
+</table>
+<p>If <code>start</code> is zero and <code>length</code> is omitted, the whole string will be returned.</p>
+<p><em>Example: substr parameters</em></p>
+<pre><code>emit 
+| put s = &quot;Hello World!&quot; 
+| put ss0 = String.substr(s, 0),       // Hello World!
+      ss6 = String.substr(s, 6),       // World!
+      ss05 = String.substr(s, 0, 5),   // Hello 
+      ss_65 = String.substr(s, -6, 5)  // World
+</code></pre>
+
+<p><em>Example: using substr to shorten a name</em> </p>
+<pre><code>// convert a long identifier into a short label
+
+emit -points [
+  {name: &quot;f79ca0aed8914533269a&quot;, value: 123},
+  {name: &quot;15adb9cced74531343b8&quot;, value: 456}
+]
+| put label = String.substr(name, 0, 6)
+| keep time, label, value 
+</code></pre>
+
+<hr />
+<h2 id="stringtolowercase">String.toLowerCase</h2>
+<p>Convert a string to lowercase characters.</p>
+<pre><code>String.toLowerCase(string)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to convert to lowercase</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Convert a camel-case string to lowercase</em></p>
+<pre><code>emit -limit 1 
+| put name=&quot;NorthDakota&quot;
+| put newname=String.toLowerCase(name)
+| view text
+</code></pre>
+
+<hr />
+<h2 id="stringtouppercase">String.toUpperCase</h2>
+<p>Convert a string to uppercase characters.</p>
+<pre><code>String.toUpperCase(string)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to convert to uppercase</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Convert a camel-case string to uppercase</em></p>
+<pre><code>emit -limit 1 
+| put name=&quot;NorthDakota&quot;
+| put newname=String.toUpperCase(name)
+| view text
+</code></pre>
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../reference/time/" class="btn btn-neutral float-right" title="Time"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../object/" class="btn btn-neutral" title="____ Object"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../object/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../reference/time/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

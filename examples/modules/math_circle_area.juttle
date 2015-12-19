@@ -1,0 +1,3 @@
+emit
+| put radius = 7
+| put area = Math.round(Math.PI * Math.pow(radius, 2))

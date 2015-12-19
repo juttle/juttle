@@ -1,0 +1,4 @@
+const start = Date.time();
+emit -from start
+| put elapsed = time - start, clock = Date.time(), skew = clock - time 
+| view table

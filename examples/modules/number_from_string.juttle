@@ -1,0 +1,4 @@
+emit -limit 1
+| put message = '127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 404 347'
+| put http_status = Number.fromString(String.split(message, ' ')[8]) 
+| filter http_status > 200

@@ -1,0 +1,2 @@
+const sixty = Date.unix(Date.new("2014-09-22T00:01:00")) - Date.unix(Date.new("2014-09-22"));
+emit -limit 1 | put seconds_in_minute = sixty

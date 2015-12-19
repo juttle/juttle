@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ Date - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ Date";
+    var mkdocs_page_input_path = "modules/date.md";
+    var mkdocs_page_url = "/modules/date/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ Date</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/modules/date.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="date">Date</h1>
+<p>Dates are represented in a Juttle flowgraph as Juttle moments. The Date module enables conversion between Unix timestamps, string representation of date/time, and moments.</p>
+<div class="toc">
+<ul>
+<li><a href="#date">Date</a><ul>
+<li><a href="#dateelapsed">Date.elapsed</a></li>
+<li><a href="#dateendof">Date.endOf</a></li>
+<li><a href="#dateformat">Date.format</a></li>
+<li><a href="#dateformattz">Date.formatTz</a></li>
+<li><a href="#dateget">Date.get</a></li>
+<li><a href="#datenew">Date.new</a></li>
+<li><a href="#dateparse">Date.parse</a><ul>
+<li><a href="#format">Format</a></li>
+<li><a href="#timezone-support">Timezone support</a></li>
+</ul>
+</li>
+<li><a href="#datequantize">Date.quantize</a></li>
+<li><a href="#datestartof">Date.startOf</a></li>
+<li><a href="#datetime">Date.time</a></li>
+<li><a href="#datetostring">Date.toString()</a></li>
+<li><a href="#dateunix">Date.unix</a></li>
+<li><a href="#dateunixms">Date.unixms</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="dateelapsed">Date.elapsed</h2>
+<p>Return floating-point seconds since the moment.</p>
+<pre><code>Date.elapsed(moment)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> This is equivalent to
+<code>Duration.seconds(Date.now() - moment)</code>.</p>
+<pre><code>emit -limit 1 | put hours_wasted_today = Date.elapsed(:today:) / 3600;
+</code></pre>
+
+<hr />
+<h2 id="dateendof">Date.endOf</h2>
+<p>Return a new moment, equal to the supplied moment set to the end of its
+current time unit.</p>
+<pre><code>Date.endOf(moment, timeunit)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> The new moment is the end of the
+unit in the time zone in which moment was recorded, not the time zone in
+which it is displayed.</p>
+<p><em>Example: Find the last day of this month</em></p>
+<pre><code>emit -limit 1 | put eom = Date.endOf(time, &quot;month&quot;)
+</code></pre>
+
+<hr />
+<h2 id="dateformat">Date.format</h2>
+<p>Format a moment as a string in the specified format, optionally adding a
+time zone. The input is assumed to be in UTC.</p>
+<pre><code>Date.format(moment)
+Date.format(moment, format_string, timezone)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>moment</code></td>
+<td>The moment to reformat</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>format_string</code></td>
+<td>The format configuration, as documented in <a href="http://momentjs.com/docs/#/displaying/">momentjs's format() function</a></td>
+<td align="right">No; if not specified, the function returns the ISO-8601-formatted date.</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>A time zone to include in the formatted string, as documented in <a href="http://momentjs.com/timezone/">momentjs's moment-timezone package</a> <br><br>At the link above, you'll find a map you can hover over to get valid values for specific locations. We've also supplemented the built-in values, see list below.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="bulb" class="custom_emoji" height="30" src="../../images/emoji/bulb.png" width="30" /> Adjustments for Daylight Savings Time/Standard Time are always applied automatically, so for example you'll still get an accurate result if you specify 'PST' for a date that falls within PDT, or 'PDT' for a date that falls within PST.</p>
+<p>Additional timezone values we support:</p>
+<ul>
+<li>arizona:"US/Arizona"   </li>
+<li>az:"US/Arizona"   </li>
+<li>central:"US/Central"   </li>
+<li>cdt:"US/Central"   </li>
+<li>cst:"US/Central"   </li>
+<li>eastern:"US/Eastern"   </li>
+<li>edt:"US/Eastern"   </li>
+<li>est:"US/Eastern"   </li>
+<li>mountain:"US/Mountain"   </li>
+<li>mdt:"US/Mountain"   </li>
+<li>mst:"US/Mountain"   </li>
+<li>pacific:"US/Pacific"   </li>
+<li>pst:"US/Pacific"   </li>
+<li>pdt:"US/Pacific"    </li>
+</ul>
+<p><em>Example</em></p>
+<pre><code>emit -from :0: -limit 1
+| put pacific = Date.format(:2015-01-01T00:00:00:,null,&quot;PDT&quot;)
+| put mountain = Date.format(:2015-01-01T00:00:00:,&quot;HH-z&quot;)
+| put central = Date.format(:2015-01-01T00:00:00:,&quot;HH Z&quot;,&quot;CDT&quot;)
+| put eastern = Date.format(:2015-01-01T00:00:00:,null,&quot;Eastern&quot;)
+</code></pre>
+
+<hr />
+<h2 id="dateformattz">Date.formatTz</h2>
+<p>Add a time zone to a UTC moment.</p>
+<pre><code>Date.formatTz(moment, timezone)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>moment</code></td>
+<td>The moment to reformat</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>A time zone to include in the formatted string, as documented in <a href="http://momentjs.com/timezone/">momentjs's moment-timezone package</a> <br><br>At the link above, you'll find a map you can hover over to get valid values for specific locations. We've also supplemented the built-in values, see list below.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="bulb" class="custom_emoji" height="30" src="../../images/emoji/bulb.png" width="30" /> Adjustments for Daylight Savings Time/Standard Time are always applied automatically, so for example you'll still get an accurate result if you specify 'PST' for a date that falls within PDT, or 'PDT' for a date that falls within PST.</p>
+<p>Additional timezone values we support:</p>
+<ul>
+<li>arizona:"US/Arizona"   </li>
+<li>az:"US/Arizona"   </li>
+<li>central:"US/Central"   </li>
+<li>cdt:"US/Central"   </li>
+<li>cst:"US/Central"   </li>
+<li>eastern:"US/Eastern"   </li>
+<li>edt:"US/Eastern"   </li>
+<li>est:"US/Eastern"   </li>
+<li>mountain:"US/Mountain"   </li>
+<li>mdt:"US/Mountain"   </li>
+<li>mst:"US/Mountain"   </li>
+<li>pacific:"US/Pacific"   </li>
+<li>pst:"US/Pacific"   </li>
+<li>pdt:"US/Pacific"   </li>
+</ul>
+<p><em>Example</em></p>
+<pre><code>emit -from :0: -limit 1
+| put pacific = Date.formatTz(:2015-01-01T00:00:00:,&quot;PDT&quot;)
+| put mountain = Date.formatTz(:2015-01-01T00:00:00:,&quot;MST&quot;)
+| put central = Date.formatTz(:2015-01-01T00:00:00:,&quot;CDT&quot;)
+| put eastern = Date.formatTz(:2015-01-01T00:00:00:,&quot;Eastern&quot;)
+</code></pre>
+
+<hr />
+<h2 id="dateget">Date.get</h2>
+<p>Return the numeric value of the time unit for a moment as an integer.</p>
+<pre><code>Date.get(moment, timeunit)
+</code></pre>
+
+<p><em>Example: get the number of current month</em></p>
+<pre><code>emit -limit 1 | put month_num = Date.get(time, &quot;month&quot;)
+</code></pre>
+
+<hr />
+<h2 id="datenew">Date.new</h2>
+<p>Return a moment.</p>
+<pre><code>Date.new(&quot;YYYY-MM-DDTHH:MM:SS.msec+TZ&quot;|seconds)
+</code></pre>
+
+<p>There are two ways to specify a moment:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"YYYY-MM-DDTHH:MM:SS.msec+TZ"</code></td>
+<td>An ISO-8601 string. The time zone (TZ) is a numeric offset from UTC0. UTC0 is the default.</td>
+</tr>
+<tr>
+<td><code>seconds</code></td>
+<td>Seconds since the UNIX epoch</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Some valid dates</em></p>
+<pre><code>emit
+  | remove time
+  | put fromunix = Date.new(1411426250)
+  | put fromunixstr = Date.new(&quot;1411426250&quot;)
+  | put infinity = Date.new(Infinity)
+  | put negInfinity = Date.new(-Infinity)
+  | put fromday =  Date.new(&quot;2014-09-22&quot;)
+  | put fromISO =  Date.new(&quot;2014-09-22T11:39:17.993&quot;)
+  | put ISOwithTZ =  Date.new(&quot;2014-09-22T11:39:17.993-08:00&quot;)
+  | split
+</code></pre>
+
+<hr />
+<h2 id="dateparse">Date.parse</h2>
+<p>Parse a moment from a string using the specified format.</p>
+<pre><code>Date.parse(moment_string, format_string)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>moment_string</code></td>
+<td>The string to convert to a moment</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>format_string</code></td>
+<td>The format configuration, as documented in <a href="http://momentjs.com/docs/#/parsing/string-format/">momentjs's String+Format constructor</a></td>
+<td align="right">No; if not specified, the function expects ISO-8601-formatted date as input.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Parse a JavaScript-formatted date</em></p>
+<pre><code>emit
+| put date_in = &quot;Thu Oct 29 2015 16:46:35 -0700&quot;,
+      date_format = &quot;ddd MMM DD YYYY HH:mm:ss Z&quot;,
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = &quot;Thu Oct 29 2015 16:46:35-0700&quot;,
+      date_format = &quot;ddd MMM DD YYYY HH:mm:ssZ&quot;,
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = &quot;Thu Oct 29 2015 16:46:35 +07:00&quot;,
+      date_format = &quot;ddd MMM DD YYYY HH:mm:ss Z&quot;,
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = &quot;10/29/15 16:46:35.000Z&quot;,
+      date_format = &quot;MM/DD/YY HH:mm:ss.SSSZ&quot;,
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = &quot;2015-10-29 16-0700&quot;,
+      date_format = &quot;YYYY-MM-DD HHZ&quot;,
+      date_out = Date.parse(date_in, date_format);
+emit
+| put date_in = &quot;2015-10-29 16:46:35-0700&quot;,
+      date_format = &quot;//default: ISO8601&quot;,
+      date_out = Date.parse(date_in);
+emit
+| put date_in = &quot;2015-10-29T16:46:35.000Z&quot;,
+      date_format = &quot;//default: ISO8601&quot;,
+      date_out = Date.parse(date_in);
+emit
+| put date_in = &quot;2014-09-22Z+08:00&quot;,
+      date_format = &quot;//default: Date fallback with timezone&quot;,
+      date_out = Date.parse(date_in);
+emit
+| put date_in = &quot;Wed Dec 2 18:56:48 2015 UTC&quot;,
+      date_format = &quot;//default: acceptable non-ISO8601&quot;,
+      date_out = Date.parse(date_in);
+</code></pre>
+
+<h3 id="format">Format</h3>
+<p>Whitespace in the format string should match whitespace in the incoming string.</p>
+<p>Different separators such as <code>-</code> vs <code>/</code> for date components, <code>.</code> vs <code>,</code> before milliseconds, are supported. However, if the timestamp in your data is enclosed in brackets, such as <code>[2015/10/29 16:46:35]</code>, Date.parse will only handle the enclosed string and not the brackets.</p>
+<p>When Date.parse is called with a single parameter of input string, without a custom format specification, it will parse several variants of ISO-8601 dates.</p>
+<h3 id="timezone-support">Timezone support</h3>
+<p>Juttle follows momentjs format for timezone specification, namely, as offset from UTC
+<code>+HH:mm</code> or <code>-HH:mm</code>, <code>+HHmm</code> or <code>-HHmm</code>, or the literal <code>Z</code> to stand for UTC (GMT) time zone.</p>
+<p>Date.parse does not handle acronyms such as "PDT", or longform such as "GMT-0700 (PDT)".</p>
+<hr />
+<h2 id="datequantize">Date.quantize</h2>
+<p>Return a new moment, equal to the supplied moment rounded down to an
+even number of durations since the epoch.</p>
+<pre><code>Date.quantize(moment, duration)
+</code></pre>
+
+<p><em>Example: get year and month when Pluto lost planet status</em></p>
+<pre><code>emit -limit 1 
+| put oh_pluto = Date.new(&quot;2006-09-13&quot;)
+| put that_month = Date.quantize(oh_pluto, :M:), that_year = Date.quantize(oh_pluto, :y:) 
+| keep oh_pluto, that_month, that_year
+</code></pre>
+
+<hr />
+<h2 id="datestartof">Date.startOf</h2>
+<p>Return a new moment, equal to the supplied moment set to the start of
+its current time unit.</p>
+<pre><code>Date.startOf(moment, timeunit)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> The new moment is the start of the unit in the time zone in which moment was recorded, not the time zone in which it is displayed.</p>
+<p><em>Example: beginning of a given day</em></p>
+<pre><code>emit -limit 1 | put today = Date.startOf(time, &quot;day&quot;) 
+</code></pre>
+
+<hr />
+<h2 id="datetime">Date.time</h2>
+<p>Return the current moment, at millisecond resolution.</p>
+<pre><code>Date.time()
+</code></pre>
+
+<p><em>Example: Show the difference between a time stamp and real time</em></p>
+<pre><code>const start = Date.time();
+emit -from start
+| put elapsed = time - start, clock = Date.time(), skew = clock - time 
+| view table
+</code></pre>
+
+<hr />
+<h2 id="datetostring">Date.toString()</h2>
+<p>Convert a value of type Date to type String. This is necessary to perform string operations such as concatenation.</p>
+<pre><code>Date.toString(date)
+</code></pre>
+
+<p>The returned String is in ISO-8601 format:</p>
+<pre><code>YYYY-MM-DDTHH:mm:ss.SSSZ
+</code></pre>
+
+<p><em>Example: print current time</em></p>
+<pre><code>emit
+| put now_moment = :now:, now_string = Date.toString(:now:)
+| put time_string = &quot;Current time: &quot; + now_string
+</code></pre>
+
+<hr />
+<h2 id="dateunix">Date.unix</h2>
+<p>Return the UNIX time stamp for this moment, as seconds since the epoch.</p>
+<pre><code>Date.unix(moment)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> This is equivalent to
+<code>Duration.seconds(moment - Date.new(0))</code>.</p>
+<p><em>Example: Compute the number of seconds in a minute, the hard way</em></p>
+<pre><code>const sixty = Date.unix(Date.new(&quot;2014-09-22T00:01:00&quot;)) - Date.unix(Date.new(&quot;2014-09-22&quot;));
+emit -limit 1 | put seconds_in_minute = sixty
+</code></pre>
+
+<hr />
+<h2 id="dateunixms">Date.unixms</h2>
+<p>Return the UNIX time stamp for this moment, as milliseconds since the
+epoch.</p>
+<pre><code>Date.unixms(moment)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> This is equivalent to
+<code>Duration.milliseconds(moment - Date.new(0))</code>.</p>
+<p><em>Example: Compute the number of milliseconds in a minute, the hard way</em></p>
+<pre><code>const sixtyaught = Date.unixms(Date.new(&quot;2014-09-22T00:01:00&quot;)) - Date.unixms(Date.new(&quot;2014-09-22&quot;));
+emit -limit 1 | put ms_in_minute = sixtyaught
+</code></pre>
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../duration/" class="btn btn-neutral float-right" title="____ Duration"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../array/" class="btn btn-neutral" title="____ Array"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../array/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../duration/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

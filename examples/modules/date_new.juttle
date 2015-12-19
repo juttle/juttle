@@ -1,0 +1,10 @@
+emit
+  | remove time
+  | put fromunix = Date.new(1411426250)
+  | put fromunixstr = Date.new("1411426250")
+  | put infinity = Date.new(Infinity)
+  | put negInfinity = Date.new(-Infinity)
+  | put fromday =  Date.new("2014-09-22")
+  | put fromISO =  Date.new("2014-09-22T11:39:17.993")
+  | put ISOwithTZ =  Date.new("2014-09-22T11:39:17.993-08:00")
+  | split

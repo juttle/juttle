@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Time - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Time";
+    var mkdocs_page_input_path = "reference/time.md";
+    var mkdocs_page_url = "/reference/time/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>Time</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/reference/time.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="time">Time</h1>
+<p>Time in Juttle is represented by "moment" and "duration" types.</p>
+<div class="toc">
+<ul>
+<li><a href="#time">Time</a><ul>
+<li><a href="#moments-and-durations">Moments and Durations</a></li>
+<li><a href="#time-notation">Time Notation</a><ul>
+<li><a href="#absolute-moments">Absolute Moments</a></li>
+<li><a href="#durations">Durations</a></li>
+<li><a href="#relative-moments">Relative Moments</a></li>
+<li><a href="#infinite-moments-and-durations">Infinite Moments and Durations</a></li>
+</ul>
+</li>
+<li><a href="#time-arithmetic">Time Arithmetic</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="moments-and-durations">Moments and Durations</h2>
+<p>Time is central to processing in Juttle. Each point that is output by a
+source node has a time value, stored in the field named time, which
+represents the date+time of the point. We refer to these date+time
+values as <em>moments</em>, and the span of time between two moments
+as <em>durations</em>.</p>
+<p>The time field always holds a moment. You can also assign moments and
+durations to other fields, do simple arithmetic on moments, and specify
+moments as parameters to other
+<a href="../../modules/">Functions</a>,
+<a href="../../reducers/">Reducers</a> and
+<a href="../../processors/">Processors</a>.</p>
+<p>You can specify moments and durations using moment literals like <code>:2 weeks ago:</code>, or with date and time functions in <a href="../../modules/date/">Date</a> and <a href="../../modules/duration/">Duration</a> modules. You can also create new moments and durations by doing time arithmetic on existing moments and durations.</p>
+<hr />
+<h2 id="time-notation">Time Notation</h2>
+<p>In Juttle, you specify time using a string between two colons. Absolute
+moments are specified as ISO 8601 strings, like <code>:1999-12-31:</code>.
+Durations and relative moments are specified using a natural-language
+notation, like <code>:this minute:</code>.</p>
+<p><img alt="bulb" class="custom_emoji" height="30" src="../../images/emoji/bulb.png" width="30" /> <code>Tip:</code> It's important to know whether your
+data was imported with a valid time field, and whether the time value
+included a time zone. Points without a time zone are imported and
+queried as UTC, and points without a valid time field receive one that
+uses the import time.</p>
+<p>A moment or duration is surrounded by colons. Spaces between the colons
+and the time are optional. All times are UTC0 unless a time zone is
+specified by appending it to an ISO-8601 string.</p>
+<h3 id="absolute-moments">Absolute Moments</h3>
+<ul>
+<li>Midnight on a specific date (UTC0):</li>
+</ul>
+<pre><code>:2014-09-21:
+</code></pre>
+
+<ul>
+<li>An <a href="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</a> date and time, UTC0:</li>
+</ul>
+<pre><code>: 2014-09-22T11:39:17.993 :
+</code></pre>
+
+<ul>
+<li>The same date and time, as Pacific Standard Time:</li>
+</ul>
+<pre><code>: 2014-09-22T03:39:17.993-08:00 :
+</code></pre>
+
+<h3 id="durations">Durations</h3>
+<ul>
+<li>One second, minute, hour, day, week, and so on:</li>
+</ul>
+<pre><code>:second:
+:minute:
+:hour:
+:day:
+:week:
+:month:
+:year:
+</code></pre>
+
+<p>Note that :month: and :year: are special "calendar" durations that do
+not have fixed length but instead advance whole months or years relative
+to a fixed moment.</p>
+<ul>
+<li>Abbreviations for 0 seconds, 1 minute, 2 hours, 3 days, 4 weeks, 5
+months, 6 years:</li>
+</ul>
+<pre><code>:0s:
+:1m:
+:2h:
+:3d:
+:4w:
+:5M:
+:6y:
+</code></pre>
+
+<ul>
+<li>Two ways to write one hour and twenty-three minutes:</li>
+</ul>
+<pre><code>: 1 hour and 23 minutes :
+: 01:23:00 :
+</code></pre>
+
+<ul>
+<li>Additional examples:</li>
+</ul>
+<pre><code>: 1 second :
+: 20 minutes :
+</code></pre>
+
+<h3 id="relative-moments">Relative Moments</h3>
+<ul>
+<li>The moment at which the program started running:</li>
+</ul>
+<pre><code>:now:
+</code></pre>
+
+<p>This moment does not change over the life of a program. If you want the
+continuously updated wall clock time, use
+<a href="../../modules/date/#datetime">Date.time</a>.</p>
+<ul>
+<li>Midnight yesterday, today, or tomorrow:</li>
+</ul>
+<pre><code>:yesterday:
+:today:
+:tomorrow:
+</code></pre>
+
+<ul>
+<li>Seven hours after midnight on the current day:</li>
+</ul>
+<pre><code>: 07:00:00 after today :
+</code></pre>
+
+<ul>
+<li>One minute from the start of the program's execution:</li>
+</ul>
+<pre><code>: 1 minute from now :
+</code></pre>
+
+<ul>
+<li>Shorter way to write <code>:2 minutes from :now:</code>:</li>
+</ul>
+<pre><code>:+2m:
+</code></pre>
+
+<ul>
+<li>Shorter way to write <code>:1 hour and 10 minutes before now:</code>:</li>
+</ul>
+<pre><code>:-01:10:00:
+</code></pre>
+
+<ul>
+<li>Now minus 72 hours:</li>
+</ul>
+<pre><code>: 3 days ago :
+</code></pre>
+
+<ul>
+<li>Now minus 22 days:</li>
+</ul>
+<pre><code>: 3 weeks and 1 day ago :
+</code></pre>
+
+<ul>
+<li>Midnight of the first day of the current calendar month:</li>
+</ul>
+<pre><code>:this month:
+</code></pre>
+
+<ul>
+<li>Midnight of the first day of the previous calendar month:</li>
+</ul>
+<pre><code>:last month:
+</code></pre>
+
+<ul>
+<li>Midnight of the 20th day of the previous calendar month:</li>
+</ul>
+<pre><code>:day 20 of last month:
+</code></pre>
+
+<ul>
+<li>The minute in which the program began executing:</li>
+</ul>
+<pre><code>:this minute:
+</code></pre>
+
+<ul>
+<li>The next even hour after the start of the program's execution:</li>
+</ul>
+<pre><code>:next hour:
+</code></pre>
+
+<ul>
+<li>The day in which the program began executing:</li>
+</ul>
+<pre><code>:this day:
+:today:
+</code></pre>
+
+<ul>
+<li>The day before the day in which the program began executing:</li>
+</ul>
+<pre><code>:last day:
+:yesterday:
+</code></pre>
+
+<h3 id="infinite-moments-and-durations">Infinite Moments and Durations</h3>
+<ul>
+<li>A historical duration beginning at the first moment for which data is
+available, and ending at the moment the program was started:</li>
+</ul>
+<pre><code>:forever:
+</code></pre>
+
+<p>(valid in -to and -last)</p>
+<ul>
+<li>Historical data from the first moment for which data exists:</li>
+</ul>
+<pre><code>:beginning:
+</code></pre>
+
+<p>(valid in -from)</p>
+<ul>
+<li>Live data until the last moment for which data exists:</li>
+</ul>
+<pre><code>:end:
+</code></pre>
+
+<p>(valid in -to)</p>
+<hr />
+<h2 id="time-arithmetic">Time Arithmetic</h2>
+<p>In Juttle, you can do arithmetic directly with moments and durations,
+and such arithmetic produces moments, durations, or numbers depending on
+the operation you perform.</p>
+<p>Time in Juttle is a distinct type (separate from numbers, Booleans,
+etc), and arithmetic on time is possible. For example, a duration may be
+added to a moment to produce a new moment that is shifted in time. A
+moment may be subtracted from a moment to produce a duration equal to
+the span of time between the moments. This means you do not need to
+convert moments and durations into seconds or milliseconds, then back to
+moments or durations in order to operate on them. It also means that
+nonsensical time arithmetic (like adding two moments) will be flagged as
+an error.</p>
+<p>Here are the arithmetic operations you can perform with moments, and
+their resulting types:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:moment: +/- :duration:</td>
+<td>:moment:</td>
+</tr>
+<tr>
+<td>:moment: - :moment:</td>
+<td>:duration:</td>
+</tr>
+<tr>
+<td>:duration: +/- :duration:</td>
+<td>:duration:</td>
+</tr>
+<tr>
+<td>number * :duration:</td>
+<td>:duration:</td>
+</tr>
+<tr>
+<td>:duration: / :duration:</td>
+<td>number</td>
+</tr>
+<tr>
+<td>:duration: % :duration:</td>
+<td>:duration: (the remainder of dividing the durations)</td>
+</tr>
+</tbody>
+</table>
+<p>Calendar durations involving :months: or :years: may also be combined
+arithmetically. Note that adding a calendar offset to a moment produces
+another moment, so "calendarness" is no longer relevant (for example,
+<code>:now: + :6 months:</code> is the moment 6 calendar months from now, but it is
+like any other moment once computed). Mixed calendar/non-calendar
+durations (for example, <code>:2 months: + :1 day:</code>) are possible, but these
+are not generally accepted by Juttle procs wanting durations as their
+arguments.</p>
+<p><strong>Examples</strong></p>
+<pre><code>:tomorrow: == :yesterday: + :48 hours:
+
+:hour: / :minute: == 60
+
+2 \* :60 seconds: + :hour: / 60 == :3 minutes:
+
+:now: + :hour: / 2 == :0.5 hours from now:
+
+:this hour: - :today: == (:this hour: - Date.new(0)) % :day:
+</code></pre>
+
+<p><em>Example: count frequency of points over time</em></p>
+<p>The following Juttle example counts the number of points over a
+specified interval, then reports the average number of points per week.
+One way to understand the moment and duration arithmetic involved is to
+think of count() / DURATION as being an absolute rate (counts per unit
+time), which we multiply by :week: to get the expected number of points
+in a week at that rate. Since we cannot write count() / DURATION
+directly, we group (DURATION / :w:) to produce a number (durations per
+week), and count is then divided by this number to produce counts per
+week.</p>
+<pre><code>const START = :2 months ago:;
+const DURATION = :now: - START; 
+emit -every :1 hour: -from START -to :now: | reduce points_per_week = (count() / (DURATION / :w:))   
+</code></pre>
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../data_types/" class="btn btn-neutral float-right" title="Data Types"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../modules/string/" class="btn btn-neutral" title="____ String"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../modules/string/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../data_types/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

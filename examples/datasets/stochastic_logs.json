@@ -1,0 +1,74 @@
+[
+  {
+    "time": "2015-11-23T01:25:16.000Z",
+    "host": "sea.0",
+    "pop": "sea",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "[ 62875 ] cfg80211: World regulatory domain updated:"
+  },
+  {
+    "time": "2015-11-23T01:25:17.000Z",
+    "host": "sea.0",
+    "pop": "nyc",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "wlan0: CTRL-EVENT-CONNECTED - Connection to 98:da:ca:02:61:d8 completed ( reauth ) [ id= 1 id_str= ]"
+  },
+  {
+    "time": "2015-11-23T01:25:17.000Z",
+    "host": "sea.0",
+    "pop": "sea",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "[ 0649 ] wlan0: authenticated"
+  },
+  {
+    "time": "2015-11-23T01:25:19.000Z",
+    "host": "sea.0",
+    "pop": "nyc",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "[ 76573 ] i915 9414:85:98.5: power state changed by ACPI to D3cold"
+  },
+  {
+    "time": "2015-11-23T01:25:19.000Z",
+    "host": "sea.0",
+    "pop": "sea",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "wlan0: WPA: Key negotiation completed with a8:28:e8:18:a6:28 [ PTK= CCMP GTK= TKIP ]"
+  },
+  {
+    "time": "2015-11-23T01:25:21.000Z",
+    "host": "sea.0",
+    "pop": "sjc",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "[ 799 ] cfg80211: Regulatory domain changed to country: US"
+  },
+  {
+    "time": "2015-11-23T01:25:21.000Z",
+    "host": "sea.0",
+    "pop": "sea",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "Endpoint registered: sender= :9.86 path= /win32/man7/def/mobile"
+  },
+  {
+    "time": "2015-11-23T01:25:22.000Z",
+    "host": "sea.0",
+    "pop": "sjc",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "DHCPREQUEST on eth0 to 200.20.96.86 port 59 ( xid= 0xa23b )"
+  },
+  {
+    "time": "2015-11-23T01:25:22.000Z",
+    "host": "sea.0",
+    "pop": "nyc",
+    "source_type": "event",
+    "name": "syslog",
+    "message": "wlan0: Trying to associate with 4c:4c:f8:08:8c:d8 ( SSID= Kanguru freq= 348 MHz )"
+  }
+]

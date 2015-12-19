@@ -1,0 +1,1 @@
+emit -limit 1 | put hadron_epoch_ms = Duration.milliseconds(:1s:)

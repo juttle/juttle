@@ -1,0 +1,2 @@
+const millenium = Date.new("2001-01-01");
+emit -limit 1 | put elapsed_seconds_third_millenium = Duration.as(:now: - millenium, "seconds")

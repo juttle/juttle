@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ File Adapter - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ File Adapter";
+    var mkdocs_page_input_path = "adapters/file.md";
+    var mkdocs_page_url = "/adapters/file/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ File Adapter</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/file.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="file-adapter">File Adapter</h1>
+<p>The <code>file</code> adapter allows reading points from, or writing points to, a file on the local filesystem.</p>
+<div class="toc">
+<ul>
+<li><a href="#file-adapter">File Adapter</a><ul>
+<li><a href="#read-file">read file</a></li>
+<li><a href="#write-file">write file</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="read-file">read file</h2>
+<p>Supported file formats are JSON array, and JSON lines; see examples below.</p>
+<pre><code class="text">read file -file &lt;path&gt; [-format &lt;format&gt;] [-timeField &lt;fieldname&gt;]
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-file</code></td>
+<td>File path on the local filesystem, absolute or relative to the current working directory</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>-format</code></td>
+<td>Input file format: <code>csv</code>for <a href="https://tools.ietf.org/html/rfc4180">CSV</a> data, <code>json</code>for <a href="https://tools.ietf.org/html/rfc7159">JSON</a> data, or <code>jsonl</code>for <a href="http://jsonlines.org/">JSON lines</a> data</td>
+<td align="right">No; defaults to <code>json</code></td>
+</tr>
+<tr>
+<td><code>-timeField</code></td>
+<td>Name of the field in the data which contains a valid timestamp</td>
+<td align="right">No; defaults to <code>time</code></td>
+</tr>
+</tbody>
+</table>
+<p>The data is assumed to contain valid timestamps in a field named <code>time</code> by default; a different name for the time field may be specified with <code>-timeField</code> option. If the data contains fields <code>time</code> and another named field specified with <code>-timeField</code>, the original contents of field <code>time</code> will be overwritten by the valid timestamp from <code>timeField</code>. </p>
+<p>Timeless data, which contains no timestamps, is acceptable; however certain operations which expect time to be present in the points, such as <code>reduce -every :interval:</code>, will execute with warnings or error out. Timeless data can be joined in the Juttle flowgraph with other data which contains timestamps; a common use case for reading timeless data from a file or another backend is to join it with streaming data for enrichment.</p>
+<p>The file adapter does not support any kind of filtering (neither filter expressions, nor full text search). In order to filter the data read from file, pipe to the <a href="../../processors/filter/">filter</a> proc.</p>
+<p><em>Example: read from a JSON array data file</em></p>
+<p>The source file has data in JSON array format:</p>
+<pre><code>[ 
+{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; },
+{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;warn&quot; },
+{ &quot;time&quot;: &quot;2015-11-06T04:28:42.405Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; },
+{ &quot;time&quot;: &quot;2015-11-06T04:28:42.502Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;ok&quot; }
+]
+</code></pre>
+
+<p>This program reads the file in, and filters on a specific hostname:</p>
+<pre><code class="juttle">read file -file 'docs/examples/datasets/input1.json'
+| filter hostname = 'lemoncake'
+| view table
+</code></pre>
+
+<p><em>Example: read from a JSON lines data file</em></p>
+<p>The source file has data in JSON lines format, i.e. newline separated JSON objects:</p>
+<pre><code>{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; }
+{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;warn&quot; }
+{ &quot;time&quot;: &quot;2015-11-06T04:28:42.405Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; }
+{ &quot;time&quot;: &quot;2015-11-06T04:28:42.502Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;ok&quot; }
+</code></pre>
+
+<p>This program reads the file in, and filters on a specific hostname:</p>
+<pre><code class="juttle">read file -file 'docs/examples/datasets/json_lines.jsonl'
+| filter hostname = 'lemoncake'
+| view table
+</code></pre>
+
+<p>The above examples produce the same output table:</p>
+<pre><code>┌────────────────────────────────────┬──────────────┬──────────┐
+│ time                               │ hostname     │ state    │
+├────────────────────────────────────┼──────────────┼──────────┤
+│ 2015-11-06T04:28:32.304Z           │ lemoncake    │ ok       │
+├────────────────────────────────────┼──────────────┼──────────┤
+│ 2015-11-06T04:28:42.405Z           │ lemoncake    │ ok       │
+└────────────────────────────────────┴──────────────┴──────────┘
+</code></pre>
+
+<h2 id="write-file">write file</h2>
+<p>Data is written out to a file as a JSON array; no other output formats are supported.</p>
+<pre><code class="text">write file -file &lt;path&gt;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-file</code></td>
+<td>File path on the local filesystem, absolute or relative to the current working directory</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.</p>
+<p><em>Example: writing data to a file</em></p>
+<pre><code class="juttle">emit -from :2015-01-01: -limit 2 
+| put name = 'write_me', value = count() 
+| write file -file '/tmp/write_me.json'
+</code></pre>
+
+<p>The resulting file <code>/tmp/write_me.json</code> contains:</p>
+<pre><code class="json">[
+    {
+        &quot;time&quot;: &quot;2015-01-01T00:00:00.000Z&quot;,
+        &quot;name&quot;: &quot;write_me&quot;,
+        &quot;value&quot;: 1
+    },
+    {
+        &quot;time&quot;: &quot;2015-01-01T00:00:01.000Z&quot;,
+        &quot;name&quot;: &quot;write_me&quot;,
+        &quot;value&quot;: 2
+    }
+]
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../http/" class="btn btn-neutral float-right" title="____ HTTP Adapter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../" class="btn btn-neutral" title="Adapters"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../http/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

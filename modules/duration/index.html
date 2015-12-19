@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ Duration - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ Duration";
+    var mkdocs_page_input_path = "modules/duration.md";
+    var mkdocs_page_url = "/modules/duration/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ Duration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/modules/duration.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="duration">Duration</h1>
+<p>Duration is the representation of a time interval in Juttle, defined as the time span between two Juttle moments; refer to the <a href="../../reference/time/">Time module</a> for more. The Duration module provides functions for working with durations, including conversion from/to seconds and strings.</p>
+<div class="toc">
+<ul>
+<li><a href="#duration">Duration</a><ul>
+<li><a href="#durationas">Duration.as</a></li>
+<li><a href="#durationformat">Duration.format</a></li>
+<li><a href="#durationget">Duration.get</a></li>
+<li><a href="#durationmilliseconds">Duration.milliseconds</a></li>
+<li><a href="#durationnew">Duration.new</a></li>
+<li><a href="#durationseconds">Duration.seconds</a></li>
+<li><a href="#durationtostring">Duration.toString()</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="durationas">Duration.as</h2>
+<p>Return the value of duration as a floating-point number in units of
+timeunit.</p>
+<pre><code>Duration.as(duration, timeunit)
+</code></pre>
+
+<p>If you were to multiply this number by Duration(1, timeunit), you would
+get back the original duration.</p>
+<p><em>Example: output elapsed time as seconds</em></p>
+<pre><code>const millenium = Date.new(&quot;2001-01-01&quot;);
+emit -limit 1 | put elapsed_seconds_third_millenium = Duration.as(:now: - millenium, &quot;seconds&quot;)
+</code></pre>
+
+<hr />
+<h2 id="durationformat">Duration.format</h2>
+<p>Format the duration as a string.</p>
+<pre><code>   Duration.format(duration)
+   Duration.format(duration, format_string)
+
+</code></pre>
+
+<p>The optional <code>format_string</code> is as described in the <a href="https://www.npmjs.com/package/moment-duration-format">npm moment-duration-format package</a>. When no format is given, an approximate format will be built based on the magnitude of the duration.</p>
+<p><em>Example</em></p>
+<pre><code>emit -limit 1
+| put duration = :2 months and 2 weeks and 2 days and 1 hour and 3 minutes:
+| put default=Duration.format(duration)              // approximate, depends on duration magnitude
+| put asdays=Duration.format(duration, &quot;DD [days]&quot;)  // rounded to nearest whole day
+| put dotnet=Duration.format(duration,&quot;dd.hh:mm:ss&quot;) // in .NET format, to nearest second.
+| remove time, duration // duration would display precisely, in a nonstandard mixed calendar/time format
+| view table
+</code></pre>
+
+<hr />
+<h2 id="durationget">Duration.get</h2>
+<p>Return the value of a given time unit for a duration (such as, "days") as an integer.</p>
+<pre><code>Duration.get(duration, timeunit)
+</code></pre>
+
+<p><em>Example: split duration into its time unit components</em></p>
+<pre><code>const millenial = :now: - Date.new(&quot;2001-01-01&quot;);
+emit -limit 1 
+| put y = Duration.get(millenial, &quot;years&quot;), 
+      M = Duration.get(millenial, &quot;months&quot;), 
+      d = Duration.get(millenial, &quot;days&quot;),
+      h = Duration.get(millenial, &quot;hours&quot;),
+      m = Duration.get(millenial, &quot;minutes&quot;),
+      s = Duration.get(millenial, &quot;seconds&quot;)
+| put ticker = &quot;Time lived in this millenium: ${y}y ${M}m ${d}d ${h}h:${m}m:${s}s&quot; 
+| keep ticker
+</code></pre>
+
+<hr />
+<h2 id="durationmilliseconds">Duration.milliseconds</h2>
+<p>Return the value of duration as a floating-point number in milliseconds.</p>
+<pre><code>Duration.milliseconds(duration)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> Equivalent to <code>Duration.as(duration, "ms")</code>.</p>
+<p><em>Example: convert duration of Hadron Epoch to milliseconds</em></p>
+<pre><code>emit -limit 1 | put hadron_epoch_ms = Duration.milliseconds(:1s:)
+</code></pre>
+
+<hr />
+<h2 id="durationnew">Duration.new</h2>
+<p>Return a duration.</p>
+<pre><code>Duration.new(seconds)
+</code></pre>
+
+<p><em>Example: Some ways to represent a minute</em></p>
+<pre><code>emit -limit 1 
+| put this_minute = Duration.new(60), that_minute = Duration.new(&quot;00:01:00&quot;)
+| put diff = that_minute - this_minute
+</code></pre>
+
+<hr />
+<h2 id="durationseconds">Duration.seconds</h2>
+<p>Return the value of duration as a floating-point number in units of seconds.</p>
+<pre><code>Duration.seconds(duration)
+</code></pre>
+
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> <code>Note:</code> Equivalent to <code>Duration.as(duration, "seconds")</code>.</p>
+<p><em>Example: how many seconds in a year</em></p>
+<pre><code>emit -limit 1 
+| put normal_year_seconds = Duration.seconds(:365 days:), 
+      leap_year_seconds = Duration.seconds(:366 days:)
+</code></pre>
+
+<hr />
+<h2 id="durationtostring">Duration.toString()</h2>
+<p>Convert a value of type Duration to type String.</p>
+<pre><code>Duration.toString(duration)
+</code></pre>
+
+<p><em>Example: print duration of this day so far</em></p>
+<pre><code>emit -limit 1 
+| put today_so_far = :now: - Date.startOf(:now:, &quot;day&quot;)
+| put message = &quot;This day has lasted &quot; + Duration.toString(today_so_far)
+| keep message
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../math/" class="btn btn-neutral float-right" title="____ Math"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../date/" class="btn btn-neutral" title="____ Date"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../date/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../math/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

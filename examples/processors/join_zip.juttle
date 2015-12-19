@@ -1,0 +1,22 @@
+// Join 1-1
+//
+// This demonstrates a synchronized join between two metric
+// streams, allowing us to "divide" one stream by another
+// to create a new metric. It does this by creating new points
+// containing one metric from each input stream.
+//
+// one-to-one joining is triggered by 'join -zip <duration>'.
+// an input point is matched to the point on the other
+// input that is nearest (within <duration>) without being in the future.
+// If we had specified <duration> of :0s:, timestamps would need to be equal.
+// We instead specified -zip true, so any offset is allowed (but exact
+// matches will always be made when they are present)
+//
+( emit 
+  | put furlongs = Math.random()
+  ; 
+  emit -from :+0.5 s: 
+  | put fortnights = Math.random()
+) | join -zip true 
+| put speed = furlongs / fortnights 
+| view table

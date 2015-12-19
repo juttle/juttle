@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Style Guide - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Style Guide";
+    var mkdocs_page_input_path = "reference/style_guide.md";
+    var mkdocs_page_url = "/reference/style_guide/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>Style Guide</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/reference/style_guide.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="juttle-style-guide">Juttle Style Guide</h1>
+<p>Juttle programs in this repository follow conventions of this style guide, as we believe it improves readability.</p>
+<p>This guide uses pseudocode in some places. For working Juttle code examples, look at <a href="https://github.com/juttle/juttle/tree/master/docs/examples">docs/examples</a> and <a href="https://github.com/juttle/juttle/tree/master/examples">simple examples</a> on GitHub, and the full program example at the end of this document.</p>
+<h3 id="comments">Comments</h3>
+<p>Both <code>//</code> and <code>/* .. */</code> style comments are supported. Prefix lines of a long comment block with <code>*</code>. If commenting <code>//</code> to the right of multiple lines of code, strive to align the comments:</p>
+<pre><code class="pseudocode">...
+emit -points data
+| put *name = value   // transpose data points
+| join                // combine data points with matching timestamps
+...
+</code></pre>
+
+<h3 id="whitespace">Whitespace</h3>
+<ul>
+<li>The indentation step is 2 spaces. Don’t use tabs.</li>
+<li>Indent each continuation of a given step in a Juttle pipeline (see Flowgraphs).</li>
+<li>Avoid trailing whitespace or extra whitespace on blank lines.</li>
+<li>No fixed right-hand limit on line length, but be reasonable.</li>
+<li>One space before and after <code>=</code> in assignments:</li>
+</ul>
+<pre><code class="juttle">emit | put good = '1 space', just = 'like that'
+</code></pre>
+
+<h3 id="functions-reducers-subgraphs">Functions, Reducers, Subgraphs</h3>
+<p>No space between a function, subgraph or reducer name and opening <code>(</code> in both declarations and calls. Note that sub invocation has a different parameter syntax than functions or reducers, but follows the same style guidelines.</p>
+<p>One space between closing <code>)</code> and opening <code>{</code> (do not drop the opening <code>{</code> down to the next line in declarations).</p>
+<p>Single space separation between parameters in function declarations and calls.</p>
+<pre><code class="pseudocode">function is_good(a, b) {
+  // function body
+}
+
+reducer get_better(x, when = :now:) {
+  // reducer body
+}
+
+sub stamper(mark, force) {
+  // subgraph body
+}
+
+emit
+| put life = is_good(1, 0)
+| reduce things = get_better(life, :tomorrow:)
+| stamper -mark 'awesome' -force 'light'
+</code></pre>
+
+<h3 id="arrays-and-objects">Arrays and Objects</h3>
+<p>In both arrays and objects, leave a single space on the inside of <code>[ brackets ]</code> and <code>{ curly: braces }</code>. </p>
+<p>Single space after (but not before) the separators <code>,</code> and <code>:</code>.</p>
+<pre><code class="pseudocode">const nice_array = [ we, favor, spaces ];
+
+const nice_object = { here: 'also', spaces: 'rule' };
+</code></pre>
+
+<p>For large arrays and objects, leave the brackets or curlies on their own lines. In Juttle this tends to happen with arrays of data points, and options objects for sinks.</p>
+<pre><code class="juttle">const input_points = [
+  { time: '2015-12-01T10:51:04', name: 'style guide', status: 'progress' },
+  { time: '2015-12-01T16:45:28', name: 'style guide', status: 'done' }
+];
+
+emit -points input_points
+| view text -o {
+    style: 'csv',
+    limit: 10,
+    title: 'TPS Report'
+  }
+</code></pre>
+
+<h3 id="capitalization">Capitalization</h3>
+<p>Constants should be capitalized.</p>
+<p>Juttle's built-in modules use camelCase for naming functions, such as <code>Date.startOf()</code>.</p>
+<p>The user-defined variable, function, reducer and subgraph names commonly use underscore_case in provided Juttle examples.</p>
+<ul>
+<li>variable_names_like_this: <code>var max_delta</code></li>
+<li>function_names_like_this: <code>function is_good(a)</code></li>
+<li>reducers_as_well: <code>reducer get_better(x)</code></li>
+<li>subgraphs_too: <code>sub does_it_all()</code></li>
+<li>CONSTANT_VALUES_LIKE_THIS: <code>const CUSTOM_COLOR</code></li>
+</ul>
+<p>When working with an existing body of Juttle code, adhere to the naming style chosen by the authors, be that camelCase, underscore_case or otherwise.</p>
+<h3 id="conditionals-and-equality">Conditionals and Equality</h3>
+<p>In Juttle, if/else conditionals appear only inside functions and reducers; in flowgraph context, filter expressions are used to fork a flowgraph based on true/false evaluation.</p>
+<p>In single-line conditionals, place the condition on the first line, without spaces inside the <code>(parentheses)</code> but with a space before opening <code>{</code>.</p>
+<p>Place the statements on the next line (not on the same line as the condition), and align the closing brace <code>}</code> to the opening statement:</p>
+<pre><code class="pseudocode">function is_null(value) {
+  if (value == null) {
+    return true;
+  } else {
+    return false;
+  }
+}
+</code></pre>
+
+<p>In multi-line conditionals, keep the and/or/not operators on the line with the preceding condition, and drop the <code>{</code> onto its own line aligned with <code>if</code>:</p>
+<pre><code class="pseudocode">function is_expected(one, two, three) {
+  if ((one == expected_one) &amp;&amp;
+      (two &gt;= min_two) &amp;&amp;
+      (three != 'bad_third_value'))
+  {
+    return true;
+  } else {
+    return false;
+  }
+}
+</code></pre>
+
+<p>In flowgraph context, when the <code>filter</code> processor is used to conditionally branch the flowgraph, the equality test can be done with either <code>==</code> or <code>=</code> operator. The idiomatic Juttle uses <code>=</code> in that case:</p>
+<pre><code class="juttle">emit
+| (
+  filter time = null
+  | put qed = &quot;impossible&quot;;
+
+  filter time != null
+  | put qed = &quot;emit always sets time&quot;;
+)
+</code></pre>
+
+<p>When using ternary or null coalescing operators, leave a single empty space on both sides of the operator:</p>
+<pre><code class="juttle">emit
+| put foo = (foo == null) ? 42 : 53
+| put bar = bar ?? 53
+</code></pre>
+
+<h3 id="string-literals">String Literals</h3>
+<p>Use single quotes for all string literals: <code>'good'</code> not <del>"bad"</del>.</p>
+<p>Note that when running Juttle programs via CLI <code>-e</code> option, this allows to enclose the program body in double quotes, avoiding any need for escapes:</p>
+<pre><code class="cli">$ juttle -e &quot;emit | put quotes = 'single', problems = 'none'&quot;
+</code></pre>
+
+<p>Multiline string literals continued with the <code>\</code> character are not supported in Juttle, use string concatenation with <code>+</code> instead:</p>
+<pre><code class="juttle">emit
+| put the_tyger = 'Tyger Tyger, burning bright, '
+    + 'In the forests of the night; '
+    + 'What immortal hand or eye, '
+    + 'Could frame thy fearful symmetry?'
+</code></pre>
+
+<p>Note that multiline strings containing newline <code>\n</code> will get rendered with or without true newlines depending on the sink.</p>
+<h3 id="flowgraphs">Flowgraphs</h3>
+<p>For pipelines, generally put each proc at a separate line and format them like this:</p>
+<pre><code class="pseudocode">source &quot;some gist&quot;
+| keep &quot;thing&quot;
+| view table
+</code></pre>
+
+<p>Exception: if a short program contains only one pipe, it is acceptable to keep it on a single line:</p>
+<pre><code class="juttle">emit | put name = &quot;example&quot;
+</code></pre>
+
+<p>Always put a single whitespace after the pipe symbol, like this: <code>emit | put ...</code> not like this: <del>emit |put ...</del></p>
+<p>When the pipeline contains a parallel graph, format it like this, indenting each branch:</p>
+<pre><code class="pseudocode">source -option -option
+| put this = that, biff = boff
+| keep &quot;on&quot;, &quot;keeping&quot;, &quot;on&quot;
+| (
+  flowgraph;
+  flowgraph;
+) | join -first -outer -inner -last
+| view donuthole
+</code></pre>
+
+<p>Note that each parallel branch ends with <code>;</code> (including the last one) and the final join (or merge) goes at the same line as the closing <code>)</code>.</p>
+<p>If one or more parallel branches are multi-line, put a blank line between the branches:</p>
+<pre><code class="pseudocode">read -from :a long time ago: -to :sometime yesterday:
+| (
+  reduce
+  | filter
+  | view treechart;
+
+  batch :fortnight:
+  | sort ear_shape
+  | write webmd;
+)
+</code></pre>
+
+<p>The trailing semicolon at the end of a single-branch flowgraph is optional; Juttle treats semicolons as separators, not terminators, and this coding style generally omits the trailing semi. It is idiomatic to write <code>emit | view table</code> but it is also acceptable to write <code>emit | view table;</code> if desired.</p>
+<h3 id="processors">Processors</h3>
+<p>In general, each proc (short for "processor") invocation should be on its own line. For short proc invocations, include all the parameters on the same line. In case of multiple assignments (e.g. in <code>put</code> and <code>reduce</code> procs), if they are short enough, keep them all on the same line:</p>
+<pre><code class="juttle">emit
+| put when = &quot;i fall down&quot;, you = &quot;put me&quot;, back = &quot;together&quot;
+</code></pre>
+
+<p>If multiple assignments are too long for one line, invoke the proc several times rather than splitting up assignments into several lines:</p>
+<pre><code class="juttle">emit
+| put when = &quot;i wake up&quot;
+| put well = &quot;i know i'm gonna be, i'm gonna be&quot;
+| put the_man = &quot;who wakes up next to you&quot;
+</code></pre>
+
+<h3 id="sources">Sources</h3>
+<p>For source procs which contain both options and filter expressions (e.g. <code>readx</code>), put all the options on the same line, and each filter expression on a separate line below the proc invocation, indented by one step relative to the proc name:</p>
+<pre><code class="pseudocode">read -from :a long time ago: -to :sometime yesterday:
+  name ~ &quot;*ears&quot;
+  AND normal = false
+  AND symptoms in ['leaking', 'deaf', 'mossy']
+</code></pre>
+
+<h3 id="sinks">Sinks</h3>
+<p>For long invocations of sink procs, put the parameters on separate lines below the proc invocation indented by one step relative to the proc name:</p>
+<pre><code class="pseudocode">...
+| view treechart
+  -boundaryField &quot;ear_shape&quot;
+  -title &quot;Relative distribution of ear shape&quot;
+</code></pre>
+
+<h3 id="inputs">Inputs</h3>
+<p>Format long input definitions similarly to long proc invocations:</p>
+<pre><code class="pseudocode">input a: combobox
+  -items [ 'a', 'b', 'c' ]
+  -multi true;
+</code></pre>
+
+<p>Name the input on the line where it is declared, indent each option, and end with a semicolon <code>;</code> on the same line as the last option. Array values follow array formatting.</p>
+<h2 id="full-program-example">Full Program Example</h2>
+<p>This example is intentionally long and complex, to showcase style of each element; it is styled right, while not necessarily well designed.</p>
+<pre><code class="juttle">input resolution: text
+  -description 'Resolution such as: approved, denied, on ice'
+  -default 'denied';
+
+const input_points = [
+  { time: '2015-12-01T10:51:04', name: 'style guide', status: 'progress' },
+  { time: '2015-12-01T16:45:28', name: 'style guide', status: 'done' }
+];
+
+const THE_FORCE = 'heavy';
+
+function level_it(value) {
+  if (value &lt;= 50) {
+    return 42;
+  } else {
+    return Math.pow(value, Math.round(value/10)); 
+  }
+}
+
+function rand10() {
+  return Math.floor(Math.random()*10);
+}
+
+sub stamper(mark, force = 'light') {
+  put stamp = mark, power = force
+}
+
+emit -points input_points
+| put position = count(), dice = rand10()
+| put note = 'Reviewed on: ' + Date.format(:now:, 'MM/DD/YYYY')
+    + ' by He-Who-Must-Not-Be-Named aka You-Know-Who'
+| stamper -mark resolution -force THE_FORCE
+| (
+  filter dice &lt; 5
+  | put level = dice * 2;
+
+  filter dice &gt;= 5
+  | put level = level_it(dice)
+) 
+| view text -o {
+    style: 'csv',
+    limit: 10,
+    title: 'TPS Report'
+  };
+
+emit | put message = &quot;Done!&quot;
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../conditionals/" class="btn btn-neutral" title="Conditionals"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../conditionals/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+
+</body>
+</html>

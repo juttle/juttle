@@ -1,0 +1,19 @@
+// Trailing average example:
+//
+// Smooth a stream of random values occurring every 10 seconds
+// by computing a trailing 10 minute average
+// 
+sub random() {
+    emit 
+      -from :2014-01-01: 
+      -limit 500 
+      -every :10s:
+    | put name = 'random'
+    | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
+}
+random
+| reduce 
+    -every :m: 
+    -over :10m: avg = avg(value), value = last(value)
+| split value, avg
+| view timechart

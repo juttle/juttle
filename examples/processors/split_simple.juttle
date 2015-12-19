@@ -1,0 +1,4 @@
+emit -limit 1 
+| put name = "NAME", value = "VALUE", wheels = 5, shape = "BENT" 
+| split 
+| view text

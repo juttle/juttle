@@ -1,0 +1,11 @@
+// 9 parts having board_ids are joined against table of board_id->boardname
+( emit -hz 1000 -limit 9
+  | put part = "part-"+Number.toString(count()), board_id = count()%3 + 1, t = time-:now:  
+  ; 
+  emit -from :0: -hz 1000 -limit 3 
+| put board = "board-" + Number.toString(count()), board_id = count() 
+| remove time
+) | join board_id 
+| batch 100 
+| keep t, part, board 
+| view table

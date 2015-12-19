@@ -1,0 +1,4 @@
+const total = 3;
+emit -limit total
+| put count = count()
+| put message = "finished ${Math.round((count / total) * 100)}%"

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Filtering - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Filtering";
+    var mkdocs_page_input_path = "concepts/filtering.md";
+    var mkdocs_page_url = "/concepts/filtering/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Concepts &raquo;</li>
+        
+      
+    
+    <li>Filtering</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/concepts/filtering.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="filtering">Filtering</h1>
+<p>In order to pare down a dataset, Juttle supports various ways of filtering the data.</p>
+<div class="toc">
+<ul>
+<li><a href="#filtering">Filtering</a><ul>
+<li><a href="#how-to-filter">How to Filter</a></li>
+<li><a href="#field-comparisons">Field comparisons</a></li>
+<li><a href="#filter-expressions">Filter Expressions</a></li>
+</ul>
+</li>
+<li><a href="#full-text-search">Full-text search</a><ul>
+<li><a href="#quoted-terms-match-exact-phrases-only">Quoted terms match exact phrases only</a></li>
+<li><a href="#terms-analysis">Terms analysis</a></li>
+<li><a href="#search-is-not-available-in-filter">Search is not available in filter</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="how-to-filter">How to Filter</h2>
+<p>There are two basic forms of filtering in Juttle.</p>
+<p>At any point in the flowgraph, you can can use the <a href="../../processors/filter/">filter</a> processor to restrict the points that will flow to those that match the given predicate. For example:</p>
+<pre><code class="juttle">emit -from :0: -limit 10
+| put i=count(), even = (i % 2 == 0)
+| filter even == true
+| view table
+</code></pre>
+
+<p>Will output:</p>
+<pre><code>┌────────────────────────────────────┬──────────┬──────────┐
+│ time                               │ even     │ i        │
+├────────────────────────────────────┼──────────┼──────────┤
+│ 1970-01-01T00:00:01.000Z           │ true     │ 2        │
+├────────────────────────────────────┼──────────┼──────────┤
+│ 1970-01-01T00:00:03.000Z           │ true     │ 4        │
+├────────────────────────────────────┼──────────┼──────────┤
+│ 1970-01-01T00:00:05.000Z           │ true     │ 6        │
+├────────────────────────────────────┼──────────┼──────────┤
+│ 1970-01-01T00:00:07.000Z           │ true     │ 8        │
+├────────────────────────────────────┼──────────┼──────────┤
+│ 1970-01-01T00:00:09.000Z           │ true     │ 10       │
+└────────────────────────────────────┴──────────┴──────────┘
+</code></pre>
+
+<p>In addition, most <a href="../../adapters/">adapters</a> take a filter expression options that are given as part of the invocation of <a href="../../sources/read/">read</a> and turn that into a corresponding query (or queries) to the backend.</p>
+<p>For example, assuming you have configured an elasticsearch adapter, then the following juttle will translate the juttle query to search for all documents with a timestamp within the last hour and a message field containing the string "error" and an app field that contains "syslog":</p>
+<pre><code class="juttle">read elastic -from :1 hour ago: -to :now: message~&quot;*error*&quot; app=&quot;syslog&quot;
+</code></pre>
+
+<p>This could have instead been written as:</p>
+<pre><code class="juttle">read elastic -from :1 hour ago: -to :now: | filter message~&quot;*error*&quot; app=&quot;syslog&quot;
+</code></pre>
+
+<p>While these would produce the same results, in the latter case the adapter would pull all of the documents for the last hour out of elasticsearch and into the Juttle runtime where they would be filtered, unlike the former example which sends the query to elasticsearch for execution.</p>
+<h2 id="field-comparisons">Field comparisons</h2>
+<p>The basic form of field comparisons is:</p>
+<pre><code>field operator expression
+</code></pre>
+
+<p><em>or</em></p>
+<pre><code>expression operator field
+</code></pre>
+
+<p>Depending on the context, you may either be able to reference fields by name or you may use the <a href="" title="./fields.md#referencing">field reference operators</a>.</p>
+<p>The valid comparison operators include:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=, ==</td>
+<td>Matches exactly</td>
+<td><code>hostname = "server1"</code></td>
+</tr>
+<tr>
+<td>!=</td>
+<td>Does not match</td>
+<td><code>hostname != "server-" + server_id</code></td>
+</tr>
+<tr>
+<td>&lt;, &lt;=, &gt;, &gt;=</td>
+<td>Is less than, is less than or equal to, is greater than, is greater than or equal to</td>
+<td><code>cpu &gt;= 1 + Math.max(4*20, 79)</code><br> <code>cpu &lt; max_cpu - 10</code></td>
+</tr>
+<tr>
+<td>~, =~</td>
+<td>Wildcard operator for matching with "glob" or regular expressions</td>
+<td>True if the value of the "hostname" field is "server" followed by any number of characters: <br><code>hostname ~ "server*"</code><br><br>True if the value of the "hostname" field contains alphanumeric characters: <br><code>hostname ~ /[A-Za-z0-9]*/</code></td>
+</tr>
+<tr>
+<td>!~</td>
+<td>Wildcard negation operator</td>
+<td>True if the value of the "hostname" field does NOT begin with "server": <br><code>hostname !~ "server*"</code></td>
+</tr>
+<tr>
+<td>in</td>
+<td>Check for inclusion in an array</td>
+<td>True if the value of "hostname" field is one of "host1", "host2", or the value of the "server" field: <br><code>hostname in ["host1", host2", server]</code></td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="../../reference/operators/">operators reference</a> for more information.</p>
+<h2 id="filter-expressions">Filter Expressions</h2>
+<p>Field comparisons can be combined using the boolean operators <code>AND</code>, <code>OR</code>, and <code>NOT</code>, and can be nested using parentheses. Note that <code>AND</code> is implicitly added between two field comparison statements.</p>
+<p>For example the following will read all points using a hypothetical adapter called <code>email</code> containing the subject "hello", where the spam rating is either 0 or 1 and the sender is not "self":</p>
+<pre><code class="juttle">read email subject~&quot;*hello*&quot; (spam=0 OR spam=1) AND NOT sender=&quot;self&quot;
+</code></pre>
+
+<h1 id="full-text-search">Full-text search</h1>
+<p>Juttle supports backend storage systems such as elasticsearch that implement
+full-text search across all fields in a document through lexical analysis.
+Full-text searches match any point in which the string returned by expression is
+present in any field.</p>
+<p>The <a href="../../processors/filter/">filter</a> processor does not support full-text search -- it can only be used as part of a read from an external backend that supports search.</p>
+<p>The search terms for full-text search are currently expressed as standalone strings in the filter expression for <code>read</code>. Search terms and other filter expressions can be combined with the AND, OR, NOT operators.</p>
+<p>A full-text search is currently expressed in a filter statement as a standalone string.</p>
+<p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> The syntax for full-text search will be changed soon to add a <code>?</code> operator.</p>
+<p>For example the following searches all documents in the last day for the term "alarm":</p>
+<pre><code class="juttle">read elastic -last :1 day: &quot;alarm&quot;
+</code></pre>
+
+<p>And the following searches all documents in the last day containing the term "alarm" and where the <code>env</code> field is not equal to "test".</p>
+<pre><code class="juttle">read elastic -last :1 day: 'alarm' AND NOT env = 'test'
+</code></pre>
+
+<h3 id="quoted-terms-match-exact-phrases-only">Quoted terms match exact phrases only</h3>
+<p>For example, the following matches points in which one or more fields contain the <em>exact phrase</em> "alarm failed":</p>
+<pre><code class="juttle">read elastic -last :1 day: &quot;alarm failed&quot;
+</code></pre>
+
+<p>It does not match points in which one field contains "alarm" and
+another field contains "failed", nor does it match points in which a
+field contains "alarm has failed". To match those points, use this
+instead:</p>
+<pre><code class="juttle">read elastic -last :1 day: &quot;alarm&quot; &quot;failed&quot;
+</code></pre>
+
+<h3 id="terms-analysis">Terms analysis</h3>
+<p>There are many different ways in which a backend storage system may map an incoming document into terms that are available for full-text search.</p>
+<p>From the standpoint of Juttle, the terms are passed through to the back end and the specific matching is implemented there.</p>
+<h3 id="search-is-not-available-in-filter">Search is not available in filter</h3>
+<p>The filter processor does not implement full-text search. It is only available when interacting with a suitable backend.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../inputs/" class="btn btn-neutral float-right" title="Inputs"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../fields/" class="btn btn-neutral" title="Fields"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../fields/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../inputs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

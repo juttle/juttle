@@ -1,0 +1,5 @@
+emit -from :0: -limit 10
+| put value = count(), even = value%2
+| reduce evens = count(even)
+| put msg1 = "Count of even values: " + Number.toString(evens),
+      msg2 = "There are ${evens} even values"

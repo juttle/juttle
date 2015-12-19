@@ -1,0 +1,5 @@
+emit -from :0: -limit 10 
+| put x = Math.random() * 2, y = Math.floor(x) 
+| reduce cnt = count() by y 
+| view text
+

@@ -1,0 +1,6 @@
+const random_length=(Math.round(Math.random()*10));
+;
+emit -limit random_length -every :.1 second:
+| put values=(Math.round(Math.random()*10))
+| reduce pluck(values)
+| put length=Array.length(pluck)

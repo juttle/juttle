@@ -1,0 +1,40 @@
+// 4-way right outer join of a point stream of ids against  tables of personal information.
+//
+// The points in the "tables" all have the same timestamp.
+// For the join, the ID in each emit point
+// is matched against each table, and an output point is created that is the union of all 
+// matching points. This demonstrates partial joins when not all tables have an entry for 
+// an ID. There are no matches at all for ID 5, so that point is passed through unchanged.
+//---------------------------------------------------------------------------
+    const name = [
+      {time:"1970-01-01T00:00:00.000Z", "id":1, "name":"fred"},
+      {time:"1970-01-01T00:00:00.000Z", "id":2, "name":"wilma"},
+      {time:"1970-01-01T00:00:00.000Z", "id":3, "name":"dino"},
+      {time:"1970-01-01T00:00:00.000Z", "id":4, "name":"barney"},
+      {time:"1970-01-01T00:00:00.000Z", "id":6, "name":"bambam"},
+       ]
+    ;
+    const haircolor = [
+      {time:"1970-01-01T00:00:00.000Z", "id":1, "haircolor":"black"},
+      {time:"1970-01-01T00:00:00.000Z", "id":2, "haircolor":"orange"},
+      {time:"1970-01-01T00:00:00.000Z", "id":4, "haircolor":"blonde"},
+      {time:"1970-01-01T00:00:00.000Z", "id":6, "haircolor":"blonde"}
+       ]
+    ;
+    const hobby = [
+       {time:"1970-01-01T00:00:00.000Z", "id":1, "hobby":"bowling"},
+       {time:"1970-01-01T00:00:00.000Z", "id":3, "hobby":"singing"},
+       {time:"1970-01-01T00:00:00.000Z", "id":6, "hobby":"home improvement"},
+       ]
+    ;
+    ( emit -points name
+      ;
+      emit -points haircolor
+      ;
+      emit -points hobby
+      ;
+      emit -from :0: -limit 6
+      | put id = count()
+    ) | join -outer 4 id
+    | remove time, type
+    | view table

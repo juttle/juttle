@@ -1,0 +1,4 @@
+emit -every :0.1s: -limit 100 
+| batch :2s:
+| reduce count()
+| view text

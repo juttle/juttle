@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Dataflow - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Dataflow";
+    var mkdocs_page_input_path = "concepts/dataflow.md";
+    var mkdocs_page_url = "/concepts/dataflow/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Concepts &raquo;</li>
+        
+      
+    
+    <li>Dataflow</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/concepts/dataflow.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="dataflow-concepts">Dataflow Concepts</h1>
+<p>This section lays out some of the conceptual framework for the Juttle dataflow language.</p>
+<div class="toc">
+<ul>
+<li><a href="#dataflow-concepts">Dataflow Concepts</a></li>
+<li><a href="#dataflow-language">Dataflow Language</a></li>
+<li><a href="#data-streams">Data Streams</a></li>
+<li><a href="#timeliness">Timeliness</a></li>
+<li><a href="#batching">Batching</a></li>
+<li><a href="#grouping">Grouping</a></li>
+<li><a href="#forking-and-merging">Forking and merging</a></li>
+<li><a href="#joining-streams">Joining streams</a><ul>
+<li><a href="#matching-batches-between-streams">Matching batches between streams</a></li>
+<li><a href="#joining-points-between-batches">Joining points between batches</a></li>
+<li><a href="#joining-points-in-a-single-stream">Joining points in a single stream</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="dataflow-language">Dataflow Language</h1>
+<p>Juttle is a declarative dataflow or stream processing language.</p>
+<p>Each Juttle program consists of one or more flowgraphs that generate or read in
+streams of data, process the streams, and output results.</p>
+<p>In each Juttle flowgraph, you pull data into your program with <a href="../../processors/">source nodes</a> that either <a href="../../sources/emit/">emit</a> synthetic data or <a href="../../sources/read/">read</a> from an external data source. In the middle of your flowgraph, you can perform operations on your data using <a href="../../processors/">processor nodes</a>. You can chain and arrange these nodes arbitrarily to enable parallel processing and forking/merging of the data stream. Then each branch of the flowgraph output can either <a href="../../sinks/view/">view</a> the data in a graph using a client side visualization library, or <a href="../../sinks/write/">write</a> data to a backend for storage or to take an action like sending an alert.</p>
+<p><img alt="" src="../../images/diagrams/juttleOverviewDiagrams/overview1.png" /></p>
+<p>The language is declarative, in that a program specifies at a high level what data to retrieve, what to do to it, and how to visualize it, not the programming details of how to actually perform these operations. This high level specification is mapped into an execution plan by the Juttle compiler, which can delegate filtering and computation to back end data stores via <a href="../../adapters/">adapters</a>, and which passes the data and configuration options to client-side <a href="../views/">views</a> to render data visualizations.</p>
+<h1 id="data-streams">Data Streams</h1>
+<p>In a Juttle, data is represented as a stream of points, where each point
+consists of a number of key/value fields of various <a href="../../reference/data_types/">data types</a>.</p>
+<p>When they enter a Juttle flowgraph, data points are represented and
+handled identically, regardless of whether they were synthetically generated, originated by tapping into a live data source, read from a persistent storage back end, or a combination. Data points may represent structured time series metrics or semi-structured log events.</p>
+<p><em>Example: three points in a stream of metric data</em></p>
+<pre><code>{&quot;name&quot; : &quot;errors&quot;, &quot;value&quot; : 42, &quot;time&quot; : &quot;2014-05-28T22:11:35.332Z&quot;}
+{&quot;name&quot; : &quot;errors&quot;, &quot;value&quot; : 44, &quot;time&quot; : &quot;2014-05-28T22:11:35.353Z&quot;}
+{&quot;name&quot; : &quot;errors&quot;, &quot;value&quot; : 46, &quot;time&quot; : &quot;2014-05-28T22:11:35.532Z&quot;}
+</code></pre>
+
+<p><em>Example: two points in a stream of Web log data</em></p>
+<pre><code>{&quot;date&quot;:&quot;2014-07-03T10:38:44-07:00&quot;,&quot;ip&quot;:&quot;79.122.57.6&quot;,&quot;referer&quot;:&quot;-&quot;,&quot;agent&quot;:&quot;-&quot;,&quot;ctry&quot;:&quot;US&quot;,&quot;uri&quot;:&quot;/iotest/reply/core/utf/krw&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;bytes&quot;:18270,&quot;bytes_in&quot;:1768,&quot;status&quot;:200,&quot;time&quot;:&quot;2014-05-28T22:11:35.332Z&quot;}
+{&quot;date&quot;:&quot;2014-07-03T10:38:45-07:00&quot;,&quot;ip&quot;:&quot;161.182.107.224&quot;,&quot;referer&quot;:&quot;-&quot;,&quot;agent&quot;:&quot;Mozilla/4.0
+(compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR
+2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.2)&quot;,&quot;ctry&quot;:&quot;US&quot;,&quot;uri&quot;:&quot;/flick/token/scss/pause/api&quot;,&quot;method&quot;:&quot;GET&quot;,&quot;bytes&quot;:8219,&quot;bytes_in&quot;:682,&quot;status&quot;:200,&quot;time&quot;:&quot;2014-05-28T22:11:35.332Z&quot;}
+</code></pre>
+
+<h1 id="timeliness">Timeliness</h1>
+<p>Points streaming through Juttle flowgraphs must always be ordered by time, and
+they must arrive in a timely manner to avoid buffering problems and delays in
+the runtime.</p>
+<ul>
+<li>
+<p>Points flow through each processor in chronological order.</p>
+<p>If a point has a time field, the value of its time field should be
+greater than or equal to the value of the time field of the previous
+point (that had a time field). Points for which that is not true are
+called "out of order".
+<br><br></p>
+</li>
+<li>
+<p>Consecutive points must arrive in a timely fashion with respect to their
+    time fields.</p>
+<p>For example, if two consecutive points with time stamps one millisecond
+apart arrive 20 seconds apart, the second one has arrived "late". Based on
+the specific system resources available in the Juttle runtime, this may end
+up causing the point to not be included in the flowgraph because it arrived too late.</p>
+</li>
+</ul>
+<p>Points that do not have a time field (aka "timeless points") are treated as if they occurred at the dawn of time. Therefore when merging or joining a stream of timeless points with a stream of timed data points, all points from the timeless branch are treated as if they occurred "before" the timed points.</p>
+<h1 id="batching">Batching</h1>
+<p>Many Juttle processors operate point-by-point, but others operate over
+batches of consecutive points in a given time interval.</p>
+<p>The meanings of
+<a href="../../processors/sort/">sort</a>,
+<a href="../../processors/head/">head</a>,
+and
+<a href="../../processors/tail/">tail</a>
+are probably known to anyone with exposure to the UNIX shell. But there
+is a twist when using these in Juttle: sort, head, and tail processors
+don't operate on files like their UNIX counterparts; they operate on
+streams of indeterminate lengths. And
+<a href="../../processors/sort/">sort</a>
+or
+<a href="../../processors/tail/">tail</a>
+can't be applied to a stream of unknown (and potentially unbounded)
+length, because you need to know where the stream ends in order to start
+the sort or tail operation.</p>
+<p>To use these on streams of indeterminate length, you segment the stream of
+points into consecutive batches that can be processed one-at-a-time by these
+processors. Think of segmentation as inserting time division markers into the
+stream of points; these marker carry no data and serve no purpose other than to
+delineate batch boundaries that are used by processors to determine which points
+to process together. Segmenting points in this way can be done with the
+<a href="../../processors/batch/">batch</a> processor or by specifying the <code>-every</code> option to the processors themselves.</p>
+<p>For streams that are of bounded length (such as pulled from long-term storage),
+an end of batch marker is always present at the end of the stream.</p>
+<p>This simple example illustrates how <a href="../../processors/batch/">batch</a>
+changes the data in two different ways when starting from the same initial data
+stream. A diagram shows the data flow with markers pointing out the logical
+separation of batches of points.</p>
+<p><em>Example</em></p>
+<pre><code class="juttle">const data = [
+  {&quot;time&quot;: 0, &quot;value&quot;: 1},
+  {&quot;time&quot;: 300, &quot;value&quot;: 2},
+  {&quot;time&quot;: 900, &quot;value&quot;: 3},
+  {&quot;time&quot;: 1200, &quot;value&quot;: 4},
+  {&quot;time&quot;: 1500, &quot;value&quot;: 5},
+  {&quot;time&quot;: 2300, &quot;value&quot;: 6}
+];
+
+emit -points data
+| (
+  tail 2
+  | view table -title 'Unbatched';
+
+  batch 1000
+  | tail 2
+  | view table -title 'Batched'
+)
+</code></pre>
+
+<p><img alt="" src="../../images/diagrams/juttleOverviewDiagrams/overview4.png" /></p>
+<p>In addition to
+<a href="../../processors/sort/">sort</a>,
+<a href="../../processors/head/">head</a>,
+and
+<a href="../../processors/tail/">tail</a>,
+another important processor that operates over batches is
+<a href="../../processors/reduce/">reduce</a>.
+Reduce is used for statistics and computations over groups of points.
+For example, you might want to compute the average of a metric over
+five-second intervals, or you might want to compute the count of a given
+event over one-minute interval.</p>
+<p>Batching can also be specified by passing the <code>-every</code> option to relevant procs.</p>
+<p>For example:</p>
+<pre><code>const data = [
+  {&quot;time&quot;: :0:, &quot;value&quot;: 1},
+  {&quot;time&quot;: :300:, &quot;value&quot;: 2},
+  {&quot;time&quot;: :900:, &quot;value&quot;: 3},
+  {&quot;time&quot;: :1200:, &quot;value&quot;: 4},
+  {&quot;time&quot;: :1500:, &quot;value&quot;: 5},
+  {&quot;time&quot;: :2300:, &quot;value&quot;: 6}
+];
+
+emit -points data
+| reduce -every :1000s:
+| (
+  tail 2
+  | view table -title 'Unbatched';
+
+  batch 1000
+  | tail 2
+  | view table -title 'Batched'
+)
+</code></pre>
+
+<h1 id="grouping">Grouping</h1>
+<p>Several processors use the <code>by</code> operator to specify grouping fields. The <code>by</code> operator causes the processor to execute its logic separately for each unique combination of the grouping
+fields.</p>
+<p>The following processors accept a <code>by</code> clause:</p>
+<ul>
+<li><a href="../../processors/head/">head</a></li>
+<li><a href="../../processors/put/">put</a></li>
+<li><a href="../../processors/reduce/">reduce</a></li>
+<li><a href="../../processors/sort/">sort</a></li>
+<li><a href="../../processors/tail/">tail</a></li>
+<li><a href="../../processors/uniq/">uniq</a></li>
+</ul>
+<p>Each point in the output of the processor contains all of the grouping
+fields in addition to fields created by the processor. Consider the
+following program, which uses modulo arithmetic to create groupings by
+remainder:</p>
+<pre><code class="juttle">emit -from :0: -limit 10
+| put x = Date.unix(time)%3
+| reduce y = count() by x
+| view table
+</code></pre>
+
+<p>Which will output:</p>
+<pre><code>┌──────────┬──────────┐
+│ x        │ y        │
+├──────────┼──────────┤
+│ 0        │ 4        │
+├──────────┼──────────┤
+│ 1        │ 3        │
+├──────────┼──────────┤
+│ 2        │ 3        │
+└──────────┴──────────┘
+</code></pre>
+
+<p>In this example, the <a href="../../reducers/count/">count</a> reducer is
+applied to each group of unique value of x (0, 1, and 2). There are 4 points
+with an x value of 0 (time: 0, 3, 6, 9) and 3 points with each of the other values
+of x.</p>
+<p>Passing multiple fields into the by operator outputs one point per unique
+combination of the grouping fields. For example the following Juttle program
+outputs 6 points, because there are 2 unique values of x, and 3 unique values of
+y:</p>
+<pre><code class="juttle">emit -from :0: -limit 10
+| put x = Date.unix(time)%2, y = Date.unix(time)%3
+| reduce by x,y
+| view table
+</code></pre>
+
+<p>This program outputs the following:</p>
+<pre><code>┌──────────┬──────────┐
+│ x        │ y        │
+├──────────┼──────────┤
+│ 0        │ 0        │
+├──────────┼──────────┤
+│ 1        │ 1        │
+├──────────┼──────────┤
+│ 0        │ 2        │
+├──────────┼──────────┤
+│ 1        │ 0        │
+├──────────┼──────────┤
+│ 0        │ 1        │
+├──────────┼──────────┤
+│ 1        │ 2        │
+└──────────┴──────────┘
+</code></pre>
+
+<p>These processors can use assignments and grouping operators together to
+aggregate data over a batch and group by a field. For example if a
+stream of data had points with the fields time, host, metric, and value,
+then <a href="../../processors/reduce/">reduce</a>
+could be used to aggregate values and group them by host.</p>
+<p><em>Example: Here's a more complex example that uses grouping in a few different ways</em></p>
+<pre><code>//
+// Example of using grouping with reduce with both historical
+// and live sources
+//
+
+
+// Classify the point into either side given the parameter c
+function choose_side(c) {
+  return (c%2 == 0) ? &quot;left&quot; : &quot;right&quot;;
+}
+
+// Generate synthetic historical data with a value and a grouping
+sub historical_points() {
+  emit -from :0: -limit 10
+  | put value=10 * count(), group=choose_side(count())
+}
+
+// Generate similar synthetic data but starting at now so it runs live
+sub live_points() {
+  emit -limit 10
+  | put value=count(), group=choose_side(count())
+}
+
+// Read the historical points in one big batch and reduce all points to a
+// single result table.
+historical_points
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'group','cnt','sum','avg','stdev'
+    -title &quot;Historical statistics by group&quot;;
+
+// Read the historical points in 5 second batches
+historical_points
+| batch :5 seconds:
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'time','group','cnt','sum','avg','stdev'
+    -title &quot;Historical 5-second statistics by group&quot;;
+
+// Read the live points and divide into 3 second batches
+live_points
+| batch :3 seconds:
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| view table
+    -columnOrder 'time','group','cnt','sum','avg','stdev'
+    -title &quot;Live 3-second statistics by group&quot;;
+</code></pre>
+
+<h1 id="forking-and-merging">Forking and merging</h1>
+<p>The Juttle language supports forking and merging, by which you can
+process the same data multiple ways in parallel or combine two streams
+into one.</p>
+<p>A semicolon (<code>;</code>) indicates the end of a branch of the flowgraph. Parentheses
+group flowgraph statements, and these two are used together for both forking and merging.</p>
+<p>When flowgraph branches are merged together, the points are ordered with respect to time so that the downstream processors can continue to operate on the incoming data in time order.</p>
+<p>Here's an imaginary program that both forks and merges:</p>
+<pre><code>read mydata -last :day:
+| (
+    filter ...
+    | head 10;
+
+    reduce ...
+  )
+| view table
+</code></pre>
+
+<p>That example can also be illustrated like this:</p>
+<pre><code>                         filter ... | head ...
+                       /                       \
+read mydata -last :day:                          view
+                       \                       /
+                             reduce ...
+</code></pre>
+
+<p>Here are some other examples:</p>
+<p><em>Example: Forking to two views</em></p>
+<p>Instead of one output, this flowgraph ends with a group of two parallel views:</p>
+<pre><code class="juttle">emit -from :2 minutes ago: -every :1s: -limit 100
+| put message = &quot;Hello World!&quot;, num_points = count(time)
+| ( view table;
+    view timechart
+      -valueField 'num_points'
+      -duration 100
+  )
+</code></pre>
+
+<p><em>Example: Merging two sources into one output</em></p>
+<p>Two sources are processed separately, then merged and processed
+together, and finally displayed in a single table:</p>
+<pre><code class="juttle">// Example: Merging two sources into one output
+// 9 parts having board_ids are joined against table of board_id-&gt;boardname
+
+( emit -from :0: -limit 9
+  | put part_id=count(), part=&quot;part-${part_id}&quot;, board_id=count() % 3 + 1
+  | remove time;
+
+  emit -from :0: -limit 3
+  | put board_id=count(), board=&quot;board-${board_id}&quot;
+  | remove time;
+)
+| join board_id
+| keep part, board
+| view table
+</code></pre>
+
+<h1 id="joining-streams">Joining streams</h1>
+<p>The <a href="../../processors/join/">join</a>
+processor overrides the usual stream merging behavior (which reorders and
+forwards its input points). It consumes its input points and emits new
+output points that combine their values.</p>
+<p>The processor groups its input points into batches, either by using
+batch information in the stream, or by treating each time stamp value as
+a batch (there may be more than one point having the same time stamp).
+If there are no time stamps for an input stream, all its points are
+treated as one batch. join creates an output point by selecting a batch
+from each input and performing a relational join on the batches (but see
+further below for how join operates differently when given a single
+stream). To understand join, you need to understand how it matches
+batches for joining, and how it joins points from batches as they are
+matched.</p>
+<h2 id="matching-batches-between-streams">Matching batches between streams</h2>
+<p>It is easiest to think of batch matching by imagining points arriving in
+real-time streams at the join. Whenever a complete batch arrives from
+one input stream, that batch is joined against the most-recent complete
+batch from the other input stream. Imagine that points with the same
+time stamp arrive at the same instant and are processed simultaneously.
+If two streams of input points having identical sequences of unique time
+stamps enter a join, each IS matched with the other by time stamp, and a
+sequence of output points is produced having those same time stamps.</p>
+<p>When batches arrive with different time stamps, or at different
+frequencies, match-against-most-recent implies there is an output point
+for each unique time stamp on any input. It also implies that a batch
+might be used more than once if the other input has new batches arriving
+more rapidly. An example of this arrangement is a join between a stream
+of points that contains customer IDs, and a table (a single batch) of
+points that contains customer IDs and additional customer information.
+The customer information batch remains parked at one join input while
+many customer points arrive at the other input and are joined against it.</p>
+<p>Sometimes you want a one-to-one match between time stamps in input
+streams. For this behavior, include time in fieldName list of the join.
+A point is only matched and joined against another point that has the
+same time stamp. You can relax this by specifying <code>-maxoffset</code>, 
+which allows points to match
+if their time stamps differ by less than this (it is still treated as a
+one-to-one match, so a time stamp will still be matched at most once in
+this mode). If points are arriving more quickly on one input, or if the
+time stamps for one input are much older, that input is "fast-forwarded"
+to a newer point with the best match, and any older points are
+discarded. The expected use for this is in joining streams that have the
+same frequency but that are staggered in time. If join such streams
+without specifying the time field, the join produces twice as many
+output points, with each input batch participating in two join
+operations as the inputs ratchet past each other.</p>
+<p>Although we have been imagining points with the same time stamp arriving
+simultaneously, points with the same time stamp may actually arrive at
+different times. join emulates simultaneous arrival by waiting until a
+new batch has begun arriving before processing a waiting batch (and
+coordinating this wait between inputs). join does not attempt to
+estimate or compensate for skewed input timing. It minimizes the
+difference between matched inputs by possibly fast-forwarding one of the
+inputs if it has a backlogged time stamp closer in value. It produces
+the same results on historic data and real-time data, or a combination
+of them.</p>
+<h2 id="joining-points-between-batches">Joining points between batches</h2>
+<p>Once a batch has been chosen from each input, for each pair of points
+having matching join field values, an output point is produced that
+combines the fields of the input points. In case of collisions, a
+tie-breaker remains to be specified. This is similar to an SQL join,
+with the batches being like tables, and the points in the batches being
+like rows in the tables. The input batching and join fields are usually
+specified in a way that yields a one-to-one match between points in the
+batch, and you get an output point for each input point. If this is not
+the case, you will have output points for multi-way combinations of
+input points, and you would likely apply an additional filter or
+aggregation downstream to reduce the result set.</p>
+<p>Time stamps are ignored during the relational join operation, and the
+output point is given the newest time stamp of the input batches.</p>
+<h2 id="joining-points-in-a-single-stream">Joining points in a single stream</h2>
+<p>Although there is no formal notion of a relational join for a single
+stream, it is convenient to be able to operate on the points of a single
+stream as if they come from different inputs and are merged upstream.
+join does this when applied to a single input stream: for each batch of
+points (or each group of points having the same time stamp), it
+separates them into groups based on matching join keys, and then
+generates an output point that is the union of the fields of all the
+points in a group (a many-to-many join of all the points in the group).
+The output contains one point for each time stamp and unique join key
+value within the points.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../programming_constructs/" class="btn btn-neutral float-right" title="Programming Constructs"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../overview/" class="btn btn-neutral" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../overview/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../programming_constructs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

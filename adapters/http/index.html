@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>____ HTTP Adapter - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "____ HTTP Adapter";
+    var mkdocs_page_input_path = "adapters/http.md";
+    var mkdocs_page_url = "/adapters/http/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>____ HTTP Adapter</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/http.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="http-adapter">HTTP Adapter</h1>
+<p>The <code>http</code> adapter allows reading points from, or writing points to, an http endpoint.</p>
+<div class="toc">
+<ul>
+<li><a href="#http-adapter">HTTP Adapter</a><ul>
+<li><a href="#read-http">read http</a></li>
+<li><a href="#write-http">write http</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="read-http">read http</h2>
+<p>Read points by issuing an HTTP request and pushing the response into the Juttle flowgraph, with options:</p>
+<pre><code>read http -url url
+          -method method
+          -headers headers
+          -body body
+          -timeField timeField
+          -includeHeaders true/false
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-url</code></td>
+<td>URL to issue the HTTP request at</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>-method</code></td>
+<td>HTTP method to use</td>
+<td align="right">No; default: <code>GET</code></td>
+</tr>
+<tr>
+<td><code>-headers</code></td>
+<td>headers to attach to the HTTP request in the form <code>{ key1: "value1", ..., keyN: "valueN" }</code></td>
+<td align="right">No; default: <code>{}</code></td>
+</tr>
+<tr>
+<td><code>-body</code></td>
+<td>body to send with the HTTP requests</td>
+<td align="right">No; default: <code>{}</code></td>
+</tr>
+<tr>
+<td><code>-timeField</code></td>
+<td>The name of the field to use as the time field <br><br>The specified field will be renamed to <code>time</code>in the body of the HTTP request. If the points already contain a field called <code>time</code> that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.</td>
+<td align="right">No; defaults to keeping the <code>time</code>field as is</td>
+</tr>
+<tr>
+<td><code>-includeHeaders</code></td>
+<td>When set to true the headers from the response are appended to each of the points in the response</td>
+<td align="right">No; default: <code>false</code></td>
+</tr>
+</tbody>
+</table>
+<p>Currently the <code>read http</code> adapter will automatically parse incoming data based off of the <code>content-type</code> header. Here are the currently supported content-types:</p>
+<pre><code>* `text/csv`: for [CSV](https://tools.ietf.org/html/rfc4180) data
+* `application/json` for [JSON](https://tools.ietf.org/html/rfc7159) data
+* `application/json` for [JSON lines](http://jsonlines.org/) data
+</code></pre>
+<p><em>Example</em></p>
+<p>Example of how to hit the Github Issues API and retrieve all issues from the
+beginning of time on a specific repository in the correct chronological order:</p>
+<pre><code>/*
+ * List issues on github 
+ *
+ * Input parameters:
+ * 
+ *  owner: repository owner, ie 'nodejs'
+ *  repo: repository name, ie 'node'
+ *  page: which of the n pages of issues to display, default: 1
+ *  perPage: how many results per page to pull, default 10
+ *  state: which state of the bugs you're interested in, default 'all'
+ * 
+ * For more information on the github Issues API, see: 
+ *  https://developer.github.com/v3/issues/ 
+ * 
+ */
+
+input owner: text -default 'nodejs';
+input repo: text -default 'node';
+input page: number -default 1;
+input perPage: number -default 10;
+input state: text -default 'all'; 
+
+read http -url &quot;https://api.github.com/repos/${owner}/${repo}/issues?page=${page}&amp;per_page=${perPage}&amp;state=${state}&amp;direction=asc&amp;sort=created&quot;
+          -headers { 'User-Agent': 'http-adapter-example' }
+| keep title, created_at, state, number
+| put time=Date.new(created_at)
+| view text
+</code></pre>
+
+<h2 id="write-http">write http</h2>
+<p>Write points out of the Juttle flowgraph by making an HTTP request, with options:</p>
+<pre><code>write http -url url
+           -method method
+           -headers headers
+           -maxLength length
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-url</code></td>
+<td>URL to issue the HTTP request at</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>-method</code></td>
+<td>HTTP method to use</td>
+<td align="right">No; default: <code>POST</code></td>
+</tr>
+<tr>
+<td><code>-headers</code></td>
+<td>headers to attach to the HTTP request in the form <code>{ key1: "value1", ..., keyN: "valueN" }</code></td>
+<td align="right">No; default: <code>{}</code></td>
+</tr>
+<tr>
+<td><code>-maxLength</code></td>
+<td>maximum payload length per HTTP request, as number of data points (not bytes) <br><br>If the number of data points out of the flowgraph exceeds <code>maxLength</code>then multiple HTTP requests will be sent.</td>
+<td align="right">No, default: 1 (each data point out of the flowgraph becomes one HTTP request)</td>
+</tr>
+</tbody>
+</table>
+<p>Each set of points passed along by the Juttle flowgraph will be placed into the body of an HTTP request, as defined by the specified options. The <code>maxLength</code> parameter allows to dictate how many points to push at most with each HTTP request. On failure, a warning will be displayed.</p>
+<p><em>Example</em></p>
+<p>Simple example of using the <code>http</code> adapter to create gists in GitHub:</p>
+<pre><code>/*
+ * Create a Gist on Github
+ *
+ * Input parameters:
+ * 
+ *  oauthToken: required  
+ * 
+ * For more information on the github Issues API, see: 
+ *  https://developer.github.com/v3/issues/ 
+ * 
+ * Usage:
+ * &gt; ./bin/juttle docs/examples/adapters/http_post_to_a_gist.juttle --input oauthToken=XXX
+ * 
+ */
+
+input oauthToken: text -default 'FILL_ME_IN';
+
+const date = :now:;
+
+emit -limit 5
+| put value=count()
+| put description='Test Gist ${date} #${value}',
+      public=true,
+      files = {
+        'main.juttle' : {
+            'content': 'emit -limit 1 | put message &quot;hello world&quot;'
+        } 
+      }
+| keep description, public, files
+| write http -url &quot;https://api.github.com/gists&quot;
+             -method 'POST'
+             -headers {
+                'User-Agent': 'http-adapter-example',
+                'Authorization': 'token ${oauthToken}'
+             }
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../stochastic/" class="btn btn-neutral float-right" title="____ Stochastic Adapter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../file/" class="btn btn-neutral" title="____ File Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../file/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../stochastic/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

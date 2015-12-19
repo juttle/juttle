@@ -1,0 +1,39 @@
+// On historical data, you can apply reducer to get a single computation,
+// or batch your historical data by time, then reduce per batch period.
+
+sub historical_points() {
+  emit -from :0: -limit 10 
+  | put cnt = count(), num = Math.floor(Math.random() * 10), value = "thing ${num}"
+}
+
+historical_points 
+| (
+  reduce uniq = count_unique(value) 
+  | view table -title "Historical total count of unique values";
+
+  reduce cnt=count(value) by value 
+  | view table -title "Historical list of unique values with counts";
+);
+
+historical_points 
+| batch 5 
+| reduce uniq = count_unique(value) 
+| view table -update "append" -title "Historical 5-second count of unique values";
+
+// On live streaming data, you must batch by time, then reduce per batch period.
+
+sub live_points() {
+  emit -limit 10 
+  | put cnt = count(), num = Math.floor(Math.random() * 10), value = "thing ${num}"
+}
+
+live_points 
+| batch 2 
+| (
+  reduce uniq = count_unique(value), cnt = null, value = null;
+  reduce cnt = count(value), uniq = null by value
+)
+| view table 
+  -update "append" 
+  -columnOrder "uniq","value","cnt" 
+  -title "Live 2-second counts of unique values";

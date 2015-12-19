@@ -1,0 +1,4 @@
+emit -limit 1 
+| put today_so_far = :now: - Date.startOf(:now:, "day")
+| put message = "This day has lasted " + Duration.toString(today_so_far)
+| keep message

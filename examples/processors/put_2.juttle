@@ -1,0 +1,3 @@
+emit -limit 5 
+| put foo = 5, bar = "string" 
+| view table
