@@ -111,7 +111,7 @@ read twitter -stream true 'apple'
 <a name="adapters"></a>
 ## Adapters
 
-Juttle includes support for a few basic [adapters](./docs/concepts/adapters.md)
+Juttle includes support for a few basic [adapters](./docs/adapters/index.md)
 out of the box to interact with files and some external systems. In addition,
 through the external adapter API, Juttle can be easily extended to interact with
 other storage systems or services.
