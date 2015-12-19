@@ -27,3 +27,4 @@ See the [Juttle README](https://github.com/juttle/juttle) for instructions on co
 * [postgres](https://github.com/juttle/juttle-postgres-adapter) (PostgreSQL)
 * [sqlite](https://github.com/juttle/juttle-sqlite-adapter) (SQLite)
 * [twitter](https://github.com/juttle/juttle-twitter-adapter) (Twitter)
+* [GMail](https://github.com/juttle/juttle-gmail-adapter/) (GMail)
