@@ -363,8 +363,8 @@ describe('HTTP adapter tests', function() {
         it('can use -headers to set headers', function() {
             var self = this;
             return check_juttle({
-                program: 'read http -headers { "foo":"bar", "fizz":"buzz" } ' +
-                    '                -url "' + self.url + '/headers?foo=bar&fizz=buzz"'
+                program: 'read http -headers { foo: "bar", fizz: "buzz" } ' +
+                    '               -url "' + self.url + '/headers?foo=bar&fizz=buzz"'
             })
             .then(function(result) {
                 expect(result.errors.length).equal(0);
@@ -413,14 +413,16 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        it('fails when response is non 200', function() {
-            return check_juttle({
-                program: 'read http -url "' + this.url + '/status/500"'
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(1);
-                expect(result.warnings.length).equal(0);
-                expect(result.errors[0]).to.contain('Error: internal error StatusCodeError: 500');
+        _.each([400, 500], function(status) {
+            it('fails when response has status code of ' + status, function() {
+                return check_juttle({
+                    program: 'read http -url "' + this.url + '/status/' + status + '"'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(1);
+                    expect(result.warnings.length).equal(0);
+                    expect(result.errors[0]).to.contain('Error: internal error StatusCodeError: ' + status);
+                });
             });
         });
 
