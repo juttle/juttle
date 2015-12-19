@@ -12,8 +12,8 @@ addons:
         - g++-4.8
 
 before_install:
-  - export CXX="g++-4.8"
-
+    - export CXX="g++-4.8"
+ 
 node_js:
     - '4.2'
     - '5.0'
@@ -26,4 +26,4 @@ script:
 
 notifications:
   slack:
-    secure: lwSV6wTYgL40rf1v5etOPlGDGv7KhUM+6hPglirzGzjm6kYVmpeuAoUZEYyPz3buD4YwRl3eMigdwPdmRAU0nSu19doTuofVZiJqR3VBIWiswx7c6PQOuUykHtKuf33EUTAxp3r8D/n0HDcF6ZARpnK8jJCXtu26T08WzgIb66zNpcgKLOmWl8j47/P0o748VOGelePav1BZUjqwjMH3n8KN+TlgmD+aMPKL4wAXEdqHGSObb3V90Um4aQNxFcJCSm/6kzpKzJ1BkXmejrWI07Upw+ivgzN4REQMZKbn5EVNMX6T8T/ra2wGBtWcFkvpNScgY3f5jX5qkeGWkdhYppEgfSGJG5fMO6+bU2jjDAvY2tiF7ugl7sG8JWfBvKgqH3j8x4ZF7yE9Rhi6w21ssScEmcDie/VorvaPrOuSvc0us/MjeqcYwd/V38edb3/HEuKKJl/5v55vm1n3zA/bpl1LG4a186JAlOQXftgx6nSY1TRjq2MYztMM+J69xJU71CC6VnkYnefHRQ2ER/f/ifsqbF0aZajbn9/XXbDYaAu+74Nzqz++KB0aLnp5I8fF5fKGnxHg5SNQuoLb9Q4B4hX1h2SYl2L1QgotD0LsBs6gCHYvad8hD7xQrjoaeC6JzeT6bPFvEpurBRxcuUxTzAlYBM1pQZQWY3Kpe+LFD8c=
+    secure: CIFuj0irasdPyw25bI+eimVL7RjFIVhjhjuBlHhTW5YW/G9gdR8l6KqEwrhM5gK9ff7Jf3QAyDXfJBszlRt26lD8tgjbbs9AF+DTmxN5zpDj4MiKSfxrstyyn7kCJ1ascE0cthVpu+/JgDhnSk2RMTPvUa+/p1Pl6PTjtzToEFUYMk/ovIdY1SPdllrLEZJlilbB4pCPMUuJfYqAvgF/oO7hjCmxKr+zHiUWHqy9xB1CZMVwUyQEJ2LG3E433S5f1ObCloi7oZmrO5CdBbLNEAM8DxT2ULPRL52BfmOcuzapYUOUWTtMsedCixzarC6Ux+25M9+vAxlp92pj+WlQacFCJw1YOT48raCkk8/Go8BL9pE4LyVOeuimCd7Qym5hCUTkhWrtFXeLY1WAQ1wuwOLS4LYaXO2Tb88OwO/jVzzgrwY36A+52Wa0OnNqvWiUue9S1guc70XaBi0IMVqPeykGKn9RWagUwREpXxonk5NUqo9Tjc3rEFpk77YhAQg8Ch63NQsG2gma6kA1hYP0psiwVxT579cbJXoF13vbVw2Hr673B29OT9snZv1692MQKZ0bd3+Au58woyEgMB8zkW9pevVWJgG/TWdMB35Pkks4t1+EGBatg694pbAOl+/Q7d17iL8Tm4NIpM0CV5MhRdqnqUwjDn+vP1Rm/+cVZCg=
