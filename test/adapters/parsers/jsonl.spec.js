@@ -15,7 +15,7 @@ describe('parsers/jsonl', function() {
 
     it('fails when given an invalid JSONL stream', function() {
         var jsonl = parsers.getParser('jsonl');
-        return jsonl.parseStream(fs.createReadStream(invalidFile))
+        return jsonl.parseStream(fs.createReadStream(invalidFile), function() {})
         .then(function() {
             throw Error('previous statement should have failed');
         })

@@ -15,7 +15,7 @@ describe('parsers/json', function() {
 
     it('fails when given an invalid JSON stream', function() {
         var json = parsers.getParser('json');
-        return json.parseStream(fs.createReadStream(invalidFile))
+        return json.parseStream(fs.createReadStream(invalidFile), function() {})
         .then(function() {
             throw Error('previous statement should have failed');
         })

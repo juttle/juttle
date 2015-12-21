@@ -15,7 +15,7 @@ describe('parsers/csv', function() {
 
     it('fails when given an invalid CSV stream', function() {
         var csv = parsers.getParser('csv');
-        return csv.parseStream(fs.createReadStream(invalidFile))
+        return csv.parseStream(fs.createReadStream(invalidFile), function() {})
         .then(function() {
             throw Error('previous statement should have failed');
         })
