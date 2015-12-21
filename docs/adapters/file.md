@@ -83,6 +83,9 @@ write file -file <path>
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
+`-bufferLimit`    | Maximum number of points to buffer in memory before each write to the specified file | No; defaults to 100000
+`-maxFilesize`    | Maximum size of the file being written to, limited since the entire JSON needs to fit in memory | No; defaults to 200MB
+`-flushFrequency` | How often (in number of points) to flush the points in memory out to the specified file | No; defaults to every 100 points
 
 If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.
 

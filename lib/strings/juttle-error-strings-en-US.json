@@ -117,6 +117,8 @@
     "RT-MODULE-NOT-FOUND": "Error: could not find module \"{{info.module}}\"",
     "RT-FIELD-NOT-STRING": "Error: field {{info.field}} is not a string",
     "RT-INVALID-OPTION-VALUE": "Error: Invalid {{info.option}} option value, must be one of the following: {{info.supported}}",
-    "RT-INVALID-VIEW": "Error: program refers to invalid client view \"{{info.sink}}\""
+    "RT-INVALID-VIEW": "Error: program refers to invalid client view \"{{info.sink}}\"",
+    "RT-OPTION-SHOULD-BE-POSITIVE-INTEGER": "Error: option {{info.option}} should be a positive integer",
+    "RT-OPTION-VALUE-EXCEEDED": "Error: option {{info.option}} exceeded limit of {{info.value}}{{info.extra}}"
   }
 }
