@@ -56,7 +56,7 @@ function get_times(pts) {
 }
 
 (function() {
-    var FileAdapter = require('../../../lib/adapters/file-adapter')();
+    var FileAdapter = require('../../../lib/adapters/file')();
     _(FileAdapter.read.prototype).extend({
         fetch: function() {
             var filepath = path.resolve(__dirname, this.filename);
