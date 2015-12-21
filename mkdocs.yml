@@ -119,9 +119,9 @@ pages:
    - '____ Object': 'modules/object.md'
    - '____ String': 'modules/string.md'
 
-   - 'CLI': 'reference/cli.md'
    - 'Time': 'reference/time.md'
    - 'Data Types': 'reference/data_types.md'
    - 'Operators': 'reference/operators.md'
    - 'Conditionals': 'reference/conditionals.md'
+   - 'CLI': 'reference/cli.md'
    - 'Style Guide': 'reference/style_guide.md'
