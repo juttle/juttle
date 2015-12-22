@@ -137,7 +137,7 @@ This is a partial list of adapters that can be installed separately. Make sure t
 * [PostgreSQL](https://github.com/juttle/juttle-postgres-adapter/)
 * [MySQL](https://github.com/juttle/juttle-mysql-adapter/)
 * [Twitter](https://github.com/juttle/juttle-twitter-adapter/)
-* [GMail](https://github.com/juttle/juttle-gmail-adapter/)
+* [Gmail](https://github.com/juttle/juttle-gmail-adapter/)
 
 Connections to external adapters are configured in the "adapters" section of the runtime configuration. See the [CLI reference](./docs/reference/cli.md) for specific instructions.
 
@@ -180,7 +180,7 @@ npm test
 Both are run automatically by Travis.
 
 When developing you may run into failures during linting where jscs complains
-about your coding style and an easy way to fix those files is to simply run 
+about your coding style and an easy way to fix those files is to simply run
 `jscs --fix test` or `jscs --fix lib` from the root directory of the project.
-After jscs fixes things you should proceed to check that those changes are 
+After jscs fixes things you should proceed to check that those changes are
 reasonable as auto-fixing may not produce the nicest of looking code.

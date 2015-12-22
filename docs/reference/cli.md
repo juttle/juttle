@@ -226,7 +226,7 @@ The first module file found is used.
 
 ## Configuring Adapters
 
-Connections to external adapters are configured in the "adapters" section of the configuration. Each entry should be the name of the adapter along with any adapter-specific configuration. By default, the CLI will try to load the adapter by executing `require(adapter)` but if the `path` attribute exists then it will try to load the adapter from the specified path.
+Connections to [external adapters](../adapters/index.md) are configured in the "adapters" section of the configuration. Each entry should be the name of the adapter along with any adapter-specific configuration. By default, the CLI will try to load the adapter by executing `require(adapter)` but if the `path` attribute exists then it will try to load the adapter from the specified path.
 
 For example, to configure the Elasticsearch adapter, first run `npm install juttle-elastic-adapter` and add the following to your `juttle-config` file, updating the address and port to point to the location of your Elasticsearch cluster.
 

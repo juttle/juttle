@@ -15,7 +15,7 @@ markdown_extensions:
     - markdown_include.include
     - unimoji:
         span_class: 'custom_emoji'
-        emoji: 
+        emoji:
          '<img alt="bulb" src="/images/emoji/bulb.png" width="30" height="30"/>': [ ':bulb:' ]
          '<img alt="construction" src="/images/emoji/construction.png" width="30" height="30"/>': [ ':construction:' ]
          '<img alt="warning" src="/images/emoji/warning.png" width="30" height="30"/>': [ ':warning:' ]
@@ -54,7 +54,7 @@ pages:
 
    - '____ Standard Library': 'concepts/juttle_standard_library.md'
 
-- Reference: 
+- Reference:
 
    - 'Sources': 'sources/index.md'
    - '____ emit': 'sources/emit.md'
@@ -123,4 +123,5 @@ pages:
    - 'Data Types': 'reference/data_types.md'
    - 'Operators': 'reference/operators.md'
    - 'Conditionals': 'reference/conditionals.md'
+   - 'CLI': 'reference/cli.md'
    - 'Style Guide': 'reference/style_guide.md'
