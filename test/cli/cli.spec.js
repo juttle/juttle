@@ -279,6 +279,40 @@ describe('Juttle CLI Tests', function() {
                 });
         });
 
+        it('does not interleave output from multiple text views', function() {
+            return runJuttle(['-e', 'emit -from :2015-01-01: -limit 2 | (put sink = 1 | view text; put sink = 2 | view text)'])
+                .then(function(result) {
+                    expect(result.stdout).equals(
+'[\n' +
+'{"time":"2015-01-01T00:00:00.000Z","sink":1},\n' +
+'{"time":"2015-01-01T00:00:01.000Z","sink":1}\n' +
+']\n' +
+'[\n' +
+'{"time":"2015-01-01T00:00:00.000Z","sink":2},\n' +
+'{"time":"2015-01-01T00:00:01.000Z","sink":2}\n' +
+']\n');
+                    expect(result.code).to.equal(0);
+                    expect(result.stderr).to.equal('');
+                });
+        });
+
+        it('interleaves output from multiple text views in progressive mode', function() {
+            return runJuttle(['-e', 'emit -from :2015-01-01: -limit 2 | (put sink = 1 | view text -progressive true; put sink = 2 | view text -progressive true)'])
+                .then(function(result) {
+                    expect(result.stdout).equals(
+'[\n' +
+'{"time":"2015-01-01T00:00:00.000Z","sink":1}[\n' +
+'{"time":"2015-01-01T00:00:00.000Z","sink":2},\n' +
+'{"time":"2015-01-01T00:00:01.000Z","sink":1},\n' +
+'{"time":"2015-01-01T00:00:01.000Z","sink":2}\n' +
+']\n' +
+'\n' +
+']\n');
+                    expect(result.code).to.equal(0);
+                    expect(result.stderr).to.equal('');
+                });
+        });
+
         it('can execute juttle with text inputs', function() {
             return runJuttle([
                 '--input',
