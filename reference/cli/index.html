@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>CLI - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "CLI";
+    var mkdocs_page_input_path = "reference/cli.md";
+    var mkdocs_page_url = "/reference/cli/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">CLI</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>CLI</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/reference/cli.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="juttle-the-juttle-command-line"><code>juttle</code>: The Juttle Command Line</h1>
+<p><code>juttle</code> is the command line interface for running juttle programs. It reads data from configured backends via adapters, executes juttle programs, and provides terminal-oriented visualizations that allow you to view the output of programs.</p>
+<p>For more complex visualizations, you can use <a href="https://github.com/juttle/outrigger">outrigger</a>, which provides browser-based visualizations and support for <a href="../../concepts/inputs/">input controls</a>.</p>
+<h2 id="usage">Usage</h2>
+<p><code>juttle</code> is run as follows:</p>
+<pre><code>usage: juttle [--version] [--mode &lt;mode&gt;] [--config &lt;config&gt;] [--color/--no-color]
+              [--show-locations] [--optimize] [--input name=val] [juttle-file]
+     --version show juttle CLI version
+     --mode &lt;mode&gt;: one of &quot;parse&quot;, &quot;semantic&quot;, &quot;build&quot;, &quot;flowgraph&quot;, &quot;compile&quot;, &quot;run&quot;
+     --config &lt;config&gt;: path to the juttle interpreter configuration file
+     --optimize runs optimization
+     --show-locations displays locations in the parse tree
+     --color/--no-color turns CLI output coloring on and off
+     --input name=val defines input `name` with value `val`
+     --e &lt;juttle-src&gt;: run the juttle source and exit
+     [juttle-file]: run the provided juttle file and exit
+</code></pre>
+
+<p>Running <code>juttle</code> with no arguments launches a read-eval-print loop with the prompt:</p>
+<pre><code>juttle&gt;
+</code></pre>
+
+<h2 id="ways-to-run-juttle-programs">Ways to run juttle programs</h2>
+<p><code>juttle</code> provides 3 different ways to run juttle programs:</p>
+<p>Directly within the CLI:</p>
+<pre><code>juttle&gt; emit -limit 1 | view table
+┌────────────────────────────────────┐
+│ time                               │
+├────────────────────────────────────┤
+│ 2015-12-18T21:40:18.555Z           │
+└────────────────────────────────────┘
+</code></pre>
+
+<p>From the command line, via the <code>-e &lt;juttle source&gt;</code> command line argument:</p>
+<pre><code>$ juttle -e 'emit -limit 1 | view table'
+┌────────────────────────────────────┐
+│ time                               │
+├────────────────────────────────────┤
+│ 2015-12-18T21:40:18.555Z           │
+└────────────────────────────────────┘
+</code></pre>
+
+<p>From a file, by naming a file on the command line:</p>
+<pre><code>$ cat my-program.juttle
+emit -limit 1 | view table
+$ juttle my-program.juttle
+┌────────────────────────────────────┐
+│ time                               │
+├────────────────────────────────────┤
+│ 2015-12-18T21:40:18.555Z           │
+└────────────────────────────────────┘
+</code></pre>
+
+<h2 id="cli-features">CLI Features</h2>
+<h3 id="command-line-editing">Command line editing</h3>
+<p>You can edit command lines via the typical set of editor keys (arrows plus <code>^f</code>/<code>^b</code>/<code>^a</code>/<code>^e</code>/etc.)</p>
+<h3 id="command-history">Command history</h3>
+<p><code>juttle</code> maintains a command history. You can navigate through this history via the typical set of editor keys (arrows plus <code>^n</code>/<code>^p</code>/etc.). This history is saved to <code>$HOME/.juttle/history</code>.</p>
+<h3 id="multi-line-input">Multi-line input</h3>
+<p>To run multi-line juttle programs from the read-eval-print loop, begin a multi-line program with a <code>&lt;</code> and finish it with a <code>.</code>:</p>
+<pre><code>juttle&gt; &lt;
+Starting multi-line input. End input with a line containing a single &quot;.&quot;:
+emit -limit 1
+   | view table
+.
+┌────────────────────────────────────┐
+│ time                               │
+├────────────────────────────────────┤
+│ 2015-12-18T22:06:36.141Z           │
+└────────────────────────────────────┘
+</code></pre>
+
+<h3 id="help">Help</h3>
+<p>Typing <code>help</code> provides a summary of the commands available:</p>
+<pre><code>juttle&gt; help
+usage:
+mode {mode} - change mode
+src {path} - source file as juttle program
+&lt; - start multi-line input
+{juttle} - evaluate juttle program
+. - end multi-line input
+exit, \q - close shell and exit
+help, \? - print this usage
+clear, \c - clear the terminal screen
+</code></pre>
+
+<h2 id="visual-sinks">Visual Sinks</h2>
+<h3 id="table">table</h3>
+<p><code>juttle</code> supports <a href="../../sinks/view_table/">table</a> and <a href="../../sinks/view_text/">text</a> visual sinks:</p>
+<pre><code>juttle&gt; emit -limit 1 | view table
+┌────────────────────────────────────┐
+│ time                               │
+├────────────────────────────────────┤
+│ 2015-12-18T22:09:44.478Z           │
+└────────────────────────────────────┘
+</code></pre>
+
+<h3 id="text">text</h3>
+<pre><code>juttle&gt; emit -limit 1 | view text
+[
+{&quot;time&quot;:&quot;2015-12-18T22:10:12.101Z&quot;}
+]
+juttle&gt;
+</code></pre>
+
+<p>If a program does not contain a visual sink, <code>juttle</code> automatically adds one based on the value of the <code>implicit_sink</code> configuration item (see below).</p>
+<h2 id="errors">Errors</h2>
+<p>If your juttle program contains syntax or runtime errors, <code>juttle</code> provides details on the error and highlights the section of the program that led to the error:</p>
+<pre><code>juttle&gt; emit limit 1 | view table
+&lt;input&gt;:1:6:
+1:emit limit 1 | view table
+^
+Expected &quot;;&quot;, &quot;|&quot; or option but &quot;l&quot; found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+</code></pre>
+
+<pre><code>juttle&gt; import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
+&lt;input&gt;:1:1:
+1:import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Error: could not find module &quot;no-such-module.juttle&quot; (RT-MODULE-NOT-FOUND)
+</code></pre>
+
+<pre><code>juttle&gt; import 'm1.juttle' as mymodule; emit -limit 1 | table;
+In module included from &lt;input&gt;:
+m1.juttle:1:8:
+1:export consty foo=bar;
+^
+Expected &quot;function&quot;, &quot;reducer&quot;, &quot;sub&quot; or processor but &quot;c&quot; found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+</code></pre>
+
+<h2 id="configuration">Configuration</h2>
+<p>The CLI tries to read runtime configuration from various locations on
+the filesystem, in the following order:</p>
+<ul>
+<li><strong>&lt;cwd&gt;/.juttle-config.json</strong></li>
+<li><strong>&lt;cwd&gt;/.juttle-config.js</strong></li>
+<li><strong>&lt;$HOME&gt;/.juttle/config.json</strong></li>
+<li><strong>&lt;$HOME&gt;/.juttle/config.js</strong></li>
+</ul>
+<p>The <strong>.json</strong> files are processed as JSON while the <strong>.js</strong> files are loaded
+with <code>require</code> and therefore need a single <code>module.exports</code> entry, see
+<a href="https://nodejs.org/api/modules.html">here</a> more details on node module
+exports.</p>
+<p>Generally <code>juttle-config</code> is used to configure adapters to various
+backends. The only <code>juttle</code>-specific configuration item is
+<code>implicit_sink</code>, which defines what the default sink is at the end of
+your flowgraph when not explicitly specified. For example if you set
+it to <code>text</code> like so:</p>
+<p><strong>.juttle-config.json</strong>:</p>
+<pre><code>{
+&quot;implicit_sink&quot;: &quot;text&quot;
+}
+</code></pre>
+
+<p>And then executed:</p>
+<pre><code>juttle&gt; emit -limit 10
+</code></pre>
+
+<p>You would get:</p>
+<pre><code>[
+{&quot;time&quot;:&quot;2015-12-07T22:32:06.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:07.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:08.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:09.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:10.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:11.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:12.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:13.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:14.483Z&quot;},
+{&quot;time&quot;:&quot;2015-12-07T22:32:15.483Z&quot;}
+]
+</code></pre>
+
+<h2 id="module-resolution">Module Resolution</h2>
+<p>When juttle programs contain <a href="../../concepts/programming_constructs/#modules">modules</a>, <code>juttle</code> resolves modules by searching the following paths, in this order:</p>
+<p><em>The current working directory
+</em>Any paths listed in the environment variable <code>JUTTLE_MODULE_PATH</code>, which is a colon-separated list of directories.</p>
+<p>The first module file found is used.</p>
+<h2 id="configuring-adapters">Configuring Adapters</h2>
+<p>Connections to <a href="../../adapters/">external adapters</a> are configured in the "adapters" section of the configuration. Each entry should be the name of the adapter along with any adapter-specific configuration. By default, the CLI will try to load the adapter by executing <code>require(adapter)</code> but if the <code>path</code> attribute exists then it will try to load the adapter from the specified path.</p>
+<p>For example, to configure the Elasticsearch adapter, first run <code>npm install juttle-elastic-adapter</code> and add the following to your <code>juttle-config</code> file, updating the address and port to point to the location of your Elasticsearch cluster.</p>
+<pre><code>{
+    &quot;adapters&quot;: {
+        &quot;elastic&quot;: {
+            &quot;address&quot;: &quot;localhost&quot;,
+            &quot;port&quot;: 9200
+        }
+    }
+}
+</code></pre>
+
+<h2 id="logging">Logging</h2>
+<p><code>juttle</code> uses <a href="http://stritti.github.io/log4js/">log4js</a> for logging, and can be controlled via the standard <code>log4js.json</code> file. In addition, unless the environment variable <code>DEBUG</code> is set to 1, <code>juttle</code> sets the default log level to 'info'.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../style_guide/" class="btn btn-neutral float-right" title="Style Guide"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../conditionals/" class="btn btn-neutral" title="Conditionals"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../conditionals/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../style_guide/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
