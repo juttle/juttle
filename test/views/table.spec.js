@@ -1,13 +1,13 @@
 var expect = require('chai').expect;
-var TableSink = require('../../lib/sinks').TableSink;
+var TableView = require('../../lib/views').TableView;
 var streams = require('memory-streams');
 
 
-describe('table sink', function () {
+describe('table view', function () {
 
     it('outputs a simple table', function() {
         var stream = new streams.WritableStream();
-        var table = new TableSink({
+        var table = new TableView({
             fstream: stream,
         },{
             color: false
@@ -30,7 +30,7 @@ describe('table sink', function () {
 
     it('respects -columnOrder', function() {
         var stream = new streams.WritableStream();
-        var table = new TableSink({
+        var table = new TableView({
             fstream: stream,
             columnOrder: ['value', 'time']
         },{
@@ -54,7 +54,7 @@ describe('table sink', function () {
 
     it('orders columns correctly', function() {
         var stream = new streams.WritableStream();
-        var table = new TableSink({
+        var table = new TableView({
             fstream: stream,
         },{
             color: false
@@ -77,7 +77,7 @@ describe('table sink', function () {
 
     it('does not truncate wide column headers', function() {
         var stream = new streams.WritableStream();
-        var table = new TableSink({
+        var table = new TableView({
             fstream: stream,
         },{
             color: false

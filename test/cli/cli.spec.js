@@ -112,13 +112,13 @@ describe('Juttle CLI Tests', function() {
             });
         });
 
-        it('returns an error for a program with an unknown sink', function() {
+        it('returns an error for a program with an unknown view', function() {
             return runJuttle([
                 '-e',
-                'emit -limit 1 | view nosink',
+                'emit -limit 1 | view noview',
             ]).then(function(result) {
                 expect(result.code).to.equal(1);
-                expect(result.stderr).to.include('Error: program refers to invalid client view \"nosink\" (RT-INVALID-VIEW)');
+                expect(result.stderr).to.include('Error: program refers to invalid client view \"noview\" (RT-INVALID-VIEW)');
             });
         });
 

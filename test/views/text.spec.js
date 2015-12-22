@@ -1,12 +1,12 @@
 var expect = require('chai').expect;
-var TextSink = require('../../lib/sinks').TextSink;
+var TextView = require('../../lib/views').TextView;
 var streams = require('memory-streams');
 
-describe('Text sink', function () {
+describe('Text view', function () {
 
     it('default outputs JSON', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             fstream: stream
         });
 
@@ -16,25 +16,25 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         expect(JSON.parse(stream.toString())).to.deep.equal(data);
     });
 
     it('no input produces a valid JSON response', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             fstream: stream
         });
 
-        textSink.eof();
+        textView.eof();
         expect(JSON.parse(stream.toString())).to.deep.equal([]);
     });
 
 
     it('-format "json" -indent 4 produces valid JSON output', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'json',
             indent: 4,
             fstream: stream
@@ -45,15 +45,15 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         var expected = JSON.stringify(data, null, 4) + '\n';
         expect(stream.toString()).to.equal(expected);
     });
 
     it('-format "json" produces valid JSON output', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'json',
             fstream: stream
         });
@@ -63,14 +63,14 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         expect(JSON.parse(stream.toString())).to.deep.equal(data);
     });
 
     it('-format "csv" produces valid CSV output', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'csv',
             fstream: stream
         });
@@ -81,8 +81,8 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         expect(stream.toString().split('\n')).to.deep.equal([
             '"time","value"',
             '"2014-01-01T00:00:01.000Z","1"',
@@ -94,7 +94,7 @@ describe('Text sink', function () {
 
     it('-format "jsonl" produces valid JSON lines output', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'jsonl',
             fstream: stream
         });
@@ -105,8 +105,8 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         var output = stream.toString().split('\n');
         expect(JSON.parse(output[0])).to.deep.equal({ time: '2014-01-01T00:00:01.000Z', value: 1});
         expect(JSON.parse(output[1])).to.deep.equal({ time: '2014-01-01T00:00:02.000Z', value: 2});
@@ -115,7 +115,7 @@ describe('Text sink', function () {
 
     it('-format "raw" produces valid raw debug output', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'raw',
             fstream: stream
         });
@@ -126,8 +126,8 @@ describe('Text sink', function () {
             { time: '2014-01-01T00:00:03.000Z', value: 3 },
         ];
 
-        textSink.consume(data);
-        textSink.eof();
+        textView.consume(data);
+        textView.eof();
         var output = stream.toString().split('\n');
         expect(JSON.parse(output[0])).to.deep.equal({ time: '2014-01-01T00:00:01.000Z', value: 1});
         expect(JSON.parse(output[1])).to.deep.equal({ time: '2014-01-01T00:00:02.000Z', value: 2});
@@ -137,19 +137,19 @@ describe('Text sink', function () {
 
     it('-format "raw" with -marks true produces correct marks', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'raw',
             marks: true,
             fstream: stream
         });
 
-        textSink.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
-        textSink.mark();
-        textSink.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
-        textSink.mark();
-        textSink.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
-        textSink.mark();
-        textSink.eof();
+        textView.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
+        textView.mark();
+        textView.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
+        textView.mark();
+        textView.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
+        textView.mark();
+        textView.eof();
 
         var output = stream.toString().split('\n');
         expect(JSON.parse(output[0])).to.deep.equal({ time: '2014-01-01T00:00:01.000Z', value: 1});
@@ -163,19 +163,19 @@ describe('Text sink', function () {
 
     it('-format "raw" with -ticks true produces correct ticks', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'raw',
             ticks: true,
             fstream: stream
         });
 
-        textSink.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
-        textSink.tick();
-        textSink.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
-        textSink.tick();
-        textSink.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
-        textSink.tick();
-        textSink.eof();
+        textView.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
+        textView.tick();
+        textView.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
+        textView.tick();
+        textView.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
+        textView.tick();
+        textView.eof();
 
         var output = stream.toString().split('\n');
         expect(JSON.parse(output[0])).to.deep.equal({ time: '2014-01-01T00:00:01.000Z', value: 1});
@@ -189,22 +189,22 @@ describe('Text sink', function () {
 
     it('-format "raw" can display ticks and marks correctly', function() {
         var stream = new streams.WritableStream();
-        var textSink = new TextSink({
+        var textView = new TextView({
             format: 'raw',
             marks: true,
             ticks: true,
             fstream: stream
         });
 
-        textSink.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
-        textSink.tick();
-        textSink.mark();
-        textSink.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
-        textSink.tick();
-        textSink.mark();
-        textSink.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
-        textSink.tick();
-        textSink.eof();
+        textView.consume([{ time: '2014-01-01T00:00:01.000Z', value: 1 }]);
+        textView.tick();
+        textView.mark();
+        textView.consume([{ time: '2014-01-01T00:00:02.000Z', value: 2 }]);
+        textView.tick();
+        textView.mark();
+        textView.consume([{ time: '2014-01-01T00:00:03.000Z', value: 3 }]);
+        textView.tick();
+        textView.eof();
 
         var output = stream.toString().split('\n');
         expect(JSON.parse(output[0])).to.deep.equal({ time: '2014-01-01T00:00:01.000Z', value: 1});
