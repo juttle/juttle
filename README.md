@@ -5,7 +5,7 @@
 
 Juttle is an analytics system for developers built upon
 a stream-processing core and a
-[dataflow language](./docs/concepts/dataflow.md)
+[dataflow language](http://juttle.github.io/juttle/concepts/dataflow)
 that tightly integrates with
 [streaming visualizations](http://github.com/juttle/juttle-viz).
 The Juttle language lets you query,
@@ -14,9 +14,9 @@ big data backends or other web services.
 You read data from a backend service, analyze it using
 *dataflow processors*, and send output to visualizations in the browser, write to a big-data store, post to http endpoints (e.g. alert to slack, pagerduty), etc.
 
-See the [docs](./docs) to learn more about [why juttle exists](./docs/index.md),
-get an [overview](./docs/concepts/overview.md) of the language, learn about the
-[dataflow features](./docs/concepts/dataflow.md) and how to [program in juttle](./docs/concepts/programming_constructs.md), and more.
+See the [docs](http://juttle.github.io/juttle/) to learn more about [why juttle exists](http://juttle.github.io/juttle/),
+get an [overview](http://juttle.github.io/juttle/concepts/overview) of the language, learn about the
+[dataflow features](http://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](http://juttle.github.io/juttle/concepts/programming_constructs), and more.
 
 ## Installation
 
@@ -52,7 +52,7 @@ To use Juttle as a JavaScript library, install the juttle package locally as par
 $ npm install juttle
 ```
 
-See the [command line reference](./docs/reference/cli.md) for more information about how to configure use the Juttle CLI and how to configure.
+See the [command line reference](http://juttle.github.io/juttle/reference/cli) for more information about how to configure use the Juttle CLI and how to configure.
 
 ## Examples
 
@@ -112,7 +112,7 @@ read twitter -stream true 'apple'
 <a name="adapters"></a>
 ## Adapters
 
-Juttle includes support for a few basic [adapters](./docs/adapters/index.md)
+Juttle includes support for a few basic [adapters](http://juttle.github.io/juttle/adapters)
 out of the box to interact with files and some external systems. In addition,
 through the external adapter API, Juttle can be easily extended to interact with
 other storage systems or services.
@@ -122,9 +122,9 @@ other storage systems or services.
 These adapters can be used in Juttle programs directly without special
 configuration.
 
-* [file](./docs/adapters/file.md)
-* [http](./docs/adapters.http.md)
-* [stochastic](./docs/adapters/stochastic.md)
+* [file](http://juttle.github.io/juttle/adapters/file)
+* [http](http://juttle.github.io/juttle/adapters/http)
+* [stochastic](http://juttle.github.io/juttle/adapters/stochastic)
 
 #### External
 
@@ -139,7 +139,7 @@ This is a partial list of adapters that can be installed separately. Make sure t
 * [Twitter](https://github.com/juttle/juttle-twitter-adapter/)
 * [Gmail](https://github.com/juttle/juttle-gmail-adapter/)
 
-Connections to external adapters are configured in the "adapters" section of the runtime configuration. See the [CLI reference](./docs/reference/cli.md) for specific instructions.
+Connections to external adapters are configured in the "adapters" section of the runtime configuration. See the [CLI reference](http://juttle.github.io/juttle/reference/cli) for specific instructions.
 
 <a name="outrigger"></a>
 ## Visualizations with Outrigger
