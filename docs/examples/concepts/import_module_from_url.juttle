@@ -1,0 +1,4 @@
+import 'https://gist.githubusercontent.com/jut-test/273396ac4efcc838687b/raw/dde7c96c7560c38a29881d0345fc2d5727ee082e/main.juttle'
+  as this_module;
+emit
+| this_module.stamper -mark "test"
