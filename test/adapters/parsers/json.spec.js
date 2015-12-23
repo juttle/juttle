@@ -5,6 +5,8 @@ var path = require('path');
 
 describe('parsers/json', function() {
     var pointFile = path.resolve(__dirname, 'input/json/point.json');
+    var pointWithArrayFile = path.resolve(__dirname, 'input/json/point_with_nested_array.json');
+    var pointsWithArrayFile = path.resolve(__dirname, 'input/json/points_with_nested_arrays.json');
     var pointsFile = path.resolve(__dirname, 'input/json/points.json');
     var invalidFile = path.resolve(__dirname, 'input/json/invalid.json');
 
@@ -52,6 +54,48 @@ describe('parsers/json', function() {
                 { 'time': '2014-01-01T00:00:01.000Z', 'foo': 1 },
                 { 'time': '2014-01-01T00:00:02.000Z', 'foo': 2 },
                 { 'time': '2014-01-01T00:00:03.000Z', 'foo': 3 }
+            ]]);
+        });
+    });
+
+    it('can parse a JSON object with nested arrrays correctly', function() {
+        var json = parsers.getParser('json');
+        var results = [];
+        return json.parseStream(fs.createReadStream(pointWithArrayFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(1);
+            expect(results).to.deep.equal([[
+                {
+                    'time': '2014-01-01T00:00:00.000Z',
+                    'foo': [
+                        {'fizz1': 'buzz'},
+                        {'fizz2': 'buzz'},
+                        {'fizz3': 'buzz'}
+                    ]
+                }
+            ]]);
+        });
+    });
+
+    it('can parse a JSON array with nested arrrays correctly', function() {
+        var json = parsers.getParser('json');
+        var results = [];
+        return json.parseStream(fs.createReadStream(pointsWithArrayFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(1);
+            expect(results).to.deep.equal([[
+                {
+                    'time': '2014-01-01T00:00:00.000Z',
+                    'foo': [ {'fizz1': 'buzz1'} ]
+                },
+                {
+                    'time': '2014-01-01T00:00:01.000Z',
+                    'foo': [ {'fizz2': 'buzz2'} ]
+                }
             ]]);
         });
     });
