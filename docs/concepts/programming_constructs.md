@@ -204,13 +204,29 @@ _Example: import by filename_
 This example assumes that the program with exports is saved at path
 `docs/examples/concepts/export_module.juttle`.
 
-```
+```juttle-no-syntax-check
 // This program is runnable from CLI from the juttle repo root,
-// node ./bin/juttle docs/examples/concepts/import_module.juttle
+// juttle docs/examples/concepts/import_module.juttle
 
 import 'docs/examples/concepts/export_module.juttle' as my_module;
 emit
 | my_module.stamper -mark 'test'
+```
+
+_Example: import by URL_
+
+This example assumes that the exported module is saved as a
+[github gist](https://gist.githubusercontent.com/jut-test/273396ac4efcc838687b/)
+containing `main.juttle` file.
+
+```juttle-no-syntax-check
+// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_from_url.juttle
+
+import 'https://gist.githubusercontent.com/jut-test/273396ac4efcc838687b/raw/dde7c96c7560c38a29881d0345fc2d5727ee082e/main.juttle'
+  as this_module;
+emit
+| this_module.stamper -mark "test"
 ```
 
 Subgraphs
