@@ -30,6 +30,7 @@ pages:
 
 - Introduction:
    - 'About': 'index.md'
+   - 'Usage Examples': 'use_cases.md'
    - '____ Docs README': 'README.md'
    - '____ Doc Template': 'doc_templates/template.md'
    - '____ Juttle Doc Template': 'doc_templates/juttle_TEMPLATE.md'

@@ -2,6 +2,16 @@
 
 Welcome to the documentation for [Juttle](https://github.com/juttle/juttle/), a dataflow programming language!
 
+## Project Info
+
+See the [GitHub project README](http://github.com/juttle/juttle) for installation and setup instructions, and if you wish to contribute.
+
+If you discover a bug in Juttle or these docs, please [open a GitHub issue](https://github.com/juttle/juttle/issues/new) or talk to us on [Gitter](https://gitter.im/juttle/juttle).
+
+Our public [Waffle board](https://waffle.io/juttle/juttle) tracks GitHub issues and PRs in a single place.
+
+This documentation was produced with [mkdocs](http://mkdocs.org), see details in [README](README.md).
+
 ## About Juttle
 
 Juttle is an analytics system and language for developers built upon
@@ -66,6 +76,7 @@ Here are some ideas of what you can do with Juttle:
   your data before implementing them in detail and in production using other
   stream-processing systems like Spark or Storm.
 
+Refer to the [Usage Examples](use_cases.md) section for more specific examples with Juttle programs and demos.
 
 ## Stream-processing Systems
 
@@ -87,20 +98,3 @@ the Juttle compiler and runtime to generate scala in addition to
 javascript as a target output langauge and leverage the Spark infrastructure
 for Juttle programs.
 
-## How To Navigate
-
-Use the left sidebar menu for navigating the sections. Getting started with the [Juttle Overview](concepts/overview.md) should orient you reasonably well; the rest of the Concepts section has background information on the language design.
-
-The search feature (powered by lunr.js in mkdocs) can be helpful too, see the search box in upper left corner.
-
-Juttle examples are provided as code snippets; copy them to run in your own environment.
-
-:construction: Embedded Juttle examples are coming soon.
-
-## Maintaining Docs
-
-:baby_symbol: These docs are just coming together.
-
-If you find a problem in the documentation, members of juttle GitHub project can edit the articles inline by following "Edit on GitHub" link. Small obvious fixes may be committed directly to master. If discussion is needed, please put up a PR on a branch.
-
-:information_source: This documentation was produced with [mkdocs](http://mkdocs.org), see details in [README](README.md).
