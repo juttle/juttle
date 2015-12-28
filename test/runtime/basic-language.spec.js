@@ -24,37 +24,30 @@ describe('Juttle basic language tests', function() {
         });
     });
 
-    it('succeeds with a source and single sink and a different data set', function() {
-        return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | view sink1',
-            expect_file: 'expected/single-sink-direct-non-monotonic.json',
-        });
-    });
-
     it('succeeds with a source and two sinks', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | (view sink1; view sink2)',
+            program: 'read file -file "input/simple.json" | (view sink1; view sink2)',
             expect_file: 'expected/two-sinks-mirrored.json',
         });
     });
 
     it('succeeds with a read file -file, a put command, and a single sink', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+1.2 | view sink1',
+            program: 'read file -file "input/simple.json" | put snarks=#rate+1.2 | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
 
     it('succeeds with a const, read file -file, a put command, and a single sink', function() {
         return check_juttle({
-            program: 'const foo=1.2; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
+            program: 'const foo=1.2; read file -file "input/simple.json" | put snarks=#rate+foo | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
 
     it('fails if a semicolon is missing after const declaration', function() {
         return check_juttle({
-            program: 'const foo=1.2 read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
+            program: 'const foo=1.2 read file -file "input/simple.json" | put snarks=#rate+foo | view sink1',
         })
         .then(function() {
             throw new Error("this should fail");
@@ -92,7 +85,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if an undeclared const is initialized (in flowgraph context)', function() {
         return check_juttle({
-            program: 'foo=1.2; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
+            program: 'foo=1.2; read file -file "input/simple.json" | put snarks=#rate+foo | view sink1',
         })
         .then(function() {
             throw new Error("this should fail");
@@ -105,7 +98,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if an undeclared const is initialized (in function context)', function() {
         return check_juttle({
-            program: 'function f() { foo=1.2; } read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
+            program: 'function f() { foo=1.2; } read file -file "input/simple.json" | put snarks=#rate+foo | view sink1',
         })
         .then(function() {
             throw new Error("this should fail");
@@ -118,7 +111,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if a const is not initialized', function() {
         return check_juttle({
-            program: 'const foo; read file -file "input/simple-non-monotonic-time.json" | view sink1',
+            program: 'const foo; read file -file "input/simple.json" | view sink1',
         })
         .then(function() {
             throw new Error("this should fail");
@@ -157,7 +150,7 @@ describe('Juttle basic language tests', function() {
 
     it('succeeds with multiple consts, simple artithmetic, read file -file, a put command, and a single sink', function() {
         return check_juttle({
-            program: 'const bar=1.2; const baz=2; const foo=bar*baz; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+(foo/baz) | view sink1',
+            program: 'const bar=1.2; const baz=2; const foo=bar*baz; read file -file "input/simple.json" | put snarks=#rate+(foo/baz) | view sink1',
             expect_file: 'expected/put-expression.json'
         });
     });
@@ -288,7 +281,7 @@ describe('Juttle basic language tests', function() {
 
     it('still works with no extra spaces', function() {
         return check_juttle({
-            program: 'const bar=1.2;const baz=2;const foo=bar*baz;read file -file "input/simple-non-monotonic-time.json"|put snarks=#grumpkins+(foo/baz)|view sink1',
+            program: 'const bar=1.2;const baz=2;const foo=bar*baz;read file -file "input/simple.json"|put snarks=#rate+(foo/baz)|view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
@@ -296,7 +289,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if an expression has a syntax error (javascript section)', function() {
         return check_juttle({
-            program: 'const foo = 5+; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
+            program: 'const foo = 5+; read file -file "input/simple.json" | put snarks=#rate+foo | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -311,7 +304,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if an expression has a syntax error (pipeline section)', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+ | view sink1',
+            program: 'read file -file "input/simple.json" | put snarks=#rate+ | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -325,7 +318,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if when arguments are missing from procs', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | pass | put | view sink1',
+            program: 'read file -file "input/simple.json" | pass | put | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -340,7 +333,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if a pipe character is missing', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | put funs=#funkins+1.2  put snarks=#grumpkins+1.2 | view sink1',
+            program: 'read file -file "input/simple.json" | put funs=#funkins+1.2  put snarks=#rate+1.2 | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -354,7 +347,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if a pipe character is missing before the sink', function() {
         return check_juttle({
-            program: 'read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+1.2  view sink1',
+            program: 'read file -file "input/simple.json" | put snarks=#rate+1.2  view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -372,9 +365,9 @@ describe('Juttle basic language tests', function() {
             program:
                 'const foo=1.2;' +
                 'sub myproc() {' +
-                '  put snarks=#grumpkins + foo' +
+                '  put snarks=#rate + foo' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| myproc | view sink1',
+                'read file -file "input/simple.json"| myproc | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
@@ -386,9 +379,9 @@ describe('Juttle basic language tests', function() {
                 'const foo=2.4;' +
                 'sub myproc() {' +
                 '  const foo=1.2;' +
-                '  put snarks=*"grumpkins" + foo' +
+                '  put snarks=*"rate" + foo' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| myproc | view sink1',
+                'read file -file "input/simple.json"| myproc | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
@@ -401,7 +394,7 @@ describe('Juttle basic language tests', function() {
                 '  var foo=1.2;' +
                 '  return foo;' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| put snarks=#grumpkins + myfunc() | view sink1',
+                'read file -file "input/simple.json"| put snarks=#rate + myfunc() | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
@@ -413,7 +406,7 @@ describe('Juttle basic language tests', function() {
                 'function myfunc(foo) {' +
                 '  return foo * 2;' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| put snarks=#grumpkins + myfunc(0.6) | view sink1',
+                'read file -file "input/simple.json"| put snarks=#rate + myfunc(0.6) | view sink1',
             expect_file: 'expected/put-expression.json',
         });
     });
@@ -474,9 +467,9 @@ describe('Juttle basic language tests', function() {
             program:
                 'const foo=1.2;' +
                 'sub foo() {' +
-                '  put snarks=#grumpkins + foo' +
+                '  put snarks=#rate + foo' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| foo() | view sink1',
+                'read file -file "input/simple.json"| foo() | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -492,9 +485,9 @@ describe('Juttle basic language tests', function() {
             program:
                 'const foo=bar;' +
                 'sub myproc() {' +
-                '  put snarks=#grumpkins + foo' +
+                '  put snarks=#rate + foo' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| myproc | view sink1',
+                'read file -file "input/simple.json"| myproc | view sink1',
             expect_file: 'expected/put-expression.json',
         })
         .then(function(data) {
@@ -514,9 +507,9 @@ describe('Juttle basic language tests', function() {
                 'const foo=1.2;' +
                 'const foo=2.4;' +
                 'sub myproc() {' +
-                '  put snarks=#grumpkins + foo' +
+                '  put snarks=#rate + foo' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| myproc | view sink1',
+                'read file -file "input/simple.json"| myproc | view sink1',
             expect_file: 'expected/put-expression.json',
         })
         .then(function(data) {
@@ -534,12 +527,12 @@ describe('Juttle basic language tests', function() {
             program:
                 'const foo=2.4;' +
                 'sub myproc() {' +
-                '  put snarks=#grumpkins + foo' +
+                '  put snarks=#rate + foo' +
                 '}' +
                 'sub myproc() {' +
-                '  put snarks=#grumpkins + 1.2' +
+                '  put snarks=#rate + 1.2' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| myproc() | view sink1',
+                'read file -file "input/simple.json"| myproc() | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -558,7 +551,7 @@ describe('Juttle basic language tests', function() {
                 'function foo() {' +
                 '  return foo;' +
                 '}' +
-                'read file -file "input/simple-non-monotonic-time.json"| put snarks=#grumpkins + foo() | view sink1',
+                'read file -file "input/simple.json"| put snarks=#rate + foo() | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
@@ -571,7 +564,7 @@ describe('Juttle basic language tests', function() {
 
     it('fails if a label is omitted', function() {
         return check_juttle({
-            program: 'read file -file "input/simple.json" | put snarks=#grumpkins+1.2 as | view sink1',
+            program: 'read file -file "input/simple.json" | put snarks=#rate+1.2 as | view sink1',
         })
         .then(function(data) {
             throw new Error("this should fail");
