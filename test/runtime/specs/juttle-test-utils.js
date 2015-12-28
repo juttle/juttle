@@ -65,6 +65,33 @@ function get_times(pts) {
     });
 })();
 
+var stdin = process.stdin;
+var stdout = process.stdout;
+
+function set_stdin(stream) {
+    stdin = stream;
+}
+
+function set_stdout(stream) {
+    stdout = stream;
+}
+
+// allow for easy injection of input stream for the `read stdin` adapter
+// at test time
+(function() {
+    var stdio = require('../../../lib/adapters/stdio')();
+    _(stdio.read.prototype).extend({
+        getStdin: function() {
+            return stdin;
+        }
+    });
+    _(stdio.write.prototype).extend({
+        getStdout: function() {
+            return stdout;
+        }
+    });
+})();
+
 
 var TestSink = Juttle.proc.subscribe.extend({
     initialize: function(options) {
@@ -284,5 +311,7 @@ module.exports = {
     compile_juttle: compile_juttle,
     check_juttle: check_juttle,
     run_juttle: run_juttle,
-    module_resolver: module_resolver
+    module_resolver: module_resolver,
+    set_stdin: set_stdin,
+    set_stdout: set_stdout
 };
