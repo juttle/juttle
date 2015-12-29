@@ -13,7 +13,7 @@ head limit [by groupfield1, [groupfield2, ...]]
 
 Parameter  |  Description  |  Required?
 ---------- | ------------- | ---------:
-`limit`    | The number of points to emit; may be an expression that evaluates to an integer  |  No
+`limit`    | The number of points to emit; may be an expression that evaluates to an integer  |  No; defaults to 1
 `by`       |  One or more fields by which to group. See [Grouping fields with by](../concepts/dataflow.md#grouping).  |  No
 
 _Example: Generate batches containing ten points each but only log the first two points from each batch_ 
