@@ -95,6 +95,51 @@ describe('file adapter tests', function () {
                 expect(err.message).equal('Error: filtering is not supported by read file.');
             });
         });
+
+        it('filters points correctly with -from', function() {
+            return check_juttle({
+                program: 'read file -file "' + file + '.json" -from :1970-01-01T00:00:03.000Z: | keep time, rate'
+            })
+            .then(function(result) {
+                expect(result.errors.length).equal(0);
+                expect(result.warnings.length).equal(0);
+                expect(result.sinks.table).to.deep.equal([
+                    { "time": "1970-01-01T00:00:03.000Z", "rate": 2},
+                    { "time": "1970-01-01T00:00:04.000Z", "rate": 7},
+                    { "time": "1970-01-01T00:00:05.000Z", "rate": 1},
+                    { "time": "1970-01-01T00:00:06.000Z", "rate": 3}
+                ]);
+            });
+        });
+
+        it('filters points correctly with -to', function() {
+            return check_juttle({
+                program: 'read file -file "' + file + '.json" -to :1970-01-01T00:00:03.000Z: | keep time, rate'
+            })
+            .then(function(result) {
+                expect(result.errors.length).equal(0);
+                expect(result.warnings.length).equal(0);
+                expect(result.sinks.table).to.deep.equal([
+                    { "time": "1970-01-01T00:00:01.000Z", "rate": 1},
+                    { "time": "1970-01-01T00:00:02.000Z", "rate": 5},
+                ]);
+            });
+        });
+
+        it('filters points correctly with -from and -to', function() {
+            return check_juttle({
+                program: 'read file -file "' + file + '.json" -from :1970-01-01T00:00:03.000Z: -to :1970-01-01T00:00:05.000Z: | keep time, rate'
+            })
+            .then(function(result) {
+                expect(result.errors.length).equal(0);
+                expect(result.warnings.length).equal(0);
+                expect(result.sinks.table).to.deep.equal([
+                    { "time": "1970-01-01T00:00:03.000Z", "rate": 2},
+                    { "time": "1970-01-01T00:00:04.000Z", "rate": 7},
+                ]);
+            });
+        });
+
     });
 
     describe('write file', function() {
