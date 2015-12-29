@@ -48,6 +48,7 @@ pages:
    - '____ Data Types': 'reference/data_types.md'
 
    - 'Tutorial': 'concepts/juttle_tutorial.md'
+   - 'Language Comparison': 'concepts/language_comparison.md'
 
    - '____ Juttle Terminology': 'concepts/terminology.md'
 
