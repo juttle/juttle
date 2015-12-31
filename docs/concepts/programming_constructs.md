@@ -73,6 +73,23 @@ emit -limit 10
       points_3=pow(points, 3)
 ```
 
+Reducers
+========
+
+Reducers are a Juttle-specific construct that allows operating on values of a chosen field, as points stream through the flowgraph, to carry out a running computation.
+
+Reducers are used in [reduce](../processors/reduce.md) and [put](../processors/put.md) assignment expressions.
+
+Juttle comes with a number of [built-in reducers](../reducers/index.md), including [count()](../reducers/count.md), [sum()](../reducers/sum.md) and [max()](../reducers/max.md) used in this example:
+
+```juttle
+emit -from :0: -limit 10
+| put value = count()
+| reduce sum = sum(value), largest = max(value)
+```
+
+Users can define their own reducers using the `reducer` keyword. To understand how reducers function, see [User-defined reducers](../reducers/juttle_reducers_user-defined.md) section that gives an annotated example.
+
 Variables
 =========
 
@@ -259,7 +276,7 @@ emit -limit 2
 | my_viz; // invoke the subgraph here
 ```
 
-<img src="/images/diagrams/juttleOverviewDiagrams/overview5.png" alt="overview5" style="width: 400px;"/>
+<img src="../../images/diagrams/juttleOverviewDiagrams/overview5.png" alt="overview5" style="width: 400px;"/>
 
 With this approach, experienced coders can express complex business
 logic and rich visualizations, then make them available to other Juttle
