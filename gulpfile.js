@@ -168,19 +168,12 @@ gulp.task('peg', ['peg-clean'], function() {
     }))
     .pipe(gulp.dest('lib/parser'));
 
-    var momentParserJs = gulp.src('lib/moment/moment-parser.pegjs')
-    .pipe(peg({
-        cache: true
-    }))
-    .pipe(rename('parser.js'))
-    .pipe(gulp.dest('lib/moment'));
-
     var pointsParserJs = gulp.src('extlib/points-parser/points-parser.pegjs')
     .pipe(peg())
     .pipe(rename('points-parser.js'))
     .pipe(gulp.dest('extlib/points-parser/'));
 
-    return merge(parserJs, momentParserJs, pointsParserJs);
+    return merge(parserJs, pointsParserJs);
 });
 
 gulp.task('clean', ['juttle-spec-clean', 'peg-clean']);
