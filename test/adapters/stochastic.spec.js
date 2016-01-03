@@ -23,6 +23,17 @@ describe('stochastic adapter options', function() {
         });
     });
 
+    it('supports starting at :beginning:', function() {
+        return check_juttle({
+            program: 'read stochastic -from :beginning: '+
+                     '-to :1970-01-01T00:00:10.000Z: ' +
+                     '| reduce count() | view text'
+        })
+        .then(function(res) {
+            expect(res.sinks.text[0]).deep.equal({count: 238});
+        });
+    });
+
     // a series of source cdn tests with various ways of specifying
     // the options will all produce these same results
     var hosts = [
