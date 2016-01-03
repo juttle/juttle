@@ -16,7 +16,7 @@ rejects mixed calendar durations for quantization
 -----------------------------------
 ### Juttle
     emit -from :2014-01-15: -every :month: -limit 5
-    | put t=time, m=:1/2.3:4:5:, d=Date.quantize(time, m)
+    | put t=time, m=:1/02.03:04:05:, d=Date.quantize(time, m)
     | view result
 
 ### Errors

@@ -9,8 +9,8 @@ describe('Juttle Moments tests', function() {
     it('distinguishes between value and duration for parameters', function() {
         return parser.parse('emit -from :now: -for :00:00:10: -hz 1 | view result')
             .then(function(ast) {
-                expect(ast.elements[0].elements[0].options[0].expr.type).to.equal('NowLiteral');
-                expect(ast.elements[0].elements[0].options[1].expr.type).to.equal('MomentDuration');
+                expect(ast.elements[0].elements[0].options[0].expr.type).to.equal('MomentLiteral');
+                expect(ast.elements[0].elements[0].options[1].expr.type).to.equal('DurationLiteral');
             });
     });
 

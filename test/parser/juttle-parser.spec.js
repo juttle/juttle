@@ -104,13 +104,13 @@ describe('Juttle parser', function() {
         it('emits correct regions', function() {
             var option_ast = {
                 from: {
-                    type: 'UnixTimeLiteral',
+                    type: 'MomentLiteral',
                     location: {
                         filename: 'main',
                         start: { offset: 11, line: 1, column: 12 },
                         end: { offset: 14, line: 1, column: 15 }
                     },
-                    value: 0
+                    value: "1970-01-01T00:00:00.000Z"
                 },
                 display_limit: {
                     type: 'NumericLiteral',

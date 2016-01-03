@@ -631,67 +631,12 @@ describe('Juttle Humanized Moments Fuzzy Tests', function() {
                     });
             });
 
-            var rand1 = getRand();
-            it('last '+ rand1 +' '+ calendarUnit, function() {
-                return check_juttle({
-                    program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :last '+ rand1 +' '+ calendarUnit +': | view result'
-                })
-                    .then(function(res) {
-                        var moment = res.prog.env.now.subtract(JuttleMoment.duration(rand1, calendarUnit));
-                        moment = moment.startOf(calendarUnit);
-
-                        expect(res.sinks.result.length).to.equal(1);
-                        expect(res.sinks.result[0].foo).to.equal(moment.valueOf());
-                    });
-            });
-
-            it('prior '+ calendarUnit, function() {
-                return check_juttle({
-                    program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :prior '+ calendarUnit +': | view result'
-                })
-                    .then(function(res) {
-                        var moment = res.prog.env.now.subtract(JuttleMoment.duration(1, calendarUnit));
-                        moment = moment.startOf(calendarUnit);
-
-                        expect(res.sinks.result.length).to.equal(1);
-                        expect(res.sinks.result[0].foo).to.equal(moment.valueOf());
-                    });
-            });
-
-            var rand2 = getRand();
-            it('prior '+ rand2 +' '+ calendarUnit, function() {
-                return check_juttle({
-                    program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :prior '+ rand2 +' '+ calendarUnit +': | view result'
-                })
-                    .then(function(res) {
-                        var moment = res.prog.env.now.subtract(JuttleMoment.duration(rand2, calendarUnit));
-                        moment = moment.startOf(calendarUnit);
-
-                        expect(res.sinks.result.length).to.equal(1);
-                        expect(res.sinks.result[0].foo).to.equal(moment.valueOf());
-                    });
-            });
-
             it('next '+ calendarUnit, function() {
                 return check_juttle({
                     program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :next '+ calendarUnit +': | view result'
                 })
                     .then(function(res) {
                         var moment = res.prog.env.now.add(JuttleMoment.duration(1, calendarUnit));
-                        moment = moment.startOf(calendarUnit);
-
-                        expect(res.sinks.result.length).to.equal(1);
-                        expect(res.sinks.result[0].foo).to.equal(moment.valueOf());
-                    });
-            });
-
-            var rand3 = getRand();
-            it('next '+ rand3 +' '+ calendarUnit, function() {
-                return check_juttle({
-                    program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :next '+ rand3 +' '+ calendarUnit +': | view result'
-                })
-                    .then(function(res) {
-                        var moment = res.prog.env.now.add(JuttleMoment.duration(rand3, calendarUnit));
                         moment = moment.startOf(calendarUnit);
 
                         expect(res.sinks.result.length).to.equal(1);
@@ -737,6 +682,7 @@ describe('Juttle Humanized Moments Fuzzy Tests', function() {
                             expect(res.sinks.result[0].foo).to.equal(moment.valueOf());
                         });
                 });
+
                 it(calendarUnit +' of '+ rand4 +' '+ durationUnit +' ago', function() {
                     return check_juttle({
                         program: 'emit -from :now: -hz 1000 -limit 1 | put foo = :'+ calendarUnit +' of '+ rand4 +' '+ durationUnit +' ago: | view result'
