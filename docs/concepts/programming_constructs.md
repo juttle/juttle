@@ -76,7 +76,7 @@ emit -limit 10
 Reducers
 ========
 
-Reducers are a Juttle-specific construct that allows operating on values of a chosen field, as points stream through the flowgraph, to carry out a running computation.
+Reducers are a Juttle-specific construct that allows operating on field values of data points as they stream through the flowgraph, to carry out a running computation.
 
 Reducers are used in [reduce](../processors/reduce.md) and [put](../processors/put.md) assignment expressions.
 
