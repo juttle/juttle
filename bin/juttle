@@ -9,6 +9,8 @@ if (! process.env.DEBUG) {
     log4js.setGlobalLogLevel('info');
 }
 
+var logger = log4js.getLogger('cli');
+
 // Node will return errors on process.stdout if the standard output is
 // piped to a program that doesn't read all of the output (for
 // example, "bin/juttle .... | head"). So when process.stdout gets an
@@ -253,6 +255,9 @@ function perform_mode(options)
             cli.prompt(prompt);
         }
     }).catch(function(e) {
+        // Log the full error object at debug level to get the stack trace
+        logger.debug('juttle error:', e, e.stack, Object.keys(e));
+
         // If the error doesn't have a location, it's not a juttle error. Just re-throw it.
         if (is_juttle_error(e)) {
             console.error(CliErrors.show_in_context({
