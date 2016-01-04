@@ -18,6 +18,19 @@ describe('file adapter tests', function () {
     var file = path.resolve(__dirname, 'input/simple');
 
     describe('read file', function() {
+
+        it('fails when you provide an unknown option', function() {
+            return check_juttle({
+                program: 'read file -file "' + filename + '" -foo "bar"'
+            })
+            .then(function() {
+                throw new Error("this should have failed");
+            })
+            .catch(function(err) {
+                expect(err.message).equal('Error: unknown read file option foo.');
+            });
+        });
+
         _.each(validFormats, function(format) {
             it('uses field specified in timeField with format: ' + format, function() {
                 return check_juttle({
@@ -140,6 +153,30 @@ describe('file adapter tests', function () {
             });
         });
 
+        it('fails when -from is an invalid moment', function() {
+            return check_juttle({
+                program: 'read file -file "' + file + '.json" -from "a"'
+            })
+            .then(function() {
+                throw Error('Previous statement should have failed');
+            })
+            .catch(function(err) {
+                expect(err.toString()).to.contain('Error: -from/-to/-last require moments: "a"');
+            });
+        });
+
+        it('fails when -to is an invalid moment', function() {
+            return check_juttle({
+                program: 'read file -file "' + file + '.json" -to "a"'
+            })
+            .then(function() {
+                throw Error('Previous statement should have failed');
+            })
+            .catch(function(err) {
+                expect(err.toString()).to.contain('Error: -from/-to/-last require moments: "a"');
+            });
+        });
+
     });
 
     describe('write file', function() {
@@ -152,6 +189,32 @@ describe('file adapter tests', function () {
             })
             .catch(function(err) {
                 expect(err.message).equal('Error: missing write file required option file.');
+            });
+        });
+
+        it('fails when you provide an unknown option', function() {
+            return check_juttle({
+                program: 'emit -limit 1 | write file -file "' + filename + '" -foo "bar"'
+            })
+            .then(function() {
+                throw new Error("this should have failed");
+            })
+            .catch(function(err) {
+                expect(err.message).equal('Error: unknown write file option foo.');
+            });
+        });
+
+        _.each(['bufferLimit', 'maxFilesize', 'flushFrequency'], function(option) {
+            it('fails when you provide an invalid ' + option, function() {
+                return check_juttle({
+                    program: 'emit -limit 1 | write file -file "' + filename + '" -' + option + ' -1'
+                })
+                .then(function() {
+                    throw new Error("this should have failed");
+                })
+                .catch(function(err) {
+                    expect(err.message).equal('Error: option ' + option + ' should be a positive integer');
+                });
             });
         });
 
@@ -171,6 +234,136 @@ describe('file adapter tests', function () {
                 expect(result.errors.length).equal(0);
                 expect(result.sinks.table.length).equal(1);
                 expect(result.sinks.table[0].message).equal('hello test');
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+        it('fails when you attempt to write to a file larger than -maxFilesize', function() {
+            return check_juttle({
+                program: 'emit -limit 2 -from :2014-01-01: | write file -file "' + filename + '"'
+            })
+            .then(function() {
+                return check_juttle({
+                    program: 'emit -limit 1 -from :2014-01-01: | write file -file "' + filename + '" -maxFilesize 2'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(1);
+                expect(result.errors[0]).to.contain('Error: option maxFilesize exceeded limit of 2 bytes');
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+        it('fails when you exceed the -bufferLimit value', function() {
+            return check_juttle({
+                program: 'emit -limit 2 -from :2014-01-01: | write file -file "' + filename + '" -bufferLimit 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).equal(1);
+                expect(result.errors[0]).to.equal('Error: option bufferLimit exceeded limit of 1, droppping points.');
+            })
+            .then(function() {
+                return check_juttle({
+                    program: 'read file -file "' + filename + '"'
+                });
+            })
+            .then(function(result) {
+                expect(result.sinks.table.length).equal(1);
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+        it('can handle writing no points out', function() {
+            return check_juttle({
+                program: 'emit -limit 3 -every :1s: | filter foo="bar" | write file -file "' + filename + '"'
+            })
+            .then(function() {
+                // verify we didn't write out any additional points to the file
+                return check_juttle({
+                    program: 'read file -file "' + filename + '"'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.equal(0);
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+        it('can write all expected data with a high -flushFrequency', function() {
+            return check_juttle({
+                program: 'emit -limit 10 | write file -file "' + filename + '" -flushFrequency 1000'
+            })
+            .then(function() {
+                // verify we didn't write out any additional points to the file
+                return check_juttle({
+                    program: 'read file -file "' + filename + '"'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.equal(10);
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+        it('can write all expected data with a low -flushFrequency', function() {
+            return check_juttle({
+                program: 'emit -limit 10 | write file -file "' + filename + '" -flushFrequency 1'
+            })
+            .then(function() {
+                // verify we didn't write out any additional points to the file
+                return check_juttle({
+                    program: 'read file -file "' + filename + '"'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.equal(10);
+            })
+            .finally(function() {
+                fs.unlinkSync(filename);
+            });
+        });
+
+
+        it('fails when you attempt to write to a file with more points than than -bufferLimit allows', function() {
+            return check_juttle({
+                program: 'emit -limit 3 -from :2014-01-01: | write file -file "' + filename + '"'
+            })
+            .then(function() {
+                return check_juttle({
+                    program: 'emit -limit 1 -from :2014-01-01: | write file -file "' + filename + '" -bufferLimit 2'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(1);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.errors[0]).to.contain('Error: option bufferLimit exceeded limit of 2, droppping points.');
+            })
+            .then(function() {
+                // verify we didn't write out any additional points to the file
+                return check_juttle({
+                    program: 'read file -file "' + filename + '"'
+                });
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.equal(3);
             })
             .finally(function() {
                 fs.unlinkSync(filename);
