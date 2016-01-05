@@ -645,6 +645,21 @@
 <td>File path on the local filesystem, absolute or relative to the current working directory</td>
 <td align="right">Yes</td>
 </tr>
+<tr>
+<td><code>-bufferLimit</code></td>
+<td>Maximum number of points that will be written to the file.</td>
+<td align="right">No; defaults to 100</td>
+</tr>
+<tr>
+<td><code>-maxFilesize</code></td>
+<td>Maximum size of the file being written to, limited since the entire JSON needs to fit in memory</td>
+<td align="right">No; defaults to 200MB</td>
+</tr>
+<tr>
+<td><code>-limit</code></td>
+<td>Maximum number of points in a file before we'd stop writing points to the file to avoid running out of memory</td>
+<td align="right">No; defaults to 100000</td>
+</tr>
 </tbody>
 </table>
 <p>If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.</p>

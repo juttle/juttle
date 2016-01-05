@@ -544,7 +544,7 @@
                 <h1 id="join">join</h1>
 <p>Create new points from the points of multiple input streams.</p>
 <pre><code>join
-   [-nearest :duration: | -zip (true | :duration:) | -once true]
+   [-nearest :duration: | -zip &lt;true|:duration:&gt; | -once true]
    [-table inputNumber, inputNumber, ...]
    [-outer inputNumber]
    [fieldName1, fieldName2,...fieldNameN]
@@ -552,67 +552,32 @@
 
 <p>It should be placed after a merge point in a parallel Juttle expression,
 like this:</p>
-<pre><code>(... ; ...) | join ...
+<pre><code>(
+  stream-1;
+  stream-2;
+)
+| join [options]
+| ... // process joined stream
+</code></pre>
+
+<p>For example:</p>
+<pre><code>read source1
+             \
+               join | reduce ...
+             /
+read source2
 </code></pre>
 
 <p>In its simplest form, join aligns its input streams by time stamp and
 produces new output points by unioning the fields of successive matching
 input points.</p>
-<p>If used on a single stream, its points are grouped by their time stamp
-or batch, and all points in a group are unioned to create an output
-point. If optional joinFields are specified for the single stream, they
-act like group-by fields, and there is an output point for each distinct
-value of the joinFields among the points.</p>
-<p>Options to <code>join</code> can cause it to
-operate like an SQL relational join across multiple input streams, where
-batches of points on an input are analogous to SQL tables, and
-individual points are analogous to rows in those tables. An optional
-list of fieldNames specifies relational join keys between the input
-batches. When points with matching key values appear on each input, new
-points are produced containing the union of these matching points'
-fields.</p>
-<p>Streaming joins are computed continually as points or batches of points
-arrive at the inputs. When a stream is batched, all points in a batch
-are treated as a group for joining (as if they all had the batch's
-ending time stamp). For an unbatched stream, all points having the same
-time stamp are treated as a batch. It is okay to join a batched stream
-with an unbatched stream.</p>
-<p>To require exact time stamp matching for batches to be joined, specify
-time as a join key along with any other join keys. If time is not listed
-as a join key, inexact time matches are allowed. Equivalent time stamps
-will always be joined when they are present. A streaming one-to-one join
-without exact time stamp matching is specified with -zip true or -zip
-:duration:. A streaming many-to-one join with -nearest :duration: (or
-simply as join with no options). A one-to-one join matches each
-successive input batch with one on its other inputs, matching by nearest
-time stamp, and drops any extra input batches that do not have matches.
-A many-to-one join performs a similar matching, but will re-use an input
-batch if it remains the best match. 
-Both <code>-zip</code> and <code>-nearest</code> accept a duration limiting the
-difference in time stamps allowed between matched batches, with :0:
-behaving as if time had been specified as a join key. When time stamps
-do not match exactly, an output point will be given the maximum time
-stamp of its input points. A join without <code>-zip</code> or <code>-nearest</code> or time as a join key is
-implicitly a <code>-nearest</code> join with no limiting duration.</p>
-<p>A streaming join can treat some of its input batches as passive tables
-with no associated time stamp. For example, this is useful for joining a
-stream of event points having user IDs against a table of user names,
-annotating the event point with its particular user name. 
-The <code>-table</code> option lists which inputs are to be
-treated in this way. A batch on a table input remains there until
-updated by a later batch, and joins are always performed against the
-most recently received complete batch. Joins are only triggered by the
-arrival of new points on a timeful input. Because tables are timeless, a
-join is never triggered by an update to a table, and no guarantees can
-be made about precisely when (in stream time) an update will displace a
-current table batch.</p>
-<p>A non-streaming join over all points at once (at the end of the run) can
-be specified by the <code>-once</code> flag. 
-The join is not computed until all points have arrived at the inputs (that
-is, it only makes sense for historic queries or bounded live queries).
-Time stamps will be ignored unless the time field is specified as a join
-field, which forces time stamps to be matched exactly between the input
-sets.</p>
+<p>To join only points with matching field values, use <code>join fieldNameN</code> where fieldNameN serves as a foreign key in SQL join terms.</p>
+<p>By default, an inner join is performed; use <code>-outer</code> option to do an outer join instead. Left or right outer join is achieved by specifying the input number of the "base" stream.</p>
+<p>The <code>-nearest</code> option causes a streaming many-to-one join, while <code>-zip</code> option causes a streaming one-to-one join.</p>
+<p>The time intervals between points are ignored by default when joining streams; set <code>:duration:</code> parameter in <code>-nearest</code> or <code>-zip</code> to join only points that are close in time.</p>
+<p>For a non-streaming join that runs over the entire set of inputs, use <code>-once</code> option.</p>
+<p>For a join that treats one or more inputs as a lookup table with timeless points, akin to a SQL relational join, use <code>-table</code> option.</p>
+<p>Join can be used on a single stream, see <a href="#Notes">Notes</a>.</p>
 <table>
 <thead>
 <tr>
@@ -624,36 +589,101 @@ sets.</p>
 <tbody>
 <tr>
 <td><code>-nearest :duration:</code></td>
-<td>Streaming many-to-one join of each input point or batch with the points or batches on the other inputs having the nearest time stamp. <p>If one stream has fewer points than the others, its points may be joined multiple times as needed so that all points or batches on the other inputs participate in a join. The duration is the maximum acceptable difference in time stamps between matched groups of points, and will cause points to be dropped rather than joined if the gap in time is too large.</p><p>:information_source: <code>Note:</code>-nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</p></td>
-<td align="right">No</td>
+<td>Streaming many-to-one join of each input point or batch with the points or batches on the other inputs having the nearest time stamp. <br><br>If one stream has fewer points than the others, its points may be joined multiple times as needed so that all points or batches on the other inputs participate in a join. The duration is the maximum acceptable difference in time stamps between matched groups of points, and will cause points to be dropped rather than joined if the gap in time is too large.</td>
+<td align="right">No; defaults to unbounded duration; mutually exclusive with -zip and -once.</td>
 </tr>
 <tr>
-<td><code>-zip true</code>\</td>
-<td><code>:duration:</code></td>
-<td align="right">Streaming one-to-one join of each input point or batch with the points or batched on the other inputs having the nearest time stamp. <p>If one stream has more points than the others, extra points are dropped, such that any point is joined at most once. </p><p>If specified, the <code>duration</code>is the maximum acceptable difference in time stamps between matched groups of points. If instead <code>-zip true</code>is specified, there is no limit to the difference in time stamps. </p><p>:information_source: <code>Note:</code>-nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</td>
+<td><code>-zip &lt;true | :duration:&gt;</code></td>
+<td>Streaming one-to-one join of each input point or batch with the points or batched on the other inputs having the nearest time stamp. <br><br>If one stream has more points than the others, extra points are dropped, such that any point is joined at most once. <br><br>If specified, the <code>duration</code>is the maximum acceptable difference in time stamps between matched groups of points. If instead <code>-zip true</code>is specified, there is no limit to the difference in time stamps.</td>
+<td align="right">No; mutually exclusive with -nearest and -once.</td>
 </tr>
 <tr>
 <td><code>-once true</code></td>
-<td>Non-streaming join over the entire set of input points, after all points have been received. <p>The time field may be specified as a join field if desired, giving results similar to a streaming one-to-one join with exactly matching time stamps. There is no analogue to the duration parameter of -zip and -nearest for non-streaming joins. </p><p>:information_source: <code>Note:</code>nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</p></td>
-<td align="right">No</td>
+<td>Non-streaming join over the entire set of input points, after all points have been received. <br><br>The time field may be specified as a join field if desired, giving results similar to a streaming one-to-one join with exactly matching time stamps. There is no analogue to the duration parameter of -zip and -nearest for non-streaming joins.</td>
+<td align="right">No; mutually exclusive with -nearest and -zip.</td>
 </tr>
 <tr>
-<td><code>-table</code></td>
-<td>Treat the specified input streams as passive tables with no associated time stamp; input streams are numbered top to bottom (or left to right) from 1 in the program. <p>:baby_symbol: <code>experimental:</code> We're still working on this feature. Try it and see what you think, then <a href="http://www.jut.io">chat with us</a> to provide feedback. </p></td>
+<td><code>-table inputNumber1 [, 2, ...]</code></td>
+<td>Treat the specified input streams as timeless, i.e. as passive tables with no associated time stamp; input streams are numbered top to bottom (or left to right) from 1 in the program.</td>
 <td align="right">No</td>
 </tr>
 <tr>
 <td><code>-outer inputNumber</code></td>
-<td>Perform an outer join preserving the specified input stream. Input streams are numbered top to bottom (or left to right) from 1 in the program (that is, <code>-outer 1</code>specifies an outer left join where the first series in the flowgraph is preserved). When a point on the outer input does not have a matching join key on the other inputs, <code>-outer</code>forwards it unchanged, or partially joined against any matching inputs. Without <code>-outer</code> an inner join is performed, which only produces a points when all inputs match.</td>
-<td align="right">No</td>
+<td>Perform an outer join preserving the specified input stream. Input streams are numbered top to bottom (or left to right) from 1 in the program (that is, <code>-outer 1</code>specifies an outer left join where the first series in the flowgraph is preserved). When a point on the outer input does not have a matching join key on the other inputs, <code>-outer</code>forwards it unchanged, or partially joined against any matching inputs. Without <code>-outer</code> an inner join is performed, which only produces points when all inputs match.</td>
+<td align="right">No; defaults to inner join.</td>
 </tr>
 <tr>
 <td><code>fieldnameN</code></td>
 <td>The fields to match when joining points.</td>
-<td align="right">No</td>
+<td align="right">No; by default, points will be unioned without matching on fields.</td>
 </tr>
 </tbody>
 </table>
+<h5 id="notes">Notes</h5>
+<h6 id="single-stream-join">Single Stream Join</h6>
+<p>If used on a single stream, its points are grouped by their time stamp
+or batch, and all points in a group are unioned to create an output
+point. If optional joinFields are specified for the single stream, they
+act like group-by fields, and there is an output point for each distinct
+value of the joinFields among the points.</p>
+<h6 id="multiple-stream-join">Multiple Stream Join</h6>
+<p>Options to <code>join</code> can cause it to
+operate like an SQL relational join across multiple input streams, where
+batches of points on an input are analogous to SQL tables, and
+individual points are analogous to rows in those tables. An optional
+list of fieldNames specifies relational join keys between the input
+batches. When points with matching key values appear on each input, new
+points are produced containing the union of these matching points'
+fields.</p>
+<h6 id="batched-vs-unbatched-join">Batched vs Unbatched Join</h6>
+<p>Streaming joins are computed continually as points or batches of points
+arrive at the inputs. When a stream is batched, all points in a batch
+are treated as a group for joining (as if they all had the batch's
+ending time stamp). For an unbatched stream, all points having the same
+time stamp are treated as a batch. It is okay to join a batched stream
+with an unbatched stream.</p>
+<h6 id="time-matching-in-many-to-one-and-one-to-one-join">Time Matching in Many-to-One and One-to-One Join</h6>
+<p>To require exact time stamp matching for batches to be joined, specify
+time as a join key along with any other join keys. If time is not listed
+as a join key, inexact time matches are allowed. Equivalent time stamps
+will always be joined when they are present. A streaming one-to-one join
+without exact time stamp matching is specified with -zip true or -zip
+:duration:. A streaming many-to-one join with -nearest :duration: (or
+simply as join with no options). A one-to-one join matches each
+successive input batch with one on its other inputs, matching by nearest
+time stamp, and drops any extra input batches that do not have matches.
+A many-to-one join performs a similar matching, but will re-use an input
+batch if it remains the best match. </p>
+<p>Both <code>-zip</code> and <code>-nearest</code> accept a duration limiting the
+difference in time stamps allowed between matched batches, with :0:
+behaving as if time had been specified as a join key. When time stamps
+do not match exactly, an output point will be given the maximum time
+stamp of its input points. A join without <code>-zip</code> or <code>-nearest</code> or time as a join key is
+implicitly a <code>-nearest</code> join with no limiting duration.</p>
+<h6 id="join-with-table-input">Join with Table Input</h6>
+<p>A streaming join can treat some of its input batches as passive tables
+with no associated time stamp. For example, this is useful for joining a
+stream of event points having user IDs against a table of user names,
+annotating the event point with its particular user name. 
+The <code>-table</code> option lists which inputs are to be
+treated in this way. The "table" input can be timeless (i.e. its data points do not contain a <code>time</code> field at all), or if it has timestamps, they will be ignored when joining.</p>
+<p>A batch on a table input remains there until
+updated by a later batch, and joins are always performed against the
+most recently received complete batch. Joins are only triggered by the
+arrival of new points on a timeful input. Because tables are timeless, a
+join is never triggered by an update to a table, and no guarantees can
+be made about precisely when (in stream time) an update will displace a
+current table batch.</p>
+<h6 id="non-streaming-join">Non-streaming Join</h6>
+<p>A non-streaming join over all points at once (at the end of the run) can
+be specified by the <code>-once</code> flag. 
+The join is not computed until all points have arrived at the inputs (that
+is, it only makes sense for historic queries or bounded live queries).
+Time stamps will be ignored unless the time field is specified as a join
+field, which forces time stamps to be matched exactly between the input
+sets.</p>
+<p>Note: -nearest, -zip, and -once are mutually exclusive. If none are specified, the behavior is as if -nearest was specified with an unbounded duration.</p>
+<h5 id="join-examples">Join Examples</h5>
 <p><em>Example: merging metric points</em></p>
 <p>One use for join is with a source that provides several different
 metrics as name/value pairs on separate points having identical time

@@ -627,9 +627,9 @@ help, \? - print this usage
 clear, \c - clear the terminal screen
 </code></pre>
 
-<h2 id="visual-sinks">Visual Sinks</h2>
+<h2 id="views">Views</h2>
 <h3 id="table">table</h3>
-<p><code>juttle</code> supports <a href="../../sinks/view_table/">table</a> and <a href="../../sinks/view_text/">text</a> visual sinks:</p>
+<p><code>juttle</code> supports <a href="../../sinks/view_table/">table</a> and <a href="../../sinks/view_text/">text</a> views:</p>
 <pre><code>juttle&gt; emit -limit 1 | view table
 ┌────────────────────────────────────┐
 │ time                               │
@@ -646,7 +646,7 @@ clear, \c - clear the terminal screen
 juttle&gt;
 </code></pre>
 
-<p>If a program does not contain a visual sink, <code>juttle</code> automatically adds one based on the value of the <code>implicit_sink</code> configuration item (see below).</p>
+<p>If a program does not contain a view, <code>juttle</code> automatically adds one based on the value of the <code>implicit_view</code> configuration item (see below).</p>
 <h2 id="errors">Errors</h2>
 <p>If your juttle program contains syntax or runtime errors, <code>juttle</code> provides details on the error and highlights the section of the program that led to the error:</p>
 <pre><code>juttle&gt; emit limit 1 | view table
@@ -686,12 +686,12 @@ with <code>require</code> and therefore need a single <code>module.exports</code
 exports.</p>
 <p>Generally <code>juttle-config</code> is used to configure adapters to various
 backends. The only <code>juttle</code>-specific configuration item is
-<code>implicit_sink</code>, which defines what the default sink is at the end of
+<code>implicit_view</code>, which defines what the default view is at the end of
 your flowgraph when not explicitly specified. For example if you set
 it to <code>text</code> like so:</p>
 <p><strong>.juttle-config.json</strong>:</p>
 <pre><code>{
-&quot;implicit_sink&quot;: &quot;text&quot;
+&quot;implicit_view&quot;: &quot;text&quot;
 }
 </code></pre>
 

@@ -567,19 +567,19 @@ optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving
 <td align="right">No; if not specified, the upstream batch interval is used. If there is no upstream batch, a single result is produced after the stream has ended.</td>
 </tr>
 <tr>
-<td><code>over</code></td>
-<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <p>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> </p><p>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. </p><p>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
-<td align="right">No</td>
+<td><code>-over</code></td>
+<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <br><br>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> <br><br>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. <br><br>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
+<td align="right">No; defaults to not using a moving window.</td>
 </tr>
 <tr>
 <td><code>-reset</code></td>
 <td>Set this to 'false' to emit results cumulatively, over all points seen so far.</td>
-<td align="right">No</td>
+<td align="right">No; defaults to resetting every interval.</td>
 </tr>
 <tr>
 <td><code>-forget</code></td>
 <td>When grouping reducer results with 'by', set this to 'false' to cause results to be emitted for every value of 'by' that has been seen in previous batches. Values that do not appear in the current batch will report their 'empty' value (for example, count() will produce 0, avg() will produce null)</td>
-<td align="right">No</td>
+<td align="right">No; defaults to forgetting.</td>
 </tr>
 <tr>
 <td><code>-from</code></td>
@@ -598,16 +598,17 @@ optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving
 </tr>
 <tr>
 <td><code>fieldname=expr</code></td>
-<td>An assignment expression, where expr can be a <a href="../../reducers/">reducer</a>. Each assignment expression results in an output field that has the left-hand side of the expression as its name and the computed right-hand side as its value.</td>
+<td>An assignment expression, where <code>expr</code>can be a <a href="../../reducers/">reducer</a> or a constant value. See <a href="#note-2">Note 2</a>.</td>
 <td align="right">At least one</td>
 </tr>
 <tr>
 <td><code>by</code></td>
-<td>One or more fields for which the assignment expression is computed separately. <p>If grouping fields are present, then the assignment expression is computed independently for each unique combination of values present in the grouping fields. See <a href="../">Processors</a> for more about grouping with by.  </p></td>
+<td>One or more fields for which the assignment expression is computed separately. <br><br>If grouping fields are present, then the assignment expression is computed independently for each unique combination of values present in the grouping fields. See <a href="../">Processors</a> for more about grouping with by.  <br><br></td>
 <td align="right">No; if no grouping fields are present, then the assignment expression is computed over all points in the batch.</td>
 </tr>
 </tbody>
 </table>
+<h6 id="note-1">Note 1</h6>
 <p>The output points contain:</p>
 <ul>
 <li>All the fields specified as assignment expressions or grouping fields in the arguments</li>
@@ -619,6 +620,32 @@ optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving
 batch. When the points flowing into reduce are not batched, output
 points are generated for all points when the stream ends.</p>
 <p>See <a href="../../concepts/fields/#referencing">Field referencing</a> for additional information relevant to this processor.</p>
+<h6 id="note-2">Note 2</h6>
+<p>In the assignment expression <code>fieldname=expr</code>, if <code>expr</code> is a reducer, the resulting point will have the return value of reducer's result() function as the value of field <code>fieldname</code>.</p>
+<p>If <code>expr</code> is a constant value (Juttle constant, string literal, number), the resulting point will have field 'fieldname' with that value. This is commonly used to place "naming" fields into the data point, such as:</p>
+<pre><code>... | reduce name = 'pct90', value = percentile (value, 0.9)
+</code></pre>
+
+<p>Assignments that try to dereference fields from the incoming data point are invalid; the field values of the point being processed by <code>reduce</code> are only accessible in the context of a reducer.</p>
+<p>For example, this is not valid Juttle, it would emit error "a is not defined" because it would try looking for a constant named 'a':</p>
+<pre><code class="text">// INVALID JUTTLE
+emit -points [ { a: 5, b: 7 }, { a: 12, b: 88 } ]
+| reduce c = a + b
+</code></pre>
+
+<p>This is also not valid Juttle, it would error out when trying to add up two null values, because dereferencing of fields 'a' and 'b' would attempt to access such fields in the data point being <em>created</em> by the <code>reduce</code>, not the data point being <em>processed</em> by it, since the fields of incoming point are not in scope.</p>
+<pre><code class="text">// INVALID JUTTLE
+emit -points [ { a: 5, b: 7 }, { a: 12, b: 88 } ]
+| reduce c = *'a' + *'b'
+</code></pre>
+
+<p>The legitimate way to achieve the desired result (compute a cumulative sum of field values for 'a' and 'b' over all points) would be to use <code>reduce</code> to get sums of 'a' and 'b' separately, with the built-in reducer <a href="../../reducers/sum/">sum()</a>, and then add resulting field values in a <code>put</code> expression:</p>
+<pre><code class="juttle">emit -points [ { a: 5, b: 7 }, { a: 12, b: 88 } ]
+| reduce sum_a = sum(a), sum_b = sum(b)
+| put c = sum_a + sum_b
+</code></pre>
+
+<p>More examples of using <code>reduce</code>:</p>
 <p><em>Example: Trailing ten-minute average</em></p>
 <pre><code>// Trailing average example:
 //
