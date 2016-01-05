@@ -33,6 +33,7 @@
     "RT-REDUCE-DELTA-ERROR": "Error: delta cannot be used with reduce (use reduce last | put delta=delta())",
     "RT-FROM-TO-MOMENT-ERROR": "Error: -from/-to/-last require moments: {{info.value}}",
     "RT-LAST-FROM-TO-ERROR": "Error: -last option should not be combined with -from or -to",
+    "RT-MISSING-TIME-RANGE-ERROR": "Error: One of -from, -to, or -last must be specified to define a query time range",
     "RT-FORGET-BY-ERROR": "Error: -forget option only applies when using \"by\"",
     "RT-FORGET-RESET-ERROR": "Error: cannot -forget when -reset false",
     "RT-FROM-OVER-ERROR": "Error: {{info.proc}} -from only when -over is specified",
