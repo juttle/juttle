@@ -179,7 +179,7 @@ describe('Graph API', function() {
         it('A | B; C | D, add edge D-B to build (A; C|D)|B', function() {
             var program = compile('emit -from Date.new(0) -limit 1 | view result; emit -from :0: -limit 1 | put a = 1;', function(graph) {
                 var put = _.findWhere(graph.get_leaves(), {type: 'PutProc'});
-                var sink = _.findWhere(graph.get_leaves(), {type: 'Sink'});
+                var sink = _.findWhere(graph.get_leaves(), {type: 'View'});
                 graph.add_edge(put, sink);
             });
             return run_juttle(program).then(function(res) {
@@ -194,10 +194,10 @@ describe('Graph API', function() {
         it('(A;B)|C, remove edge B-C to build A | C ; B ', function() {
             var program = compile('(emit -from Date.new(0) -limit 1 ; emit -from Date.new(0) -limit 1 | put a = 1)| view result ', function(graph) {
                 var put = _.findWhere(graph.get_nodes(), {type: 'PutProc'});
-                var sink = _.findWhere(graph.get_leaves(), {type: 'Sink'});
+                var sink = _.findWhere(graph.get_leaves(), {type: 'View'});
                 graph.remove_edge(put, sink);
                 // add a new sink just so that it doesn't complain about
-                graph.add_edge(put, graph.add_node("Sink", "newSink"));
+                graph.add_edge(put, graph.add_node("View", "newView"));
             });
             return run_juttle(program).then(function(res) {
                 expect(res.sinks.result.sort()).deep.equal([

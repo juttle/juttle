@@ -66,7 +66,7 @@ function get_times(pts) {
 })();
 
 
-var TestSink = Juttle.proc.subscribe.extend({
+var TestView = Juttle.proc.subscribe.extend({
     initialize: function(options) {
         this.sink = options.sink;
         this.eofs = options.eofs || 1;
@@ -205,7 +205,7 @@ function run_juttle(prog, options) {
             }
 
             var cur_options = _.extend({ sink: sink }, sink_options[sink.name]);
-            var sink_handler = new TestSink(cur_options, {}, null, null, prog);
+            var sink_handler = new TestView(cur_options, {}, null, null, prog);
 
             sink_handlers.push(sink_handler);
 
