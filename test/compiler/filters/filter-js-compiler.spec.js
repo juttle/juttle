@@ -53,8 +53,8 @@ describe('FilterJSCompiler', function() {
     var literalNaN = { type: 'NaNLiteral' };
     var literalAbcd = { type: 'StringLiteral', value: "abcd" };
     var literalGlob = { type: 'StringLiteral', value: "e*h" };
-    var literalMoment = { type: 'MomentConstant', value: '2015-01-01T00:00:00.000Z' };
-    var literalDuration = { type: 'DurationConstant', value: '00:00:05.000' };
+    var literalMoment = { type: 'MomentLiteral', value: '2015-01-01T00:00:00.000Z' };
+    var literalDuration = { type: 'DurationLiteral', value: '00:00:05.000' };
     var literal13 = { type: 'ArrayLiteral', elements: [literal1, literal3] };
     var regExp = { type: 'RegularExpressionLiteral', value: "e.*h", flags: "" };
 

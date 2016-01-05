@@ -20,13 +20,6 @@ var parseFiles = [
         }
     },
     {
-        src: '../lib/moment/moment-parser.pegjs',
-        dest: '../lib/moment/parser.js',
-        options: {
-            cache: true
-        }
-    },
-    {
         src: '../extlib/points-parser/points-parser.pegjs',
         dest: '../extlib/points-parser/points-parser.js'
     }
