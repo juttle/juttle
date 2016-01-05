@@ -332,6 +332,7 @@ function setupCline() {
         console.log('Starting multi-line input. End input with a line containing a single ".":');
         multi_line_src = '';
         in_multi_line = true;
+        cli.prompt('');
         trim_history();
     });
 
