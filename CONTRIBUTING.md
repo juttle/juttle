@@ -6,7 +6,13 @@ The aim of this document is to make the process easy. These guidelines apply to 
 
 If you have questions, feel free to ask in our [Gitter chat room](https://gitter.im/juttle/juttle).
 
-[TOC]
+Topics:
+- [Submitting Issues](#submitting-issues)
+- [Filing Bugs](#filing-bugs)
+- [Asking Questions](#asking-questions)
+- [Updating Docs](#updating-docs)
+- [Requesting Enhancements](#requesting-enhancements)
+- [Contributing Code](#contributing-code)
 
 ## Submitting Issues
 
