@@ -139,4 +139,36 @@ describe('table view', function () {
             '└───────────────────────────────────┘',
             '' ]);
     });
+
+    it('warns if subsequent points arrive late with different keys', function() {
+        var stream = new streams.WritableStream();
+        var table = new TableView({
+            fstream: stream,
+            progressive: true
+        },{
+            color: false
+        });
+
+        var warnings = [];
+        table.events.on('warning', function(msg) {
+            warnings.push(msg);
+        });
+
+        table.consume([{key1: 'val1'}]);
+        table.consume([{key2: 'val2'}]);
+        table.eof();
+
+        var lines = stream.toString().split('\n');
+        expect(lines).to.deep.equal([
+            '┌──────────┐',
+            '│ key1     │',
+            '├──────────┤',
+            '│ val1     │',
+            '├──────────┤',
+            '│          │',
+            '└──────────┘',
+            ''
+        ]);
+        expect(warnings).to.deep.equal(['view table: Ignoring new point key(s) "key2"']);
+    });
 });

@@ -175,7 +175,7 @@ function perform_run(options) {
         });
 
         program.events.on('warning', function(msg, warn) {
-            console.warn(warn, msg);
+            console.warn(msg);
         });
 
         view_mgr.events.on('error', function(msg, err) {
@@ -183,7 +183,7 @@ function perform_run(options) {
         });
 
         view_mgr.events.on('warning', function(msg, warn) {
-            console.warn(warn, msg);
+            console.warn(msg);
         });
 
         // Start the program.
