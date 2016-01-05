@@ -335,7 +335,7 @@ function setupCline() {
         trim_history();
     });
 
-    cli.command('{juttle}', 'evaluate juttle program', {juttle: '(?!(help|clear|exit)|\\.).*'}, function(input, args) {
+    cli.command('{juttle}', 'evaluate juttle program', {juttle: '(?!(help|clear|exit)|\\.).*(?:\n.*)*'}, function(input, args) {
         if (in_multi_line) {
             multi_line_src += input + '\n';
         } else {
@@ -351,7 +351,14 @@ function setupCline() {
             cli.prompt(prompt);
         } else {
             in_multi_line = false;
-            add_history(multi_line_src);
+
+            // Remove the newlines from the command before adding it
+            // to history. This will make it easier to view and edit
+            // after scrolling back through history. When running the
+            // command, however, still keep the multi-line version so
+            // any initial errors are printed in context.
+
+            add_history(multi_line_src.replace(/\n/g, ' '));
             perform_mode({
                 action: mode,
                 juttle_src: multi_line_src
