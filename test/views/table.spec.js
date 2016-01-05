@@ -97,4 +97,46 @@ describe('table view', function () {
         expect(lines[5]).to.match(/│.*true.*│/);
         expect(lines[7]).to.match(/│.*false.*│/);
     });
+
+    it('progressive mode truncates columns in subsequent batches', function() {
+        var stream = new streams.WritableStream();
+        var table = new TableView({
+            fstream: stream,
+            progressive: true
+        },{
+            color: false
+        });
+
+        var batch1 = [
+            { key: 'short' },
+            { key: 'a bit longer' },
+            { key: 'very much longer by far' },
+            { key: 'shorter' }
+        ];
+
+        var batch2 = [
+            { key: 'very very very very very much longer by far' }
+        ];
+
+        table.consume(batch1);
+        table.consume(batch2);
+        table.eof();
+
+        var lines = stream.toString().split('\n');
+        expect(lines).to.deep.equal([
+            '┌───────────────────────────────────┐',
+            '│ key                               │',
+            '├───────────────────────────────────┤',
+            '│ short                             │',
+            '├───────────────────────────────────┤',
+            '│ a bit longer                      │',
+            '├───────────────────────────────────┤',
+            '│ very much longer by far           │',
+            '├───────────────────────────────────┤',
+            '│ shorter                           │',
+            '├───────────────────────────────────┤',
+            '│ very very very very very much lo… │',
+            '└───────────────────────────────────┘',
+            '' ]);
+    });
 });
