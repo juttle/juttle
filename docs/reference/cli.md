@@ -107,10 +107,10 @@ help, \? - print this usage
 clear, \c - clear the terminal screen
 ```
 
-## Visual Sinks
+## Views
 
 ###table
-`juttle` supports [table](../sinks/view_table.md) and [text](../sinks/view_text.md) visual sinks:
+`juttle` supports [table](../sinks/view_table.md) and [text](../sinks/view_text.md) views:
 
 
 ```
@@ -132,7 +132,7 @@ juttle> emit -limit 1 | view text
 juttle>
 ```
 
-If a program does not contain a visual sink, `juttle` automatically adds one based on the value of the `implicit_sink` configuration item (see below).
+If a program does not contain a view, `juttle` automatically adds one based on the value of the `implicit_view` configuration item (see below).
 
 ## Errors
 
@@ -180,14 +180,14 @@ exports.
 
 Generally `juttle-config` is used to configure adapters to various
 backends. The only `juttle`-specific configuration item is
-`implicit_sink`, which defines what the default sink is at the end of
+`implicit_view`, which defines what the default view is at the end of
 your flowgraph when not explicitly specified. For example if you set
 it to `text` like so:
 
 **.juttle-config.json**:
 ```
 {
-"implicit_sink": "text"
+"implicit_view": "text"
 }
 ```
 

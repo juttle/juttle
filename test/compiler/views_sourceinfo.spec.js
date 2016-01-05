@@ -7,7 +7,7 @@ describe('Views get info on source time bounds', function() {
     function test(juttle, spec) {
         it(juttle, function() {
             var prog = compiler.compileSync(juttle, {fg_processors: [views_sourceinfo]});
-            var views = prog.get_client_sinks();
+            var views = prog.get_views();
             var expected, actual;
 
             for (var i = 0; i < views.length; i++) {

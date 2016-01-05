@@ -24,14 +24,14 @@ describe('Program deactivation', function() {
         var prog = "emit -limit 1 -from :-1m: | view result";
         return check_juttle({program: prog}).then(function(res) {
             res.prog.deactivate();
-            expect(teardowns.sort()).to.deep.equal(["clientsink", "emit"]);
+            expect(teardowns.sort()).to.deep.equal(["clientview", "emit"]);
         });
     });
     it('teardown() is called on all procs (complicated program)', function() {
         var prog = "(emit -limit 1 -from :-1m: ; emit -limit 1 -from :-1m:)  | (put a = 1; put b = 1)| (view result1; view result2)";
         return check_juttle({program: prog}).then(function(res) {
             res.prog.deactivate();
-            expect(teardowns.sort()).to.deep.equal(["clientsink", "clientsink", "emit", "emit", "put", "put"]);
+            expect(teardowns.sort()).to.deep.equal(["clientview", "clientview", "emit", "emit", "put", "put"]);
         });
     });
 });

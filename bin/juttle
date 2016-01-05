@@ -29,11 +29,11 @@ var path = require('path');
 var cline = require('cline');
 var minimist = require('minimist');
 var Promise = require('bluebird');
-var sinks = require('../lib/sinks');
+var views = require('../lib/views');
 var read_config = require('../lib/config/read-config');
 
 var LocationStripper = require('../lib/cli/location-stripper');
-var ClientSinkManager = require('../lib/sinks/client-sink-mgr.js');
+var ViewManager = require('../lib/views/view-mgr.js');
 var CliErrors = require('../lib/cli/errors');
 var parseInputs = require('../lib/cli/inputs').parseInputs;
 var URLResolver = require('../lib/module-resolvers/url-resolver');
@@ -106,13 +106,13 @@ _.defaults(config, {
     adapters: {},
     color: true,
     show_locations: true,
-    implicit_sink: 'table'
+    implicit_view: 'table'
 });
 
-var sink_classes = {
-    table: sinks.TableSink,
-    text: sinks.TextSink,
-    file: sinks.FileSink
+var view_classes = {
+    table: views.TableView,
+    text: views.TextView,
+    file: views.FileView
 };
 
 var Juttle = require('../lib/runtime').Juttle;
@@ -146,7 +146,7 @@ function perform_compile(options) {
     var compile_options = {
         stage: options.stage,
         moduleResolver: options.resolver,
-        fg_processors: [implicit_views(config.implicit_sink || 'table'), optimize],
+        fg_processors: [implicit_views(config.implicit_view || 'table'), optimize],
         inputs: options.inputs
     };
 
@@ -155,21 +155,21 @@ function perform_compile(options) {
 
 function perform_run(options) {
     // We break this into compile and run phases. After compiling
-    // and before running, we get the list of sinks and create
+    // and before running, we get the list of views and create
     // appropriate objects for each.
 
     return perform_compile(options).then(function(program) {
-        var sink_mgr = new ClientSinkManager({
+        var view_mgr = new ViewManager({
             program: program,
-            sink_classes: sink_classes
+            view_classes: view_classes
         },{ // env
             color: (opts.color ? true : false) && (opts.no_color ? false : true)
         });
 
-        var sinks_done = sink_mgr.setup(program);
+        var views_done = view_mgr.setup(program);
 
-        // Start listening for callbacks from the program and client sink
-        // manager for errors/warnings/sink data.
+        // Start listening for callbacks from the program and view
+        // manager for errors/warnings/view data.
         program.events.on('error', function(msg, err) {
             console.error(msg, err);
         });
@@ -178,11 +178,11 @@ function perform_run(options) {
             console.warn(warn, msg);
         });
 
-        sink_mgr.events.on('error', function(msg, err) {
+        view_mgr.events.on('error', function(msg, err) {
             console.error(msg, err);
         });
 
-        sink_mgr.events.on('warning', function(msg, warn) {
+        view_mgr.events.on('warning', function(msg, warn) {
             console.warn(warn, msg);
         });
 
@@ -191,7 +191,7 @@ function perform_run(options) {
 
         return program.done()
         .then(function() {
-            return sinks_done;
+            return views_done;
         })
         .then(function() {
             program.events.off();

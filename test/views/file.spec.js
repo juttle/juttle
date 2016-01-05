@@ -1,21 +1,21 @@
 var expect = require('chai').expect;
-var FileSink = require('../../lib/sinks').FileSink;
+var FileView = require('../../lib/views').FileView;
 var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs'));
 var tmp = require('tmp');
 
 
-describe('file sink', function () {
+describe('file view', function () {
 
     it('fails when no -filename specified', function() {
         expect(function() {
-            new FileSink({});
-        }).to.throw('File sinks require a -filename argument');
+            new FileView({});
+        }).to.throw('File views require a -filename argument');
     });
 
     it('default outputs JSON', function(done) {
         var filename = tmp.tmpNameSync();
-        var file = new FileSink({
+        var file = new FileView({
             filename: filename
         });
 

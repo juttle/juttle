@@ -197,7 +197,7 @@ function run_juttle(prog, options) {
 
             // non-visual sinks don't implement pub/sub channel but instead have
             // a done() promise to indicate when they are at eof.
-            if (sink.procName !== 'clientsink') {
+            if (sink.procName !== 'clientview') {
                 return sink.isDone
                 .then(function() {
                     return sink;

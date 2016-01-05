@@ -95,7 +95,7 @@ describe('adapter API tests', function () {
             expect(first_node.procName).equal('read-test');
 
             var second_node = first_node.out_.default[0].proc;
-            expect(second_node.procName).equal('clientsink');
+            expect(second_node.procName).equal('clientview');
             expect(result.sinks.table).deep.equal([{count: 1}]);
             expect(result.prog.graph.count).equal(true);
         });
@@ -122,7 +122,7 @@ describe('adapter API tests', function () {
             expect(first_node.procName).equal('read-test');
 
             var second_node = first_node.out_.default[0].proc;
-            expect(second_node.procName).equal('clientsink');
+            expect(second_node.procName).equal('clientview');
 
             expect(result.sinks.table).deep.equal([{count: 1}]);
             expect(result.prog.graph.limit).equal(1);
