@@ -23,3 +23,13 @@ counts unique days
 
 ### Output
     { days: 5 }
+
+supports nested points
+---------------------------------------
+### Juttle
+    emit -points [ {"task":{"day":"Monday"}}, {"task":{"day":"Friday"}}, {"task":{"day":"Monday"}} ]
+    | reduce days = count_unique(task)
+    | view result
+
+### Output
+    { days: 2 }
