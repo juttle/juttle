@@ -1179,6 +1179,43 @@ describe('Juttle procs tests', function() {
                 });
         });
 
+        it('reduce by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 5 },'
+                            + '{ "o": { "a": 2 }, "value": 3 },'
+                            + '{ "o": { "a": 1 }, "value": 2 }]'
+                            + ' | reduce sum(value) by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 1 }, sum: 7 },
+                        { o: { a: 2 }, sum: 3 },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
+
+        it('reduce by non-scalar field and a scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "tag": 1, "value": 5 },'
+                            + '{ "o": { "a": 2 }, "tag": 2, "value": 3 },'
+                            + '{ "o": { "a": 1 }, "tag": 1, "value": 2 }]'
+                            + ' | reduce count() by o, tag | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 1 }, tag: 1, count: 2 },
+                        { o: { a: 2 }, tag: 2, count: 1 },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
+
+
         it('reduce by time (from function returning array)', function() {
             var program = 'function getGroups() { return ["time"]; } emit  -hz 1000 -from Date.new(0)  -limit 6 | reduce by getGroups() | view result';
             return check_juttle({
