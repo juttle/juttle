@@ -33,10 +33,10 @@ describe('Program instrumentation', function() {
             read: 1
         },
         proc_total: 1,
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         reducers: {},
         reducer_total: 0,
         functions: {'user-defined': 0},
@@ -54,10 +54,10 @@ describe('Program instrumentation', function() {
             read: 1
         },
         proc_total: 2,
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         reducers: {},
         reducer_total: 0,
         functions: {'user-defined': 0},
@@ -70,10 +70,10 @@ describe('Program instrumentation', function() {
         input_total: 0,
         source_total: 1,
         sources: [{type: 'read', from: from, to: null, last: null}],
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         procs: {
             read: 1
         },
@@ -89,10 +89,10 @@ describe('Program instrumentation', function() {
         input_total: 0,
         source_total: 1,
         sources: [{type: 'read', from: from, to: to, last: null}],
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         procs: {
             read: 1
         },
@@ -112,10 +112,10 @@ describe('Program instrumentation', function() {
             read: 1
         },
         proc_total: 1,
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         reducer_total: 0,
         reducers: {},
         functions: {'user-defined': 0},
@@ -130,10 +130,10 @@ describe('Program instrumentation', function() {
             {type: 'read', from: from, to: null, last: null},
             {type: 'read', from: null, to: null, last: last}
         ],
-        sinks: {
+        views: {
             view: 2
         },
-        sink_total: 2,
+        view_total: 2,
         procs: {
             read: 2
         },
@@ -152,10 +152,10 @@ describe('Program instrumentation', function() {
             {type: 'read', from: from, to: null, last: null},
             {type: 'read', from: null, to: null, last: last}
         ],
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         procs: {
             read: 2
         },
@@ -172,10 +172,10 @@ describe('Program instrumentation', function() {
              input_total: 0,
              source_total: 1,
              sources: [{type: 'read', from: null, to: null, last: null}],
-             sinks: {
+             views: {
                  view: 1
              },
-             sink_total: 1,
+             view_total: 1,
              procs: {
                  read: 1,
                  reduce: 1
@@ -201,11 +201,11 @@ describe('Program instrumentation', function() {
              input_total: 0,
              source_total: 1,
              sources: [{type: 'read', from: null, to: null, last: null}],
-             sinks: {
+             views: {
                  table: 1,
                  view: 1
              },
-             sink_total: 2,
+             view_total: 2,
              procs: {
                  read: 1,
                  reduce: 2
@@ -227,10 +227,10 @@ describe('Program instrumentation', function() {
              input_total: 0,
              source_total: 1,
              sources: [{type: 'emit'}],
-             sinks: {
+             views: {
                  view: 1
              },
-             sink_total: 1,
+             view_total: 1,
              procs: {
                  emit: 1,
                  put: 1
@@ -248,10 +248,10 @@ describe('Program instrumentation', function() {
         input_total: 0,
         source_total: 1,
         sources: [{type: 'emit'}],
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         procs: {
             emit: 1
         },
@@ -271,10 +271,10 @@ describe('Program instrumentation', function() {
         input_total: 2,
         source_total: 1,
         sources: [{type: 'emit'}],
-        sinks: {
+        views: {
             view: 1
         },
-        sink_total: 1,
+        view_total: 1,
         procs: {
             emit: 1
         },

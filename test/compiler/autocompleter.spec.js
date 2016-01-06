@@ -10,7 +10,7 @@ describe('Autocompleter', function() {
             autocompleter = new Autocompleter({
                 // Deliberately in reverse-alphabetical order (to exercise
                 // sorting code in the autocompleter).
-                sinks: {
+                views: {
                     '@timechart': {
                         type: 'sink',
                         options: {}
