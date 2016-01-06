@@ -128,6 +128,31 @@ Other operators: Produces an error for `stream-expression @ field`
 
   * The "<" operator: LHS operand must be computable at compile-time.
 
+Other operators: Allows `field @ field` in `filter`
+---------------------------------------------------
+
+### Juttle
+
+    emit -from :0: -limit 1
+    | put a = 5, b = 6
+    | filter a < b
+    | view result
+
+### Output
+
+    { time: "1970-01-01T00:00:00.000Z", a: 5, b: 6 }
+
+Other operators: Produces an error for `field @ field` in `read`
+----------------------------------------------------------------
+
+### Juttle
+
+    read test a < b
+
+### Errors
+
+  * The "<" operator: RHS operand must be computable at compile-time.
+
 The `=~` operator: Produces an error when RHS has an invalid type
 -----------------------------------------------------------------
 
