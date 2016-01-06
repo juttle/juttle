@@ -11,7 +11,6 @@ var store = {};
 
 function TestAdapter(config, Juttle) {
     var Read = Juttle.proc.source.extend({
-        sourceType: 'batch',
         procName: 'read-test',
 
         initialize: function(options, params) {
