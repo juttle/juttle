@@ -14,14 +14,3 @@ Produces an error when used on term of invalid type
 
 The following testcase should really be in parser tests, but we don't have
 these.
-
-Produces correct error on terms that look like options
-------------------------------------------------------
-
-### Juttle
-
-    read test "abcd" -type "event"
-
-### Errors
-
-  * Options must be specified before filter expressions.
