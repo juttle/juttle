@@ -8,6 +8,7 @@ var tmp = require('tmp');
 describe('Juttle CLI Tests', function() {
 
     describe('juttle', function() {
+        this.timeout(30000);
         it('can see the correct running juttle version', function() {
             var version = require('../../package.json').version;
             return runJuttle(['--version'])
