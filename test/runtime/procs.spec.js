@@ -271,6 +271,29 @@ describe('Juttle procs tests', function() {
                                   { time: '1970-01-01T00:00:06.000Z', x: 6, y: 0, z: 0 } ]);
             });
         });
+
+        it('put by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 5, "time": "1970-01-01T00:00:00.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 3, "time": "1970-01-01T00:00:01.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 3, "time": "1970-01-01T00:00:02.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 1, "time": "1970-01-01T00:00:03.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 2, "time": "1970-01-01T00:00:04.000Z" }]'
+                            + ' | put o=#o, value=#value | put min=min("value") by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 1 }, value: 5, min: 5, time: "1970-01-01T00:00:00.000Z" },
+                        { o: { a: 2 }, value: 3, min: 3, time: "1970-01-01T00:00:01.000Z" },
+                        { o: { a: 1 }, value: 3, min: 3, time: "1970-01-01T00:00:02.000Z" },
+                        { o: { a: 2 }, value: 1, min: 1, time: "1970-01-01T00:00:03.000Z" },
+                        { o: { a: 1 }, value: 2, min: 2, time: "1970-01-01T00:00:04.000Z" }
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
     });
 
     describe('Merge (synchronized) tests ', function() {
@@ -819,6 +842,42 @@ describe('Juttle procs tests', function() {
             });
         });
 
+        it('head by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 1, "time": "1970-01-01T00:00:00.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 2, "time": "1970-01-01T00:00:01.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 3, "time": "1970-01-01T00:00:02.000Z" }]'
+                            + ' | head 1 by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 1 }, value: 1, time: '1970-01-01T00:00:00.000Z' },
+                        { o: { a: 2 }, value: 2, time: '1970-01-01T00:00:01.000Z' },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
+
+        it('head default by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 1, "time": "1970-01-01T00:00:00.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 2, "time": "1970-01-01T00:00:01.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 3, "time": "1970-01-01T00:00:02.000Z" }]'
+                            + ' | head by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 1 }, value: 1, time: '1970-01-01T00:00:00.000Z' },
+                        { o: { a: 2 }, value: 2, time: '1970-01-01T00:00:01.000Z' },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
+
         it('default head test', function() {
             return check_juttle({
                 program: 'read file -file "input/simple.json" | head | view result'
@@ -927,6 +986,42 @@ describe('Juttle procs tests', function() {
                                                      {time: '1970-01-01T00:00:08.000Z', x: 2},
                                                      {time: '1970-01-01T00:00:09.000Z', x: 0}]);
             });
+        });
+
+        it('tail by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 1, "time": "1970-01-01T00:00:00.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 2, "time": "1970-01-01T00:00:01.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 3, "time": "1970-01-01T00:00:02.000Z" }]'
+                            + ' | tail 1 by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 2 }, value: 2, time: '1970-01-01T00:00:01.000Z' },
+                        { o: { a: 1 }, value: 3, time: '1970-01-01T00:00:02.000Z' },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
+        });
+
+        it('tail default by non-scalar field', function() {
+            var program = 'emit -points ['
+                            + '{ "o": { "a": 1 }, "value": 1, "time": "1970-01-01T00:00:00.000Z" },'
+                            + '{ "o": { "a": 2 }, "value": 2, "time": "1970-01-01T00:00:01.000Z" },'
+                            + '{ "o": { "a": 1 }, "value": 3, "time": "1970-01-01T00:00:02.000Z" }]'
+                            + ' | tail by o | view result';
+            return check_juttle({
+                program: program
+            })
+                .then(function (res) {
+                    var expected_value = [
+                        { o: { a: 2 }, value: 2, time: '1970-01-01T00:00:01.000Z' },
+                        { o: { a: 1 }, value: 3, time: '1970-01-01T00:00:02.000Z' },
+                    ];
+                    expect(res.sinks.result).to.deep.equal(expected_value);
+                });
         });
 
         it('tail 0 returns empty results', function() {
