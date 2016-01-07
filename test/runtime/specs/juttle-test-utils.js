@@ -24,7 +24,7 @@ JuttleLogger.getLogger = log4js.getLogger;
 // Register the test adapter
 var adapter = require('../test-adapter');
 
-Juttle.adapters.register('test', adapter({}, Juttle));
+Juttle.adapters.register('test', adapter({}));
 
 if (! process.env.DEBUG) {
     log4js.setGlobalLogLevel('info');
