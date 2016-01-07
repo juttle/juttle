@@ -84,6 +84,21 @@ function TestAdapter(config, Juttle) {
             optimization_info.limit = limit;
             return true;
         },
+        optimize_tail: function(read, tail, graph, optimization_info) {
+            if (optimization_info.type && optimization_info.type !== 'tail') {
+                return false;
+            }
+
+            var limit = graph.node_get_option(tail, 'arg');
+
+            if (optimization_info.hasOwnProperty('limit')) {
+                limit = Math.min(limit, optimization_info.limit);
+            }
+
+            optimization_info.type = 'tail';
+            optimization_info.limit = limit;
+            return true;
+        },
         optimize_reduce: function(read, reduce, graph, optimization_info) {
             var reduce_is_count = reduce && reduce.reducers &&
                 reduce.reducers.length === 1 && reduce.reducers[0].name === 'count' &&
