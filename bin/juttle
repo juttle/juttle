@@ -116,7 +116,7 @@ var view_classes = {
 };
 
 var Juttle = require('../lib/runtime').Juttle;
-Juttle.adapters.load(config.adapters);
+Juttle.adapters.configure(config.adapters);
 
 function format_js(code) {
     var beautify = require('js-beautify').js_beautify;
