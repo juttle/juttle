@@ -7,12 +7,13 @@ var expect = require('chai').expect;
 
 var simpleData;
 var simpleData2;
-
+var nestedData;
 
 describe('Juttle reducers tests', function() {
 
     before(function() {
         simpleData = require('./specs/input/simple');
+        nestedData = require('./specs/input/nested');
 
         simpleData2 = require('./specs/input/simple-non-monotonic-time');
     });
@@ -160,6 +161,15 @@ describe('Juttle reducers tests', function() {
             program: 'read file -file "input/simple.json" | reduce pluck=pluck(rate) | view result'
         }).then(function(res) {
             var rate_values = _.pluck(simpleData, 'rate');
+            expect(res.sinks.result[0].pluck).to.deep.equal(rate_values);
+        });
+    });
+
+    it('pluck nested', function() {
+        return check_juttle({
+            program: 'read file -file "input/nested.json" | reduce pluck=pluck(obj) | view result'
+        }).then(function(res) {
+            var rate_values = _.pluck(nestedData, 'obj');
             expect(res.sinks.result[0].pluck).to.deep.equal(rate_values);
         });
     });
