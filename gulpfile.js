@@ -188,6 +188,7 @@ gulp.task('examples-check', ['peg'], function() {
     // adapter types that are used in the examples.
     var adapters = require('./lib/runtime/adapters');
     adapters.get = function(name) { return {}; };
+    adapters.isValid = function(name) { return true; };
 
     var jcompile = function() {
         return through.obj(function(file, encoding, callback) {
