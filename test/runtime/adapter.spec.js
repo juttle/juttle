@@ -152,4 +152,36 @@ describe('adapter API tests', function () {
             expect(result.sinks.table.length).equal(0);
         });
     });
+
+    it('errors if a bogus adapter is used in read', function() {
+        return check_juttle({
+            program: 'read bogus'
+        })
+        .then(function() {
+            throw new Error('unexpected success');
+        })
+        .catch(function(err) {
+            expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
+            expect(err.message).equal('Error: adapter bogus not registered');
+            expect(err.info.location.filename).is.a.string;
+            expect(err.info.location.start.offset).is.a.number;
+            expect(err.info.location.end.offset).is.a.number;
+        });
+    });
+
+    it('errors if a bogus adapter is used in write', function() {
+        return check_juttle({
+            program: 'emit | write bogus'
+        })
+        .then(function() {
+            throw new Error('unexpected success');
+        })
+        .catch(function(err) {
+            expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
+            expect(err.message).equal('Error: adapter bogus not registered');
+            expect(err.info.location.filename).is.a.string;
+            expect(err.info.location.start.offset).is.a.number;
+            expect(err.info.location.end.offset).is.a.number;
+        });
+    });
 });
