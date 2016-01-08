@@ -241,7 +241,10 @@ For example, to configure the Elasticsearch adapter, first run `npm install jutt
 }
 ```
 
+By default, the runtime will try to load the adapter from an npm module matching the name `juttle-<type>-adapter`, so for the above example to work properly, you need to make sure that `juttle-elastic-adapter` exists somewhere in your npm load path.
+
+To load an adapter from a different location, add a `path` attribute to the adapter configuration that contains the module path to be used when loading the adapter.
+
 ## Logging
 
 `juttle` uses [log4js](http://stritti.github.io/log4js/) for logging, and can be controlled via the standard `log4js.json` file. In addition, unless the environment variable `DEBUG` is set to 1, `juttle` sets the default log level to 'info'.
-
