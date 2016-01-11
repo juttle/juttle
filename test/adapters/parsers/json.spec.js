@@ -58,7 +58,7 @@ describe('parsers/json', function() {
         });
     });
 
-    it('can parse a JSON object with nested arrrays correctly', function() {
+    it('can parse a JSON object with nested arrays correctly', function() {
         var json = parsers.getParser('json');
         var results = [];
         return json.parseStream(fs.createReadStream(pointWithArrayFile), function(result) {
@@ -73,13 +73,67 @@ describe('parsers/json', function() {
                         {'fizz1': 'buzz'},
                         {'fizz2': 'buzz'},
                         {'fizz3': 'buzz'}
-                    ]
+                    ],
+                    'bar': {
+                        'baz': [
+                            {'fizz1': 'buzz', 'contents': [1,2,3]},
+                            {'fizz2': 'buzz', 'contents': [1,2,3]},
+                            {'fizz3': 'buzz', 'contents': [1,2,3]}
+                        ],
+                        'bing': {'bang': 'object', 'bong': {'type': 'object'}}
+                    }
                 }
             ]]);
         });
     });
 
-    it('can parse a JSON array with nested arrrays correctly', function() {
+    it('can parse a nested array out of a JSON object using a rootPath path', function() {
+        var json = parsers.getParser('json', {rootPath: 'foo'});
+        var results = [];
+        return json.parseStream(fs.createReadStream(pointWithArrayFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(1);
+            expect(results).to.deep.equal([[
+                {'fizz1': 'buzz'},
+                {'fizz2': 'buzz'},
+                {'fizz3': 'buzz'}
+            ]]);
+        });
+    });
+
+    it('can parse a nested array out of a JSON object using a multi-element rootPath path', function() {
+        var json = parsers.getParser('json', {rootPath: 'bar.baz'});
+        var results = [];
+        return json.parseStream(fs.createReadStream(pointWithArrayFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(1);
+            expect(results).to.deep.equal([[
+                {'fizz1': 'buzz', 'contents': [1,2,3]},
+                {'fizz2': 'buzz', 'contents': [1,2,3]},
+                {'fizz3': 'buzz', 'contents': [1,2,3]}
+            ]]);
+        });
+    });
+
+    it('can parse a nested object out of a JSON object using a rootPath path', function() {
+        var json = parsers.getParser('json', {rootPath: 'bar.bing'});
+        var results = [];
+        return json.parseStream(fs.createReadStream(pointWithArrayFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(1);
+            expect(results).to.deep.equal([[
+                {'bang': 'object', 'bong': {'type': 'object'}}
+            ]]);
+        });
+    });
+
+    it('can parse a JSON array with nested arrays correctly', function() {
         var json = parsers.getParser('json');
         var results = [];
         return json.parseStream(fs.createReadStream(pointsWithArrayFile), function(result) {
