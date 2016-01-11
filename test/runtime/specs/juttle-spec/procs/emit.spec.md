@@ -384,7 +384,7 @@ Complains about bad time formatting in -points
 
 ### Juttle
 
-    emit -points [ {time:"1970-01-X01"} ]
+    emit -points [ {time:"invalid"} ]
     | view result
 
 ### Errors
