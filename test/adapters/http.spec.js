@@ -120,6 +120,7 @@ describe('HTTP adapter tests', function() {
                 * timeField: name of to put the ISO 8601 timestamp in
                 * from: ISO 8601 timestamp to start the timestamps at, default :now:
                 * every: seconds between each point, default: 1
+                * rootPath: add a wrapper object with the given key
                 *
                 */
                 var points = [];
@@ -127,6 +128,7 @@ describe('HTTP adapter tests', function() {
                 var count = req.query.count;
                 var from = req.query.from ? new Date(req.query.from) : new Date();
                 var every = req.query.every ? parseInt(req.query.every) : 1;
+                var rootPath = req.query.rootPath;
 
                 var now = from;
                 for (var index = 0; index < parseInt(count); index++) {
@@ -134,7 +136,7 @@ describe('HTTP adapter tests', function() {
 
                     // copy all fields except timeField and count to each point
                     _.each(req.query, function(value, key, obj) {
-                        if (['timeField', 'count', 'from', 'every'].indexOf(key) === -1 ) {
+                        if (['timeField', 'count', 'from', 'every', 'rootPath'].indexOf(key) === -1) {
                             point[key] = value;
                         }
                     });
@@ -176,6 +178,13 @@ describe('HTTP adapter tests', function() {
                 } else {
                     // default to JSON
                     res.set('Content-Type', 'application/json');
+
+                    // add a wrapper object if requested
+                    if (rootPath) {
+                        var obj = {};
+                        obj[rootPath] = points;
+                        points = obj;
+                    }
                     res.send(points);
                 }
             });
@@ -397,6 +406,18 @@ describe('HTTP adapter tests', function() {
                 expect(result.sinks.table[0]['user-agent']).to.equal('fake-data');
                 expect(result.sinks.table[1].etag).to.equal('12345');
                 expect(result.sinks.table[1]['user-agent']).to.equal('fake-data');
+            });
+        });
+
+        it('can use -rootPath to extract points from a nested field', function() {
+            return check_juttle({
+                program: 'read http -rootPath "wrapper" ' +
+                    '-url "' + this.url + '/points?count=5&rootPath=wrapper&timeField=time&key=val"'
+            })
+            .then(function(result) {
+                expect(result.sinks.table.length).equal(5);
+                expect(result.sinks.table[0].key).equal('val');
+                expect(result.sinks.table[0].time).is.defined;
             });
         });
 
