@@ -3,7 +3,7 @@ var Head = require('../../lib/runtime/procs/head');
 var Groups = require('../../lib/runtime/groups');
 
 // FIXME: The groups are coupled to procs only to emit a warning.
-var head = new Head({}, {}, null, null, {id: 'fake', trigger:function() {}});
+var head = new Head({}, {}, null, {id: 'fake', trigger:function() {}});
 
 describe('groups tests', function() {
     describe('non-scalars', function() {
