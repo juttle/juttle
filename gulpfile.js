@@ -141,10 +141,10 @@ gulp.task('test-coverage', ['peg', 'juttle-spec', 'instrument'], function() {
         .pipe(istanbul.enforceThresholds({
             thresholds: {
                 global: {
-                    statements: 91,
-                    branches: 84,
-                    functions: 91,
-                    lines: 91
+                    statements: 92,
+                    branches: 86,
+                    functions: 92,
+                    lines: 92
                 }
             }
         }));
