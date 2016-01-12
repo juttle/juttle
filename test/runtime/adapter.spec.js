@@ -1,6 +1,9 @@
 var juttle_test_utils = require('./specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var expect = require('chai').expect;
+var path = require('path');
+var adapters = require('../../lib/runtime/adapters');
+var TestAdapterClone = require('./test-adapter-clone');
 
 describe('adapter API tests', function () {
     it('fails when you do not provide the `key` to read', function() {
@@ -127,6 +130,26 @@ describe('adapter API tests', function () {
             expect(result.sinks.table).deep.equal([{count: 1}]);
             expect(result.prog.graph.limit).equal(1);
             expect(result.prog.graph.count).equal(true);
+        });
+    });
+
+    it('delays loading of configured adapters', function() {
+        adapters.configure({
+            'testClone': {
+                path: path.resolve(__dirname, './test-adapter-clone')
+            }
+        });
+
+        expect(TestAdapterClone.initialized).is.false;
+
+        var program = 'read testClone -key "test"';
+        return check_juttle({
+            program: program
+        })
+        .then(function(result) {
+            expect(TestAdapterClone.initialized).is.true;
+            expect(result.errors.length).equal(0);
+            expect(result.sinks.table.length).equal(0);
         });
     });
 });

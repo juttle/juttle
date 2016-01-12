@@ -8,8 +8,9 @@
 
 var _ = require('underscore');
 var store = {};
+var Juttle = require('../../lib/runtime/index').Juttle;
 
-function TestAdapter(config, Juttle) {
+function TestAdapter(config) {
     var Read = Juttle.proc.source.extend({
         procName: 'read-test',
 

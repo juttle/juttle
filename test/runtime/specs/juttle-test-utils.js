@@ -21,10 +21,12 @@ var optimize = require('../../../lib/compiler/optimize');
 // Set up logging to use log4js loggers
 JuttleLogger.getLogger = log4js.getLogger;
 
-// Register the test adapter
-var adapter = require('../test-adapter');
-
-Juttle.adapters.register('test', adapter({}, Juttle));
+// Configure the test adapter
+Juttle.adapters.configure({
+    test: {
+        path: path.resolve(__dirname, '../test-adapter')
+    }
+});
 
 if (! process.env.DEBUG) {
     log4js.setGlobalLogLevel('info');
