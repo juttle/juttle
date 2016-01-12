@@ -4,5 +4,13 @@
         {"fizz1": "buzz"},
         {"fizz2": "buzz"},
         {"fizz3": "buzz"}
-    ]
+    ],
+    "bar": {
+        "baz": [
+            {"fizz1": "buzz", "contents": [1,2,3]},
+            {"fizz2": "buzz", "contents": [1,2,3]},
+            {"fizz3": "buzz", "contents": [1,2,3]}
+        ],
+        "bing": {"bang": "object", "bong": {"type": "object"}}
+    }
 }

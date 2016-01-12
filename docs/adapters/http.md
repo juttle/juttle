@@ -18,6 +18,7 @@ read http -url url
           -headers headers
           -body body
           -timeField timeField
+          -rootPath rootPath
           -includeHeaders true/false
 ```
 
@@ -28,6 +29,7 @@ Parameter         |             Description          | Required?
 `-headers`        | headers to attach to the HTTP request in the form `{ key1: "value1", ..., keyN: "valueN" }` | No; default: `{}`
 `-body`           | body to send with the HTTP requests | No; default: `{}`
 `-timeField`      | The name of the field to use as the time field <br><br>The specified field will be renamed to `time` in the body of the HTTP request. If the points already contain a field called `time`, that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.  | No; defaults to keeping the `time` field as is
+`-rootPath`       | When the incoming data is JSON, use the specified path into the incoming object (expressed as `field1.field2`) to emit points | No
 `-includeHeaders` | When set to true the headers from the response are appended to each of the points in the response | No; default: `false`
 
 Currently the `read http` adapter will automatically parse incoming data based off of the `content-type` header. Here are the currently supported content-types:
@@ -40,6 +42,15 @@ _Example_
 
 Example of how to hit the Github Issues API and retrieve all issues from the
 beginning of time on a specific repository in the correct chronological order:
+
+```
+{!docs/examples/adapters/http_github_open_issues.juttle!}
+```
+
+_Example_
+
+Example of how to hit the NPM download counts API and retrieve daily download
+counts for a given package. This uses the rootPath and timeField options:
 
 ```
 {!docs/examples/adapters/http_github_open_issues.juttle!}
@@ -72,4 +83,3 @@ Simple example of using the `http` adapter to create gists in GitHub:
 ```
 {!docs/examples/adapters/http_post_to_a_gist.juttle!}
 ```
-
