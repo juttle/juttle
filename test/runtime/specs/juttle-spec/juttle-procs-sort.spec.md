@@ -126,3 +126,37 @@ Timestamps: batched flow, with grouping
     {"time":"1970-01-01T00:00:00.200Z","a":2,"b":0}
     {"time":"1970-01-01T00:00:00.400Z","a":1,"b":1}
     {"time":"1970-01-01T00:00:00.400Z","a":0,"b":0}
+
+Nested fields - arrays
+---------------------------------------
+
+### Juttle
+
+    emit -points [
+        { arr: [1, 2, 3], value: 1},
+        { arr: [3, 2, 3], value: 3},
+        { arr: [2, 2, 3], value: 2},
+    ] | sort arr | view result
+
+### Output
+
+    {"arr": [1,2,3], "value": 1}
+    {"arr": [2,2,3], "value": 2}
+    {"arr": [3,2,3], "value": 3}
+
+Nested fields - array length affects sorting
+--------------------------------------------
+
+### Juttle
+
+    emit -points [
+        { arr: [1], value: 1},
+        { arr: [3, 2, 3], value: 3},
+        { arr: [2, 2], value: 2},
+    ] | sort arr | view result
+
+### Output
+
+    {"arr": [1], "value": 1}
+    {"arr": [2,2], "value": 2}
+    {"arr": [3,2,3], "value": 3}
