@@ -26,4 +26,28 @@ describe('Scheduler', function() {
             }
         }, 100);
     });
+
+    it('runs periodic jobs', function(done) {
+        var ticks  = 0;
+
+        scheduler.schedule_every(10, function() { ticks += 1; });
+
+        var check = setTimeout(function() {
+            clearTimeout(check);
+            expect(ticks).to.gte(5);
+            done();
+        }, 70);
+    });
+
+    it('schedule throws after scheduler stopped', function() {
+        scheduler.stop();
+        expect(scheduler.schedule.bind(scheduler, Date.now(), function() {})).to.throw(/Cannot schedule callbacks/);
+        scheduler.start();
+    });
+
+    it('schedule every throws after scheduler stopped', function() {
+        scheduler.stop();
+        expect(scheduler.schedule_every.bind(scheduler, 1000, function() {})).to.throw(/Cannot schedule callbacks/);
+        scheduler.start();
+    });
 });

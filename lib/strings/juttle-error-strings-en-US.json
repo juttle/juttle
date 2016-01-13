@@ -14,6 +14,7 @@
     "RT-POINT-MISSING-TIME": "Warning: point is missing a time in {{info.field}}",
     "RT-TIMELESS-POINTS": "Warning: encountered point(s) without the time field",
     "RT-TYPE-ERROR": "Error: {{info.message}}",
+    "RT-CANNOT-SCHEDULE-AFTER-STOP": "Cannot schedule callbacks after scheduler has been stopped",
     "RT-NO-FREE-TEXT": "Error: Free text search is not implemented in this context.",
     "RT-ADAPTER-UNSUPPORTED-FILTER": "Error: {{info.filter}} is not supported by {{info.proc}}.",
     "RT-FREE-TEXT-STOCHASTIC": "Error: Free text search is not implemented for stochastic adapter.",
