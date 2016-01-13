@@ -16,46 +16,50 @@ describe('serializers/json', function() {
     it('can write no points to a provided stream', function(done) {
         var tmpFilename = tmp.tmpNameSync();
         var stream = fs.createWriteStream(tmpFilename);
-        var serializer = serializers.getSerializer('json', stream);
-        serializer.done();
-        stream.end(function(err) {
-            if (err) {
-                done(err);
-            }
-            expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
-            done();
+        stream.on('open', function() {
+            var serializer = serializers.getSerializer('json', stream);
+            serializer.done();
+            stream.end(function(err) {
+                if (err) {
+                    done(err);
+                }
+                expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
+                done();
+            });
         });
     });
 
     it('can write out a few points correctly', function(done) {
         var tmpFilename = tmp.tmpNameSync();
         var stream = fs.createWriteStream(tmpFilename);
-        var serializer = serializers.getSerializer('json', stream);
-        var data = [
-            { time: '2014-01-01T00:00:00.000Z', foo: 'bar' },
-            { time: '2014-02-01T00:00:00.000Z', foo: 'buzz' },
-            { time: '2014-03-01T00:00:00.000Z', foo: 'bizz' }
-        ];
-        serializer.write(data);
-        serializer.done();
-        stream.end(function(err) {
-            if (err) {
-                done(err);
-            }
-            var results = [];
-            var parser = parsers.getParser('json');
-            parser.parseStream(fs.createReadStream(tmpFilename), function(result) {
-                results.push(result);
-            })
-            .then(function() {
-                expect(results).to.deep.equal([data]);
-                done();
-            })
-            .catch(function(err) {
-                done(err);
-            })
-            .finally(function() {
-                fs.unlinkSync(tmpFilename);
+        stream.on('open', function() {
+            var serializer = serializers.getSerializer('json', stream);
+            var data = [
+                { time: '2014-01-01T00:00:00.000Z', foo: 'bar' },
+                { time: '2014-02-01T00:00:00.000Z', foo: 'buzz' },
+                { time: '2014-03-01T00:00:00.000Z', foo: 'bizz' }
+            ];
+            serializer.write(data);
+            serializer.done();
+            stream.end(function(err) {
+                if (err) {
+                    done(err);
+                }
+                var results = [];
+                var parser = parsers.getParser('json');
+                parser.parseStream(fs.createReadStream(tmpFilename), function(result) {
+                    results.push(result);
+                })
+                .then(function() {
+                    expect(results).to.deep.equal([data]);
+                    done();
+                })
+                .catch(function(err) {
+                    done(err);
+                })
+                .finally(function() {
+                    fs.unlinkSync(tmpFilename);
+                });
             });
         });
     });
