@@ -36,6 +36,21 @@ uniq on a duration
     {time: "1970-01-01T00:00:01.000Z", foo: "00:00:01.000", rate: "00:00:02.000"}
     {time: "1970-01-01T00:00:03.000Z", foo: "00:00:03.000", rate: "00:00:04.000"}
 
+uniq on a non-scalar field
+----------------------------
+
+### Juttle
+    emit -from Date.new(0) -limit 5
+    | put foo=count()-1
+    | put obj={ i: foo + foo % 2 }
+    | uniq obj
+    | view result
+
+### Output
+
+    {time: "1970-01-01T00:00:00.000Z", foo: 0, obj: { i: 0 }}
+    {time: "1970-01-01T00:00:01.000Z", foo: 1, obj: { i: 2 }}
+    {time: "1970-01-01T00:00:03.000Z", foo: 3, obj: { i: 4 }}
 
 uniq on multiple fields
 ------------------------
@@ -54,7 +69,6 @@ uniq on multiple fields
     {time: "1970-01-01T00:00:01.000Z", foo: "00:00:01.000", rate: "00:00:02.000", test: "00:00:00.000"}
     {time: "1970-01-01T00:00:03.000Z", foo: "00:00:03.000", rate: "00:00:04.000", test: "00:00:01.000"}
     {time: "1970-01-01T00:00:04.000Z", foo: "00:00:04.000", rate: "00:00:04.000", test: "00:00:00.000"}
-
 
 uniq by
 --------
@@ -119,6 +133,26 @@ uniq by on all fields
     { x:3, y:2, n:7 }
     { x:3, y:2, n:8 }
     { x:4, y:2, n:9 }
+
+uniq by a non-scalar field
+----------------------------
+
+### Juttle
+    emit -from Date.new(0) -limit 9
+    | put n=count(), x={ i: Math.floor((count()-1)/2) }, y=Math.floor((count()-1)/3)
+    | uniq y by x
+    | remove time
+    | view result
+
+### Output
+
+    { x:{ i:0 }, y:0, n:1 }
+    { x:{ i:1 }, y:0, n:3 }
+    { x:{ i:1 }, y:1, n:4 }
+    { x:{ i:2 }, y:1, n:5 }
+    { x:{ i:3 }, y:2, n:7 }
+    { x:{ i:4 }, y:2, n:9 }
+
 
 uniq with batched input
 ------------------------
