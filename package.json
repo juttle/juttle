@@ -1,6 +1,6 @@
 {
   "name": "juttle",
-  "version": "0.2.0",
+  "version": "0.3.0-rc.0",
   "description": "Juttle dataflow programming language",
   "keywords": [
     "juttle",
