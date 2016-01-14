@@ -13,7 +13,7 @@ The `file` adapter allows reading points from, or writing points to, a file on t
 Supported file formats are JSON array, and JSON lines; see examples below.
 
 ```text
-read file -file <path> [-format <format>] [-timeField <fieldname>]
+read file -file <path> [-format <format>] [-timeField <fieldname>] [-timeUnit <unit>]
 ```
 
 Parameter         |             Description          | Required?
@@ -21,8 +21,11 @@ Parameter         |             Description          | Required?
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
 `-format`         | Input file format: `csv` for [CSV](https://tools.ietf.org/html/rfc4180) data, `json` for [JSON](https://tools.ietf.org/html/rfc7159) data, or `jsonl` for [JSON lines](http://jsonlines.org/) data | No; defaults to `json`
 `-timeField`      | Name of the field in the data which contains a valid timestamp  | No; defaults to `time`
+`-timeUnit`       | Unit to use for any UNIX timestamps | No; defaults to `seconds`
 
-The data is assumed to contain valid timestamps in a field named `time` by default; a different name for the time field may be specified with `-timeField` option. If the data contains fields `time` and another named field specified with `-timeField`, the original contents of field `time` will be overwritten by the valid timestamp from `timeField`. 
+The data is assumed to contain valid timestamps in a field named `time` by default; a different name for the time field may be specified with `-timeField` option. If the data contains fields `time` and another named field specified with `-timeField`, the original contents of field `time` will be overwritten by the valid timestamp from `timeField`.
+
+For numeric [UNIX timestamps](https://en.wikipedia.org/wiki/Unix_time), specify a unit with the `-timeUnit` option.
 
 Timeless data, which contains no timestamps, is acceptable; however certain operations which expect time to be present in the points, such as `reduce -every :interval:`, will execute with warnings or error out. Timeless data can be joined in the Juttle flowgraph with other data which contains timestamps; a common use case for reading timeless data from a file or another backend is to join it with streaming data for enrichment.
 
@@ -92,8 +95,8 @@ If the file already exists and contains a valid JSON array, the write will appen
 _Example: writing data to a file_
 
 ```juttle
-emit -from :2015-01-01: -limit 2 
-| put name = 'write_me', value = count() 
+emit -from :2015-01-01: -limit 2
+| put name = 'write_me', value = count()
 | write file -file '/tmp/write_me.json'
 ```
 
