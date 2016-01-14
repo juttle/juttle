@@ -173,6 +173,16 @@ joins 3 1-point streams
 ### Output
     { "time":"2010-01-01T00:00:00.000Z", "foo":1, "bar":2, "baz":3 }
 
+joins 3 1-point streams with nested points
+------------------------------------------------------
+### Juttle
+    emit -from :2010-01-01: -limit 1
+    | ( put foo={ i: 1 }; put bar={ i: 2 }; put baz={ i: 3 })
+    | join | view result
+
+### Output
+    { "time":"2010-01-01T00:00:00.000Z", "foo":{"i":1}, "bar":{"i":2}, "baz":{"i":3} }
+
 joins an unbatched stream against an advancing batched table and a fixed batched table
 --------------------------------------------------------------------------------------
 ### Juttle
@@ -349,6 +359,26 @@ outer join of a point stream of ids against a table of names
     {time:"1970-01-01T00:00:04.000Z", "id":5, "n":5 }
     {time:"1970-01-01T00:00:05.000Z", "id":1, "name":"fred", "n":6 }
 
+outer join of a point stream of nested ids against a table of names
+-------------------------------------------------------------------
+### Juttle
+    const names = [
+        {time:"1970-01-01T00:00:00.000Z", "id":{i: 1}, "name":"fred"},
+        {time:"1970-01-01T00:00:00.000Z", "id":{i: 2}, "name":"wilma"},
+        {time:"1970-01-01T00:00:00.000Z", "id":{i: 3}, "name":"dino"}
+    ];
+    ( emit -points names |  remove type
+    ; emit -from Date.new(0) -limit 6 | put id = { i: (count() - 1) % 5 + 1 }, n=count()
+    ) | join -outer 2 id | view result
+
+### Output
+    {time:"1970-01-01T00:00:00.000Z", "id":{i: 1}, "name":"fred", "n":1 }
+    {time:"1970-01-01T00:00:01.000Z", "id":{i: 2}, "name":"wilma", "n":2 }
+    {time:"1970-01-01T00:00:02.000Z", "id":{i: 3}, "name":"dino", "n":3 }
+    {time:"1970-01-01T00:00:03.000Z", "id":{i: 4}, "n":4 }
+    {time:"1970-01-01T00:00:04.000Z", "id":{i: 5}, "n":5 }
+    {time:"1970-01-01T00:00:05.000Z", "id":{i: 1}, "name":"fred", "n":6 }
+
 outer join of two point streams with ids against a table of names
 ------------------------------------------------------
 verify we pick up the match with input 2 even when there is no match with input 1
@@ -471,6 +501,36 @@ single-stream join by a field
       "m": 2,
       "p": 4,
       "peek": "thunk",
+      "time": "2000-01-01T00:00:00.000Z"
+    }
+
+single-stream join by a nested field
+--------------------------------------
+### Juttle
+    emit -from :2000-01-01: -limit 1
+    |(put region="north",  group="bar",  peek={foo: "frean"}, n=1
+    ; put region="east",   group="blort",peek={foo: "thunk"}, m=2
+    ; put region="south",  group="bar",  peek={foo: "frean"}, o=3
+    ; put region="west",   group="blort",peek={foo: "thunk"}, p=4
+    )
+    | pass
+    | join peek | view result
+
+### Output
+    {
+      "group": "bar",
+      "region": "south",
+      "n": 1,
+      "o": 3,
+      "peek": {"foo": "frean"},
+      "time": "2000-01-01T00:00:00.000Z"
+    }
+    {
+      "group": "blort",
+      "region": "west",
+      "m": 2,
+      "p": 4,
+      "peek": {"foo": "thunk"},
       "time": "2000-01-01T00:00:00.000Z"
     }
 
