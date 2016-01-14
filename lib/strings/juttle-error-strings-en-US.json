@@ -5,7 +5,7 @@
     "JUTTLE-SYNTAX-ERROR-WITH-EXPECTED": "Expected {{info.expectedDescription}} but {{info.foundDescription}} found.",
     "JUTTLE-SYNTAX-ERROR-WITHOUT-EXPECTED": "{{info.message}}",
 
-    "RT-INVALID-ADAPTER": "Error: instantiating {{info.type}} -- module not registered",
+    "JUTTLE-INVALID-ADAPTER": "Error: adapter {{info.type}} not registered",
     "RT-GROUP-BY-UNDEFINED": "Warning: group by undefined field \"{{info.field}}\"",
     "RT-SORT-LIMIT-EXCEEDED": "Warning: sort limit exceeded, dropping points",
     "RT-BATCH-OUT-OF-ORDER": "Warning: batch dropped out-of-order point(s)",
