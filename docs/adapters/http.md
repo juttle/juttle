@@ -18,17 +18,19 @@ read http -url url
           -headers headers
           -body body
           -timeField timeField
+          -timeUnit timeUnit
           -rootPath rootPath
           -includeHeaders true/false
 ```
 
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
-`-url`            | URL to issue the HTTP request at | Yes 
+`-url`            | URL to issue the HTTP request at | Yes
 `-method`         | HTTP method to use               | No; default: `GET`
 `-headers`        | headers to attach to the HTTP request in the form `{ key1: "value1", ..., keyN: "valueN" }` | No; default: `{}`
 `-body`           | body to send with the HTTP requests | No; default: `{}`
 `-timeField`      | The name of the field to use as the time field <br><br>The specified field will be renamed to `time` in the body of the HTTP request. If the points already contain a field called `time`, that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.  | No; defaults to keeping the `time` field as is
+`-timeUnit`       | Unit to use for any UNIX timestamps | No; defaults to `seconds`
 `-rootPath`       | When the incoming data is JSON, use the specified path into the incoming object (expressed as `field1.field2`) to emit points | No
 `-includeHeaders` | When set to true the headers from the response are appended to each of the points in the response | No; default: `false`
 
@@ -36,7 +38,7 @@ Currently the `read http` adapter will automatically parse incoming data based o
 
     * `text/csv`: for [CSV](https://tools.ietf.org/html/rfc4180) data
     * `application/json` for [JSON](https://tools.ietf.org/html/rfc7159) data
-    * `application/json` for [JSON lines](http://jsonlines.org/) data 
+    * `application/json` for [JSON lines](http://jsonlines.org/) data
 
 _Example_
 
@@ -69,7 +71,7 @@ write http -url url
 
 Parameter    |             Description          | Required?
 ------------ | -------------------------------- | ---------:
-`-url`       | URL to issue the HTTP request at | Yes 
+`-url`       | URL to issue the HTTP request at | Yes
 `-method`    | HTTP method to use               | No; default: `POST`
 `-headers`   | headers to attach to the HTTP request in the form `{ key1: "value1", ..., keyN: "valueN" }` | No; default: `{}`
 `-maxLength` | maximum payload length per HTTP request, as number of data points (not bytes) <br><br>If the number of data points out of the flowgraph exceeds `maxLength` then multiple HTTP requests will be sent. | No, default: 1 (each data point out of the flowgraph becomes one HTTP request)

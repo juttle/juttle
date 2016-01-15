@@ -158,6 +158,47 @@ describe('file adapter tests', function () {
 
             return expect_to_fail(failing_read, message);
         });
+
+        describe('time units', function() {
+            function time_test(unit, unit_size) {
+                var file = path.resolve(__dirname, 'input/unix-second-times.json');
+                var options = {timeField: 'timestamp'};
+                if (unit) { options.timeUnit = unit; }
+
+                return run_read_file_juttle(file, options)
+                    .then(function(result) {
+                        expect(result.errors).deep.equal([]);
+
+                        var expected = require(file).map(function(pt) {
+                            pt.time = new Date(pt.timestamp * unit_size).toISOString();
+
+                            return pt;
+                        });
+
+                        expect(result.sinks.table).deep.equal(expected);
+                    });
+            }
+
+            it('milliseconds', function() {
+                return time_test('milliseconds', 1);
+            });
+
+            it('seconds (default)', function() {
+                return time_test(null, 1000);
+            });
+
+            it('seconds (explicit)', function() {
+                return time_test('seconds', 1000);
+            });
+
+            it('minutes', function() {
+                return time_test('minutes', 60 * 1000);
+            });
+
+            it('hours', function() {
+                return time_test('hours', 60 * 60 * 1000);
+            });
+        });
     });
 
     describe('write file', function() {
