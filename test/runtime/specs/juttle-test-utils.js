@@ -1,6 +1,7 @@
 /* jshint: node */
 
 var fs = require('fs');
+var util = require('util');
 var path = require('path');
 var events = require('events');
 var _ = require('underscore');
@@ -307,6 +308,24 @@ function module_resolver(modules) {
     };
 }
 
+function options_from_object(options) {
+    function _option_is_moment(key) {
+        return key === 'from' || key === 'to';
+    }
+
+    return _.reduce(options, function(memo, value, key) {
+        var str = _option_is_moment(key) ? ':%s:' : '"%s"';
+        return memo + '-' + key + ' ' + util.format(str, value) + ' ';
+    }, '');
+}
+
+function expect_to_fail(promise, message) {
+    return promise.throw(new Error('should have failed'))
+        .catch(function(err) {
+            expect(err.message).equal(message);
+        });
+}
+
 module.exports = {
     wait_for_event: wait_for_event,
     get_times: get_times,
@@ -314,6 +333,8 @@ module.exports = {
     check_juttle: check_juttle,
     run_juttle: run_juttle,
     module_resolver: module_resolver,
+    options_from_object: options_from_object,
+    expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
     set_stdout: set_stdout
 };
