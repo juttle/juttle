@@ -1,0 +1,6 @@
+[
+{ "updated_at": 1452861833105, "hostname": "lemoncake", "state": "ok" },
+{ "updated_at": 1452861904731, "hostname": "applepie", "state": "warn" },
+{ "updated_at": 1452861927332, "hostname": "lemoncake", "state": "ok" },
+{ "updated_at": 1452861950997, "hostname": "applepie", "state": "ok" }
+]

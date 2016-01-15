@@ -1,0 +1,4 @@
+read file -file './docs/examples/datasets/input_milliseconds.json'
+| put time = Date.new(updated_at/1000)
+| remove updated_at
+| view text

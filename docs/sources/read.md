@@ -28,3 +28,12 @@ _Example_
 read influxdb -db "test" -measurements "cpu" -from :1 hour ago: -to :now:
 | reduce max() by host
 ```
+
+:bulb: `Tip:` In certain cases, the source might supply time in a different
+field than `time` or in different units than seconds. The following example
+shows how to extract and convert the time information, and then remove the
+field which was previously storing it:
+
+```
+{!docs/examples/sources/set_time.juttle!}
+```
