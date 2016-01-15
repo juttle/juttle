@@ -5,7 +5,7 @@ var juttle_test_utils = require('../../runtime/specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var path = require('path');
 
-var validFormats = {
+var symmetricalFormats = {
     json: {
         name: 'json',
         typed: true
@@ -26,6 +26,8 @@ describe('read stdio adapter tests', function() {
     // using the existing csv, json and jsonl files from the file adapter
     var simpleBase = path.resolve(__dirname, '../file/input/simple');
     var invalidBase = path.resolve(__dirname, '../parsers/input');
+
+    var syslog = path.resolve(__dirname, '../parsers/input/logs/syslog');
 
     it('fails when given an unknown option' , function() {
         juttle_test_utils.set_stdin(fs.createReadStream(emptyFile));
@@ -55,7 +57,7 @@ describe('read stdio adapter tests', function() {
         });
     });
 
-    _.each(validFormats, function(details, format) {
+    _.each(symmetricalFormats, function(details, format) {
         it('fails when reading invalid ' + format , function() {
             var filename = path.join(invalidBase, format, 'invalid.' + format);
             juttle_test_utils.set_stdin(fs.createReadStream(filename));
@@ -69,9 +71,7 @@ describe('read stdio adapter tests', function() {
                 expect(result.errors[0]).to.contain('Error: Invalid ' + format.toUpperCase() + ' data');
             });
         });
-    });
 
-    _.each(validFormats, function(details, format) {
         it('can handle an empty stdin with -format=' + format , function() {
             juttle_test_utils.set_stdin(fs.createReadStream(emptyFile));
 
@@ -84,9 +84,7 @@ describe('read stdio adapter tests', function() {
                 expect(result.sinks.table.length).to.equal(0);
             });
         });
-    });
 
-    _.each(validFormats, function(details, format) {
         it('can read ' + format + ' data from stdin' , function() {
             juttle_test_utils.set_stdin(fs.createReadStream(simpleBase + '.' + format));
 
@@ -115,4 +113,23 @@ describe('read stdio adapter tests', function() {
             });
         });
     });
+
+    it('can read syslog data from stdin using -format "grok"' , function() {
+        juttle_test_utils.set_stdin(fs.createReadStream(syslog));
+
+        return check_juttle({
+            program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | keep program, pid'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { program: 'anacron', pid: '15134' },
+                { program: 'anacron', pid: '15134' },
+                { program: 'CRON', pid: '17219' },
+                { program: 'CRON', pid: '17218' }
+            ]);
+        });
+    });
+
 });
