@@ -2,7 +2,7 @@
 title: Data types | Juttle Language Reference
 ---
 
-Data types 
+Data types
 ==========
 
 Here are the data types supported in Juttle data points.
@@ -18,6 +18,9 @@ Date       | An exact moment in time, represented by a number
 Duration   | An interval between to moments in time, represented by a numerical length
 Array      | An ordered sequence of zero or more values
 Object     | An unordered collection of zero or more properties, each consisting of a key and a value
+
+The way how Juttle handles `Array` and `Object` data types is described in the
+[nested fields](../concepts/fields.md#fields-with-object-or-array-values) section.
 
 All data types supported by Juttle data points are equivalent to their
 corresponding [JavaScript types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures),

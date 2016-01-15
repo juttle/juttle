@@ -5,6 +5,9 @@ Each Juttle data point consists of a set of named fields. The name of a field is
 
 :construction: This needs to be updated to clarify stream context vs function context.
 
+[TOC]
+
+***
 
 Referencing
 ===========
@@ -113,6 +116,37 @@ To summarize, this is how field referencing works in Juttle:
 -   The `*` operator can be used with any string (literal, const,
     variable), which allows reference to a field name that would be
     invalid as a bare identifier.
+
+Fields with Object or Array Values
+==================================
+
+:construction: The syntax for referencing fields inside objects and arrays is still under development.
+
+:construction: Handling of these fields by adapters is still under development.
+
+A point can have a field whose value is an array or an object. The following
+juttle will emit such point:
+
+```
+{!docs/examples/concepts/object_array_point_simple.juttle!}
+```
+
+You can work with these fields just like you would with the ones containing
+a string or a number - all Juttle procs like `put`, `join`, `reduce` and `uniq`
+can handle them. For example:
+
+```
+{!docs/examples/concepts/object_uniq.juttle!}
+```
+
+will create six points with an object field, then output only those that have
+not appeared before in the stream, and
+
+```
+{!docs/examples/concepts/object_reduce.juttle!}
+```
+
+groups the points by a field `o` containing an object, then sums over the `value`.
 
 Time Field
 ==========
