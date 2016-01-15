@@ -10,7 +10,7 @@ var expect_to_fail = juttle_test_utils.expect_to_fail;
 
 var tmp_file = tmp.tmpNameSync();
 
-var validFormats = {
+var symmetricalFormats = {
     json: 'json',
     jsonl: 'jsonl',
     csv: 'csv'
@@ -42,7 +42,7 @@ describe('file adapter tests', function () {
             });
         });
 
-        _.each(validFormats, function(format) {
+        _.each(symmetricalFormats, function(format) {
             describe(format, function() {
                 var file_name = file + '.' + format;
 
