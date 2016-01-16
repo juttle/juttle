@@ -12,7 +12,7 @@ var merge_messages = words.merge_messages;
 var domains = words.domains;
 var expect      = require('chai').expect;
 
-describe("stoke.words", function() {
+describe('stoke.words', function() {
 
     it('shortword produces short words', function(done) {
         var word = new words.Words(13,1);

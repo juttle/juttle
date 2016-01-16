@@ -1,5 +1,3 @@
-/* jshint: node */
-
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
@@ -13,9 +11,7 @@ var utils = require('../../../lib/runtime').utils;
 var Juttle = require('../../../lib/runtime/index').Juttle;
 var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 var compiler = require('../../../lib/compiler');
-var parser = require('../../../lib/parser');
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
-var url = require('url');
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
 
@@ -142,7 +138,7 @@ var TestView = Juttle.proc.subscribe.extend({
 function compile_juttle(options) {
     logger.debug('parsing Juttle program:', options.program);
     if (options.hasOwnProperty('modules') && options.hasOwnProperty('moduleResolver')) {
-        throw new Error("confused by presence of both 'modules' and 'moduleResolver'");
+        throw new Error('confused by presence of both \'modules\' and \'moduleResolver\'');
     }
     var source = options.program;
     options = _.omit(options, 'program');

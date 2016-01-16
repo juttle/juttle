@@ -105,12 +105,12 @@ describe('read stdio adapter tests', function() {
                 expect(result.errors.length).to.equal(0);
                 expect(result.warnings.length).to.equal(0);
                 expect(result.sinks.table).to.deep.equal([
-                    { "time": "1970-01-01T00:00:01.000Z", "rate": handle(1) },
-                    { "time": "1970-01-01T00:00:02.000Z", "rate": handle(5) },
-                    { "time": "1970-01-01T00:00:03.000Z", "rate": handle(2) },
-                    { "time": "1970-01-01T00:00:04.000Z", "rate": handle(7) },
-                    { "time": "1970-01-01T00:00:05.000Z", "rate": handle(1) },
-                    { "time": "1970-01-01T00:00:06.000Z", "rate": handle(3) }
+                    { 'time': '1970-01-01T00:00:01.000Z', 'rate': handle(1) },
+                    { 'time': '1970-01-01T00:00:02.000Z', 'rate': handle(5) },
+                    { 'time': '1970-01-01T00:00:03.000Z', 'rate': handle(2) },
+                    { 'time': '1970-01-01T00:00:04.000Z', 'rate': handle(7) },
+                    { 'time': '1970-01-01T00:00:05.000Z', 'rate': handle(1) },
+                    { 'time': '1970-01-01T00:00:06.000Z', 'rate': handle(3) }
                 ]);
             });
         });

@@ -137,7 +137,7 @@ describe('Juttle Field Reference Tests', function() {
             });
     });
 
-    it("doesn't coerce LHS for regular assignment expressions", function() {
+    it('doesn\'t coerce LHS for regular assignment expressions', function() {
         return check_juttle({
             program: 'function f() { var a, b; a = (b = 1); return a; }'
                 + 'read file -file "input/simple.json" | put foo=f() | view sink1'
@@ -149,7 +149,7 @@ describe('Juttle Field Reference Tests', function() {
             });
     });
 
-    it("field reference in a return statement", function() {
+    it('field reference in a return statement', function() {
         return check_juttle({
             program: [ 'reducer foo(field) {',
                        '  var res=0;',

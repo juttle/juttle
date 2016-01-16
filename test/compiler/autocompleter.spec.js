@@ -148,7 +148,7 @@ describe('Autocompleter', function() {
             });
         });
 
-        describe("option value autocomplete", function() {
+        describe('option value autocomplete', function() {
             var NAME_COMPLETIONS = [
                 { type: 'option_name', proc: 'read', value: '-space' }
             ];

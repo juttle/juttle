@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var express = require('express');
 var Promise = require('bluebird');
-var findFreePort = Promise.promisify(require("find-free-port"));
+var findFreePort = Promise.promisify(require('find-free-port'));
 var URLResolver = require('../../lib/module-resolvers/url-resolver');
 
 describe('url-resolver', function() {
