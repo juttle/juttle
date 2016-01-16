@@ -1,0 +1,21 @@
+{
+    "extends": "eslint:recommended",
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "rules": {
+        "indent": [ 2, 4, { "SwitchCase": 1 } ],
+        "linebreak-style": [ 2, "unix" ],
+        "no-unused-vars": [2, { "args": "none" }],
+        "quotes": [ 2, "single" ],
+        "semi": [ 2, "always" ],
+        "comma-dangle": [ 0, "never" ],
+        "no-constant-condition" : [ 0 ]
+    },
+    "plugins": [ ]
+}

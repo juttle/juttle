@@ -3,13 +3,12 @@ var _ = require('underscore');
 var args   = require('yargs').argv;
 var clean = require('gulp-clean');
 var debug = require('gulp-debug');
+var eslint = require('gulp-eslint');
 var fs = require('fs');
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var istanbul = require('gulp-istanbul');
-var jshint = require('gulp-jshint');
 var merge = require('merge-stream');
-var jscs = require('gulp-jscs');
 var mocha = require('gulp-mocha');
 var path = require('path');
 var peg = require('gulp-peg');
@@ -46,45 +45,17 @@ gulp.task('juttle-spec', ['juttle-spec-clean'], function() {
         .pipe(jspec());
 });
 
-gulp.task('jscs-test', function() {
+gulp.task('lint-test', function() {
     return gulp.src([
         'test/**/*.spec.js',
         '!test/runtime/specs/juttle-spec/**/*.js'
     ])
-    .pipe(jscs({
-        configPath: '.jscsrc'
-    }))
-    .pipe(jscs.reporter('unix'))
-    .pipe(jscs.reporter('fail'));
+	.pipe(eslint())
+	.pipe(eslint.format())
+	.pipe(eslint.failAfterError());
 });
 
-gulp.task('jscs-lib', function() {
-    return gulp.src([
-        'bin/juttle',
-        'lib/**/*.js',
-
-        // exclude generated files
-        '!lib/moment/parser.js',
-        '!lib/parser/parser.js'
-    ])
-    .pipe(jscs({
-        configPath: '.jscsrc'
-    }))
-    .pipe(jscs.reporter('unix'))
-    .pipe(jscs.reporter('fail'));
-});
-
-gulp.task('jshint-test', function() {
-    return gulp.src([
-        'test/**/*.spec.js',
-        '!test/runtime/specs/juttle-spec/**/*.js'
-    ])
-    .pipe(jshint('./test/.jshintrc'))
-    .pipe(jshint.reporter('default', { verbose: true }))
-    .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('jshint-lib', function() {
+gulp.task('lint-lib', function() {
     return gulp.src([
         'gulpfile.js',
         'bin/juttle',
@@ -97,12 +68,12 @@ gulp.task('jshint-lib', function() {
         '!lib/moment/parser.js',
         '!lib/parser/parser.js'
     ])
-    .pipe(jshint('./lib/.jshintrc'))
-    .pipe(jshint.reporter('default', { verbose: true }))
-    .pipe(jshint.reporter('fail'));
+	.pipe(eslint())
+	.pipe(eslint.format())
+	.pipe(eslint.failAfterError());
 });
 
-gulp.task('lint', ['jscs-lib', 'jscs-test', 'jshint-lib', 'jshint-test']);
+gulp.task('lint', ['lint-lib', 'lint-test']);
 
 gulp.task('instrument', function () {
     return gulp.src([
