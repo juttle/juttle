@@ -12,7 +12,7 @@ var merge = require('merge-stream');
 var mocha = require('gulp-mocha');
 var path = require('path');
 var peg = require('gulp-peg');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
 var through = require('through2');
 // jshint ignore:line
 var Promise = require('bluebird');
@@ -165,7 +165,7 @@ gulp.task('examples-check', ['peg'], function() {
         return through.obj(function(file, encoding, callback) {
             var juttles = [];
             var ext = path.extname(file.path);
-            var contents = fs.readFileSync(file.path, "utf8");
+            var contents = fs.readFileSync(file.path, 'utf8');
             if (ext === '.juttle') {
                 juttles = [contents];
             } else if (ext === '.md') {
