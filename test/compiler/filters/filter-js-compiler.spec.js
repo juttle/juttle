@@ -4,7 +4,7 @@ var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler
 var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 
 // Needed to evaluate compiled Juttle code.
-var juttle = require('../../../lib/runtime/runtime');   // jshint ignore:line
+var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
 
 var POINTS_MISC = [
     { v: null                                         },

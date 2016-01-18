@@ -382,9 +382,9 @@ describe('Juttle CLI Tests', function() {
                 stdin: 'emit -limit 1\n' +
                            'exit\n'
             }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can clear screen', function() {
@@ -393,9 +393,9 @@ describe('Juttle CLI Tests', function() {
                            'clear\n' +
                            'exit\n'
             }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can display help', function() {
@@ -404,9 +404,9 @@ describe('Juttle CLI Tests', function() {
                            'help\n' +
                            'exit\n'
             }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stdout).to.include('print this usage');
-                });
+                expect(result.code).to.equal(0);
+                expect(result.stdout).to.include('print this usage');
+            });
         });
 
         it('can execute a program interactively', function() {

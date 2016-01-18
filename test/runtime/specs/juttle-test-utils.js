@@ -13,9 +13,7 @@ var utils = require('../../../lib/runtime').utils;
 var Juttle = require('../../../lib/runtime/index').Juttle;
 var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 var compiler = require('../../../lib/compiler');
-var parser = require('../../../lib/parser');
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
-var url = require('url');
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
 

@@ -6,7 +6,6 @@ var check_juttle = juttle_test_utils.check_juttle;
 var expect = require('chai').expect;
 
 var simpleData;
-var simpleData2;
 var nestedData;
 
 describe('Juttle reducers tests', function() {
@@ -14,8 +13,6 @@ describe('Juttle reducers tests', function() {
     before(function() {
         simpleData = require('./specs/input/simple');
         nestedData = require('./specs/input/nested');
-
-        simpleData2 = require('./specs/input/simple-non-monotonic-time');
     });
 
     it('avg', function() {

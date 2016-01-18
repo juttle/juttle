@@ -190,11 +190,11 @@ describe('Values tests', function () {
                     value: new Filter({
                         type: 'ExpressionFilterTerm',
                         expression: {
-                                type: 'BinaryExpression',
-                                operator: '<',
-                                left: { type: 'Variable', name: 'a' },
-                                right: { type: 'NumericLiteral', value: 5 }
-                            }
+                            type: 'BinaryExpression',
+                            operator: '<',
+                            left: { type: 'Variable', name: 'a' },
+                            right: { type: 'NumericLiteral', value: 5 }
+                        }
                     },
                         'a < 5'
                     ),
@@ -288,11 +288,11 @@ describe('Values tests', function () {
                     value: new Filter({
                         type: 'ExpressionFilterTerm',
                         expression: {
-                                type: 'BinaryExpression',
-                                operator: '<',
-                                left: { type: 'Variable', name: 'a' },
-                                right: { type: 'NumericLiteral', value: 5 }
-                            }
+                            type: 'BinaryExpression',
+                            operator: '<',
+                            left: { type: 'Variable', name: 'a' },
+                            right: { type: 'NumericLiteral', value: 5 }
+                        }
                     },
                         'a < 5'
                     ),
