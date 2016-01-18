@@ -21,7 +21,7 @@ Interpolated string (`Null`)
 
 ### Output
 
-    { time: "1970-01-01T00:00:00.000Z", s: "" }
+    { time: "1970-01-01T00:00:00.000Z", s: "null" }
 
 Interpolated string (`Boolean`)
 -------------------------------
@@ -98,7 +98,7 @@ Interpolated string (`Array`)
 
 ### Output
 
-    { time: "1970-01-01T00:00:00.000Z", s: "1, 2, 3" }
+    { time: "1970-01-01T00:00:00.000Z", s: "[ 1, 2, 3 ]" }
 
 Interpolated string (`Object`)
 ------------------------------
@@ -109,7 +109,7 @@ Interpolated string (`Object`)
 
 ### Output
 
-    { time: "1970-01-01T00:00:00.000Z", s: "a: 1, b: 2, c: 3" }
+    { time: "1970-01-01T00:00:00.000Z", s: "{ a: 1, b: 2, c: 3 }" }
 
 Interpolated string (complex expression)
 ----------------------------------------
