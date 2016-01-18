@@ -15,13 +15,25 @@ function TestAdapter(config) {
         procName: 'read-test',
 
         initialize: function(options, params) {
+            var defaultTimeRange = config.defaultTimeRange || this.DEFAULT_TIME_RANGE.INFINITE;
+            this.handleTimeOptions(options, defaultTimeRange);
+
             this.logger.debug('initialize options:', options, 'params:', params);
+
             // If invoked with -debug 'optimization', then instead of emitting
             // points, emit the optimization info that was passed in from the
             // compiler.
             if (options.debug && options.debug === 'optimization') {
                 this.logger.debug('debug mode: optimization')
                 this.debug_info = params.optimization_info || {};
+                return;
+            }
+
+            // If invoked with -debug 'timeBounds', then instead of emitting
+            // points, emit the -from and -to time options.
+            if (options.debug && options.debug === 'timeBounds') {
+                this.logger.debug('debug mode: timeBounds')
+                this.debug_info = {from: this.from.toJSON(), to: this.to.toJSON()};
                 return;
             }
 
