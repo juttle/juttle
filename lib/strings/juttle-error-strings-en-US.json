@@ -120,6 +120,8 @@
     "RT-INVALID-OPTION-VALUE": "Error: Invalid {{info.option}} option value, must be one of the following: {{info.supported}}",
     "RT-INVALID-VIEW": "Error: program refers to invalid client view \"{{info.view}}\"",
     "RT-OPTION-SHOULD-BE-POSITIVE-INTEGER": "Error: option {{info.option}} should be a positive integer",
-    "RT-OPTION-VALUE-EXCEEDED": "Error: option {{info.option}} exceeded limit of {{info.value}}{{info.extra}}"
+    "RT-OPTION-VALUE-EXCEEDED": "Error: option {{info.option}} exceeded limit of {{info.value}}{{info.extra}}",
+    "RT-INVALID-OPTION-COMBINATION": "Error: option {{info.option}} can only be used with {{info.rule}}"
+
   }
 }
