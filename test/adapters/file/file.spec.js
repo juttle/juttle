@@ -148,7 +148,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when -from is an invalid moment', function() {
-            var message = 'Error: -from/-to/-last require moments: "a"';
+            var message = 'Error: -from wants a moment, got "a"';
 
             var program = util.format('read file -file "%s" -from "a"', json_file);
             var failing_read = check_juttle({
@@ -159,9 +159,20 @@ describe('file adapter tests', function () {
         });
 
         it('fails when -to is an invalid moment', function() {
-            var message = 'Error: -from/-to/-last require moments: "a"';
+            var message = 'Error: -to wants a moment, got "a"';
 
-            var program = util.format('read file -file "%s" -from "a"', json_file);
+            var program = util.format('read file -file "%s" -to "a"', json_file);
+            var failing_read = check_juttle({
+                program: program
+            });
+
+            return expect_to_fail(failing_read, message);
+        });
+
+        it('fails when -last is an invalid duration', function() {
+            var message = 'Error: -last wants a duration, got "a"';
+
+            var program = util.format('read file -file "%s" -last "a"', json_file);
             var failing_read = check_juttle({
                 program: program
             });
