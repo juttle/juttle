@@ -1413,8 +1413,9 @@ describe('Juttle procs tests', function() {
     it('outputs results with batch end timestamp', function() {
         return check_juttle({
             program:
-            ('const start = Date.quantize(:2 seconds ago:, :second:);'+
-             'emit -from start -to :now: | batch 1 '+
+            ('const start = Date.quantize(:3 seconds ago:, :second:);'+
+             'const end = Date.quantize(:now:, :second:);'+
+             'emit -from start -to end | batch 1 '+
              '| put dt = time - start | (view before -times 1 ; pass) '+
              '| reduce count() '+
              '| put dt = time - start | view after -times 1')
@@ -1431,8 +1432,9 @@ describe('Juttle procs tests', function() {
     it('propagates batch end timestamp across multiple reducers', function() {
         return check_juttle({
             program:
-            ('const start = Date.quantize(:2 seconds ago:, :second:);'+
-             'emit -from start -to :now: | batch 1 '+
+            ('const start = Date.quantize(:3 seconds ago:, :second:);'+
+             'const end = Date.quantize(:now:, :second:);'+
+             'emit -from start -to end | batch 1 '+
              '| put dt = time - start | (view before -times 1 ; pass) '+
              '| reduce count() '+
              '| put dt = time - start | (view during -times 1 ; pass) '+
