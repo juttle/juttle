@@ -13,7 +13,7 @@ stochastic with bad type complains
 stochastic with FTS complains
 -------------------------
 ### Juttle
-    read stochastic -source "cdn" "Never gonna get it" | view result
+    read stochastic -source "cdn" -last :day: "Never gonna get it" | view result
 
 ### Errors
 
@@ -156,7 +156,7 @@ source "ecommerce" outputs something
 source "badone" fails as expected
 -------------------------
 ### Juttle
-    read stochastic -source "badone" | view result
+    read stochastic -source "badone" -last :1m: | view result
 
 ### Errors
 
