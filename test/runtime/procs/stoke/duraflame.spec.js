@@ -3,7 +3,7 @@ var _ =  require('underscore');
 var duraflame = require('../../../../lib/runtime/procs/stoke/duraflame');
 var expect      = require('chai').expect;
 
-describe("stoke.duraflame", function() {
+describe('stoke.duraflame', function() {
 
     it('sysinfo produces something', function(done) {
         var sysinfo = duraflame.sysinfo();
@@ -28,10 +28,10 @@ describe("stoke.duraflame", function() {
             messages.push(syslog.message(i));
         }
         var nerror = _.filter(messages, function(message) {
-            return message.indexOf("error") >= 0; }).length;
+            return message.indexOf('error') >= 0; }).length;
         expect(nerror).least(messages.length/4);
         var ninfo = _.filter(messages, function(message) {
-            return message.indexOf("error") < 0; }).length;
+            return message.indexOf('error') < 0; }).length;
         expect(ninfo).least(messages.length/4);
         done();
     });
@@ -43,10 +43,10 @@ describe("stoke.duraflame", function() {
             messages.push(gitlog.message(i));
         }
         var nmerge = _.filter(messages, function(message) {
-            return message.indexOf("Merge") === 0; }).length;
+            return message.indexOf('Merge') === 0; }).length;
         expect(nmerge).least(messages.length/4);
         var ncommit = _.filter(messages, function(message) {
-            return message.indexOf("Merge") !== 0; }).length;
+            return message.indexOf('Merge') !== 0; }).length;
         expect(ncommit).equal(messages.length - nmerge);
         done();
     });
@@ -58,10 +58,10 @@ describe("stoke.duraflame", function() {
             messages.push(syslog.message(i));
         }
         var nerror = _.filter(messages, function(message) {
-            return message.indexOf("error") >= 0; }).length;
+            return message.indexOf('error') >= 0; }).length;
         expect(nerror).least(messages.length/4);
         var ninfo = _.filter(messages, function(message) {
-            return message.indexOf("error") < 0; }).length;
+            return message.indexOf('error') < 0; }).length;
         expect(ninfo).least(messages.length/4);
         done();
     });

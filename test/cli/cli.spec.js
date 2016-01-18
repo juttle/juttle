@@ -53,10 +53,10 @@ describe('Juttle CLI Tests', function() {
             ])
             .then(function(result) {
                 var ast = JSON.parse(result.stdout);
-                expect(ast.type).to.equal("MainModuleDef");
-                expect(ast.name).to.equal("main");
+                expect(ast.type).to.equal('MainModuleDef');
+                expect(ast.name).to.equal('main');
                 expect(ast.location).is.undefined;
-                expect(ast.elements[0].elements[0].name).to.equal("emit");
+                expect(ast.elements[0].elements[0].name).to.equal('emit');
                 expect(ast.elements[0].location).is.undefined;
             });
         });
@@ -71,12 +71,12 @@ describe('Juttle CLI Tests', function() {
             ])
             .then(function(result) {
                 var ast = JSON.parse(result.stdout);
-                expect(ast.type).to.equal("MainModuleDef");
-                expect(ast.name).to.equal("main");
+                expect(ast.type).to.equal('MainModuleDef');
+                expect(ast.name).to.equal('main');
                 expect(ast.location).is.defined;
                 expect(ast.location.start).is.defined;
                 expect(ast.location.end).is.defined;
-                expect(ast.elements[0].elements[0].name).to.equal("emit");
+                expect(ast.elements[0].elements[0].name).to.equal('emit');
                 expect(ast.elements[0].location).is.defined;
             });
         });
@@ -323,7 +323,7 @@ describe('Juttle CLI Tests', function() {
             ]).then(function(result) {
                 expect(result.code).to.equal(0);
                 expect(JSON.parse(result.stdout)).to.deep.equal([
-                    {message: "hello"}
+                    {message: 'hello'}
                 ]);
                 expect(result.stderr).to.equal('');
             });
@@ -379,34 +379,34 @@ describe('Juttle CLI Tests', function() {
     describe('juttle REPL', function() {
         it('can exit', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 1\n' +
+                stdin: 'emit -limit 1\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can clear screen', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 1\n' +
+                stdin: 'emit -limit 1\n' +
                            'clear\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can display help', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 0\n' +
+                stdin: 'emit -limit 0\n' +
                            'help\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stdout).to.include('print this usage');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stdout).to.include('print this usage');
+            });
         });
 
         it('can execute a program interactively', function() {

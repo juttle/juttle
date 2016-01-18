@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var compiler = require('../../lib/compiler');
 var views_sourceinfo = require('../../lib/compiler/flowgraph/views_sourceinfo.js');
-var juttle_test_utils = require('../runtime/specs/juttle-test-utils'); // jshint ignore: line
+var juttle_test_utils = require('../runtime/specs/juttle-test-utils'); // eslint-disable-line
 
 describe('Views get info on source time bounds', function() {
     function test(juttle, spec) {

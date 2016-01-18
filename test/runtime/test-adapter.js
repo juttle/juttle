@@ -20,7 +20,7 @@ function TestAdapter(config) {
             // points, emit the optimization info that was passed in from the
             // compiler.
             if (options.debug && options.debug === 'optimization') {
-                this.logger.debug('debug mode: optimization')
+                this.logger.debug('debug mode: optimization');
                 this.debug_info = params.optimization_info || {};
                 return;
             }
