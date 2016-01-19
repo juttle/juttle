@@ -19,9 +19,9 @@ read file -file <path> [-format <format>] [-timeField <fieldname>]
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
-`-format`         | Input file format, supports: `csv`, `json`, `jsonl`, or `grok` for text [parseable by grok](adapters/parsers/index.md) | No; defaults to `json`
+`-format`         | Input file format, supports: `csv`, `json`, `jsonl`, or `grok` for text [parseable by grok](parsers/index.md) | No; defaults to `json`
 `-timeField`      | Name of the field in the data which contains a valid timestamp  | No; defaults to `time`
-`-pattern`        | When `-format='grok'` you can specify the grok matching pattern here. More information on grok [here](adapters/parsers/grok.md)  | No
+`-pattern`        | When `-format='grok'` you can specify the grok matching pattern here. More information on grok [here](parsers/grok.md)  | No
 
 The data is assumed to contain valid timestamps in a field named `time` by default; a different name for the time field may be specified with `-timeField` option. If the data contains fields `time` and another named field specified with `-timeField`, the original contents of field `time` will be overwritten by the valid timestamp from `timeField`. 
 
