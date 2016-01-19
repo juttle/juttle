@@ -7,7 +7,7 @@
   
   
   
-  <title>____ Sample Datasets - Juttle Language Reference</title>
+  <title>____ Grok Parser - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ Sample Datasets";
-    var mkdocs_page_input_path = "examples/datasets/README.md";
-    var mkdocs_page_url = "/examples/datasets/README/";
+    var mkdocs_page_name = "____ Grok Parser";
+    var mkdocs_page_input_path = "adapters/parsers/grok.md";
+    var mkdocs_page_url = "/adapters/parsers/grok/";
   </script>
   
   <script src="../../../js/jquery-2.1.1.min.js"></script>
@@ -306,7 +306,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../../adapters/">Adapters</a>
+        <a class="" href="../../">Adapters</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -343,7 +343,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../../adapters/parsers/">Parsers</a>
+        <a class="" href="../">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -538,16 +538,16 @@
     
       
         
-          <li>Introduction &raquo;</li>
+          <li>Reference &raquo;</li>
         
       
     
-    <li>____ Sample Datasets</li>
+    <li>____ Grok Parser</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/examples/datasets/README.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/parsers/grok.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -558,56 +558,92 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="sample-datasets">Sample Datasets</h1>
-<p>A lot of juttle examples in this documentation use <code>emit</code> as the data source.</p>
-<p>Examples that call for more complex data sets rely on <code>read file</code> source with <code>-file 'filename.json</code> option, that allows to read data points from a local file in JSON array format, like this:</p>
-<pre><code class="juttle">read file -file 'docs/examples/datasets/input1.json'
-| reduce count() by hostname
-| view table
+                <h1 id="grok-parser">Grok Parser</h1>
+<p>The grok parser exposes the ability to parse incoming data using the grok rules
+which are supported by <a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html">logstash</a>.
+The usage of the grok parser is currently supported by the <a href="../../stdio/">stdio</a>
+and <a href="../../file/">file</a> adapters and can be expanded easily to others. ## Field Names</p>
+<p>If your grok rule specified in <code>-pattern</code> option does not contain field name to
+place the parsed data into, it will be placed into <code>message</code> field. See
+<a href="#parsing-a-syslog-file">syslog example</a> with <code>-pattern '%{SYSLOGLINE}'</code>. This
+grok parser supports many <a href="https://github.com/Beh01der/node-grok/tree/master/lib/patterns">built in rules</a>.</p>
+<p>When the grok rule is used to parse timestamps from the incoming text, you
+should assign field name <code>time</code> in the rule, as that is where Juttle will look
+for a valid timestamp. See <a href="#parsing-a-custom-file">custom file example</a> with
+<code>-pattern "%{TIMESTAMP_ISO8601:time}</code></p>
+<h1 id="usage">Usage</h1>
+<h2 id="parsing-a-syslog-file">Parsing a syslog file</h2>
+<p>Since there quite a few <a href="https://github.com/Beh01der/node-grok/tree/master/lib/patterns">built in rules</a>
+already, parsing certain log types is very easy, such as:</p>
+<pre><code>read file -file '/var/log/syslog' -format 'grok' -pattern '%{SYSLOGLINE}'
+| filter message~'*error*'
 </code></pre>
 
-<p>The dataset files are presented below. </p>
-<h3 id="dataset-1">Dataset 1</h3>
-<p>Tiny fake data set:</p>
-<pre><code>[ 
-{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; },
-{ &quot;time&quot;: &quot;2015-11-06T04:28:32.304Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;warn&quot; },
-{ &quot;time&quot;: &quot;2015-11-06T04:28:42.405Z&quot;, &quot;hostname&quot;: &quot;lemoncake&quot;, &quot;state&quot;: &quot;ok&quot; },
-{ &quot;time&quot;: &quot;2015-11-06T04:28:42.502Z&quot;, &quot;hostname&quot;: &quot;applepie&quot;, &quot;state&quot;: &quot;ok&quot; }
+<p>The above reads your local <code>/var/log/syslog</code> file and parses it using the grok
+built in pattern for syslog and then looks for the <code>error</code> string in the
+message of the parsed data points.</p>
+<h2 id="parsing-a-custom-file">Parsing a custom file</h2>
+<p>Let's say you had a log file that looked like so:</p>
+<pre><code>2016-01-02 16:34:03 status installed linux-image-extra-3.13.0-73-generic:amd64 3.13.0-73.116
+2016-01-02 16:34:03 remove linux-image-extra-3.13.0-73-generic:amd64 3.13.0-73.116 &lt;none&gt;
+2016-01-02 16:34:13 status installed linux-image-3.13.0-73-generic:amd64 3.13.0-73.116
+2016-01-02 16:34:13 remove linux-image-3.13.0-73-generic:amd64 3.13.0-73.116 &lt;none&gt;
+2016-01-02 16:34:13 status half-configured linux-image-3.13.0-73-generic:amd64 3.13.0-73.116
+2016-01-14 08:58:07 status unpacked isc-dhcp-common:amd64 4.2.4-7ubuntu12.4
+2016-01-14 08:58:07 upgrade openssh-client:amd64 1:6.6p1-2ubuntu2.3 1:6.6p1-2ubuntu2.4
+2016-01-14 08:58:07 status half-configured openssh-client:amd64 1:6.6p1-2ubuntu2.3
+</code></pre>
+
+<p><strong>above is from the /var/log/dpkg.log of a debian machine</strong> </p>
+<p>We want to parse this file using the <a href="../../stdio/">stdio</a> adapter and be able to 
+gather some information about the most upgraded packages. So we want to definitely parse
+out the log line into the following sections:</p>
+<pre><code>|       time       | cmd  | subcmd  |               pkg_name                  | pkg_version |  
+2016-01-02 16:34:03 status installed linux-image-extra-3.13.0-73-generic:amd64 3.13.0-73.116
+</code></pre>
+
+<p>After reading up on <a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html">grok</a> 
+the best approach to building up the custom grok rule is to add pattern
+components one at a time, starting with:</p>
+<pre><code>%{TIMESTAMP_ISO8601:time} %{GREEDYDATA:message}
+</code></pre>
+
+<p>Which you can quickly test like so:</p>
+<pre><code>tail -10 /var/log/dpkg.log | juttle -e 'read stdio -format &quot;grok&quot; -pattern &quot;%{TIMESTAMP_ISO8601:time} %{GREEDYDATA:message}&quot; | view text'
+[
+{&quot;time&quot;:&quot;2016-01-03T00:34:03.000Z&quot;,&quot;message&quot;:&quot;status installed linux-image-extra-3.13.0-73-generic:amd64 3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:03.000Z&quot;,&quot;message&quot;:&quot;remove linux-image-extra-3.13.0-73-generic:amd64 3.13.0-73.116 &lt;none&gt;&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;message&quot;:&quot;status installed linux-image-3.13.0-73-generic:amd64 3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;message&quot;:&quot;remove linux-image-3.13.0-73-generic:amd64 3.13.0-73.116 &lt;none&gt;&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;message&quot;:&quot;status half-configured linux-image-3.13.0-73-generic:amd64 3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;message&quot;:&quot;status unpacked isc-dhcp-common:amd64 4.2.4-7ubuntu12.4&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;message&quot;:&quot;upgrade openssh-client:amd64 1:6.6p1-2ubuntu2.3 1:6.6p1-2ubuntu2.4&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;message&quot;:&quot;status half-configured openssh-client:amd64 1:6.6p1-2ubuntu2.3&quot;}
 ]
 </code></pre>
 
-<h3 id="dataset-2">Dataset 2</h3>
-<p>Log messages, generated from the synthetic data source</p>
-<pre><code>stochastic -source 'logs'
+<p>Iterating on the rule by adding more pattern elements, we arrive at the pattern:</p>
+<pre><code>%{TIMESTAMP_ISO8601:time} %{WORD:cmd} %{NOTSPACE:subcmd} %{NOTSPACE:pkg_name} %{NOTSPACE:pkg_version}
 </code></pre>
 
-<p>See file <a href="../stochastic_logs.json">stochastic_logs.json</a> with points like this:</p>
-<pre><code>  {
-    &quot;time&quot;: &quot;2015-11-23T01:25:16.000Z&quot;,
-    &quot;host&quot;: &quot;sea.0&quot;,
-    &quot;pop&quot;: &quot;sea&quot;,
-    &quot;source_type&quot;: &quot;event&quot;,
-    &quot;name&quot;: &quot;syslog&quot;,
-    &quot;message&quot;: &quot;[ 62875 ] cfg80211: World regulatory domain updated:&quot;
-  }
+<p>With the new pattern our parsed data now looks like so:</p>
+<pre><code>cat /var/log/dpkg.log | juttle -e &quot;read stdio -format 'grok' -pattern '%{TIMESTAMP_ISO8601:time} %{WORD:cmd} %{NOTSPACE:subcmd} %{NOTSPACE:pkg_name} %{NOTSPACE:pkg_version}' | view text&quot;
+[
+{&quot;time&quot;:&quot;2016-01-03T00:34:03.000Z&quot;,&quot;cmd&quot;:&quot;status&quot;,&quot;subcmd&quot;:&quot;installed&quot;,&quot;pkg_name&quot;:&quot;linux-image-extra-3.13.0-73-generic:amd64&quot;,&quot;pkg_version&quot;:&quot;3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:03.000Z&quot;,&quot;cmd&quot;:&quot;remove&quot;,&quot;subcmd&quot;:&quot;linux-image-extra-3.13.0-73-generic:amd64&quot;,&quot;pkg_name&quot;:&quot;3.13.0-73.116&quot;,&quot;pkg_version&quot;:&quot;&lt;none&gt;&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;cmd&quot;:&quot;status&quot;,&quot;subcmd&quot;:&quot;installed&quot;,&quot;pkg_name&quot;:&quot;linux-image-3.13.0-73-generic:amd64&quot;,&quot;pkg_version&quot;:&quot;3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;cmd&quot;:&quot;remove&quot;,&quot;subcmd&quot;:&quot;linux-image-3.13.0-73-generic:amd64&quot;,&quot;pkg_name&quot;:&quot;3.13.0-73.116&quot;,&quot;pkg_version&quot;:&quot;&lt;none&gt;&quot;},
+{&quot;time&quot;:&quot;2016-01-03T00:34:13.000Z&quot;,&quot;cmd&quot;:&quot;status&quot;,&quot;subcmd&quot;:&quot;half-configured&quot;,&quot;pkg_name&quot;:&quot;linux-image-3.13.0-73-generic:amd64&quot;,&quot;pkg_version&quot;:&quot;3.13.0-73.116&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;cmd&quot;:&quot;status&quot;,&quot;subcmd&quot;:&quot;unpacked&quot;,&quot;pkg_name&quot;:&quot;isc-dhcp-common:amd64&quot;,&quot;pkg_version&quot;:&quot;4.2.4-7ubuntu12.4&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;cmd&quot;:&quot;upgrade&quot;,&quot;subcmd&quot;:&quot;openssh-client:amd64&quot;,&quot;pkg_name&quot;:&quot;1:6.6p1-2ubuntu2.3&quot;,&quot;pkg_version&quot;:&quot;1:6.6p1-2ubuntu2.4&quot;},
+{&quot;time&quot;:&quot;2016-01-14T16:58:07.000Z&quot;,&quot;cmd&quot;:&quot;status&quot;,&quot;subcmd&quot;:&quot;half-configured&quot;,&quot;pkg_name&quot;:&quot;openssh-client:amd64&quot;,&quot;pkg_version&quot;:&quot;1:6.6p1-2ubuntu2.3&quot;}
+]
 </code></pre>
 
-<h3 id="dataset-3">Dataset 3</h3>
-<p>Host metrics, generated from the synthetic data source</p>
-<pre><code>stochastic -source 'cdn' -nhosts 3 -dos 0.5 -last :5 minutes: -source_type 'metrics' name = 'requests' OR name = 'response_ms' OR name = 'responses'
-</code></pre>
-
-<p>See file <a href="../stochastic_cdn_nhosts3_dos05_pts100.json">stochastic_cdn_nhosts3_dos05_pts100.json</a> with points like this:</p>
-<pre><code>  {
-    &quot;host&quot;: &quot;sea.0&quot;,
-    &quot;pop&quot;: &quot;sea&quot;,
-    &quot;service&quot;: &quot;search&quot;,
-    &quot;source_type&quot;: &quot;metric&quot;,
-    &quot;name&quot;: &quot;requests&quot;,
-    &quot;time&quot;: &quot;2015-11-23T01:47:10.000Z&quot;,
-    &quot;value&quot;: 28.096945568298626
-  }
+<p>Which is precisely what we wanted to be able to write some <strong>juttle</strong> that can
+help us analyze this log. For example if we wanted to find the top 3 most
+upgraded packages:</p>
+<pre><code>cat /var/log/dpkg.log | juttle -e &quot;read stdio -format 'grok' -pattern '%{TIMESTAMP_ISO8601:time} %{WORD:cmd} %{NOTSPACE:subcmd} %{NOTSPACE:pkg_name} %{NOTSPACE:pkg_version}' | filter cmd = 'upgraded' | reduce count() by pkg_name | sort count -desc | head 3&quot;
 </code></pre>
               
             </div>
@@ -616,10 +652,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../../concepts/overview/" class="btn btn-neutral float-right" title="Overview"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../../reducers/" class="btn btn-neutral float-right" title="Reducers"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../../doc_templates/juttle_TEMPLATE/" class="btn btn-neutral" title="____ Juttle Doc Template"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../" class="btn btn-neutral" title="Parsers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -647,10 +683,10 @@
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../../doc_templates/juttle_TEMPLATE/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../../concepts/overview/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../../reducers/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

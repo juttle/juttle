@@ -7,7 +7,7 @@
   
   
   
-  <title>____ batch - Juttle Language Reference</title>
+  <title>____ STDIO Adapter - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ batch";
-    var mkdocs_page_input_path = "processors/batch.md";
-    var mkdocs_page_url = "/processors/batch/";
+    var mkdocs_page_name = "____ STDIO Adapter";
+    var mkdocs_page_input_path = "adapters/stdio.md";
+    var mkdocs_page_url = "/adapters/stdio/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -204,7 +204,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Processors</a>
+        <a class="" href="../../processors/">Processors</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -306,7 +306,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../adapters/">Adapters</a>
+        <a class="" href="../">Adapters</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -343,7 +343,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../adapters/parsers/">Parsers</a>
+        <a class="" href="../parsers/">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -542,12 +542,12 @@
         
       
     
-    <li>____ batch</li>
+    <li>____ STDIO Adapter</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/batch.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/stdio.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -558,12 +558,20 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="batch">batch</h1>
-<p>Create batches by segmenting a sequence of points ordered by time stamp,
-each segment spanning a specified interval of time.</p>
-<pre><code>batch
-  -every duration
-  -on duration-or-calendar-offset batch-interval
+                <h1 id="stdio-adapter">STDIO Adapter</h1>
+<p>The <code>stdio</code> adapter allows reading points from stdin and writing points to stdout.</p>
+<div class="toc">
+<ul>
+<li><a href="#stdio-adapter">STDIO Adapter</a><ul>
+<li><a href="#read-stdio">read stdio</a></li>
+<li><a href="#write-stdio">write stdio</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="read-stdio">read stdio</h2>
+<p>Supported formats are JSON array, JSON lines and CSV; see examples below.</p>
+<pre><code class="text">read stdio [-format &lt;format&gt;] [-timeField &lt;fieldname&gt;]
 </code></pre>
 
 <table>
@@ -576,86 +584,61 @@ each segment spanning a specified interval of time.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>-every</code>or <code>batch-interval</code></td>
-<td>The time interval for batches, specified as one of the following: <dl><dt>n</dt><dd>The number of seconds in the time interval </dd><dt>:duration:</dt><dd>The time interval expressed as a <a href="../../reference/time/">moment literal</a></dd></dl></td>
-<td align="right">Yes</td>
+<td><code>-format</code></td>
+<td>Input file format, supports: <code>csv</code> <code>json</code> <code>jsonl</code> or <code>grok</code>for text <a href="adapters/parsers/index.md">parseable by grok</a></td>
+<td align="right">No; defaults to <code>json</code></td>
 </tr>
 <tr>
-<td><code>-on</code></td>
-<td>A time alignment for the batches. It may be a duration or a calendar offset less than batch interval. For example, <code>-every :hour: -on :00:30:00:</code>batches points over an hour on the half-hour, while <code>-every :month: -on :day 10:</code>batches monthly starting on day 10 of the month. If the beginning or ending of your data does not align evenly with these times, the first and last batch will contain less than the specified interval.</td>
-<td align="right">No; if <code>-on</code>is not specified, output batches are aligned with the UNIX epoch. If <code>batch-interval</code>equals one day, then batch boundaries are at midnight UTC.</td>
+<td><code>-timeField</code></td>
+<td>Name of the field in the data which contains a valid timestamp</td>
+<td align="right">No; defaults to <code>time</code></td>
+</tr>
+<tr>
+<td><code>-pattern</code></td>
+<td>When <code>-format='grok'</code>you can specify the grok matching pattern here. More information on grok <a href="adapters/parsers/grok.md">here</a></td>
+<td align="right">No</td>
 </tr>
 </tbody>
 </table>
-<p>Many processors do their work over groups of points called batches. For
-example, the <a href="../sort/">sort</a> processor orders everything within a batch and the <a href="../reduce/">reduce</a> processor aggregates points within a batch.</p>
-<p>The batch processor creates batches by segmenting a sequence of points
-ordered by time stamp, each segment spanning batch-interval seconds of
-time. It does not alter points or their travel in any way. Instead, it
-adds information to the sequence that segments it into disjoint groups
-of points.</p>
-<p>The end time of one batch is the start time of the following batch.
-Batch boundaries are time values that exist independent of the points,
-and there may or may not be points having these values as their time
-stamps. When batching is in place, any points that share a given time
-stamp are guaranteed to lie within the same batch. A batch processor
-downstream from an earlier batch replaces the earlier grouping with the
-new one.</p>
-<p><em>Example: Call records, day by day</em></p>
-<pre><code>// Call Record billing example:
-//
-// Call records arrive as a stream of points indicating duration in minutes.
-// Your phone bill is the total of these, charged at $.05/minute, from the
-// 20th of each month.
-//
-// This program displays a day-by-day running total of your bill:
-//
-sub call_record() {
-  emit -from :2014-01-01: -limit 4000 -every :h:
-  | put name = 'duration'
-  | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
-}
-call_record
-| batch 
-    -every :month:  
-    -on :day 20: 
-| put name = 'total', value = sum(value) * 0.05
-| view timechart
-;
-//
-// This program displays a table with monthly totals
-//
-call_record
-| reduce 
-    -every :month:
-    -on :day 20: value = sum(value) * 0.05
-| put name = &quot;total&quot;, value = Math.floor(value * 100) / 100 
-| view table 
-
+<p>The data is assumed to contain valid timestamps in a field named <code>time</code> by default; a different name for the time field may be specified with <code>-timeField</code> option. If the data contains fields <code>time</code> and another named field specified with <code>-timeField</code>, the original contents of field <code>time</code> will be overwritten by the valid timestamp from <code>timeField</code>. 
+Timeless data, which contains no timestamps, is acceptable; however certain operations which expect time to be present in the points, such as <code>reduce -every :interval:</code>, will execute with warnings or error out. Timeless data can be joined in the Juttle flowgraph with other data which contains timestamps; a common use case for reading timeless data from a file or another backend is to join it with streaming data for enrichment.</p>
+<p>The stdio adapter does not support any kind of filtering (neither filter expressions, nor full text search). In order to filter the data from the <code>read stdio</code>, pipe to the <a href="../../processors/filter/">filter</a> proc.</p>
+<p>_Example: redirect a JSON file to your juttle program</p>
+<p>This is an example using the CLI since this is where the stdio adapter comes in handy:</p>
+<pre><code class="bash">cat myfile.json | juttle -e &quot;read stdio | filter hostname = 'lemoncake' | view table&quot;
 </code></pre>
 
-<p><em>Example: create one-second interval batches</em> </p>
-<p>In this example, <a href="../../sources/emit/">emit</a>
-sends 20 points at a rate of 5 points per second. The points are then
-divided into batches at one-second intervals. The <a href="../tail/">tail</a>
-processor outputs the last point from each batch, resulting in 4 output
-points. Without the batch processor, tail would handle all 20 points at
-once, resulting in a single output point.</p>
-<pre><code>emit -from :0: -hz 5 -limit 20 
-| batch 1 
-| tail 1 
-| view text
-
+<h2 id="write-stdio">write stdio</h2>
+<p>Supported formats are JSON array, JSON lines and CSV; see examples below.</p>
+<pre><code class="text">... | write stdio [-format &lt;format&gt;]
 </code></pre>
 
-<p><em>Example: batching live data</em></p>
-<p>In contrast with the earlier example that used historical mode to emit data with past timestamps,
-all at once, this example generates data in real time, divides into batches, and uses the
-<a href="../tail/">tail</a> processor to output the last 2 points from each batch.</p>
-<pre><code>emit -hz 10 -limit 100 
-| batch 1
-| tail 2 
-| view text
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-format</code></td>
+<td>Input input format: <code>csv</code>for <a href="https://tools.ietf.org/html/rfc4180">CSV</a> data, <code>json</code>for <a href="https://tools.ietf.org/html/rfc7159">JSON</a> data, or <code>jsonl</code>for <a href="http://jsonlines.org/">JSON lines</a> data</td>
+<td align="right">No; defaults to <code>json</code></td>
+</tr>
+</tbody>
+</table>
+<p>_Example: writing csv data to stdout</p>
+<pre><code class="juttle">emit -from :2015-01-01: -limit 2
+| put name = 'write_me', value = count()
+| write stdio -format 'csv'
+</code></pre>
+
+<p>The resulting output will look like so:</p>
+<pre><code class="csv">time,name,value
+2015-01-01T00:00:00.000Z,write_me,1
+2015-01-01T00:00:01.000Z,write_me,2
 </code></pre>
               
             </div>
@@ -664,10 +647,10 @@ all at once, this example generates data in real time, divides into batches, and
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../filter/" class="btn btn-neutral float-right" title="____ filter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../stochastic/" class="btn btn-neutral float-right" title="____ Stochastic Adapter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Processors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../http/" class="btn btn-neutral" title="____ HTTP Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -695,10 +678,10 @@ all at once, this example generates data in real time, divides into batches, and
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../http/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../filter/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../stochastic/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

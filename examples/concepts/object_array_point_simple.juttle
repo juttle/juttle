@@ -1,0 +1,4 @@
+emit
+| put object = { index: count() }
+| put array = [ count() ]
+| view text

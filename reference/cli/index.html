@@ -338,6 +338,23 @@
         
             
   
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/parsers/">Parsers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -732,6 +749,8 @@ it to <code>text</code> like so:</p>
 }
 </code></pre>
 
+<p>By default, the runtime will try to load the adapter from an npm module matching the name <code>juttle-&lt;type&gt;-adapter</code>, so for the above example to work properly, you need to make sure that <code>juttle-elastic-adapter</code> exists somewhere in your npm load path.</p>
+<p>To load an adapter from a different location, add a <code>path</code> attribute to the adapter configuration that contains the module path to be used when loading the adapter.</p>
 <h2 id="logging">Logging</h2>
 <p><code>juttle</code> uses <a href="http://stritti.github.io/log4js/">log4js</a> for logging, and can be controlled via the standard <code>log4js.json</code> file. In addition, unless the environment variable <code>DEBUG</code> is set to 1, <code>juttle</code> sets the default log level to 'info'.</p>
               

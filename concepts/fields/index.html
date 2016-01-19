@@ -338,6 +338,23 @@
         
             
   
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/parsers/">Parsers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -544,6 +561,15 @@
                 <h1 id="fields">Fields</h1>
 <p>Each Juttle data point consists of a set of named fields. The name of a field is always a string, but the value can be of various <a href="../../reference/data_types/">types</a>.</p>
 <p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> This needs to be updated to clarify stream context vs function context.</p>
+<div class="toc">
+<ul>
+<li><a href="#fields">Fields</a></li>
+<li><a href="#referencing">Referencing</a></li>
+<li><a href="#fields-with-object-or-array-values">Fields with Object or Array Values</a></li>
+<li><a href="#time-field">Time Field</a></li>
+</ul>
+</div>
+<hr />
 <h1 id="referencing">Referencing</h1>
 <p>Juttle includes two operators for field referencing -- the <code>*</code> operator and the <code>#</code> operator.</p>
 <p>Consider this simple Juttle:</p>
@@ -631,6 +657,37 @@ bare identifiers.</p>
     variable), which allows reference to a field name that would be
     invalid as a bare identifier.</li>
 </ul>
+<h1 id="fields-with-object-or-array-values">Fields with Object or Array Values</h1>
+<p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> The syntax for referencing fields inside objects and arrays is still under development.</p>
+<p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> Handling of these fields by adapters is still under development.</p>
+<p>A point can have a field whose value is an array or an object. The following
+juttle will emit such point:</p>
+<pre><code>emit
+| put object = { index: count() }
+| put array = [ count() ]
+| view text
+</code></pre>
+
+<p>You can work with these fields just like you would with the ones containing
+a string or a number - all Juttle procs like <code>put</code>, <code>join</code>, <code>reduce</code> and <code>uniq</code>
+can handle them. For example:</p>
+<pre><code>emit -from Date.new(0) -limit 5
+| put foo = count() - 1
+| put obj = { i: foo + foo % 2 }
+| uniq obj
+| view text
+</code></pre>
+
+<p>will create six points with an object field, then output only those that have
+not appeared before in the stream, and</p>
+<pre><code>emit -from Date.new(0) -limit 3
+| put o = { i: count() % 2 }
+| put value = 4 - count()
+| reduce sum(value) by o
+| view text
+</code></pre>
+
+<p>groups the points by a field <code>o</code> containing an object, then sums over the <code>value</code>.</p>
 <h1 id="time-field">Time Field</h1>
 <p>The field named <code>time</code> is treated specially in the Juttle language as it is the field that is used by various processors to order points and group them into appropriate time intervals.</p>
 <p>The time field must be a Moment (see <a href="../../reference/data_types/">data types</a> that represents the time at which the event occurred. Successive points in the same stream must have time values that are monotonically increasing.</p>

@@ -1,0 +1,5 @@
+emit -from Date.new(0) -limit 3
+| put o = { i: count() % 2 }
+| put value = 4 - count()
+| reduce sum(value) by o
+| view text

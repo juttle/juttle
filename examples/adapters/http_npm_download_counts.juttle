@@ -1,0 +1,13 @@
+/*
+ * Query daily download counts from npm
+ *
+ * Input parameters:
+ *
+ *  package: package name (i.e. 'juttle')
+ */
+
+input package: text -default 'juttle';
+
+read http -url 'https://api.npmjs.org/downloads/range/last-month/${package}'
+     -rootPath 'downloads' -timeField 'day'
+| view table

@@ -338,6 +338,23 @@
         
             
   
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../parsers/">Parsers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -573,13 +590,18 @@
 </tr>
 <tr>
 <td><code>-format</code></td>
-<td>Input file format: <code>csv</code>for <a href="https://tools.ietf.org/html/rfc4180">CSV</a> data, <code>json</code>for <a href="https://tools.ietf.org/html/rfc7159">JSON</a> data, or <code>jsonl</code>for <a href="http://jsonlines.org/">JSON lines</a> data</td>
+<td>Input file format, supports: <code>csv</code> <code>json</code> <code>jsonl</code> or <code>grok</code>for text <a href="adapters/parsers/index.md">parseable by grok</a></td>
 <td align="right">No; defaults to <code>json</code></td>
 </tr>
 <tr>
 <td><code>-timeField</code></td>
 <td>Name of the field in the data which contains a valid timestamp</td>
 <td align="right">No; defaults to <code>time</code></td>
+</tr>
+<tr>
+<td><code>-pattern</code></td>
+<td>When <code>-format='grok'</code>you can specify the grok matching pattern here. More information on grok <a href="adapters/parsers/grok.md">here</a></td>
+<td align="right">No</td>
 </tr>
 </tbody>
 </table>

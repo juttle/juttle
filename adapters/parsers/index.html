@@ -7,7 +7,7 @@
   
   
   
-  <title>____ batch - Juttle Language Reference</title>
+  <title>Parsers - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ batch";
-    var mkdocs_page_input_path = "processors/batch.md";
-    var mkdocs_page_url = "/processors/batch/";
+    var mkdocs_page_name = "Parsers";
+    var mkdocs_page_input_path = "adapters/parsers/index.md";
+    var mkdocs_page_url = "/adapters/parsers/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -204,7 +204,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Processors</a>
+        <a class="" href="../../processors/">Processors</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -306,7 +306,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../adapters/">Adapters</a>
+        <a class="" href="../">Adapters</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -342,8 +342,8 @@
         
             
   
-    <li class="toctree-l1 ">
-        <a class="" href="../../adapters/parsers/">Parsers</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -542,12 +542,12 @@
         
       
     
-    <li>____ batch</li>
+    <li>Parsers</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/batch.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/adapters/parsers/index.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -558,105 +558,15 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="batch">batch</h1>
-<p>Create batches by segmenting a sequence of points ordered by time stamp,
-each segment spanning a specified interval of time.</p>
-<pre><code>batch
-  -every duration
-  -on duration-or-calendar-offset batch-interval
-</code></pre>
-
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th align="right">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-every</code>or <code>batch-interval</code></td>
-<td>The time interval for batches, specified as one of the following: <dl><dt>n</dt><dd>The number of seconds in the time interval </dd><dt>:duration:</dt><dd>The time interval expressed as a <a href="../../reference/time/">moment literal</a></dd></dl></td>
-<td align="right">Yes</td>
-</tr>
-<tr>
-<td><code>-on</code></td>
-<td>A time alignment for the batches. It may be a duration or a calendar offset less than batch interval. For example, <code>-every :hour: -on :00:30:00:</code>batches points over an hour on the half-hour, while <code>-every :month: -on :day 10:</code>batches monthly starting on day 10 of the month. If the beginning or ending of your data does not align evenly with these times, the first and last batch will contain less than the specified interval.</td>
-<td align="right">No; if <code>-on</code>is not specified, output batches are aligned with the UNIX epoch. If <code>batch-interval</code>equals one day, then batch boundaries are at midnight UTC.</td>
-</tr>
-</tbody>
-</table>
-<p>Many processors do their work over groups of points called batches. For
-example, the <a href="../sort/">sort</a> processor orders everything within a batch and the <a href="../reduce/">reduce</a> processor aggregates points within a batch.</p>
-<p>The batch processor creates batches by segmenting a sequence of points
-ordered by time stamp, each segment spanning batch-interval seconds of
-time. It does not alter points or their travel in any way. Instead, it
-adds information to the sequence that segments it into disjoint groups
-of points.</p>
-<p>The end time of one batch is the start time of the following batch.
-Batch boundaries are time values that exist independent of the points,
-and there may or may not be points having these values as their time
-stamps. When batching is in place, any points that share a given time
-stamp are guaranteed to lie within the same batch. A batch processor
-downstream from an earlier batch replaces the earlier grouping with the
-new one.</p>
-<p><em>Example: Call records, day by day</em></p>
-<pre><code>// Call Record billing example:
-//
-// Call records arrive as a stream of points indicating duration in minutes.
-// Your phone bill is the total of these, charged at $.05/minute, from the
-// 20th of each month.
-//
-// This program displays a day-by-day running total of your bill:
-//
-sub call_record() {
-  emit -from :2014-01-01: -limit 4000 -every :h:
-  | put name = 'duration'
-  | put value = (Math.random() - .5) * 20 + (Math.random() - .5) * 10 + 5
-}
-call_record
-| batch 
-    -every :month:  
-    -on :day 20: 
-| put name = 'total', value = sum(value) * 0.05
-| view timechart
-;
-//
-// This program displays a table with monthly totals
-//
-call_record
-| reduce 
-    -every :month:
-    -on :day 20: value = sum(value) * 0.05
-| put name = &quot;total&quot;, value = Math.floor(value * 100) / 100 
-| view table 
-
-</code></pre>
-
-<p><em>Example: create one-second interval batches</em> </p>
-<p>In this example, <a href="../../sources/emit/">emit</a>
-sends 20 points at a rate of 5 points per second. The points are then
-divided into batches at one-second intervals. The <a href="../tail/">tail</a>
-processor outputs the last point from each batch, resulting in 4 output
-points. Without the batch processor, tail would handle all 20 points at
-once, resulting in a single output point.</p>
-<pre><code>emit -from :0: -hz 5 -limit 20 
-| batch 1 
-| tail 1 
-| view text
-
-</code></pre>
-
-<p><em>Example: batching live data</em></p>
-<p>In contrast with the earlier example that used historical mode to emit data with past timestamps,
-all at once, this example generates data in real time, divides into batches, and uses the
-<a href="../tail/">tail</a> processor to output the last 2 points from each batch.</p>
-<pre><code>emit -hz 10 -limit 100 
-| batch 1
-| tail 2 
-| view text
-</code></pre>
+                <h1 id="parsers">Parsers</h1>
+<p>Juttle's adapters supports a few different <code>formats</code> which allow you to read in data in various formats.</p>
+<h3 id="built-in-parsers">Built In Parsers</h3>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc7159">json</a></li>
+<li><a href="http://jsonlines.org/">jsonl</a></li>
+<li><a href="https://tools.ietf.org/html/rfc4180">csv</a></li>
+<li><a href="grok/">grok</a></li>
+</ul>
               
             </div>
           </div>
@@ -664,10 +574,10 @@ all at once, this example generates data in real time, divides into batches, and
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../filter/" class="btn btn-neutral float-right" title="____ filter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="grok/" class="btn btn-neutral float-right" title="____ Grok Parser"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Processors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../stochastic_search_cluster/" class="btn btn-neutral" title="____ Search Cluster Source"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -695,10 +605,10 @@ all at once, this example generates data in real time, divides into batches, and
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../stochastic_search_cluster/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../filter/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="grok/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
