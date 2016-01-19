@@ -1,0 +1,5 @@
+emit -from Date.new(0) -limit 5
+| put foo = count() - 1
+| put obj = { i: foo + foo % 2 }
+| uniq obj
+| view text
