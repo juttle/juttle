@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var juttle_test_utils = require('./specs/juttle-test-utils');
 var compile_juttle = juttle_test_utils.compile_juttle;
 var check_juttle = juttle_test_utils.check_juttle;
+var moment = require('moment');
 
 
 describe('Juttle sinks validation', function() {
@@ -174,11 +175,12 @@ describe('Juttle sinks validation', function() {
             } );
     } );
 
-    it('converts a duration sink option to a string representation', function() {
+    it('converts a duration sink option to a moment.duration', function() {
         var program = 'emit -limit 1 | view result -d :10 minutes:';
         return check_juttle({ program: program })
             .then(function(res) {
-                expect(sink_options(res.prog, 0).d).to.equal('00:10:00.000');
+                expect(moment.isDuration(sink_options(res.prog, 0).d)).to.equal(true);
+                expect(sink_options(res.prog, 0).d.as("minutes")).to.equal(10);
             } );
     } );
 
@@ -193,11 +195,12 @@ describe('Juttle sinks validation', function() {
             } );
     } );
 
-    it('converts a nested duration sink option to its string representation', function() {
+    it('converts a nested duration sink option to a moment.duration', function() {
         var program = 'emit -limit 1 | view result -a.b.c :250 milliseconds:';
         return check_juttle({ program: program })
             .then(function(res) {
-                expect(sink_options(res.prog, 0).a.b.c).to.equal('00:00:00.250');
+                expect(moment.isDuration(sink_options(res.prog, 0).a.b.c)).to.equal(true);
+                expect(sink_options(res.prog, 0).a.b.c.as("milliseconds")).to.equal(250);
             } );
     } );
 
@@ -212,11 +215,12 @@ describe('Juttle sinks validation', function() {
             } );
     } );
 
-    it('converts a duration sink option in an array to its string representation', function() {
+    it('converts a duration sink option in an array to be a moment.duration', function() {
         var program = 'emit -limit 1 | view result -d [ :1 day: ]';
         return check_juttle({ program: program })
             .then(function(res) {
-                expect(sink_options(res.prog, 0).d[0]).to.equal('1d');
+                expect(moment.isDuration(sink_options(res.prog, 0).d[0])).to.equal(true);
+                expect(sink_options(res.prog, 0).d[0].as("days")).to.equal(1);
             } );
     } );
 
