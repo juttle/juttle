@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var compiler = require('../../lib/compiler');
 var views_sourceinfo = require('../../lib/compiler/flowgraph/views_sourceinfo.js');
 var juttle_test_utils = require('../runtime/specs/juttle-test-utils'); // jshint ignore: line
+var JuttleMoment = require('../../lib/moment').JuttleMoment;
 
 describe('Views get info on source time bounds', function() {
     function test(juttle, spec) {
@@ -16,19 +17,19 @@ describe('Views get info on source time bounds', function() {
                     actual = views[i].options._jut_time_bounds[j];
 
                     if (expected.from !== null) {
-                        expect(expected.from).to.equal(actual.from.toISOString());
+                        expect(JuttleMoment.eq(expected.from, actual.from)).to.equal(true);
                     } else {
                         expect(expected.from).to.be.null;
                     }
 
                     if (expected.to !== null) {
-                        expect(expected.to).to.equal(actual.to.toISOString());
+                        expect(JuttleMoment.eq(expected.to, actual.to)).to.equal(true);
                     } else {
                         expect(expected.to).to.be.null;
                     }
 
                     if (expected.last !== null) {
-                        expect(expected.last).to.equal(actual.last);
+                        expect(JuttleMoment.eq(expected.last, actual.last)).to.equal(true);
                     } else {
                         expect(expected.last).to.be.null;
                     }
@@ -37,19 +38,19 @@ describe('Views get info on source time bounds', function() {
         });
     }
 
-    var from = '2015-01-01T00:00:00.000Z';
-    var to = '2015-02-02T00:00:00.000Z';
-    var last = '01:00:00.000';
+    var from = new JuttleMoment({ raw: '2015-01-01T00:00:00.000Z' });
+    var to = new JuttleMoment({ raw: '2015-02-02T00:00:00.000Z' });
+    var last = new JuttleMoment.duration(1, "hour");
 
     test('read stochastic -source "cdn" | view view ', [[{from: null, to: null, last: null}]]);
-    test('read stochastic -source "cdn" -from :' + from + ': | view view ', [[{from: from, to: null, last: null}]]);
-    test('read stochastic -source "cdn" -from :' + from + ': -to :' + to + ': | view view ', [[{from: from, to: to, last: null}]]);
-    test('read stochastic -last :' + last + ': -source "cdn" | view view ', [[{from: null, to: null, last: last}]]);
+    test('read stochastic -source "cdn" -from :' + from.valueOf() + ': | view view ', [[{from: from, to: null, last: null}]]);
+    test('read stochastic -source "cdn" -from :' + from.valueOf() + ': -to :' + to.valueOf() + ': | view view ', [[{from: from, to: to, last: null}]]);
+    test('read stochastic -last :' + last.valueOf() + ': -source "cdn" | view view ', [[{from: null, to: null, last: last}]]);
 
-    test('read stochastic -source "cdn" -from :' + from + ': | view view; read stochastic -last :' + last + ': -source "cdn"  | view view ',
+    test('read stochastic -source "cdn" -from :' + from.valueOf() + ': | view view; read stochastic -last :' + last.valueOf() + ': -source "cdn"  | view view ',
          [[{from: from, to: null, last: null}], [{from: null, to: null, last: last}]]);
 
-    test('(read stochastic -source "cdn" -from :' + from + ':; read stochastic -last :' + last + ': -source "cdn" ) | view view ',
+    test('(read stochastic -source "cdn" -from :' + from.valueOf() + ':; read stochastic -last :' + last.valueOf() + ': -source "cdn" ) | view view ',
          [[{from: from, to: null, last: null}, {from: null, to: null, last: last}]]);
 
 });

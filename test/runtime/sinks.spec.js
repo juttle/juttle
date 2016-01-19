@@ -163,63 +163,6 @@ describe('Juttle sinks validation', function() {
             } );
     } );
 
-    it('converts a moment sink option to a Date', function() {
-        var now = new Date();
-        var program = 'emit -limit 1 | view result -d'
-            + ' :' + now.toISOString() + ':';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).d.getTime())
-                    .to.equal(now.getTime());
-            } );
-    } );
-
-    it('converts a duration sink option to a string representation', function() {
-        var program = 'emit -limit 1 | view result -d :10 minutes:';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).d).to.equal('00:10:00.000');
-            } );
-    } );
-
-    it('converts a nested moment sink option to a Date', function() {
-        var now = new Date();
-        var program = 'emit -limit 1 | view result -a.b.c'
-            + ' :' + now.toISOString() + ':';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).a.b.c.getTime())
-                    .to.equal(now.getTime());
-            } );
-    } );
-
-    it('converts a nested duration sink option to its string representation', function() {
-        var program = 'emit -limit 1 | view result -a.b.c :250 milliseconds:';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).a.b.c).to.equal('00:00:00.250');
-            } );
-    } );
-
-    it('converts a moment sink option in an array to a Date', function() {
-        var now = new Date();
-        var program = 'emit -limit 1 | view result -d'
-            + ' [ :' + now.toISOString() + ': ]';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).d[0].getTime())
-                    .to.equal(now.getTime());
-            } );
-    } );
-
-    it('converts a duration sink option in an array to its string representation', function() {
-        var program = 'emit -limit 1 | view result -d [ :1 day: ]';
-        return check_juttle({ program: program })
-            .then(function(res) {
-                expect(sink_options(res.prog, 0).d[0]).to.equal('1d');
-            } );
-    } );
-
     it('handles dots for nested sink arguments', function() {
         var program = 'emit -limit 1 | view result -foo.bar.baz 5';
         var nested = {
