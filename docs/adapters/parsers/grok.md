@@ -4,22 +4,27 @@ title: Grok Parser Overview | Juttle Language Reference
 
 # Grok Parser
 
-The grok parser exposes the ability to parse incoming data using the grok rules
-which are supported by [logstash](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html).
+The grok parser exposes the ability to parse incoming unstructured log data
+using the grok rules similar to those
+[documented by logstash](https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html).
+
+The juttle grok parser supports [this set of built-in rules](https://github.com/Beh01der/node-grok/tree/master/lib/patterns).
+
 The usage of the grok parser is currently supported by the [stdio](../stdio.md)
-and [file](../file.md) adapters and can be expanded easily to others. ## Field Names
+and [file](../file.md) adapters and can be expanded easily to others. 
+
+# Usage
+
+## Field Names
 
 If your grok rule specified in `-pattern` option does not contain field name to
 place the parsed data into, it will be placed into `message` field. See
-[syslog example](#parsing-a-syslog-file) with `-pattern '%{SYSLOGLINE}'`. This
-grok parser supports many [built in rules](https://github.com/Beh01der/node-grok/tree/master/lib/patterns).
+[syslog example](#parsing-a-syslog-file) with `-pattern '%{SYSLOGLINE}'`.
 
 When the grok rule is used to parse timestamps from the incoming text, you
 should assign field name `time` in the rule, as that is where Juttle will look
 for a valid timestamp. See [custom file example](#parsing-a-custom-file) with
 `-pattern "%{TIMESTAMP_ISO8601:time}`
-
-# Usage
 
 ## Parsing a syslog file
 
