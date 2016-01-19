@@ -93,6 +93,9 @@ pages:
    - '____ CDN Source': 'adapters/stochastic_cdn.md'
    - '____ Logs Source': 'adapters/stochastic_logs.md'
    - '____ Search Cluster Source': 'adapters/stochastic_search_cluster.md'
+   
+   - 'Parsers': 'adapters/parsers/index.md'
+   - '____ Grok Parser': 'adapters/parsers/grok.md'
 
    - 'Reducers': 'reducers/index.md'
    - '____ Time Windowed Reducers': 'reducers/juttle_reducers_timewindows.md'

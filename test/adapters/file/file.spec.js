@@ -10,7 +10,7 @@ var expect_to_fail = juttle_test_utils.expect_to_fail;
 
 var tmp_file = tmp.tmpNameSync();
 
-var validFormats = {
+var symmetricalFormats = {
     json: 'json',
     jsonl: 'jsonl',
     csv: 'csv'
@@ -31,6 +31,8 @@ describe('file adapter tests', function () {
     var file = path.resolve(__dirname, 'input/simple');
     var json_file = file + '.json';
 
+    var syslog = path.resolve(__dirname, '../parsers/input/logs/syslog');
+
     describe('read file', function() {
         it('fails when you provide an unknown option', function() {
             return run_read_file_juttle(tmp_file, {foo: 'bar'})
@@ -42,7 +44,7 @@ describe('file adapter tests', function () {
             });
         });
 
-        _.each(validFormats, function(format) {
+        _.each(symmetricalFormats, function(format) {
             describe(format, function() {
                 var file_name = file + '.' + format;
 
@@ -71,6 +73,14 @@ describe('file adapter tests', function () {
                     .then(function(result) {
                         expect(result.errors.length).equal(1);
                         expect(result.errors[0]).match(/ENOENT/);
+                    });
+                });
+
+                it('fails if you use -pattern with the non "grok" format', function() {
+                    var options = {format: format, pattern: '%{SYSLOGLINE}'};
+                    return run_read_file_juttle(file_name, options)
+                    .catch(function(err) {
+                        expect(err).match(/Error: option pattern can only be used with format="grok"/);
                     });
                 });
             });
@@ -158,6 +168,23 @@ describe('file adapter tests', function () {
 
             return expect_to_fail(failing_read, message);
         });
+
+        it('can read syslog file using -format "grok"' , function() {
+            return check_juttle({
+                program: 'read file -file "' +  syslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | keep program, pid'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table).to.deep.equal([
+                    { program: 'anacron', pid: '15134' },
+                    { program: 'anacron', pid: '15134' },
+                    { program: 'CRON', pid: '17219' },
+                    { program: 'CRON', pid: '17218' }
+                ]);
+            });
+        });
+
     });
 
     describe('write file', function() {
@@ -331,5 +358,7 @@ describe('file adapter tests', function () {
                 expect(result.sinks.table[1].message).equal('hello test 3');
             });
         });
+
     });
+
 });
