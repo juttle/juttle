@@ -10,7 +10,7 @@ Produces an error when used on term of invalid type
 
 ### Errors
 
-  * Full-text search: Invalid term type (array).
+  * Invalid term type (array).
 
 The following testcase should really be in parser tests, but we don't have
 these.
