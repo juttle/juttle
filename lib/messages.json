@@ -16,6 +16,8 @@
   "RT-NO-FREE-TEXT": "Error: Free text search is not implemented in this context.",
   "RT-ADAPTER-UNSUPPORTED-FILTER": "Error: {filter} is not supported by {proc}.",
   "RT-FREE-TEXT-STOCHASTIC": "Error: Free text search is not implemented for stochastic adapter.",
+  "RT-INVALID-TYPE": "Error: content-type must be set to: {{info.types}}",
+  "RT-INVALID-HTTP-METHOD": "Error: endpoint only allows these http methods: {{info.types}}",
   "RT-INVALID-JSON-ERROR": "Error: Invalid JSON data: {detail}",
   "RT-INVALID-JSONL-ERROR": "Error: Invalid JSONL data: {detail}",
   "RT-INVALID-CSV-ERROR": "Error: Invalid CSV data: {detail}",
