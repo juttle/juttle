@@ -113,7 +113,7 @@
     "RT-SUB-INVALID-ARG": "Error: Subgraph {{info.sub}} called with invalid argument {{info.arg}}",
     "RT-SUB-MISSING-ARG": "Error: Subgraph {{info.sub}} called without argument {{info.arg}}",
     "RT-INVALID-OPERAND-TYPE": "Error: The \"{{info.operator}}\" operator: Invalid operand type ({{info.type}}).",
-    "RT-INVALID-TERM-TYPE": "Error: Full-text search: Invalid term type ({{info.type}}).",
+    "RT-INVALID-TERM-TYPE": "Error: Invalid term type ({{info.type}}).",
     "RT-IMPORT-INTERPOLATION": "Error: Cannot use interpolation in imported module name.",
     "RT-MODULE-NOT-FOUND": "Error: could not find module \"{{info.module}}\"",
     "RT-FIELD-NOT-STRING": "Error: field {{info.field}} is not a string",
