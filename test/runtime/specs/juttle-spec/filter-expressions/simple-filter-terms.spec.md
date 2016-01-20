@@ -11,6 +11,3 @@ Produces an error when used on term of invalid type
 ### Errors
 
   * Invalid term type (array).
-
-The following testcase should really be in parser tests, but we don't have
-these.
