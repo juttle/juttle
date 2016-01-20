@@ -38,6 +38,18 @@ skips points by field, no argument
     {id:2}
     {id:3}
 
+skips points by array/object field, no argument
+---------------------------------------------------
+
+### Juttle
+    emit -from Date.new(0) -limit 6
+    | put o={id: Math.ceil(count() / 2)}
+    | skip by o | remove time | view result
+
+### Output
+    {o:{id:1}}
+    {o:{id:2}}
+    {o:{id:3}}
 
 skips points by field, numeric argument
 ---------------------------------------------------
@@ -51,6 +63,19 @@ skips points by field, numeric argument
     {id:1}
     {id:2}
     {id:3}
+
+skips points by array/object field, numeric argument
+----------------------------------------------------
+
+### Juttle
+    emit -from Date.new(0) -limit 9
+    | put o={id:Math.ceil(count() / 3)}
+    | skip 2 by o | remove time | view result
+
+### Output
+    {o:{id:1}}
+    {o:{id:2}}
+    {o:{id:3}}
 
 complains about nonnumeric argument
 ---------------------------------------------------

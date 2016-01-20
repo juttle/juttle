@@ -53,6 +53,17 @@ doesnt split an array
     {time: "2000-01-01T00:00:00.000Z", name:"a",   value:["we", "will", "rock", "you"],  peek:"frean"}
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
+doesn't split an object
+-----------------------
+### Juttle
+    emit -from :2000-01-01: -limit 1
+    | put a={"we":"will","rock":"you"}, bleat="blort", peek="frean"
+    | split a, bleat
+    | view result
+
+### Output
+    {time: "2000-01-01T00:00:00.000Z", name:"a",   value:{"we":"will","rock":"you"}, peek:"frean"}
+    {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
 splits points without time
 ------------------
