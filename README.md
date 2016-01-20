@@ -14,11 +14,9 @@ big data backends or other web services.
 You read data from a backend service, analyze it using
 *dataflow processors*, and send output to visualizations in the browser, write to a big-data store, post to http endpoints (e.g. alert to slack, pagerduty), etc.
 
-See the [docs](./docs) to learn more about [why juttle exists](./docs/index.md),
-get an [overview](./docs/concepts/overview.md) of the language, learn about the
-[dataflow features](./docs/concepts/dataflow.md) and how to [program in juttle](./docs/concepts/programming_constructs.md), and more.
-
-All documentation is also available from the [juttle documentation site](https://juttle.github.io/juttle).
+See the [documentation site](https://juttle.github.io/juttle) to learn more about why juttle exists,
+get an [overview](https://juttle.github.io/juttle/concepts/overview) of the language, learn about the
+[dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), and more.
 
 ## Installation
 
