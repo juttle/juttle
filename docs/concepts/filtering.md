@@ -109,8 +109,6 @@ The [filter](../processors/filter.md) processor does not support full-text searc
 
 The search terms for full-text search are currently expressed as standalone strings in the filter expression for `read`. Search terms and other filter expressions can be combined with the AND, OR, NOT operators.
 
-A full-text search is currently expressed in a filter statement as a standalone string.
-
 :construction: The syntax for full-text search will be changed soon to add a `?` operator.
 
 
