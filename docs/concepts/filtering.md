@@ -107,21 +107,19 @@ present in any field.
 The [filter](../processors/filter.md) processor does not support full-text search -- it can only be used as part of a read from an external backend that supports search.
 
 
-The search terms for full-text search are currently expressed as standalone strings in the filter expression for `read`. Search terms and other filter expressions can be combined with the AND, OR, NOT operators.
-
-:construction: The syntax for full-text search will be changed soon to add a `?` operator.
+The search terms for full-text search are expressed using the `?=` operator followed by the search string in the filter expression for `read`. Search terms and other filter expressions can be combined with the AND, OR, NOT operators.
 
 
 For example the following searches all documents in the last day for the term "alarm":
 
 ```juttle
-read elastic -last :1 day: "alarm"
+read elastic -last :1 day: ?= "alarm"
 ```
 
 And the following searches all documents in the last day containing the term "alarm" and where the `env` field is not equal to "test".
 
 ```juttle
-read elastic -last :1 day: 'alarm' AND NOT env = 'test'
+read elastic -last :1 day: ?= 'alarm' AND NOT env = 'test'
 ```
 
 ### Quoted terms match exact phrases only
@@ -129,7 +127,7 @@ read elastic -last :1 day: 'alarm' AND NOT env = 'test'
 For example, the following matches points in which one or more fields contain the *exact phrase* "alarm failed":
 
 ```juttle
-read elastic -last :1 day: "alarm failed"
+read elastic -last :1 day: ?= "alarm failed"
 ```
 
 It does not match points in which one field contains "alarm" and
@@ -138,7 +136,7 @@ field contains "alarm has failed". To match those points, use this
 instead:
 
 ```juttle
-read elastic -last :1 day: "alarm" "failed"
+read elastic -last :1 day: ?= "alarm" ?= "failed"
 ```
 
 ### Terms analysis

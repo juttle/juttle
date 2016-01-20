@@ -292,7 +292,7 @@ describe('FilterJSCompiler', function() {
             it('finds correct points', function() {
                 testFilter(
                     {
-                        type: 'SimpleFilterTerm',
+                        type: 'ReferenceFilterTerm',
                         expression: {
                             type: 'FilterLiteral',
                             ast: {

@@ -13,7 +13,7 @@ stochastic with bad type complains
 stochastic with FTS complains
 -------------------------
 ### Juttle
-    read stochastic -source "cdn" "Never gonna get it" | view result
+    read stochastic -source "cdn" ?= "Never gonna get it" | view result
 
 ### Errors
 

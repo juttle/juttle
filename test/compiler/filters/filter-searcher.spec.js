@@ -54,11 +54,11 @@ describe('FilterSearcher', function() {
 
         describe('filters with fulltext term(s)', function() {
             var filters = [
-                '"value"',
-                'NOT "value"',
-                'NOT ("value")',
-                '"value" == v OR (value <= 0 AND "thing")',
-                '"search term" value in ["value"]'
+                '?= "value"',
+                'NOT ?= "value"',
+                'NOT (?= "value")',
+                '"value" == v OR (value <= 0 AND ?= "thing")',
+                '?= "search term" value in ["value"]'
             ];
 
             _.each(filters, function (filter) {
