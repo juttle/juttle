@@ -603,7 +603,7 @@
 <p>The data is assumed to contain valid timestamps in a field named <code>time</code> by default; a different name for the time field may be specified with <code>-timeField</code> option. If the data contains fields <code>time</code> and another named field specified with <code>-timeField</code>, the original contents of field <code>time</code> will be overwritten by the valid timestamp from <code>timeField</code>. 
 Timeless data, which contains no timestamps, is acceptable; however certain operations which expect time to be present in the points, such as <code>reduce -every :interval:</code>, will execute with warnings or error out. Timeless data can be joined in the Juttle flowgraph with other data which contains timestamps; a common use case for reading timeless data from a file or another backend is to join it with streaming data for enrichment.</p>
 <p>The stdio adapter does not support any kind of filtering (neither filter expressions, nor full text search). In order to filter the data from the <code>read stdio</code>, pipe to the <a href="../../processors/filter/">filter</a> proc.</p>
-<p>_Example: redirect a JSON file to your juttle program</p>
+<p><em>Example: redirect a JSON file to your juttle program</em></p>
 <p>This is an example using the CLI since this is where the stdio adapter comes in handy:</p>
 <pre><code class="bash">cat myfile.json | juttle -e &quot;read stdio | filter hostname = 'lemoncake' | view table&quot;
 </code></pre>
@@ -629,7 +629,7 @@ Timeless data, which contains no timestamps, is acceptable; however certain oper
 </tr>
 </tbody>
 </table>
-<p>_Example: writing csv data to stdout</p>
+<p><em>Example: writing csv data to stdout</em></p>
 <pre><code class="juttle">emit -from :2015-01-01: -limit 2
 | put name = 'write_me', value = count()
 | write stdio -format 'csv'

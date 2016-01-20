@@ -559,19 +559,21 @@
             <div class="section">
               
                 <h1 id="grok-parser">Grok Parser</h1>
-<p>The grok parser exposes the ability to parse incoming data using the grok rules
-which are supported by <a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html">logstash</a>.
-The usage of the grok parser is currently supported by the <a href="../../stdio/">stdio</a>
-and <a href="../../file/">file</a> adapters and can be expanded easily to others. ## Field Names</p>
+<p>The grok parser exposes the ability to parse incoming unstructured log data
+using the grok rules similar to those
+<a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html">documented by logstash</a>.</p>
+<p>The juttle grok parser supports <a href="https://github.com/Beh01der/node-grok/tree/master/lib/patterns">this set of built-in rules</a>.</p>
+<p>The usage of the grok parser is currently supported by the <a href="../../stdio/">stdio</a>
+and <a href="../../file/">file</a> adapters and can be expanded easily to others. </p>
+<h1 id="usage">Usage</h1>
+<h2 id="field-names">Field Names</h2>
 <p>If your grok rule specified in <code>-pattern</code> option does not contain field name to
 place the parsed data into, it will be placed into <code>message</code> field. See
-<a href="#parsing-a-syslog-file">syslog example</a> with <code>-pattern '%{SYSLOGLINE}'</code>. This
-grok parser supports many <a href="https://github.com/Beh01der/node-grok/tree/master/lib/patterns">built in rules</a>.</p>
+<a href="#parsing-a-syslog-file">syslog example</a> with <code>-pattern '%{SYSLOGLINE}'</code>.</p>
 <p>When the grok rule is used to parse timestamps from the incoming text, you
 should assign field name <code>time</code> in the rule, as that is where Juttle will look
 for a valid timestamp. See <a href="#parsing-a-custom-file">custom file example</a> with
 <code>-pattern "%{TIMESTAMP_ISO8601:time}</code></p>
-<h1 id="usage">Usage</h1>
 <h2 id="parsing-a-syslog-file">Parsing a syslog file</h2>
 <p>Since there quite a few <a href="https://github.com/Beh01der/node-grok/tree/master/lib/patterns">built in rules</a>
 already, parsing certain log types is very easy, such as:</p>
