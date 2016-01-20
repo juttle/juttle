@@ -2,6 +2,37 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.3.0
+
+Released 2016-01-20
+
+### Major Changes
+
+- Added support for points with array/object field values. [#55]
+- Added support for Grok parsing to `file` and `stdio` adapters (`-format "grok" -pattern ...`). [#37]
+- Adapters are now loaded only when they are used. [#83]
+
+### Minor Changes
+
+- Added a `rootPath` option to `read http` which allows to specify which part of a JSON object should be used when emitting points. [#146]
+- Changed string representation of some Juttle values, most notably arrays and objects. [#200]
+- Improved error messages for `read` options with invalid values. [#17]
+- Added location information to invalid adapter errors. [#156]
+- Added infrastructure for `tail` optimization. [#129]
+- Removed conversion of view options containing moments and durations into `Date` instances and numbers. [#210]
+- Added new `rawDurationString` option to `JuttleMoment#initialize` [#186]
+- Changed `JuttleMoment#compare` to implement `strcmp`-like comparison [#191]
+- Removed unused `Program#get_stats` method. [#154]
+- Removed unused `Juttle.proc.base#initialize` parameters. [#132]
+- Streamlined error-related code. [#174]
+- Updated compile command in the Emacs mode to use `outrigger-client`. [#198]
+- Added the `AUTHORS.md` file. [#169]
+
+### Bug Fixes
+
+- Added code that detects multiple copies of `juttle` being loaded by adapters. [#130]
+- Removed inappropriate module-recursive parsing in `parser#parseValue` and `parser#parseFilter`. [#163]
+
 ## 0.2.0
 
 Released 2016-01-06
