@@ -9,7 +9,7 @@ Released 2016-01-06
 ### Major Changes
 
 - Added support for field to field comparisons in `filter`. [#122]
-- Renamed various occurrences of "sink" to "view" in the compiler and runtime implementation and API to be consistent with the current terminology. [#40]
+- Renamed various occurrences of “sink” to “view” in the compiler and runtime implementation and API to be consistent with the current terminology. [#40]
 - Added a stdio backend to read and write from standard I/O using various formats. [#36]
 - Rewrote the file adapter to use asynchronous I/O and to add a buffering limit for large files. [#6]
 - Cleaned up the parser API. [#19]
