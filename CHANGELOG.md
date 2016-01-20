@@ -1,6 +1,6 @@
 # Change Log
 
-This file documents all notable changes to juttle. The release numbering uses [semantic versioning](http://semver.org).
+This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
 ## 0.2.0
 
