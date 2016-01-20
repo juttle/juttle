@@ -21,6 +21,7 @@ Parameter  |  Description  |  Required?
 `-every`  |  The interval at which to emit points, specified as a :duration: <p>See [Time notation in Juttle](../reference/time.md) for syntax information. </p> |  No
 `-from`  |  Stream points whose time stamps are greater than or equal to the specified moment <p>See [Time notation in Juttle](../reference/time.md) for syntax information.</p> |  No; defaults to :now:
 `-to`  |  Stream points whose time stamps are less than the specified moment, which is less than or equal to :now: <p>See [Time notation in Juttle](../reference/time.md) for syntax information.  |  No; defaults to forever
+`-last`  |  Given a duration, shorthand for `-from (:now: - duration) -to :now:` |  No
 `-limit`  |  Total number of points to emit  |  No; defaults to 1.
 `-points` |  An array of points to stream  |  No
 
