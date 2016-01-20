@@ -1,6 +1,8 @@
 # Juttle Documentation
 
-Welcome to the documentation for [Juttle](https://github.com/juttle/juttle/), a dataflow programming language!
+Welcome to the documentation for Juttle, a dataflow programming language!
+
+The Juttle project is hosted on [GitHub](https://github.com/juttle/juttle/) and described in the [Project README](project.md).
 
 ## About Juttle
 
