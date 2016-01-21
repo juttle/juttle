@@ -1,12 +1,12 @@
-Simple filter terms
-===================
+Fulltext filter terms
+=====================
 
 Produces an error when used on term of invalid type
 ---------------------------------------------------
 
 ### Juttle
 
-    read test [1, 2, 3]
+    read test ?= [1, 2, 3]
 
 ### Errors
 
