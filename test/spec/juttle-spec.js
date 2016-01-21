@@ -156,7 +156,7 @@ var SpecRenderer = Base.extend({
         ].join('\n'));
 
         if (test.output !== null) {
-            parts.push('            expect(res.sinks.result).to.deep.equal(' + util.inspect(test.output) + ');');
+            parts.push('            expect(res.sinks.result).to.deep.equal(' + util.inspect(test.output, { depth: null }) + ');');
         }
         if (test.errors.length > 0) {
             for (var erri=0 ; erri < test.errors.length ; erri++) {
