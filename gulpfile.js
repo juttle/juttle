@@ -113,8 +113,8 @@ gulp.task('test-coverage', ['peg', 'juttle-spec', 'instrument'], function() {
             thresholds: {
                 global: {
                     statements: 92,
-                    branches: 87,
-                    functions: 92,
+                    branches: 86,
+                    functions: 91,
                     lines: 92
                 }
             }
