@@ -137,7 +137,7 @@ describe('adapter API tests', function () {
         adapters.configure({
             'testClone': {
                 path: path.resolve(__dirname, './test-adapter-clone'),
-                defaultTimeRange: 'EMPTY'
+                timeRequired: true
             }
         });
 

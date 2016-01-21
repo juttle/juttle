@@ -15,8 +15,8 @@ function TestAdapter(config) {
         procName: 'read-test',
 
         initialize: function(options, params) {
-            var defaultTimeRange = config.defaultTimeRange || this.DEFAULT_TIME_RANGE.INFINITE;
-            this.handleTimeOptions(options, defaultTimeRange);
+            this.handleTimeOptions(options);
+            this.setDefaultTimeRange(config.timeRequired || false);
 
             this.logger.debug('initialize options:', options, 'params:', params);
 
