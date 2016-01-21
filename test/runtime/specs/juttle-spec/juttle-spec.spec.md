@@ -76,3 +76,14 @@ Marks with time
     {"time": "1970-01-01T00:00:01.000Z", "mark": true }
     {"time": "1970-01-01T00:00:01.000Z"}
     {"time": "1970-01-01T00:00:02.000Z", "mark": true}
+
+Array/Object values
+-------------------
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | put result = [1, 2, { "key": "value" }] | view result
+
+### Output
+
+    { "time": "1970-01-01T00:00:00.000Z", "result": [1, 2, { "key": "value" }] }
