@@ -5,6 +5,79 @@ var JuttleMoment = require('../../lib/moment').JuttleMoment;
 var Filter = require('../../lib/runtime/filter');
 
 describe('Values tests', function () {
+    describe('toJSONCopmatible', function() {
+        it('returns correct representation', function() {
+            var tests = [
+                {
+                    value: true,
+                    expected: true,
+                },
+                {
+                    value: null,
+                    expected: null,
+                },
+                {
+                    value: 10,
+                    expected: 10,
+                },
+                {
+                    value: Infinity,
+                    expected: Infinity,
+                },
+                {
+                    value: NaN,
+                    expected: NaN,
+                },
+                {
+                    value: 'hello',
+                    expected: 'hello',
+                },
+                {
+                    value: new RegExp('abc'),
+                    expected: '/abc/',
+                },
+                {
+                    value: new JuttleMoment(0),
+                    expected: '1970-01-01T00:00:00.000Z',
+                },
+                {
+                    value: new Filter({
+                        type: 'ExpressionFilterTerm',
+                        expression: {
+                            type: 'BinaryExpression',
+                            operator: '<',
+                            left: { type: 'Variable', name: 'a' },
+                            right: { type: 'NumericLiteral', value: 5 }
+                        }
+                    },
+                    'a < 5'
+                    ),
+                    expected: 'a < 5',
+                },
+                {
+                    value: [1, 2, "a"],
+                    expected: [1, 2, "a"],
+                },
+                {
+                    value: [1, 2, new JuttleMoment(0)],
+                    expected: [1, 2, '1970-01-01T00:00:00.000Z']
+                },
+                {
+                    value: { a: 'b', c: 'd' },
+                    expected: { a: 'b', c: 'd' },
+                },
+                {
+                    value: [1, 2, { o: { a: new JuttleMoment(0), c: 'd' } }],
+                    expected: [1, 2, { o: { a: '1970-01-01T00:00:00.000Z', c: 'd' } }]
+                }
+            ];
+
+            _.each(tests, function(test) {
+                expect(values.toJSONCompatible(test.value)).to.deep.equal(test.expected);
+            });
+        });
+    });
+
     describe('compare', function() {
         describe('invalid comparison', function() {
             it('throws error', function() {
@@ -209,7 +282,7 @@ describe('Values tests', function () {
                     expected: '[ 1, 2, 3 ]'
                 },
                 {
-                    value: ["abcd", new JuttleMoment.duration('5', 'seconds') ],
+                    value: ['abcd', new JuttleMoment.duration('5', 'seconds') ],
                     expected: '[ "abcd", :00:00:05.000: ]'
                 },
                 {
@@ -221,7 +294,7 @@ describe('Values tests', function () {
                     expected: '{ a: 1, b: 2, c: 3 }'
                 },
                 {
-                    value: { a: "abcd", b: new JuttleMoment.duration('5', 'seconds') },
+                    value: { a: 'abcd', b: new JuttleMoment.duration('5', 'seconds') },
                     expected: '{ a: "abcd", b: :00:00:05.000: }'
                 },
             ];
@@ -307,7 +380,7 @@ describe('Values tests', function () {
                     expected: '[ 1, 2, 3 ]'
                 },
                 {
-                    value: ["abcd", new JuttleMoment.duration('5', 'seconds') ],
+                    value: ['abcd', new JuttleMoment.duration('5', 'seconds') ],
                     expected: '[ "abcd", :00:00:05.000: ]'
                 },
                 {
@@ -319,7 +392,7 @@ describe('Values tests', function () {
                     expected: '{ a: 1, b: 2, c: 3 }'
                 },
                 {
-                    value: { a: "abcd", b: new JuttleMoment.duration('5', 'seconds') },
+                    value: { a: 'abcd', b: new JuttleMoment.duration('5', 'seconds') },
                     expected: '{ a: "abcd", b: :00:00:05.000: }'
                 },
             ];
