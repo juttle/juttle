@@ -5,6 +5,7 @@
   "JUTTLE-SYNTAX-ERROR-WITHOUT-EXPECTED": "{message}",
 
   "JUTTLE-INVALID-ADAPTER": "adapter {type} not registered",
+  "JUTTLE-UNSUPPORTED-ADAPTER-METHOD": "adapter {type} does not implement {method}",
   "RT-GROUP-BY-UNDEFINED": "group by undefined field \"{field}\"",
   "RT-SORT-LIMIT-EXCEEDED": "sort limit exceeded, dropping points",
   "RT-BATCH-OUT-OF-ORDER": "batch dropped out-of-order point(s)",
