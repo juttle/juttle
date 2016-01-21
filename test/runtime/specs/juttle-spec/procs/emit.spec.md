@@ -232,7 +232,7 @@ Emits points and ticks in a live setting
 
 ### Juttle
 
-    emit -limit 3
+    emit -limit 3 -every :2s:
     | put n = count(), dt = time - :now:
     | keep n, dt
     | view result -ticks true
@@ -241,9 +241,9 @@ Emits points and ticks in a live setting
 
     { n: 1, dt: "00:00:00.000" }
     { tick: true }
-    { n: 2, dt: "00:00:01.000" }
+    { n: 2, dt: "00:00:02.000" }
     { tick: true }
-    { n: 3, dt: "00:00:02.000" }
+    { n: 3, dt: "00:00:04.000" }
 
 Does not emit any points with `-limit 0`
 ----------------------------------------
@@ -370,7 +370,7 @@ Emits historic and live points with -from
 
 ### Juttle
 
-    emit -from :-2s: -to :+3s:
+    emit -from :-2s: -limit 5
     | put n = count(), dt = time - :now:
     | keep n, dt
     | view result -ticks true
