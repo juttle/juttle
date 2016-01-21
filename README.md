@@ -14,11 +14,11 @@ big data backends or other web services.
 You read data from a backend service, analyze it using
 *dataflow processors*, and send output to visualizations in the browser, write to a big-data store, post to http endpoints (e.g. alert to slack, pagerduty), etc.
 
-See the [docs](./docs) to learn more about [why juttle exists](./docs/index.md),
-get an [overview](./docs/concepts/overview.md) of the language, learn about the
-[dataflow features](./docs/concepts/dataflow.md) and how to [program in juttle](./docs/concepts/programming_constructs.md), and more.
+See the [documentation site](https://juttle.github.io/juttle) to learn more about why juttle exists,
+get an [overview](https://juttle.github.io/juttle/concepts/overview) of the language, learn about the
+[dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), and more.
 
-All documentation is also available from the [juttle documentation site](https://juttle.github.io/juttle).
+For more information about the Juttle project, see the [wiki](https://github.com/juttle/juttle/wiki).
 
 ## Installation
 
@@ -64,6 +64,8 @@ Note that most of these examples use Juttle in conjunction with external systems
 using [adapters](#adapters) and/or depend on visualizations from an environment
 like [outrigger](#outrigger) so they are meant to be
 illustrative and not necessarily functional out of the box.
+
+For more end-to-end examples of juttle usage, see the [outrigger examples](https://github.com/juttle/outrigger/tree/master/examples).
 
 ### Hello world
 
