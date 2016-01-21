@@ -69,6 +69,7 @@
     "json2csv": "^3.0.1",
     "memory-streams": "^0.1.0",
     "merge-stream": "^1.0.0",
+    "request-promise": "^2.0.0",
     "through2": "^2.0.0",
     "tmp": "^0.0.28",
     "yargs": "^3.30.0"

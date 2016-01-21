@@ -2,6 +2,12 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## Unreleased Changes
+
+### Minor Changes
+
+- Create `http_server` adapter. [[#224](https://github.com/juttle/juttle/pull/224)]
+
 ## 0.3.1
 
 Released 2016-01-21
