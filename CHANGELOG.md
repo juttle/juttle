@@ -2,6 +2,14 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.3.1
+
+Released 2016-01-21
+
+### Bug Fixes
+
+- Use our own `node-grok` fork which uses `collections^2.0` to avoid buggy reimplementation of `Array.prototype.find` in earlier versions. [[#225](https://github.com/juttle/juttle/issues/225)]
+
 ## 0.3.0
 
 Released 2016-01-20
