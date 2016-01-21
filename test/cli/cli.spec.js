@@ -379,34 +379,34 @@ describe('Juttle CLI Tests', function() {
     describe('juttle REPL', function() {
         it('can exit', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 1\n' +
+                stdin: 'emit -limit 1\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can clear screen', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 1\n' +
+                stdin: 'emit -limit 1\n' +
                            'clear\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stderr).to.not.include('no such sub');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stderr).to.not.include('no such sub');
+            });
         });
 
         it('can display help', function() {
             return runJuttle([], {
-                    stdin: 'emit -limit 0\n' +
+                stdin: 'emit -limit 0\n' +
                            'help\n' +
                            'exit\n'
-                }).then(function(result) {
-                    expect(result.code).to.equal(0);
-                    expect(result.stdout).to.include('print this usage');
-                });
+            }).then(function(result) {
+                expect(result.code).to.equal(0);
+                expect(result.stdout).to.include('print this usage');
+            });
         });
 
         it('can execute a program interactively', function() {

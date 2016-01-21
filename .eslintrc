@@ -1,0 +1,16 @@
+{
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true
+    },
+    "rules": {
+        "indent": [ 2, 4, { "SwitchCase": 1 } ],
+        "linebreak-style": [ 2, "unix" ],
+        "no-unused-vars": [2, { "args": "none" }],
+        "semi": [ 2, "always" ],
+        "comma-dangle": [ 0 ],
+        "no-constant-condition" : [ 0 ]
+    },
+}
