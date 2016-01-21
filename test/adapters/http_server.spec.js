@@ -69,6 +69,36 @@ describe('read http_server', function() {
         });
     });
 
+    it('ingests with put method', function() {
+        var programFinish, program;
+        var body = {'name': 'ted', 'age': 53, 'weight': 100};
+
+        return compile_juttle({
+            program: 'read http_server -port 2000 -method \'PUT\''
+        })
+        .then(function(prog) {
+            program = prog;
+            programFinish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:2000',
+                method: 'PUT',
+                body: body,
+                json: true,
+                resolveWithFullResponse: true
+            });
+        })
+        .then(function(res) {
+            expect(res.statusCode).to.equal(200);
+
+            program.deactivate();
+            return programFinish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table).to.deep.equal([body]);
+        });
+    });
+
     it('ingests simple csv, verify timeField works correctly', function() {
         var program, finish;
         var body = 'product,amount,saleTime'
