@@ -328,4 +328,124 @@ describe('Values tests', function () {
             });
         });
     });
+
+    describe('typeOf', function() {
+        it('correctly identifies value type', function() {
+            var tests = [
+                {
+                    value: true,
+                    expected: 'Boolean',
+                },
+                {
+                    value: null,
+                    expected: 'Null',
+                },
+                {
+                    value: 10,
+                    expected: 'Number',
+                },
+                {
+                    value: Infinity,
+                    expected: 'Number',
+                },
+                {
+                    value: NaN,
+                    expected: 'Number',
+                },
+                {
+                    value: 'hello',
+                    expected: 'String',
+                },
+                {
+                    value: new RegExp('abc'),
+                    expected: 'RegExp',
+                },
+                {
+                    value: new JuttleMoment(0),
+                    expected: 'Date',
+                },
+                {
+                    value: JuttleMoment.duration('5', 's'),
+                    expected: 'Duration',
+                },
+                {
+                    value: new Filter({
+                        type: 'ExpressionFilterTerm',
+                        expression: {
+                            type: 'BinaryExpression',
+                            operator: '<',
+                            left: { type: 'Variable', name: 'a' },
+                            right: { type: 'NumericLiteral', value: 5 }
+                        }
+                    },
+                    'a < 5'
+                    ),
+                    expected: 'Filter',
+                },
+                {
+                    value: [1, 2, 'a'],
+                    expected: 'Array',
+                },
+                {
+                    value: { a: 'b', c: 'd' },
+                    expected: 'Object',
+                }
+            ];
+            _.each(tests, function(test) {
+                expect(values.typeOf(test.value)).to.equal(test.expected);
+            });
+        });
+    });
+
+    describe('is helpers', function() {
+        it('correctly identify a type', function() {
+            var types = [
+                'Null',
+                'Boolean',
+                'Number',
+                'String',
+                'RegExp',
+                'Date',
+                'Duration',
+                'Filter',
+                'Array',
+                'Object'
+            ];
+
+            var vals = [
+                null,
+                true,
+                10,
+                'hello',
+                new RegExp('abcd'),
+                new JuttleMoment(0),
+                JuttleMoment.duration('5', 's'),
+                new Filter({
+                    type: 'ExpressionFilterTerm',
+                    expression: {
+                        type: 'BinaryExpression',
+                        operator: '<',
+                        left: { type: 'Variable', name: 'a' },
+                        right: { type: 'NumericLiteral', value: 5 }
+                    }
+                },
+                    'a < 5'
+                ),
+                [1, 2, 3],
+                { a: 'b', c: 'd' }
+            ];
+
+            _.each(types, function(t, i) {
+                _.each(vals, function(v, j) {
+                    var isType = values['is' + t](v);
+
+                    if (i === j) {
+                        expect(isType).to.equal(true, 'is' + t + ': ' + v);
+                    } else {
+                        expect(isType).to.equal(false, 'is' + t + ': ' + v);
+                    }
+                });
+            });
+        });
+    });
 });
