@@ -18,6 +18,8 @@ See the [documentation site](https://juttle.github.io/juttle) to learn more abou
 get an [overview](https://juttle.github.io/juttle/concepts/overview) of the language, learn about the
 [dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), and more.
 
+For more information about the Juttle project, see the [wiki](https://github.com/juttle/juttle/wiki).
+
 ## Installation
 
 Juttle requires [node.js](https://nodejs.org/) version 4.2 or later.
@@ -62,6 +64,8 @@ Note that most of these examples use Juttle in conjunction with external systems
 using [adapters](#adapters) and/or depend on visualizations from an environment
 like [outrigger](#outrigger) so they are meant to be
 illustrative and not necessarily functional out of the box.
+
+For more end-to-end examples of juttle usage, see the [outrigger examples](https://github.com/juttle/outrigger/tree/master/examples).
 
 ### Hello world
 
