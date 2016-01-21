@@ -65,6 +65,50 @@ Complains if -to isnt a moment
 
    * CompileError: Error: -to wants a moment, got "never"
 
+Complains if -last isnt a duration
+----------------------------------------
+
+### Juttle
+
+    emit -last "never"  | view result
+
+### Errors
+
+   * CompileError: Error: -last wants a duration, got "never"
+
+Complains if -last and -from are specified
+------------------------------------------
+
+### Juttle
+
+    emit -from :yesterday: -last :day: | view result
+
+### Errors
+
+   * CompileError: Error: -last option should not be combined with -from or -to
+
+Complains if -last and -to are specified
+----------------------------------------
+
+### Juttle
+
+    emit -to :tomorrow: -last :day: | view result
+
+### Errors
+
+   * CompileError: Error: -last option should not be combined with -from or -to
+
+Complains if -from and -to and -last are specified
+----------------------------------------
+
+### Juttle
+
+    emit -from :yesterday: -to :tomorrow: -last :day: | view result
+
+### Errors
+
+   * CompileError: Error: -last option should not be combined with -from or -to
+
 Complains if -limit and -to are specified
 ----------------------------------------
 
@@ -74,7 +118,18 @@ Complains if -limit and -to are specified
 
 ### Errors
 
-   * Do not specify both -limit and -to
+   * Do not specify both -limit and -to or -last
+
+Complains if -limit and -last are specified
+----------------------------------------
+
+### Juttle
+
+    emit -limit 1 -last :1 minute: | view result
+
+### Errors
+
+   * Do not specify both -limit and -to or -last
 
 Complains about -points that are not an array
 ----------------------------------------------------
@@ -177,7 +232,7 @@ Emits points and ticks in a live setting
 
 ### Juttle
 
-    emit -limit 3
+    emit -limit 3 -every :2s:
     | put n = count(), dt = time - :now:
     | keep n, dt
     | view result -ticks true
@@ -186,9 +241,9 @@ Emits points and ticks in a live setting
 
     { n: 1, dt: "00:00:00.000" }
     { tick: true }
-    { n: 2, dt: "00:00:01.000" }
+    { n: 2, dt: "00:00:02.000" }
     { tick: true }
-    { n: 3, dt: "00:00:02.000" }
+    { n: 3, dt: "00:00:04.000" }
 
 Does not emit any points with `-limit 0`
 ----------------------------------------
@@ -284,12 +339,38 @@ Emits the right points when -from, -to, and -every are specified
     { "time": "1970-01-01T00:00:06.000Z" }
     { "time": "1970-01-01T00:00:09.000Z" }
 
+Emits the right number of points when -from, -to, and -every are specified
+----------------------------------------------------
+
+### Juttle
+
+    emit -from :10 seconds ago: -to :now: -every :2 seconds:
+    | reduce count()
+    | view result
+
+### Output
+
+    { "count": 5 }
+
+Emits the right number of points when -last and -every are specified
+----------------------------------------------------
+
+### Juttle
+
+    emit -last :10 seconds: -every :2 seconds:
+    | reduce count()
+    | view result
+
+### Output
+
+    { "count": 5 }
+
 Emits historic and live points with -from
 ----------------------------------------------------
 
 ### Juttle
 
-    emit -from :-2s: -to :+3s:
+    emit -from :-2s: -limit 5
     | put n = count(), dt = time - :now:
     | keep n, dt
     | view result -ticks true
@@ -413,4 +494,3 @@ Emits correct number of points when -from/-to and -every are set
 
 ### Output
     { count: 12 }
-

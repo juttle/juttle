@@ -38,7 +38,8 @@ Parameter  |  Description  |  Required?
 Parameter  |  Description  |  Required?
 ---------- | ------------- | ---------:
 `-from`    | Stream points whose time stamps are greater than or equal to the specified moment <p>See [Time notation in Juttle](../reference/time.md)  for syntax information. </p>  | Required only if -to is present; defaults to :now:
-`-to`  |  Stream points whose time stamps are less than the specified moment, which is less than or equal to :now:  <p>See [Time notation in Juttle](../reference/time.md) for syntax information. </p><p>:information_source: `Note:` To stream live data only, omit -from and -to. To combine historical and live data, specify a -from value in the past and omit -to.|  No; defaults to forever
+`-to`  |  Stream points whose time stamps are less than the specified moment, which is less than or equal to :now:  <p>See [Time notation in Juttle](../reference/time.md) for syntax information. </p><p>:information_source: `Note:` To stream live data only, omit `-from` and specify `-to :end:`. To combine historical and live data, specify a `-from` value in the past and `-to :end:`.|  No; defaults to forever
+`-last`  |  Given a duration, shorthand for `-from (:now: - duration) -to :now:` |  No
 `filter-expression`  |  A field comparison, where multiple terms are joined with AND, OR, or NOT <p>See [Filtering](../concepts/filtering.md) for additional details.  </p>  |  No
 
 #### Characteristics of a simulated CDN
