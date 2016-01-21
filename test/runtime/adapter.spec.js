@@ -11,7 +11,7 @@ describe('adapter API tests', function () {
             program: 'read test'
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .then(function(result) {
             expect(result.errors.length).equal(0);
@@ -27,7 +27,7 @@ describe('adapter API tests', function () {
             program: 'read test -key "test1" | write test'
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.message).to.equal('Error: invalid write test required option key.');

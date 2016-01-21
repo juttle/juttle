@@ -21,7 +21,7 @@ describe('Juttle inputs', function() {
                   })
             .then(function(res) {
                 expect(res.sinks.sink.length).equal(1);
-                expect(res.sinks.sink[0].message).equal("hello");
+                expect(res.sinks.sink[0].message).equal('hello');
             });
     });
 
@@ -43,9 +43,9 @@ describe('Juttle inputs', function() {
                 expect(res.sinks.s1.length).equal(1);
                 expect(res.sinks.s2.length).equal(1);
                 expect(res.sinks.s3.length).equal(1);
-                expect(res.sinks.s1[0].message).equal("first");
+                expect(res.sinks.s1[0].message).equal('first');
                 expect(res.sinks.s2[0].value).equal(0);
-                expect(res.sinks.s3[0].message).equal("second");
+                expect(res.sinks.s3[0].message).equal('second');
             });
     });
 
@@ -68,9 +68,9 @@ describe('Juttle inputs', function() {
                 expect(res.sinks.s1.length).equal(1);
                 expect(res.sinks.s2.length).equal(1);
                 expect(res.sinks.s3.length).equal(1);
-                expect(res.sinks.s1[0].message).equal("first");
+                expect(res.sinks.s1[0].message).equal('first');
                 expect(res.sinks.s2[0].value).equal(0);
-                expect(res.sinks.s3[0].message).equal("second");
+                expect(res.sinks.s3[0].message).equal('second');
             });
     });
 
@@ -126,7 +126,7 @@ describe('Juttle inputs', function() {
                                      )
                                  }})
                 .then(function() {
-                    throw new Error("this should fail");
+                    throw new Error('this should fail');
                 })
                 .catch(function(err) {
                     expect(err.message).to.eq('Error: The "<" operator: Must be in format "field < expression" or "expression < field".');
@@ -144,7 +144,7 @@ describe('Juttle inputs', function() {
                                  input_defaults: input_default_fns})
                 .then(function(res) {
                     expect(res.sinks.sink.length).equal(1);
-                    expect(res.sinks.sink[0].message).equal("value");
+                    expect(res.sinks.sink[0].message).equal('value');
                 });
         });
 
@@ -155,7 +155,7 @@ describe('Juttle inputs', function() {
                         input_defaults: input_default_fns})
                 .then(function(res) {
                     expect(res.sinks.sink.length).equal(1);
-                    expect(res.sinks.sink[0].message).equal("default");
+                    expect(res.sinks.sink[0].message).equal('default');
                 });
         });
 
@@ -164,11 +164,11 @@ describe('Juttle inputs', function() {
                                     'emit -from :0: -limit 1 | put message = a | view sink',
                         inputs: {},
                         input_defaults: {
-                            text: function(input) { return "implicit default"; }
+                            text: function(input) { return 'implicit default'; }
                         }})
                 .then(function(res) {
                     expect(res.sinks.sink.length).equal(1);
-                    expect(res.sinks.sink[0].message).equal("implicit default");
+                    expect(res.sinks.sink[0].message).equal('implicit default');
                 });
         });
 

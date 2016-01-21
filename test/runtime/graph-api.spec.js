@@ -170,7 +170,7 @@ describe('Graph API', function() {
             var graph = make_graph('emit -hz 1000 -foo {a: 1, b: "bla"}');
             var emit = graph.get_roots()[0];
             var foo = graph.node_get_option(emit, 'foo');
-            expect(foo).deep.equal({a: 1, b: "bla"});
+            expect(foo).deep.equal({a: 1, b: 'bla'});
         });
     });
 
@@ -197,7 +197,7 @@ describe('Graph API', function() {
                 var sink = _.findWhere(graph.get_leaves(), {type: 'View'});
                 graph.remove_edge(put, sink);
                 // add a new sink just so that it doesn't complain about
-                graph.add_edge(put, graph.add_node("View", "newView"));
+                graph.add_edge(put, graph.add_node('View', 'newView'));
             });
             return run_juttle(program).then(function(res) {
                 expect(res.sinks.result.sort()).deep.equal([
@@ -259,7 +259,7 @@ describe('Graph API', function() {
                     expect(e.message).to.match(/invalid shortcut/i);
                     return;
                 }
-                throw new Error("Should reject invalid shortcut");
+                throw new Error('Should reject invalid shortcut');
             });
         });
         it('Rejects invalid shortcut due to existing edge', function() {
@@ -272,7 +272,7 @@ describe('Graph API', function() {
                     expect(e.message).to.match(/invalid shortcut/i);
                     return;
                 }
-                throw new Error("Should reject invalid shortcut");
+                throw new Error('Should reject invalid shortcut');
             });
         });
     });

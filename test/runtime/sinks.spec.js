@@ -34,7 +34,7 @@ describe('Juttle sinks validation', function() {
     });
 
     it('implicit view table with a single flowgraph', function() {
-        return compile_juttle({program: "emit | put a = 1"})
+        return compile_juttle({program: 'emit | put a = 1'})
             .then(function(program) {
                 var sinks = program.get_sinks();
                 expect(sinks.length).to.equal(1);
@@ -43,7 +43,7 @@ describe('Juttle sinks validation', function() {
     });
 
     it('implicit view table with a top-level parallel graph', function() {
-        return compile_juttle({program: "emit; emit"})
+        return compile_juttle({program: 'emit; emit'})
             .then(function(program) {
                 var sinks = program.get_sinks();
                 expect(sinks.length).to.equal(2);
@@ -53,7 +53,7 @@ describe('Juttle sinks validation', function() {
     });
 
     it('implicit view table with a top-level parallel graph (2)', function() {
-        return compile_juttle({program: "emit; emit | view text"})
+        return compile_juttle({program: 'emit; emit | view text'})
             .then(function(program) {
                 var sinks = program.get_sinks();
                 expect(sinks.length).to.equal(2);

@@ -55,8 +55,8 @@ describe('Values tests', function () {
                     expected: 'a < 5',
                 },
                 {
-                    value: [1, 2, "a"],
-                    expected: [1, 2, "a"],
+                    value: [1, 2, 'a'],
+                    expected: [1, 2, 'a'],
                 },
                 {
                     value: [1, 2, new JuttleMoment(0)],

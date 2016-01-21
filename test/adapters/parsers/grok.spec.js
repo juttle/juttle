@@ -34,10 +34,10 @@ describe('parsers/grok', function() {
         })
         .then(function() {
             expect(results).to.deep.equal([[
-                {"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Job `cron.daily' terminated"},
-                {"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Normal exit (1 job run)"},
-                {"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17219","message":"(root) CMD (   cd / && run-parts --report /etc/cron.hourly)"},
-                {"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17218","message":"(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)"}
+                {'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Job `cron.daily\' terminated'},
+                {'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Normal exit (1 job run)'},
+                {'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17219','message':'(root) CMD (   cd / && run-parts --report /etc/cron.hourly)'},
+                {'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17218','message':'(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)'}
             ]]);
         });
     });
@@ -60,10 +60,10 @@ describe('parsers/grok', function() {
             expect(errors[0].toString()).to.contain('Skipping line "invalid line", due to: not matching pattern');
             expect(errors[1].toString()).to.contain('Skipping line "invalid line", due to: not matching pattern');
             expect(results).to.deep.equal([[
-                {"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Job `cron.daily' terminated"},
-                {"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Normal exit (1 job run)"},
-                {"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17219","message":"(root) CMD (   cd / && run-parts --report /etc/cron.hourly)"},
-                {"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17218","message":"(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)"}
+                {'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Job `cron.daily\' terminated'},
+                {'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Normal exit (1 job run)'},
+                {'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17219','message':'(root) CMD (   cd / && run-parts --report /etc/cron.hourly)'},
+                {'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17218','message':'(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)'}
             ]]);
         });
     });
@@ -80,10 +80,10 @@ describe('parsers/grok', function() {
         .then(function() {
             expect(results.length).equal(5);
             expect(results).to.deep.equal([
-                [{"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Job `cron.daily' terminated"}],
-                [{"timestamp":"Jan  6 10:54:52","logsource":"x230","program":"anacron","pid":"15134","message":"Normal exit (1 job run)"}],
-                [{"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17219","message":"(root) CMD (   cd / && run-parts --report /etc/cron.hourly)"}],
-                [{"timestamp":"Jan  6 11:17:01","logsource":"x230","program":"CRON","pid":"17218","message":"(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)"}],
+                [{'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Job `cron.daily\' terminated'}],
+                [{'timestamp':'Jan  6 10:54:52','logsource':'x230','program':'anacron','pid':'15134','message':'Normal exit (1 job run)'}],
+                [{'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17219','message':'(root) CMD (   cd / && run-parts --report /etc/cron.hourly)'}],
+                [{'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17218','message':'(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)'}],
                 []
             ]);
         });

@@ -11,7 +11,7 @@ describe('Juttle named outputs', function() {
             .then(function(program) {
                 var emit = program.get_sources()[0];
                 var sink = program.get_sinks()[0];
-                emit.shortcut(sink, emit, "s1");
+                emit.shortcut(sink, emit, 's1');
                 return program;
             }).then(function(program) {
                 return run_juttle(program, {});
@@ -25,7 +25,7 @@ describe('Juttle named outputs', function() {
                 var emit = program.get_sources()[0];
                 var sink = program.get_sinks()[0];
                 var put = _.filter(program.get_nodes(), function(n) { return n.procName === 'put'; })[0];
-                emit.shortcut(sink, put, "s1");
+                emit.shortcut(sink, put, 's1');
                 return program;
             }).then(function(program) {
                 return run_juttle(program, {});
@@ -39,7 +39,7 @@ describe('Juttle named outputs', function() {
                 var emit = program.get_sources()[0];
                 var sink = program.get_sinks()[0];
                 var reduce = _.filter(program.get_nodes(), function(n) { return n.procName === 'reduce'; })[0];
-                emit.shortcut(sink, reduce, "s1");
+                emit.shortcut(sink, reduce, 's1');
                 return program;
             }).then(function(program) {
                 return run_juttle(program, {});
@@ -53,8 +53,8 @@ describe('Juttle named outputs', function() {
                 var emit = program.get_sources()[0];
                 var sinks = program.get_sinks();
                 var reduce = _.filter(program.get_nodes(), function(n) { return n.procName === 'reduce'; })[0];
-                emit.shortcut(sinks[0], reduce, "s1");
-                emit.shortcut(sinks[1], reduce, "s1");
+                emit.shortcut(sinks[0], reduce, 's1');
+                emit.shortcut(sinks[1], reduce, 's1');
                 return program;
             }).then(function(program) {
                 return run_juttle(program, {});

@@ -21,17 +21,17 @@ describe('Program deactivation', function() {
     });
 
     it('teardown() is called on all procs (simple program)', function() {
-        var prog = "emit -limit 1 -from :-1m: | view result";
+        var prog = 'emit -limit 1 -from :-1m: | view result';
         return check_juttle({program: prog}).then(function(res) {
             res.prog.deactivate();
-            expect(teardowns.sort()).to.deep.equal(["emit", "view"]);
+            expect(teardowns.sort()).to.deep.equal(['emit', 'view']);
         });
     });
     it('teardown() is called on all procs (complicated program)', function() {
-        var prog = "(emit -limit 1 -from :-1m: ; emit -limit 1 -from :-1m:)  | (put a = 1; put b = 1)| (view result1; view result2)";
+        var prog = '(emit -limit 1 -from :-1m: ; emit -limit 1 -from :-1m:)  | (put a = 1; put b = 1)| (view result1; view result2)';
         return check_juttle({program: prog}).then(function(res) {
             res.prog.deactivate();
-            expect(teardowns.sort()).to.deep.equal(["emit", "emit", "put", "put", "view", "view"]);
+            expect(teardowns.sort()).to.deep.equal(['emit', 'emit', 'put', 'put', 'view', 'view']);
         });
     });
 });

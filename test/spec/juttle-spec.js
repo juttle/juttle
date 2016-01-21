@@ -213,16 +213,16 @@ var SpecRenderer = Base.extend({
 
             case 3:   // new section
                 if (/Module\s+/.test(text)) {
-                    this.section = "module";
+                    this.section = 'module';
                     this.moduleName = text.split(/\s+/)[1];
-                } else if (text === "Juttle") {
-                    this.section = "juttle";
-                } else if (text === "Output") {
-                    this.section = "output";
-                } else if (text === "Errors") {
-                    this.section = "errors";
-                } else if (text === "Warnings") {
-                    this.section = "warnings";
+                } else if (text === 'Juttle') {
+                    this.section = 'juttle';
+                } else if (text === 'Output') {
+                    this.section = 'output';
+                } else if (text === 'Errors') {
+                    this.section = 'errors';
+                } else if (text === 'Warnings') {
+                    this.section = 'warnings';
                 }
                 break;
         }

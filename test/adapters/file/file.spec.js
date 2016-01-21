@@ -37,7 +37,7 @@ describe('file adapter tests', function () {
         it('fails when you provide an unknown option', function() {
             return run_read_file_juttle(tmp_file, {foo: 'bar'})
             .then(function() {
-                throw new Error("this should have failed");
+                throw new Error('this should have failed');
             })
             .catch(function(err) {
                 expect(err.message).equal('Error: unknown read file option foo.');
@@ -109,10 +109,10 @@ describe('file adapter tests', function () {
                 expect(result.errors.length).equal(0);
                 expect(result.warnings.length).equal(0);
                 expect(result.sinks.table).to.deep.equal([
-                    { "time": "1970-01-01T00:00:03.000Z", "rate": 2},
-                    { "time": "1970-01-01T00:00:04.000Z", "rate": 7},
-                    { "time": "1970-01-01T00:00:05.000Z", "rate": 1},
-                    { "time": "1970-01-01T00:00:06.000Z", "rate": 3}
+                    { 'time': '1970-01-01T00:00:03.000Z', 'rate': 2},
+                    { 'time': '1970-01-01T00:00:04.000Z', 'rate': 7},
+                    { 'time': '1970-01-01T00:00:05.000Z', 'rate': 1},
+                    { 'time': '1970-01-01T00:00:06.000Z', 'rate': 3}
                 ]);
             });
         });
@@ -124,8 +124,8 @@ describe('file adapter tests', function () {
                 expect(result.errors.length).equal(0);
                 expect(result.warnings.length).equal(0);
                 expect(result.sinks.table).to.deep.equal([
-                    { "time": "1970-01-01T00:00:01.000Z", "rate": 1},
-                    { "time": "1970-01-01T00:00:02.000Z", "rate": 5},
+                    { 'time': '1970-01-01T00:00:01.000Z', 'rate': 1},
+                    { 'time': '1970-01-01T00:00:02.000Z', 'rate': 5},
                 ]);
             });
         });
@@ -141,8 +141,8 @@ describe('file adapter tests', function () {
                 expect(result.errors.length).equal(0);
                 expect(result.warnings.length).equal(0);
                 expect(result.sinks.table).to.deep.equal([
-                    { "time": "1970-01-01T00:00:03.000Z", "rate": 2},
-                    { "time": "1970-01-01T00:00:04.000Z", "rate": 7},
+                    { 'time': '1970-01-01T00:00:03.000Z', 'rate': 2},
+                    { 'time': '1970-01-01T00:00:04.000Z', 'rate': 7},
                 ]);
             });
         });

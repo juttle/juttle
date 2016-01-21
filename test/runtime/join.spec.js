@@ -10,7 +10,7 @@ describe('Juttle join tests, historic', function() {
                return check_juttle(
                { program: 'join -zip 0.01 |  view result'
                }).then(function() {
-                   throw new Error("this should fail");
+                   throw new Error('this should fail');
                }).catch(function(err) {
                    expect(err.code).to.equal('RT-JOIN-ZIP-ERROR');
                });
@@ -20,7 +20,7 @@ describe('Juttle join tests, historic', function() {
                return check_juttle(
                { program: 'join -nearest 0.01 |  view result'
                }).then(function() {
-                   throw new Error("this should fail");
+                   throw new Error('this should fail');
                }).catch(function(err) {
                    expect(err.code).to.equal('RT-INVALID-OFFSET-ERROR');
                });
@@ -30,7 +30,7 @@ describe('Juttle join tests, historic', function() {
                return check_juttle(
                { program: 'join -nearest 0.01 -zip true |  view result'
                }).then(function() {
-                   throw new Error("this should fail");
+                   throw new Error('this should fail');
                }).catch(function(err) {
                    expect(err.code).to.equal('RT-JOIN-ZIP-NEAREST-ERROR');
                });
@@ -40,7 +40,7 @@ describe('Juttle join tests, historic', function() {
                return check_juttle(
                { program: 'join -zip :0.01s: -once 1 -failure 1 |  view result'
                }).then(function(res) {
-                   throw new Error("how did I get here?");
+                   throw new Error('how did I get here?');
                }).catch(function(err) {
                    expect(err.code).to.equal('RT-UNKNOWN-OPTION-ERROR');
                    expect(err.info.proc).to.equal('join');
@@ -52,7 +52,7 @@ describe('Juttle join tests, historic', function() {
                return check_juttle(
                { program: 'join -zip 1 |  view result'
                }).then(function(res) {
-                   throw new Error("how did I get here?");
+                   throw new Error('how did I get here?');
                }).catch(function(err) {
                    expect(err.code).to.equal('RT-JOIN-ZIP-ERROR');
                });
@@ -75,7 +75,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -once 1 assy_id ',
                   '  | remove time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -103,7 +103,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(.01) -limit 3',
                   '  | put b=count()-1, id=count()',
                   ') | join | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(10).toISOString(), a:0, b:0, id:1},
@@ -119,7 +119,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from Date.new(0) -limit 6 | put a=Math.floor((count()-1)/2)',
                   '; emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   ') | join -nearest :0s: | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -136,7 +136,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   '; emit -hz 1000 -from Date.new(0) -limit 6 | put a=Math.floor((count()-1)/2)',
                   ') | join -nearest :0s: | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -156,7 +156,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join | remove time  |  view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {btime:'00:00:00.000', atime:'00:00:00.000', a:0, b:0},
@@ -178,7 +178,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 6',
                   '  | put a=count()-1, atime=time-:0:',
                   ') | join | remove time  |  view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {btime:'00:00:00.000', atime:'00:00:00.000', a:0, b:0},
@@ -204,7 +204,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -225,7 +225,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -outer 1 | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -244,7 +244,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -outer 2 | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -262,7 +262,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from Date.new(0) -limit 6 | put a=count()-1',
                   '; emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   ') | join -outer 1 | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -283,7 +283,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from Date.new(0) -limit 6 | put a=Math.floor((count()-1)/2)',
                   '; emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   ') | join -outer 2 | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -306,7 +306,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 3 ',
                   '  | put btime=time-:0:, b=count()-1',
                   ') | join | remove time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:01.000', btime:'00:00:00.002', a:0, b:2},
@@ -325,7 +325,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(1) -limit 3 ',
                   '  | put atime=time-:0:, a=count()-1',
                   ') | join | remove time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:01.000', btime:'00:00:00.002', a:0, b:2},
@@ -341,7 +341,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from Date.new(0) -limit 6 | put a=Math.floor((count()-1)/2)',
                   '; emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   ') | join -nearest :0s: | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -358,7 +358,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 500 -from Date.new(0) -limit 3 | put b=count()-1',
                   '; emit -hz 1000 -from Date.new(0) -limit 6 | put a=Math.floor((count()-1)/2)',
                   ') | join -nearest :0s: | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -378,7 +378,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, id=count()',
                   ') | join id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(1).toISOString(), a:1, b:1, id:2}
@@ -402,18 +402,18 @@ describe('Juttle join tests, historic', function() {
                   '  | pass',
                   '}',
                   '(teamScores ; teamColors) | join team | keep team, color, score | view result'
-                  ].join(" ")
+                  ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"team":"alpha","score":1,"color":"#EB4A24"},
-                       {"team":"beta", "score":2,"color":"#7CBF42"},
-                       {"team":"gamma","score":3,"color":"#34A8C8"},
-                       {"team":"alpha","score":2,"color":"#EB4A24"},
-                       {"team":"beta", "score":4,"color":"#7CBF42"},
-                       {"team":"gamma","score":6,"color":"#34A8C8"},
-                       {"team":"alpha","score":3,"color":"#EB4A24"},
-                       {"team":"beta", "score":6,"color":"#7CBF42"},
-                       {"team":"gamma","score":9,"color":"#34A8C8"}
+                       {'team':'alpha','score':1,'color':'#EB4A24'},
+                       {'team':'beta', 'score':2,'color':'#7CBF42'},
+                       {'team':'gamma','score':3,'color':'#34A8C8'},
+                       {'team':'alpha','score':2,'color':'#EB4A24'},
+                       {'team':'beta', 'score':4,'color':'#7CBF42'},
+                       {'team':'gamma','score':6,'color':'#34A8C8'},
+                       {'team':'alpha','score':3,'color':'#EB4A24'},
+                       {'team':'beta', 'score':6,'color':'#7CBF42'},
+                       {'team':'gamma','score':9,'color':'#34A8C8'}
                    ]);
                });
            });
@@ -428,11 +428,11 @@ describe('Juttle join tests, historic', function() {
                   ') | join | view result')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"time":"1970-01-01T00:00:00.000Z","first":true,"n":1,"second":true,"m":1,"third":true,"p":1},
-                       {"time":"1970-01-01T00:00:01.000Z","first":true,"n":2,"second":true,"m":2,"third":true,"p":2},
-                       {"time":"1970-01-01T00:00:02.000Z","first":true,"n":3,"second":true,"m":3,"third":true,"p":3},
-                       {"time":"1970-01-01T00:00:03.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":4},
-                       {"time":"1970-01-01T00:00:04.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":5}
+                       {'time':'1970-01-01T00:00:00.000Z','first':true,'n':1,'second':true,'m':1,'third':true,'p':1},
+                       {'time':'1970-01-01T00:00:01.000Z','first':true,'n':2,'second':true,'m':2,'third':true,'p':2},
+                       {'time':'1970-01-01T00:00:02.000Z','first':true,'n':3,'second':true,'m':3,'third':true,'p':3},
+                       {'time':'1970-01-01T00:00:03.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':4},
+                       {'time':'1970-01-01T00:00:04.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':5}
                    ]);
                });
            });
@@ -447,10 +447,10 @@ describe('Juttle join tests, historic', function() {
                   ') | join | view result')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"time":"1970-01-01T00:00:01.000Z","first":true,"n":1,"second":true,"m":2,"third":true,"p":2},
-                       {"time":"1970-01-01T00:00:02.000Z","first":true,"n":2,"second":true,"m":3,"third":true,"p":3},
-                       {"time":"1970-01-01T00:00:03.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":4},
-                       {"time":"1970-01-01T00:00:04.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":5}
+                       {'time':'1970-01-01T00:00:01.000Z','first':true,'n':1,'second':true,'m':2,'third':true,'p':2},
+                       {'time':'1970-01-01T00:00:02.000Z','first':true,'n':2,'second':true,'m':3,'third':true,'p':3},
+                       {'time':'1970-01-01T00:00:03.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':4},
+                       {'time':'1970-01-01T00:00:04.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':5}
                    ]);
                });
            });
@@ -473,7 +473,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(1) -limit 9 ', // parts stream
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep time, batch, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time: '1970-01-01T00:00:01.000Z', batch:'00:00:00.000', part:'bar-1', assy:'baz-1'},
@@ -503,7 +503,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep time, part, assy, batch, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:'1970-01-01T00:00:01.000Z', part:'bar-1', assy:'baz-2.1', assy_id:1, batch:2},
@@ -536,7 +536,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -outer 2 assy_id | keep time, part, assy, batch, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:'1970-01-01T00:00:00.000Z', part:'bar-1', assy_id:1},
@@ -566,7 +566,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep part, assy, batch, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -590,7 +590,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep time, batch, part, assy, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    var batch_end = new Date(1000).toISOString();
                    expect(res.sinks.result).to.deep.equal([
@@ -615,7 +615,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep time, part, assy, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    var batch_1 = new Date(3).toISOString();
                    var batch_2 = new Date(6).toISOString();
@@ -650,7 +650,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put ms = Date.unixms(time) | filter ms < 3 OR ms >= 15 ',
                   ') | join assy_id | keep time, part, assy, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    var batch_1 = new Date(3).toISOString();
                    var batch_6 = new Date(18).toISOString();
@@ -679,7 +679,7 @@ describe('Juttle join tests, historic', function() {
                   '  | batch 0.003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep part, assy, assy_id, batch | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -704,10 +704,10 @@ describe('Juttle join tests, historic', function() {
                  )
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"time":"1970-01-01T00:00:03.000Z","first":true,"n":2,"second":true,"m":1},
-                       {"time":"1970-01-01T00:00:04.000Z","first":true,"n":3,"second":true,"m":2},
-                       {"time":"1970-01-01T00:00:05.000Z","first":true,"n":3,"second":true,"m":3},
-                       {"time":"1970-01-01T00:00:06.000Z","first":true,"n":3,"second":true,"m":4}
+                       {'time':'1970-01-01T00:00:03.000Z','first':true,'n':2,'second':true,'m':1},
+                       {'time':'1970-01-01T00:00:04.000Z','first':true,'n':3,'second':true,'m':2},
+                       {'time':'1970-01-01T00:00:05.000Z','first':true,'n':3,'second':true,'m':3},
+                       {'time':'1970-01-01T00:00:06.000Z','first':true,'n':3,'second':true,'m':4}
                    ]);
                });
            });
@@ -722,11 +722,11 @@ describe('Juttle join tests, historic', function() {
                   ') | join | view result')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"time":"1970-01-01T00:00:01.000Z","first":true,"n":1,"second":true,"m":1,"third":true,"p":1},
-                       {"time":"1970-01-01T00:00:02.000Z","first":true,"n":2,"second":true,"m":2,"third":true,"p":2},
-                       {"time":"1970-01-01T00:00:03.000Z","first":true,"n":3,"second":true,"m":3,"third":true,"p":3},
-                       {"time":"1970-01-01T00:00:04.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":4},
-                       {"time":"1970-01-01T00:00:05.000Z","first":true,"n":3,"second":true,"m":4,"third":true,"p":5},
+                       {'time':'1970-01-01T00:00:01.000Z','first':true,'n':1,'second':true,'m':1,'third':true,'p':1},
+                       {'time':'1970-01-01T00:00:02.000Z','first':true,'n':2,'second':true,'m':2,'third':true,'p':2},
+                       {'time':'1970-01-01T00:00:03.000Z','first':true,'n':3,'second':true,'m':3,'third':true,'p':3},
+                       {'time':'1970-01-01T00:00:04.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':4},
+                       {'time':'1970-01-01T00:00:05.000Z','first':true,'n':3,'second':true,'m':4,'third':true,'p':5},
                    ]);
                });
            });
@@ -744,7 +744,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from :now: -limit 3',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip true | keep a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {a:0, b:0, id:1},
@@ -761,7 +761,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from :now: -limit 6 | put a=Math.floor((count()-1)/2)',
                   '; emit -hz 500 -from :now: -limit 3 | put b=count()-1',
                   ') | join -zip :0s: | keep a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {a:0, b:0},
@@ -778,7 +778,7 @@ describe('Juttle join tests, historic', function() {
                  ['( emit -hz 1000 -from Date.new(0) -limit 3 | put a=count()-1',
                   '; emit -hz 1000 -from Date.new(0) -limit 3 | put b=count()-1',
                   ') | join -zip true |  view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), a:0, b:0},
@@ -797,7 +797,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -zip true | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(0).toISOString(), btime:'00:00:00.000', atime:'00:00:00.000', a:0, b:0},
@@ -817,7 +817,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -zip :0.01s: | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -838,7 +838,7 @@ describe('Juttle join tests, historic', function() {
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -zip :0.002s: | keep atime, btime, a, b',
                   '| view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -853,7 +853,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0) -limit 3',
                   '  | put b=count()-1, btime=time-:0:',
                   ') | join -zip :0s: | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -901,7 +901,7 @@ describe('Juttle join tests, historic', function() {
                   '  ] ',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip true id | keep time, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -958,7 +958,7 @@ describe('Juttle join tests, historic', function() {
                   '  ] ',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip true id | keep time, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -987,7 +987,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0.001) -limit 3 ',
                   '  | put b=count()-1',
                   ') | join -zip :0s: id | keep t, a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -1004,7 +1004,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0.001) -limit 3 ',
                   '  | put b=count()-1',
                   ') | join -zip :0.001s: id | keep t, a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.000', a:0, b:0},
@@ -1025,7 +1025,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 100 -from Date.new(0.03100) -limit 3',
                   '  | put b=count()-1',
                   ') | join -zip :0.001s: | keep t, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.030', a:3, b:0},
@@ -1078,7 +1078,7 @@ describe('Juttle join tests, historic', function() {
                   '  ] ',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip :0.01s: id |  keep t, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1136,7 +1136,7 @@ describe('Juttle join tests, historic', function() {
                   '  ] ',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip :0.01s: id |  keep t, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1164,11 +1164,11 @@ describe('Juttle join tests, historic', function() {
                   ') | join | view result')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
-                       {"time":"1970-01-01T00:00:00.000Z","first":true,"n":1,"second":true,"m":1,"third":true,"p":1},
-                       {"time":"1970-01-01T00:00:01.000Z","first":true,"n":2,"second":true,"m":2,"third":true,"p":2},
-                       {"time":"1970-01-01T00:00:02.000Z","first":true,"n":3,"second":true,"m":3,"third":true,"p":3},
-                       {"time":"1970-01-01T00:00:03.000Z","first":true,"n":3,"second":true,"m":3,"third":true,"p":4},
-                       {"time":"1970-01-01T00:00:04.000Z","first":true,"n":3,"second":true,"m":3,"third":true,"p":5}
+                       {'time':'1970-01-01T00:00:00.000Z','first':true,'n':1,'second':true,'m':1,'third':true,'p':1},
+                       {'time':'1970-01-01T00:00:01.000Z','first':true,'n':2,'second':true,'m':2,'third':true,'p':2},
+                       {'time':'1970-01-01T00:00:02.000Z','first':true,'n':3,'second':true,'m':3,'third':true,'p':3},
+                       {'time':'1970-01-01T00:00:03.000Z','first':true,'n':3,'second':true,'m':3,'third':true,'p':4},
+                       {'time':'1970-01-01T00:00:04.000Z','first':true,'n':3,'second':true,'m':3,'third':true,'p':5}
                    ]);
                });
            });
@@ -1188,7 +1188,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 9 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep batch, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {batch:'00:00:00.000', part:'bar-3', assy:'baz-3'}
@@ -1210,7 +1210,7 @@ describe('Juttle join tests, historic', function() {
                   '; emit -hz 1000 -from Date.new(0) -limit 9 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep time, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time: new Date(3).toISOString(), part:'bar-3', assy:'baz-0.3'},
@@ -1234,7 +1234,7 @@ describe('Juttle join tests, historic', function() {
                   '  | batch 0.003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep part, assy, batch, time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(6).toISOString(), part:'bar-1', assy:'baz-0.1', batch:0},
@@ -1258,7 +1258,7 @@ describe('Juttle join tests, historic', function() {
                   '  | batch .003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep part, assy, time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {time:new Date(6).toISOString(), part:'bar-1', assy:'baz-0.1'},
@@ -1293,7 +1293,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 3',
                   '  | put b=count()-1, id=count()',
                   ') | join | keep a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {a:0, b:0, id:1},
@@ -1309,7 +1309,7 @@ describe('Juttle join tests, realtime', function() {
                  ['( emit -hz 1000 -from :now: -limit 6 | put a=Math.floor((count()-1)/2)',
                   '; emit -hz 500 -from :now: -limit 3 | put b=count()-1',
                   ') | join -nearest :0s: | remove time | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {a:0, b:0},
@@ -1329,7 +1329,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join | keep atime, btime, a,b |  view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {btime:'00:00:00.000', atime:'00:00:00.000', a:0, b:0},
@@ -1356,7 +1356,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -1378,7 +1378,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join -nearest :0s: | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -1397,7 +1397,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from then -limit 3 ',
                   '  | put btime=#time-:now:, b=count()-1',
                   ') | join | keep atime,btime,a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {btime:'-00:00:00.998', atime:'00:00:00.000', a:0, b:2},
@@ -1417,7 +1417,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 3',
                   '  | put b=count()-1, id=count()',
                   ') | join id | keep a,b,id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {a:1, b:1, id:2}
@@ -1444,7 +1444,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from now+:1s: -limit 9 ', // parts stream
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep batch, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {batch:'00:00:00.000', part:'bar-1', assy:'baz-1'},
@@ -1474,7 +1474,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -outer 2 assy_id | keep part, assy, batch, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy_id:1},
@@ -1504,7 +1504,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep part, assy, batch, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -1527,7 +1527,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -outer 2 assy_id | keep batch, part, assy, assy_id',
                   '  | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -1556,7 +1556,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | batch 0.003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join assy_id | keep part, assy, assy_id, batch | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {part:'bar-1', assy:'baz-0.1', assy_id:1, batch:0},
@@ -1588,7 +1588,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join -zip true | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {btime:'00:00:00.000', atime:'00:00:00.000', a:0, b:0},
@@ -1607,7 +1607,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join -zip :0s: | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -1624,7 +1624,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from :now: -limit 3',
                   '  | put b=count()-1, btime=#time-:now:',
                   ') | join -zip :0.005s:  | keep atime, btime, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {atime:'00:00:00.005', btime:'00:00:00.000', a:0, b:0},
@@ -1678,7 +1678,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put b=count()-1, id=count()',
                   '  | put t=#time-:now:',
                   ') | join -zip true id | keep t, a, b, id| view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1737,7 +1737,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put b=count()-1, id=count()',
                   '  | put t=#time-now1',
                   ') | join -zip true id | keep a, b, id, t | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1767,7 +1767,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from jittered -limit 3 ',
                   '  | put b=count()-1',
                   ') | join -zip :0s: id | keep t, a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -1785,7 +1785,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from jittered -limit 3 ',
                   '  | put b=count()-1',
                   ') | join -zip :0.001s: id | keep t, a,b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.000', a:0, b:0},
@@ -1807,7 +1807,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from jittered -limit 3',
                   '  | put b=count()-1',
                   ') | join -zip :0s: | keep t, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([]);
                });
@@ -1825,7 +1825,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 100 -from jittered -limit 3',
                   '  | put b=count()-1',
                   ') | join -zip :0.001s: | keep t, a, b | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.030', a:3, b:0},
@@ -1879,7 +1879,7 @@ describe('Juttle join tests, realtime', function() {
                   '  ] ',
                   '  | put b=count()-1, id=count()',
                   ') | join -zip :0.01s: id |  keep t, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1939,7 +1939,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | put b=count()-1, id=count()',
                   '  | put bt=#time-now+Duration.new(0.001)',
                   ') | join -zip :0.01s: id |  keep t, a, b, id | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    // XXX this is fragile, ordering of points for a given
                    // timestamp value is not determined by the join definition
@@ -1972,7 +1972,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 9 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep batch, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {batch:'00:00:00.000', part:'bar-3', assy:'baz-3'}
@@ -1994,7 +1994,7 @@ describe('Juttle join tests, realtime', function() {
                   '; emit -hz 1000 -from :now: -limit 9 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | keep t, part, assy | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t: '00:00:00.002', part:'bar-3', assy:'baz-0.3'},
@@ -2019,7 +2019,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | batch 0.003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | put t=#time-now | keep part, assy, batch, t | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.006', part:'bar-1', assy:'baz-0.1', batch:0},
@@ -2044,7 +2044,7 @@ describe('Juttle join tests, realtime', function() {
                   '  | batch .003 ',
                   '  | put part="bar-"+Number.toString(count()), assy_id=1+(count()-1)%3',
                   ') | join -zip true assy_id | put t=#time-now | keep part, assy, t | view result'
-                 ].join(" ")
+                 ].join(' ')
                }).then(function(res) {
                    expect(res.sinks.result).to.deep.equal([
                        {t:'00:00:00.006', part:'bar-1', assy:'baz-0.1'},

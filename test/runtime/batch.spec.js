@@ -14,7 +14,7 @@ describe('batch tests', function () {
     });
 
     it('batch flushes points on eof', function() {
-        var program = "emit -from Date.new(0) -hz 100 -limit 11 | batch 0.1 | reduce count() | keep count | view result";
+        var program = 'emit -from Date.new(0) -hz 100 -limit 11 | batch 0.1 | reduce count() | keep count | view result';
 
         return check_juttle({
             program: program
@@ -82,11 +82,11 @@ describe('batch tests', function () {
         .then(function(res) {
             expect(res.sinks.result).deep.equal([
                 { },
-                { "time": "1970-01-01T00:00:00.000Z" },
+                { 'time': '1970-01-01T00:00:00.000Z' },
                 { },
-                { "time": "1970-01-01T00:00:01.000Z" },
+                { 'time': '1970-01-01T00:00:01.000Z' },
                 { },
-                { "time": "1970-01-01T00:00:02.000Z" }
+                { 'time': '1970-01-01T00:00:02.000Z' }
             ]);
         });
     });
