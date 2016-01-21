@@ -209,7 +209,7 @@ describe('Values tests', function () {
                     expected: '[ 1, 2, 3 ]'
                 },
                 {
-                    value: ["abcd", new JuttleMoment.duration('5', 'seconds') ],
+                    value: ['abcd', new JuttleMoment.duration('5', 'seconds') ],
                     expected: '[ "abcd", :00:00:05.000: ]'
                 },
                 {
@@ -221,7 +221,7 @@ describe('Values tests', function () {
                     expected: '{ a: 1, b: 2, c: 3 }'
                 },
                 {
-                    value: { a: "abcd", b: new JuttleMoment.duration('5', 'seconds') },
+                    value: { a: 'abcd', b: new JuttleMoment.duration('5', 'seconds') },
                     expected: '{ a: "abcd", b: :00:00:05.000: }'
                 },
             ];
@@ -307,7 +307,7 @@ describe('Values tests', function () {
                     expected: '[ 1, 2, 3 ]'
                 },
                 {
-                    value: ["abcd", new JuttleMoment.duration('5', 'seconds') ],
+                    value: ['abcd', new JuttleMoment.duration('5', 'seconds') ],
                     expected: '[ "abcd", :00:00:05.000: ]'
                 },
                 {
@@ -319,7 +319,7 @@ describe('Values tests', function () {
                     expected: '{ a: 1, b: 2, c: 3 }'
                 },
                 {
-                    value: { a: "abcd", b: new JuttleMoment.duration('5', 'seconds') },
+                    value: { a: 'abcd', b: new JuttleMoment.duration('5', 'seconds') },
                     expected: '{ a: "abcd", b: :00:00:05.000: }'
                 },
             ];
