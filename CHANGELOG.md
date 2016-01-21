@@ -4,9 +4,9 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ## Unreleased Changes
 
-### Major Changes
+### Minor Changes
 
-- Create `http_server` adapter.
+- Create `http_server` adapter. [[#224](https://github.com/juttle/juttle/pull/224)]
 
 ## 0.3.1
 
