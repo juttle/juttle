@@ -27,6 +27,9 @@ JuttleLogger.getLogger = log4js.getLogger;
 Juttle.adapters.configure({
     test: {
         path: path.resolve(__dirname, '../test-adapter')
+    },
+    testTimeseries: {
+        path: path.resolve(__dirname, '../test-adapter-timeseries')
     }
 });
 
