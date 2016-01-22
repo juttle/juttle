@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var path = require('path');
 var FileResolver = require('../../lib/module-resolvers/file-resolver');

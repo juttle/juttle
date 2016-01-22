@@ -1,3 +1,5 @@
+'use strict';
+
 var Base = require('extendable-base');
 var marked = require('marked');
 var pointsParser = require('../../extlib/points-parser').pointsParser;

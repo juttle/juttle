@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var Promise = require('bluebird');
 var _ = require('underscore');

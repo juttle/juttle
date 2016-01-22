@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('underscore');
 var JuttleMoment = require('../../lib/moment').JuttleMoment;
 var Filter = require('../../lib/runtime/filter');

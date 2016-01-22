@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('underscore');
 var expect = require('chai').expect;
 var fs = require('fs');

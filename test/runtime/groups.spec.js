@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var Head = require('../../lib/runtime/procs/head');
 var Groups = require('../../lib/runtime/groups');

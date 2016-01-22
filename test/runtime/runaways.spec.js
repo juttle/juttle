@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var compiler = require('../../lib/compiler');
 var check_runaway = require('../../lib/compiler/flowgraph/check_runaway');

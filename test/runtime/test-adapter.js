@@ -1,3 +1,5 @@
+'use strict';
+
 //
 // Fake adapter used for testing that implements read and write.
 //

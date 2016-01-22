@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('underscore');
 var Promise = require('bluebird');
 var bodyParser = require('body-parser');

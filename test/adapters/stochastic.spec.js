@@ -1,3 +1,5 @@
+'use strict';
+
 // unit tests for stochastic adapter
 // stochastic is an adapter, but its named sources are based at
 // ../../stoke/<source-name>.js

@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var fs = require('fs');
 var parsers = require('../../../lib/adapters/parsers');

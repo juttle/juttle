@@ -1,3 +1,5 @@
+'use strict';
+
 /* globals describe,it  */
 var _ =  require('underscore');
 var duraflame = require('../../../../lib/runtime/procs/stoke/duraflame');

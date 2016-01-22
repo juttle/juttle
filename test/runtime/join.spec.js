@@ -1,3 +1,5 @@
+'use strict';
+
 var check_juttle = require('./specs/juttle-test-utils').check_juttle;
 
 var expect = require('chai').expect;
