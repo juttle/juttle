@@ -3,7 +3,7 @@ var Stoke = require('../../../../lib/runtime/procs/stoke/stoke').Stoke;
 var StokeSequence = require('../../../../lib/runtime/procs/stoke/stoke').StokeSequence;
 var expect      = require('chai').expect;
 
-describe("stoke.Stoke", function() {
+describe('stoke.Stoke', function() {
 
     it('.uniform produces uniform samples between 0 and 1', function(done) {
         var stoke = new Stoke(13,1);
@@ -106,7 +106,7 @@ describe("stoke.Stoke", function() {
     });
 });
 
-describe("stoke.StokeSequence", function() {
+describe('stoke.StokeSequence', function() {
 
     it('.uniform produces different samples for successive t', function(done) {
         var stoke = new StokeSequence(13,1);

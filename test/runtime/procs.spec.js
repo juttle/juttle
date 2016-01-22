@@ -28,7 +28,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(0) -limit 10 | put id=1  ',
                     '; emit  -hz 1000 -from Date.new(0) -limit 10 | put id=2) ',
                     '| view result'
-                ].join(" ")
+                ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -41,7 +41,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(0) -limit 10 | put id=1;',
                     'emit  -hz 1000 -from Date.new(0) -limit 10 | put id=2;) ',
                     '| view result;'
-                ].join(" ")
+                ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -69,7 +69,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 100 -from Date.new(0) -limit 10 ',
                           '; emit  -hz 100 -from Date.new(.005) -limit 10)',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -82,7 +82,7 @@ describe('Juttle procs tests', function() {
                 program: ['emit  -hz 1000 -from Date.new(0) -limit 10 ',
                           '| ( put left=1 ; put left=0 ) ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -95,7 +95,7 @@ describe('Juttle procs tests', function() {
                 program: ['emit  -hz 1000 -from Date.new(0) -limit 10 ',
                           '| ( put left=1 ; put left=0 ) ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -110,7 +110,7 @@ describe('Juttle procs tests', function() {
                           '| ( put left=1 ; put left=0 ) ',
                           '|  reduce four=count() ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(5);
@@ -128,7 +128,7 @@ describe('Juttle procs tests', function() {
                           '| ( put left=1 ; put left=0 ) ',
                           '|  reduce four=count() ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(5);
@@ -143,7 +143,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 100 -from Date.new(' + start/1000 + ') -limit 10 ',
                           '; emit  -hz 100 -from Date.new(' + (start+5)/1000 + ') -limit 10)',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 var start = new Date(res.sinks.result[0].time).getTime();
@@ -157,7 +157,7 @@ describe('Juttle procs tests', function() {
                 program: ['emit  -hz 1000 -from Date.new(0) -limit 10 ',
                           '| (put a=1 | put b=2 | put c=3) ',
                           '| keep a,b,c | view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(10);
                 for (var i = 0 ; i < 10 ; i ++) {
@@ -172,7 +172,7 @@ describe('Juttle procs tests', function() {
                           '( put oh="hai" | keep oh ',
                           '; put oh="bai" | keep oh ',
                           ')| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var sorted = _(res.sinks.result).sortBy('oh');
                 expect(sorted.length).to.equal(20);
@@ -188,7 +188,7 @@ describe('Juttle procs tests', function() {
                           '( put oh="hai" | keep oh ',
                           '; put oh="bai" | keep oh ',
                           ')|  reduce c=count() | view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 for (var i = 0 ; i < 5 ; i ++) {
                     expect(res.sinks.result[i].c).to.equal(4);
@@ -201,7 +201,7 @@ describe('Juttle procs tests', function() {
                           '( put oh="hai" | keep oh, time ',
                           '; put oh="bai" | keep oh ',
                           ')|  reduce c=count() | view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 for (var i = 0 ; i < 5 ; i ++) {
                     expect(res.sinks.result[i].c).to.equal(4);
@@ -285,11 +285,11 @@ describe('Juttle procs tests', function() {
             })
                 .then(function (res) {
                     var expected_value = [
-                        { o: { a: 1 }, value: 5, min: 5, time: "1970-01-01T00:00:00.000Z" },
-                        { o: { a: 2 }, value: 3, min: 3, time: "1970-01-01T00:00:01.000Z" },
-                        { o: { a: 1 }, value: 3, min: 3, time: "1970-01-01T00:00:02.000Z" },
-                        { o: { a: 2 }, value: 1, min: 1, time: "1970-01-01T00:00:03.000Z" },
-                        { o: { a: 1 }, value: 2, min: 2, time: "1970-01-01T00:00:04.000Z" }
+                        { o: { a: 1 }, value: 5, min: 5, time: '1970-01-01T00:00:00.000Z' },
+                        { o: { a: 2 }, value: 3, min: 3, time: '1970-01-01T00:00:01.000Z' },
+                        { o: { a: 1 }, value: 3, min: 3, time: '1970-01-01T00:00:02.000Z' },
+                        { o: { a: 2 }, value: 1, min: 1, time: '1970-01-01T00:00:03.000Z' },
+                        { o: { a: 1 }, value: 2, min: 2, time: '1970-01-01T00:00:04.000Z' }
                     ];
                     expect(res.sinks.result).to.deep.equal(expected_value);
                 });
@@ -311,7 +311,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(0) -limit 10 ',
                           '; emit  -hz 1000 -from Date.new(0) -limit 10)',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -325,7 +325,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(' + start/1000 + ') -limit 10 ',
                           '; emit  -hz 1000 -from Date.new(' + start/1000 + ') -limit 10)',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -339,7 +339,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 100 -from Date.new(0) -limit 10 ',
                           '; emit  -hz 100 -from Date.new(0.005) -limit 10)',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 for (var i = 0 ; i < 20 ; i ++) {
@@ -353,7 +353,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 100 -from Date.new(' + start/1000 + ') -limit 10 ',
                           '; emit  -hz 100 -from Date.new(' + (start+5)/1000 + ') -limit 10)',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(20);
@@ -367,7 +367,7 @@ describe('Juttle procs tests', function() {
                 program: ['emit  -hz 1000 -from Date.new(0) -limit 10 ',
                           '| ( put left=1 ; put left=0 ) ',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(20);
@@ -381,7 +381,7 @@ describe('Juttle procs tests', function() {
                 program: ['emit  -hz 1000 -limit 10 ',
                           '| ( put left=1 ; put left=0 ) ',
                           '|  view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(20);
@@ -398,7 +398,7 @@ describe('Juttle procs tests', function() {
                           '| ( put left=1 ; put left=0 ) ',
                           '|  reduce four=count() ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(5);
@@ -416,7 +416,7 @@ describe('Juttle procs tests', function() {
                           '| ( put left=1 ; put left=0 ) ',
                           '|  reduce four=count() ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(5);
@@ -431,7 +431,7 @@ describe('Juttle procs tests', function() {
                           '; emit  -hz 1000 -from Date.new(0) -limit 12 | batch 0.004 ) ',
                           '|  reduce n=count() ',
                           '| view result'
-                         ].join(" ")
+                         ].join(' ')
             }).then(function(res) {
                 var result = res.sinks.result;
                 expect(result.length).to.equal(6);
@@ -532,7 +532,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(' + start/1000 + ') -limit 5',
                           '; emit  -hz 1000 -from Date.new(' + (start-5)/1000 + ') -limit 5)',
                           '| view result'
-                          ].join(" ")
+                          ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(10);
                 expect(res.sinks.result[0].time).to.equal(new Date(start - 5).toISOString());
@@ -544,7 +544,7 @@ describe('Juttle procs tests', function() {
                 program: ['( emit  -hz 1000 -from Date.new(0.01) -limit 10',
                           '; emit  -hz 1000 -from Date.new(0) -limit 10)',
                           '| view result'
-                          ].join(" ")
+                          ].join(' ')
             }).then(function(res) {
                 expect(res.sinks.result.length).to.equal(20);
                 expect(res.sinks.result[0].time).to.equal('1970-01-01T00:00:00.000Z');
@@ -1093,12 +1093,12 @@ describe('Juttle procs tests', function() {
 
         it('sort (letters again)', function() {
             return check_juttle({
-                program: ["const words = ['alabaster', 'dave', 'glowering', 'jejune', 'marvelous', 'avocado', 'typhoon', 'salmonella', 'box', 'cactus'];",
-                          "function randomWord() {",
-                          "var index = Math.floor(Math.random() * 10);",
-                          "return words[index];",
-                          "}",
-                          "emit -from Date.new(0) -limit 11 | put word=randomWord() | sort word | view result"].join('\n')
+                program: ['const words = [\'alabaster\', \'dave\', \'glowering\', \'jejune\', \'marvelous\', \'avocado\', \'typhoon\', \'salmonella\', \'box\', \'cactus\'];',
+                          'function randomWord() {',
+                          'var index = Math.floor(Math.random() * 10);',
+                          'return words[index];',
+                          '}',
+                          'emit -from Date.new(0) -limit 11 | put word=randomWord() | sort word | view result'].join('\n')
             })
             .then(function(res) {
                 var words = _.map(res.sinks.result, function(obj) {
@@ -1120,12 +1120,12 @@ describe('Juttle procs tests', function() {
 
         it('sort(multiple fields)', function() {
             return check_juttle({
-                program: ["const words = ['alabaster', 'dave', 'glowering', 'jejune', 'marvelous', 'harridan', 'typhoon', 'salmonella', 'box', 'cactus'];",
-                          "function randomWord() {",
-                          "var index = Math.floor(Math.random() * 10);",
-                          "return words[index];",
-                          "}",
-                          "emit -from Date.new(0) -limit 1 | put a=randomWord(),b=randomWord(),c=randomWord() | sort a,b,c | keep a,b,c | view result"].join('\n')
+                program: ['const words = [\'alabaster\', \'dave\', \'glowering\', \'jejune\', \'marvelous\', \'harridan\', \'typhoon\', \'salmonella\', \'box\', \'cactus\'];',
+                          'function randomWord() {',
+                          'var index = Math.floor(Math.random() * 10);',
+                          'return words[index];',
+                          '}',
+                          'emit -from Date.new(0) -limit 1 | put a=randomWord(),b=randomWord(),c=randomWord() | sort a,b,c | keep a,b,c | view result'].join('\n')
             })
             .then(function(res) {
                 var receivedData = res.sinks.result;
@@ -1420,11 +1420,11 @@ describe('Juttle procs tests', function() {
              '| reduce count() '+
              '| put dt = time - start | view after -times 1')
         }).then(function(res) {
-            expect(_.pluck(res.sinks.before, "dt")).deep.equal(
-                ["00:00:00.000", "00:00:01.000", "00:00:02.000"]
+            expect(_.pluck(res.sinks.before, 'dt')).deep.equal(
+                ['00:00:00.000', '00:00:01.000', '00:00:02.000']
             );
-            expect(_.pluck(res.sinks.after, "dt")).deep.equal(
-                ["00:00:01.000", "00:00:02.000", "00:00:03.000"]
+            expect(_.pluck(res.sinks.after, 'dt')).deep.equal(
+                ['00:00:01.000', '00:00:02.000', '00:00:03.000']
             );
         });
     });
@@ -1441,14 +1441,14 @@ describe('Juttle procs tests', function() {
              '| reduce count() '+
              '| put dt = time - start | view after -times 1')
         }).then(function(res) {
-            expect(_.pluck(res.sinks.before, "dt")).deep.equal(
-                ["00:00:00.000", "00:00:01.000", "00:00:02.000"]
+            expect(_.pluck(res.sinks.before, 'dt')).deep.equal(
+                ['00:00:00.000', '00:00:01.000', '00:00:02.000']
             );
-            expect(_.pluck(res.sinks.during, "dt")).deep.equal(
-                ["00:00:01.000", "00:00:02.000", "00:00:03.000"]
+            expect(_.pluck(res.sinks.during, 'dt')).deep.equal(
+                ['00:00:01.000', '00:00:02.000', '00:00:03.000']
             );
-            expect(_.pluck(res.sinks.after, "dt")).deep.equal(
-                ["00:00:01.000", "00:00:02.000", "00:00:03.000"]
+            expect(_.pluck(res.sinks.after, 'dt')).deep.equal(
+                ['00:00:01.000', '00:00:02.000', '00:00:03.000']
             );
         });
     });

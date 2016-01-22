@@ -16,7 +16,7 @@ describe('stochastic adapter options', function() {
             ('read stochastic -source "cdn" -from :2012-01-02: -to :2012-01-01: ' +
              '| view text')
         }).then(function(res) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.message).to.equal('Error: -to must not be earlier than -from');
@@ -37,9 +37,9 @@ describe('stochastic adapter options', function() {
     // a series of source cdn tests with various ways of specifying
     // the options will all produce these same results
     var hosts = [
-        {"host":"nyc.2"},
-        {"host":"sea.0"},
-        {"host":"sjc.1"}
+        {'host':'nyc.2'},
+        {'host':'sea.0'},
+        {'host':'sjc.1'}
     ];
     it('accepts a named source and proc options',function() {
         return check_juttle({
@@ -89,11 +89,11 @@ describe('stochastic -source "cdn"', function() {
              '| keep name | sort name | reduce by name | view text')
         }).then(function(res) {
             expect(res.sinks.text).to.deep.equal([
-                {"name":"cpu"},
-                {"name":"disk"},
-                {"name":"requests"},
-                {"name":"response_ms"},
-                {"name":"responses"},
+                {'name':'cpu'},
+                {'name':'disk'},
+                {'name':'requests'},
+                {'name':'response_ms'},
+                {'name':'responses'},
             ]);
         });
     });
@@ -105,8 +105,8 @@ describe('stochastic -source "cdn"', function() {
              '| keep name | sort name | reduce by name | view text')
         }).then(function(res) {
             expect(res.sinks.text).to.deep.equal([
-                {"name":"server_error"},
-                {"name":"syslog"}
+                {'name':'server_error'},
+                {'name':'syslog'}
             ]);
         });
     });
@@ -120,9 +120,9 @@ describe('stochastic -source "cdn"', function() {
              'keep delta | view text')
         }).then(function(res) {
             expect(res.sinks.text).to.deep.equal([
-                {"delta":"-00:00:02.000"},
-                {"delta":"00:00:00.000"},
-                {"delta":"00:00:02.000"}
+                {'delta':'-00:00:02.000'},
+                {'delta':'00:00:00.000'},
+                {'delta':'00:00:02.000'}
             ]);
         });
     });
@@ -134,7 +134,7 @@ describe('stochastic -source "cdn"', function() {
              '| keep cust_id | sort cust_id | uniq | view text')
         }).then(function(res) {
             var n = res.sinks.text.length;
-            expect(res.sinks.text[n-1].cust_id).to.equal("demmer");
+            expect(res.sinks.text[n-1].cust_id).to.equal('demmer');
         });
     });
     it('has no DOS agent if we disable it', function() {
@@ -145,7 +145,7 @@ describe('stochastic -source "cdn"', function() {
              '| keep cust_id | sort cust_id | uniq | view text')
         }).then(function(res) {
             var n = res.sinks.text.length;
-            expect(res.sinks.text[n-1].cust_id).to.not.equal("demmer");
+            expect(res.sinks.text[n-1].cust_id).to.not.equal('demmer');
         });
     });
     it('lets us configure hostnames', function() {
@@ -156,9 +156,9 @@ describe('stochastic -source "cdn"', function() {
              '| keep host | sort host | reduce by host | view text')
         }).then(function(res) {
             expect(res.sinks.text).to.deep.equal([
-                {"host":"bleat"},
-                {"host":"blort"},
-                {"host":"freen"}
+                {'host':'bleat'},
+                {'host':'blort'},
+                {'host':'freen'}
             ]);
         });
     });
@@ -170,8 +170,8 @@ describe('stochastic -source "cdn"', function() {
              '| reduce n=count() by code | keep code,n | sort n '+
              '| view text')
         }).then(function(res) {
-            expect(res.sinks.text[0].code).to.equal("503");
-            expect(res.sinks.text[1].code).to.equal("500");
+            expect(res.sinks.text[0].code).to.equal('503');
+            expect(res.sinks.text[1].code).to.equal('500');
         });
     });
     it('lets us control average syslog rate', function() {
@@ -290,7 +290,7 @@ describe('stochastic -source "cdn"', function() {
              ' -from :12 seconds ago: source_type=="metric" name=="cpu" '+
              '| put dt=Duration.seconds(time - qnow)| keep dt | view text')
         }).then(function(res) {
-            var dt = _.pluck(res.sinks.text, "dt");
+            var dt = _.pluck(res.sinks.text, 'dt');
             expect(dt[1] - dt[0]).to.equal(1.5);
             // the final step is a messy one to -to, but before that
             // it should be clean 1-sec steps.
@@ -308,7 +308,7 @@ describe('stochastic -source "logs"', function() {
             ('read stochastic -source "logs" -logType "syslog" -lpm 3600 -to :second from now:  | view text')
         }).then(function(res) {
             expect(res.sinks.text.length).at.least(1) ; // want 60!
-            expect(res.sinks.text[0].name).to.equal("syslog");
+            expect(res.sinks.text[0].name).to.equal('syslog');
             for (var i = 0 ; i < res.sinks.text.length ; i++) {
                 // smallest message is "Failed." see lib/runtime/procs/stoke/data/syslog-info-patterns.js
                 // at line 2 which has this possible message
@@ -323,7 +323,7 @@ describe('stochastic -source "logs"', function() {
              '| view text')
         }).then(function(res) {
             expect(res.sinks.text.length).at.least(1) ; // want 60!
-            expect(res.sinks.text[0].name).to.equal("syslog");
+            expect(res.sinks.text[0].name).to.equal('syslog');
             for (var i = 0 ; i < res.sinks.text.length ; i++) {
                 expect(res.sinks.text[i].message.length).at.least(10);
             }
@@ -335,7 +335,7 @@ describe('stochastic -source "logs"', function() {
             ('read stochastic -source "logs" -from :2014-01-01: -to :2014-01-01T00:01:00:'+
              '| view text')
         }).then(function(res) {
-            expect(res.sinks.text[0].name).to.equal("syslog");
+            expect(res.sinks.text[0].name).to.equal('syslog');
         });
     });
     it('pix source logType produces something', function() {
@@ -344,7 +344,7 @@ describe('stochastic -source "logs"', function() {
             ('read stochastic -source "logs" -logType "pix" -from :2014-01-01: -to :2014-01-01T00:01:00:'+
              '| view text')
         }).then(function(res) {
-            expect(res.sinks.text[0].name).to.equal("pix");
+            expect(res.sinks.text[0].name).to.equal('pix');
         });
     });
     it('git source logType produces something', function() {
@@ -353,7 +353,7 @@ describe('stochastic -source "logs"', function() {
             ('read stochastic -source "logs" -logType "git"  -from :2014-01-01: -to :2014-01-01T00:01:00:'+
              '| view text')
         }).then(function(res) {
-            expect(res.sinks.text[0].name).to.equal("git");
+            expect(res.sinks.text[0].name).to.equal('git');
         });
     });
     it('osx source logType produces something', function() {
@@ -362,7 +362,7 @@ describe('stochastic -source "logs"', function() {
             ('read stochastic -source "logs" -logType "osx"  -from :2014-01-01: -to :2014-01-01T00:01:00:'+
              '| view text')
         }).then(function(res) {
-            expect(res.sinks.text[0].name).to.equal("osx");
+            expect(res.sinks.text[0].name).to.equal('osx');
         });
     });
     it('emits points continously to the live stream', function() {

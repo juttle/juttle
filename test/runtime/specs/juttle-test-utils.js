@@ -140,7 +140,7 @@ var TestView = Juttle.proc.subscribe.extend({
 function compile_juttle(options) {
     logger.debug('parsing Juttle program:', options.program);
     if (options.hasOwnProperty('modules') && options.hasOwnProperty('moduleResolver')) {
-        throw new Error("confused by presence of both 'modules' and 'moduleResolver'");
+        throw new Error('confused by presence of both \'modules\' and \'moduleResolver\'');
     }
     var source = options.program;
     options = _.omit(options, 'program');

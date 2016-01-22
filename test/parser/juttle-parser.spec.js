@@ -40,7 +40,7 @@ describe('Juttle parser', function() {
             expect(err).to.be.an.instanceof(Error);
         }).then(function() {
             if (! got_error) {
-                throw new Error("shouldn't be here");
+                throw new Error('shouldn\'t be here');
             }
         });
     });
@@ -83,7 +83,7 @@ describe('Juttle parser', function() {
             expect(err).to.be.an.instanceof(Error);
         }).then(function() {
             if (! got_error) {
-                throw new Error("shouldn't be here");
+                throw new Error('shouldn\'t be here');
             }
         });
     });
@@ -93,7 +93,7 @@ describe('Juttle parser', function() {
 
         try {
             parser.parseSync(program, { modules: lib });
-            throw new Error("parsing should have failed");
+            throw new Error('parsing should have failed');
         } catch (err) {
             expect(err).to.be.an.instanceof(Error);
             expect(err.message).match(/could not find module/);
@@ -110,7 +110,7 @@ describe('Juttle parser', function() {
                         start: { offset: 11, line: 1, column: 12 },
                         end: { offset: 14, line: 1, column: 15 }
                     },
-                    value: "1970-01-01T00:00:00.000Z"
+                    value: '1970-01-01T00:00:00.000Z'
                 },
                 display_limit: {
                     type: 'NumericLiteral',

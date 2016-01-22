@@ -10,7 +10,7 @@ describe('Juttle basic language tests', function() {
             program: ''
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.message).to.equal('Error: Cannot run a program without a flowgraph.');
@@ -57,7 +57,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo=1.2 read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -69,7 +69,7 @@ describe('Juttle basic language tests', function() {
             program: 'banana | put value=count() | view sink1',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -83,7 +83,7 @@ describe('Juttle basic language tests', function() {
                 'emit -limit 2 | put value=count() | view sink3 )'
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -95,7 +95,7 @@ describe('Juttle basic language tests', function() {
             program: 'foo=1.2; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -108,7 +108,7 @@ describe('Juttle basic language tests', function() {
             program: 'function f() { foo=1.2; } read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -121,7 +121,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo; read file -file "input/simple-non-monotonic-time.json" | view sink1',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -134,7 +134,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo = foo + 1; emit | view text',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -147,7 +147,7 @@ describe('Juttle basic language tests', function() {
             program: 'function f() { var foo = foo + 1; return foo;} emit -hz 1000 -limit 1 | put a = f() | view text',
         })
         .then(function() {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -167,7 +167,7 @@ describe('Juttle basic language tests', function() {
             program: 'emit -from Date.new(0) -limit 1 | put single=\'\', double="" | view result'
         })
         .then(function(res) {
-            expect(res.sinks.result).deep.equal([{time:"1970-01-01T00:00:00.000Z", single: '', double:''}]);
+            expect(res.sinks.result).deep.equal([{time:'1970-01-01T00:00:00.000Z', single: '', double:''}]);
         });
     });
 
@@ -186,7 +186,7 @@ describe('Juttle basic language tests', function() {
         return check_juttle({
             program: 'const foo=[]; emit -from Date.new(0) -limit 1 | put empty=foo | view result'
         }).then(function(res) {
-            expect(res.sinks.result).to.deep.equal([{"time":"1970-01-01T00:00:00.000Z", "empty":[]}]);
+            expect(res.sinks.result).to.deep.equal([{'time':'1970-01-01T00:00:00.000Z', 'empty':[]}]);
         });
     });
 
@@ -219,9 +219,9 @@ describe('Juttle basic language tests', function() {
             ].join('\n')
         })
         .then(function(res) {
-            expect(res.sinks.result).deep.equal([{time:"1970-01-01T00:00:00.000Z", value: 3},
-                                                 {time:"1970-01-01T00:00:01.000Z", value: 5},
-                                                 {time:"1970-01-01T00:00:02.000Z", value: 5}]);
+            expect(res.sinks.result).deep.equal([{time:'1970-01-01T00:00:00.000Z', value: 3},
+                                                 {time:'1970-01-01T00:00:01.000Z', value: 5},
+                                                 {time:'1970-01-01T00:00:02.000Z', value: 5}]);
         });
     });
 
@@ -241,9 +241,9 @@ describe('Juttle basic language tests', function() {
             ].join('\n')
         })
         .then(function(res) {
-            expect(res.sinks.result).deep.equal([{time:"1970-01-01T00:00:00.000Z", value: 3},
-                                                 {time:"1970-01-01T00:00:01.000Z", value: 5},
-                                                 {time:"1970-01-01T00:00:02.000Z", value: 7}]);
+            expect(res.sinks.result).deep.equal([{time:'1970-01-01T00:00:00.000Z', value: 3},
+                                                 {time:'1970-01-01T00:00:01.000Z', value: 5},
+                                                 {time:'1970-01-01T00:00:02.000Z', value: 7}]);
         });
     });
 
@@ -252,7 +252,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo = bar.freen; read file -file "input/simple.json" | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -265,7 +265,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo = bar.freen(1); read file -file "input/simple.json" | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -278,7 +278,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple.json" | bar.freen | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -299,7 +299,7 @@ describe('Juttle basic language tests', function() {
             program: 'const foo = 5+; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -314,7 +314,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+ | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -328,7 +328,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple-non-monotonic-time.json" | pass | put | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -343,7 +343,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple-non-monotonic-time.json" | put funs=#funkins+1.2  put snarks=#grumpkins+1.2 | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -357,7 +357,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+1.2  view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -479,7 +479,7 @@ describe('Juttle basic language tests', function() {
                 'read file -file "input/simple-non-monotonic-time.json"| foo() | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .then(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -498,7 +498,7 @@ describe('Juttle basic language tests', function() {
             expect_file: 'expected/put-expression.json',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -520,7 +520,7 @@ describe('Juttle basic language tests', function() {
             expect_file: 'expected/put-expression.json',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
@@ -542,7 +542,7 @@ describe('Juttle basic language tests', function() {
                 'read file -file "input/simple-non-monotonic-time.json"| myproc() | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('Error');
@@ -561,7 +561,7 @@ describe('Juttle basic language tests', function() {
                 'read file -file "input/simple-non-monotonic-time.json"| put snarks=#grumpkins + foo() | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('Error');
@@ -574,7 +574,7 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple.json" | put snarks=#grumpkins+1.2 as | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
@@ -586,19 +586,19 @@ describe('Juttle basic language tests', function() {
             program: 'read file -file "input/simple.json" | put a=1 as p | view sink1',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         })
         .catch(function(err) {
             expect(err.name).to.equal('SyntaxError');
         });
     });
 
-    it("fails if a user-defined sub is called with missing arguments", function() {
+    it('fails if a user-defined sub is called with missing arguments', function() {
         return check_juttle({
             program: 'sub f(missing) { const x = missing; emit -from Date.new(0) -limit 1 | put x=missing | view sink1} f ',
         })
         .then(function(data) {
-            throw new Error("this should fail");
+            throw new Error('this should fail');
         }).catch(function(err) {
             expect(err.message).to.match(/Subgraph f called without argument missing/i);
         });

@@ -40,7 +40,7 @@ describe('Views get info on source time bounds', function() {
 
     var from = new JuttleMoment({ raw: '2015-01-01T00:00:00.000Z' });
     var to = new JuttleMoment({ raw: '2015-02-02T00:00:00.000Z' });
-    var last = new JuttleMoment.duration(1, "hour");
+    var last = new JuttleMoment.duration(1, 'hour');
 
     test('read stochastic -source "cdn" -from :' + from.valueOf() + ': | view view ', [[{from: from, to: null, last: null}]]);
     test('read stochastic -source "cdn" -from :' + from.valueOf() + ': -to :' + to.valueOf() + ': | view view ', [[{from: from, to: to, last: null}]]);

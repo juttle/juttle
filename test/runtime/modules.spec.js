@@ -51,7 +51,7 @@ describe('Juttle modules ', function() {
                 program: 'import ; emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.name).to.equal('SyntaxError');
@@ -73,7 +73,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod1" "mod2"; emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.name).to.equal('SyntaxError');
@@ -85,7 +85,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod1"; emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.name).to.equal('SyntaxError');
@@ -97,7 +97,7 @@ describe('Juttle modules ', function() {
                 program: 'function f() { import "mod1" as m1;} emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.name).to.equal('SyntaxError');
@@ -109,7 +109,7 @@ describe('Juttle modules ', function() {
                 program: 'sub p() { import "a" as a; emit | view sink} emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.equal('Error: Cannot import from within a sub');
@@ -123,7 +123,7 @@ describe('Juttle modules ', function() {
                       'export function f() { var a=1;}',
                       'function g() { var a=1;}',
                       'export sub p() { emit | view sink  }',
-                      'sub q() { emit | view sink2 }'].join("\n")
+                      'sub q() { emit | view sink2 }'].join('\n')
             });
 
             return check_juttle({
@@ -141,7 +141,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod" as m; emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.match(/Cannot export from within a fn/);
@@ -153,7 +153,7 @@ describe('Juttle modules ', function() {
                 program: 'sub p() { export const a=1; emit | view sink} emit | view sink'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.equal('Error: Cannot export from within a sub');
@@ -170,7 +170,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod" as m; emit -limit 1 | keep m'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.match(/Cannot use a module as a variable/);
@@ -187,7 +187,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod" as m; const c = m; emit -limit 1'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.match(/Cannot use a module as a variable/);
@@ -204,7 +204,7 @@ describe('Juttle modules ', function() {
                 program: 'import "mod" as m; emit -limit 1 | put a = m'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.match(/Cannot use a module as a variable/);
@@ -221,7 +221,7 @@ describe('Juttle modules ', function() {
                 program: 'const outer = 5; import "mod" as m;'
             })
             .then(function() {
-                throw new Error("Should have thrown an error");
+                throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
                 expect(err.message).to.match(/outer is not defined/);
@@ -243,7 +243,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 3, b: 3 } ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 3, b: 3 } ]);
             });
         });
 
@@ -257,7 +257,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 1} ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 1} ]);
             });
         });
 
@@ -289,7 +289,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 2}] );
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 2}] );
             });
         });
 
@@ -307,7 +307,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 3, b: 3 } ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 3, b: 3 } ]);
             });
         });
 
@@ -325,7 +325,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 3, b: 3 } ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 3, b: 3 } ]);
             });
         });
 
@@ -360,7 +360,7 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 2}] );
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 2}] );
             });
         });
 
@@ -377,7 +377,7 @@ describe('Juttle modules ', function() {
             .then(function(res) {
                 expect(res.sinks.ignored).to.be.undefined;
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 3, b: 3 } ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 3, b: 3 } ]);
             });
         });
 
@@ -393,11 +393,11 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", f: 2} ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', f: 2} ]);
             });
         });
 
-        it("Doesn't break when using a function from a module that also exports a const (PROD-7786)", function() {
+        it('Doesn\'t break when using a function from a module that also exports a const (PROD-7786)', function() {
             var resolver = moduleResolver({
                 mod: 'export const one = 1; export function simple() {return 2;}'
             });
@@ -407,11 +407,11 @@ describe('Juttle modules ', function() {
             })
             .then(function(res) {
                 expect(res.sinks.result)
-                    .deep.equal([ { time: "1970-01-01T00:00:00.000Z", a: 2} ]);
+                    .deep.equal([ { time: '1970-01-01T00:00:00.000Z', a: 2} ]);
             });
         });
 
-        it("Doesn't break when using a reducer from a module that also exports a const (PROD-7786)", function() {
+        it('Doesn\'t break when using a reducer from a module that also exports a const (PROD-7786)', function() {
             var resolver = moduleResolver({
                 mod: 'export const one = 1; export reducer r() {function update() { } function result() {return 2;}}'
             });
@@ -425,7 +425,7 @@ describe('Juttle modules ', function() {
             });
         });
 
-        it("Doesn't infinite-loop on cyclic imports", function() {
+        it('Doesn\'t infinite-loop on cyclic imports', function() {
             var resolver = moduleResolver({
                 'mod': 'export const m = 1;',
                 'cycle1': 'import "mod" as m; import "cycle3" as cycle3; ',
@@ -438,7 +438,7 @@ describe('Juttle modules ', function() {
                 program: 'import "cycle1" as cycle1;  emit | view sink'
             })
             .then(function(res) {
-                throw new Error("Should have detected cycle and errored!");
+                throw new Error('Should have detected cycle and errored!');
             })
             .catch(function(err) {
                 expect(err.message).to.contain('Import cycle detected (cycle1 -> cycle3 -> cycle2 -> cycle1)');

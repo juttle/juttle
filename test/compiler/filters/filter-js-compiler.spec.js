@@ -14,7 +14,7 @@ var POINTS_MISC = [
     { v: Infinity                                     },
     { v: -Infinity                                    },
     { v: NaN                                          },
-    { v: "abcd"                                       },
+    { v: 'abcd'                                       },
     { v: new JuttleMoment('2015-01-01T00:00:00.000Z') },
     { v: JuttleMoment.duration('00:00:05.000')        }
 ];
@@ -26,9 +26,9 @@ var POINTS_NUMBERS = [
 ];
 
 var POINTS_STRINGS = [
-    { v: "abcd" },
-    { v: "efgh" },
-    { v: "ijkl" }
+    { v: 'abcd' },
+    { v: 'efgh' },
+    { v: 'ijkl' }
 ];
 
 describe('FilterJSCompiler', function() {
@@ -51,12 +51,12 @@ describe('FilterJSCompiler', function() {
     var literalInfinity = { type: 'InfinityLiteral', negative: false };
     var literalMinusInfinity = { type: 'InfinityLiteral', negative: true };
     var literalNaN = { type: 'NaNLiteral' };
-    var literalAbcd = { type: 'StringLiteral', value: "abcd" };
-    var literalGlob = { type: 'StringLiteral', value: "e*h" };
+    var literalAbcd = { type: 'StringLiteral', value: 'abcd' };
+    var literalGlob = { type: 'StringLiteral', value: 'e*h' };
     var literalMoment = { type: 'MomentLiteral', value: '2015-01-01T00:00:00.000Z' };
     var literalDuration = { type: 'DurationLiteral', value: '00:00:05.000' };
     var literal13 = { type: 'ArrayLiteral', elements: [literal1, literal3] };
-    var regExp = { type: 'RegularExpressionLiteral', value: "e.*h", flags: "" };
+    var regExp = { type: 'RegularExpressionLiteral', value: 'e.*h', flags: '' };
 
     function testFilter(ast, points, expected) {
         /* jshint evil:true */
@@ -170,7 +170,7 @@ describe('FilterJSCompiler', function() {
                     }
                 },
                 POINTS_MISC,
-                [{ v: "abcd" }]
+                [{ v: 'abcd' }]
             );
         });
 
@@ -414,7 +414,7 @@ describe('FilterJSCompiler', function() {
                         }
                     },
                     POINTS_STRINGS,
-                    [{ v: "efgh" }]
+                    [{ v: 'efgh' }]
                 );
 
                 testFilter(
@@ -428,7 +428,7 @@ describe('FilterJSCompiler', function() {
                         }
                     },
                     POINTS_STRINGS,
-                    [{ v: "efgh" }]
+                    [{ v: 'efgh' }]
                 );
             });
         });
@@ -446,7 +446,7 @@ describe('FilterJSCompiler', function() {
                         }
                     },
                     POINTS_STRINGS,
-                    [{ v: "abcd" }, { v: "ijkl" }]
+                    [{ v: 'abcd' }, { v: 'ijkl' }]
                 );
 
                 testFilter(
@@ -460,7 +460,7 @@ describe('FilterJSCompiler', function() {
                         }
                     },
                     POINTS_STRINGS,
-                    [{ v: "abcd" }, { v: "ijkl" }]
+                    [{ v: 'abcd' }, { v: 'ijkl' }]
                 );
             });
         });
