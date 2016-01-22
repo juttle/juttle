@@ -762,9 +762,9 @@ describe('HTTP adapter tests', function() {
                     expect(result.errors.length).to.be.equal(0);
                     expect(result.warnings.length).to.be.equal(0);
                     expect(result.sinks.table.length).to.be.equal(1);
-                    expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
-                    expect(result.prog.graph.parser.totalRead).to.equal(100);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(100);
+                    expect(result.prog.graph.readState.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                    expect(result.prog.graph.readState.parser.totalRead).to.equal(100);
+                    expect(result.prog.graph.readState.parser.totalParsed).to.equal(100);
                 });
             });
 
@@ -783,9 +783,9 @@ describe('HTTP adapter tests', function() {
                     expect(result.errors.length).to.be.equal(0);
                     expect(result.warnings.length).to.be.equal(0);
                     expect(result.sinks.table.length).to.be.equal(1);
-                    expect(result.prog.graph.parser.stopAt).to.equal(1);
-                    expect(result.prog.graph.parser.totalRead).to.be.lessThan(50);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                    expect(result.prog.graph.readState.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.readState.parser.totalRead).to.be.lessThan(50);
+                    expect(result.prog.graph.readState.parser.totalParsed).to.equal(2);
                 });
             });
 
@@ -804,9 +804,9 @@ describe('HTTP adapter tests', function() {
                     expect(result.errors.length).to.be.equal(0);
                     expect(result.warnings.length).to.be.equal(0);
                     expect(result.sinks.table.length).to.be.equal(1);
-                    expect(result.prog.graph.parser.stopAt).to.equal(1);
-                    expect(result.prog.graph.parser.totalRead).to.be.lessThan(50);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                    expect(result.prog.graph.readState.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.readState.parser.totalRead).to.be.lessThan(50);
+                    expect(result.prog.graph.readState.parser.totalParsed).to.equal(2);
                 });
             });
         });
