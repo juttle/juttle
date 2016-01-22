@@ -15,6 +15,7 @@ var utils = require('../../../lib/runtime').utils;
 var Juttle = require('../../../lib/runtime/index').Juttle;
 var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 var compiler = require('../../../lib/compiler');
+var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
@@ -151,7 +152,7 @@ function compile_juttle(options) {
         modules: options.modules,
         moduleResolver: options.moduleResolver,
         fg_processors: [implicit_views, optimize],
-        scheduler: new TestScheduler()
+        scheduler: options.realtime ? new Scheduler() : new TestScheduler()
     };
 
     if (_.has(options, 'inputs')) {
