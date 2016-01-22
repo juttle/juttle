@@ -60,6 +60,21 @@ describe('file adapter tests', function () {
                     });
                 });
 
+                it('read with numeric time field', function() {
+                    var file_name = path.resolve(__dirname, 'input/numeric-time-field.' + format);
+                    return run_read_file_juttle(file_name, {format: format, timeField: 'mytime'})
+                        .then(function(result) {
+                            var expected = [
+                                { mytime: '1', a: 'a0', time: '1970-01-01T00:00:01.000Z' },
+                                { mytime: '267000', a: 'a1', time: '1970-01-04T02:10:00.000Z' },
+                                { mytime: '267001', a: 'a2', time: '1970-01-04T02:10:01.000Z' },
+                                { mytime: '268000', a: 'a3', time: '1970-01-04T02:26:40.000Z' }
+                            ];
+
+                            expect(result.sinks.table).deep.equal(expected);
+                        });
+                });
+
                 it('emits a warning if specified timeField does not exist', function() {
                     var options = {timeField: 'foo', format: format};
                     return run_read_file_juttle(file_name, options)
