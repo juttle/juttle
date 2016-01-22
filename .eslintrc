@@ -3,7 +3,8 @@
     "env": {
         "browser": true,
         "node": true,
-        "mocha": true
+        "mocha": true,
+        "es6": true
     },
     "rules": {
         "indent": [ 2, 4, { "SwitchCase": 1 } ],
@@ -12,6 +13,7 @@
         "semi": [ 2, "always" ],
         "comma-dangle": [ 0 ],
         "no-constant-condition" : [ 0 ],
-        "quotes": [ 2, "single" ]
+        "quotes": [ 2, "single" ],
+        "strict": [ 2, "global" ]
     },
 }
