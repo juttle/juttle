@@ -151,8 +151,8 @@ describe('read stdio adapter tests', function() {
                     expect(result.sinks.table.length).to.be.equal(1);
                     // not optimized therefore there's no stopAt and we'll
                     // parse the 6 points
-                    expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(6);
+                    expect(result.prog.graph.adapter.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                    expect(result.prog.graph.adapter.parser.totalParsed).to.equal(6);
                 });
             });
 
@@ -169,8 +169,8 @@ describe('read stdio adapter tests', function() {
                     expect(result.errors.length).to.be.equal(0);
                     expect(result.warnings.length).to.be.equal(0);
                     expect(result.sinks.table.length).to.be.equal(1);
-                    expect(result.prog.graph.parser.stopAt).to.equal(1);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                    expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
                 });
             });
 
@@ -187,8 +187,8 @@ describe('read stdio adapter tests', function() {
                     expect(result.errors.length).to.be.equal(0);
                     expect(result.warnings.length).to.be.equal(0);
                     expect(result.sinks.table.length).to.be.equal(1);
-                    expect(result.prog.graph.parser.stopAt).to.equal(1);
-                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                    expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
                 });
             });
         });
@@ -205,8 +205,8 @@ describe('read stdio adapter tests', function() {
                 expect(result.errors.length).to.equal(2);
                 expect(result.warnings.length).to.equal(0);
                 expect(result.sinks.table.length).to.be.equal(1);
-                expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
-                expect(result.prog.graph.parser.totalParsed).to.equal(6);
+                expect(result.prog.graph.adapter.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                expect(result.prog.graph.adapter.parser.totalParsed).to.equal(6);
             });
         });
 
@@ -222,8 +222,8 @@ describe('read stdio adapter tests', function() {
                 expect(result.errors.length).to.equal(0);
                 expect(result.warnings.length).to.equal(0);
                 expect(result.sinks.table.length).to.be.equal(1);
-                expect(result.prog.graph.parser.stopAt).to.equal(1);
-                expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
             });
         });
 
@@ -239,8 +239,8 @@ describe('read stdio adapter tests', function() {
                 expect(result.errors.length).to.equal(0);
                 expect(result.warnings.length).to.equal(0);
                 expect(result.sinks.table.length).to.be.equal(1);
-                expect(result.prog.graph.parser.stopAt).to.equal(1);
-                expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
             });
         });
 
