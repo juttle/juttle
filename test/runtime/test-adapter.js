@@ -7,66 +7,62 @@
 // table. All points written to the table in a given key can be
 // read back using the same key.
 //
+'use strict';
 
 var _ = require('underscore');
 var store = {};
-var Juttle = require('../../lib/runtime/index').Juttle;
+var AdapterRead = require('../../lib/runtime/adapter-read');
+var AdapterWrite = require('../../lib/runtime/adapter-write');
+var errors = require('../../lib/errors');
 
 function TestAdapter(config) {
-    var Read = Juttle.proc.source.extend({
-        procName: 'read-test',
-
-        initialize: function(options, params) {
-            this.handleTimeOptions(options);
-            this.setDefaultTimeRange(config.timeRequired || false);
-
-            this.logger.debug('initialize options:', options, 'params:', params);
-
-            // If invoked with -debug 'optimization', then instead of emitting
-            // points, emit the optimization info that was passed in from the
-            // compiler.
-            if (options.debug && options.debug === 'optimization') {
-                this.logger.debug('debug mode: optimization');
-                this.debug_info = params.optimization_info || {};
-                return;
-            }
-
-            // If invoked with -debug 'timeBounds', then instead of emitting
-            // points, emit the -from and -to time options.
-            if (options.debug && options.debug === 'timeBounds') {
-                this.logger.debug('debug mode: timeBounds');
-                this.debug_info = {from: this.from.toJSON(), to: this.to.toJSON()};
-                return;
-            }
-
+    class Read extends AdapterRead {
+        constructor(options, params) {
+            super(options, params, false);
+            this.logger.debug('initialize options:', options);
+            this.debug = options.debug;
             this.key = options.key;
-            if (!this.key) {
-                throw this.compile_error('RT-REQUIRED-OPTION-ERROR', {
+            if (!this.debug && !this.key) {
+                throw new errors.compileError('RT-REQUIRED-OPTION-ERROR', {
                     proc: 'read test',
                     option: 'key'
                 });
             }
 
             this._setup_optimization(params);
-        },
+        }
 
-        _setup_optimization: function(params) {
+        _setup_optimization(params) {
             var optimization_info = params.optimization_info;
             if (!optimization_info) {
                 return;
             }
+            this.optimization_info = params.optimization_info;
 
             this.count = optimization_info.count;
             if (optimization_info.hasOwnProperty('limit')) {
                 this.limit = optimization_info.limit;
             }
-        },
+        }
 
-        start: function() {
+        read(from, to, limit, state) {
             var points;
-            if (this.debug_info) {
-                points = [this.debug_info];
-            } else {
+
+            // If invoked with -debug 'optimization', then instead of emitting
+            // points, emit the optimization info that was passed in from the
+            // compiler.
+            if (this.debug === 'optimization') {
+                this.logger.debug('debug mode: optimization');
+                points = [this.optimization_info || {}];
+            }
+            // If invoked with -debug 'timeBounds', then instead of emitting
+            // points, emit the -from and -to time options.
+            else if (this.debug === 'timeBounds') {
+                this.logger.debug('debug mode: timeBounds');
+                points = [{from: from.toJSON(), to: to.toJSON()}];
+            }
+            // Otherwise just emit whatever is stored for the given key
+            else {
                 points = store[this.key] || [];
             }
 
@@ -78,10 +74,12 @@ function TestAdapter(config) {
                 points = [{count: points.length}];
             }
 
-            this.emit(points);
-            this.eof();
+            return Promise.resolve({
+                points: points,
+                readEnd: to
+            });
         }
-    });
+    }
 
     var optimizer = {
         optimize_head: function(read, head, graph, optimization_info) {
@@ -127,29 +125,29 @@ function TestAdapter(config) {
         }
     };
 
-    var Write = Juttle.proc.sink.extend({
-        procName: 'write-test',
-        initialize: function(options, params) {
+    class Write extends AdapterWrite {
+        constructor(options, params) {
+            super(options, params);
             this.key = options.key;
-            this.name = 'write-test';
-            if (!this.key) {
-                throw this.compile_error('RT-REQUIRED-OPTION-ERROR', {
+            if (! this.key) {
+                throw new errors.compileError('RT-REQUIRED-OPTION-ERROR', {
                     proc: 'write test',
                     option: 'key'
                 });
             }
-        },
+        }
 
-        process: function(points) {
+        write(points) {
+            this.logger.debug('write', this.key, points);
             var data = store[this.key] || [];
             data = data.concat(points);
             store[this.key] = data;
-        },
-
-        eof: function() {
-            this.done();
         }
-    });
+
+        eof() {
+            return Promise.resolve();
+        }
+    }
 
     return {
         name: 'test',

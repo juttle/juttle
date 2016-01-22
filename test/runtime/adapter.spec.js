@@ -97,12 +97,12 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             var first_node = result.prog.graph.head[0];
-            expect(first_node.procName).equal('read-test');
+            expect(first_node.procName).equal('read');
 
             var second_node = first_node.out_.default[0].proc;
             expect(second_node.procName).equal('view');
             expect(result.sinks.table).deep.equal([{count: 1}]);
-            expect(result.prog.graph.count).equal(true);
+            expect(result.prog.graph.adapter.count).equal(true);
         });
     });
 
@@ -113,7 +113,7 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             expect(result.sinks.table.length).equal(1);
-            expect(result.prog.graph.limit).equal(1);
+            expect(result.prog.graph.adapter.limit).equal(1);
         });
     });
 
@@ -124,22 +124,21 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             var first_node = result.prog.graph.head[0];
-            expect(first_node.procName).equal('read-test');
+            expect(first_node.procName).equal('read');
 
             var second_node = first_node.out_.default[0].proc;
             expect(second_node.procName).equal('view');
 
             expect(result.sinks.table).deep.equal([{count: 1}]);
-            expect(result.prog.graph.limit).equal(1);
-            expect(result.prog.graph.count).equal(true);
+            expect(result.prog.graph.adapter.limit).equal(1);
+            expect(result.prog.graph.adapter.count).equal(true);
         });
     });
 
     it('delays loading of configured adapters', function() {
         adapters.configure({
             'testClone': {
-                path: path.resolve(__dirname, './test-adapter-clone'),
-                timeRequired: true
+                path: path.resolve(__dirname, './test-adapter-clone')
             }
         });
 
@@ -195,19 +194,6 @@ describe('adapter API tests', function () {
         .then(function(result) {
             var expected = [{from: '1970-01-01T00:00:00.000Z', to: 'Infinity'}];
             expect(result.sinks.table).deep.equal(expected);
-        });
-    });
-
-    it('defaults to an empty range for -from and -to in the clone', function() {
-        return check_juttle({
-            program: 'read testClone -debug "timeBounds"'
-        })
-        .then(function(result) {
-            throw new Error('unexpected success');
-        })
-        .catch(function(err) {
-            expect(err.code).equal('RT-MISSING-TIME-RANGE-ERROR');
-            expect(err.message).equal('One of -from, -to, or -last must be specified to define a query time range');
         });
     });
 });
