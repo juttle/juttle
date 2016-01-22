@@ -47,7 +47,7 @@ gulp.task('juttle-spec', ['juttle-spec-clean'], function() {
 
 gulp.task('lint-test', function() {
     return gulp.src([
-        'test/**/*.spec.js',
+        'test/**/*.js',
         '!test/runtime/specs/juttle-spec/**/*.js'
     ])
 	.pipe(eslint())

@@ -32,7 +32,7 @@ function TestAdapter(config) {
             // If invoked with -debug 'timeBounds', then instead of emitting
             // points, emit the -from and -to time options.
             if (options.debug && options.debug === 'timeBounds') {
-                this.logger.debug('debug mode: timeBounds')
+                this.logger.debug('debug mode: timeBounds');
                 this.debug_info = {from: this.from.toJSON(), to: this.to.toJSON()};
                 return;
             }
