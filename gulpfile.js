@@ -1,3 +1,5 @@
+'use strict';
+
 /* globals __dirname */
 var _ = require('underscore');
 var args   = require('yargs').argv;
