@@ -6,7 +6,7 @@ var check_juttle = juttle_test_utils.check_juttle;
 var run_juttle = juttle_test_utils.run_juttle;
 var compile_juttle = juttle_test_utils.compile_juttle;
 
-describe('read http_server', function() {
+describe.skip('read http_server', function() {
     it('ingests simple json array', function() {
         var programFinish, program;
         var body = [
