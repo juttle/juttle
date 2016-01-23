@@ -1,12 +1,22 @@
 var expect = require('chai').expect;
 var request = require('request-promise');
 
+var Promise = require('bluebird');
+var findFreePort = Promise.promisify(require('find-free-port'));
 var juttle_test_utils = require('../runtime/specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var run_juttle = juttle_test_utils.run_juttle;
 var compile_juttle = juttle_test_utils.compile_juttle;
 
 describe('read http_server', function() {
+    var port;
+    beforeEach(function() {
+        return findFreePort(10000, 20000)
+        .then(function(p) {
+            port = p;
+        });
+    });
+
     it('ingests simple json array', function() {
         var programFinish, program;
         var body = [
@@ -15,14 +25,14 @@ describe('read http_server', function() {
         ];
 
         return compile_juttle({
-            program: 'read http_server'
+            program: 'read http_server -port ' + port
         })
         .then(function(prog) {
             program = prog;
             programFinish = run_juttle(prog);
 
             return request({
-                uri: 'http://localhost:8080',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 body: body,
                 json: true
@@ -44,14 +54,14 @@ describe('read http_server', function() {
         var body = { 'name': 'ted', 'age': 53, 'weight': 100};
 
         return compile_juttle({
-            program: 'read http_server -port 2000'
+            program: 'read http_server -port ' + port
         })
         .then(function(prog) {
             program = prog;
             programFinish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 body: body,
                 json: true,
@@ -74,14 +84,14 @@ describe('read http_server', function() {
         var body = {'name': 'ted', 'age': 53, 'weight': 100};
 
         return compile_juttle({
-            program: 'read http_server -port 2000 -method \'PUT\''
+            program: 'read http_server -port ' + port + '  -method \'PUT\''
         })
         .then(function(prog) {
             program = prog;
             programFinish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'PUT',
                 body: body,
                 json: true,
@@ -106,14 +116,14 @@ describe('read http_server', function() {
             + '\nRed Dragon,35.06,2016-01-17';
 
         return compile_juttle({
-            program: 'read http_server -port 2000 -timeField "saleTime"'
+            program: 'read http_server -port ' + port + ' -timeField "saleTime"'
         })
         .then(function(prog) {
             program = prog;
             finish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 headers: { 'Content-Type': 'text/csv' },
                 body: body
@@ -135,14 +145,14 @@ describe('read http_server', function() {
     it('correctly handles rootPath option', function() {
         var program, finish;
         return compile_juttle({
-            program: 'read http_server -port 2000 -rootPath \'root.root\''
+            program: 'read http_server -port ' + port + ' -rootPath \'root.root\''
         })
         .then(function(prog) {
             program = prog;
             finish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 json: true,
                 body: { root: { root: { actual_root: true }}}
@@ -162,7 +172,7 @@ describe('read http_server', function() {
         var json_body = JSON.stringify([{person: 'matt', awesome_rating: 100}]);
 
         return compile_juttle({
-            program: 'read http_server -port 2000'
+            program: 'read http_server -port ' + port
         })
         .then(function(prog) {
             program = prog;
@@ -170,7 +180,7 @@ describe('read http_server', function() {
 
             // invalid content-type
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 headers: { 'Content-Type': 'text/html' },
                 body: json_body,
@@ -183,7 +193,7 @@ describe('read http_server', function() {
 
             // no content-type
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 body: json_body,
                 simple: false,
@@ -208,14 +218,14 @@ describe('read http_server', function() {
             + '\nRed Dragon, 24.04';
 
         return compile_juttle({
-            program: 'read http_server -port 2000 -timeField \'saleTime\''
+            program: 'read http_server -port ' + port + ' -timeField \'saleTime\''
         })
         .then(function(prog) {
             program = prog;
             finish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 headers: { 'Content-Type': 'text/csv' },
                 body: invalid_body,
@@ -238,14 +248,14 @@ describe('read http_server', function() {
     it('error request should not kill program', function() {
         var program, finish;
         return compile_juttle({
-            program: 'read http_server -port 2000'
+            program: 'read http_server -port ' + port
         })
         .then(function(prog) {
             program = prog;
             finish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 body: JSON.stringify({ error: 'error' }),
                 simple: false,
@@ -256,7 +266,7 @@ describe('read http_server', function() {
             expect(res.statusCode).to.equal(415);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'POST',
                 body: { ok: 'ok' },
                 json: true
@@ -276,14 +286,14 @@ describe('read http_server', function() {
         var program, finish;
 
         return compile_juttle({
-            program: 'read http_server -port 2000'
+            program: 'read http_server -port ' + port
         })
         .then(function(prog) {
             program = prog;
             finish = run_juttle(program);
 
             return request({
-                uri: 'http://localhost:2000',
+                uri: 'http://localhost:' + port,
                 method: 'GET',
                 simple: false,
                 resolveWithFullResponse: true,
@@ -299,7 +309,7 @@ describe('read http_server', function() {
 
     it('unsupport method throws error', function() {
         return check_juttle({
-            program: 'read http_server -port 2000 -method \'HEAD\''
+            program: 'read http_server -port ' + port + ' -method \'HEAD\''
         })
         .then(function() {
             throw new Error('the previous statement should have failed');
