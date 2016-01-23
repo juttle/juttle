@@ -50,9 +50,9 @@ gulp.task('lint-test', function() {
         'test/**/*.js',
         '!test/runtime/specs/juttle-spec/**/*.js'
     ])
-	.pipe(eslint())
-	.pipe(eslint.format())
-	.pipe(eslint.failAfterError());
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('lint-lib', function() {
@@ -68,9 +68,9 @@ gulp.task('lint-lib', function() {
         '!lib/moment/parser.js',
         '!lib/parser/parser.js'
     ])
-	.pipe(eslint())
-	.pipe(eslint.format())
-	.pipe(eslint.failAfterError());
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('lint', ['lint-lib', 'lint-test']);
