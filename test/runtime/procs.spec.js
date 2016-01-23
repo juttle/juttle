@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('underscore');
 
 var juttle_test_utils = require('./specs/juttle-test-utils');

@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var FileView = require('../../lib/views').FileView;
 var Promise = require('bluebird');

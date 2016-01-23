@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var TextView = require('../../lib/views').TextView;
 var streams = require('memory-streams');

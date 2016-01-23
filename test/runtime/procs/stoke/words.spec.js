@@ -1,3 +1,5 @@
+'use strict';
+
 /* globals describe,it  */
 var _ =  require('underscore');
 var words = require('../../../../lib/runtime/procs/stoke/words');

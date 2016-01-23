@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var _ = require('underscore');
 var values = require('../../lib/runtime/values');

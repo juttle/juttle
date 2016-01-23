@@ -1,3 +1,5 @@
+'use strict';
+
 /* globals describe,it  */
 var Stoke = require('../../../../lib/runtime/procs/stoke/stoke').Stoke;
 var StokeSequence = require('../../../../lib/runtime/procs/stoke/stoke').StokeSequence;

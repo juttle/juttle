@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var compiler = require('../../lib/compiler');
 var prog_stats = require('../../lib/compiler/flowgraph/program_stats.js');

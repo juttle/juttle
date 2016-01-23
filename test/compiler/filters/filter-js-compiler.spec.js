@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 
 var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');

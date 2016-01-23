@@ -1,3 +1,5 @@
+'use strict';
+
 var TestAdapter = require('./test-adapter');
 var TestAdapterClone = function(config) {
     TestAdapterClone.initialized = true;

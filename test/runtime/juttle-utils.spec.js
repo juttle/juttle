@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var utils = require('../../lib/runtime/juttle-utils');
 var JuttleMoment = require('../../lib/moment').JuttleMoment;

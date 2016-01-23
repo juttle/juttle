@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 var compiler = require('../../lib/compiler');
 var views_sourceinfo = require('../../lib/compiler/flowgraph/views_sourceinfo.js');

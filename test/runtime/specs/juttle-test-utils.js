@@ -1,3 +1,5 @@
+'use strict';
+
 /* jshint: node */
 
 var fs = require('fs');

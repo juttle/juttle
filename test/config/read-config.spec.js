@@ -1,3 +1,5 @@
+'use strict';
+
 var config = require('../../lib/config/read-config');
 var expect = require('chai').expect;
 var fse = require('fs-extra');
