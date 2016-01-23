@@ -12,6 +12,7 @@ These adapters are included in the Juttle runtime and can be used in Juttle prog
 
 * [file](../adapters/file.md)
 * [http](../adapters/http.md)
+* [http_server](../adapters/http_server.md)
 * [stdio](../adapters/stdio.md)
 * [stochastic](../adapters/stochastic.md)
 

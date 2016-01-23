@@ -132,6 +132,31 @@ describe('read http_server', function() {
         });
     });
 
+    it('correctly handles rootPath option', function() {
+        var program, finish;
+        return compile_juttle({
+            program: 'read http_server -port 2000 -rootPath \'root.root\''
+        })
+        .then(function(prog) {
+            program = prog;
+            finish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:2000',
+                method: 'POST',
+                json: true,
+                body: { root: { root: { actual_root: true }}}
+            });
+        })
+        .then(function() {
+            program.deactivate();
+            return finish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table).to.deep.equal([{ actual_root: true }]);
+        });
+    });
+
     it('invalid content type returns error', function() {
         var program, finish;
         var json_body = JSON.stringify([{person: 'matt', awesome_rating: 100}]);
