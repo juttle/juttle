@@ -17,8 +17,10 @@ var errors = require('../../lib/errors');
 
 function TestAdapter(config) {
     class Read extends AdapterRead {
+        static get timeRequired() { return false; }
+
         constructor(options, params) {
-            super(options, params, false);
+            super(options, params);
             this.logger.debug('initialize options:', options);
             this.debug = options.debug;
             this.key = options.key;

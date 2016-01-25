@@ -13,8 +13,10 @@ var AdapterRead = require('../../lib/runtime/adapter-read');
 var JuttleMoment = require('../../lib/moment').JuttleMoment;
 
 class TestTimeseriesRead extends AdapterRead {
+    static get timeRequired() { return true; }
+
     constructor(options, params) {
-        super(options, params, true);
+        super(options, params);
 
         this.options = options;
         this.logger.debug('initialize options:', options);
