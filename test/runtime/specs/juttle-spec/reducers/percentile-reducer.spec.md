@@ -89,7 +89,7 @@ complains about nonnumeric input
 
 ### Errors
 
-   * Error: percentile expects numeric fields, but received: bar
+   * percentile expects numeric fields, but received: bar
 
 
 keeps discrete values and returns data values for percentiles

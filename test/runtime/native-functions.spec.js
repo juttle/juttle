@@ -62,7 +62,7 @@ describe('Juttle Native Functions Tests', function() {
             return_data: true
         })
         .then(function(output) {
-            expect(output.warnings[0]).equal('Error: Invalid argument type for "String.substr": expected string, received null.');
+            expect(output.warnings[0]).equal('Invalid argument type for "String.substr": expected string, received null.');
         });
     });
 

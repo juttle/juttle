@@ -23,7 +23,7 @@ pace -every and number complains
 
 ### Errors
 
-   * CompileError: Error: -every wants a duration, got 2
+   * CompileError: -every wants a duration, got 2
 
 complains if -x is not a number
 -------------------------
@@ -35,7 +35,7 @@ complains if -x is not a number
 
 ### Errors
 
-   * CompileError: Error: -x wants a number, got :00:01:00.000:
+   * CompileError: -x wants a number, got :00:01:00.000:
 
 complains if -from is not a moment
 -------------------------
@@ -47,7 +47,7 @@ complains if -from is not a moment
 
 ### Errors
 
-   * CompileError: Error: -from wants a moment, got 0
+   * CompileError: -from wants a moment, got 0
 
 
 plain pacer kicks history out at its real rate

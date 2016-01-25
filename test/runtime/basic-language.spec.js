@@ -15,7 +15,7 @@ describe('Juttle basic language tests', function() {
             throw new Error('this should fail');
         })
         .catch(function(err) {
-            expect(err.message).to.equal('Error: Cannot run a program without a flowgraph.');
+            expect(err.message).to.equal('Cannot run a program without a flowgraph.');
         });
     });
 

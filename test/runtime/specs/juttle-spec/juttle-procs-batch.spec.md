@@ -24,7 +24,7 @@ no bare numbers with the new -every option
 
 ### Errors
 
-   * CompileError: Error: -every wants a duration, got 2
+   * CompileError: -every wants a duration, got 2
 
 complains if batch -on > -every
 -------------------------
@@ -37,7 +37,7 @@ complains if batch -on > -every
 
 ### Errors
 
-   * CompileError: Error: batch -on cannot be greater than -every
+   * CompileError: batch -on cannot be greater than -every
 
 complains if batch -every is negative
 -------------------------
@@ -50,7 +50,7 @@ complains if batch -every is negative
 
 ### Errors
 
-   * CompileError: Error: batch interval must be a positive number or duration.
+   * CompileError: batch interval must be a positive number or duration.
 
 complains if batch -every is 0
 -------------------------
@@ -63,7 +63,7 @@ complains if batch -every is 0
 
 ### Errors
 
-   * CompileError: Error: batch interval must be a positive number or duration.
+   * CompileError: batch interval must be a positive number or duration.
 
 complains if batch duration is negative
 -------------------------
@@ -76,7 +76,7 @@ complains if batch duration is negative
 
 ### Errors
 
-   * CompileError: Error: batch interval must be a positive number or duration.
+   * CompileError: batch interval must be a positive number or duration.
 
 complains if batch duration is 0
 -------------------------
@@ -89,7 +89,7 @@ complains if batch duration is 0
 
 ### Errors
 
-   * CompileError: Error: batch interval must be a positive number or duration.
+   * CompileError: batch interval must be a positive number or duration.
 
 batching works for months
 -------------------------

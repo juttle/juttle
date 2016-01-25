@@ -8,7 +8,7 @@ Complains about unknown options
     | view result
 
 ### Errors
-   * Error: unknown emit option failure.
+   * unknown emit option failure.
 
 Complains if -limit isnt a number
 ----------------------------------------
@@ -19,7 +19,7 @@ Complains if -limit isnt a number
 
 ### Errors
 
-   * CompileError: Error: -limit wants a number, got "no limits!"
+   * CompileError: -limit wants a number, got "no limits!"
 
 Complains if -hz isnt a number
 ----------------------------------------
@@ -30,7 +30,7 @@ Complains if -hz isnt a number
 
 ### Errors
 
-   * CompileError: Error: -hz wants a number, got "so good"
+   * CompileError: -hz wants a number, got "so good"
 
 Complains if -every isnt a duration
 ----------------------------------------
@@ -41,7 +41,7 @@ Complains if -every isnt a duration
 
 ### Errors
 
-   * CompileError: Error: -every wants a duration, got "so often"
+   * CompileError: -every wants a duration, got "so often"
 
 Complains if -from isnt a moment
 ----------------------------------------
@@ -52,7 +52,7 @@ Complains if -from isnt a moment
 
 ### Errors
 
-   * CompileError: Error: -from wants a moment, got "never"
+   * CompileError: -from wants a moment, got "never"
 
 Complains if -to isnt a moment
 ----------------------------------------
@@ -63,7 +63,7 @@ Complains if -to isnt a moment
 
 ### Errors
 
-   * CompileError: Error: -to wants a moment, got "never"
+   * CompileError: -to wants a moment, got "never"
 
 Complains if -last isnt a duration
 ----------------------------------------
@@ -74,7 +74,7 @@ Complains if -last isnt a duration
 
 ### Errors
 
-   * CompileError: Error: -last wants a duration, got "never"
+   * CompileError: -last wants a duration, got "never"
 
 Complains if -last and -from are specified
 ------------------------------------------
@@ -85,7 +85,7 @@ Complains if -last and -from are specified
 
 ### Errors
 
-   * CompileError: Error: -last option should not be combined with -from or -to
+   * CompileError: -last option should not be combined with -from or -to
 
 Complains if -last and -to are specified
 ----------------------------------------
@@ -96,7 +96,7 @@ Complains if -last and -to are specified
 
 ### Errors
 
-   * CompileError: Error: -last option should not be combined with -from or -to
+   * CompileError: -last option should not be combined with -from or -to
 
 Complains if -from and -to and -last are specified
 ----------------------------------------
@@ -107,7 +107,7 @@ Complains if -from and -to and -last are specified
 
 ### Errors
 
-   * CompileError: Error: -last option should not be combined with -from or -to
+   * CompileError: -last option should not be combined with -from or -to
 
 Complains if -limit and -to are specified
 ----------------------------------------

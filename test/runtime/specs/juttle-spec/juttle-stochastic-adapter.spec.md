@@ -17,7 +17,7 @@ stochastic with FTS complains
 
 ### Errors
 
-   * CompileError: Error: Free text search is not implemented for stochastic adapter.
+   * CompileError: Free text search is not implemented for stochastic adapter.
 
 historic read
 --------------------
@@ -160,4 +160,4 @@ source "badone" fails as expected
 
 ### Errors
 
-   * CompileError: Error: Unknown source: badone
+   * CompileError: Unknown source: badone

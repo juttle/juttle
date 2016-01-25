@@ -36,7 +36,7 @@ complains about non-time assignment to the `time` field
 
 ### Errors
 
-   * Error: Invalid type assigned to time: duration (00:00:01.000).
+   * Invalid type assigned to time: duration (00:00:01.000).
 
 complains about out-of-order assignment to the `time` field with a reducer
 -----------------------------------------------------
@@ -47,7 +47,7 @@ complains about out-of-order assignment to the `time` field with a reducer
 
 ### Warnings
 
-   * Warning: out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
@@ -62,7 +62,7 @@ complains about out-of-order assignment to the `time` field with non-reducer exp
 
 ### Warnings
 
-   * Warning: out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }

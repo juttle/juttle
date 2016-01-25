@@ -21,7 +21,7 @@ Produces an error when passed argument `format` of invalid type
 
 ### Warnings
 
-  * Error: Invalid argument type for "Date.format": expected string, received number (23).
+  * Invalid argument type for "Date.format": expected string, received number (23).
 
 Produces an error when passed argument `tzstring` of invalid type
 ---------------------------------------------------------------

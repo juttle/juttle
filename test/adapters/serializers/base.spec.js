@@ -8,7 +8,7 @@ describe('serializers/base', function() {
     it('fails when instantiating an invalid serializer', function() {
         expect(function() {
             serializers.getSerializer('bogus');
-        }).to.throw('Error: Invalid format option value, must be one of the following:');
+        }).to.throw('Invalid format option value, must be one of the following:');
     });
 
 });

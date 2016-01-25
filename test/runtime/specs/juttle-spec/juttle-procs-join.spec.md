@@ -58,7 +58,7 @@ complains about unknown options
     emit -limit 1 | join -failure 1 foo, bar | remove time | view result
 
 ### Errors
-   * CompileError: Error: unknown join option failure.
+   * CompileError: unknown join option failure.
 
 not everything can be a table
 ------------------------------------------------------
@@ -67,7 +67,7 @@ not everything can be a table
     join -table 1 |  view result
 
 ### Errors
-   * Error: at least one input must not be a table
+   * at least one input must not be a table
 
 System Test C4107 Scenario 2: join 2 event streams using once to generate every combination possible
 ------------------------------------------------------

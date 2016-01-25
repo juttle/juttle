@@ -173,19 +173,19 @@ function perform_run(options) {
         // Start listening for callbacks from the program and view
         // manager for errors/warnings/view data.
         program.events.on('error', function(msg, err) {
-            console.error(msg, err);
+            console.error('Error: ' + msg, err);
         });
 
         program.events.on('warning', function(msg, warn) {
-            console.warn(msg);
+            console.warn('Warning: ' + msg);
         });
 
         view_mgr.events.on('error', function(msg, err) {
-            console.error(msg, err);
+            console.error('Error: ' + msg, err);
         });
 
         view_mgr.events.on('warning', function(msg, warn) {
-            console.warn(msg);
+            console.warn('Warning: ' + msg);
         });
 
         // Start the program.
@@ -275,7 +275,7 @@ function perform_mode(options)
                 return Promise.reject(e);
             }
         } else {
-            console.error(e.message);
+            console.error('Error: ' + e.message);
             return Promise.reject(e);
         }
     });

@@ -21,7 +21,7 @@ Runtime error, partial match
 
 ### Errors
 
-   * CompileError: Error: unknown
+   * CompileError: unknown
 
 Warning, partial match
 --------------------------------

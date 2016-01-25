@@ -43,4 +43,4 @@ Produces an error when argument `string` is not a string
 
 ### Warnings
 
-  * Error: Invalid argument type for "JSON.parse": expected string
+  * Invalid argument type for "JSON.parse": expected string

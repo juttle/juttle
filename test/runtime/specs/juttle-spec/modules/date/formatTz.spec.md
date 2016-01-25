@@ -10,7 +10,7 @@ Produces an error when passed argument `date` of invalid type
 
 ### Warnings
 
-  * Error: Invalid argument type for "Date.formatTz": expected date, received null.
+  * Invalid argument type for "Date.formatTz": expected date, received null.
 
 Produces an error when passed argument `tzstring` of invalid type
 ---------------------------------------------------------------
@@ -21,7 +21,7 @@ Produces an error when passed argument `tzstring` of invalid type
 
 ### Warnings
 
-  * Error: Invalid argument type for "Date.formatTz": expected string, received number (23).
+  * Invalid argument type for "Date.formatTz": expected string, received number (23).
 
 Formats a date in different timezones (and doesnt care about Standard or DST)
 ----------------------------------------------------------------------------

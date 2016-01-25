@@ -36,7 +36,7 @@ complains if -on > -every
 
 ### Errors
 
-   * CompileError: Error: reduce -on cannot be greater than -every
+   * CompileError: reduce -on cannot be greater than -every
 
 complains if reduce -every is negative
 -------------------------
@@ -48,7 +48,7 @@ complains if reduce -every is negative
 
 ### Errors
 
-   * CompileError: Error: reduce -every must be a positive duration.
+   * CompileError: reduce -every must be a positive duration.
 
 complains if reduce -every is 0
 -------------------------
@@ -60,7 +60,7 @@ complains if reduce -every is 0
 
 ### Errors
 
-   * CompileError: Error: reduce -every must be a positive duration.
+   * CompileError: reduce -every must be a positive duration.
 
 complains if reduce -every null -on notnull
 -----------------------------------------------------
@@ -73,7 +73,7 @@ complains if reduce -every null -on notnull
 
 ### Errors
 
-   * CompileError: Error: reduce -on requires -every
+   * CompileError: reduce -on requires -every
 
 complains if reduce -forget without by
 -------------------------
@@ -85,7 +85,7 @@ complains if reduce -forget without by
 
 ### Errors
 
-   * CompileError: Error: -forget option only applies when using "by"
+   * CompileError: -forget option only applies when using "by"
 
 complains if reduce -forget -reset false
 -------------------------
@@ -97,7 +97,7 @@ complains if reduce -forget -reset false
 
 ### Errors
 
-   * CompileError: Error: cannot -forget when -reset false
+   * CompileError: cannot -forget when -reset false
 
 
 complains about a bogus option
@@ -456,7 +456,7 @@ complains about out-of-order assignment to the `time` field in -every mode
 
 ### Warnings
 
-   * Warning: out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
 
 complains about out-of-order assignment to the `time` field in batch mode
 -----------------------------------------------------
@@ -467,7 +467,7 @@ complains about out-of-order assignment to the `time` field in batch mode
 
 ### Warnings
 
-   * Warning: out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 complains about out-of-order assignment to the `time` field with -every
 -----------------------------------------------------
@@ -480,7 +480,7 @@ complains about out-of-order assignment to the `time` field with -every
 
 ### Warnings
 
-   * Warning: out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
