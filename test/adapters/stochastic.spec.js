@@ -25,14 +25,16 @@ describe('stochastic adapter options', function() {
         });
     });
 
-    it('supports starting at :beginning:', function() {
+    it('complains about starting at :beginning:', function() {
         return check_juttle({
             program: 'read stochastic -from :beginning: '+
                      '-to :1970-01-01T00:00:10.000Z: ' +
                      '| reduce count() | view text'
+        }).then(function(res) {
+            throw new Error('this should fail');
         })
-        .then(function(res) {
-            expect(res.sinks.text[0]).deep.equal({count: 238});
+        .catch(function(err) {
+            expect(err.message).to.equal('Unsupported value for from option: value must be finite');
         });
     });
 

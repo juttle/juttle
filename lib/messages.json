@@ -16,6 +16,7 @@
   "RT-TYPE-ERROR": "{message}",
   "RT-NO-FREE-TEXT": "Free text search is not implemented in this context.",
   "RT-ADAPTER-UNSUPPORTED-FILTER": "{filter} is not supported by {proc}.",
+  "RT-ADAPTER-UNSUPPORTED-TIME-OPTION": "Unsupported value for {option} option: {message}",
   "RT-FREE-TEXT-STOCHASTIC": "Free text search is not implemented for stochastic adapter.",
   "RT-INVALID-TYPE": "content-type must be set to: {{info.types}}",
   "RT-INVALID-HTTP-METHOD": "endpoint only allows these http methods: {{info.types}}",
