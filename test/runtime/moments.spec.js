@@ -408,7 +408,7 @@ describe('Juttle Moments tests', function() {
             program: 'emit -from :now: -hz 1000 -limit 1 | put foo = Date.quantize(Date.time(), 5) | view result'
         })
         .then(function(res) {
-            expect(res.warnings[0]).to.equal('Error: Invalid argument type for \"Date.quantize\": expected duration, received number (5).');
+            expect(res.warnings[0]).to.equal('Invalid argument type for \"Date.quantize\": expected duration, received number (5).');
         });
     });
 

@@ -42,7 +42,7 @@ describe('file adapter tests', function () {
                 throw new Error('this should have failed');
             })
             .catch(function(err) {
-                expect(err.message).equal('Error: unknown read file option foo.');
+                expect(err.message).equal('unknown read file option foo.');
             });
         });
 
@@ -97,14 +97,14 @@ describe('file adapter tests', function () {
                     var options = {format: format, pattern: '%{SYSLOGLINE}'};
                     return run_read_file_juttle(file_name, options)
                     .catch(function(err) {
-                        expect(err).match(/Error: option pattern can only be used with format="grok"/);
+                        expect(err).match(/option pattern can only be used with format="grok"/);
                     });
                 });
             });
         });
 
         it('fails when you do not provide a file to read', function() {
-            var message = 'Error: missing read file required option file.';
+            var message = 'missing read file required option file.';
             var failing_read = check_juttle({
                 program: 'read file'
             });
@@ -113,7 +113,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails if you pass a filter to read', function() {
-            var message = 'Error: filtering is not supported by read file.';
+            var message = 'filtering is not supported by read file.';
             var failing_read = run_read_file_juttle(json_file, {}, 'foo = 123');
 
             return expect_to_fail(failing_read, message);
@@ -165,7 +165,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when -from is an invalid moment', function() {
-            var message = 'Error: -from wants a moment, got "a"';
+            var message = '-from wants a moment, got "a"';
 
             var program = util.format('read file -file "%s" -from "a"', json_file);
             var failing_read = check_juttle({
@@ -176,7 +176,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when -to is an invalid moment', function() {
-            var message = 'Error: -to wants a moment, got "a"';
+            var message = '-to wants a moment, got "a"';
 
             var program = util.format('read file -file "%s" -to "a"', json_file);
             var failing_read = check_juttle({
@@ -187,7 +187,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when -last is an invalid duration', function() {
-            var message = 'Error: -last wants a duration, got "a"';
+            var message = '-last wants a duration, got "a"';
 
             var program = util.format('read file -file "%s" -last "a"', json_file);
             var failing_read = check_juttle({
@@ -223,7 +223,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when you do not provide a file to write', function() {
-            var message = 'Error: missing write file required option file.';
+            var message = 'missing write file required option file.';
             var failing_write = check_juttle({
                 program: 'write file'
             });
@@ -232,7 +232,7 @@ describe('file adapter tests', function () {
         });
 
         it('fails when you provide an unknown option', function() {
-            var message = 'Error: unknown write file option foo.';
+            var message = 'unknown write file option foo.';
             var failing_write = check_juttle({
                 program: 'emit -limit 1 | write file -file "' + tmp_file + '" -foo "bar"'
             });
@@ -242,7 +242,7 @@ describe('file adapter tests', function () {
 
         _.each(['limit', 'maxFilesize', 'bufferLimit'], function(option) {
             it('fails when you provide an invalid ' + option, function() {
-                var message = util.format('Error: option %s should be a positive integer', option);
+                var message = util.format('option %s should be a positive integer', option);
                 var failing_write = check_juttle({
                     program: 'emit -limit 1 | write file -file "' + tmp_file + '" -' + option + ' -1'
                 });
@@ -278,7 +278,7 @@ describe('file adapter tests', function () {
             })
             .then(function(result) {
                 expect(result.errors.length).to.equal(1);
-                expect(result.errors[0]).to.contain('Error: option maxFilesize exceeded limit of 2 bytes');
+                expect(result.errors[0]).to.contain('option maxFilesize exceeded limit of 2 bytes');
             });
         });
 
@@ -288,7 +288,7 @@ describe('file adapter tests', function () {
             })
             .then(function(result) {
                 expect(result.errors.length).equal(1);
-                expect(result.errors[0]).to.equal('Error: option limit exceeded limit of 1, dropping points.');
+                expect(result.errors[0]).to.equal('option limit exceeded limit of 1, dropping points.');
 
                 return run_read_file_juttle(tmp_file);
             })
@@ -351,7 +351,7 @@ describe('file adapter tests', function () {
             .then(function(result) {
                 expect(result.errors.length).to.equal(1);
                 expect(result.warnings.length).to.equal(0);
-                expect(result.errors[0]).to.contain('Error: option limit exceeded limit of 2, dropping points.');
+                expect(result.errors[0]).to.contain('option limit exceeded limit of 2, dropping points.');
 
                 return run_read_file_juttle(tmp_file);
             })

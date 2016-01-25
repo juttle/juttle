@@ -131,7 +131,7 @@ describe('Juttle inputs', function() {
                     throw new Error('this should fail');
                 })
                 .catch(function(err) {
-                    expect(err.message).to.eq('Error: The "<" operator: Must be in format "field < expression" or "expression < field".');
+                    expect(err.message).to.eq('The "<" operator: Must be in format "field < expression" or "expression < field".');
                 });
         });
     });

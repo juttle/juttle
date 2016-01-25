@@ -84,4 +84,4 @@ complains about nonnumeric argument
     emit -from Date.new(0) -limit 9 | skip "foo" | view result
 
 ### Errors
-  * CompileError: Error: argument for skip must be an integer
+  * CompileError: argument for skip must be an integer

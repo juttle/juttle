@@ -8,7 +8,7 @@ describe('parsers/base', function() {
     it('fails when instantiating an invalid parser', function() {
         expect(function() {
             parsers.getParser('bogus');
-        }).to.throw('Error: Invalid format option value, must be one of the following:');
+        }).to.throw('Invalid format option value, must be one of the following:');
     });
 
     it('fails when using -pattern with invalid -format', function() {
@@ -16,7 +16,7 @@ describe('parsers/base', function() {
             parsers.getParser('csv', {
                 pattern: 'bananas'
             });
-        }).to.throw('Error: option pattern can only be used with format="grok"');
+        }).to.throw('option pattern can only be used with format="grok"');
     });
 
 });

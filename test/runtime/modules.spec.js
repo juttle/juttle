@@ -30,7 +30,7 @@ describe('Juttle modules ', function() {
                 if (_.has(modules, moduleName)) {
                     resolve({source: modules[moduleName], name: moduleName});
                 } else {
-                    reject(new Error('Error: could not find module ' + moduleName));
+                    reject(new Error('could not find module ' + moduleName));
                 }
             }).delay(Math.random() * 200);
         };
@@ -114,7 +114,7 @@ describe('Juttle modules ', function() {
                 throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
-                expect(err.message).to.equal('Error: Cannot import from within a sub');
+                expect(err.message).to.equal('Cannot import from within a sub');
             });
         });
 
@@ -158,7 +158,7 @@ describe('Juttle modules ', function() {
                 throw new Error('Should have thrown an error');
             })
             .catch(function(err) {
-                expect(err.message).to.equal('Error: Cannot export from within a sub');
+                expect(err.message).to.equal('Cannot export from within a sub');
             });
         });
 

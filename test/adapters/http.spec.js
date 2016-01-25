@@ -307,7 +307,7 @@ describe('HTTP adapter tests', function() {
             .then(function(result) {
                 expect(result.errors.length).equal(1);
                 expect(result.warnings.length).equal(0);
-                expect(result.errors[0]).to.contain('Error: connect ECONNREFUSED');
+                expect(result.errors[0]).to.contain('connect ECONNREFUSED');
             });
         });
 
@@ -318,7 +318,7 @@ describe('HTTP adapter tests', function() {
             .then(function(result) {
                 expect(result.errors.length).equal(1);
                 expect(result.warnings.length).equal(0);
-                expect(result.errors[0]).to.contain('Error: getaddrinfo ENOTFOUND');
+                expect(result.errors[0]).to.contain('getaddrinfo ENOTFOUND');
             });
         });
 
@@ -330,7 +330,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('Error: missing read http required option url');
+                expect(err.toString()).to.contain('missing read http required option url');
             });
         });
 
@@ -342,7 +342,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('Error: unknown read http option unknown.');
+                expect(err.toString()).to.contain('unknown read http option unknown.');
             });
         });
 
@@ -431,7 +431,7 @@ describe('HTTP adapter tests', function() {
                 .then(function(result) {
                     expect(result.errors.length).equal(1);
                     expect(result.warnings.length).equal(0);
-                    expect(result.errors[0]).to.contain('Error: Invalid ' + name.toUpperCase() + ' data');
+                    expect(result.errors[0]).to.contain('Invalid ' + name.toUpperCase() + ' data');
                 });
             });
         });
@@ -444,7 +444,7 @@ describe('HTTP adapter tests', function() {
                 .then(function(result) {
                     expect(result.errors.length).equal(1);
                     expect(result.warnings.length).equal(0);
-                    expect(result.errors[0]).to.contain('Error: internal error StatusCodeError: ' + status);
+                    expect(result.errors[0]).to.contain('internal error StatusCodeError: ' + status);
                 });
             });
         });
@@ -512,7 +512,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('Error: filtering is not supported by read http');
+                expect(err.toString()).to.contain('filtering is not supported by read http');
             });
         });
 
@@ -528,7 +528,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('Error: missing write http required option url');
+                expect(err.toString()).to.contain('missing write http required option url');
             });
         });
 
@@ -540,7 +540,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('Error: unknown write http option unknown.');
+                expect(err.toString()).to.contain('unknown write http option unknown.');
             });
         });
 
@@ -579,7 +579,7 @@ describe('HTTP adapter tests', function() {
             .then(function(result) {
                 expect(result.errors.length).equal(0);
                 expect(result.warnings.length).equal(1);
-                expect(result.warnings[0]).to.contain('Error: internal error StatusCodeError: 500');
+                expect(result.warnings[0]).to.contain('internal error StatusCodeError: 500');
             });
         });
 

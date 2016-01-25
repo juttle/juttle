@@ -20,7 +20,7 @@ describe('adapter API tests', function () {
             expect(result.sinks.table.length).equal(0);
         })
         .catch(function(err) {
-            expect(err.message).to.equal('Error: invalid read test required option key.');
+            expect(err.message).to.equal('invalid read test required option key.');
         });
     });
 
@@ -32,7 +32,7 @@ describe('adapter API tests', function () {
             throw new Error('this should fail');
         })
         .catch(function(err) {
-            expect(err.message).to.equal('Error: invalid write test required option key.');
+            expect(err.message).to.equal('invalid write test required option key.');
         });
     });
 
@@ -165,7 +165,7 @@ describe('adapter API tests', function () {
         })
         .catch(function(err) {
             expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
-            expect(err.message).equal('Error: adapter bogus not registered');
+            expect(err.message).equal('adapter bogus not registered');
             expect(err.info.location.filename).is.a.string;
             expect(err.info.location.start.offset).is.a.number;
             expect(err.info.location.end.offset).is.a.number;
@@ -181,7 +181,7 @@ describe('adapter API tests', function () {
         })
         .catch(function(err) {
             expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
-            expect(err.message).equal('Error: adapter bogus not registered');
+            expect(err.message).equal('adapter bogus not registered');
             expect(err.info.location.filename).is.a.string;
             expect(err.info.location.start.offset).is.a.number;
             expect(err.info.location.end.offset).is.a.number;
@@ -207,7 +207,7 @@ describe('adapter API tests', function () {
         })
         .catch(function(err) {
             expect(err.code).equal('RT-MISSING-TIME-RANGE-ERROR');
-            expect(err.message).equal('Error: One of -from, -to, or -last must be specified to define a query time range');
+            expect(err.message).equal('One of -from, -to, or -last must be specified to define a query time range');
         });
     });
 });

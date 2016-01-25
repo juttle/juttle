@@ -21,7 +21,7 @@ describe('stochastic adapter options', function() {
             throw new Error('this should fail');
         })
         .catch(function(err) {
-            expect(err.message).to.equal('Error: -to must not be earlier than -from');
+            expect(err.message).to.equal('-to must not be earlier than -from');
         });
     });
 
@@ -205,7 +205,7 @@ describe('stochastic -source "cdn"', function() {
         }).then(function(res) {
             expect(res.sinks.text[0].count).to.equal(10);
             expect(res.warnings[0]).to.equal(
-                'Warning: too many logs from sea.0, throttling');
+                'too many logs from sea.0, throttling');
         });
     });
     it('lets us disable the runaway syslog throttle', function() {

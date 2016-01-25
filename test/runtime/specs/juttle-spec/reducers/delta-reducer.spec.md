@@ -15,7 +15,7 @@ complains if reduce delta
     emit -limit 1 | reduce delta(foo) | view result
 
 ### Errors
-   * CompileError: Error: delta cannot be used with reduce (use reduce last | put delta=delta())
+   * CompileError: delta cannot be used with reduce (use reduce last | put delta=delta())
 
 outputs "empty" on missing field
 --------------------------------------------------
