@@ -49,7 +49,7 @@ The `*` operator: Produces an error when the expression has an invalid type
 
 ### Errors
 
-  * The "*" operator: Invalid operand type (null).
+  * Invalid filter term. Valid forms are: "field == value", "value == field", "field == field".
 
 The `=~` operator: Produces an error for `non-field @ *`
 --------------------------------------------------------
@@ -162,7 +162,7 @@ The `=~` operator: Produces an error when RHS has an invalid type
 
 ### Errors
 
-  * The "=~" operator: Invalid operand type (array).
+  * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
 The `=~` operator: Returns `false` when LHS is a non-string value
 -----------------------------------------------------------------
@@ -189,7 +189,7 @@ The `!~` operator: Produces an error when RHS has an invalid type
 
 ### Errors
 
-  * The "!~" operator: Invalid operand type (array).
+  * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
 The `!~` operator: Returns `true` when LHS is a non-string value
 ----------------------------------------------------------------
@@ -218,7 +218,7 @@ The `in` operator: Produces an error when used on operand of invalid type
 
 ### Errors
 
-  * The "in" operator: Invalid operand type (string).
+  * Invalid filter term. Valid forms are: "field in array".
 
 Other operators: Produces an error when used on operand of invalid type
 -----------------------------------------------------------------------
@@ -229,4 +229,4 @@ Other operators: Produces an error when used on operand of invalid type
 
 ### Errors
 
-  * The "==" operator: Invalid operand type (array).
+  * Invalid filter term. Valid forms are: "field == value", "value == field".

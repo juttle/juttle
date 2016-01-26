@@ -114,6 +114,7 @@
   "RT-SUB-MISSING-ARG": "Subgraph {sub} called without argument {arg}",
   "RT-INVALID-OPERAND-TYPE": "The \"{operator}\" operator: Invalid operand type ({type}).",
   "RT-INVALID-TERM-TYPE": "Invalid term type ({type}).",
+  "RT-INVALID-EXPRESSION-FILTER-TERM": "Invalid filter term. Valid forms are: {forms}.",
   "RT-IMPORT-INTERPOLATION": "Cannot use interpolation in imported module name.",
   "RT-MODULE-NOT-FOUND": "could not find module \"{module}\"",
   "RT-FIELD-NOT-STRING": "field {field} is not a string",
