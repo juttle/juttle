@@ -20,4 +20,46 @@ describe('juttle utils tests', function() {
             expect(converted.obj.time).to.equal(time.valueOf());
         });
     });
+
+    describe('toNative', function() {
+        it('converts Date to JuttleMoment', function() {
+            var time = new Date(2000);
+
+            var points = [
+                { time: time }
+            ];
+
+            var converted = utils.toNative(points)[0];
+
+            expect(converted.time).instanceOf(JuttleMoment);
+            expect(converted.time.unixms()).to.equal(time.getTime());
+        });
+
+        it('converts ISO string to JuttleMoment', function() {
+            var time = new Date(2000);
+
+            var points = [
+                { time: time.toISOString() }
+            ];
+
+            var converted = utils.toNative(points)[0];
+
+            expect(converted.time).instanceOf(JuttleMoment);
+            expect(converted.time.unixms()).to.equal(time.getTime());
+        });
+
+        it('converts seconds to JuttleMoment', function() {
+            var seconds = 2;
+            var time = new Date(seconds * 1000);
+
+            var points = [
+                { time: seconds }
+            ];
+
+            var converted = utils.toNative(points)[0];
+
+            expect(converted.time).instanceOf(JuttleMoment);
+            expect(converted.time.unixms()).to.equal(time.getTime());
+        });
+    });
 });
