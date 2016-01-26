@@ -172,4 +172,30 @@ describe('parsers/json', function() {
             ]);
         });
     });
+
+    it('stops emitting values after the optimization.limit', function() {
+        var parser = parsers.getParser('json', {
+            optimization: {
+                type: 'head',
+                limit: 1
+            }
+        });
+
+        var results = [];
+        return parser.parseStream(fs.createReadStream(pointsFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).equal(2);
+            // the json parser stops as soon as we've reached the desired
+            // limit without emitting any additional points
+            expect(parser.totalRead).to.equal(2);
+            expect(parser.totalParsed).to.equal(2);
+            expect(results).to.deep.equal([
+                [{ 'time': '2014-01-01T00:00:01.000Z', 'foo': 1 }],
+                []
+            ]);
+        });
+    });
+
 });

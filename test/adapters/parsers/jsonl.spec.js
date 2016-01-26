@@ -74,4 +74,30 @@ describe('parsers/jsonl', function() {
             ]);
         });
     });
+
+    it('stops emitting values after the optimization.limit', function() {
+        var parser = parsers.getParser('jsonl', {
+            optimization: {
+                type: 'head',
+                limit: 1
+            }
+        });
+        var results = [];
+        return parser.parseStream(fs.createReadStream(pointsFile), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            // the jsonl parser that actually that allows us to stop as soon as
+            // we've reached the desired limit without emitting any additional
+            // points
+            expect(results.length).to.equal(2);
+            expect(parser.totalRead).to.equal(2);
+            expect(parser.totalParsed).to.equal(2);
+            expect(results).to.deep.equal([
+                [{ 'time': '2014-01-01T00:00:01.000Z', 'foo': 1 }],
+                []
+            ]);
+        });
+    });
+
 });

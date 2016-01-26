@@ -3,7 +3,9 @@
 var expect = require('chai').expect;
 var fs = require('fs');
 var parsers = require('../../../lib/adapters/parsers');
+var serializers = require('../../../lib/adapters/serializers');
 var path = require('path');
+var tmp = require('tmp');
 
 describe('parsers/csv', function() {
     var pointFile = path.resolve(__dirname, 'input/csv/point.csv');
@@ -74,4 +76,45 @@ describe('parsers/csv', function() {
             ]);
         });
     });
+
+    it('stops emitting values after the optimization.limit', function() {
+        // the read ahead buffer of the parser will always read more points
+        // that we actually want to parse but lets make sure this does not
+        // read the whole file by writing out enough data
+        var tmpFilename = tmp.tmpNameSync();
+        var stream = fs.createWriteStream(tmpFilename);
+        var serializer = serializers.getSerializer('csv', stream);
+
+        for(var index = 0; index < 50; index++) {
+            serializer.write([{
+                time: new Date().toISOString(),
+                index: index,
+                fluff: Array(1024).join('X')
+            }]);
+        }
+
+        serializer.done();
+        stream.end();
+
+        var csv = parsers.getParser('csv', {
+            optimization: {
+                type: 'head',
+                limit: 1
+            }
+        });
+
+        var results = [];
+        return csv.parseStream(fs.createReadStream(tmpFilename), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).to.be.equal(2); // 1 point + empty batch
+            expect(csv.totalRead).to.be.lessThan(20);
+            expect(csv.totalParsed).to.equal(2); // we always parse one ahead
+        })
+        .finally(function() {
+            fs.unlinkSync(tmpFilename);
+        });
+    });
+
 });

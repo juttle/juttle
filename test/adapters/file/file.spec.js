@@ -31,9 +31,11 @@ function run_read_file_juttle(filename, options, extra) {
 
 describe('file adapter tests', function () {
     var file = path.resolve(__dirname, 'input/simple');
+    var corrupt = path.resolve(__dirname, 'input/corrupt');
     var json_file = file + '.json';
 
     var syslog = path.resolve(__dirname, '../parsers/input/logs/syslog');
+    var badSyslog = path.resolve(__dirname, '../parsers/input/logs/bad-syslog');
 
     describe('read file', function() {
         it('fails when you provide an unknown option', function() {
@@ -384,6 +386,104 @@ describe('file adapter tests', function () {
                 expect(result.sinks.table.length).equal(2);
                 expect(result.sinks.table[0].message).equal('hello test 2');
                 expect(result.sinks.table[1].message).equal('hello test 3');
+            });
+        });
+
+    });
+
+    describe('optimizations', function() {
+        _.each(symmetricalFormats, function(format) {
+            it('fails to optimize tail followed by head with -format "' + format + '"', function() {
+                var file_name = file + '.' + format;
+                return check_juttle({
+                    program: 'read file -file "' + file_name + '" -format "' + format + '" | tail 1 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    // not optimized therefore there's no stopAt and we'll
+                    // parse the 6 points
+                    expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(6);
+                });
+            });
+
+            it('can optimize "| head 1" with -format "' + format + '"', function() {
+                // the corrupt file will throw an error if we hit the 3rd entry when
+                // parsing and the parsers currently read 1 point ahead
+                var file_name = corrupt + '.' + format;
+                return check_juttle({
+                    program: 'read file -file "' + file_name + '" -format "' + format + '" | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+
+            it('can optimize nested "| head 2 | head 1" with -format "' + format + '"', function() {
+                // the corrupt file will throw an error if we hit the 3rd entry when
+                // parsing and the parsers currently read 1 point ahead
+                var file_name = corrupt + '.' + format;
+                return check_juttle({
+                    program: 'read file -file "' + file_name + '" -format "' + format + '" | head 2 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+        });
+
+        it('fails to optimized tail followed by head with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            return check_juttle({
+                program: 'read file -file "' +  badSyslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | tail 1 | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(2);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                expect(result.prog.graph.parser.totalParsed).to.equal(6);
+            });
+        });
+
+        it('can optimize "| head 1" with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            return check_juttle({
+                program: 'read file -file "' +  badSyslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.parser.totalParsed).to.equal(2);
+            });
+        });
+
+        it('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            return check_juttle({
+                program: 'read file -file "' +  badSyslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | head 2 | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.parser.totalParsed).to.equal(2);
             });
         });
 

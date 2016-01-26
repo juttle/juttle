@@ -4,6 +4,7 @@ var expect = require('chai').expect;
 var fs = require('fs');
 var parsers = require('../../../lib/adapters/parsers');
 var path = require('path');
+var tmp = require('tmp');
 
 describe('parsers/grok', function() {
     var empty = path.resolve(__dirname, 'input/logs/empty.log');
@@ -88,6 +89,40 @@ describe('parsers/grok', function() {
                 [{'timestamp':'Jan  6 11:17:01','logsource':'x230','program':'CRON','pid':'17218','message':'(root) MAIL (mailed 1 byte of output; but got status 0x00ff, #012)'}],
                 []
             ]);
+        });
+    });
+
+    it('stops emitting values after the optimization.limit', function() {
+        // the read ahead buffer of the parser will always read more points
+        // that we actually want to parse but lets make sure this does not // read the whole file by writing out enough data
+        var tmpFilename = tmp.tmpNameSync();
+        var stream = fs.createWriteStream(tmpFilename);
+        for(var index = 0; index < 1000; index++) {
+            stream.write('Jan  6 10:54:52 x230 anacron[' +
+                         parseInt(Math.random()*64*1024) +
+                         ']: ' + Array(1024).join('X') + '\n');
+        }
+        stream.end();
+
+        var parser = parsers.getParser('grok', {
+            pattern: '%{SYSLOGLINE}',
+            optimization: {
+                type: 'head',
+                limit: 1
+            }
+        });
+
+        var results = [];
+        return parser.parseStream(fs.createReadStream(tmpFilename), function(result) {
+            results.push(result);
+        })
+        .then(function() {
+            expect(results.length).to.be.equal(2); // 1 point + empty batch
+            expect(parser.totalRead).to.be.lessThan(500);
+            expect(parser.totalParsed).to.equal(2); // always parse one ahead
+        })
+        .finally(function() {
+            fs.unlinkSync(tmpFilename);
         });
     });
 
