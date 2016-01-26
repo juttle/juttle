@@ -131,7 +131,7 @@ describe('Juttle inputs', function() {
                     throw new Error('this should fail');
                 })
                 .catch(function(err) {
-                    expect(err.message).to.eq('The "<" operator: Must be in format "field < expression" or "expression < field".');
+                    expect(err.message).to.eq('Invalid filter term. Valid forms are: "field < value", "value < field", "field < field".');
                 });
         });
     });
