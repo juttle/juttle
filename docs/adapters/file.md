@@ -10,7 +10,7 @@ The `file` adapter allows reading points from, or writing points to, a file on t
 
 ## read file
 
-Supported file formats are JSON array, and JSON lines; see examples below.
+Supported file formats are JSON array, JSON lines, CSV and unstructured logs (with grok parsing); see examples below.
 
 ```text
 read file -file <path> [-format <format>] [-timeField <fieldname>]
