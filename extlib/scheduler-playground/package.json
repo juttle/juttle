@@ -1,0 +1,9 @@
+{
+  "name": "juttle-scheduler",
+  "version": "0.0.1",
+  "description": "Scheduler for juttle",
+  "main": "./index.js",
+  "devDependencies": {
+    "underscore": "*"
+  }
+}
