@@ -11,7 +11,7 @@ var juttle_test_utils = require('../runtime/specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var json2csv = require('json2csv');
 
-var validContentTypes = {
+var symmetricalFormats = {
     json: 'application/json',
     jsonl: 'application/jsonl',
     csv: 'text/csv'
@@ -111,6 +111,57 @@ describe('HTTP adapter tests', function() {
                     // default to JSON
                     res.set('Content-Type', type);
                     res.send(point);
+                }
+            });
+
+            self.app.get('/objects', function (req, res) {
+                /*
+                 * returns a set of objects with the specified content-type
+                 */
+                var points = [];
+                var count = parseInt(req.query.count);
+                delete req.query.count;
+            
+                for(var index = 0; index < count; index++) { 
+                    var point = {};
+                    _.each(req.query, function(value, key) {
+                        point[key] = value;
+                    });
+                    points.push(point);
+                }
+
+                var contentTypeHeader = req.header('Accept');
+                var type;
+                if (contentTypeHeader) {
+                    type = contentType.parse(contentTypeHeader).type;
+                }
+
+                if (type === 'text/csv') {
+                    json2csv({
+                        data: points,
+                        fields: _.keys(point)
+                    }, function(err, csv) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        res.set('Content-Type', 'text/csv');
+                        res.send(csv);
+                    });
+                } else if (type === 'application/jsonl') {
+                    var buffer = [];
+                    res.set('Content-Type', 'application/jsonl');
+                    _.each(points, function(point) {
+                        buffer.push(JSON.stringify(point));
+                    });
+                    res.send(buffer.join('\n'));
+                } else if (type === 'application/json') {
+                    // default to JSON
+                    res.set('Content-Type', type);
+                    res.send(points);
+                } else { 
+                    res.status(500);
+                    res.end();
                 }
             });
 
@@ -423,7 +474,7 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        _.each(validContentTypes, function(contentType, name) {
+        _.each(symmetricalFormats, function(contentType, name) {
             it('fails when response is not valid ' + name, function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '"} -url "' + this.url + '/garbage"'
@@ -460,7 +511,7 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        _.each(validContentTypes, function(contentType) {
+        _.each(symmetricalFormats, function(contentType) {
             it('can read timeless data point back with content-type: "' + contentType + '"', function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '"} ' +
@@ -671,4 +722,66 @@ describe('HTTP adapter tests', function() {
             });
         });
     });
+
+    describe('optimizations', function() {
+        _.each(symmetricalFormats, function(contentType, name) {
+            it('fails to optimize tail followed by head with -format "' + name + '"', function() {
+                return check_juttle({
+                    program: 'read http -headers { Accept: "' + contentType + '"} ' +
+                                    '   -url "' + this.url + '/objects?foo=bar&count=100" | tail 1 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                    expect(result.prog.graph.parser.totalRead).to.equal(100);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(100);
+                });
+            });
+
+            it('can optimize "| head 1" with -format "' + name + '"', function() {
+                // the read ahead buffer of the parser will always read more points
+                // that we actually want to parse but lets make sure this does not
+                // read the whole stream by making a big enough payload over http
+                // that we know the parser won't read ahead the totality of the
+                // points
+                return check_juttle({
+                    program: 'read http -headers { Accept: "' + contentType + '"} ' +
+                             '          -url "' + this.url + '/objects?foo=' +
+                             Array(2048).join('X') + '&count=100" | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalRead).to.be.lessThan(50);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+
+            it('can optimize nested "| head 2 | head 1" with -format "' + name + '"', function() {
+                // the read ahead buffer of the parser will always read more points
+                // that we actually want to parse but lets make sure this does not
+                // read the whole stream by making a big enough payload over http
+                // that we know the parser won't read ahead the totality of the
+                // points
+                return check_juttle({
+                    program: 'read http -headers { Accept: "' + contentType + '"} ' +
+                             '          -url "' + this.url + '/objects?foo=' +
+                             Array(2048).join('X') + '&count=100" | head 2 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalRead).to.be.lessThan(50);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+        });
+    });
+
 });
