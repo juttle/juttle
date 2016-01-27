@@ -85,8 +85,7 @@ Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
 `-bufferLimit`    | Maximum number of points that will be written to the file. | No; defaults to 100
-`-maxFilesize`    | Maximum size of the file being written to, limited since the entire JSON needs to fit in memory | No; defaults to 200MB
-`-limit` | Maximum number of points in a file before we'd stop writing points to the file to avoid running out of memory | No; defaults to 100000
+`-append`         | When set to true your JSON data is append to an existing file otherwise the file is truncated and data from the current program is written out | No; defaults to false
 
 If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.
 

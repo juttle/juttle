@@ -32,6 +32,7 @@
     "heap": "^0.2.3",
     "isomorphic-fetch": "^2.2.0",
     "js-beautify": "^1.5.4",
+    "jsoner": "^0.2.3",
     "log4js": "^0.6.28",
     "marked": "0.3.3",
     "minimist": "1.1.0",
