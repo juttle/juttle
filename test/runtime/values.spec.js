@@ -7,6 +7,16 @@ var JuttleMoment = require('../../lib/moment').JuttleMoment;
 var Filter = require('../../lib/runtime/filter');
 
 describe('Values tests', function () {
+    var FILTER_AST = {
+        type: 'ExpressionFilterTerm',
+        expression: {
+            type: 'BinaryExpression',
+            operator: '<',
+            left: { type: 'Variable', name: 'a' },
+            right: { type: 'NumericLiteral', value: 5 }
+        }
+    };
+
     describe('toJSONCopmatible', function() {
         it('returns correct representation', function() {
             var tests = [
@@ -43,17 +53,7 @@ describe('Values tests', function () {
                     expected: '1970-01-01T00:00:00.000Z',
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                    'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'a < 5',
                 },
                 {
@@ -262,17 +262,7 @@ describe('Values tests', function () {
                     expected: '2015-01-01T00:00:05.000Z'
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                        'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'a < 5'
                 },
                 {
@@ -360,17 +350,7 @@ describe('Values tests', function () {
                     expected: ':2015-01-01T00:00:05.000Z:'
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                        'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'filter(a < 5)'
                 },
                 {
@@ -444,17 +424,7 @@ describe('Values tests', function () {
                     expected: 'Duration',
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                    'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'Filter',
                 },
                 {
@@ -495,17 +465,7 @@ describe('Values tests', function () {
                 new RegExp('abcd'),
                 new JuttleMoment(0),
                 JuttleMoment.duration('5', 's'),
-                new Filter({
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '<',
-                        left: { type: 'Variable', name: 'a' },
-                        right: { type: 'NumericLiteral', value: 5 }
-                    }
-                },
-                    'a < 5'
-                ),
+                new Filter(FILTER_AST, 'a < 5'),
                 [1, 2, 3],
                 { a: 'b', c: 'd' }
             ];
