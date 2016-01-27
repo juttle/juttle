@@ -483,4 +483,104 @@ describe('Values tests', function () {
             });
         });
     });
+
+    describe('toAST', function() {
+        it('returns correct AST', function() {
+            var testcases = [
+                {
+                    value: null,
+                    ast: { type: 'NullLiteral' }
+                },
+                {
+                    value: true,
+                    ast: { type: 'BooleanLiteral', value: true }
+                },
+                {
+                    value: false,
+                    ast: { type: 'BooleanLiteral', value: false }
+                },
+                {
+                    value: 5,
+                    ast: { type: 'NumericLiteral', value: 5 }
+                },
+                {
+                    value: Infinity,
+                    ast: { type: 'InfinityLiteral', negative: false }
+                },
+                {
+                    value: -Infinity,
+                    ast: { type: 'InfinityLiteral', negative: true }
+                },
+                {
+                    value: NaN,
+                    ast: { type: 'NaNLiteral' }
+                },
+                {
+                    value: 'abcd',
+                    ast: { type: 'StringLiteral', value: 'abcd' }
+                },
+                {
+                    value: /abcd/i,
+                    ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'i' }
+                },
+                {
+                    value: /abcd/gim,
+                    ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'gim' }
+                },
+                {
+                    value: new JuttleMoment('2015-01-01T00:00:05.000Z'),
+                    ast: { type: 'MomentLiteral', value: '2015-01-01T00:00:05.000Z' }
+                },
+                {
+                    value: new JuttleMoment.duration('00:00:05.000'),
+                    ast: { type: 'DurationLiteral', value: '00:00:05.000' }
+                },
+                {
+                    value: new Filter(FILTER_AST, 'a < 5'),
+                    ast: { type: 'FilterLiteral', ast: FILTER_AST, text: 'a < 5' }
+                },
+                {
+                    value: [ 1, 2, 3 ],
+                    ast: {
+                        type: 'ArrayLiteral',
+                        elements: [
+                            { type: 'NumericLiteral', value: 1 },
+                            { type: 'NumericLiteral', value: 2 },
+                            { type: 'NumericLiteral', value: 3 }
+                        ]
+                    }
+                },
+                {
+                    value: { a: 1, b: 2, c: 3 },
+                    ast: {
+                        type: 'ObjectLiteral',
+                        properties: [
+                            {
+                                type: 'ObjectProperty',
+                                key: { type: 'StringLiteral', value: 'a' },
+                                value: { type: 'NumericLiteral', value: 1 }
+                            },
+                            {
+                                type: 'ObjectProperty',
+                                key: { type: 'StringLiteral', value: 'b' },
+                                value: { type: 'NumericLiteral', value: 2 }
+                            },
+                            {
+                                type: 'ObjectProperty',
+                                key: { type: 'StringLiteral', value: 'c' },
+                                value: { type: 'NumericLiteral', value: 3 }
+                            }
+                        ]
+                    }
+                },
+            ];
+
+            _.each(testcases, function(testcase) {
+                expect(values.toAST(testcase.value)).to.deep.equal(
+                    testcase.ast,
+                    values.inspect(testcase.value)
+                );
+            });
+        });
+    });
 });
