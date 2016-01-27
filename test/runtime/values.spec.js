@@ -573,6 +573,17 @@ describe('Values tests', function () {
         },
     ];
 
+    describe('fromAST', function() {
+        it('returns correct value', function() {
+            _.each(AST_TESTCASES, function(testcase) {
+                expect(values.fromAST(testcase.ast)).to.deep.equal(
+                    testcase.value,
+                    JSON.stringify(testcase.ast)
+                );
+            });
+        });
+    });
+
     describe('toAST', function() {
         it('returns correct AST', function() {
             _.each(AST_TESTCASES, function(testcase) {
