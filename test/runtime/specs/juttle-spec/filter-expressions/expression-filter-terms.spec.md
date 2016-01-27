@@ -60,7 +60,7 @@ The `=~` operator: Produces an error for `non-field @ *`
 
 ### Errors
 
-  * The "=~" operator: Must be in format "field =~ expression".
+  * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
 The `=~` operator: Produces an error for `field @ stream-expression`
 --------------------------------------------------------------------
@@ -71,7 +71,7 @@ The `=~` operator: Produces an error for `field @ stream-expression`
 
 ### Errors
 
-  * The "=~" operator: RHS operand must be computable at compile-time.
+  * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
 The `!~` operator: Produces an error for `non-field @ *`
 --------------------------------------------------------
@@ -82,7 +82,7 @@ The `!~` operator: Produces an error for `non-field @ *`
 
 ### Errors
 
-  * The "!~" operator: Must be in format "field !~ expression".
+  * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
 The `!~` operator: Produces an error for `field @ stream-expression`
 --------------------------------------------------------------------
@@ -93,7 +93,7 @@ The `!~` operator: Produces an error for `field @ stream-expression`
 
 ### Errors
 
-  * The "!~" operator: RHS operand must be computable at compile-time.
+  * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
 Other operators: Produces an error for `non-field @ non-field`
 --------------------------------------------------------------
@@ -104,7 +104,7 @@ Other operators: Produces an error for `non-field @ non-field`
 
 ### Errors
 
-  * The "<" operator: Must be in format "field < expression" or "expression < field".
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
 
 Other operators: Produces an error for `field @ stream-expression`
 ------------------------------------------------------------------
@@ -115,7 +115,7 @@ Other operators: Produces an error for `field @ stream-expression`
 
 ### Errors
 
-  * The "<" operator: RHS operand must be computable at compile-time.
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
 
 Other operators: Produces an error for `stream-expression @ field`
 ------------------------------------------------------------------
@@ -126,7 +126,7 @@ Other operators: Produces an error for `stream-expression @ field`
 
 ### Errors
 
-  * The "<" operator: LHS operand must be computable at compile-time.
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
 
 Other operators: Allows `field @ field` in `filter`
 ---------------------------------------------------
@@ -151,7 +151,7 @@ Other operators: Produces an error for `field @ field` in `read`
 
 ### Errors
 
-  * The "<" operator: RHS operand must be computable at compile-time.
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
 
 The `=~` operator: Produces an error when RHS has an invalid type
 -----------------------------------------------------------------
