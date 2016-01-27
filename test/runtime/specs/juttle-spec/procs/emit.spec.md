@@ -385,27 +385,6 @@ Emits historic and live points with -from
     { tick: true }
     { n: 5, dt: "00:00:02.000" }
 
-Emits historic and live points with -from and -points
-----------------------------------------------------
-
-### Juttle
-
-    emit -from :-2s:
-        -points [{n:1}, {n:2}, {n:3}, {n:4}, {n:5}]
-    | put dt = time - :now:
-    | keep n, dt
-    | view result -ticks true
-
-### Output
-
-    { n: 1, dt: "-00:00:02.000" }
-    { n: 2, dt: "-00:00:01.000" }
-    { n: 3, dt: "00:00:00.000" }
-    { tick: true }
-    { n: 4, dt: "00:00:01.000" }
-    { tick: true }
-    { n: 5, dt: "00:00:02.000" }
-
 Emits historic and live points with -points
 ----------------------------------------------------
 
@@ -470,6 +449,23 @@ Complains about bad time formatting in -points
 
 ### Errors
    * the time field must contain a number or a string representing time.
+
+Does not add timestamps and ticks with timeless -points
+--------------------------------------------------------
+
+### Juttle
+
+    emit
+        -points [{n:1}, {n:2}, {n:3}, {n:4}, {n:5}]
+    | view result -ticks true
+
+### Output
+
+    { n: 1 }
+    { n: 2 }
+    { n: 3 }
+    { n: 4 }
+    { n: 5 }
 
 Emits correct number of points when -from and -every are set
 ------------------------------------------------------------
