@@ -12,6 +12,7 @@
     "RT-TIME-OUT-OF-ORDER": "Warning: out-of-order assignment of time {{info.badTime}} after {{info.goodTime}}, point(s) dropped",
     "RT-TOO-MANY-LOGS-WARNING": "Warning: too many logs from {{info.host}}, throttling",
     "RT-POINT-MISSING-TIME": "Warning: point is missing a time in {{info.field}}",
+    "RT-OVERWRITING-TIME": "Warning: overwriting value of time field with {{info.field}} field",
     "RT-TIMELESS-POINTS": "Warning: encountered point(s) without the time field",
     "RT-TYPE-ERROR": "Error: {{info.message}}",
     "RT-NO-FREE-TEXT": "Error: Free text search is not implemented in this context.",
