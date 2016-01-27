@@ -7,6 +7,16 @@ var JuttleMoment = require('../../lib/moment').JuttleMoment;
 var Filter = require('../../lib/runtime/filter');
 
 describe('Values tests', function () {
+    var FILTER_AST = {
+        type: 'ExpressionFilterTerm',
+        expression: {
+            type: 'BinaryExpression',
+            operator: '<',
+            left: { type: 'Variable', name: 'a' },
+            right: { type: 'NumericLiteral', value: 5 }
+        }
+    };
+
     describe('toJSONCopmatible', function() {
         it('returns correct representation', function() {
             var tests = [
@@ -43,17 +53,7 @@ describe('Values tests', function () {
                     expected: '1970-01-01T00:00:00.000Z',
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                    'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'a < 5',
                 },
                 {
@@ -262,17 +262,7 @@ describe('Values tests', function () {
                     expected: '2015-01-01T00:00:05.000Z'
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                        'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'a < 5'
                 },
                 {
@@ -360,17 +350,7 @@ describe('Values tests', function () {
                     expected: ':2015-01-01T00:00:05.000Z:'
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                        'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'filter(a < 5)'
                 },
                 {
@@ -444,17 +424,7 @@ describe('Values tests', function () {
                     expected: 'Duration',
                 },
                 {
-                    value: new Filter({
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: { type: 'Variable', name: 'a' },
-                            right: { type: 'NumericLiteral', value: 5 }
-                        }
-                    },
-                    'a < 5'
-                    ),
+                    value: new Filter(FILTER_AST, 'a < 5'),
                     expected: 'Filter',
                 },
                 {
@@ -495,17 +465,7 @@ describe('Values tests', function () {
                 new RegExp('abcd'),
                 new JuttleMoment(0),
                 JuttleMoment.duration('5', 's'),
-                new Filter({
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '<',
-                        left: { type: 'Variable', name: 'a' },
-                        right: { type: 'NumericLiteral', value: 5 }
-                    }
-                },
-                    'a < 5'
-                ),
+                new Filter(FILTER_AST, 'a < 5'),
                 [1, 2, 3],
                 { a: 'b', c: 'd' }
             ];
@@ -520,6 +480,117 @@ describe('Values tests', function () {
                         expect(isType).to.equal(false, 'is' + t + ': ' + v);
                     }
                 });
+            });
+        });
+    });
+
+    var AST_TESTCASES = [
+        {
+            value: null,
+            ast: { type: 'NullLiteral' }
+        },
+        {
+            value: true,
+            ast: { type: 'BooleanLiteral', value: true }
+        },
+        {
+            value: false,
+            ast: { type: 'BooleanLiteral', value: false }
+        },
+        {
+            value: 5,
+            ast: { type: 'NumericLiteral', value: 5 }
+        },
+        {
+            value: Infinity,
+            ast: { type: 'InfinityLiteral', negative: false }
+        },
+        {
+            value: -Infinity,
+            ast: { type: 'InfinityLiteral', negative: true }
+        },
+        {
+            value: NaN,
+            ast: { type: 'NaNLiteral' }
+        },
+        {
+            value: 'abcd',
+            ast: { type: 'StringLiteral', value: 'abcd' }
+        },
+        {
+            value: /abcd/i,
+            ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'i' }
+        },
+        {
+            value: /abcd/gim,
+            ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'gim' }
+        },
+        {
+            value: new JuttleMoment('2015-01-01T00:00:05.000Z'),
+            ast: { type: 'MomentLiteral', value: '2015-01-01T00:00:05.000Z' }
+        },
+        {
+            value: new JuttleMoment.duration('00:00:05.000'),
+            ast: { type: 'DurationLiteral', value: '00:00:05.000' }
+        },
+        {
+            value: new Filter(FILTER_AST, 'a < 5'),
+            ast: { type: 'FilterLiteral', ast: FILTER_AST, text: 'a < 5' }
+        },
+        {
+            value: [ 1, 2, 3 ],
+            ast: {
+                type: 'ArrayLiteral',
+                elements: [
+                    { type: 'NumericLiteral', value: 1 },
+                    { type: 'NumericLiteral', value: 2 },
+                    { type: 'NumericLiteral', value: 3 }
+                ]
+            }
+        },
+        {
+            value: { a: 1, b: 2, c: 3 },
+            ast: {
+                type: 'ObjectLiteral',
+                properties: [
+                    {
+                        type: 'ObjectProperty',
+                        key: { type: 'StringLiteral', value: 'a' },
+                        value: { type: 'NumericLiteral', value: 1 }
+                    },
+                    {
+                        type: 'ObjectProperty',
+                        key: { type: 'StringLiteral', value: 'b' },
+                        value: { type: 'NumericLiteral', value: 2 }
+                    },
+                    {
+                        type: 'ObjectProperty',
+                        key: { type: 'StringLiteral', value: 'c' },
+                        value: { type: 'NumericLiteral', value: 3 }
+                    }
+                ]
+            }
+        },
+    ];
+
+    describe('fromAST', function() {
+        it('returns correct value', function() {
+            _.each(AST_TESTCASES, function(testcase) {
+                expect(values.fromAST(testcase.ast)).to.deep.equal(
+                    testcase.value,
+                    JSON.stringify(testcase.ast)
+                );
+            });
+        });
+    });
+
+    describe('toAST', function() {
+        it('returns correct AST', function() {
+            _.each(AST_TESTCASES, function(testcase) {
+                expect(values.toAST(testcase.value)).to.deep.equal(
+                    testcase.ast,
+                    values.inspect(testcase.value)
+                );
             });
         });
     });
