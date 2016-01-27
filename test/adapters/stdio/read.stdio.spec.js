@@ -28,8 +28,10 @@ describe('read stdio adapter tests', function() {
     // using the existing csv, json and jsonl files from the file adapter
     var simpleBase = path.resolve(__dirname, '../file/input/simple');
     var invalidBase = path.resolve(__dirname, '../parsers/input');
+    var corrupt = path.resolve(__dirname, '../file/input/corrupt');
 
     var syslog = path.resolve(__dirname, '../parsers/input/logs/syslog');
+    var badSyslog = path.resolve(__dirname, '../parsers/input/logs/bad-syslog');
 
     it('fails when given an unknown option' , function() {
         juttle_test_utils.set_stdin(fs.createReadStream(emptyFile));
@@ -132,6 +134,116 @@ describe('read stdio adapter tests', function() {
                 { program: 'CRON', pid: '17218' }
             ]);
         });
+    });
+
+    describe('optimizations', function() {
+        _.each(symmetricalFormats, function(details, format) {
+            it('fails to optimize tail followed by head with -format "' + format + '"', function() {
+                var file_name = simpleBase + '.' + format;
+                juttle_test_utils.set_stdin(fs.createReadStream(file_name));
+
+                return check_juttle({
+                    program: 'read stdio -format "' + format + '" | tail 1 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    // not optimized therefore there's no stopAt and we'll
+                    // parse the 6 points
+                    expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(6);
+                });
+            });
+
+            it('can optimize "| head 1" with -format "' + format + '"', function() {
+                // the corrupt file will throw an error if we hit the 3rd entry when
+                // parsing and the parsers currently read 1 point ahead
+                var file_name = corrupt + '.' + format;
+                juttle_test_utils.set_stdin(fs.createReadStream(file_name));
+
+                return check_juttle({
+                    program: 'read stdio -format "' + format + '" | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+
+            it('can optimize nested "| head 2 | head 1" with -format "' + format + '"', function() {
+                // the corrupt file will throw an error if we hit the 3rd entry when
+                // parsing and the parsers currently read 1 point ahead
+                var file_name = corrupt + '.' + format;
+                juttle_test_utils.set_stdin(fs.createReadStream(file_name));
+
+                return check_juttle({
+                    program: 'read stdio -format "' + format + '" | head 2 | head 1'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.be.equal(0);
+                    expect(result.warnings.length).to.be.equal(0);
+                    expect(result.sinks.table.length).to.be.equal(1);
+                    expect(result.prog.graph.parser.stopAt).to.equal(1);
+                    expect(result.prog.graph.parser.totalParsed).to.equal(2);
+                });
+            });
+        });
+
+        it('fails to optimized tail followed by head with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
+
+            return check_juttle({
+                program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | tail 1 | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(2);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
+                expect(result.prog.graph.parser.totalParsed).to.equal(6);
+            });
+        });
+
+        it('can optimize "| head 1" with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
+
+            return check_juttle({
+                program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.parser.totalParsed).to.equal(2);
+            });
+        });
+
+        it('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
+            // the bad syslog file will emit an error if we hit the 3rd entry when
+            // parsing and the parsers currently read 1 point ahead
+            juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
+
+            return check_juttle({
+                program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | head 2 | head 1'
+            })
+            .then(function(result) {
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
+                expect(result.sinks.table.length).to.be.equal(1);
+                expect(result.prog.graph.parser.stopAt).to.equal(1);
+                expect(result.prog.graph.parser.totalParsed).to.equal(2);
+            });
+        });
+
     });
 
 });
