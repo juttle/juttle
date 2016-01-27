@@ -22,18 +22,10 @@ Scheduler.prototype.addAdapter = function(adapter, from, to) {
     this.nextId++;
 
     function log(name, e) {
-        console.log(id
-                + ' ('
-                + e.head.time.getTime()
-                + ', '
-                + e.tail.time.getTime()
-                + '), '
-                + name
-                + ' points: '
-                + e.size
-                + ' qlength: '
-                + e.qlength
-                );
+        var t1 = e.head.time.getTime();
+        var t2 = e.tail.time.getTime();
+
+        console.log(`${id} (${t1}, ${t2}) ${name} points: ${e.size} qlength: ${e.qlength}`);
     }
 
     // When adapter fetches data in the interval between <from> and <to>,
