@@ -72,6 +72,11 @@ describe('FilterJSCompiler', function() {
         { a: { a: 1, b: 2, c: 3 } }
     ];
 
+    var POINTS_BOOLEANS = [
+        { a: true },
+        { a: false }
+    ];
+
     var POINTS_NUMBERS = [
         { a: 1 },
         { a: 2 },
@@ -139,8 +144,12 @@ describe('FilterJSCompiler', function() {
     });
 
     it('compiles UnaryExpression correctly', function() {
-        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
         expect('*"a" == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == !false').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == +2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == -(-2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == ~(-3)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
     });
 
     it('compiles BinaryExpression correctly', function() {
