@@ -1,624 +1,172 @@
 'use strict';
 
-var expect = require('chai').expect;
+var chai = require('chai');
+var expect = chai.expect;
+
+var Filter = require('../../../lib/runtime/filter');
+var JuttleMoment = require('../../../lib/moment').JuttleMoment;
+var SemanticPass = require('../../../lib/compiler/semantic');
+var _ = require('underscore');
+var errors = require('../../../lib/errors');
+var parser = require('../../../lib/parser');
 
 var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
-var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 
-// Needed to evaluate compiled Juttle code.
+// Needed to evaluate compiled filters.
 var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
 
-var POINTS_MISC = [
-    { v: null                                         },
-    { v: true                                         },
-    { v: false                                        },
-    { v: 5                                            },
-    { v: Infinity                                     },
-    { v: -Infinity                                    },
-    { v: NaN                                          },
-    { v: 'abcd'                                       },
-    { v: new JuttleMoment('2015-01-01T00:00:00.000Z') },
-    { v: JuttleMoment.duration('00:00:05.000')        }
-];
+function filterPoints(filter, points) {
+    var ast = parser.parseFilter(filter).ast;
 
-var POINTS_NUMBERS = [
-    { v: 1 },
-    { v: 2 },
-    { v: 3 }
-];
+    // We need to run the semantic pass to convert Variable nodes to field
+    // references.
+    var semantic = new SemanticPass();
+    ast = semantic.sa_expr(ast);
 
-var POINTS_STRINGS = [
-    { v: 'abcd' },
-    { v: 'efgh' },
-    { v: 'ijkl' }
-];
+    var compiler = new FilterJSCompiler();
+    var fn = eval(compiler.compile(ast));
+
+    return _.filter(points, fn);
+}
+
+chai.use(function(chai, utils) {
+    chai.Assertion.addMethod('filter', function(points, result) {
+        var filtered = filterPoints(this._obj, points);
+
+        this.assert(
+            utils.eql(filtered, result),
+            'expected #{this} to filter points to #{exp} but it filtered it to #{act}',
+            'expected #{this} to not filter points to #{exp} but it did',
+            result,
+            filtered,
+            true
+        );
+    });
+});
 
 describe('FilterJSCompiler', function() {
-    var fieldM = {
-        type: 'UnaryExpression',
-        operator: '*',
-        expression: { type: 'StringLiteral', value: 'm' },
+    var FILTER_AST = {
+        type: 'ExpressionFilterTerm',
+        expression: {
+            type: 'BinaryExpression',
+            operator: '<',
+            left: { type: 'Variable', name: 'a' },
+            right: { type: 'NumericLiteral', value: 5 }
+        }
     };
-    var fieldV = {
-        type: 'UnaryExpression',
-        operator: '*',
-        expression: { type: 'StringLiteral', value: 'v' },
-    };
-    var literalNull = { type: 'NullLiteral' };
-    var literalTrue = { type: 'BooleanLiteral', value: true };
-    var literal1 = { type: 'NumericLiteral', value: 1 };
-    var literal2 = { type: 'NumericLiteral', value: 2 };
-    var literal3 = { type: 'NumericLiteral', value: 3 };
-    var literal5 = { type: 'NumericLiteral', value: 5 };
-    var literalInfinity = { type: 'InfinityLiteral', negative: false };
-    var literalMinusInfinity = { type: 'InfinityLiteral', negative: true };
-    var literalNaN = { type: 'NaNLiteral' };
-    var literalAbcd = { type: 'StringLiteral', value: 'abcd' };
-    var literalGlob = { type: 'StringLiteral', value: 'e*h' };
-    var literalMoment = { type: 'MomentLiteral', value: '2015-01-01T00:00:00.000Z' };
-    var literalDuration = { type: 'DurationLiteral', value: '00:00:05.000' };
-    var literal13 = { type: 'ArrayLiteral', elements: [literal1, literal3] };
-    var regExp = { type: 'RegularExpressionLiteral', value: 'e.*h', flags: '' };
 
-    function testFilter(ast, points, expected) {
-        /* jshint evil:true */
+    var POINTS_VALUES = [
+        { a: null },
+        { a: true },
+        { a: false },
+        { a: 5 },
+        { a: Infinity },
+        { a: NaN },
+        { a: 'abcd' },
+        { a: /abcd/ },
+        { a: /abcd/gim },
+        { a: new JuttleMoment('2015-01-01T00:00:05.000Z') },
+        { a: JuttleMoment.duration('00:00:05.000') },
+        { a: new Filter(FILTER_AST, 'a < 5') },
+        { a: [ 1, 2, 3 ] },
+        { a: { a: 1, b: 2, c: 3 } }
+    ];
 
-        var compiler = new FilterJSCompiler();
-        var fn = eval(compiler.compile(ast));
+    var POINTS_NUMBERS = [
+        { a: 1 },
+        { a: 2 },
+        { a: 3 }
+    ];
 
-        expect(points.filter(fn)).to.deep.equal(expected);
-    }
+    var POINTS_STRINGS = [
+        { a: 'abcd' },
+        { a: 'efgh' },
+        { a: 'ijkl' }
+    ];
 
-    describe('literals', function() {
-        it('handles null', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalNull
-                    }
-                },
-                POINTS_MISC,
-                [{ v: null }]
-            );
-        });
-
-        it('handles booleans', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalTrue
-                    }
-                },
-                POINTS_MISC,
-                [{ v: true }]
-            );
-        });
-
-        it('handles numbers', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literal5
-                    }
-                },
-                POINTS_MISC,
-                [{ v: 5 }]
-            );
-
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalInfinity
-                    }
-                },
-                POINTS_MISC,
-                [{ v: Infinity }]
-            );
-
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalMinusInfinity
-                    }
-                },
-                POINTS_MISC,
-                [{ v: -Infinity }]
-            );
-
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalNaN
-                    }
-                },
-                POINTS_MISC,
-                []   // no value equals NaN, not even NaN
-            );
-        });
-
-        it('handles strings', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalAbcd
-                    }
-                },
-                POINTS_MISC,
-                [{ v: 'abcd' }]
-            );
-        });
-
-        it('handles dates', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalMoment
-                    }
-                },
-                POINTS_MISC,
-                [{ v: new JuttleMoment('2015-01-01T00:00:00.000Z') }]
-            );
-        });
-
-        it('handles durations', function() {
-            testFilter(
-                {
-                    type: 'ExpressionFilterTerm',
-                    expression: {
-                        type: 'BinaryExpression',
-                        operator: '==',
-                        left: fieldV,
-                        right: literalDuration
-                    }
-                },
-                POINTS_MISC,
-                [{ v: JuttleMoment.duration('00:00:05.000') }]
-            );
-        });
+    it('compiles NullLiteral correctly', function() {
+        expect('a == null').to.filter(POINTS_VALUES, [ { a: null } ]);
     });
 
-    describe('filter expressions', function() {
-        describe('NOT', function() {
-            it('finds correct points', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'UnaryExpression',
-                            operator: 'NOT',
-                            expression: {
-                                type: 'BinaryExpression',
-                                operator: '==',
-                                left: fieldV,
-                                right: literal2
-                            }
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 3 }]
-                );
-            });
-        });
-
-        describe('AND', function() {
-            it('finds correct points', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: 'AND',
-                            left: {
-                                type: 'BinaryExpression',
-                                operator: '<=',
-                                left: fieldV,
-                                right: literal2
-                            },
-                            right: {
-                                type: 'BinaryExpression',
-                                operator: '>=',
-                                left: fieldV,
-                                right: literal2
-                            }
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }]
-                );
-            });
-        });
-
-        describe('OR', function() {
-            it('finds correct points', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: 'OR',
-                            left: {
-                                type: 'BinaryExpression',
-                                operator: '<=',
-                                left: fieldV,
-                                right: literal2
-                            },
-                            right: {
-                                type: 'BinaryExpression',
-                                operator: '>=',
-                                left: fieldV,
-                                right: literal2
-                            }
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 2 }, { v: 3 }]
-                );
-            });
-        });
+    it('compiles BooleanLiteral correctly', function() {
+        expect('a == true').to.filter(POINTS_VALUES, [ { a: true } ]);
+        expect('a == false').to.filter(POINTS_VALUES, [ { a: false } ]);
     });
 
-    describe('simple terms', function() {
-        describe('with filter literals', function() {
-            it('finds correct points', function() {
-                testFilter(
-                    {
-                        type: 'SimpleFilterTerm',
-                        expression: {
-                            type: 'FilterLiteral',
-                            ast: {
-                                type: 'ExpressionFilterTerm',
-                                expression: {
-                                    type: 'BinaryExpression',
-                                    operator: '==',
-                                    left: fieldV,
-                                    right: literal2
-                                }
-                            },
-                            text: 'v == 2'
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }]
-                );
-            });
-        });
+    it('compiles NumericLiteral correctly', function() {
+        expect('a == 5').to.filter(POINTS_VALUES, [ { a: 5 } ]);
     });
 
-    describe('expression terms', function() {
-        describe('missing fields', function() {
-            it('treats them as null', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '==',
-                            left: fieldM,
-                            right: literalNull
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 2 }, { v: 3 }]
-                );
-            });
-        });
+    it('compiles InfinityLiteral correctly', function() {
+        expect('a == Infinity').to.filter(POINTS_VALUES, [ { a: Infinity } ]);
 
-        describe('==', function() {
-            it('finds correct points (field == expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '==',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }]
-                );
-            });
+        // Negative InfinityLiteral can't be tested because "-Infinity" is
+        // parsed as a unary operator and a positive InfinityLiteral.
+    });
 
-            it('finds correct points (expression == field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '==',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }]
-                );
-            });
-        });
+    it('compiles NaNLiteral correctly', function() {
+        // No value equals NaN, not even NaN.
+        expect('a == NaN').to.filter(POINTS_VALUES, []);
+    });
 
-        describe('!=', function() {
-            it('finds correct points (field != expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '!=',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 3 }]
-                );
-            });
+    it('compiles StringLiteral correctly', function() {
+        expect('a == "abcd"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
 
-            it('finds correct points (expression != field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '!=',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 3 }]
-                );
-            });
-        });
+    it('compiles RegularExpressionLiteral correctly', function() {
+        expect('a == /abcd/').to.filter(POINTS_VALUES, [ { a: /abcd/ } ]);
+        expect('a == /abcd/gim').to.filter(POINTS_VALUES, [ { a: /abcd/gim } ]);
+    });
 
-        describe('=~', function() {
-            it('finds correct points (field =~ expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '=~',
-                            left: fieldV,
-                            right: literalGlob
-                        }
-                    },
-                    POINTS_STRINGS,
-                    [{ v: 'efgh' }]
-                );
+    it('compiles MomentLiteral correctly', function() {
+        expect('a == :2015-01-01T00:00:05.000Z:').to.filter(
+            POINTS_VALUES,
+            [ { a: new JuttleMoment('2015-01-01T00:00:05.000Z') } ]
+        );
+    });
 
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '=~',
-                            left: fieldV,
-                            right: regExp
-                        }
-                    },
-                    POINTS_STRINGS,
-                    [{ v: 'efgh' }]
-                );
-            });
-        });
+    it('compiles DurationLiteral correctly', function() {
+        expect('a == :00:00:05.000:').to.filter(
+            POINTS_VALUES,
+            [ { a: new JuttleMoment.duration('00:00:05.000') } ]
+        );
+    });
 
-        describe('!~', function() {
-            it('finds correct points (field !~ expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '!~',
-                            left: fieldV,
-                            right: literalGlob
-                        }
-                    },
-                    POINTS_STRINGS,
-                    [{ v: 'abcd' }, { v: 'ijkl' }]
-                );
+    // FilterLiteral can't be tested because there is no filter literal syntax.
 
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '!~',
-                            left: fieldV,
-                            right: regExp
-                        }
-                    },
-                    POINTS_STRINGS,
-                    [{ v: 'abcd' }, { v: 'ijkl' }]
-                );
-            });
-        });
+    it('compiles ArrayLiteral correctly', function() {
+        expect('a == [ 1, 2, 3 ]').to.filter(POINTS_VALUES, [ { a: [ 1, 2, 3 ] } ]);
+    });
 
-        describe('<', function() {
-            it('finds correct points (field < expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }]
-                );
-            });
+    it('compiles UnaryExpression correctly', function() {
+        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
+        expect('*"a" == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
 
-            it('finds correct points (expression < field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 3 }]
-                );
-            });
-        });
+    it('compiles BinaryExpression correctly', function() {
+        expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a != 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
+        expect('a =~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'efgh' } ]);
+        expect('a !~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'abcd' }, { a: 'ijkl' } ]);
+        expect('a < 2').to.filter(POINTS_NUMBERS, [ { a: 1 } ]);
+        expect('a > 2').to.filter(POINTS_NUMBERS, [ { a: 3 } ]);
+        expect('a <= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 2 } ]);
+        expect('a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 }, { a : 3 } ]);
+        expect('a in [ 1, 3 ]').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 3 } ]);
+        expect('a <= 2 AND a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a <= 2 OR a >= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 2 }, { a: 3 } ]);
+    });
 
-        describe('>', function() {
-            it('finds correct points (field > expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '>',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 3 }]
-                );
-            });
+    it('compiles ExpressionFilterTerm correctly', function() {
+        expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
 
-            it('finds correct points (expression > field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '>',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }]
-                );
-            });
-        });
+    it('compiles SimpleFilterTerm correctly', function() {
+        expect(function() {
+            filterPoints('"abcd"', POINTS_STRINGS);
+        }).to.throw(errors.CompileError);
 
-        describe('<=', function() {
-            it('finds correct points (field <= expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<=',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 2 }]
-                );
-            });
-
-            it('finds correct points (expression <= field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '<=',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }, { v: 3 }]
-                );
-            });
-        });
-
-        describe('>=', function() {
-            it('finds correct points (field >= expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '>=',
-                            left: fieldV,
-                            right: literal2
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 2 }, { v: 3 }]
-                );
-            });
-
-            it('finds correct points (expression >= field)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: '>=',
-                            left: literal2,
-                            right: fieldV
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 2 }]
-                );
-            });
-        });
-
-        describe('in', function() {
-            it('finds correct points (field in expression)', function() {
-                testFilter(
-                    {
-                        type: 'ExpressionFilterTerm',
-                        expression: {
-                            type: 'BinaryExpression',
-                            operator: 'in',
-                            left: fieldV,
-                            right: literal13
-                        }
-                    },
-                    POINTS_NUMBERS,
-                    [{ v: 1 }, { v: 3 }]
-                );
-            });
-        });
+        // FilterLiteral can't be tested because there is no filter literal
+        // syntax.
     });
 });
