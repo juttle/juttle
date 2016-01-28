@@ -89,6 +89,12 @@ describe('FilterJSCompiler', function() {
         { a: 'ijkl' }
     ];
 
+    var POINTS_ARRAYS = [
+        { a: [ 1, 2, 3 ] },
+        { a: [ 4, 5, 6 ] },
+        { a: [ 7, 8, 9 ] },
+    ];
+
     var POINTS_OBJECTS = [
         { a: { 'a': 1 } },
         { a: { 5: 2 } },
@@ -166,6 +172,13 @@ describe('FilterJSCompiler', function() {
 
     it('compiles ToString correctly', function() {
         expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
+
+    it('compiles PropertyAccess correctly', function() {
+        // Non-computed PropertyAccess can't be tested because it refers to
+        // module exports and we can't load modules here.
+
+        expect('a[1] == 5').to.filter(POINTS_ARRAYS, [ { a: [ 4, 5, 6 ] } ]);
     });
 
     it('compiles UnaryExpression correctly', function() {
