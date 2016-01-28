@@ -66,7 +66,6 @@
   "RT-UNKNOWN-DOS-ROUTER": "Unknown DOS router: {dos_router}",
   "RT-INVALID-MARKOV-ITEMS": "Markov items must all be numbers or all be strings",
   "JUTTLE-RUNAWAY-PROGRAM": "Not starting program as it would run forever with no output. {extra}",
-  "JUTTLE-DROPPED-TOPO": "'dropped' source must be followed by a linear topology",
   "JUTTLE-SPLIT-NAME": "Cannot split on name",
   "RT-ON-NO-EVERY": "Cannot set -on without -every",
   "RT-CUSTOM-ERROR": "{message}",
