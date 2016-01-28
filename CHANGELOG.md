@@ -4,9 +4,18 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ## Unreleased Changes
 
+### Major Changes
+- Implemented a new API for adapters in which `read` and `write` now have a simpler contract that is more isolated from the internals of the runtime and can more easily support behaviors like periodically reading for pseudo-live streams. [[#248](https://github.com/juttle/juttle/pull/248)]
+
 ### Minor Changes
 
+- Added support for the `-last` option to the emit proc and modified the stochastic adapter to require  one of `-from`, `-to`, or `-last`
+[[#242](https://github.com/juttle/juttle/pull/242)]
 - Create `http_server` adapter. [[#224](https://github.com/juttle/juttle/pull/224)]
+
+### Bug Fixes
+
+- Fixed `emit` to properly output ticks when there are gaps in the points. [[#248](https://github.com/juttle/juttle/pull/248)]
 
 ## 0.3.1
 
