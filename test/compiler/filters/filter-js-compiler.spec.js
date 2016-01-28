@@ -153,6 +153,19 @@ describe('FilterJSCompiler', function() {
     });
 
     it('compiles BinaryExpression correctly', function() {
+        expect('a == (true && true)').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == (true || true)').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == 1 + 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 3 - 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 2 * 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 / 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 2 % 3').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 & 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 | 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 ^ 0)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 1 << 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 >> 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 >>> 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a != 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
         expect('a =~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'efgh' } ]);
@@ -164,6 +177,7 @@ describe('FilterJSCompiler', function() {
         expect('a in [ 1, 3 ]').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 3 } ]);
         expect('a <= 2 AND a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a <= 2 OR a >= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 2 }, { a: 3 } ]);
+        expect('a == (null ?? 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
     });
 
     it('compiles ExpressionFilterTerm correctly', function() {
