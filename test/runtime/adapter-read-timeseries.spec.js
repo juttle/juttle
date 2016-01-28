@@ -70,6 +70,27 @@ describe('read testTimeseries', function () {
         });
     });
 
+    it('properly emits ticks in live mode', function() {
+        this.timeout(10000);
+        return check_juttle({
+            program: 'read testTimeseries -to :end: -every :2s: -lag :0s:' +
+                '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
+                '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
+                '| keep count, dtProg, dtReal' +
+                '| view result -ticks true -dt true',
+            realtime: true
+        }, 4000)
+        .then(function(result) {
+            var expected = [
+                { count: 0, dtProg: 0, dtReal: 2 },
+                { tick: true, dt: '00:00:01.000'},
+                { count: 1, dtProg: 2, dtReal: 2 },
+                { tick: true, dt: '00:00:03.000'}
+            ];
+            expect(result.sinks.result).deep.equal(expected);
+        });
+    });
+
     it('handles mixed historical and live mode', function() {
         this.timeout(10000);
         return check_juttle({
