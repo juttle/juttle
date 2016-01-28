@@ -20,13 +20,15 @@ describe('serializers/jsonl', function() {
         var stream = fs.createWriteStream(tmpFilename);
         stream.on('open', function() {
             var serializer = serializers.getSerializer('jsonl', stream);
-            serializer.done();
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
-                expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
-                done();
+            serializer.done()
+            .then(() => {
+                stream.end(function(err) {
+                    if (err) {
+                        done(err);
+                    }
+                    expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
+                    done();
+                });
             });
         });
     });
@@ -42,13 +44,8 @@ describe('serializers/jsonl', function() {
                 { time: '2014-03-01T00:00:00.000Z', fuzz: 'bizz' }
             ];
             serializer.write(data);
-            serializer.done();
-
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
-
+            serializer.done()
+            .then(() => {
                 var parser = parsers.getParser('jsonl');
                 var results = [];
                 return parser.parseStream(fs.createReadStream(tmpFilename), function(result) {

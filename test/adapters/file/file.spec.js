@@ -242,6 +242,19 @@ describe('file adapter tests', function () {
             return expect_to_fail(failing_write, message);
         });
 
+        it('warns when the underlying serializer emits errors', function() {
+            return check_juttle({
+                program: '( emit -limit 1 -from :2014-01-01:-:1s: | put foo = "bar"; ' +
+                         '  emit -limit 1 -from :2014-01-01: | put fizz = "buzz" )' +
+                         '| write file -file "' + tmp_file + '" -format "csv"'
+            })
+            .then(function(result) {
+                expect(result.errors.length).equal(0);
+                expect(result.warnings.length).equal(1);
+                expect(result.warnings[0]).to.contain('Invalid CSV data: Found new or missing fields: fizz');
+            });
+        });
+
         _.each(symmetricalFormats, function(format) {
             it('can write a point and read it back with ' + format + ' format', function() {
                 return check_juttle({
