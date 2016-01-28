@@ -116,22 +116,20 @@ describe('Juttle inputs', function() {
                                  inputs: {
                                      f: new Filter(
                                          {
-                                             type: 'ExpressionFilterTerm',
+                                             type: 'SimpleFilterTerm',
                                              expression: {
-                                                 type: 'BinaryExpression',
-                                                 operator: '<',
-                                                 left: { type: 'NumericLiteral', value: 1 },
-                                                 right: { type: 'NumericLiteral', value: 2 }
+                                                 type: 'StringLiteral',
+                                                 value: 'abcd'
                                              }
                                          },
-                                         '1 < 2'
+                                         '"abcd"'
                                      )
                                  }})
                 .then(function() {
                     throw new Error('this should fail');
                 })
                 .catch(function(err) {
-                    expect(err.message).to.eq('Invalid filter term. Valid forms are: "field < value", "value < field", "field < field".');
+                    expect(err.message).to.eq('Free text search is not implemented in this context.');
                 });
         });
     });
