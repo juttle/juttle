@@ -242,153 +242,73 @@ describe('file adapter tests', function () {
             return expect_to_fail(failing_write, message);
         });
 
-        _.each(['limit', 'maxFilesize', 'bufferLimit'], function(option) {
-            it('fails when you provide an invalid ' + option, function() {
-                var message = util.format('option %s should be a positive integer', option);
-                var failing_write = check_juttle({
-                    program: 'emit -limit 1 | write file -file "' + tmp_file + '" -' + option + ' -1'
-                });
-
-                return expect_to_fail(failing_write, message);
-            });
-        });
-
-        it('can write a point and read it back', function() {
+        it('warns when the underlying serializer emits errors', function() {
             return check_juttle({
-                program: 'emit -limit 1 | put message = "hello test" | write file -file "' + tmp_file + '"'
+                program: '( emit -limit 1 -from :2014-01-01:-:1s: | put foo = "bar"; ' +
+                         '  emit -limit 1 -from :2014-01-01: | put fizz = "buzz" )' +
+                         '| write file -file "' + tmp_file + '" -format "csv"'
             })
             .then(function(result) {
                 expect(result.errors.length).equal(0);
-
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.sinks.table.length).equal(1);
-                expect(result.sinks.table[0].message).equal('hello test');
+                expect(result.warnings.length).equal(1);
+                expect(result.warnings[0]).to.contain('Invalid CSV data: Found new or missing fields: fizz');
             });
         });
 
-        it('fails when you attempt to write to a file larger than -maxFilesize', function() {
-            return check_juttle({
-                program: 'emit -limit 2 -from :2014-01-01: | write file -file "' + tmp_file + '"'
-            })
-            .then(function() {
+        _.each(symmetricalFormats, function(format) {
+            it('can write a point and read it back with ' + format + ' format', function() {
                 return check_juttle({
-                    program: 'emit -limit 1 -from :2014-01-01: | write file -file "' + tmp_file + '" -maxFilesize 2'
+                    program: 'emit -limit 1 ' +
+                             '| put message = "hello test" ' +
+                             '| write file -file "' + tmp_file + '" -format "' + format + '"'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+
+                    return run_read_file_juttle(tmp_file, { format: format });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.sinks.table.length).equal(1);
+                    expect(result.sinks.table[0].message).equal('hello test');
                 });
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(1);
-                expect(result.errors[0]).to.contain('option maxFilesize exceeded limit of 2 bytes');
             });
-        });
 
-        it('fails when you exceed the -limit value', function() {
-            return check_juttle({
-                program: 'emit -limit 2 -from :2014-01-01: | write file -file "' + tmp_file + '" -limit 1'
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(1);
-                expect(result.errors[0]).to.equal('option limit exceeded limit of 1, dropping points.');
-
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.sinks.table.length).equal(1);
-            });
-        });
-
-        it('can handle writing no points out', function() {
-            return check_juttle({
-                program: 'emit -limit 3 -every :1s: | filter foo="bar" | write file -file "' + tmp_file + '"'
-            })
-            .then(function() {
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
-                expect(result.sinks.table.length).to.equal(0);
-            });
-        });
-
-        it('can write all expected data with a high -bufferLimit', function() {
-            return check_juttle({
-                program: 'emit -limit 10 | write file -file "' + tmp_file + '" -bufferLimit 1000'
-            })
-            .then(function() {
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
-                expect(result.sinks.table.length).to.equal(10);
-            });
-        });
-
-        it('can write all expected data with a low -bufferLimit', function() {
-            return check_juttle({
-                program: 'emit -limit 10 | write file -file "' + tmp_file + '" -bufferLimit 1'
-            })
-            .then(function() {
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
-                expect(result.sinks.table.length).to.equal(10);
-            });
-        });
-
-        it('fails when you attempt to write to a file with more points than than -limit allows', function() {
-            return check_juttle({
-                program: 'emit -limit 3 -from :2014-01-01: | write file -file "' + tmp_file + '"'
-            })
-            .then(function() {
+            it('can handle writing no points out with ' + format + ' format ', function() {
                 return check_juttle({
-                    program: 'emit -limit 1 -from :2014-01-01: | write file -file "' + tmp_file + '" -limit 2'
+                    program: 'emit -limit 3 -every :1s: ' +
+                             '| filter foo="bar" ' +
+                             '| write file -file "' + tmp_file + '" -format "' + format + '"'
+                })
+                .then(function() {
+                    return run_read_file_juttle(tmp_file, { format: format });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).to.equal(0);
+                    expect(result.warnings.length).to.equal(0);
+                    expect(result.sinks.table.length).to.equal(0);
                 });
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(1);
-                expect(result.warnings.length).to.equal(0);
-                expect(result.errors[0]).to.contain('option limit exceeded limit of 2, dropping points.');
-
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
-                expect(result.sinks.table.length).to.equal(3);
             });
-        });
 
-        it('can write two points and read them back again', function() {
-            return check_juttle({
-                program: 'emit -limit 1 | put message = "hello test 2" | write file -file "' + tmp_file + '"'
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(0);
-            })
-            .then(function() {
+            it('can write multiple points and read them back again with ' + format + ' format', function() {
                 return check_juttle({
-                    program: 'emit -limit 1 | put message = "hello test 3" | write file -file "' + tmp_file + '"'
+                    program: 'emit -limit 10 -every :100ms: ' +
+                             '| put value=count(), message="hello test ${value}" ' +
+                             '| write file -file "' + tmp_file + '" -format "' + format + '"'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    return run_read_file_juttle(tmp_file, { format: format });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.sinks.table.length).equal(10);
+                    for(var index = 0; index < 10; index++) {
+                        expect(result.sinks.table[index].message).equal('hello test ' + (index + 1));
+                    }
                 });
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(0);
-
-                return run_read_file_juttle(tmp_file);
-            })
-            .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.sinks.table.length).equal(2);
-                expect(result.sinks.table[0].message).equal('hello test 2');
-                expect(result.sinks.table[1].message).equal('hello test 3');
             });
         });
-
     });
 
     describe('optimizations', function() {
@@ -488,5 +408,4 @@ describe('file adapter tests', function () {
         });
 
     });
-
 });

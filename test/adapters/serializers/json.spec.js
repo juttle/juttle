@@ -20,11 +20,8 @@ describe('serializers/json', function() {
         var stream = fs.createWriteStream(tmpFilename);
         stream.on('open', function() {
             var serializer = serializers.getSerializer('json', stream);
-            serializer.done();
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
+            serializer.done()
+            .then(() => {
                 expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
                 done();
             });
@@ -42,11 +39,8 @@ describe('serializers/json', function() {
                 { time: '2014-03-01T00:00:00.000Z', foo: 'bizz' }
             ];
             serializer.write(data);
-            serializer.done();
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
+            serializer.done()
+            .then(() => {
                 var results = [];
                 var parser = parsers.getParser('json');
                 parser.parseStream(fs.createReadStream(tmpFilename), function(result) {

@@ -75,7 +75,7 @@ The above examples produce the same output table:
 
 ## write file
 
-Data is written out to a file as a JSON array; no other output formats are supported.
+Data is written out to the filename specified in the format you specify.
 
 ```text
 write file -file <path>
@@ -84,11 +84,9 @@ write file -file <path>
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
-`-bufferLimit`    | Maximum number of points that will be written to the file. | No; defaults to 100
-`-maxFilesize`    | Maximum size of the file being written to, limited since the entire JSON needs to fit in memory | No; defaults to 200MB
-`-limit` | Maximum number of points in a file before we'd stop writing points to the file to avoid running out of memory | No; defaults to 100000
+`-format`         | Input input format: `csv` for [CSV](https://tools.ietf.org/html/rfc4180) data, `json` for [JSON](https://tools.ietf.org/html/rfc7159) data, or `jsonl` for [JSON lines](http://jsonlines.org/) data | No; defaults to `json`
 
-If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.
+If the file already exists it will be truncated and overwritten.
 
 _Example: writing data to a file_
 

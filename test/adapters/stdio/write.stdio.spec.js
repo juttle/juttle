@@ -36,6 +36,22 @@ describe('write stdio adapter tests', function() {
         });
     });
 
+    it('warns when the underlying serializer emits errors', function() {
+        var tmpFilename = tmp.tmpNameSync();
+        juttle_test_utils.set_stdout(fs.createWriteStream(tmpFilename));
+
+        return check_juttle({
+            program: '( emit -limit 1 -from :2014-01-01:-:1s: | put foo = "bar"; ' +
+                     '  emit -limit 1 -from :2014-01-01: | put fizz = "buzz" )' +
+                     '| write stdio -format "csv"'
+        })
+        .then(function(result) {
+            expect(result.errors.length).equal(0);
+            expect(result.warnings.length).equal(1);
+            expect(result.warnings[0]).to.contain('Invalid CSV data: Found new or missing fields: fizz');
+        });
+    });
+
     _.each(validFormats, function(details, format) {
         function handle(input) {
             if (details.typed) {

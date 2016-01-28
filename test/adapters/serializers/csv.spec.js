@@ -20,14 +20,15 @@ describe('serializers/csv', function() {
         var stream = fs.createWriteStream(tmpFilename);
         stream.on('open', function() {
             var serializer = serializers.getSerializer('csv', stream);
-            serializer.done();
-
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
-                expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
-                done();
+            serializer.done()
+            .then(() => {
+                stream.end(function(err) {
+                    if (err) {
+                        done(err);
+                    }
+                    expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
+                    done();
+                });
             });
         });
     });
@@ -57,13 +58,8 @@ describe('serializers/csv', function() {
                 { time: '2014-03-01T00:00:00.000Z', foo: 'bizz' }
             ];
             serializer.write(data);
-            serializer.done();
-
-            stream.end(function(err) {
-                if (err) {
-                    done(err);
-                }
-
+            serializer.done()
+            .then(() => {
                 var parser = parsers.getParser('csv');
                 var results = [];
                 parser.parseStream(fs.createReadStream(tmpFilename), function(result) {
