@@ -175,7 +175,7 @@ Complains about -points and -to
 
    * CompileError: Do not specify -points with -limit or -to
 
-Complains about timeful -points with -from
+Complains about -points with -from
 ----------------------------------------------------
 
 ### Juttle
@@ -184,7 +184,7 @@ Complains about timeful -points with -from
 
 ### Errors
 
-   * CompileError: emit -points must not have timestamps when -from or -every is specified
+   * CompileError: Do not specify -points with -from or -every
 
 Complains about a mix of timeful and timeless -points
 ----------------------------------------------------
@@ -431,7 +431,7 @@ Complains when no points are given
 
 ### Juttle
 
-    emit -from :1970-01-01: -points []
+    emit -points []
     | reduce count()
     | view result
 
