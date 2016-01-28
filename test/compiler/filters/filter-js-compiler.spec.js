@@ -5,26 +5,33 @@ var expect = chai.expect;
 
 var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
 var JuttleMoment = require('../../../lib/moment').JuttleMoment;
+var Filter = require('../../../lib/runtime/filter');
 var parser = require('../../../lib/parser');
+var errors = require('../../../lib/errors');
 var SemanticPass = require('../../../lib/compiler/semantic');
 
 // Needed to evaluate compiled Juttle code.
 var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
 
+function filterPoints(filter, points) {
+    /* jshint evil:true */
+
+    var ast = parser.parseFilter(filter).ast;
+
+    // We need to run the semantic pass to convert Variable nodes to field
+    // references.
+    var semantic = new SemanticPass();
+    ast = semantic.sa_expr(ast);
+
+    var compiler = new FilterJSCompiler();
+    var fn = eval(compiler.compile(ast));
+
+    return points.filter(fn);
+}
+
 chai.use(function(chai, utils) {
     chai.Assertion.addMethod('filter', function(points, result) {
-        /* jshint evil:true */
-
-        var ast = parser.parseFilter(this._obj).ast;
-
-        // We need to run the semantic pass to convert Variable nodes to field
-        // references.
-        var semantic = new SemanticPass();
-        ast = semantic.sa_expr(ast);
-
-        var compiler = new FilterJSCompiler();
-        var fn = eval(compiler.compile(ast));
-        var filtered = points.filter(fn);
+        var filtered = filterPoints(this._obj, points);
 
         this.assert(
             utils.eql(filtered, result),
@@ -37,172 +44,129 @@ chai.use(function(chai, utils) {
     });
 });
 
-var POINTS_MISC = [
-    { v: null                                         },
-    { v: true                                         },
-    { v: false                                        },
-    { v: 5                                            },
-    { v: Infinity                                     },
-    { v: NaN                                          },
-    { v: 'abcd'                                       },
-    { v: new JuttleMoment('2015-01-01T00:00:00.000Z') },
-    { v: JuttleMoment.duration('00:00:05.000')        }
-];
-
-var POINTS_NUMBERS = [
-    { v: 1 },
-    { v: 2 },
-    { v: 3 }
-];
-
-var POINTS_STRINGS = [
-    { v: 'abcd' },
-    { v: 'efgh' },
-    { v: 'ijkl' }
-];
-
 describe('FilterJSCompiler', function() {
-    describe('literals', function() {
-        it('handles null', function() {
-            expect('v == null').to.filter(POINTS_MISC, [{ v: null }]);
-        });
+    var FILTER_AST = {
+        type: 'ExpressionFilterTerm',
+        expression: {
+            type: 'BinaryExpression',
+            operator: '<',
+            left: { type: 'Variable', name: 'a' },
+            right: { type: 'NumericLiteral', value: 5 }
+        }
+    };
 
-        it('handles booleans', function() {
-            expect('v == true').to.filter(POINTS_MISC, [{ v: true }]);
-        });
+    var POINTS_VALUES = [
+        { a: null },
+        { a: true },
+        { a: false },
+        { a: 5 },
+        { a: Infinity },
+        { a: NaN },
+        { a: 'abcd' },
+        { a: /abcd/ },
+        { a: /abcd/gim },
+        { a: new JuttleMoment('2015-01-01T00:00:05.000Z') },
+        { a: JuttleMoment.duration('00:00:05.000') },
+        { a: new Filter(FILTER_AST, 'a < 5') },
+        { a: [ 1, 2, 3 ] },
+        { a: { a: 1, b: 2, c: 3 } }
+    ];
 
-        it('handles numbers', function() {
-            expect('v == 5').to.filter(POINTS_MISC, [{ v: 5 }]);
-            expect('v == Infinity').to.filter(POINTS_MISC, [{ v: Infinity }]);
-            // No value equals NaN, not even NaN.
-            expect('v == NaN').to.filter(POINTS_MISC, []);
-        });
+    var POINTS_NUMBERS = [
+        { a: 1 },
+        { a: 2 },
+        { a: 3 }
+    ];
 
-        it('handles strings', function() {
-            expect( 'v == "abcd"').to.filter(POINTS_MISC, [{ v: 'abcd' }]);
-        });
+    var POINTS_STRINGS = [
+        { a: 'abcd' },
+        { a: 'efgh' },
+        { a: 'ijkl' }
+    ];
 
-        it('handles dates', function() {
-            expect('v == :2015-01-01T00:00:00.000Z:').to.filter(
-                POINTS_MISC,
-                [{ v: new JuttleMoment('2015-01-01T00:00:00.000Z') }]
-            );
-        });
-
-        it('handles durations', function() {
-            expect('v == :00:00:05.000:').to.filter(
-                POINTS_MISC,
-                [{ v: JuttleMoment.duration('00:00:05.000') }]
-            );
-        });
+    it('compiles NullLiteral correctly', function() {
+        expect('a == null').to.filter(POINTS_VALUES, [ { a: null } ]);
     });
 
-    describe('filter expressions', function() {
-        describe('NOT', function() {
-            it('finds correct points', function() {
-                expect('NOT v == 2').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 3 }]);
-            });
-        });
-
-        describe('AND', function() {
-            it('finds correct points', function() {
-                expect('v <= 2 AND v >= 2').to.filter(POINTS_NUMBERS, [{ v: 2 }]);
-            });
-        });
-
-        describe('OR', function() {
-            it('finds correct points', function() {
-                expect('v <= 2 OR v >= 2').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 2 }, { v: 3 }]);
-            });
-        });
+    it('compiles BooleanLiteral correctly', function() {
+        expect('a == true').to.filter(POINTS_VALUES, [ { a: true } ]);
+        expect('a == false').to.filter(POINTS_VALUES, [ { a: false } ]);
     });
 
-    describe('expression terms', function() {
-        describe('missing fields', function() {
-            it('treats them as null', function() {
-                expect('m == null').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 2 }, { v: 3 }]);
-            });
-        });
+    it('compiles NumericLiteral correctly', function() {
+        expect('a == 5').to.filter(POINTS_VALUES, [ { a: 5 } ]);
+    });
 
-        describe('==', function() {
-            it('finds correct points (field == expression)', function() {
-                expect('v == 2').to.filter(POINTS_NUMBERS, [{ v: 2 }]);
-            });
+    it('compiles InfinityLiteral correctly', function() {
+        expect('a == Infinity').to.filter(POINTS_VALUES, [ { a: Infinity } ]);
 
-            it('finds correct points (expression == field)', function() {
-                expect('v == 2').to.filter(POINTS_NUMBERS, [{ v: 2 }]);
-            });
-        });
+        // Negative InfinityLiteral can't be tested because "-Infinity" is
+        // parsed as a unary operator and a positive InfinityLiteral.
+    });
 
-        describe('!=', function() {
-            it('finds correct points (field != expression)', function() {
-                expect('v != 2').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 3 }]);
-            });
+    it('compiles NaNLiteral correctly', function() {
+        // No value equals NaN, not even NaN.
+        expect('a == NaN').to.filter(POINTS_VALUES, []);
+    });
 
-            it('finds correct points (expression != field)', function() {
-                expect('2 != v').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 3 }]);
-            });
-        });
+    it('compiles StringLiteral correctly', function() {
+        expect('a == "abcd"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
 
-        describe('=~', function() {
-            it('finds correct points (field =~ expression)', function() {
-                expect('v =~ "e*h"').to.filter(POINTS_STRINGS, [{ v: 'efgh' }]);
-                expect('v =~ /e.*h/').to.filter(POINTS_STRINGS, [{ v: 'efgh' }]);
-            });
-        });
+    it('compiles RegularExpressionLiteral correctly', function() {
+        expect('a == /abcd/').to.filter(POINTS_VALUES, [ { a: /abcd/ } ]);
+        expect('a == /abcd/gim').to.filter(POINTS_VALUES, [ { a: /abcd/gim } ]);
+    });
 
-        describe('!~', function() {
-            it('finds correct points (field !~ expression)', function() {
-                expect('v !~ "e*h"').to.filter(POINTS_STRINGS, [{ v: 'abcd' }, { v: 'ijkl' }]);
-                expect('v !~ /e.*h/').to.filter(POINTS_STRINGS, [{ v: 'abcd' }, { v: 'ijkl' }]);
-            });
-        });
+    it('compiles MomentLiteral correctly', function() {
+        expect('a == :2015-01-01T00:00:05.000Z:').to.filter(
+            POINTS_VALUES,
+            [ { a: new JuttleMoment('2015-01-01T00:00:05.000Z') } ]
+        );
+    });
 
-        describe('<', function() {
-            it('finds correct points (field < expression)', function() {
-                expect('v < 2').to.filter(POINTS_NUMBERS, [{ v: 1 }]);
-            });
+    it('compiles DurationLiteral correctly', function() {
+        expect('a == :00:00:05.000:').to.filter(
+            POINTS_VALUES,
+            [ { a: new JuttleMoment.duration('00:00:05.000') } ]
+        );
+    });
 
-            it('finds correct points (expression < field)', function() {
-                expect('2 < v').to.filter(POINTS_NUMBERS, [{ v: 3 }]);
-            });
-        });
+    // FilterLiteral can't be tested because there is no filter literal syntax.
 
-        describe('>', function() {
-            it('finds correct points (field > expression)', function() {
-                expect('v > 2').to.filter(POINTS_NUMBERS, [{ v: 3 }]);
-            });
+    it('compiles ArrayLiteral correctly', function() {
+        expect('a == [ 1, 2, 3 ]').to.filter(POINTS_VALUES, [ { a: [ 1, 2, 3 ] } ]);
+    });
 
-            it('finds correct points (expression > field)', function() {
-                expect('2 > v').to.filter(POINTS_NUMBERS, [{ v: 1 }]);
-            });
-        });
+    it('compiles UnaryExpression correctly', function() {
+        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
+        expect('*"a" == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
 
-        describe('<=', function() {
-            it('finds correct points (field <= expression)', function() {
-                expect('v <= 2').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 2 }]);
-            });
+    it('compiles BinaryExpression correctly', function() {
+        expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a != 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
+        expect('a =~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'efgh' } ]);
+        expect('a !~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'abcd' }, { a: 'ijkl' } ]);
+        expect('a < 2').to.filter(POINTS_NUMBERS, [ { a: 1 } ]);
+        expect('a > 2').to.filter(POINTS_NUMBERS, [ { a: 3 } ]);
+        expect('a <= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 2 } ]);
+        expect('a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 }, { a : 3 } ]);
+        expect('a in [ 1, 3 ]').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 3 } ]);
+        expect('a <= 2 AND a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a <= 2 OR a >= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 2 }, { a: 3 } ]);
+    });
 
-            it('finds correct points (expression <= field)', function() {
-                expect('2 <= v').to.filter(POINTS_NUMBERS, [{ v: 2 }, { v: 3 }]);
-            });
-        });
+    it('compiles ExpressionFilterTerm correctly', function() {
+        expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
 
-        describe('>=', function() {
-            it('finds correct points (field >= expression)', function() {
-                expect('v >= 2').to.filter(POINTS_NUMBERS, [{ v: 2 }, { v: 3 }]
-                );
-            });
+    it('compiles SimpleFilterTerm correctly', function() {
+        expect(function() {
+            filterPoints('"abcd"', POINTS_STRINGS);
+        }).to.throw(errors.CompileError);
 
-            it('finds correct points (expression >= field)', function() {
-                expect('2 >= v').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 2 }]);
-            });
-        });
-
-        describe('in', function() {
-            it('finds correct points (field in expression)', function() {
-                expect('v in [1, 3]').to.filter(POINTS_NUMBERS, [{ v: 1 }, { v: 3 }]);
-            });
-        });
+        // FilterLiteral can't be tested because there is no filter literal
+        // syntax.
     });
 });
