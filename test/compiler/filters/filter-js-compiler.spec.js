@@ -118,6 +118,10 @@ describe('FilterJSCompiler', function() {
         expect('a == "abcd"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
 
+    it('compiles MultipartStringLiteral correctly', function() {
+        expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
+
     it('compiles RegularExpressionLiteral correctly', function() {
         expect('a == /abcd/').to.filter(POINTS_VALUES, [ { a: /abcd/ } ]);
         expect('a == /abcd/gim').to.filter(POINTS_VALUES, [ { a: /abcd/gim } ]);
@@ -141,6 +145,10 @@ describe('FilterJSCompiler', function() {
 
     it('compiles ArrayLiteral correctly', function() {
         expect('a == [ 1, 2, 3 ]').to.filter(POINTS_VALUES, [ { a: [ 1, 2, 3 ] } ]);
+    });
+
+    it('compiles ToString correctly', function() {
+        expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
 
     it('compiles UnaryExpression correctly', function() {
