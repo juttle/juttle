@@ -121,8 +121,8 @@ describe('HTTP adapter tests', function() {
                 var points = [];
                 var count = parseInt(req.query.count);
                 delete req.query.count;
-            
-                for(var index = 0; index < count; index++) { 
+
+                for(var index = 0; index < count; index++) {
                     var point = {};
                     _.each(req.query, function(value, key) {
                         point[key] = value;
@@ -159,7 +159,7 @@ describe('HTTP adapter tests', function() {
                     // default to JSON
                     res.set('Content-Type', type);
                     res.send(points);
-                } else { 
+                } else {
                     res.status(500);
                     res.end();
                 }
@@ -218,19 +218,31 @@ describe('HTTP adapter tests', function() {
                             throw err;
                         }
 
-                        res.set('Content-Type', 'text/csv');
+                        if (req.headers['return-content-type']) {
+                            res.set('Content-Type', req.headers['return-content-type']);
+                        } else {
+                            res.set('Content-Type', 'text/csv');
+                        }
                         res.send(csv);
                     });
                 } else if (type === 'application/jsonl') {
                     var buffer = [];
-                    res.set('Content-Type', 'application/jsonl');
+                    if (req.headers['return-content-type']) {
+                        res.set('Content-Type', req.headers['return-content-type']);
+                    } else {
+                        res.set('Content-Type', 'application/jsonl');
+                    }
                     _.each(points, function(point) {
                         buffer.push(JSON.stringify(point));
                     });
                     res.send(buffer.join('\n'));
                 } else {
                     // default to JSON
-                    res.set('Content-Type', 'application/json');
+                    if (req.headers['return-content-type']) {
+                        res.set('Content-Type', req.headers['return-content-type']);
+                    } else {
+                        res.set('Content-Type', 'application/json');
+                    }
 
                     // add a wrapper object if requested
                     if (rootPath) {
@@ -511,7 +523,7 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        _.each(symmetricalFormats, function(contentType) {
+        _.each(symmetricalFormats, function(contentType, format) {
             it('can read timeless data point back with content-type: "' + contentType + '"', function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '"} ' +
@@ -551,6 +563,22 @@ describe('HTTP adapter tests', function() {
                     expect(result.sinks.table[0].fizz).to.be.equal('buzz');
                 });
             });
+
+            it('can override content-type using -format="' + format + '"', function() {
+                return check_juttle({
+                    program: 'read http -headers { Accept: "' + contentType + '", "Return-Content-Type": "application/xml"} ' +
+                             '          -format "' + format + '"' +
+                             '          -url "' + this.url + '/points?count=100&timeField=time&fizz=buzz"'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.warnings.length).equal(0);
+                    expect(result.sinks.table.length).equal(100);
+                    expect(result.sinks.table[0].time).to.not.be.undefined();
+                    expect(result.sinks.table[0].fizz).to.be.equal('buzz');
+                });
+            });
+
         });
 
         it('fails when you pass a filter expression', function() {
