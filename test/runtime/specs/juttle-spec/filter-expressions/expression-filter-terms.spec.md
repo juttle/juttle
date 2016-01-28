@@ -40,17 +40,6 @@ Regression test for PROD-6797.
 
     { time: "1970-01-01T00:00:00.000Z", a: 5 }
 
-The `*` operator: Produces an error when the expression has an invalid type
----------------------------------------------------------------------------
-
-### Juttle
-
-    emit -from Date.new(0) -limit 1 | put a = 5 | filter *null == 5 | view result
-
-### Errors
-
-  * Invalid filter term. Valid forms are: "field == value", "value == field", "field == field".
-
 The `=~` operator: Produces an error for `non-field @ *`
 --------------------------------------------------------
 
