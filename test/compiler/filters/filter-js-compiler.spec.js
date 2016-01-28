@@ -3,19 +3,19 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
-var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 var Filter = require('../../../lib/runtime/filter');
-var parser = require('../../../lib/parser');
-var errors = require('../../../lib/errors');
+var JuttleMoment = require('../../../lib/moment').JuttleMoment;
 var SemanticPass = require('../../../lib/compiler/semantic');
+var _ = require('underscore');
+var errors = require('../../../lib/errors');
+var parser = require('../../../lib/parser');
 
-// Needed to evaluate compiled Juttle code.
+var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
+
+// Needed to evaluate compiled filters.
 var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
 
 function filterPoints(filter, points) {
-    /* jshint evil:true */
-
     var ast = parser.parseFilter(filter).ast;
 
     // We need to run the semantic pass to convert Variable nodes to field
@@ -26,7 +26,7 @@ function filterPoints(filter, points) {
     var compiler = new FilterJSCompiler();
     var fn = eval(compiler.compile(ast));
 
-    return points.filter(fn);
+    return _.filter(points, fn);
 }
 
 chai.use(function(chai, utils) {
