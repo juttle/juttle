@@ -108,6 +108,7 @@ var TestView = Juttle.proc.subscribe.extend({
         this.ticks = options.sink.options && options.sink.options.ticks;
         this.marks = options.sink.options && options.sink.options.marks;
         this.times = options.sink.options && options.sink.options.times;
+        this.dt = options.sink.options && options.sink.options.dt;
     },
     procName: 'testsink',
     emitEvent: events.EventEmitter.prototype.emit,
@@ -123,10 +124,14 @@ var TestView = Juttle.proc.subscribe.extend({
         }
     },
     tick: function(time) {
-        if (this.ticks && this.times) {
-            this.data = this.data.concat(utils.fromNative([{time:time, tick:true}]));
-        } else if (this.ticks) {
-            this.data = this.data.concat({tick:true});
+        if (this.ticks) {
+            if (this.times) {
+                this.data = this.data.concat(utils.fromNative([{time:time, tick:true}]));
+            } else if (this.dt) {
+                this.data = this.data.concat(utils.fromNative([{dt:JuttleMoment.subtract(time, this.program.now), tick:true}]));
+            } else {
+                this.data = this.data.concat({tick:true});
+            }
         }
     },
     eof: function() {
@@ -238,6 +243,10 @@ function run_juttle(prog, options) {
                 });
             }
 
+            // XXX this hack is needed to make sure the program given to the
+            // test view has a `now` for it to use. it should be removed once
+            // the test view no longer uses publish/subscribe.
+            prog.now = prog.env.now;
             var cur_options = _.extend({ sink: sink }, sink_options[sink.name]);
             var sink_handler = new TestView(cur_options, {}, null, prog);
 
