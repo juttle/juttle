@@ -72,6 +72,11 @@ describe('FilterJSCompiler', function() {
         { a: { a: 1, b: 2, c: 3 } }
     ];
 
+    var POINTS_BOOLEANS = [
+        { a: true },
+        { a: false }
+    ];
+
     var POINTS_NUMBERS = [
         { a: 1 },
         { a: 2 },
@@ -82,6 +87,18 @@ describe('FilterJSCompiler', function() {
         { a: 'abcd' },
         { a: 'efgh' },
         { a: 'ijkl' }
+    ];
+
+    var POINTS_ARRAYS = [
+        { a: [ 1, 2, 3 ] },
+        { a: [ 4, 5, 6 ] },
+        { a: [ 7, 8, 9 ] },
+    ];
+
+    var POINTS_OBJECTS = [
+        { a: { 'a': 1 } },
+        { a: { 5: 2 } },
+        { a: { 'abcd': 3 } },
     ];
 
     it('compiles NullLiteral correctly', function() {
@@ -113,6 +130,10 @@ describe('FilterJSCompiler', function() {
         expect('a == "abcd"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
 
+    it('compiles MultipartStringLiteral correctly', function() {
+        expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
+
     it('compiles RegularExpressionLiteral correctly', function() {
         expect('a == /abcd/').to.filter(POINTS_VALUES, [ { a: /abcd/ } ]);
         expect('a == /abcd/gim').to.filter(POINTS_VALUES, [ { a: /abcd/gim } ]);
@@ -138,12 +159,54 @@ describe('FilterJSCompiler', function() {
         expect('a == [ 1, 2, 3 ]').to.filter(POINTS_VALUES, [ { a: [ 1, 2, 3 ] } ]);
     });
 
+    it('compiles ObjectLiteral correctly', function() {
+        expect('a == { a: 1 }').to.filter(POINTS_OBJECTS, [ { a: { a: 1 } } ]);
+        expect('a == { 5: 2 }').to.filter(POINTS_OBJECTS, [ { a: { 5: 2 } } ]);
+        expect('a == { "${"ab" + "cd"}": 3 }').to.filter(POINTS_OBJECTS, [ { a: { 'abcd': 3 } } ]);
+    });
+
+    it('compiles ObjectProperty correctly', function() {
+        expect('a == { a: 1 }').to.filter(POINTS_OBJECTS, [ { a: { a: 1 } } ]);
+        expect('a == { "${"ab" + "cd"}": 3 }').to.filter(POINTS_OBJECTS, [ { a: { 'abcd': 3 } } ]);
+    });
+
+    it('compiles ToString correctly', function() {
+        expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
+    });
+
+    it('compiles PropertyAccess correctly', function() {
+        // Non-computed PropertyAccess can't be tested because it refers to
+        // module exports and we can't load modules here.
+
+        expect('a[1] == 5').to.filter(POINTS_ARRAYS, [ { a: [ 4, 5, 6 ] } ]);
+    });
+
+    // FunctionCall can't be tested because it calls a function and we can't
+    // define functions here.
+
     it('compiles UnaryExpression correctly', function() {
-        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
         expect('*"a" == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == !false').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == +2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == -(-2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == ~(-3)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('NOT a == 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
     });
 
     it('compiles BinaryExpression correctly', function() {
+        expect('a == (true && true)').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == (true || true)').to.filter(POINTS_BOOLEANS, [ { a: true } ]);
+        expect('a == 1 + 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 3 - 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 2 * 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 / 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 2 % 3').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 & 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 | 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == (2 ^ 0)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 1 << 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 >> 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+        expect('a == 4 >>> 1').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a != 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 3 } ]);
         expect('a =~ "efgh"').to.filter(POINTS_STRINGS, [ { a: 'efgh' } ]);
@@ -155,6 +218,11 @@ describe('FilterJSCompiler', function() {
         expect('a in [ 1, 3 ]').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a : 3 } ]);
         expect('a <= 2 AND a >= 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
         expect('a <= 2 OR a >= 2').to.filter(POINTS_NUMBERS, [ { a: 1 }, { a: 2 }, { a: 3 } ]);
+        expect('a == (null ?? 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
+
+    it('compiles ConditionalExpression correctly', function() {
+        expect('a == (true ? 2 : 3)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
     });
 
     it('compiles ExpressionFilterTerm correctly', function() {
