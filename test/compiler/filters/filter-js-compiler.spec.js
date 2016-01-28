@@ -221,6 +221,10 @@ describe('FilterJSCompiler', function() {
         expect('a == (null ?? 2)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
     });
 
+    it('compiles ConditionalExpression correctly', function() {
+        expect('a == (true ? 2 : 3)').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
+
     it('compiles ExpressionFilterTerm correctly', function() {
         expect('a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
     });
