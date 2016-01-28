@@ -89,6 +89,12 @@ describe('FilterJSCompiler', function() {
         { a: 'ijkl' }
     ];
 
+    var POINTS_OBJECTS = [
+        { a: { 'a': 1 } },
+        { a: { 5: 2 } },
+        { a: { 'abcd': 3 } },
+    ];
+
     it('compiles NullLiteral correctly', function() {
         expect('a == null').to.filter(POINTS_VALUES, [ { a: null } ]);
     });
@@ -145,6 +151,17 @@ describe('FilterJSCompiler', function() {
 
     it('compiles ArrayLiteral correctly', function() {
         expect('a == [ 1, 2, 3 ]').to.filter(POINTS_VALUES, [ { a: [ 1, 2, 3 ] } ]);
+    });
+
+    it('compiles ObjectLiteral correctly', function() {
+        expect('a == { a: 1 }').to.filter(POINTS_OBJECTS, [ { a: { a: 1 } } ]);
+        expect('a == { 5: 2 }').to.filter(POINTS_OBJECTS, [ { a: { 5: 2 } } ]);
+        expect('a == { "${"ab" + "cd"}": 3 }').to.filter(POINTS_OBJECTS, [ { a: { 'abcd': 3 } } ]);
+    });
+
+    it('compiles ObjectProperty correctly', function() {
+        expect('a == { a: 1 }').to.filter(POINTS_OBJECTS, [ { a: { a: 1 } } ]);
+        expect('a == { "${"ab" + "cd"}": 3 }').to.filter(POINTS_OBJECTS, [ { a: { 'abcd': 3 } } ]);
     });
 
     it('compiles ToString correctly', function() {
