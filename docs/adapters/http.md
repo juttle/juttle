@@ -20,6 +20,7 @@ read http -url url
           -timeField timeField
           -rootPath rootPath
           -includeHeaders true/false
+          -format csv/json/jsonl
 ```
 
 Parameter         |             Description          | Required?
@@ -31,6 +32,8 @@ Parameter         |             Description          | Required?
 `-timeField`      | The name of the field to use as the time field <br><br>The specified field will be renamed to `time` in the body of the HTTP request. If the points already contain a field called `time`, that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.  | No; defaults to keeping the `time` field as is
 `-rootPath`       | When the incoming data is JSON, use the specified path into the incoming object (expressed as `field1.field2`) to emit points | No
 `-includeHeaders` | When set to true the headers from the response are appended to each of the points in the response | No; default: `false`
+`-timeField`      | Name of the field in the data which contains a valid timestamp  | No; defaults to `time`
+`-format`         | HTTP data format, supports: `csv`, `json` and `jsonl` | No; defaults to HTTP response header `Content-Type`
 
 Currently the `read http` adapter will automatically parse incoming data based off of the `content-type` header. Here are the currently supported content-types:
 
