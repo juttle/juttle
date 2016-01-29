@@ -11,6 +11,7 @@
 
 var AdapterRead = require('../../lib/runtime/adapter-read');
 var JuttleMoment = require('../../lib/moment').JuttleMoment;
+var errors = require('../../lib/errors');
 
 class TestTimeseriesRead extends AdapterRead {
     static get timeRequired() { return true; }
@@ -21,8 +22,16 @@ class TestTimeseriesRead extends AdapterRead {
         this.options = options;
         this.logger.debug('initialize options:', options);
 
+        if (!options.from && !options.to) {
+            throw errors.compileError('RT-MISSING-TIME-RANGE-ERROR');
+        }
+
         this.every = options.every || new JuttleMoment.duration(1, 's');
         this.count = 0;
+    }
+
+    periodicLiveRead() {
+        return true;
     }
 
     read(from, to, limit, state) {

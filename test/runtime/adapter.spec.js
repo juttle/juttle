@@ -16,7 +16,7 @@ describe('adapter API tests', function () {
             throw new Error('this should fail');
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equal([]);
             expect(result.sinks.table.length).equal(0);
         })
         .catch(function(err) {
@@ -41,8 +41,8 @@ describe('adapter API tests', function () {
             program: 'read test -key "test1"'
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
-            expect(result.sinks.table.length).equal(0);
+            expect(result.errors).deep.equal([]);
+            expect(result.sinks.table).deep.equal([]);
         });
     });
 
@@ -51,7 +51,7 @@ describe('adapter API tests', function () {
             program: 'emit -limit 1 | put message = "hello test" | write test -key "test2"'
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equal([]);
         })
         .then(function() {
             return check_juttle({
@@ -59,7 +59,7 @@ describe('adapter API tests', function () {
             });
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equal([]);
             expect(result.sinks.table.length).equal(1);
             expect(result.sinks.table[0].message).equal('hello test');
         });
@@ -83,7 +83,7 @@ describe('adapter API tests', function () {
             });
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equal([]);
             expect(result.sinks.table.length).equal(2);
             expect(result.sinks.table[0].message).equal('hello test 2');
             expect(result.sinks.table[1].message).equal('hello again');
@@ -187,12 +187,14 @@ describe('adapter API tests', function () {
         });
     });
 
-    it('defaults to an infinite range for -from and -to', function() {
+    it('defaults to undefined for -from and -to', function() {
         return check_juttle({
             program: 'read test -debug "timeBounds"'
         })
         .then(function(result) {
-            var expected = [{from: '1970-01-01T00:00:00.000Z', to: 'Infinity'}];
+            expect(result.errors).deep.equal([]);
+
+            var expected = [{from: '(null)', to: '(null)'}];
             expect(result.sinks.table).deep.equal(expected);
         });
     });

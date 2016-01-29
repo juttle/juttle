@@ -11,12 +11,11 @@ var _ = require('underscore');
 var store = {};
 var AdapterRead = require('../../lib/runtime/adapter-read');
 var AdapterWrite = require('../../lib/runtime/adapter-write');
+var JuttleMoment = require('../../lib/moment').JuttleMoment;
 var errors = require('../../lib/errors');
 
 function TestAdapter(config) {
     class Read extends AdapterRead {
-        static get timeRequired() { return false; }
-
         constructor(options, params) {
             super(options, params);
             this.logger.debug('initialize options:', options);
@@ -59,7 +58,10 @@ function TestAdapter(config) {
             // points, emit the -from and -to time options.
             else if (this.debug === 'timeBounds') {
                 this.logger.debug('debug mode: timeBounds');
-                points = [{from: from.toJSON(), to: to.toJSON()}];
+                points = [{
+                    from: from ? from.toJSON() : '(null)',
+                    to: to ? to.toJSON() : '(null)'
+                }];
             }
             // Otherwise just emit whatever is stored for the given key
             else {
@@ -76,7 +78,7 @@ function TestAdapter(config) {
 
             return Promise.resolve({
                 points: points,
-                readEnd: to
+                readEnd: new JuttleMoment(Infinity)
             });
         }
     }
