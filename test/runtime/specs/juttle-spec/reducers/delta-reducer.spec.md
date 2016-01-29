@@ -55,11 +55,11 @@ reduce + put delta pattern works like reduce delta sorta-aughta
 put computes point-to-point differences
 --------------------------------------------------
 ### Juttle
-    emit -from Date.new(0) -points [
-    {x: 1},
-    {x: 10},
-    {y: 100},
-    {x: 20}]
+    emit -points [
+    { time: "1970-01-01T00:00:00.000Z", x: 1},
+    { time: "1970-01-01T00:00:01.000Z", x: 10},
+    { time: "1970-01-01T00:00:02.000Z", y: 100},
+    { time: "1970-01-01T00:00:03.000Z", x: 20}]
     | put dx = delta(x)
     | keep x, dx
     | view result
@@ -91,13 +91,13 @@ also compute running change in a duration.
 put computes point-to-point differences by name
 --------------------------------------------------
 ### Juttle
-    emit -from Date.new(0) -points [
-    {name:"x", value:1},
-    {name:"y", value:-1},
-    {name:"x", value:10},
-    {name:"y", value:-10},
-    {name:"x", value:100},
-    {name:"y", value:-100}]
+    emit -points [
+    { time: "1970-01-01T00:00:00.000Z", name:"x", value:1},
+    { time: "1970-01-01T00:00:01.000Z", name:"y", value:-1},
+    { time: "1970-01-01t00:00:02.000z", name:"x", value:10},
+    { time: "1970-01-01t00:00:03.000z", name:"y", value:-10},
+    { time: "1970-01-01t00:00:04.000z", name:"x", value:100},
+    { time: "1970-01-01t00:00:05.000z", name:"y", value:-100}]
     | put d = delta(value) by name
     | keep name, value, d
     | view result
@@ -113,11 +113,11 @@ put computes point-to-point differences by name
 put computes point-to-point differences with a wrapping counter, wrap > 0
 --------------------------------------------------
 ### Juttle
-    emit -from Date.new(0) -points [
-    {x: 1},
-    {x: 10},
-    {x:  5},
-    {x: 15}]
+    emit -points [
+    { time: "1970-01-01T00:00:00.000Z", x: 1},
+    { time: "1970-01-01T00:00:01.000Z", x: 10},
+    { time: "1970-01-01T00:00:02.000Z", x:  5},
+    { time: "1970-01-01T00:00:03.000Z", x: 15}]
     | put dx = delta(x, 0, 20)
     | keep x, dx
     | view result
@@ -131,11 +131,11 @@ put computes point-to-point differences with a wrapping counter, wrap > 0
 put computes point-to-point differences with a wrapping counter, wrap = 0
 --------------------------------------------------
 ### Juttle
-    emit -from Date.new(0) -points [
-    {x: 1},
-    {x: 10},
-    {x:  5},
-    {x: 15}]
+    emit -points [
+    { time: "1970-01-01T00:00:00.000Z", x: 1},
+    { time: "1970-01-01T00:00:01.000Z", x: 10},
+    { time: "1970-01-01T00:00:02.000Z", x:  5},
+    { time: "1970-01-01T00:00:03.000Z", x: 15}]
     | put dx = delta(x, 0, 0)
     | keep x, dx
     | view result
@@ -149,11 +149,11 @@ put computes point-to-point differences with a wrapping counter, wrap = 0
 put computes point-to-point differences with a wrapping counter, wrap = true
 --------------------------------------------------
 ### Juttle
-    emit -from Date.new(0) -points [
-    {x: 1},
-    {x: 10},
-    {x:  5},
-    {x: 15}]
+    emit -points [
+    { time: "1970-01-01T00:00:00.000Z", x: 1},
+    { time: "1970-01-01T00:00:01.000Z", x: 10},
+    { time: "1970-01-01T00:00:02.000Z", x:  5},
+    { time: "1970-01-01T00:00:03.000Z", x: 15}]
     | put dx = delta(x, 0, true)
     | keep x, dx
     | view result

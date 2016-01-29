@@ -55,11 +55,13 @@ put with -over -by works
 ### Juttle
 
     emit -points [
-            {"color":"red"}, {"color":"blue"},
-            {"color":"red"}, {"color":"blue"},
-            {"color":"red"}, {"color":"blue"}
-        ]
-        -from Date.new(1)
+        {"time": "1970-01-01T00:00:01.000Z", "color":"red"},
+        {"time": "1970-01-01T00:00:02.000Z", "color":"blue"},
+        {"time": "1970-01-01T00:00:03.000Z", "color":"red"},
+        {"time": "1970-01-01T00:00:04.000Z", "color":"blue"},
+        {"time": "1970-01-01T00:00:05.000Z", "color":"red"},
+        {"time": "1970-01-01T00:00:06.000Z", "color":"blue"}
+    ]
     | put -over :6s: c = count() by color
     | keep time, color, c
     | view result

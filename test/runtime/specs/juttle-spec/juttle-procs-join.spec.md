@@ -1039,7 +1039,7 @@ implicit timeless table joins still work
         {        "user_id": 4,        "username": "Maggie Simpson"  }
     ];
     (
-        emit -from Date.new(0) -points source_pts | remove time;
+        emit -points source_pts | remove time;
         emit -points read_pts | filter name~"C4078.minutes_used"
             | reduce total_minutes_used=sum(value) by user_id
     )
