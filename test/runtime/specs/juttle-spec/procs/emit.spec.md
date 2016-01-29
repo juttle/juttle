@@ -414,25 +414,6 @@ Emits historic and live points with -from
     { tick: true }
     { n: 5, dt: "00:00:04.000" }
 
-Emits historic and live points with -from and -points
-----------------------------------------------------
-
-### Juttle
-
-    emit -from :-2s:
-        -points [{n:1}, {n:2}, {n:3}, {n:4}, {n:5}]
-    | put dt = time - :now:
-    | keep n, dt
-    | view result -ticks true
-
-### Output
-
-    { n: 1, dt: "-00:00:02.000" }
-    { n: 2, dt: "-00:00:01.000" }
-    { n: 3, dt: "00:00:00.000" }
-    { n: 4, dt: "00:00:01.000" }
-    { n: 5, dt: "00:00:02.000" }
-
 Emits historic and live points with -points
 ----------------------------------------------------
 
