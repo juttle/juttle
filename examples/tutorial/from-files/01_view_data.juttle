@@ -1,0 +1,6 @@
+read file -file '/tmp/data.json'
+| head 5
+| view table;
+
+read file -file '/tmp/data.json'
+| tail 5

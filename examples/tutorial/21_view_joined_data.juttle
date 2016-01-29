@@ -1,0 +1,6 @@
+(
+  read http -url 'https://s3-us-west-2.amazonaws.com/juttle-data/github-tutorial/github_data_sample.json' -format 'json';
+  read http -url 'https://s3-us-west-2.amazonaws.com/juttle-data/github-tutorial/github_metadata.csv' -format 'csv'
+)
+| join repo_name
+| head 2

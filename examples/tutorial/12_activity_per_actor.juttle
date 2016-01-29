@@ -1,0 +1,5 @@
+read file -file '/tmp/data.json'
+| reduce events = count(), actors = count_unique('actor_login') by repo_name
+| sort actors -desc
+| head 10
+| put activity_per_actor = Math.round(events/actors) by repo_name

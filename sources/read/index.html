@@ -560,8 +560,8 @@
               
                 <h1 id="read">read</h1>
 <p>Reads events or metrics from various remote backends via <a href="../../adapters/">adapters supported by Juttle</a> and emits them into the flowgraph. The read source honors standard parameters as well as adapter-specific options.</p>
-<pre><code>read &lt;adapter&gt; -from moment -to moment [-last duration]
-  [filter-expression] [adapter-options]
+<pre><code>read &lt;adapter&gt; [-from moment] [-to moment] [-last duration]
+   [adapter-options] [filter-expression]
 | ...
 </code></pre>
 
@@ -581,33 +581,34 @@
 </tr>
 <tr>
 <td><code>-from</code></td>
-<td>Start time, inclusive: tream points whose time stamps are greater than or equal to the specified moment. <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information.</td>
-<td align="right">Required only if -to is present; defaults to :now:</td>
+<td>Start time, inclusive: stream points whose time stamps are greater than or equal to the specified moment. <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information.</td>
+<td align="right">Depending on the adapter</td>
 </tr>
 <tr>
 <td><code>-to</code></td>
-<td>End time, exclusive: stream points whose time stamps are less than the specified moment, which is less than or equal to :now: <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. <br><br>:information_source: <code>Note:</code>To stream live data only, omit -from and -to. To combine historical and live data, specify a -from value in the past and omit -to.</td>
-<td align="right">No; defaults to forever</td>
+<td>End time, exclusive: stream points whose time stamps are less than the specified moment, which is less than or equal to :now: <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. <br><br>:information_source: <code>Note:</code>To stream live data only, omit -from and use <code>-to :end:</code> To combine historical and live data, specify a -from value in the past and use <code>-to :end:</code></td>
+<td align="right">Depending on the adapter</td>
 </tr>
 <tr>
 <td><code>-last</code></td>
-<td>An alternative to -from moment -to :now:, this specifies a historical time window that ends at the present moment.</td>
-<td align="right">No</td>
-</tr>
-<tr>
-<td><code>filter-expression</code></td>
-<td>A full-text search expression, a field comparison, or a combination of both, where multiple terms are joined with AND, OR, or NOT <br><br>See <a href="../../concepts/filtering/">Filtering</a> for additional details.</td>
+<td>Shorthand syntax for to <code>-from (:now: - duration) -to :now:</code> this specifies a historical time window of the specified duration that ends at the present moment.</td>
 <td align="right">No</td>
 </tr>
 <tr>
 <td><code>adapter-options</code></td>
-<td>Options specific to reading from the chosen backend, handled by the adapter.</td>
+<td>Additional <code>-&lt;key&gt; &lt;value&gt;</code>options specific to reading from the chosen backend, handled by the adapter.</td>
 <td align="right">See adapter documentation</td>
+</tr>
+<tr>
+<td><code>filter-expression</code></td>
+<td>A filter expression such as full-text search, field comparisons, or a combination, where multiple terms are joined with AND, OR, or NOT <br><br>See <a href="../../concepts/filtering/">Filtering</a> for a full description.</td>
+<td align="right">No</td>
 </tr>
 </tbody>
 </table>
+<p><img alt="information_source" class="custom_emoji" height="30" src="../../images/emoji/information_source.png" width="30" /> Some adapters require a time range to be specified in the read with either <code>-from</code> / <code>-to</code> or <code>-last</code> and/or may have additional constraints on the valid time ranges for a read operation. See the adapter documentation for details.</p>
 <p><em>Example</em></p>
-<pre><code>read influxdb -db &quot;test&quot; -measurements &quot;cpu&quot; -from :1 hour ago: -to :now:
+<pre><code>read influxdb -from :1 hour ago: -to :now: -db 'test' name='cpu' AND host~=/www.*/
 | reduce max() by host
 </code></pre>
               

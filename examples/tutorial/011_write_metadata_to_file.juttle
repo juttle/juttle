@@ -1,0 +1,2 @@
+read http -url 'https://s3-us-west-2.amazonaws.com/juttle-data/github-tutorial/github_metadata.csv' -format 'csv'
+| write file -file '/tmp/metadata.csv' -format 'csv'

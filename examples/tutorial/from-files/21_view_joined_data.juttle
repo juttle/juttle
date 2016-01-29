@@ -1,0 +1,6 @@
+(
+  read file -file '/tmp/data.json';
+  read file -file '/tmp/metadata.csv' -format 'csv'
+)
+| join repo_name
+| head 5

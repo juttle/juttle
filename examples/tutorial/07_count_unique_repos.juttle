@@ -1,0 +1,2 @@
+read file -file '/tmp/data.json'
+| reduce repos = count_unique('repo_name')

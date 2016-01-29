@@ -1,0 +1,4 @@
+read file -file '/tmp/data.json'
+| reduce total = count(), 
+    actors = count_unique('actor_login'), 
+    repos = count_unique('repo_name')

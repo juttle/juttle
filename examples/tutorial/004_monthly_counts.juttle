@@ -1,0 +1,9 @@
+(
+read file -file '/tmp/github_data_joined.json' -from :2015-01-01: -to :2015-02-01: | reduce count(), month=1;
+read file -file '/tmp/github_data_joined.json' -from :2015-02-01: -to :2015-03-01: | reduce count(), month=2;
+read file -file '/tmp/github_data_joined.json' -from :2015-03-01: -to :2015-04-01: | reduce count(), month=3;
+read file -file '/tmp/github_data_joined.json' -from :2015-04-01: -to :2015-05-01: | reduce count(), month=4;
+read file -file '/tmp/github_data_joined.json' -from :2015-05-01: -to :2015-06-01: | reduce count(), month=5;
+read file -file '/tmp/github_data_joined.json' -from :2015-06-01: -to :2015-07-01: | reduce count(), month=6;
+)
+| view table

@@ -1,0 +1,4 @@
+read file -file '/tmp/data.json'
+| reduce actors = count_unique('actor_login') by repo_name
+| sort actors -desc
+| head 10

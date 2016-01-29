@@ -570,7 +570,7 @@
 </ul>
 </div>
 <h2 id="read-file">read file</h2>
-<p>Supported file formats are JSON array, and JSON lines; see examples below.</p>
+<p>Supported file formats are JSON array, JSON lines, CSV and unstructured logs (with grok parsing); see examples below.</p>
 <pre><code class="text">read file -file &lt;path&gt; [-format &lt;format&gt;] [-timeField &lt;fieldname&gt;]
 </code></pre>
 
@@ -649,7 +649,7 @@
 </code></pre>
 
 <h2 id="write-file">write file</h2>
-<p>Data is written out to a file as a JSON array; no other output formats are supported.</p>
+<p>Data is written out to the filename specified in the format you specify.</p>
 <pre><code class="text">write file -file &lt;path&gt;
 </code></pre>
 
@@ -668,23 +668,13 @@
 <td align="right">Yes</td>
 </tr>
 <tr>
-<td><code>-bufferLimit</code></td>
-<td>Maximum number of points that will be written to the file.</td>
-<td align="right">No; defaults to 100</td>
-</tr>
-<tr>
-<td><code>-maxFilesize</code></td>
-<td>Maximum size of the file being written to, limited since the entire JSON needs to fit in memory</td>
-<td align="right">No; defaults to 200MB</td>
-</tr>
-<tr>
-<td><code>-limit</code></td>
-<td>Maximum number of points in a file before we'd stop writing points to the file to avoid running out of memory</td>
-<td align="right">No; defaults to 100000</td>
+<td><code>-format</code></td>
+<td>Input input format: <code>csv</code>for <a href="https://tools.ietf.org/html/rfc4180">CSV</a> data, <code>json</code>for <a href="https://tools.ietf.org/html/rfc7159">JSON</a> data, or <code>jsonl</code>for <a href="http://jsonlines.org/">JSON lines</a> data</td>
+<td align="right">No; defaults to <code>json</code></td>
 </tr>
 </tbody>
 </table>
-<p>If the file already exists and contains a valid JSON array, the write will append new data rather than overwrite.</p>
+<p>If the file already exists it will be truncated and overwritten.</p>
 <p><em>Example: writing data to a file</em></p>
 <pre><code class="juttle">emit -from :2015-01-01: -limit 2 
 | put name = 'write_me', value = count() 

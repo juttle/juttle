@@ -1,0 +1,3 @@
+read file -file '/tmp/data.json' -from :2015-06-01: -to :2015-07-01:
+| reduce by type
+| reduce count()

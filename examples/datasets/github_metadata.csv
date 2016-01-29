@@ -1,0 +1,48 @@
+name,repo_name,sub_category,category
+Git,git/git,Version Control and Collaboration,Dev
+GitLab,gitlabhq/gitlabhq,Version Control and Collaboration,Dev
+Subversion,apache/subversion,Version Control and Collaboration,Dev
+Ant,apache/ant,Build & Test Automation,Dev
+Maven,apache/maven,Build & Test Automation,Dev
+Selenium,SeleniumHQ/selenium,Build & Test Automation,Dev
+QUnit,jquery/qunit,Build & Test Automation,Dev
+JMeter,apache/jmeter,Build & Test Automation,Dev
+Gradle,gradle/gradle,Build & Test Automation,Dev
+PHPUnit,sebastianbergmann/phpunit,Build & Test Automation,Dev
+Jenkins,jenkinsci/jenkins,Continuous Integration & Delivery,Dev
+Capistrano,capistrano/capistrano,Continuous Integration & Delivery,Dev
+BuildBot,buildbot/buildbot,Continuous Integration & Delivery,Dev
+Fabric,fabric/fabric,Continuous Integration & Delivery,Dev
+Travis CI,travis-ci/travis-ci,Continuous Integration & Delivery,Dev
+Continuum,apache/continuum,Continuous Integration & Delivery,Dev
+CruiseControl,thoughtworks/cruisecontrol.rb,Continuous Integration & Delivery,Dev
+Integrity,integrity/integrity,Continuous Integration & Delivery,Dev
+Docker,docker/docker,Container Platform,Deploy
+Rocket,coreos/rkt,Container Platform,Deploy
+LXC,lxc/lxc,Container Platform,Deploy
+Chef,chef/chef,Configuration Management,Deploy
+Puppet,puppetlabs/puppet,Configuration Management,Deploy
+CFengine,cfengine/core,Configuration Management,Deploy
+Rudder,Normation/rudder,Configuration Management,Deploy
+Rundeck,rundeck/rundeck,Configuration Management,Deploy
+SaltStack,saltstack/salt,Configuration Management,Deploy
+Ansible,ansible/ansible,Configuration Management,Deploy
+OpenShift,openshift/origin,Microservice Platform,Deploy
+Cloud Foundry,cloudfoundry/bosh,Microservice Platform,Deploy
+Kubernetes,GoogleCloudPlatform/kubernetes,Microservice Platform,Deploy
+Mesosphere,mesosphere/marathon,Microservice Platform,Deploy
+Puppet,puppetlabs/puppet,Provisioning,Deploy
+Razor,puppetlabs/razor-server,Provisioning,Deploy
+Chef Knife,chef/chef,Provisioning,Deploy
+Docker Swarm,docker/swarm,Provisioning,Deploy
+Vagrant,mitchellh/vagrant,Provisioning,Deploy
+OpenStack Heat,openstack/heat,Provisioning,Deploy
+Logstash,elastic/logstash,Logging,Monitor
+CollectD,collectd/collectd,Logging,Monitor
+StatsD,etsy/statsd,Logging,Monitor
+Nagios,NagiosEnterprises/nagioscore,Monitoring and Alerting,Monitor
+Ganglia,ganglia/monitor-core,Monitoring and Alerting,Monitor
+Sensu,sensu/sensu,Monitoring and Alerting,Monitor
+Icinga,Icinga/icinga2,Monitoring and Alerting,Monitor
+Graphite,graphite-project/graphite-web,Monitoring and Alerting,Monitor
+Kibana,elastic/kibana,Monitoring and Alerting,Monitor

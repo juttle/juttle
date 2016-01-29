@@ -1,0 +1,5 @@
+input t: text -default "Hello world";
+input d: date -default :3 days ago:;
+
+emit -limit 1 -from d 
+| put msg = t;

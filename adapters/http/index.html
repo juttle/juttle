@@ -578,6 +578,7 @@
           -timeField timeField
           -rootPath rootPath
           -includeHeaders true/false
+          -format csv/json/jsonl
 </code></pre>
 
 <table>
@@ -623,6 +624,16 @@
 <td><code>-includeHeaders</code></td>
 <td>When set to true the headers from the response are appended to each of the points in the response</td>
 <td align="right">No; default: <code>false</code></td>
+</tr>
+<tr>
+<td><code>-timeField</code></td>
+<td>Name of the field in the data which contains a valid timestamp</td>
+<td align="right">No; defaults to <code>time</code></td>
+</tr>
+<tr>
+<td><code>-format</code></td>
+<td>HTTP data format, supports: <code>csv</code> <code>json</code>and <code>jsonl</code></td>
+<td align="right">No; defaults to HTTP response header <code>Content-Type</code></td>
 </tr>
 </tbody>
 </table>

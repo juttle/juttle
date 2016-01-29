@@ -1,0 +1,2 @@
+read http -url 'https://s3-us-west-2.amazonaws.com/juttle-data/github-tutorial/github_data_sample.json' -format 'json'
+| write file -file '/tmp/data.json'

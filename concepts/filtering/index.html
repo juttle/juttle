@@ -677,7 +677,6 @@ Full-text searches match any point in which the string returned by expression is
 present in any field.</p>
 <p>The <a href="../../processors/filter/">filter</a> processor does not support full-text search -- it can only be used as part of a read from an external backend that supports search.</p>
 <p>The search terms for full-text search are currently expressed as standalone strings in the filter expression for <code>read</code>. Search terms and other filter expressions can be combined with the AND, OR, NOT operators.</p>
-<p>A full-text search is currently expressed in a filter statement as a standalone string.</p>
 <p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> The syntax for full-text search will be changed soon to add a <code>?</code> operator.</p>
 <p>For example the following searches all documents in the last day for the term "alarm":</p>
 <pre><code class="juttle">read elastic -last :1 day: &quot;alarm&quot;

@@ -1,0 +1,6 @@
+read file -file '/tmp/data.json'
+| reduce events = count() by repo_name, actor_login
+| filter events > 1
+| sort events -desc by repo_name
+| put rank = count() by repo_name
+| head 3 by repo_name

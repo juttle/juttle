@@ -1,0 +1,16 @@
+input subcat: select -items [
+  { value: 'Microservice Platform', label: 'Microservice Platform' },
+  { value: 'Provisioning', label: 'Provisioning' },
+  { value: 'Logging', label: 'Logging' }
+  ]
+  -label 'Sub-Category'
+  -default 'Microservice Platform';
+
+(
+  read file -file '/tmp/data.json';
+  read file -file '/tmp/metadata.csv' -format 'csv';
+)
+| join repo_name
+| filter sub_category = subcat
+| reduce -from :2015-01-01: -over :w: -every :d: count() by 'repo_name'
+| view timechart -keyField 'repo_name'

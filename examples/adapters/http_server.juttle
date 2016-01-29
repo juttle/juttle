@@ -1,0 +1,7 @@
+/*
+ * Create an http server on port 2000. View points in a table.
+ *
+ */
+
+ read http_server -port 2000
+ | view table;

@@ -1,0 +1,2 @@
+read elastic -from :2015-01-01: -to :2015-07-01:
+| reduce count()

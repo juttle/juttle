@@ -1,0 +1,2 @@
+read file -file '/tmp/metadata.csv' -format 'csv'
+| head 5

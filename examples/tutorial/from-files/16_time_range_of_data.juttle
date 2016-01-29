@@ -1,0 +1,6 @@
+read file -file '/tmp/data.json'
+|(
+  tail 1;
+  head 1
+)
+| keep time

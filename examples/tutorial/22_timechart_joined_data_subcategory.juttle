@@ -1,0 +1,7 @@
+(
+  read file -file '/tmp/data.json';
+  read file -file '/tmp/metadata.csv' -format 'csv'
+)
+| join repo_name
+| reduce -from :2015-01-01: -over :w: -every :d: count() by 'sub_category'
+| view timechart -keyField 'sub_category'
