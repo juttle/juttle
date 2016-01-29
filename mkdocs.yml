@@ -88,6 +88,7 @@ pages:
    - 'Adapters': 'adapters/index.md'
    - '____ File Adapter': 'adapters/file.md'
    - '____ HTTP Adapter': 'adapters/http.md'
+   - '____ HTTP Server Adapter': 'adapters/http_server.md'
    - '____ STDIO Adapter': 'adapters/stdio.md'
    - '____ Stochastic Adapter': 'adapters/stochastic.md'
    - '____ CDN Source': 'adapters/stochastic_cdn.md'
