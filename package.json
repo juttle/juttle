@@ -39,7 +39,6 @@
     "moment-duration-format": "^1.3.0",
     "moment-parser": "^0.3.0",
     "moment-timezone": "^0.4.0",
-    "node-grok": "github:rlgomes/node-grok#b3b810f4277d7b9d765853214bf20adfdb010ebe",
     "oboe": "^2.1.2",
     "pegjs": "^0.9.0",
     "request": "^2.67.0",

@@ -326,6 +326,50 @@ function expect_to_fail(promise, message) {
         });
 }
 
+// mocha utils
+
+function checkForModule(name) {
+    /*
+     * check for required module dependency
+     */
+    try {
+        require(name);
+    } catch(err) {
+        logger.warn('WARNING: skipping test due to unmet dependency on module "' +
+                    name + '"');
+        return false;
+    }
+
+    return true;
+}
+
+var mochaIt = global.it;
+
+function withModuleIt(description, fn, module) {
+    /*
+     * wrapper function for mocha it() so you can skip a test based on module
+     * availability.
+     *
+     *  module: the name of a module that must be require'able for a specific
+     *          test to be executed or skipped if the module can not be
+     *          required
+     *  
+     * if you have the need to set the same requirements for all tests in a 
+     * single test suite then use the following approach and redefine it() 
+     * locally to that one file like so:
+     *
+     *  var withGrokIt = function(describe, function) {
+     *      return require('../../runtime/specs/juttle-test-utils').it(describe, function, 'node-grok');
+     *  };
+     *
+     */
+    if (checkForModule(module)) {
+        mochaIt(description, fn);
+    } else {
+        mochaIt.skip(description, fn);
+    }
+}
+
 module.exports = {
     wait_for_event: wait_for_event,
     get_times: get_times,
@@ -336,5 +380,6 @@ module.exports = {
     options_from_object: options_from_object,
     expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
-    set_stdout: set_stdout
+    set_stdout: set_stdout,
+    withModuleIt 
 };

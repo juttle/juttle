@@ -4,6 +4,7 @@ var _ = require('underscore');
 var expect = require('chai').expect;
 var fs = require('fs');
 var juttle_test_utils = require('../../runtime/specs/juttle-test-utils');
+var withModuleIt = juttle_test_utils.withModuleIt;
 var check_juttle = juttle_test_utils.check_juttle;
 var path = require('path');
 
@@ -118,7 +119,7 @@ describe('read stdio adapter tests', function() {
         });
     });
 
-    it('can read syslog data from stdin using -format "grok"' , function() {
+    withModuleIt('can read syslog data from stdin using -format "grok"' , function() {
         juttle_test_utils.set_stdin(fs.createReadStream(syslog));
 
         return check_juttle({
@@ -134,7 +135,7 @@ describe('read stdio adapter tests', function() {
                 { program: 'CRON', pid: '17218' }
             ]);
         });
-    });
+    }, 'node-grok');
 
     describe('optimizations', function() {
         _.each(symmetricalFormats, function(details, format) {
@@ -193,7 +194,7 @@ describe('read stdio adapter tests', function() {
             });
         });
 
-        it('fails to optimized tail followed by head with -format "grok"', function() {
+        withModuleIt('fails to optimized tail followed by head with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
@@ -208,9 +209,9 @@ describe('read stdio adapter tests', function() {
                 expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
                 expect(result.prog.graph.parser.totalParsed).to.equal(6);
             });
-        });
+        }, 'node-grok');
 
-        it('can optimize "| head 1" with -format "grok"', function() {
+        withModuleIt('can optimize "| head 1" with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
@@ -225,9 +226,9 @@ describe('read stdio adapter tests', function() {
                 expect(result.prog.graph.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.parser.totalParsed).to.equal(2);
             });
-        });
+        }, 'node-grok');
 
-        it('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
+        withModuleIt('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             juttle_test_utils.set_stdin(fs.createReadStream(badSyslog));
@@ -242,7 +243,7 @@ describe('read stdio adapter tests', function() {
                 expect(result.prog.graph.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.parser.totalParsed).to.equal(2);
             });
-        });
+        }, 'node-grok');
 
     });
 
