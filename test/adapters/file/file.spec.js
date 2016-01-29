@@ -7,6 +7,7 @@ var path = require('path');
 var tmp = require('tmp');
 var fs = require('fs');
 var juttle_test_utils = require('../../runtime/specs/juttle-test-utils');
+var withModuleIt = juttle_test_utils.withModuleIt;
 var check_juttle = juttle_test_utils.check_juttle;
 var expect_to_fail = juttle_test_utils.expect_to_fail;
 
@@ -199,7 +200,7 @@ describe('file adapter tests', function () {
             return expect_to_fail(failing_read, message);
         });
 
-        it('can read syslog file using -format "grok"' , function() {
+        withModuleIt('can read syslog file using -format "grok"' , function() {
             return check_juttle({
                 program: 'read file -file "' +  syslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | keep program, pid'
             })
@@ -213,7 +214,7 @@ describe('file adapter tests', function () {
                     { program: 'CRON', pid: '17218' }
                 ]);
             });
-        });
+        }, 'node-grok');
 
     });
 
@@ -362,7 +363,7 @@ describe('file adapter tests', function () {
             });
         });
 
-        it('fails to optimized tail followed by head with -format "grok"', function() {
+        withModuleIt('fails to optimized tail followed by head with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             return check_juttle({
@@ -375,9 +376,9 @@ describe('file adapter tests', function () {
                 expect(result.prog.graph.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
                 expect(result.prog.graph.parser.totalParsed).to.equal(6);
             });
-        });
+        }, 'node-grok');
 
-        it('can optimize "| head 1" with -format "grok"', function() {
+        withModuleIt('can optimize "| head 1" with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             return check_juttle({
@@ -390,9 +391,9 @@ describe('file adapter tests', function () {
                 expect(result.prog.graph.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.parser.totalParsed).to.equal(2);
             });
-        });
+        }, 'node-grok');
 
-        it('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
+        withModuleIt('can optimize nested "| head 2 | head 1" with -format "grok"', function() {
             // the bad syslog file will emit an error if we hit the 3rd entry when
             // parsing and the parsers currently read 1 point ahead
             return check_juttle({
@@ -405,7 +406,7 @@ describe('file adapter tests', function () {
                 expect(result.prog.graph.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.parser.totalParsed).to.equal(2);
             });
-        });
+        }, 'node-grok');
 
     });
 });

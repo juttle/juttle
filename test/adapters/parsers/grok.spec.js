@@ -5,18 +5,23 @@ var fs = require('fs');
 var parsers = require('../../../lib/adapters/parsers');
 var path = require('path');
 var tmp = require('tmp');
+var juttleTestUtils = require('../../runtime/specs/juttle-test-utils');
+
+var withGrokIt = function(describe, fn) {
+    return juttleTestUtils.withModuleIt(describe, fn,  'node-grok');
+};
 
 describe('parsers/grok', function() {
     var empty = path.resolve(__dirname, 'input/logs/empty.log');
     var syslog = path.resolve(__dirname, 'input/logs/syslog');
     var badSyslog = path.resolve(__dirname, 'input/logs/bad-syslog');
 
-    it('can instantiate a grok parser', function() {
+    withGrokIt('can instantiate a grok parser', function() {
         var parser = parsers.getParser('grok');
         expect(parser).to.not.be.undefined();
     });
 
-    it('can read an empty file', function() {
+    withGrokIt('can read an empty file', function() {
         var parser = parsers.getParser('grok');
         var results = [];
         return parser.parseStream(fs.createReadStream(empty), function(result) {
@@ -27,7 +32,7 @@ describe('parsers/grok', function() {
         });
     });
 
-    it('can parse syslog file', function() {
+    withGrokIt('can parse syslog file', function() {
         var parser = parsers.getParser('grok', {
             pattern: '%{SYSLOGLINE}'
         });
@@ -45,7 +50,7 @@ describe('parsers/grok', function() {
         });
     });
 
-    it('can parse a file with invalid syslog lines', function() {
+    withGrokIt('can parse a file with invalid syslog lines', function() {
         var parser = parsers.getParser('grok', {
             pattern: '%{SYSLOGLINE}'
         });
@@ -71,7 +76,7 @@ describe('parsers/grok', function() {
         });
     });
 
-    it('calls emit multiple times with payload limit specified', function() {
+    withGrokIt('calls emit multiple times with payload limit specified', function() {
         var csv = parsers.getParser('grok', {
             limit: 1,
             pattern: '%{SYSLOGLINE}'
@@ -92,7 +97,7 @@ describe('parsers/grok', function() {
         });
     });
 
-    it('stops emitting values after the optimization.limit', function() {
+    withGrokIt('stops emitting values after the optimization.limit', function() {
         // the read ahead buffer of the parser will always read more points
         // that we actually want to parse but lets make sure this does not // read the whole file by writing out enough data
         var tmpFilename = tmp.tmpNameSync();
