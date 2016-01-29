@@ -12,9 +12,18 @@ var run_read_file_juttle = require('./utils.js').run_read_file_juttle;
 var tmp_file = tmp.tmpNameSync();
 
 var symmetricalFormats = {
-    json: 'json',
-    jsonl: 'jsonl',
-    csv: 'csv'
+    json: {
+        append: false,
+        typed: true
+    },
+    jsonl: {
+        append: true,
+        typed: true
+    },
+    csv: {
+        append: true,
+        typed: false
+    }
 };
 
 describe('write file adapter tests', function () {
@@ -56,7 +65,7 @@ describe('write file adapter tests', function () {
         });
     });
 
-    _.each(symmetricalFormats, function(format) {
+    _.each(symmetricalFormats, function(details, format) {
         it('can write a point and read it back with ' + format + ' format', function() {
             return check_juttle({
                 program: 'emit -limit 1 ' +
@@ -108,6 +117,59 @@ describe('write file adapter tests', function () {
                     expect(result.sinks.table[index].message).equal('hello test ' + (index + 1));
                 }
             });
+        });
+
+        function handle(input) {
+            if (details.typed) {
+                return input;
+            } else {
+                return '' + input;
+            }
+        }
+
+        if (details.append) {
+            // only formats that are appendable
+            it('can append to a file with -format="' + format + '"', function() {
+                return check_juttle({
+                    program: 'emit -limit 1 | put value=1 | write file -file "' +
+                        tmp_file + '" -format "' + format + '"'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    return run_read_file_juttle(tmp_file, { format: format });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.sinks.table.length).equal(1);
+                    expect(result.sinks.table[0].value).equal(handle(1));
+                })
+                .then(function() {
+                    return check_juttle({
+                        program: 'emit -limit 1 | put value=2 | write file -file "' +
+                            tmp_file + '" -format "' + format + '" -append true'
+                    });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    return run_read_file_juttle(tmp_file, { format: format });
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.sinks.table.length).equal(2);
+                    expect(result.sinks.table[0].value).equal(handle(1));
+                    expect(result.sinks.table[1].value).equal(handle(2));
+                });
+            });
+        }
+
+    });
+
+    it('fails when append is used with invalid format', function() {
+        return check_juttle({
+            program: 'emit -limit 1 | write file -file "' + tmp_file + '" -format "json" -append true'
+        })
+        .catch(function(err) {
+            expect(err.toString()).to.match(/option append can only be used with format="csv" or format="jsonl"/);
         });
     });
 
