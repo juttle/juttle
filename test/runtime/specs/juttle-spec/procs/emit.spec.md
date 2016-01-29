@@ -118,7 +118,7 @@ Complains if -limit and -to are specified
 
 ### Errors
 
-   * Do not specify both -limit and -to or -last
+   * -to option should not be combined with -limit
 
 Complains if -limit and -last are specified
 ----------------------------------------
@@ -129,7 +129,7 @@ Complains if -limit and -last are specified
 
 ### Errors
 
-   * Do not specify both -limit and -to or -last
+   * -to option should not be combined with -limit
 
 Complains about -points that are not an array
 ----------------------------------------------------
@@ -162,7 +162,7 @@ Complains about -points and -limit
 
 ### Errors
 
-   * CompileError: Do not specify -points with -limit or -to
+   * CompileError: -points option should not be combined with -limit
 
 Complains about -points and -to
 ----------------------------------------------------
@@ -173,7 +173,18 @@ Complains about -points and -to
 
 ### Errors
 
-   * CompileError: Do not specify -points with -limit or -to
+   * CompileError: -points option should not be combined with -from, -to, or -last
+
+Complains about -points and -last
+----------------------------------------------------
+
+### Juttle
+
+    emit -last :10s: -points [] | view result
+
+### Errors
+
+   * CompileError: -points option should not be combined with -from, -to, or -last
 
 Complains about -points with -from
 ----------------------------------------------------
@@ -184,7 +195,7 @@ Complains about -points with -from
 
 ### Errors
 
-   * CompileError: Do not specify -points with -from or -every
+   * CompileError: -points option should not be combined with -from, -to, or -last
 
 Complains about a mix of timeful and timeless -points
 ----------------------------------------------------
