@@ -120,6 +120,12 @@ var view_classes = {
 var Juttle = require('../lib/runtime').Juttle;
 Juttle.adapters.configure(config.adapters);
 
+
+if (process.env.JUTTLE_LOAD_TEST_ADAPTERS) {
+    Juttle.adapters.register('test', require('../test/runtime/test-adapter')());
+    Juttle.adapters.register('testTimeseries', require('../test/runtime/test-adapter-timeseries')());
+}
+
 function format_js(code) {
     var beautify = require('js-beautify').js_beautify;
     return(beautify(code, { indent_size: 2 }));

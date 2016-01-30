@@ -27,6 +27,7 @@
     "csv-parser": "^1.8.1",
     "csv-write-stream": "^1.0.0",
     "double-ended-queue": "^0.9.7",
+    "eventemitter3": "^1.1.1",
     "extendable-base": "^0.3.1",
     "gex": "^0.1.4",
     "heap": "^0.2.3",

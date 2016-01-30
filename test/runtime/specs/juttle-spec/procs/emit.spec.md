@@ -118,7 +118,7 @@ Complains if -limit and -to are specified
 
 ### Errors
 
-   * Do not specify both -limit and -to or -last
+   * -to option should not be combined with -limit
 
 Complains if -limit and -last are specified
 ----------------------------------------
@@ -129,7 +129,7 @@ Complains if -limit and -last are specified
 
 ### Errors
 
-   * Do not specify both -limit and -to or -last
+   * -to option should not be combined with -limit
 
 Complains about -points that are not an array
 ----------------------------------------------------
@@ -162,7 +162,7 @@ Complains about -points and -limit
 
 ### Errors
 
-   * CompileError: Do not specify -points with -limit or -to
+   * CompileError: -points option should not be combined with -limit
 
 Complains about -points and -to
 ----------------------------------------------------
@@ -173,7 +173,18 @@ Complains about -points and -to
 
 ### Errors
 
-   * CompileError: Do not specify -points with -limit or -to
+   * CompileError: -points option should not be combined with -from, -to, or -last
+
+Complains about -points and -last
+----------------------------------------------------
+
+### Juttle
+
+    emit -last :10s: -points [] | view result
+
+### Errors
+
+   * CompileError: -points option should not be combined with -from, -to, or -last
 
 Complains about -points with -from
 ----------------------------------------------------
@@ -184,7 +195,7 @@ Complains about -points with -from
 
 ### Errors
 
-   * CompileError: Do not specify -points with -from or -every
+   * CompileError: -points option should not be combined with -from, -to, or -last
 
 Complains about a mix of timeful and timeless -points
 ----------------------------------------------------
@@ -227,7 +238,7 @@ Emits live points by default
     { n: 2, dt: "00:00:01.000" }
     { n: 3, dt: "00:00:02.000" }
 
-Emits points and ticks in a live setting
+Does not emit ticks if points are generated every second
 -----------------------------------------------------------
 
 ### Juttle
@@ -240,10 +251,28 @@ Emits points and ticks in a live setting
 ### Output
 
     { n: 1, dt: "00:00:00.000" }
-    { tick: true }
     { n: 2, dt: "00:00:01.000" }
-    { tick: true }
     { n: 3, dt: "00:00:02.000" }
+
+emits ticks in between long gaps in the points
+----------------------------------------------------------
+
+### Juttle
+
+    emit -limit 3 -every :3s:
+    | put n = count(), dt = time - :now:
+    | keep n, dt
+    | view result -ticks true -dt true
+
+### Output
+
+    { n: 1, dt: "00:00:00.000" }
+    { tick: true, dt: "00:00:01.000" }
+    { tick: true, dt: "00:00:02.000" }
+    { n: 2, dt: "00:00:03.000" }
+    { tick: true, dt: "00:00:04.000" }
+    { tick: true, dt: "00:00:05.000" }
+    { n: 3, dt: "00:00:06.000" }
 
 Does not emit any points with `-limit 0`
 ----------------------------------------
@@ -370,20 +399,20 @@ Emits historic and live points with -from
 
 ### Juttle
 
-    emit -from :-2s: -to :+3s:
+    emit -from :-4s: -to :+6s: -every :2s:
     | put n = count(), dt = time - :now:
     | keep n, dt
     | view result -ticks true
 
 ### Output
 
-    { n: 1, dt: "-00:00:02.000" }
-    { n: 2, dt: "-00:00:01.000" }
+    { n: 1, dt: "-00:00:04.000" }
+    { n: 2, dt: "-00:00:02.000" }
     { n: 3, dt: "00:00:00.000" }
     { tick: true }
-    { n: 4, dt: "00:00:01.000" }
+    { n: 4, dt: "00:00:02.000" }
     { tick: true }
-    { n: 5, dt: "00:00:02.000" }
+    { n: 5, dt: "00:00:04.000" }
 
 Emits historic and live points with -points
 ----------------------------------------------------
@@ -391,7 +420,7 @@ Emits historic and live points with -points
 ### Juttle
 
     emit
-        -points [{time: :-2s:, n:1}, {time: :-1s:, n:2}, {time: :+0s:, n:3}, {time: :+1s:, n:4}, {time: :+2s:, n:5}]
+        -points [{time: :-2s:, n:1}, {time: :-1s:, n:2}, {time: :+0s:, n:3}, {time: :+1s:, n:4}, {time: :+4s:, n:5}]
     | put dt = time - :now:
     | keep n, dt
     | view result -ticks true
@@ -401,10 +430,10 @@ Emits historic and live points with -points
     { n: 1, dt: "-00:00:02.000" }
     { n: 2, dt: "-00:00:01.000" }
     { n: 3, dt: "00:00:00.000" }
-    { tick: true }
     { n: 4, dt: "00:00:01.000" }
     { tick: true }
-    { n: 5, dt: "00:00:02.000" }
+    { tick: true }
+    { n: 5, dt: "00:00:04.000" }
 
 Parses time string and numbers in -points
 ----------------------------------------------------
@@ -484,7 +513,7 @@ Emits correct number of points when -from/-to and -every are set
 
 ### Juttle
 
-    emit -from :6 hours ago: -every :hour: -to :6 hours from now:
+    emit -from :6 minutes ago: -every :minute: -to :6 minutes from now:
     | reduce count()
     | view result
 

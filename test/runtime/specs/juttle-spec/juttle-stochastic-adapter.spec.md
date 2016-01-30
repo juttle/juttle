@@ -1,10 +1,20 @@
 Juttle stochastic adapter
 ================================================
 
+stochastic with no time options complains
+-----------------------------------------
+### Juttle
+    read stochastic -source "cdn" | view result
+
+### Errors
+
+   * One of -from, -to, or -last must be specified to define a query time range
+
+
 stochastic with bad type complains
 -------------------------
 ### Juttle
-    read stochastic -source "cdn" -type 'bleat' | view result
+    read stochastic -last :day: -source "cdn" -type 'bleat' | view result
 
 ### Errors
 
@@ -13,7 +23,7 @@ stochastic with bad type complains
 stochastic with FTS complains
 -------------------------
 ### Juttle
-    read stochastic -source "cdn" -last :day: "Never gonna get it" | view result
+    read stochastic -last :day: -source "cdn" -last :day: "Never gonna get it" | view result
 
 ### Errors
 
