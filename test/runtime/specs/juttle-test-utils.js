@@ -5,7 +5,6 @@
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
-var events = require('events');
 var _ = require('underscore');
 var Promise = require('bluebird');
 var expect = require('chai').expect;
@@ -19,6 +18,7 @@ var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
+var View = require('../../../lib/views/view.js');
 
 // Set up logging to use log4js loggers
 JuttleLogger.getLogger = log4js.getLogger;
@@ -100,8 +100,8 @@ function set_stdout(stream) {
 })();
 
 
-var TestView = Juttle.proc.subscribe.extend({
-    initialize: function(options) {
+var TestView = View.extend({
+    initialize: function(options, env) {
         this.sink = options.sink;
         this.eofs = options.eofs || 1;
         this.data = [];
@@ -109,10 +109,9 @@ var TestView = Juttle.proc.subscribe.extend({
         this.marks = options.sink.options && options.sink.options.marks;
         this.times = options.sink.options && options.sink.options.times;
         this.dt = options.sink.options && options.sink.options.dt;
+        this.env = env;
     },
-    procName: 'testsink',
-    emitEvent: events.EventEmitter.prototype.emit,
-    on: events.EventEmitter.prototype.on,
+    name: 'test',
     consume: function(data) {
         this.data = this.data.concat(utils.fromNative(data.map(_.clone)));
     },
@@ -128,7 +127,7 @@ var TestView = Juttle.proc.subscribe.extend({
             if (this.times) {
                 this.data = this.data.concat(utils.fromNative([{time:time, tick:true}]));
             } else if (this.dt) {
-                this.data = this.data.concat(utils.fromNative([{dt:JuttleMoment.subtract(time, this.program.now), tick:true}]));
+                this.data = this.data.concat(utils.fromNative([{dt:JuttleMoment.subtract(time, this.env.now), tick:true}]));
             } else {
                 this.data = this.data.concat({tick:true});
             }
@@ -143,7 +142,7 @@ var TestView = Juttle.proc.subscribe.extend({
             result.type = this.sink.name;
             result.options = this.sink.options;
             logger.debug('End of file reached: emitting', result);
-            this.emitEvent('end', result);
+            this.events.trigger('end', result);
         }
     }
 });
@@ -223,45 +222,52 @@ function run_juttle(prog, options) {
         sink_options = options.sink_options;
     }
 
-    var sink_handlers = [];
-
     if (options.expect_file && ! options.write_expect_file) {
         raw_data = fs.readFileSync(options.expect_file, 'utf8');
         expect_data = JSON.parse(raw_data);
     }
 
     return Promise.try(function() {
-        logger.debug('binding Juttle sinks');
-        var promises = _.map(prog.get_sinks(), function(sink) {
+        var views = {};
 
+        var promises = _.map(prog.get_sinks(), function(sink) {
             // non-visual sinks don't implement pub/sub channel but instead have
             // a done() promise to indicate when they are at eof.
             if (sink.procName !== 'view') {
                 return sink.isDone
-                .then(function() {
-                    return sink;
+                    .then(function() {
+                        return sink;
+                    });
+            } else {
+                var view = new TestView(_.extend({ sink: sink }, sink_options[sink.name]), prog.env);
+                views[sink.channel] = view;
+
+                return new Promise(function(resolve, reject) {
+                    view.events.on('end', resolve);
+                    view.events.on('error', reject);
                 });
             }
-
-            // XXX this hack is needed to make sure the program given to the
-            // test view has a `now` for it to use. it should be removed once
-            // the test view no longer uses publish/subscribe.
-            prog.now = prog.env.now;
-            var cur_options = _.extend({ sink: sink }, sink_options[sink.name]);
-            var sink_handler = new TestView(cur_options, {}, null, prog);
-
-            sink_handlers.push(sink_handler);
-
-            prog.bind_sink(sink_handler, sink.channel);
-
-            return new Promise(function(resolve, reject) {
-                sink_handler.on('end', resolve);
-                sink_handler.on('error', reject);
-            });
         });
 
         var errors = [];
         var warnings = [];
+
+        // Dispatch to correct test view
+        prog.events.on('view:mark', function(data) {
+            views[data.channel].mark(data.time);
+        });
+
+        prog.events.on('view:tick', function(data) {
+            views[data.channel].tick(data.time);
+        });
+
+        prog.events.on('view:eof', function(data) {
+            views[data.channel].eof();
+        });
+
+        prog.events.on('view:points', function(data) {
+            views[data.channel].consume(data.points);
+        });
 
         prog.events.on('error', function(err) {
             errors.push(err);
