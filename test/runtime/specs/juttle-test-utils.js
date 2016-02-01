@@ -1,7 +1,5 @@
 'use strict';
 
-/* jshint: node */
-
 var fs = require('fs');
 var util = require('util');
 var path = require('path');

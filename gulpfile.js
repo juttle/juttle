@@ -16,7 +16,6 @@ var path = require('path');
 var peg = require('gulp-peg');
 var rename = require('gulp-rename');
 var through = require('through2');
-// jshint ignore:line
 var Promise = require('bluebird');
 var marked = require('marked');
 var FileResolver = require('./lib/module-resolvers/file-resolver');
