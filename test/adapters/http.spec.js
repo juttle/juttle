@@ -369,7 +369,7 @@ describe('HTTP adapter tests', function() {
             })
             .then(function(result) {
                 expect(result.errors.length).equal(1);
-                expect(result.warnings.length).equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.errors[0]).to.contain('connect ECONNREFUSED');
             });
         });
@@ -380,7 +380,7 @@ describe('HTTP adapter tests', function() {
             })
             .then(function(result) {
                 expect(result.errors.length).equal(1);
-                expect(result.warnings.length).equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.errors[0]).to.contain('getaddrinfo ENOTFOUND');
             });
         });
@@ -416,7 +416,7 @@ describe('HTTP adapter tests', function() {
             })
             .then(function(result) {
                 expect(result.errors.length).equal(1);
-                expect(result.warnings.length).equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.errors[0]).to.contain('Invalid format option value, must be one of the following: csv, json, jsonl');
             });
         });
@@ -428,8 +428,8 @@ describe('HTTP adapter tests', function() {
                     program: 'read http -method "' + method + '" -url "' + self.url + '/status/200"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                 });
             });
         });
@@ -441,8 +441,8 @@ describe('HTTP adapter tests', function() {
                     '               -url "' + self.url + '/headers?foo=bar&fizz=buzz"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -452,8 +452,8 @@ describe('HTTP adapter tests', function() {
                     '-url "' + this.url + '/points?count=1&timeField=created_on"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).equal(1);
                 expect(result.sinks.table[0].time).to.not.be.undefined();
             });
@@ -464,8 +464,8 @@ describe('HTTP adapter tests', function() {
                 program: 'read http -includeHeaders true -url "' + this.url + '/fake-data"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).equal(2);
                 expect(result.sinks.table[0].etag).to.equal('12345');
                 expect(result.sinks.table[0]['user-agent']).to.equal('fake-data');
@@ -493,7 +493,7 @@ describe('HTTP adapter tests', function() {
                 })
                 .then(function(result) {
                     expect(result.errors.length).equal(1);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.errors[0]).to.contain('Invalid ' + name.toUpperCase() + ' data');
                 });
             });
@@ -506,7 +506,7 @@ describe('HTTP adapter tests', function() {
                 })
                 .then(function(result) {
                     expect(result.errors.length).equal(1);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.errors[0]).to.contain('internal error StatusCodeError: ' + status);
                 });
             });
@@ -517,8 +517,8 @@ describe('HTTP adapter tests', function() {
                 program: 'read http -url "' + this.url + '/points?count=0"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).equal(0);
             });
         });
@@ -530,8 +530,8 @@ describe('HTTP adapter tests', function() {
                                     '   -url "' + this.url + '/object?foo=bar"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(1);
                     expect(result.sinks.table[0].foo).to.be.equal('bar');
                 });
@@ -543,8 +543,8 @@ describe('HTTP adapter tests', function() {
                                     '   -url "' + this.url + '/object?time=2014-01-01T00:00:00.000Z"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(1);
                     expect(result.sinks.table[0].time).to.be.equal('2014-01-01T00:00:00.000Z');
                 });
@@ -556,8 +556,8 @@ describe('HTTP adapter tests', function() {
                                     '   -url "' + this.url + '/points?count=100&timeField=time&fizz=buzz"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(100);
                     expect(result.sinks.table[0].time).to.not.be.undefined();
                     expect(result.sinks.table[0].fizz).to.be.equal('buzz');
@@ -571,8 +571,8 @@ describe('HTTP adapter tests', function() {
                              '          -url "' + this.url + '/points?count=100&timeField=time&fizz=buzz"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(100);
                     expect(result.sinks.table[0].time).to.not.be.undefined();
                     expect(result.sinks.table[0].fizz).to.be.equal('buzz');
@@ -632,8 +632,8 @@ describe('HTTP adapter tests', function() {
                         '              -url "' + self.url + '/status/200"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
-                    expect(result.warnings.length).equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                 });
             });
         });
@@ -646,8 +646,8 @@ describe('HTTP adapter tests', function() {
                     '              -url "' + self.url + '/headers?foo=bar&fizz=buzz"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -656,7 +656,7 @@ describe('HTTP adapter tests', function() {
                 program: 'emit -limit 1 | write http -url "' + this.url + '/status/500"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
+                expect(result.errors).deep.equals([]);
                 expect(result.warnings.length).equal(1);
                 expect(result.warnings[0]).to.contain('internal error StatusCodeError: 500');
             });
@@ -669,7 +669,7 @@ describe('HTTP adapter tests', function() {
                     '| write http -url "' + this.url + '/flakey"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
+                expect(result.errors).deep.equals([]);
                 expect(result.warnings.length).equal(5);
             });
         });
@@ -680,8 +680,8 @@ describe('HTTP adapter tests', function() {
                 program: 'emit -limit 1 | filter banana=true | write http -url "' + this.url + '/status/500"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.be.undefined();
             });
         });
@@ -694,8 +694,8 @@ describe('HTTP adapter tests', function() {
                     '| write http -method "PUT" -url "' + this.url + '/body?value=1&name=field-1"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -706,8 +706,8 @@ describe('HTTP adapter tests', function() {
                     '| write http -method "PUT" -url "' + this.url + '/body?time=2015-01-01T00:00:00.000Z&value=1&name=field-1"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -719,8 +719,8 @@ describe('HTTP adapter tests', function() {
                     '| write http -method "PUT" -url "' + this.url + '/points?expect=1"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -731,8 +731,8 @@ describe('HTTP adapter tests', function() {
                     '| write http -method "PUT" -url "' + this.url + '/accept-object"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
 
@@ -745,8 +745,8 @@ describe('HTTP adapter tests', function() {
                     '| write http -maxLength 10 -method "PUT" -url "' + this.url + '/points?expect=10"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             });
         });
     });
