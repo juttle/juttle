@@ -2,20 +2,37 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
-## Unreleased Changes
+## 0.4.0
 
 ### Major Changes
+
 - Implemented a new API for adapters in which `read` and `write` now have a simpler contract that is more isolated from the internals of the runtime and can more easily support behaviors like periodically reading for pseudo-live streams. [[#248](https://github.com/juttle/juttle/pull/248)]
+- Added the `http_server` adapter. [[#224](https://github.com/juttle/juttle/pull/224)]
+- Added the `JSON` module. [[#209](https://github.com/juttle/juttle/pull/209)]
 
 ### Minor Changes
 
-- Added support for the `-last` option to the emit proc and modified the stochastic adapter to require  one of `-from`, `-to`, or `-last`
+- Allowed more expressive filter expressions in `filter`. [[#57](https://github.com/juttle/juttle/issues/57)]
+- Added support for the `-last` option to the `emit` proc and modified the `stochastic` adapter to require one of `-from`, `-to`, or `-last`.
 [[#242](https://github.com/juttle/juttle/pull/242)]
-- Create `http_server` adapter. [[#224](https://github.com/juttle/juttle/pull/224)]
+- Added the `-format` option to `read http` and `write file`. [[#287](https://github.com/juttle/juttle/issues/287), [#125](https://github.com/juttle/juttle/issues/125)]
+- Optimized `read ... | head ...` with `file`, `stdio`, and `http` adapters. [[#261](https://github.com/juttle/juttle/issues/261), [#267](https://github.com/juttle/juttle/pull/267), [#278](https://github.com/juttle/juttle/pull/278), [#279](https://github.com/juttle/juttle/pull/279)]
+- Made `emit -points` not add the `time` field to points that don’t contain it already. [[#77](https://github.com/juttle/juttle/issues/77)]
+- Made the `-points` option of `emit` mutually exclusive with `-from`, `-to`, `-last`, `-limit`, and `-every`. [[#274](https://github.com/juttle/juttle/pull/274)]
+- Made the `node-grok` dependency optional. [[#290](https://github.com/juttle/juttle/pull/290)]
+- Replaced JSHint + JSCS by ESLint and fixed various issues ESLint found. [[#202](https://github.com/juttle/juttle/issues/202)]
+- Enforced single quotes for strings in the codebase. [[#238](https://github.com/juttle/juttle/pull/238)]
+- Enabled strict mode for the whole codebase. [[#240](https://github.com/juttle/juttle/issues/240)]
+- Improved `README.md`. [[#218](https://github.com/juttle/juttle/pull/218)]
 
 ### Bug Fixes
 
+- Fixed a memory leak when reading JSON files. [[#258](https://github.com/juttle/juttle/issues/258)]
+- Fixed sources to handle numeric time field as a Unix timestamp. [[#166](https://github.com/juttle/juttle/issues/166), [#243](https://github.com/juttle/juttle/issues/243)]
 - Fixed `emit` to properly output ticks when there are gaps in the points. [[#248](https://github.com/juttle/juttle/pull/248)]
+- Fixed a problem where some warnings were labeled as errors. [[#255](https://github.com/juttle/juttle/pull/255)]
+- Fixed error message produced in cases like `read elastic [1, 2, 3]`. [[#217](https://github.com/juttle/juttle/pull/217)]
+- Fixed documentation of `read` options. [[#291](https://github.com/juttle/juttle/pull/291)]
 
 ## 0.3.1
 
