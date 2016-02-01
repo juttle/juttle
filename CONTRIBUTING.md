@@ -105,7 +105,7 @@ Be sure to update documentation when you make user-facing changes. Small reposit
 
 ### Style
 
-When developing you may run into failures during linting where jscs complains about your Javascript coding style. An easy way to fix those files is to simply run `jscs --fix test` or `jscs --fix lib` from the root directory of the project. After jscs fixes things you should proceed to check that those changes are reasonable, as auto-fixing may not produce the nicest looking code.
+When developing you may run into failures during linting where eslint complains about your Javascript coding style. An easy way to fix those files is to simply run `eslint --fix test` or `eslint --fix lib` from the root directory of the project. After eslint fixes things you should proceed to check that those changes are reasonable, as auto-fixing may not produce the nicest looking code.
 
 When adding Juttle code, follow the [Juttle Style Guide](docs/references/style_guide.md). If you add *.juttle programs under docs/examples, or embedded anywhere in the docs markdown articles as a code block with `juttle` language marker, they will be automatically syntax-checked when tests are run.
 
