@@ -48,8 +48,9 @@ var implicit_views = require('../lib/compiler/flowgraph/implicit_views');
 var modes = _.without(compiler.stageNames, 'eval').concat('run');
 
 function usage() {
-    console.log('usage: juttle [--version] [--mode <mode>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
+    console.log('usage: juttle [--version] [--adapters] [--mode <mode>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
     console.log('     --version show juttle CLI version');
+    console.log('     --adapters show versions and paths to all configured adapters');
     console.log('     --mode <mode>: one of ' + modes.map(JSON.stringify).join(', '));
     console.log('     --config <config>: path to the juttle interpreter configuration file');
     console.log('     --optimize runs optimization');
@@ -120,6 +121,12 @@ var view_classes = {
 var Juttle = require('../lib/runtime').Juttle;
 Juttle.adapters.configure(config.adapters);
 
+if (opts.adapters) {
+    Juttle.adapters.list().forEach(function(info) {
+        console.log(info.adapter, info.version, info.path);
+    });
+    process.exit(0);
+}
 
 if (process.env.JUTTLE_LOAD_TEST_ADAPTERS) {
     Juttle.adapters.register('test', require('../test/runtime/test-adapter')());
