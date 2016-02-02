@@ -5,7 +5,7 @@ var juttle_test_utils = require('../runtime/specs/juttle-test-utils.js');
 var compile_juttle = juttle_test_utils.compile_juttle;
 var check_juttle = juttle_test_utils.check_juttle;
 var input_default_fns = require('../spec/input-default-functions');
-var Filter = require('../../lib/runtime/filter');
+var Filter = require('../../lib/runtime/types/filter');
 
 describe('Juttle inputs', function() {
 

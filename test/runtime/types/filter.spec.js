@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var Filter = require('../../lib/runtime/filter');
+var Filter = require('../../../lib/runtime/types/filter');
 
 describe('Filter', function() {
     describe('constructor', function() {
