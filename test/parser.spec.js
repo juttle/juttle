@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var Promise = require('bluebird');
 var _ = require('underscore');
 
-var parser = require('../../lib/parser/juttle-parser');
+var parser = require('../lib/parser');
 
 
 describe('Juttle parser', function() {
