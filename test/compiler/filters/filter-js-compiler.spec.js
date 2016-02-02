@@ -149,7 +149,7 @@ describe('FilterJSCompiler', function() {
     it('compiles DurationLiteral correctly', function() {
         expect('a == :00:00:05.000:').to.filter(
             POINTS_VALUES,
-            [ { a: new JuttleMoment.duration('00:00:05.000') } ]
+            [ { a: JuttleMoment.duration('00:00:05.000') } ]
         );
     });
 

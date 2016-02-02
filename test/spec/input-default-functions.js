@@ -31,7 +31,7 @@ module.exports = {
     },
 
     duration: function() {
-        return new JuttleMoment.duration('1h');
+        return JuttleMoment.duration('1h');
     },
 
     filter: function() {
