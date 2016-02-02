@@ -4,7 +4,7 @@ var _ = require('underscore');
 var juttle_test_utils = require('../specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var expect = require('chai').expect;
-var JuttleMoment = require('../../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 
 var validDurationUnits = [
     'week',

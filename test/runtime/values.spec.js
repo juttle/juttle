@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 var _ = require('underscore');
 var values = require('../../lib/runtime/values');
-var JuttleMoment = require('../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var Filter = require('../../lib/runtime/types/filter');
 
 describe('Values tests', function () {

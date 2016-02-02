@@ -4,7 +4,7 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var Filter = require('../../../lib/runtime/types/filter');
-var JuttleMoment = require('../../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var SemanticPass = require('../../../lib/compiler/semantic');
 var _ = require('underscore');
 var errors = require('../../../lib/errors');

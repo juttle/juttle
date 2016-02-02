@@ -11,7 +11,7 @@ var _ = require('underscore');
 var store = {};
 var AdapterRead = require('../../lib/runtime/adapter-read');
 var AdapterWrite = require('../../lib/runtime/adapter-write');
-var JuttleMoment = require('../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var errors = require('../../lib/errors');
 
 function TestAdapter(config) {
