@@ -1,8 +1,8 @@
 'use strict';
 
 var _ = require('underscore');
-var JuttleMoment = require('../../lib/moment').JuttleMoment;
-var Filter = require('../../lib/runtime/filter');
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
+var Filter = require('../../lib/runtime/types/filter');
 
 function computeListDefault(input) {
     var items = input.options.items;

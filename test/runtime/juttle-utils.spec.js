@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 var utils = require('../../lib/runtime/juttle-utils');
-var JuttleMoment = require('../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 
 describe('juttle utils tests', function() {
     describe('fromNative', function() {

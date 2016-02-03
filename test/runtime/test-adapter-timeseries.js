@@ -10,7 +10,7 @@
 'use strict';
 
 var AdapterRead = require('../../lib/runtime/adapter-read');
-var JuttleMoment = require('../../lib/moment').JuttleMoment;
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var errors = require('../../lib/errors');
 
 class TestTimeseriesRead extends AdapterRead {
