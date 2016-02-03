@@ -126,8 +126,8 @@ describe('file adapter tests', function () {
             var options = {from: '1970-01-01T00:00:03.000Z'};
             return run_read_file_juttle(json_file, options, ' | keep time, rate')
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { 'time': '1970-01-01T00:00:03.000Z', 'rate': 2},
                     { 'time': '1970-01-01T00:00:04.000Z', 'rate': 7},
@@ -141,8 +141,8 @@ describe('file adapter tests', function () {
             var options = {to: '1970-01-01T00:00:03.000Z'};
             return run_read_file_juttle(json_file, options, ' | keep time, rate')
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { 'time': '1970-01-01T00:00:01.000Z', 'rate': 1},
                     { 'time': '1970-01-01T00:00:02.000Z', 'rate': 5},
@@ -158,8 +158,8 @@ describe('file adapter tests', function () {
 
             return run_read_file_juttle(json_file, options, '| keep time, rate')
             .then(function(result) {
-                expect(result.errors.length).equal(0);
-                expect(result.warnings.length).equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { 'time': '1970-01-01T00:00:03.000Z', 'rate': 2},
                     { 'time': '1970-01-01T00:00:04.000Z', 'rate': 7},
@@ -205,8 +205,8 @@ describe('file adapter tests', function () {
                 program: 'read file -file "' +  syslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | keep program, pid'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { program: 'anacron', pid: '15134' },
                     { program: 'anacron', pid: '15134' },
@@ -250,7 +250,7 @@ describe('file adapter tests', function () {
                          '| write file -file "' + tmp_file + '" -format "csv"'
             })
             .then(function(result) {
-                expect(result.errors.length).equal(0);
+                expect(result.errors).deep.equals([]);
                 expect(result.warnings.length).equal(1);
                 expect(result.warnings[0]).to.contain('Invalid CSV data: Found new or missing fields: fizz');
             });
@@ -264,12 +264,12 @@ describe('file adapter tests', function () {
                              '| write file -file "' + tmp_file + '" -format "' + format + '"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
+                    expect(result.errors).deep.equals([]);
 
                     return run_read_file_juttle(tmp_file, { format: format });
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
+                    expect(result.errors).deep.equals([]);
                     expect(result.sinks.table.length).equal(1);
                     expect(result.sinks.table[0].message).equal('hello test');
                 });
@@ -285,8 +285,8 @@ describe('file adapter tests', function () {
                     return run_read_file_juttle(tmp_file, { format: format });
                 })
                 .then(function(result) {
-                    expect(result.errors.length).to.equal(0);
-                    expect(result.warnings.length).to.equal(0);
+                    expect(result.errors).deep.equals([]);
+                    expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).to.equal(0);
                 });
             });
@@ -298,11 +298,11 @@ describe('file adapter tests', function () {
                              '| write file -file "' + tmp_file + '" -format "' + format + '"'
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
+                    expect(result.errors).deep.equals([]);
                     return run_read_file_juttle(tmp_file, { format: format });
                 })
                 .then(function(result) {
-                    expect(result.errors.length).equal(0);
+                    expect(result.errors).deep.equals([]);
                     expect(result.sinks.table.length).equal(10);
                     for(var index = 0; index < 10; index++) {
                         expect(result.sinks.table[index].message).equal('hello test ' + (index + 1));
@@ -371,7 +371,7 @@ describe('file adapter tests', function () {
             })
             .then(function(result) {
                 expect(result.errors.length).to.equal(2);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(6);
@@ -385,8 +385,8 @@ describe('file adapter tests', function () {
                 program: 'read file -file "' +  badSyslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | head 1'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
@@ -400,8 +400,8 @@ describe('file adapter tests', function () {
                 program: 'read file -file "' +  badSyslog + '" -format "grok" -pattern "%{SYSLOGLINE}" | head 2 | head 1'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);

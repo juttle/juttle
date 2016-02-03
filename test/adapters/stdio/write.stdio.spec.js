@@ -46,7 +46,7 @@ describe('write stdio adapter tests', function() {
                      '| write stdio -format "csv"'
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equals([]);
             expect(result.warnings.length).equal(1);
             expect(result.warnings[0]).to.contain('Invalid CSV data: Found new or missing fields: fizz');
         });
@@ -69,8 +69,8 @@ describe('write stdio adapter tests', function() {
                 program: 'emit -limit 3 | filter foo="bar" | write stdio -format "' + format + '"'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(fs.readFileSync(tmpFilename).toString()).to.equal('');
             });
         });
@@ -83,8 +83,8 @@ describe('write stdio adapter tests', function() {
                 program: 'emit -limit 3 | put foo="bar", index=count() | write stdio -format "' + format + '"'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
             })
             .then(function() {
                 juttle_test_utils.set_stdin(fs.createReadStream(tmpFilename));
@@ -93,8 +93,8 @@ describe('write stdio adapter tests', function() {
                 });
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { foo: 'bar', index: handle(1) },
                     { foo: 'bar', index: handle(2) },

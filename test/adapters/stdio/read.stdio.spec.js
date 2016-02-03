@@ -72,7 +72,7 @@ describe('read stdio adapter tests', function() {
             })
             .then(function(result) {
                 expect(result.errors.length).to.equal(1);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.errors[0]).to.contain('Error: Invalid ' + format.toUpperCase() + ' data');
             });
         });
@@ -84,8 +84,8 @@ describe('read stdio adapter tests', function() {
                 program: 'read stdio'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.equal(0);
             });
         });
@@ -105,8 +105,8 @@ describe('read stdio adapter tests', function() {
                 program: 'read stdio -format "' + format + '" | keep time, rate'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([
                     { 'time': '1970-01-01T00:00:01.000Z', 'rate': handle(1) },
                     { 'time': '1970-01-01T00:00:02.000Z', 'rate': handle(5) },
@@ -126,8 +126,8 @@ describe('read stdio adapter tests', function() {
             program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | keep program, pid'
         })
         .then(function(result) {
-            expect(result.errors.length).to.equal(0);
-            expect(result.warnings.length).to.equal(0);
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
             expect(result.sinks.table).to.deep.equal([
                 { program: 'anacron', pid: '15134' },
                 { program: 'anacron', pid: '15134' },
@@ -204,7 +204,7 @@ describe('read stdio adapter tests', function() {
             })
             .then(function(result) {
                 expect(result.errors.length).to.equal(2);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(Number.POSITIVE_INFINITY);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(6);
@@ -220,8 +220,8 @@ describe('read stdio adapter tests', function() {
                 program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | head 1'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);
@@ -237,8 +237,8 @@ describe('read stdio adapter tests', function() {
                 program: 'read stdio -format "grok" -pattern "%{SYSLOGLINE}" | head 2 | head 1'
             })
             .then(function(result) {
-                expect(result.errors.length).to.equal(0);
-                expect(result.warnings.length).to.equal(0);
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).to.be.equal(1);
                 expect(result.prog.graph.adapter.parser.stopAt).to.equal(1);
                 expect(result.prog.graph.adapter.parser.totalParsed).to.equal(2);

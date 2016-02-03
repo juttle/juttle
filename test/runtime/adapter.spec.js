@@ -70,7 +70,7 @@ describe('adapter API tests', function () {
             program: 'emit -limit 1 | put message = "hello test 2" | write test -key "test3"'
         })
         .then(function(result) {
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equals([]);
         })
         .then(function() {
             return check_juttle({
@@ -150,7 +150,7 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             expect(TestAdapterClone.initialized).is.true;
-            expect(result.errors.length).equal(0);
+            expect(result.errors).deep.equals([]);
             expect(result.sinks.table.length).equal(0);
         });
     });

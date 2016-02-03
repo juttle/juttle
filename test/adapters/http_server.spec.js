@@ -46,8 +46,8 @@ describe('read http_server', function() {
         })
         .then(function(result) {
             expect(result.sinks.table).to.deep.equal(body);
-            expect(result.errors.length).equal(0);
-            expect(result.warnings.length).equal(0);
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
         });
     });
 
