@@ -397,9 +397,9 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        it('fails when no -unknown provided', function() {
+        it('fails when -unknown provided', function() {
             return check_juttle({
-                program: 'read http -unknown true'
+                program: 'read http -unknown true -url "some_url"'
             })
             .then(function() {
                 throw Error('The previous statement should have failed');
@@ -423,7 +423,7 @@ describe('HTTP adapter tests', function() {
 
         it('can use -method', function() {
             var self = this;
-            Promise.map(['GET', 'POST', 'DELETE'], function(method) {
+            return Promise.map(['GET', 'POST', 'DELETE'], function(method) {
                 return check_juttle({
                     program: 'read http -method "' + method + '" -url "' + self.url + '/status/200"'
                 })
@@ -611,9 +611,9 @@ describe('HTTP adapter tests', function() {
             });
         });
 
-        it('fails when no -unknown provided', function() {
+        it('fails when -unknown provided', function() {
             return check_juttle({
-                program: 'emit -limit 1 | write http -unknown true'
+                program: 'emit -limit 1 | write http -unknown true -url "some_url"'
             })
             .then(function() {
                 throw Error('The previous statement should have failed');

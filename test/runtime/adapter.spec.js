@@ -97,7 +97,7 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             var first_node = result.prog.graph.head[0];
-            expect(first_node.procName).equal('read');
+            expect(first_node.procName).equal('read test');
 
             var second_node = first_node.out_.default[0].proc;
             expect(second_node.procName).equal('view');
@@ -124,7 +124,7 @@ describe('adapter API tests', function () {
         })
         .then(function(result) {
             var first_node = result.prog.graph.head[0];
-            expect(first_node.procName).equal('read');
+            expect(first_node.procName).equal('read test');
 
             var second_node = first_node.out_.default[0].proc;
             expect(second_node.procName).equal('view');
