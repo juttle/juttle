@@ -156,12 +156,6 @@ gulp.task('examples-check', ['peg'], function() {
     var optimize = require('./lib/compiler/optimize');
     var implicit_views = require('./lib/compiler/flowgraph/implicit_views');
 
-    // Override the adapter get method to return a dummy object for all
-    // adapter types that are used in the examples.
-    var adapters = require('./lib/runtime/adapters');
-    adapters.get = function(name) { return {}; };
-    adapters.isValid = function(name) { return true; };
-
     var jcompile = function() {
         return through.obj(function(file, encoding, callback) {
             var juttles = [];
@@ -195,6 +189,14 @@ gulp.task('examples-check', ['peg'], function() {
         });
     };
 
+    // Override the adapter get method to return a dummy object for all
+    // adapter types that are used in the examples.
+    var adapters = require('./lib/runtime/adapters');
+    var adaptersGet = adapters.get;
+    var adaptersIsValid = adapters.isValid;
+    adapters.get = function(name) { return {}; };
+    adapters.isValid = function(name) { return true; };
+
     return gulp.src([
         'docs/**/*.md',
         'docs/examples/**/*.juttle',
@@ -203,5 +205,9 @@ gulp.task('examples-check', ['peg'], function() {
         '!examples/invalid.juttle'
     ])
     .pipe(gulpif(debugOn, debug({title: 'Syntax check: '})))
-    .pipe(jcompile());
+    .pipe(jcompile())
+    .on('end', function() {
+        adapters.get = adaptersGet;
+        adapters.isValid = adaptersIsValid;
+    });
 });
