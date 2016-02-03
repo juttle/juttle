@@ -564,6 +564,23 @@ describe('HTTP adapter tests', function() {
                 });
             });
 
+            it('can filter data points with content-type: "' + contentType + '" using -from/-to', function() {
+                return check_juttle({
+                    program: 'read http -headers { Accept: "' + contentType + '"} ' +
+                                    '   -url "' + this.url + '/points?count=10&from=2014-01-01T00:00:00.000Z&timeField=time"' +
+                                    '   -from :2014-01-01T00:00:03.000Z: -to :2014-01-01T00:00:06.000Z:'
+                })
+                .then(function(result) {
+                    expect(result.errors.length).equal(0);
+                    expect(result.warnings.length).equal(0);
+                    expect(result.sinks.table).to.deep.equal([
+                        { time: '2014-01-01T00:00:03.000Z' },
+                        { time: '2014-01-01T00:00:04.000Z' },
+                        { time: '2014-01-01T00:00:05.000Z' }
+                    ]);
+                });
+            });
+
             it('can override content-type using -format="' + format + '"', function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '", "Return-Content-Type": "application/xml"} ' +
