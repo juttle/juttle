@@ -12,11 +12,7 @@ describe('Filter', function() {
                 expression: {
                     type: 'BinaryExpression',
                     operator: '==',
-                    left: {
-                        type: 'UnaryExpression',
-                        operator: '*',
-                        expression: { type: 'StringLiteral', value: 'a' },
-                    },
+                    left: { type: 'Field', name: 'a' },
                     right: { type: 'NumericLiteral', value: 5 }
                 }
             };

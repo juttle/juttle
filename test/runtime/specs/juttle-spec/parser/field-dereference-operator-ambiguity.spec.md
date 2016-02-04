@@ -35,9 +35,9 @@ Parses toplevel `*` as field dereference with whitespace before and no whitespac
     | reduce count()
     | view result
 
-### Output
+### Errors
 
-    { count: 62 }
+  * Invalid filter term. Valid forms are: "field == value", "value == field".
 
 Parses toplevel `*` as multiplication with whitespace before and whitespace after
 ---------------------------------------------------------------------------------
