@@ -23,7 +23,7 @@ class TestTimeseriesRead extends AdapterRead {
         this.logger.debug('initialize options:', options);
 
         if (!options.from && !options.to) {
-            throw errors.compileError('RT-MISSING-TIME-RANGE-ERROR');
+            throw errors.compileError('MISSING-TIME-RANGE-ERROR');
         }
 
         this.every = options.every || JuttleMoment.duration(1, 's');

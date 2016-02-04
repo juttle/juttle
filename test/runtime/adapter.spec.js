@@ -163,7 +163,7 @@ describe('adapter API tests', function () {
             throw new Error('unexpected success');
         })
         .catch(function(err) {
-            expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
+            expect(err.code).equal('INVALID-ADAPTER');
             expect(err.message).equal('adapter bogus not registered');
             expect(err.info.location.filename).is.a.string;
             expect(err.info.location.start.offset).is.a.number;
@@ -179,7 +179,7 @@ describe('adapter API tests', function () {
             throw new Error('unexpected success');
         })
         .catch(function(err) {
-            expect(err.code).equal('JUTTLE-INVALID-ADAPTER');
+            expect(err.code).equal('INVALID-ADAPTER');
             expect(err.message).equal('adapter bogus not registered');
             expect(err.info.location.filename).is.a.string;
             expect(err.info.location.start.offset).is.a.number;
