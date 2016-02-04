@@ -18,6 +18,19 @@ describe('read testTimeseries', function () {
         });
     });
 
+    it('requires -from to be before -to', function() {
+        return check_juttle({
+            program: 'read testTimeseries -from :2014-01-01: -to :2014-01-01:'
+        })
+        .then(function(result) {
+            throw new Error('unexpected success');
+        })
+        .catch(function(err) {
+            expect(err.code).equal('RT-TO-BEFORE-FROM-MOMENT-ERROR');
+            expect(err.message).equal('-from must be before -to');
+        });
+    });
+
     it('handles pure historical mode', function() {
         return check_juttle({
             program: 'read testTimeseries -from :2015-01-01: -to :2015-01-05: -every :1d:'

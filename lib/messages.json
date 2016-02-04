@@ -41,7 +41,7 @@
   "RT-FORGET-RESET-ERROR": "cannot -forget when -reset false",
   "RT-FROM-OVER-ERROR": "{proc} -from only when -over is specified",
   "RT-FROM-TO-OVER-ERROR": "{proc} -from/-to only when -over is specified",
-  "RT-TO-BEFORE-FROM-MOMENT-ERROR": "-to must not be earlier than -from",
+  "RT-TO-BEFORE-FROM-MOMENT-ERROR": "-from must be before -to",
   "RT-PACE-EVERY-X-ERROR": "Specify either output period with -every or time speedup with -x",
   "RT-METRICS-OR-EVENTS": "-type must be \"metric\" or \"event\"",
   "RT-EMIT-POINTS-ARRAY-ERROR": "emit -points wants an array of points",
