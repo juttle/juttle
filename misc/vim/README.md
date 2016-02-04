@@ -8,6 +8,6 @@ To install automatic syntax highlighting for Juttle programs:
 
 ## Updating the rules
 
-There's a simple ash script in syntax directory that can be called like so
+There's a simple bash script in syntax directory that can be called like so
 `./update.sh` to simply update the syntax.vim based off the
 `lib/parser/parser.pegjs` grammar directly and update the proc rules.

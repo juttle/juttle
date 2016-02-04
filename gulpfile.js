@@ -15,6 +15,7 @@ var mocha = require('gulp-mocha');
 var path = require('path');
 var peg = require('gulp-peg');
 var rename = require('gulp-rename');
+var shell = require('gulp-shell');
 var through = require('through2');
 var Promise = require('bluebird');
 var marked = require('marked');
@@ -44,6 +45,15 @@ gulp.task('juttle-spec-clean', function() {
 gulp.task('juttle-spec', ['juttle-spec-clean'], function() {
     return gulp.src('test/runtime/specs/juttle-spec/**/*.md')
         .pipe(jspec());
+});
+
+gulp.task('misc', function() {
+    return gulp.src([
+        'misc/vim/syntax/update.sh'
+    ], {read: false})
+    .pipe(shell([
+        '<%= file.path %>'
+    ]));
 });
 
 gulp.task('lint-test', function() {
@@ -103,11 +113,11 @@ function gulp_test() {
         }));
 }
 
-gulp.task('test', ['peg', 'juttle-spec'], function() {
+gulp.task('test', ['misc', 'peg', 'juttle-spec'], function() {
     return gulp_test();
 });
 
-gulp.task('test-coverage', ['peg', 'juttle-spec', 'instrument'], function() {
+gulp.task('test-coverage', ['misc', 'peg', 'juttle-spec', 'instrument'], function() {
     return gulp_test()
         .pipe(istanbul.writeReports())
         .pipe(istanbul.enforceThresholds({

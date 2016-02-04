@@ -21,7 +21,7 @@ syn keyword juttleConditional       if else
 syn keyword juttleFunctions         function reducer sub
 
 syn keyword juttleSinks             view
-syn keyword juttleProcs             $(grep "'processor' =" ../../../lib/parser/parser.pegjs  | awk '{print $4}' | xargs)
+syn keyword juttleProcs             $(grep "'processor' =" $CWD/../../../lib/parser/parser.pegjs  | awk '{print $4}' | xargs)
 syn keyword juttleConst             false null true
 
 syn region  juttleLineComment       start=+\/\/+ end=/$/ oneline
