@@ -121,7 +121,7 @@ describe('Juttle CLI Tests', function() {
                 'emit -limit 1 | view noview',
             ]).then(function(result) {
                 expect(result.code).to.equal(1);
-                expect(result.stderr).to.include('Error: program refers to invalid client view \"noview\" (RT-INVALID-VIEW)');
+                expect(result.stderr).to.include('Error: program refers to invalid client view \"noview\" (INVALID-VIEW)');
             });
         });
 

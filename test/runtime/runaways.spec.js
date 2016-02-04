@@ -13,7 +13,7 @@ describe('Runaway program detection', function() {
                 compiler.compileSync(juttle, {fg_processors: [check_runaway]});
             } catch (e) {
                 if (is_runaway) {
-                    expect(e.code).to.equal('JUTTLE-RUNAWAY-PROGRAM');
+                    expect(e.code).to.equal('RUNAWAY-PROGRAM');
                 } else {
                     throw e;
                 }

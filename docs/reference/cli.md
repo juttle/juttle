@@ -143,7 +143,7 @@ juttle> emit limit 1 | view table
 <input>:1:6:
 1:emit limit 1 | view table
 ^
-Expected ";", "|" or option but "l" found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+Expected ";", "|" or option but "l" found. (SYNTAX-ERROR-WITH-EXPECTED)
 ```
 
 ```
@@ -151,7 +151,7 @@ juttle> import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
 <input>:1:1:
 1:import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error: could not find module "no-such-module.juttle" (RT-MODULE-NOT-FOUND)
+Error: could not find module "no-such-module.juttle" (MODULE-NOT-FOUND)
 ```
 
 ```
@@ -160,7 +160,7 @@ In module included from <input>:
 m1.juttle:1:8:
 1:export consty foo=bar;
 ^
-Expected "function", "reducer", "sub" or processor but "c" found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+Expected "function", "reducer", "sub" or processor but "c" found. (SYNTAX-ERROR-WITH-EXPECTED)
 ```
 
 ## Configuration

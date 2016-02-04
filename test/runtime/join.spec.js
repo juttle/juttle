@@ -14,7 +14,7 @@ describe('Juttle join tests, historic', function() {
                }).then(function() {
                    throw new Error('this should fail');
                }).catch(function(err) {
-                   expect(err.code).to.equal('RT-JOIN-ZIP-ERROR');
+                   expect(err.code).to.equal('JOIN-ZIP-ERROR');
                });
            });
         it('complains if nearest maxoffset is not a duration',
@@ -24,7 +24,7 @@ describe('Juttle join tests, historic', function() {
                }).then(function() {
                    throw new Error('this should fail');
                }).catch(function(err) {
-                   expect(err.code).to.equal('RT-INVALID-OFFSET-ERROR');
+                   expect(err.code).to.equal('INVALID-OFFSET-ERROR');
                });
            });
         it('complains about zip and nearest at the same time',
@@ -34,7 +34,7 @@ describe('Juttle join tests, historic', function() {
                }).then(function() {
                    throw new Error('this should fail');
                }).catch(function(err) {
-                   expect(err.code).to.equal('RT-JOIN-ZIP-NEAREST-ERROR');
+                   expect(err.code).to.equal('JOIN-ZIP-NEAREST-ERROR');
                });
            });
         it('complains about a bogus option',
@@ -44,7 +44,7 @@ describe('Juttle join tests, historic', function() {
                }).then(function(res) {
                    throw new Error('how did I get here?');
                }).catch(function(err) {
-                   expect(err.code).to.equal('RT-UNKNOWN-OPTION-ERROR');
+                   expect(err.code).to.equal('UNKNOWN-OPTION-ERROR');
                    expect(err.info.proc).to.equal('join');
                    expect(err.info.option).to.equal('failure');
                });
@@ -56,7 +56,7 @@ describe('Juttle join tests, historic', function() {
                }).then(function(res) {
                    throw new Error('how did I get here?');
                }).catch(function(err) {
-                   expect(err.code).to.equal('RT-JOIN-ZIP-ERROR');
+                   expect(err.code).to.equal('JOIN-ZIP-ERROR');
                });
            });
     });
