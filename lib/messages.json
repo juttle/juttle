@@ -8,7 +8,7 @@
   "JUTTLE-UNSUPPORTED-ADAPTER-METHOD": "adapter {type} does not implement {method}",
   "RT-GROUP-BY-UNDEFINED": "group by undefined field \"{field}\"",
   "RT-SORT-LIMIT-EXCEEDED": "sort limit exceeded, dropping points",
-  "RT-BATCH-OUT-OF-ORDER": "batch dropped out-of-order point(s)",
+  "RT-POINTS-OUT-OF-ORDER": "out-of-order point(s) dropped by {proc}",
   "RT-TIME-OUT-OF-ORDER": "out-of-order assignment of time {badTime} after {goodTime}, point(s) dropped",
   "RT-TOO-MANY-LOGS-WARNING": "too many logs from {host}, throttling",
   "RT-POINT-MISSING-TIME": "point is missing a time in {field}",
