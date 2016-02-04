@@ -42,6 +42,7 @@
   "RT-FROM-OVER-ERROR": "{proc} -from only when -over is specified",
   "RT-FROM-TO-OVER-ERROR": "{proc} -from/-to only when -over is specified",
   "RT-TO-BEFORE-FROM-MOMENT-ERROR": "-to must not be earlier than -from",
+  "RT-FROM-TO-EQUAL-ERROR": "{proc} -from/-to must not be equal",
   "RT-PACE-EVERY-X-ERROR": "Specify either output period with -every or time speedup with -x",
   "RT-METRICS-OR-EVENTS": "-type must be \"metric\" or \"event\"",
   "RT-EMIT-POINTS-ARRAY-ERROR": "emit -points wants an array of points",
