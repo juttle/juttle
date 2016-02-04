@@ -447,6 +447,22 @@ Allows direct assignment to the `time` field
     { time: "1970-01-01T00:01:02.000Z" }
     { time: "1970-01-01T00:01:04.000Z" }
 
+complains about out-of-order points
+-----------------------------------
+
+### Juttle
+
+    emit -points [
+        { "time": "1970-01-01T00:00:01.000Z", "value": 1 },
+        { "time": "1970-01-01T00:00:00.000Z", "value": 0 },
+        { "time": "1970-01-01T00:00:02.000Z", "value": 2 },
+    ]
+    | reduce -every :s: avg=avg(value) | view result
+
+### Warnings
+
+   * out-of-order point(s) dropped by reduce
+
 complains about out-of-order assignment to the `time` field in -every mode
 -----------------------------------------------------
 

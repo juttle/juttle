@@ -48,7 +48,7 @@ describe('batch tests', function () {
             program: program
         })
         .then(function(res) {
-            expect(res.warnings[0]).match(/batch dropped out-of-order point\(s\)/);
+            expect(res.warnings[0]).match(/out-of-order point\(s\) dropped by batch/);
         });
     });
 
