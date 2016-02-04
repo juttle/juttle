@@ -9,6 +9,7 @@ Juttle comes with built-in modules that provide functions for different data typ
    * [Array](../modules/array.md)
    * [Date](../modules/date.md)
    * [Duration](../modules/duration.md)
+   * [Juttle](../modules/juttle.md)
    * [Math](../modules/math.md)
    * [Number](../modules/number.md)
    * [Object](../modules/object.md)
