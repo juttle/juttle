@@ -7,6 +7,10 @@
         "es6": true
     },
     "rules": {
+        "no-new-object": [ 2 ],
+        "eqeqeq": [ 2 ],
+        "no-new-func": [ 2 ],
+        "no-new-wrappers": [ 2 ],
         "indent": [ 2, 4, { "SwitchCase": 1 } ],
         "linebreak-style": [ 2, "unix" ],
         "no-unused-vars": [2, { "args": "none" }],
