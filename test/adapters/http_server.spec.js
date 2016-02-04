@@ -329,7 +329,7 @@ describe('read http_server', function() {
             throw new Error('the previous statement should have failed');
         })
         .catch(function(err) {
-            expect(err.toString()).to.contain('unknown read http_server option unknown.');
+            expect(err.toString()).to.contain('unknown read-http_server option unknown.');
         });
     });
 });

@@ -19,7 +19,6 @@ class TestTimeseriesRead extends AdapterRead {
     constructor(options, params) {
         super(options, params);
 
-        this.options = options;
         this.logger.debug('initialize options:', options);
 
         if (!options.from && !options.to) {

@@ -31,6 +31,10 @@ function TestAdapter(config) {
             this._setup_optimization(params);
         }
 
+        static allowedOptions() {
+            return AdapterRead.commonOptions.concat(['debug', 'key', 'optimize']);
+        }
+
         _setup_optimization(params) {
             var optimization_info = params.optimization_info;
             if (!optimization_info) {
