@@ -79,4 +79,49 @@ describe('serializers/csv', function() {
         });
     });
 
+    it('fails when you attempt to append without providing an input stream', function() {
+        expect(function() {
+            serializers.getSerializer('csv', undefined, { append: true });
+        }).to.throw('internal error input stream must be provided when appending');
+    });
+
+    it('can append to an existing stream', function(done) {
+        var tmpFilename = tmp.tmpNameSync();
+        var stream = fs.createWriteStream(tmpFilename);
+        stream.on('open', () => {
+            var serializer = serializers.getSerializer('csv', stream);
+            serializer.write([{ time: '2014-01-01T00:00:00.000Z', foo: 'bar' }]);
+            serializer.done()
+            .then(() => {
+                var aStream = fs.createWriteStream(tmpFilename, { flags: 'a' });
+                var options = {
+                    append: true,
+                    input: fs.createReadStream(tmpFilename)
+                };
+                var serializer = serializers.getSerializer('csv', aStream, options);
+                serializer.write([{ time: '2014-01-01T00:00:01.000Z', foo: 'bizz' }]);
+                return serializer.done();
+            })
+            .then(() => {
+                var parser = parsers.getParser('csv');
+                var results = [];
+                return parser.parseStream(fs.createReadStream(tmpFilename), (result) => {
+                    results.push(result);
+                })
+                .then(() => {
+                    expect(results).to.deep.equal([[
+                        { time: '2014-01-01T00:00:00.000Z', foo: 'bar' },
+                        { time: '2014-01-01T00:00:01.000Z', foo: 'bizz' }
+                    ]]);
+                    done();
+                })
+                .catch((err) => {
+                    done(err);
+                })
+                .finally(() => {
+                    fs.unlinkSync(tmpFilename);
+                });
+            });
+        });
+    });
 });
