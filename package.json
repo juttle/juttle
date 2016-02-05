@@ -19,7 +19,6 @@
   "dependencies": {
     "JSONStream": "^1.0.7",
     "babyparse": "^0.4.1",
-    "backbone": "^1.1.2",
     "bluebird": "^2.9.30",
     "cli-table": "^0.3.1",
     "cline": "^0.8.2",

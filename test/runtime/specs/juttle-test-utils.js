@@ -140,7 +140,7 @@ var TestView = View.extend({
             result.type = this.sink.name;
             result.options = this.sink.options;
             logger.debug('End of file reached: emitting', result);
-            this.events.trigger('end', result);
+            this.events.emit('end', result);
         }
     }
 });
@@ -302,7 +302,7 @@ function run_juttle(prog, options) {
 
 function wait_for_event(program, type, checker) {
     return new Promise(function(resolve, reject) {
-        program.on(type, resolve);
+        program.events.on(type, resolve);
     })
     .then(function(err) {
         checker(err);
