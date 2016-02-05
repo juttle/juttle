@@ -170,6 +170,10 @@ describe('FilterJSCompiler', function() {
         expect('a == { "${"ab" + "cd"}": 3 }').to.filter(POINTS_OBJECTS, [ { a: { 'abcd': 3 } } ]);
     });
 
+    it('compiles Field correctly', function() {
+        expect('#a == 2').to.filter(POINTS_NUMBERS, [ { a: 2 } ]);
+    });
+
     it('compiles ToString correctly', function() {
         expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
