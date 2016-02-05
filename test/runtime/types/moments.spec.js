@@ -366,10 +366,10 @@ describe('Juttle Moments tests', function() {
             program: 'emit -from :now: -hz 1000 -limit 1 | put foo = Date.new("blah") | view result'
         })
         .then(function(res) {
-            expect(res.errors[0]).to.equal('Unable to parse: blah');
+            expect(res.errors[0]).to.equal('Unable to parse date: "blah"');
         })
         .catch(function(err) {
-            expect(err.message).equal('Unable to parse: blah');
+            expect(err.message).equal('Unable to parse date: "blah"');
         });
     });
 
