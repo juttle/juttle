@@ -47,8 +47,9 @@ describe('read file adapter tests', function () {
                     var points = result.sinks.table;
 
                     expect(points).to.have.length(6);
-                    _.each(points, function(pt, i) {
-                        expect(pt.time).to.equal(pt.created_at);
+                    _.each(points, function(point, index) {
+                        expect(point.time).to.equal('2015-01-01T00:00:0' + (index + 1) + '.000Z');
+                        expect(point['undefined']).to.be.undefined();
                     });
                 });
             });
@@ -58,10 +59,10 @@ describe('read file adapter tests', function () {
                 return run_read_file_juttle(file_name, {format: format, timeField: 'mytime'})
                     .then(function(result) {
                         var expected = [
-                            { mytime: '1', a: 'a0', time: '1970-01-01T00:00:01.000Z' },
-                            { mytime: '267000', a: 'a1', time: '1970-01-04T02:10:00.000Z' },
-                            { mytime: '267001', a: 'a2', time: '1970-01-04T02:10:01.000Z' },
-                            { mytime: '268000', a: 'a3', time: '1970-01-04T02:26:40.000Z' }
+                            { a: 'a0', time: '1970-01-01T00:00:01.000Z' },
+                            { a: 'a1', time: '1970-01-04T02:10:00.000Z' },
+                            { a: 'a2', time: '1970-01-04T02:10:01.000Z' },
+                            { a: 'a3', time: '1970-01-04T02:26:40.000Z' }
                         ];
 
                         expect(result.sinks.table).deep.equal(expected);

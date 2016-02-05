@@ -62,4 +62,55 @@ describe('juttle utils tests', function() {
             expect(converted.time.unixms()).to.equal(time.getTime());
         });
     });
+
+    describe('parseTime', function() {
+        it('parses a timeField correctly and removes it from resulting data', function() {
+            var points;
+            return new Promise((resolve, reject) => {
+                points = utils.parseTime([
+                    { foo: '2014-01-01T00:00:00.000Z'},
+                    { foo: '2015-01-01T00:00:00.000Z'}
+                ], 'foo', {
+                    trigger: (type, error) => { 
+                        reject(error);
+                    }
+                });
+                resolve();
+            })
+            .then(() => {
+                expect(points).to.deep.equal([
+                    {
+                        time: new JuttleMoment({
+                            rawDate: new Date('2014-01-01T00:00:00.000Z')
+                        })
+                    },
+                    {
+                        time: new JuttleMoment({
+                            rawDate: new Date('2015-01-01T00:00:00.000Z')
+                        })
+                    }
+                ]);
+            });
+        });
+
+        it('warns if any points is missing the timeField', function() {
+            var points;
+            return new Promise((resolve) => {
+                points = utils.parseTime([{ foo: 1 }, {},  { foo: 3 }], 'foo', {
+                    trigger: function(type, error) { 
+                        expect(type).to.equal('warning');
+                        expect(error.toString()).to.match(/point is missing a time in foo/);
+                        resolve();
+                    }
+                });
+            })
+            .then(() => {
+                expect(points).to.deep.equal([
+                    { time: new JuttleMoment({ rawDate: new Date('1970-01-01T00:00:01.000Z') }) },
+                    {},
+                    { time: new JuttleMoment({ rawDate: new Date('1970-01-01T00:00:03.000Z') }) }
+                ]);
+            });
+        });
+    }); 
 });
