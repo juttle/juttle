@@ -21,7 +21,7 @@ describe('stochastic adapter options', function() {
             throw new Error('this should fail');
         })
         .catch(function(err) {
-            expect(err.message).to.equal('-to must not be earlier than -from');
+            expect(err.message).to.equal('-from must be before -to');
         });
     });
 
