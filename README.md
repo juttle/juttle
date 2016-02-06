@@ -127,7 +127,7 @@ These adapters can be used in Juttle programs directly without special
 configuration.
 
 * [file](./docs/adapters/file.md)
-* [http](./docs/adapters.http.md)
+* [http](./docs/adapters/http.md)
 * [stochastic](./docs/adapters/stochastic.md)
 
 #### External
