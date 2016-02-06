@@ -119,6 +119,7 @@ pages:
    - '____ Array': 'modules/array.md'
    - '____ Date': 'modules/date.md'
    - '____ Duration': 'modules/duration.md'
+   - '____ Juttle': 'modules/juttle.md'
    - '____ Math': 'modules/math.md'
    - '____ Number': 'modules/number.md'
    - '____ Object': 'modules/object.md'

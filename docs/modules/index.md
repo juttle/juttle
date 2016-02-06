@@ -4,7 +4,7 @@ title: Modules Overview | Juttle Language Reference
 
 # Modules
 
-Juttle comes with built-in modules that provide functions for different data types:
+Juttle comes with built-in modules that provide functions for different data types, as well as the Juttle module for debugging needs:
 
    * [Array](../modules/array.md)
    * [Date](../modules/date.md)
