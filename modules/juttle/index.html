@@ -7,7 +7,7 @@
   
   
   
-  <title>____ reorder - Juttle Language Reference</title>
+  <title>____ Juttle - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ reorder";
-    var mkdocs_page_input_path = "processors/reorder.md";
-    var mkdocs_page_url = "/processors/reorder/";
+    var mkdocs_page_name = "____ Juttle";
+    var mkdocs_page_input_path = "modules/juttle.md";
+    var mkdocs_page_url = "/modules/juttle/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -204,7 +204,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Processors</a>
+        <a class="" href="../../processors/">Processors</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -429,7 +429,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../modules/">Modules</a>
+        <a class="" href="../">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -550,12 +550,12 @@
         
       
     
-    <li>____ reorder</li>
+    <li>____ Juttle</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/processors/reorder.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/modules/juttle.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -566,36 +566,56 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="reorder">reorder</h1>
-<p>Buffer and reorder points based on their time fields.</p>
-<pre><code>reorder [-delay milliseconds] [-limit n]
+                <h1 id="juttle">Juttle</h1>
+<p>Juttle is a simple module that exposes some aspects of the Juttle runtime for debugging purposes.</p>
+<div class="toc">
+<ul>
+<li><a href="#juttle">Juttle</a><ul>
+<li><a href="#juttleversion">Juttle.version</a></li>
+<li><a href="#juttleadapters">Juttle.adapters</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="juttleversion">Juttle.version</h2>
+<p>Constant that contains the version of the Juttle runtime.</p>
+<p>For example:</p>
+<pre><code class="juttle">emit -points [{version: Juttle.version}]
 </code></pre>
 
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-<th align="right">Required?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-delay</code></td>
-<td>The duration of the buffer, in milliseconds</td>
-<td align="right">No; the default is 5000ms</td>
-</tr>
-<tr>
-<td><code>-limit</code></td>
-<td>The number of points that are buffered. When the buffer is full, the oldest point (by time stamp) is passed through without delay.</td>
-<td align="right">No; the default is 100,000 points</td>
-</tr>
-</tbody>
-</table>
-<p>If you encounter the following message while using this source, try increasing the value of the -delay parameter:   </p>
-<blockquote>
-<p>reorder dropping 2 point(s) that arrived late   </p>
-</blockquote>
+<pre><code>┌───────────┐
+│ version   │
+├───────────┤
+│ 0.4.0     │
+└───────────┘
+</code></pre>
+
+<hr />
+<h2 id="juttleadapters">Juttle.adapters</h2>
+<p>Function that returns an array with the type, version, and filesystem path for all configured adapters. This can be useful when debugging a juttle installation to ensure that all the expected modules are being loaded properly.</p>
+<p>For example:</p>
+<pre><code class="juttle">emit -points Juttle.adapters()
+</code></pre>
+
+<pre><code>┌─────────────┬───────────────────────────────────────────┬─────────┐
+│ adapter     │ path                                      │ version │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ influx      │ /root/juttle-influx-adapter/index.js      │ 0.3.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ elastic     │ /root/juttle-elastic-adapter/lib/index.js │ 0.4.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ file        │ /root/juttle/lib/adapters/file/index.js   │ 0.4.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ http        │ /root/juttle/lib/adapters/http/index.js   │ 0.4.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ stdio       │ /root/juttle/lib/adapters/stdio/index.js  │ 0.4.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ stochastic  │ /root/juttle/lib/adapters/stochastic.js   │ 0.4.0   │
+├─────────────┼───────────────────────────────────────────┼─────────┤
+│ http_server │ /root/juttle/lib/adapters/http_server.js  │ 0.4.0   │
+└─────────────┴───────────────────────────────────────────┴─────────┘
+</code></pre>
               
             </div>
           </div>
@@ -603,10 +623,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../skip/" class="btn btn-neutral float-right" title="____ skip"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../math/" class="btn btn-neutral float-right" title="____ Math"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../remove/" class="btn btn-neutral" title="____ remove"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../duration/" class="btn btn-neutral" title="____ Duration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -634,10 +654,10 @@
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../remove/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../duration/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../skip/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../math/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

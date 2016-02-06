@@ -5,31 +5,31 @@
         
     <url>
      <loc>None/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/README/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/doc_templates/template/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/doc_templates/juttle_TEMPLATE/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/examples/datasets/README/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -39,67 +39,67 @@
         
     <url>
      <loc>None/concepts/overview/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/dataflow/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/programming_constructs/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/fields/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/filtering/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/inputs/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/views/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/data_types/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/juttle_tutorial/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/terminology/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/concepts/juttle_standard_library/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -109,403 +109,409 @@
         
     <url>
      <loc>None/sources/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sources/emit/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sources/read/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/batch/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/filter/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/head/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/join/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/keep/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/pace/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/pass/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/put/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/reduce/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/remove/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/reorder/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/skip/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/sort/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/split/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/tail/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/unbatch/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/processors/uniq/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sinks/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sinks/view/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sinks/view_text/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sinks/view_table/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/sinks/write/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/file/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/http/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/http_server/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/stdio/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/stochastic/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/stochastic_cdn/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/stochastic_logs/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/stochastic_search_cluster/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/parsers/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/adapters/parsers/grok/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/juttle_reducers_timewindows/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/juttle_reducers_user-defined/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/avg/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/count/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/count_unique/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/delta/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/first/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/last/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/mad/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/max/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/min/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/percentile/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/pluck/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/sigma/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reducers/sum/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/array/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/date/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/duration/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/modules/juttle/</loc>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/math/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/number/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/object/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/modules/string/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/time/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/data_types/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/operators/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/conditionals/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/cli/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/reference/style_guide/</loc>
-     <lastmod>2016-01-29</lastmod>
+     <lastmod>2016-02-05</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
