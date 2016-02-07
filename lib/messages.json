@@ -56,7 +56,6 @@
   "RT-JOIN-ALL-TABLES-ERROR": "at least one input must not be a table",
   "RT-JOIN-TABLE-OUTER-ERROR": "-table and -outer cannot be specified for the same input",
   "RT-JOIN-TABLE-BATCHED-ERROR": "-table input cannot be batched.",
-  "RT-REQUIRED-OPTION-ERROR": "invalid {proc} required option {option}.",
   "RT-MISSING-OPTION-ERROR": "missing {proc} required option {option}.",
   "RT-UNKNOWN-OPTION-ERROR": "unknown {proc} option {option}.",
   "RT-INCOMPATIBLE-OPTION-ERROR": "-{option} option should not be combined with -{other}",
