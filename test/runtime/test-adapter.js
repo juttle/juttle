@@ -143,6 +143,10 @@ function TestAdapter(config) {
             }
         }
 
+        static allowedOptions() {
+            return ['key'];
+        }
+
         write(points) {
             this.logger.debug('write', this.key, points);
             var data = store[this.key] || [];
