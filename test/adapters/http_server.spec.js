@@ -81,6 +81,41 @@ describe('read http_server', function() {
         });
     });
 
+    it('handles delayed point arrival', function() {
+        var programFinish, program;
+        var body = { 'name': 'ted', 'age': 53, 'weight': 100};
+
+        return compile_juttle({
+            program: 'read http_server -every :100ms: -port ' + port
+        })
+        .then(function(prog) {
+            program = prog;
+            programFinish = run_juttle(program);
+        })
+        // Wait a while before posting the data
+        .delay(500)
+        .then(function() {
+            return request({
+                uri: 'http://localhost:' + port,
+                method: 'POST',
+                body: body,
+                json: true,
+                resolveWithFullResponse: true
+            });
+        })
+        // Wait a bit more for everything to propagate
+        .delay(50)
+        .then(function(res) {
+            expect(res.statusCode).to.equal(200);
+
+            program.deactivate();
+            return programFinish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table[0]).to.deep.equal(body);
+        });
+    });
+
     it('ingests with put method', function() {
         var programFinish, program;
         var body = {'name': 'ted', 'age': 53, 'weight': 100};
@@ -235,6 +270,8 @@ describe('read http_server', function() {
                 resolveWithFullResponse: true
             });
         })
+        // Need to wait a bit to give the results time to propagate
+        .delay(50)
         .then(function(res) {
             expect(res.statusCode).to.equal(400);
 
@@ -242,8 +279,8 @@ describe('read http_server', function() {
             return finish;
         })
         .then(function(results) {
-            expect(results.errors.length).to.equal(1);
-            expect(results.sinks.table.length).to.equal(0);
+            expect(results.errors).to.deep.equal(['Invalid CSV data: Error: Row length does not match headers']);
+            expect(results.sinks.table.length).to.equal(1);
         });
     });
 
@@ -329,7 +366,7 @@ describe('read http_server', function() {
             throw new Error('the previous statement should have failed');
         })
         .catch(function(err) {
-            expect(err.toString()).to.contain('unknown read-http_server option unknown.');
+            expect(err.toString()).to.contain('unknown read http_server option unknown.');
         });
     });
 });
