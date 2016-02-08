@@ -405,7 +405,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('unknown read http option unknown.');
+                expect(err.toString()).to.contain('unknown read-http option unknown.');
             });
         });
 
@@ -636,7 +636,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('unknown write http option unknown.');
+                expect(err.toString()).to.contain('unknown write-http option unknown.');
             });
         });
 

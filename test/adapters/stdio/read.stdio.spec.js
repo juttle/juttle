@@ -44,7 +44,7 @@ describe('read stdio adapter tests', function() {
             throw Error('Previous statement should have failed');
         })
         .catch(function(err) {
-            expect(err.toString()).to.contain('Error: unknown read stdio option foo.');
+            expect(err.toString()).to.contain('Error: unknown read-stdio option foo.');
         });
     });
 

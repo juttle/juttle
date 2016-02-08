@@ -33,7 +33,7 @@ describe('read file adapter tests', function () {
             throw new Error('this should have failed');
         })
         .catch(function(err) {
-            expect(err.message).equal('unknown read file option foo.');
+            expect(err.message).equal('unknown read-file option foo.');
         });
     });
 

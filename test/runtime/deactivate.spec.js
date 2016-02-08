@@ -15,7 +15,7 @@ describe('Program deactivation', function() {
         base.prototype.teardown_ = base.prototype.teardown;
         emit.prototype.teardown_ = emit.prototype.teardown;
 
-        base.prototype.teardown = emit.prototype.teardown = function() { teardowns.push(this.procName); };
+        base.prototype.teardown = emit.prototype.teardown = function() { teardowns.push(this.procName()); };
     });
     after(function() {
         base.prototype.teardown = base.prototype.teardown_;
