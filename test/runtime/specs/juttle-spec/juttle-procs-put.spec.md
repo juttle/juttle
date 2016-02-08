@@ -34,7 +34,7 @@ complains about non-time assignment to the `time` field
 
     emit -from Date.new(0) -limit 3 | put n=count(), time = :s: | view result
 
-### Errors
+### Warnings
 
    * Invalid type assigned to time: duration (00:00:01.000).
 
