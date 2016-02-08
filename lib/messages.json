@@ -51,7 +51,7 @@
   "RT-MOMENT-ERROR": "-{option} wants a moment, got {value}",
   "RT-DURATION-OR-MOMENT-ERROR": "-{option} wants a duration or moment, got {value}",
   "RT-INVALID-OFFSET-ERROR": "a duration is required for the offset.",
-  "RT-INVALID-SINK-OPTIONS-ERROR": "{procName} called with non-object argument to -o/-options",
+  "RT-INVALID-SINK-OPTIONS-ERROR": "view called with non-object argument to -o/-options",
   "RT-JOIN-INPUTNUM-ERROR": "-{option} must be an input number (1, 2, ...).",
   "RT-JOIN-ALL-TABLES-ERROR": "at least one input must not be a table",
   "RT-JOIN-TABLE-OUTER-ERROR": "-table and -outer cannot be specified for the same input",

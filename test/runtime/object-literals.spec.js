@@ -96,7 +96,7 @@ describe('Juttle Object Literal Tests', function() {
                 done(new Error('Received unexpected response!'));
             })
             .catch(function(error) {
-                expect(error.message).to.equal(' called with non-object argument to -o/-options');
+                expect(error.message).to.equal('view called with non-object argument to -o/-options');
                 done();
             });
     });
