@@ -333,8 +333,15 @@ function options_from_object(options) {
     }
 
     return _.reduce(options, function(memo, value, key) {
-        var str = _option_is_moment(key) ? ':%s:' : '"%s"';
-        return memo + '-' + key + ' ' + util.format(str, value) + ' ';
+        var formatted_str;
+        if (_option_is_moment(key)) {
+            formatted_str = util.format(':%s:', value);
+        } else if(typeof value === 'string') {
+            formatted_str = util.format('"%s"', value);
+        } else {
+            formatted_str = value;
+        }
+        return memo + '-' + key + ' ' + formatted_str + ' ';
     }, '');
 }
 
@@ -372,9 +379,9 @@ function withModuleIt(description, fn, module) {
      *  module: the name of a module that must be require'able for a specific
      *          test to be executed or skipped if the module can not be
      *          required
-     *  
-     * if you have the need to set the same requirements for all tests in a 
-     * single test suite then use the following approach and redefine it() 
+     *
+     * if you have the need to set the same requirements for all tests in a
+     * single test suite then use the following approach and redefine it()
      * locally to that one file like so:
      *
      *  var withGrokIt = function(describe, function) {
@@ -400,5 +407,5 @@ module.exports = {
     expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
     set_stdout: set_stdout,
-    withModuleIt 
+    withModuleIt
 };

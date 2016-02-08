@@ -95,6 +95,56 @@ describe('read file adapter tests', function () {
         });
     });
 
+    describe('timeField option and invalid time', function() {
+        var time_with_other = path.resolve(__dirname, 'input/time-with-other.json');
+        var time_garbage = path.resolve(__dirname, 'input/time-garbage.json');
+        var jsonPoint = require(time_with_other)[0];
+
+        it('with no options', function() {
+            var options = {};
+            return run_read_file_juttle(time_with_other, options)
+            .then(function(result) {
+                expect(result.errors[0]).equal(undefined);
+                expect(result.warnings[0]).equal(undefined);
+
+                expect(result.sinks.table[0]).to.deep.equal(jsonPoint);
+            });
+        });
+        it('with option -timeField "other"', function() {
+            var options = {timeField: 'other'};
+            return run_read_file_juttle(time_with_other, options)
+            .then(function(result) {
+                expect(result.errors).to.deep.equal([]);
+                expect(result.warnings).to.deep.equal([]);
+
+                var expected_result = _.clone(jsonPoint);
+                expected_result.time = expected_result.other;
+                delete expected_result.other;
+
+                expect(result.sinks.table[0]).to.deep.equal(expected_result);
+            });
+        });
+
+        it('with no options', function() {
+            var options = {};
+            return run_read_file_juttle(time_garbage, options)
+            .then(function(result) {
+                expect(result.warnings[0]).to.contain('the time field must contain a number or a string representing time');
+                expect(result.errors[0]).to.equal(undefined);
+                expect(result.sinks.table[0]).to.deep.equal(undefined);
+            });
+        });
+        it('with timeField that points to invalid time', function() {
+            var options = {timeField: 'value'};
+            return run_read_file_juttle(time_garbage, options)
+            .then(function(result) {
+                expect(result.warnings[0]).to.contain(['the time field must contain a number or a string representing time']);
+                expect(result.errors).to.deep.equal([]);
+                expect(result.sinks.table).to.deep.equal([]);
+            });
+        });
+    });
+
     it('fails when you do not provide a file to read', function() {
         var message = 'missing read-file required option file.';
         var failing_read = check_juttle({

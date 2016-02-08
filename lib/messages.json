@@ -26,6 +26,8 @@
   "INVALID-JSON-TIME": "the time field must contain a number or a string representing time.",
   "FIELD-NOT-FOUND": "field \"{field}\" does not exist",
   "DATE-PARSE-ERROR": "Unable to parse date: \"{s}\"",
+  "INVALID-TIME-ERROR": "the time field must contain a number or a string representing time. Instead it contains \"{time}\".",
+  "OVERWRITING-TIME": "Warning: overwriting value of time field with \"{field}\" field",
 
   "INTEGER-REQUIRED": "{argument} for {proc} must be an integer",
   "BATCH-INTERVAL-ERROR": "batch interval must be a positive number or duration.",
