@@ -2,7 +2,7 @@
 
 `juttle` is the command line interface for running juttle programs. It reads data from configured backends via adapters, executes juttle programs, and provides terminal-oriented visualizations that allow you to view the output of programs.
 
-For more complex visualizations, you can use [outrigger](https://github.com/juttle/outrigger), which provides browser-based visualizations and support for [input controls](../concepts/inputs.md).
+For more complex visualizations, you can use [juttle engine](https://github.com/juttle/juttle-engine), which provides browser-based visualizations and support for [input controls](../concepts/inputs.md).
 
 ## Usage
 

@@ -13,7 +13,7 @@ The `name` can be any valid identifier and is treated in the program like a  [co
 
 Inputs can be declared in a Juttle program either at the top level of a flowgraph or inside a [subgraph](./programming_constructs.md#subgraphs).
 
-Before the program is run, an application environment like [outrigger](http://github.com/juttle/outrigger) first evaluates the flowgraph to determine which inputs are in the program and renders them for a user. Then once the user has made their selection, the application gathers the selections and includes them when running the program.
+Before the program is run, an application environment like [juttle engine](http://github.com/juttle/juttle-engine) first evaluates the flowgraph to determine which inputs are in the program and renders them for a user. Then once the user has made their selection, the application gathers the selections and includes them when running the program.
 
 Note: The specific types of supported inputs and the supported options are supplied from the application environment and are not part of Juttle itself. The Juttle CLI has limited support for text and number inputs using command line options.
 
