@@ -13,7 +13,7 @@ describe('read testTimeseries', function () {
             throw new Error('unexpected success');
         })
         .catch(function(err) {
-            expect(err.code).equal('RT-MISSING-TIME-RANGE-ERROR');
+            expect(err.code).equal('MISSING-TIME-RANGE');
             expect(err.message).equal('One of -from, -to, or -last must be specified to define a query time range');
         });
     });
@@ -26,7 +26,7 @@ describe('read testTimeseries', function () {
             throw new Error('unexpected success');
         })
         .catch(function(err) {
-            expect(err.code).equal('RT-TO-BEFORE-FROM-MOMENT-ERROR');
+            expect(err.code).equal('TO-BEFORE-FROM-MOMENT-ERROR');
             expect(err.message).equal('-from must be before -to');
         });
     });

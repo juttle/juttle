@@ -22,7 +22,7 @@ function TestAdapter(config) {
             this.debug = options.debug;
             this.key = options.key;
             if (!this.debug && !this.key) {
-                throw new errors.compileError('RT-MISSING-OPTION-ERROR', {
+                throw new errors.compileError('MISSING-OPTION', {
                     proc: 'read test',
                     option: 'key'
                 });
@@ -136,7 +136,7 @@ function TestAdapter(config) {
             super(options, params);
             this.key = options.key;
             if (! this.key) {
-                throw new errors.compileError('RT-MISSING-OPTION-ERROR', {
+                throw new errors.compileError('MISSING-OPTION', {
                     proc: 'write test',
                     option: 'key'
                 });
