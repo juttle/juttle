@@ -14,3 +14,21 @@ Modifying a point on one branch does not modify it on another.
     {"label":"branch1"}
     {"label":"branch1"}
     {"label":"pre"}
+
+Points with `time == null` are handled correctly
+------------------------------------------------
+
+Regression test for #351.
+
+### Juttle
+
+    emit -from :0: -limit 1
+    | batch -every :1s:
+    | filter true = false
+    | (reduce time = null; reduce time = null)
+    | view result
+
+### Output
+
+    { time: null }
+    { time: null }
