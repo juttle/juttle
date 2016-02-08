@@ -20,7 +20,7 @@ describe('adapter API tests', function () {
             expect(result.sinks.table.length).equal(0);
         })
         .catch(function(err) {
-            expect(err.message).to.equal('invalid read test required option key.');
+            expect(err.message).to.equal('missing read test required option key.');
         });
     });
 
@@ -32,7 +32,7 @@ describe('adapter API tests', function () {
             throw new Error('this should fail');
         })
         .catch(function(err) {
-            expect(err.message).to.equal('invalid write test required option key.');
+            expect(err.message).to.equal('missing write test required option key.');
         });
     });
 
@@ -189,7 +189,7 @@ describe('adapter API tests', function () {
 
     it('defaults to undefined for -from and -to', function() {
         return check_juttle({
-            program: 'read test -debug "timeBounds"'
+            program: 'read test -debug "timeBounds" -key "bananas"'
         })
         .then(function(result) {
             expect(result.errors).deep.equal([]);
