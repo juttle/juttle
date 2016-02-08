@@ -27,7 +27,7 @@
   "RT-FIELD-NOT-FOUND": "field \"{field}\" does not exist",
   "RT-DATE-PARSE-ERROR": "Unable to parse date:\"{s}\"",
 
-  "RT-INTEGER-REQUIRED-ERROR": "{argument} for {procName} must be an integer",
+  "RT-INTEGER-REQUIRED-ERROR": "{argument} for {proc} must be an integer",
   "RT-BATCH-INTERVAL-ERROR": "batch interval must be a positive number or duration.",
   "RT-BATCH-INTERVAL-EVERY-ERROR": "Specify either batch -every or batch :interval:",
   "RT-ON-EVERY-ERROR": "{proc} -on cannot be greater than -every",
