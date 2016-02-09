@@ -26,7 +26,7 @@ describe('write file adapter tests', function () {
     });
 
     it('fails when you do not provide a file to write', function() {
-        var message = 'missing write file required option file.';
+        var message = 'missing write-file required option file.';
         var failing_write = check_juttle({
             program: 'write file'
         });

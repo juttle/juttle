@@ -96,7 +96,7 @@ describe('read file adapter tests', function () {
     });
 
     it('fails when you do not provide a file to read', function() {
-        var message = 'missing read file required option file.';
+        var message = 'missing read-file required option file.';
         var failing_read = check_juttle({
             program: 'read file'
         });
