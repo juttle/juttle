@@ -19,9 +19,11 @@ or
 DEBUG=* juttle -e "juttle-program"
 ```
 
-To run programs in the browser environment with debug logging, set `--log-config <log4js-config-path>` and specify desired log level in the log4js config, as described in the [outrigger README](https://github.com/juttle/outrigger).
+To run programs in the browser environment with debug logging, first enable debug logs for juttle-service: set `--log-config <log4js-config-path>` and specify desired log level in the log4js config, as described in the [juttle-service README](https://github.com/juttle/juttle-service). Exposing the logs in the juttle-viewer is tracked by the issue [juttle-viewer#7](https://github.com/juttle/juttle-viewer/issues/7).
 
 ## Print-style Debugging: (pass | view text)
+
+:construction: This section will be updated when issue [juttle-viewer#9](https://github.com/juttle/juttle-viewer/issues/9) add the ability to `view trace`.
 
 Output data as it's moving through the Juttle flowgraph by inserting this statement into any flowgraph node(s):
 
@@ -44,18 +46,18 @@ Programs that are amenable to debugging with `(pass; view text)` approach are ne
 There are two possible places where to write out the data file:
 
    1. The local filesystem where the console or browser is executing;
-   2. The remote filesystem where juttle/outrigger server is executing. 
+   2. The remote filesystem where juttle-service is executing.
 
 The local case is handled by:
 
    - running the program via CLI and using `(pass; write file -file 'local_file_path')`, or
-   - running the program via outrigger and using `(pass; view file)` which will write the file to the browser's downloads directory;
+   - running the program via juttle-viewer and using `(pass; view file)` which will write the file to the browser's downloads directory;
    - with either approach, we would then `read file -file 'local_file_path` to see the data.
 
 The remote case is handled by:
 
-   - running the program via outrigger and using `(pass; write file -file 'remote_file_path')` (any file path would be interpreted as remote, i.e. local to where the outrigger server is executing), and
-   - then running another program to read that file, namely `read file -file 'remote_file_path'`, as we cannot access the remote file in any other way (unless we have ssh access to the outrigger server host).
+   - running the program via juttle-engine and using `(pass; write file -file 'remote_file_path')` (any file path would be interpreted as remote, i.e. local to where the outrigger server is executing), and
+   - then running another program to read that file, namely `read file -file 'remote_file_path'`, as we cannot access the remote file in any other way (unless we have ssh access to the juttle-service host).
 
 ## Visualizing Juttle Flowgraphs
 
@@ -81,9 +83,11 @@ juttle --adapters
 
 The same information can be exposed inside a running Juttle program using the [Juttle module](../modules/juttle.md).
 
-## Disabling Optimizations
+## Debugging Optimizations
 
 Juttle programs that read from backends using juttle adapters will often attempt to optimize execution by handing off more than just read of raw data to the backend. See, for example, the Optimizations section of the [juttle-elastic-adapter README](https://github.com/juttle/juttle-elastic-adapter).
+
+To see how the adapter formed the query for the backend, follow [Turning On Debug Logging](#turning-on-debug-logging) steps; the query API call will be printed to the juttle-service log.
 
 If the optimizations aren't working as expected, they can be turned off by passing a flag to the `read` proc in the program:
 
