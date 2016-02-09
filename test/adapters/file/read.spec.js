@@ -49,7 +49,7 @@ describe('read file adapter tests', function () {
                     expect(points).to.have.length(6);
                     _.each(points, function(point, index) {
                         expect(point.time).to.equal('2015-01-01T00:00:0' + (index + 1) + '.000Z');
-                        expect(point['undefined']).to.be.undefined();
+                        expect(point['undefined']).to.be.undefined;
                     });
                 });
             });
