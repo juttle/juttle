@@ -12,7 +12,7 @@ describe('serializers/csv', function() {
         var tmpFilename = tmp.tmpNameSync();
         var stream = fs.createWriteStream(tmpFilename);
         var serializer = serializers.getSerializer('csv', stream);
-        expect(serializer).to.not.be.undefined();
+        expect(serializer).to.not.be.undefined;
     });
 
     it('can write no points to a provided stream', function(done) {

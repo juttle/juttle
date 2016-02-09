@@ -384,7 +384,7 @@ describe('stochastic -source "logs"', function() {
             expect(res.errors).to.have.length(0);
             expect(res.warnings).to.have.length(0);
             _.each(res.sinks.result, function(point) {
-                expect(point.time).to.not.be.undefined();
+                expect(point.time).to.not.be.undefined;
                 expect(point.count).to.greaterThan(0);
             });
         });

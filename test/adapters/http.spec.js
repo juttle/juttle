@@ -455,7 +455,7 @@ describe('HTTP adapter tests', function() {
                 expect(result.errors).deep.equals([]);
                 expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table.length).equal(1);
-                expect(result.sinks.table[0].time).to.not.be.undefined();
+                expect(result.sinks.table[0].time).to.not.be.undefined;
             });
         });
 
@@ -559,7 +559,7 @@ describe('HTTP adapter tests', function() {
                     expect(result.errors).deep.equals([]);
                     expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(100);
-                    expect(result.sinks.table[0].time).to.not.be.undefined();
+                    expect(result.sinks.table[0].time).to.not.be.undefined;
                     expect(result.sinks.table[0].fizz).to.be.equal('buzz');
                 });
             });
@@ -591,7 +591,7 @@ describe('HTTP adapter tests', function() {
                     expect(result.errors).deep.equals([]);
                     expect(result.warnings).deep.equals([]);
                     expect(result.sinks.table.length).equal(100);
-                    expect(result.sinks.table[0].time).to.not.be.undefined();
+                    expect(result.sinks.table[0].time).to.not.be.undefined;
                     expect(result.sinks.table[0].fizz).to.be.equal('buzz');
                 });
             });
@@ -699,7 +699,7 @@ describe('HTTP adapter tests', function() {
             .then(function(result) {
                 expect(result.errors).deep.equals([]);
                 expect(result.warnings).deep.equals([]);
-                expect(result.sinks.table).to.be.undefined();
+                expect(result.sinks.table).to.be.undefined;
             });
         });
 

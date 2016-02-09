@@ -14,7 +14,7 @@ describe('parsers/json', function() {
 
     it('can instantiate a json parser', function() {
         var json = parsers.getParser('json');
-        expect(json).to.not.be.undefined();
+        expect(json).to.not.be.undefined;
     });
 
     it('fails when given an invalid JSON stream', function() {

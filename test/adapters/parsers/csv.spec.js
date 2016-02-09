@@ -14,7 +14,7 @@ describe('parsers/csv', function() {
 
     it('can instantiate a csv parser', function() {
         var csv = parsers.getParser('csv');
-        expect(csv).to.not.be.undefined();
+        expect(csv).to.not.be.undefined;
     });
 
     it('fails when given an invalid CSV stream', function() {

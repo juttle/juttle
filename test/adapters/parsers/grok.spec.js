@@ -18,7 +18,7 @@ describe('parsers/grok', function() {
 
     withGrokIt('can instantiate a grok parser', function() {
         var parser = parsers.getParser('grok');
-        expect(parser).to.not.be.undefined();
+        expect(parser).to.not.be.undefined;
     });
 
     withGrokIt('can read an empty file', function() {

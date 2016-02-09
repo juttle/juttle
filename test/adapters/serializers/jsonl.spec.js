@@ -12,7 +12,7 @@ describe('serializers/jsonl', function() {
         var tmpFilename = tmp.tmpNameSync();
         var stream = fs.createWriteStream(tmpFilename);
         var serializer = serializers.getSerializer('jsonl', stream);
-        expect(serializer).to.not.be.undefined();
+        expect(serializer).to.not.be.undefined;
     });
 
     it('can write no points to a provided stream', function(done) {

@@ -12,7 +12,7 @@ describe('parsers/jsonl', function() {
 
     it('can instantiate a jsonl parser', function() {
         var jsonl = parsers.getParser('jsonl');
-        expect(jsonl).to.not.be.undefined();
+        expect(jsonl).to.not.be.undefined;
     });
 
     it('fails when given an invalid JSONL stream', function() {
