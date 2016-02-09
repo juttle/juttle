@@ -27,7 +27,7 @@
   "RT-FIELD-NOT-FOUND": "field \"{field}\" does not exist",
   "RT-DATE-PARSE-ERROR": "Unable to parse date:\"{s}\"",
 
-  "RT-INTEGER-REQUIRED-ERROR": "{argument} for {procName} must be an integer",
+  "RT-INTEGER-REQUIRED-ERROR": "{argument} for {proc} must be an integer",
   "RT-BATCH-INTERVAL-ERROR": "batch interval must be a positive number or duration.",
   "RT-BATCH-INTERVAL-EVERY-ERROR": "Specify either batch -every or batch :interval:",
   "RT-ON-EVERY-ERROR": "{proc} -on cannot be greater than -every",
@@ -51,7 +51,7 @@
   "RT-MOMENT-ERROR": "-{option} wants a moment, got {value}",
   "RT-DURATION-OR-MOMENT-ERROR": "-{option} wants a duration or moment, got {value}",
   "RT-INVALID-OFFSET-ERROR": "a duration is required for the offset.",
-  "RT-INVALID-SINK-OPTIONS-ERROR": "{procName} called with non-object argument to -o/-options",
+  "RT-INVALID-SINK-OPTIONS-ERROR": "view called with non-object argument to -o/-options",
   "RT-JOIN-INPUTNUM-ERROR": "-{option} must be an input number (1, 2, ...).",
   "RT-JOIN-ALL-TABLES-ERROR": "at least one input must not be a table",
   "RT-JOIN-TABLE-OUTER-ERROR": "-table and -outer cannot be specified for the same input",

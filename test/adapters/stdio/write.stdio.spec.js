@@ -32,7 +32,7 @@ describe('write stdio adapter tests', function() {
             throw Error('Previous statement should have failed');
         })
         .catch(function(err) {
-            expect(err.toString()).to.contain('Error: unknown write stdio option foo.');
+            expect(err.toString()).to.contain('Error: unknown write-stdio option foo.');
         });
     });
 

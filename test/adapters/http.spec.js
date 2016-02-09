@@ -393,7 +393,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('missing read http required option url');
+                expect(err.toString()).to.contain('missing read-http required option url');
             });
         });
 
@@ -405,7 +405,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('unknown read http option unknown.');
+                expect(err.toString()).to.contain('unknown read-http option unknown.');
             });
         });
 
@@ -624,7 +624,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('missing write http required option url');
+                expect(err.toString()).to.contain('missing write-http required option url');
             });
         });
 
@@ -636,7 +636,7 @@ describe('HTTP adapter tests', function() {
                 throw Error('The previous statement should have failed');
             })
             .catch(function(err) {
-                expect(err.toString()).to.contain('unknown write http option unknown.');
+                expect(err.toString()).to.contain('unknown write-http option unknown.');
             });
         });
 

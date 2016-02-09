@@ -33,7 +33,7 @@ describe('read file adapter tests', function () {
             throw new Error('this should have failed');
         })
         .catch(function(err) {
-            expect(err.message).equal('unknown read file option foo.');
+            expect(err.message).equal('unknown read-file option foo.');
         });
     });
 
@@ -96,7 +96,7 @@ describe('read file adapter tests', function () {
     });
 
     it('fails when you do not provide a file to read', function() {
-        var message = 'missing read file required option file.';
+        var message = 'missing read-file required option file.';
         var failing_read = check_juttle({
             program: 'read file'
         });
