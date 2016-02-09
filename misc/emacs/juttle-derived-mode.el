@@ -14,7 +14,7 @@
 ;; (setq juttle-run-dir "/home/<user>/src/juttle/bin")
 
 (defvar juttle-run-dir "")
-(defvar juttle-run-prog "outrigger-client push --topic mydev --path")
+(defvar juttle-run-prog "juttle-engine-client push --topic mydev --path")
 
 (defvar juttle-derived-mode-hook nil "hooks")
 
