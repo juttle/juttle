@@ -165,16 +165,18 @@ of wiring Juttle dataflow computation to your browser-based views.
 
 This can be done using [Juttle Engine](https://github.com/juttle/juttle-engine),
 an integrated environment for developing and executing juttle programs and
-visualizations. Juttle Engine integrates
-[juttle-service](https://github.com/juttle/juttle-service), a node.js API server
-that enables execution of Juttle programs using a REST API along with the
-[juttle-viewer](https://github.com/juttle/juttle-viewer) application that
-renders the input controls and results of juttle programs using the
-[juttle-viz](https://github.com/juttle/juttle-viz) visualization library.
-
-Juttle Engine lets you run Juttle programs stored on the file system
-and present the results in a browser for experimentation, development,
+visualizations. Juttle Engine lets you run Juttle programs stored on the file
+system and present the results in a browser for experimentation, development,
 deployment, and debugging of juttles.
+
+It integrates [juttle-service](https://github.com/juttle/juttle-service), a
+node.js API server that enables execution of Juttle programs using a REST API
+with the ability to serve web application bundles. It comes with the
+[juttle-viewer](https://github.com/juttle/juttle-viewer) application that
+provides a simple in browser experience for loading and executing juttle
+programs in the juttle-engine and rendering the results using the
+[juttle-viz](https://github.com/juttle/juttle-viz) visualization library. In the
+future, Juttle Engine may be extended to support other application bundles.
 
 ## Contributing
 
