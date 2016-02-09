@@ -463,6 +463,28 @@ complains about out-of-order points
 
    * out-of-order point(s) dropped by reduce
 
+complains about non-time assignment to the `time` field in -every mode
+-----------------------------------------------------
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | reduce -every :s: time = :s: | view result
+
+### Warnings
+
+   * Invalid type assigned to time: duration (00:00:01.000).
+
+complains about non-time assignment to the `time` field in batch mode
+-----------------------------------------------------
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | batch :s: | reduce time = :s: | view result
+
+### Warnings
+
+   * Invalid type assigned to time: duration (00:00:01.000).
+
 complains about out-of-order assignment to the `time` field in -every mode
 -----------------------------------------------------
 
