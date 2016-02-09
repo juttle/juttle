@@ -14,8 +14,6 @@ var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var errors = require('../../lib/errors');
 
 class TestTimeseriesRead extends AdapterRead {
-    static get timeRequired() { return true; }
-
     constructor(options, params) {
         super(options, params);
 
