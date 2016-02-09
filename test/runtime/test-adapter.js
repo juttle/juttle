@@ -32,7 +32,7 @@ function TestAdapter(config) {
         }
 
         static allowedOptions() {
-            return AdapterRead.commonOptions.concat(['debug', 'key', 'optimize']);
+            return AdapterRead.commonOptions().concat(['debug', 'key', 'optimize']);
         }
 
         _setup_optimization(params) {
