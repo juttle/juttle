@@ -62,10 +62,10 @@ Here are some more examples of what you can do with Juttle.
 
 Note that most of these examples use Juttle in conjunction with external systems
 using [adapters](#adapters) and/or depend on visualizations from an environment
-like [outrigger](#outrigger) so they are meant to be
+like [Juttle Engine](#juttle-engine) so they are meant to be
 illustrative and not necessarily functional out of the box.
 
-For more end-to-end examples of juttle usage, see the [outrigger examples](https://github.com/juttle/outrigger/tree/master/examples).
+For more end-to-end examples of juttle usage, see the [Juttle Engine examples](https://github.com/juttle/juttle-engine/tree/master/examples).
 
 ### Hello world
 
@@ -146,8 +146,8 @@ This is a partial list of adapters that can be installed separately. Make sure t
 
 Connections to external adapters are configured in the "adapters" section of the runtime configuration. See the [CLI reference](./docs/reference/cli.md) for specific instructions.
 
-<a name="outrigger"></a>
-## Visualizations with Outrigger
+<a name="juttle-engine"></a>
+## Visualizations with Juttle Engine
 
 The Juttle CLI and its backend adapters provide a
 programmable foundation for dataflow-oriented analytics, but there is no
@@ -163,15 +163,18 @@ and energy), Juttle integrates these two layers
 so you don't have to worry about the details
 of wiring Juttle dataflow computation to your browser-based views.
 
-We haven't yet worked out all of the details of this separation, but
-we've put together the components in a prototype test and development utility
-called [outrigger](https://github.com/juttle/outrigger).
-Outrigger pulls in the Juttle core from this repo along with
-the [juttle-viz](https://github.com/juttle/juttle-viz) visualization library and corresponding glue
-to implement Juttle's visualization capabilities.
-Outrigger lets you run Juttle programs from your local file system
+As an example, [Juttle Engine](https://github.com/juttle/juttle-engine) is an
+integrated environment for developing and executing juttle programs and
+visualizations. Juttle Engine integrates
+[juttle-service](https://github.com/juttle/juttle-engine), a node.js server that
+enables execution of Juttle programs using a REST API, along with the
+[juttle-viewer](https://github.com/juttle/juttle-viewer) application that
+integrates juttle programs with the
+[juttle-viz](https://github.com/juttle/juttle-viz) visualization library.
+
+Juttle Engine lets you run Juttle programs stored on the file system
 and present the results in a browser for experimentation, development,
-and debugging of juttles.
+deployment, and debugging of juttles.
 
 ## Contributing
 
