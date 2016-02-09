@@ -5,10 +5,9 @@ var expect = chai.expect;
 
 var Filter = require('../../../lib/runtime/types/filter');
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
-var SemanticPass = require('../../../lib/compiler/semantic');
 var _ = require('underscore');
 var errors = require('../../../lib/errors');
-var parser = require('../../../lib/parser');
+var processFilter = require('./process-filter');
 
 var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
 
@@ -16,15 +15,8 @@ var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler
 var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
 
 function filterPoints(filter, points) {
-    var ast = parser.parseFilter(filter).ast;
-
-    // We need to run the semantic pass to convert Variable nodes to field
-    // references.
-    var semantic = new SemanticPass();
-    ast = semantic.sa_expr(ast);
-
     var compiler = new FilterJSCompiler();
-    var fn = eval(compiler.compile(ast));
+    var fn = eval(compiler.compile(processFilter(filter)));
 
     return _.filter(points, fn);
 }
