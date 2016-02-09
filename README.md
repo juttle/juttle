@@ -163,13 +163,13 @@ and energy), Juttle integrates these two layers
 so you don't have to worry about the details
 of wiring Juttle dataflow computation to your browser-based views.
 
-As an example, [Juttle Engine](https://github.com/juttle/juttle-engine) is an
-integrated environment for developing and executing juttle programs and
+This can be done using [Juttle Engine](https://github.com/juttle/juttle-engine),
+an integrated environment for developing and executing juttle programs and
 visualizations. Juttle Engine integrates
-[juttle-service](https://github.com/juttle/juttle-engine), a node.js server that
-enables execution of Juttle programs using a REST API, along with the
+[juttle-service](https://github.com/juttle/juttle-service), a node.js API server
+that enables execution of Juttle programs using a REST API along with the
 [juttle-viewer](https://github.com/juttle/juttle-viewer) application that
-integrates juttle programs with the
+renders the input controls and results of juttle programs using the
 [juttle-viz](https://github.com/juttle/juttle-viz) visualization library.
 
 Juttle Engine lets you run Juttle programs stored on the file system
