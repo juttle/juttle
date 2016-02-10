@@ -9,6 +9,7 @@
 
 'use strict';
 
+var _ = require('underscore');
 var AdapterRead = require('../../lib/runtime/adapter-read');
 var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var errors = require('../../lib/errors');
@@ -25,12 +26,19 @@ class TestTimeseriesRead extends AdapterRead {
             throw errors.compileError('MISSING-TIME-RANGE');
         }
 
-        this.every = options.every || JuttleMoment.duration(1, 's');
+        this.every = options.every || this.defaultTimeOptions().every;
         this.count = 0;
     }
 
     periodicLiveRead() {
         return true;
+    }
+
+    defaultTimeOptions() {
+        return _.extend(super.defaultTimeOptions(), {
+            lag: JuttleMoment.duration(1, 's'),
+            every: JuttleMoment.duration(0.5, 's')
+        });
     }
 
     read(from, to, limit, state) {

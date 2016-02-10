@@ -55,10 +55,13 @@ describe('read testTimeseries', function () {
             realtime: true
         }, 3000)
         .then(function(result) {
+            expect(result.graph.readEvery.milliseconds()).equal(500);
+            expect(result.graph.lag.milliseconds()).equal(1000);
             var expected = [
                 { count: 0, dtProg: 0, dtReal: 1 },
-                { count: 1, dtProg: 1, dtReal: 1 },
-                { count: 2, dtProg: 2, dtReal: 1 }
+                { count: 1, dtProg: 0, dtReal: 1 },
+                { count: 2, dtProg: 1, dtReal: 1 },
+                { count: 3, dtProg: 1, dtReal: 1 }
             ];
             expect(result.sinks.table).deep.equal(expected);
         });
@@ -67,7 +70,7 @@ describe('read testTimeseries', function () {
     it('handles pure live mode with a configurable lag', function() {
         this.timeout(10000);
         return check_juttle({
-            program: 'read testTimeseries -to :end: -lag :2s: ' +
+            program: 'read testTimeseries -to :end: -lag :2s: -every :1s:' +
                 '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal',
@@ -107,7 +110,7 @@ describe('read testTimeseries', function () {
     it('handles mixed historical and live mode', function() {
         this.timeout(10000);
         return check_juttle({
-            program: 'read testTimeseries -from :-2s: -to :end:' +
+            program: 'read testTimeseries -from :-2s: -to :end: -every :1s: -lag :0s:' +
                 '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal',
