@@ -2,6 +2,13 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.4.1
+
+### Bug Fixes
+
+- Fixed an error occurring with `reduce` on empty batches which produced `null` `time` field. [[#351](https://github.com/juttle/juttle/issues/351)]
+- Updated Outrigger references in documentation and elsewhere to point to Juttle Engine and other components.
+
 ## 0.4.0
 
 ### Major Changes
