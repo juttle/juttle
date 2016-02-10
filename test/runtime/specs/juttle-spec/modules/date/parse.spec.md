@@ -32,7 +32,7 @@ Complains of badly-formed dates
 
 ### Warnings
 
-  * Unable to parse date:"bad date"
+  * Unable to parse date: "bad date"
 
 
 Parses a custom-formatted date
@@ -62,7 +62,7 @@ Complains of dates not matching a specified format
 
 ### Warnings
 
-  * Unable to parse date:"2015-05-06T19:26:07Z"
+  * Unable to parse date: "2015-05-06T19:26:07Z"
 
 
 Parses Juttle-style date variants
