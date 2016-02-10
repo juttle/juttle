@@ -100,6 +100,7 @@ function set_stdout(stream) {
 
 var TestView = View.extend({
     initialize: function(options, env) {
+        this.name = 'test';
         this.sink = options.sink;
         this.eofs = options.eofs || 1;
         this.data = [];
@@ -109,7 +110,6 @@ var TestView = View.extend({
         this.dt = options.sink.options && options.sink.options.dt;
         this.env = env;
     },
-    name: 'test',
     consume: function(data) {
         this.data = this.data.concat(utils.fromNative(data.map(_.clone)));
     },
