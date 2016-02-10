@@ -1,6 +1,5 @@
 'use strict';
 
-var Base = require('extendable-base');
 var marked = require('marked');
 var pointsParser = require('../../extlib/points-parser').pointsParser;
 var util = require('util');
@@ -77,34 +76,34 @@ var html = {
  *   * Tests have multiple *sections*, introduced by level 3 headings (e.g.
  *     "Juttle", "Output").
  */
-var SpecRenderer = Base.extend({
-    initialize: function(options) {
+class SpecRenderer {
+    constructor(options) {
         this.title = null;
         this.tests = [];
         this.section = null;
         this.moduleName = null;
 
         this.baseDir = options.baseDir;
-    },
+    }
 
-    check: function() {
+    check() {
         if (this.title === null) {
             throw new Error('Spec is missing a title.');
         }
 
         this.tests.forEach(this.checkTest);
-    },
+    }
 
-    checkTest: function(test) {
+    checkTest(test) {
         if (test.juttle === null) {
             throw new Error('Test "' + test.title + '" is missing the "Juttle" section.');
         }
         if (test.output === null && test.errors.length === 0 && test.warnings.length === 0) {
             throw new Error('Test "' + test.title + '" is missing the "Output", "Errors", or "Warnings" section.');
         }
-    },
+    }
 
-    render: function() {
+    render() {
         var parts = [];
         var self = this;
 
@@ -118,9 +117,9 @@ var SpecRenderer = Base.extend({
         parts.push(this.renderFooter());
 
         return parts.join('\n');
-    },
+    }
 
-    renderHeader: function() {
+    renderHeader() {
         return [
             'var expect = require(\'chai\').expect;',
             '',
@@ -131,13 +130,13 @@ var SpecRenderer = Base.extend({
             '',
             'describe(\'' + js.stringEscape(this.title) + '\', function() {',
         ].join('\n');
-    },
+    }
 
-    renderFooter: function() {
+    renderFooter() {
         return '}); // describe block \n';
-    },
+    }
 
-    renderTest: function(test) {
+    renderTest(test) {
         var parts = [];
 
         parts.push([
@@ -180,11 +179,11 @@ var SpecRenderer = Base.extend({
 
         parts.push('});');
         return parts.join('\n');
-    },
+    }
 
     /* Block-level Methods */
 
-    heading: function(text, level) {
+    heading(text, level) {
         text = html.unescape(text);
 
         switch (level) {
@@ -222,12 +221,12 @@ var SpecRenderer = Base.extend({
         }
 
         return '';
-    },
+    }
 
     /*
      * Simple per-test directives
      */
-    getDirective: function(text) {
+    getDirective(text) {
         if (text.match(/^\(skip.*\)/i)) {
             return '.skip';
         } else if (text.match(/^\(only.*\)/i)) {
@@ -235,9 +234,9 @@ var SpecRenderer = Base.extend({
         } else {
             return '';
         }
-    },
+    }
 
-    code: function(code) {
+    code(code) {
         var test = this.tests[this.tests.length - 1];
 
         switch (this.section) {
@@ -255,9 +254,9 @@ var SpecRenderer = Base.extend({
         }
 
         return '';
-    },
+    }
 
-    listitem: function(text) {
+    listitem(text) {
         text = html.unescape(text);
 
         var test = this.tests[this.tests.length - 1];
@@ -273,69 +272,69 @@ var SpecRenderer = Base.extend({
         }
 
         return '';
-    },
+    }
 
-    blockquote: function() {
+    blockquote() {
         return '';
-    },
+    }
 
-    hr: function() {
+    hr() {
         return '';
-    },
+    }
 
-    html: function() {
+    html() {
         return '';
-    },
+    }
 
-    list: function() {
+    list() {
         return '';
-    },
+    }
 
-    paragraph: function() {
+    paragraph() {
         return '';
-    },
+    }
 
-    table: function() {
+    table() {
         return '';
-    },
+    }
 
-    tablecell: function() {
+    tablecell() {
         return '';
-    },
+    }
 
-    tablerow: function() {
+    tablerow() {
         return '';
-    },
+    }
 
     /* Inline-level Methods */
-    codespan: function pass(s) {
-        return s;
-    },
-
-    br: function() {
-        return '';
-    },
-
-    del: function pass(s) {
-        return s;
-    },
-
-    em: function pass(s) {
-        return s;
-    },
-
-    image: function() {
-        return '';
-    },
-
-    link: function() {
-        return '';
-    },
-
-    strong: function pass(s) {
+    codespan(s) {
         return s;
     }
-});
+
+    br() {
+        return '';
+    }
+
+    del(s) {
+        return s;
+    }
+
+    em(s) {
+        return s;
+    }
+
+    image() {
+        return '';
+    }
+
+    link() {
+        return '';
+    }
+
+    strong(s) {
+        return s;
+    }
+}
 
 /*
  * Main JuttleSpec module. Wraps converting Markdown specs into JavaScript ones.
