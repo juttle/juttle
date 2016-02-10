@@ -57,14 +57,6 @@ var html = {
     }
 };
 
-function skip() {
-    return '';
-}
-
-function pass(s) {
-    return s;
-}
-
 /*
  * Renderer passed to marked that renders a Markdown spec into a JavaScript one.
  *
@@ -283,24 +275,66 @@ var SpecRenderer = Base.extend({
         return '';
     },
 
-    blockquote: skip,
-    hr: skip,
-    html: skip,
-    list: skip,
-    paragraph: skip,
-    table: skip,
-    tablecell: skip,
-    tablerow: skip,
+    blockquote: function() {
+        return '';
+    },
+
+    hr: function() {
+        return '';
+    },
+
+    html: function() {
+        return '';
+    },
+
+    list: function() {
+        return '';
+    },
+
+    paragraph: function() {
+        return '';
+    },
+
+    table: function() {
+        return '';
+    },
+
+    tablecell: function() {
+        return '';
+    },
+
+    tablerow: function() {
+        return '';
+    },
 
     /* Inline-level Methods */
+    codespan: function pass(s) {
+        return s;
+    },
 
-    codespan: pass,
-    br: skip,
-    del: pass,
-    em: pass,
-    image: skip,
-    link: skip,
-    strong: pass
+    br: function() {
+        return '';
+    },
+
+    del: function pass(s) {
+        return s;
+    },
+
+    em: function pass(s) {
+        return s;
+    },
+
+    image: function() {
+        return '';
+    },
+
+    link: function() {
+        return '';
+    },
+
+    strong: function pass(s) {
+        return s;
+    }
 });
 
 /*
