@@ -422,4 +422,47 @@ describe('Juttle CLI Tests', function() {
             });
         });
     });
+
+    describe('logging', function() {
+        it('logs at info level by default', function() {
+            return runJuttle([
+                '-e', 'emit -from :2016-01-01: -limit 1 | view text -format "jsonl"'
+            ])
+            .then(function(result) {
+                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
+                expect(result.stdout).to.not.match(/\[DEBUG\]/);
+                expect(result.stdout).to.not.match(/\[INFO\]/);
+            });
+        });
+
+        it('logs at debug level for all targets with DEBUG=*', function() {
+            return runJuttle(
+                ['-e', 'emit -from :2016-01-01: -limit 1 | view text -format "jsonl"'],
+                {
+                    env: {DEBUG: '*'}
+                }
+            )
+            .then(function(result) {
+                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
+                expect(result.stdout).to.match(/\[DEBUG\] cli/);
+                expect(result.stdout).to.match(/\[DEBUG\] juttle-adapter/);
+                expect(result.stdout).to.match(/\[DEBUG\] proc-emit/);
+            });
+        });
+
+        it('logs at debug level for named targets with DEBUG=cli,juttle-adapter', function() {
+            return runJuttle(
+                ['-e', 'emit -from :2016-01-01: -limit 1 | view text -format "jsonl"'],
+                {
+                    env: {DEBUG: 'cli,juttle-adapter'}
+                }
+            )
+            .then(function(result) {
+                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
+                expect(result.stdout).to.match(/\[DEBUG\] cli/);
+                expect(result.stdout).to.match(/\[DEBUG\] juttle-adapter/);
+                expect(result.stdout).to.not.match(/\[DEBUG\] proc-emit/);
+            });
+        });
+    });
 });

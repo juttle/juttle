@@ -5,6 +5,7 @@ var Promise = require('bluebird');
 
 var spawn = require('child-process-promise').spawn;
 var juttleBin = 'bin/juttle';
+var _ = require('underscore');
 
 module.exports.runJuttle = function(args, options) {
 
@@ -12,9 +13,10 @@ module.exports.runJuttle = function(args, options) {
         var stdout = '';
         var stderr = '';
 
+        options = options || {};
         var spawnOptions;
 
-        if (options && options.stdin) {
+        if (options.stdin) {
             spawnOptions = {
                 stdio : ['pipe', 'pipe', 'pipe']
             };
@@ -22,6 +24,10 @@ module.exports.runJuttle = function(args, options) {
             spawnOptions = {
                 stdio : [undefined, 'pipe', 'pipe']
             };
+        }
+
+        if (options.env) {
+            spawnOptions.env = _.extend({}, process.env, options.env);
         }
 
         return spawn(juttleBin,

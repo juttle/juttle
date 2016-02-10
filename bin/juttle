@@ -1,17 +1,10 @@
 #!/usr/bin/env node
 'use strict';
-
 /* eslint no-console: 0 */
-var JuttleLogger = require('../lib/logger');
-var log4js = require('log4js');
 
-// Set up logging to use log4js loggers
-JuttleLogger.getLogger = log4js.getLogger;
-if (! process.env.DEBUG) {
-    log4js.setGlobalLogLevel('info');
-}
-
-var logger = log4js.getLogger('cli');
+// Initialize logging before loading any other juttle files.
+require('../lib/cli/log-setup')();
+var logger = require('../lib/logger').getLogger('cli');
 
 // Node will return errors on process.stdout if the standard output is
 // piped to a program that doesn't read all of the output (for
@@ -46,7 +39,6 @@ var optimize = require('../lib/compiler/optimize');
 var implicit_views = require('../lib/compiler/flowgraph/implicit_views');
 
 var modes = _.without(compiler.stageNames, 'eval').concat('run');
-
 function usage() {
     console.log('usage: juttle [--version] [--adapters] [--mode <mode>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
     console.log('     --version show juttle CLI version');
