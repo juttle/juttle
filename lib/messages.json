@@ -25,7 +25,7 @@
   "RT-INVALID-CSV-ERROR": "Invalid CSV data: {detail}",
   "RT-INVALID-JSON-TIME-ERROR": "the time field must contain a number or a string representing time.",
   "RT-FIELD-NOT-FOUND": "field \"{field}\" does not exist",
-  "RT-DATE-PARSE-ERROR": "Unable to parse date:\"{s}\"",
+  "RT-DATE-PARSE-ERROR": "Unable to parse date: \"{s}\"",
 
   "RT-INTEGER-REQUIRED-ERROR": "{argument} for {proc} must be an integer",
   "RT-BATCH-INTERVAL-ERROR": "batch interval must be a positive number or duration.",
