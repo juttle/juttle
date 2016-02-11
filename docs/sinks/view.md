@@ -33,7 +33,7 @@ Display a raw dump of the output in a fixed-width, console-style font.
 
 These charts are supplied by the [juttle-viz charting library](https://github.com/juttle/juttle-viz) which seamlessly integrates with Juttle.
 
-To use these charts, follow installation instructions for juttle-viz, or try out the integrated Juttle analytics environment [outrigger](https://github.com/juttle/demo-app).
+To use these charts, follow installation instructions for juttle-viz, or try out the integrated Juttle analytics environment [juttle engine](https://github.com/juttle/juttle-engine).
 
 Sink | Description | Image
 ---- | ----------- | -----

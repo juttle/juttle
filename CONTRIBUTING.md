@@ -36,7 +36,7 @@ When filing a new bug, include:
 - juttle program you ran (put it in a code block if the program is short, attach in a text file if long)
 - sample data (if your program reads from a storage backend, explain the data format)
 - steps to reproduce the problem, if it's more than just running your juttle program
-- screenshot of the browser output, if the problem is with juttle-viz or outrigger
+- screenshot of the browser output, if the problem is with juttle-viz or juttle-viewer
 - version of the code you used (for example, 'juttle@0.1.0' as reported by `npm list`, or "master as of rev abcd")
 
 What will happen to the bug next? See [wiki](https://github.com/juttle/juttle/wiki/Managing-Issues#bugs).

@@ -32,7 +32,7 @@ In the simple example above, the following steps occurred:
 
 1. The point is fed into the processor [put](../processors/put.md), which adds a field called message.
 
-1. The point is then sent to a `table` [view](./views.md) which renders the result as the given table. Note that the specific views are actually not part of the Juttle language -- they are passed through to the calling environment, either the Juttle CLI (shown above) or an application environment like [outrigger](https://github.com/juttle/outrigger).
+1. The point is then sent to a `table` [view](./views.md) which renders the result as the given table. Note that the specific views are actually not part of the Juttle language -- they are passed through to the calling environment, either the Juttle CLI (shown above) or an application environment like [juttle engine](https://github.com/juttle/juttle-engine).
 
 ---
 
