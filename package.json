@@ -1,6 +1,6 @@
 {
   "name": "juttle",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Juttle dataflow programming language",
   "keywords": [
     "juttle",
@@ -79,21 +79,21 @@
     "npm": ">=2.14.7"
   },
   "files": [
-      "AUTHORS.md",
-      "CHANGELOG.md",
-      "CONTRIBUTING.md",
-      "LICENSE",
-      "NOTICE",
-      "README.md",
-      "bin",
-      "docs",
-      "examples",
-      "extlib",
-      "gulpfile.js",
-      "index.js",
-      "lib",
-      "package.json",
-      "scripts",
-      "test"
+    "AUTHORS.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "bin",
+    "docs",
+    "examples",
+    "extlib",
+    "gulpfile.js",
+    "index.js",
+    "lib",
+    "package.json",
+    "scripts",
+    "test"
   ]
 }
