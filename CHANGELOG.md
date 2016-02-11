@@ -2,6 +2,12 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.4.2
+
+### Bug Fixes
+
+- Work around an npm issue [[npm/#8982](https://github.com/npm/npm/issues/8982)] by running the peg parser generation as a prepublish and not a postinstall script. [[#398](https://github.com/juttle/juttle/pull/398)]
+
 ## 0.4.1
 
 ### Bug Fixes
