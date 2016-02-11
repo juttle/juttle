@@ -2,6 +2,8 @@
 
 var juttle_test_utils = require('./specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
+
+var Promise = require('bluebird');
 var expect = require('chai').expect;
 var path = require('path');
 var _ = require('underscore');
@@ -261,6 +263,32 @@ describe('adapter API tests', function () {
 
             var expected = [{from: '(null)', to: '(null)'}];
             expect(result.sinks.table).deep.equal(expected);
+        });
+    });
+
+    it('accepts filter expressions including nested objects', function() {
+        var operators = [ '==', '!=', '=~', '!~', '<', '>', '<=', '>=' ];
+        return Promise.map(operators, function(op) {
+            return check_juttle({
+                program: `read test -key "nothing" field["x"] ${op} "1"`
+            })
+            .then(function(result) {
+                expect(result.errors).deep.equal([]);
+            });
+        })
+        .then(function() {
+            return check_juttle({
+                program: `read test -key "nothing" field["x"] in [1]`
+            });
+        })
+        .then(function(result) {
+            expect(result.errors).deep.equal([]);
+            return check_juttle({
+                program: `read test -key "nothing" field.x.y = 1`
+            });
+        })
+        .then(function(result) {
+            expect(result.errors).deep.equal([]);
         });
     });
 });
