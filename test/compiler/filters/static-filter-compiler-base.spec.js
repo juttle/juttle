@@ -36,13 +36,13 @@ class FieldCompiler extends StaticFilterCompilerBase {
     }
 }
 
-// A compiler which transforms a filter expression into a Lisp S-expression and
-// tracks nodes passed to various methods.
+// A compiler which transforms a filter expression into a Lisp S-expression
+// while tracking arguments passed to various methods.
 class LispCompiler extends StaticFilterCompilerBase {
     constructor() {
         super();
 
-        this.nodes = {
+        this.args = {
             literal: [],
             field: [],
             expression: [],
@@ -54,56 +54,56 @@ class LispCompiler extends StaticFilterCompilerBase {
     }
 
     compileLiteral(node) {
-        this.nodes.literal.push(node);
+        this.args.literal.push(arguments);
 
         return values.inspect(values.fromAST(node));
     }
 
     compileField(node) {
-        this.nodes.field.push(node);
+        this.args.field.push(arguments);
 
         return `'${node.name}`;
     }
 
-    compileExpressionTerm(node) {
-        this.nodes.expression.push(node);
+    compileExpressionTerm(node, a, b, c) {
+        this.args.expression.push(arguments);
 
-        let leftCode = this.compile(node.left);
-        let rightCode = this.compile(node.right);
+        let leftCode = this.compile(node.left, a, b, c);
+        let rightCode = this.compile(node.right, a, b, c);
 
         return `(${node.operator} ${leftCode} ${rightCode})`;
     }
 
     compileFulltextTerm(node) {
-        this.nodes.fulltext.push(node);
+        this.args.fulltext.push(arguments);
 
         let stringCode = values.inspect(values.fromAST(node));
 
         return `(fulltext ${stringCode})`;
     }
 
-    compileAndExpression(node) {
-        this.nodes.and.push(node);
+    compileAndExpression(node, a, b, c) {
+        this.args.and.push(arguments);
 
-        let leftCode = this.compile(node.left);
-        let rightCode = this.compile(node.right);
+        let leftCode = this.compile(node.left, a, b, c);
+        let rightCode = this.compile(node.right, a, b, c);
 
         return `(and ${leftCode} ${rightCode})`;
     }
 
-    compileOrExpression(node) {
-        this.nodes.or.push(node);
+    compileOrExpression(node, a, b, c) {
+        this.args.or.push(arguments);
 
-        let leftCode = this.compile(node.left);
-        let rightCode = this.compile(node.right);
+        let leftCode = this.compile(node.left, a, b, c);
+        let rightCode = this.compile(node.right, a, b, c);
 
         return `(or ${leftCode} ${rightCode})`;
     }
 
-    compileNotExpression(node) {
-        this.nodes.not.push(node);
+    compileNotExpression(node, a, b, c) {
+        this.args.not.push(arguments);
 
-        let expressionCode = this.compile(node.expression);
+        let expressionCode = this.compile(node.expression, a, b, c);
 
         return `(not ${expressionCode})`;
     }
@@ -121,9 +121,22 @@ chai.use((chai, utils) => {
 
         compiler.compile(processFilter(this._obj));
 
-        new Assertion(compiler.nodes[type]).to.have.length(1);
-        new Assertion(compiler.nodes[type][0]).to.be.an.instanceOf(Object);
-        new Assertion(compiler.nodes[type][0]).to.contain.all.keys(node);
+        new Assertion(compiler.args[type]).to.have.length(1);
+
+        let args = compiler.args[type][0];
+        new Assertion(args[0]).to.be.an.instanceOf(Object);
+        new Assertion(args[0]).to.contain.all.keys(node);
+    });
+
+    Assertion.addMethod('receiveExtraArgs', function(type) {
+        let compiler = new LispCompiler('adapter');
+
+        compiler.compile(processFilter(this._obj), 1, 2, 3);
+
+        new Assertion(compiler.args[type]).to.have.length(1);
+
+        let args = compiler.args[type][0];
+        new Assertion(Array.prototype.slice.call(args, 1)).to.deep.equal([1, 2, 3]);
     });
 
     Assertion.addMethod('compileAs', function(result) {
@@ -233,6 +246,12 @@ describe('StaticFilterCompilerBase', () => {
             });
         });
 
+        it('receives additional arguments', () => {
+            _.each(literals, (literal) => {
+                expect(`a < ${literal.source}`).to.receiveExtraArgs('literal');
+            });
+        });
+
         it('its result is used', () => {
             _.each(literals, (literal) => {
                 expect(`a < ${literal.source}`).to.compileAs(`(< \'a ${literal.source})`);
@@ -257,6 +276,10 @@ describe('StaticFilterCompilerBase', () => {
             });
         });
 
+        it('receives additional arguments', () => {
+            expect('a < 5').to.receiveExtraArgs('field');
+        });
+
         it('its result is used', () => {
             expect('a < 5').to.compileAs('(< \'a 5)');
         });
@@ -278,6 +301,12 @@ describe('StaticFilterCompilerBase', () => {
                     type: 'BinaryExpression',
                     operator: operator
                 });
+            });
+        });
+
+        it('receives additional arguments', () => {
+            _.each(operators, (operator) => {
+                expect(`a ${operator} 5`).to.receiveExtraArgs('expression');
             });
         });
 
@@ -305,6 +334,10 @@ describe('StaticFilterCompilerBase', () => {
             });
         });
 
+        it('receives additional arguments', () => {
+            expect('"abcd"').to.receiveExtraArgs('fulltext');
+        });
+
         it('its result is used', () => {
             expect('"abcd"').to.compileAs('(fulltext "abcd")');
         });
@@ -323,6 +356,10 @@ describe('StaticFilterCompilerBase', () => {
                 type: 'BinaryExpression',
                 operator: 'AND'
             });
+        });
+
+        it('receives additional arguments', () => {
+            expect('a < 5 AND b > 6').to.receiveExtraArgs('and');
         });
 
         it('its result is used', () => {
@@ -345,6 +382,10 @@ describe('StaticFilterCompilerBase', () => {
             });
         });
 
+        it('receives additional arguments', () => {
+            expect('a < 5 OR b > 6').to.receiveExtraArgs('or');
+        });
+
         it('its result is used', () => {
             expect('a < 5 OR b > 6').to.compileAs('(or (< \'a 5) (> \'b 6))');
         });
@@ -363,6 +404,10 @@ describe('StaticFilterCompilerBase', () => {
                 type: 'UnaryExpression',
                 operator: 'NOT'
             });
+        });
+
+        it('receives additional arguments', () => {
+            expect('NOT a < 5').to.receiveExtraArgs('not');
         });
 
         it('its result is used', () => {
