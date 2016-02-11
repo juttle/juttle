@@ -13,7 +13,7 @@
   "bin": "bin/juttle",
   "repository": "juttle/juttle",
   "scripts": {
-    "postinstall": "node scripts/peg.js",
+    "prepublish": "node scripts/peg.js",
     "shrinkwrap": "npm-shrinkwrap"
   },
   "dependencies": {
@@ -74,5 +74,23 @@
   "engines": {
     "node": ">=4.2.0",
     "npm": ">=2.14.7"
-  }
+  },
+  "files": [
+      "AUTHORS.md",
+      "CHANGELOG.md",
+      "CONTRIBUTING.md",
+      "LICENSE",
+      "NOTICE",
+      "README.md",
+      "bin",
+      "docs",
+      "examples",
+      "extlib",
+      "gulpfile.js",
+      "index.js",
+      "lib",
+      "package.json",
+      "scripts",
+      "test"
+  ]
 }
