@@ -9,7 +9,7 @@ var expect = require('chai').expect;
 var log4js = require('log4js');
 var JuttleLogger = require('../../../lib/logger');
 var utils = require('../../../lib/runtime').utils;
-var Juttle = require('../../../lib/runtime/index').Juttle;
+var adapters = require('../../../lib/runtime/adapters');
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var compiler = require('../../../lib/compiler');
 var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
@@ -22,7 +22,7 @@ var View = require('../../../lib/views/view.js');
 JuttleLogger.getLogger = log4js.getLogger;
 
 // Configure the test adapter
-Juttle.adapters.configure({
+adapters.configure({
     test: {
         path: path.resolve(__dirname, '../test-adapter')
     },

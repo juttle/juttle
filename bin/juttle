@@ -27,6 +27,7 @@ var Promise = require('bluebird');
 var views = require('../lib/views');
 var read_config = require('../lib/config/read-config');
 
+var adapters = require('../lib/runtime/adapters');
 var LocationStripper = require('../lib/cli/location-stripper');
 var ViewManager = require('../lib/views/view-mgr.js');
 var CliErrors = require('../lib/cli/errors');
@@ -110,19 +111,18 @@ var view_classes = {
     file: views.FileView
 };
 
-var Juttle = require('../lib/runtime').Juttle;
-Juttle.adapters.configure(config.adapters);
+adapters.configure(config.adapters);
 
 if (opts.adapters) {
-    Juttle.adapters.list().forEach(function(info) {
+    adapters.list().forEach(function(info) {
         console.log(info.adapter, info.version, info.path);
     });
     process.exit(0);
 }
 
 if (process.env.JUTTLE_LOAD_TEST_ADAPTERS) {
-    Juttle.adapters.register('test', require('../test/runtime/test-adapter')());
-    Juttle.adapters.register('testTimeseries', require('../test/runtime/test-adapter-timeseries')());
+    adapters.register('test', require('../test/runtime/test-adapter')());
+    adapters.register('testTimeseries', require('../test/runtime/test-adapter-timeseries')());
 }
 
 function format_js(code) {
