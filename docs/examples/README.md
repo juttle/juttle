@@ -53,7 +53,7 @@ Error at line 2:
    1:(
    2:    stochastic -source 'srch_cluster' -from :2 minutes ago: name = 'response_ms'
                                                          ^
-SyntaxError: Expected ")", ",", ";", "|" or option but "n" found. code (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+SyntaxError: Expected ")", ",", ";", "|" or option but "n" found. code (SYNTAX-ERROR-WITH-EXPECTED)
 
     at ChildProcess.exithandler (child_process.js:637:15)
     at ChildProcess.EventEmitter.emit (events.js:98:17)
