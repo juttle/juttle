@@ -10,7 +10,7 @@
 'use strict';
 
 var _ = require('underscore');
-var AdapterRead = require('../../lib/runtime/adapter-read');
+var AdapterRead = require('../../lib/adapters/adapter-read');
 var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 var errors = require('../../lib/errors');
 

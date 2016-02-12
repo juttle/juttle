@@ -9,8 +9,8 @@
 
 var _ = require('underscore');
 var store = {};
-var AdapterRead = require('../../lib/runtime/adapter-read');
-var AdapterWrite = require('../../lib/runtime/adapter-write');
+var AdapterRead = require('../../lib/adapters/adapter-read');
+var AdapterWrite = require('../../lib/adapters/adapter-write');
 var errors = require('../../lib/errors');
 
 function TestAdapter(config) {
