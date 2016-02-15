@@ -13,7 +13,7 @@ describe('Values tests', function () {
             type: 'BinaryExpression',
             operator: '<',
             left: { type: 'Variable', name: 'a' },
-            right: { type: 'NumericLiteral', value: 5 }
+            right: { type: 'NumberLiteral', value: 5 }
         }
     };
 
@@ -499,7 +499,7 @@ describe('Values tests', function () {
         },
         {
             value: 5,
-            ast: { type: 'NumericLiteral', value: 5 }
+            ast: { type: 'NumberLiteral', value: 5 }
         },
         {
             value: Infinity,
@@ -542,9 +542,9 @@ describe('Values tests', function () {
             ast: {
                 type: 'ArrayLiteral',
                 elements: [
-                    { type: 'NumericLiteral', value: 1 },
-                    { type: 'NumericLiteral', value: 2 },
-                    { type: 'NumericLiteral', value: 3 }
+                    { type: 'NumberLiteral', value: 1 },
+                    { type: 'NumberLiteral', value: 2 },
+                    { type: 'NumberLiteral', value: 3 }
                 ]
             }
         },
@@ -556,17 +556,17 @@ describe('Values tests', function () {
                     {
                         type: 'ObjectProperty',
                         key: { type: 'StringLiteral', value: 'a' },
-                        value: { type: 'NumericLiteral', value: 1 }
+                        value: { type: 'NumberLiteral', value: 1 }
                     },
                     {
                         type: 'ObjectProperty',
                         key: { type: 'StringLiteral', value: 'b' },
-                        value: { type: 'NumericLiteral', value: 2 }
+                        value: { type: 'NumberLiteral', value: 2 }
                     },
                     {
                         type: 'ObjectProperty',
                         key: { type: 'StringLiteral', value: 'c' },
-                        value: { type: 'NumericLiteral', value: 3 }
+                        value: { type: 'NumberLiteral', value: 3 }
                     }
                 ]
             }

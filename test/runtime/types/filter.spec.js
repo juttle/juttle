@@ -13,7 +13,7 @@ describe('Filter', function() {
                     type: 'BinaryExpression',
                     operator: '==',
                     left: { type: 'Field', name: 'a' },
-                    right: { type: 'NumericLiteral', value: 5 }
+                    right: { type: 'NumberLiteral', value: 5 }
                 }
             };
             var text = 'a == 5';

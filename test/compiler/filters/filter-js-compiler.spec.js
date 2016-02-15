@@ -51,7 +51,7 @@ describe('FilterJSCompiler', function() {
             type: 'BinaryExpression',
             operator: '<',
             left: { type: 'Variable', name: 'a' },
-            right: { type: 'NumericLiteral', value: 5 }
+            right: { type: 'NumberLiteral', value: 5 }
         }
     };
 
@@ -110,7 +110,7 @@ describe('FilterJSCompiler', function() {
         expect('a == false').to.filter(POINTS_VALUES, [ { a: false } ]);
     });
 
-    it('compiles NumericLiteral correctly', function() {
+    it('compiles NumberLiteral correctly', function() {
         expect('a == 5').to.filter(POINTS_VALUES, [ { a: 5 } ]);
     });
 

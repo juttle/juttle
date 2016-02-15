@@ -21,7 +21,7 @@ describe('LocationStripper', function() {
             expect(ast.elements[0].elements[0]).not.to.have.property('location');
             // ProcOption(id = "limit")
             expect(ast.elements[0].elements[0].options[0]).not.to.have.property('location');
-            // NumericLiteral(value = 5)
+            // NumberLiteral(value = 5)
             expect(ast.elements[0].elements[0].options[0].expr).not.to.have.property('location');
         });
     });
