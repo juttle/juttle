@@ -134,7 +134,7 @@ describe('FilterJSCompiler', function() {
         expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
 
-    it('compiles RegularExpressionLiteral correctly', function() {
+    it('compiles RegExpLiteral correctly', function() {
         expect('a == /abcd/').to.filter(POINTS_VALUES, [ { a: /abcd/ } ]);
         expect('a == /abcd/gim').to.filter(POINTS_VALUES, [ { a: /abcd/gim } ]);
     });

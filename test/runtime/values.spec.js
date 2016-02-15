@@ -519,11 +519,11 @@ describe('Values tests', function () {
         },
         {
             value: /abcd/i,
-            ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'i' }
+            ast: { type: 'RegExpLiteral', value: 'abcd', flags: 'i' }
         },
         {
             value: /abcd/gim,
-            ast: { type: 'RegularExpressionLiteral', value: 'abcd', flags: 'gim' }
+            ast: { type: 'RegExpLiteral', value: 'abcd', flags: 'gim' }
         },
         {
             value: new JuttleMoment('2015-01-01T00:00:05.000Z'),
