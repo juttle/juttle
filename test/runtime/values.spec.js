@@ -535,7 +535,7 @@ describe('Values tests', function () {
         },
         {
             value: new Filter(FILTER_AST, 'a < 5'),
-            ast: { type: 'FilterLiteral', ast: FILTER_AST, text: 'a < 5' }
+            ast: { type: 'FilterLiteral', ast: FILTER_AST, source: 'a < 5' }
         },
         {
             value: [ 1, 2, 3 ],
