@@ -13,6 +13,7 @@ var expect = require('chai').expect;
 var JuttleLogger = require('../../../lib/logger');
 var utils = require('../../../lib/runtime').utils;
 var adapters = require('../../../lib/runtime/adapters');
+var adapterAPI = require('../../../lib/adapters/api');
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var compiler = require('../../../lib/compiler');
 var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
@@ -393,6 +394,21 @@ function withModuleIt(description, fn, module) {
     }
 }
 
+// Wrapper around the adapter.configure method
+function configureAdapter(config) {
+    return adapters.configure(config);
+}
+
+// To facilitate unit testing of external juttle adapters, this wrapper function
+// makes sure the the JuttleAdapterAPI global is  set during the execution of
+// the specified function, which can be used to enclose a set of it() or describe()
+// calls that need to pull in portions of the adapter code for tests.
+function withAdapterAPI(fn) {
+    global.JuttleAdapterAPI = adapterAPI;
+    fn();
+    global.JuttleAdapterAPI = undefined;
+}
+
 module.exports = {
     wait_for_event: wait_for_event,
     get_times: get_times,
@@ -404,5 +420,7 @@ module.exports = {
     expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
     set_stdout: set_stdout,
+    configureAdapter,
+    withAdapterAPI,
     withModuleIt
 };
