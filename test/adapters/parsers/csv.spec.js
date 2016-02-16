@@ -95,26 +95,26 @@ describe('parsers/csv', function() {
 
         return serializer.done()
         .then(() => {
-            stream.end();
+            stream.end(function() {
+                var csv = parsers.getParser('csv', {
+                    optimization: {
+                        type: 'head',
+                        limit: 1
+                    }
+                });
 
-            var csv = parsers.getParser('csv', {
-                optimization: {
-                    type: 'head',
-                    limit: 1
-                }
-            });
-
-            var results = [];
-            return csv.parseStream(fs.createReadStream(tmpFilename), function(result) {
-                results.push(result);
-            })
-            .then(function() {
-                expect(results.length).to.be.equal(2); // 1 point + empty batch
-                expect(csv.totalRead).to.be.lessThan(40);
-                expect(csv.totalParsed).to.equal(2); // we always parse one ahead
-            })
-            .finally(function() {
-                fs.unlinkSync(tmpFilename);
+                var results = [];
+                return csv.parseStream(fs.createReadStream(tmpFilename), function(result) {
+                    results.push(result);
+                })
+                .then(function() {
+                    expect(results.length).to.be.equal(2); // 1 point + empty batch
+                    expect(csv.totalRead).to.be.lessThan(40);
+                    expect(csv.totalParsed).to.equal(2); // we always parse one ahead
+                })
+                .finally(function() {
+                    fs.unlinkSync(tmpFilename);
+                });
             });
         });
     });
