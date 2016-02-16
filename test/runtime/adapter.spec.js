@@ -187,6 +187,28 @@ describe('adapter API tests', function () {
         });
     });
 
+    it('errors if an incompatible adapter is used in read', function() {
+        adapters.configure({
+            'testIncompatible': {
+                path: path.resolve(__dirname, './test-adapter-incompatible')
+            }
+        });
+
+        return check_juttle({
+            program: 'read testIncompatible'
+        })
+        .then(function() {
+            throw new Error('unexpected success');
+        })
+        .catch(function(err) {
+            expect(err.message).match(/adapter testIncompatible incompatible with juttle \d+\.\d+\.\d+ \(wanted \^999.0.0\)/);
+            expect(err.code).equal('INCOMPATIBLE-ADAPTER');
+            expect(err.info.location.filename).is.a.string;
+            expect(err.info.location.start.offset).is.a.number;
+            expect(err.info.location.end.offset).is.a.number;
+        });
+    });
+
     it('defaults to undefined for -from and -to', function() {
         return check_juttle({
             program: 'read test -debug "timeBounds" -key "bananas"'
