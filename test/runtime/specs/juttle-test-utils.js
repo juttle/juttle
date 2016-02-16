@@ -420,6 +420,20 @@ module.exports = {
     expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
     set_stdout: set_stdout,
+
+    // Export the utility methods as camelCase as well. Eventually we should
+    // deprecate the underscore variants.
+    waitForEvent: wait_for_event,
+    getTimes: get_times,
+    compileJuttle: compile_juttle,
+    checkJuttle: check_juttle,
+    runJuttle: run_juttle,
+    moduleResolver: module_resolver,
+    optionsFromObject: options_from_object,
+    expectToFail: expect_to_fail,
+    setStdin: set_stdin,
+    setStdout: set_stdout,
+
     configureAdapter,
     withAdapterAPI,
     withModuleIt
