@@ -1,12 +1,15 @@
 'use strict';
 
+// Make sure to call log-setup before requiring any other sources to make sure
+// that the configuration applies to any loggers initialized in module scope.
+require('../../../lib/cli/log-setup')();
+
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
 var _ = require('underscore');
 var Promise = require('bluebird');
 var expect = require('chai').expect;
-var log4js = require('log4js');
 var JuttleLogger = require('../../../lib/logger');
 var utils = require('../../../lib/runtime').utils;
 var adapters = require('../../../lib/runtime/adapters');
@@ -18,9 +21,6 @@ var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')()
 var optimize = require('../../../lib/compiler/optimize');
 var View = require('../../../lib/views/view.js');
 
-// Set up logging to use log4js loggers
-JuttleLogger.getLogger = log4js.getLogger;
-
 // Configure the test adapter
 adapters.configure({
     test: {
@@ -31,9 +31,6 @@ adapters.configure({
     }
 });
 
-if (! process.env.DEBUG) {
-    log4js.setGlobalLogLevel('info');
-}
 
 var logger = JuttleLogger.getLogger('juttle-tests');
 logger.debug('initializing');
