@@ -98,7 +98,7 @@ describe('Juttle inputs', function() {
                                                  type: 'BinaryExpression',
                                                  operator: '<',
                                                  left: { type: 'Variable', name: 'c' },
-                                                 right: { type: 'NumericLiteral', value: 2 }
+                                                 right: { type: 'NumberLiteral', value: 2 }
                                              }
                                          },
                                          'c < 2'

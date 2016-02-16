@@ -115,7 +115,7 @@ describe('Juttle parser', function() {
                     value: '1970-01-01T00:00:00.000Z'
                 },
                 display_limit: {
-                    type: 'NumericLiteral',
+                    type: 'NumberLiteral',
                     location: {
                         filename: 'main',
                         start: { offset: 22, line: 1, column: 23 },

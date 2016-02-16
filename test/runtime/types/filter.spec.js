@@ -13,14 +13,14 @@ describe('Filter', function() {
                     type: 'BinaryExpression',
                     operator: '==',
                     left: { type: 'Field', name: 'a' },
-                    right: { type: 'NumericLiteral', value: 5 }
+                    right: { type: 'NumberLiteral', value: 5 }
                 }
             };
-            var text = 'a == 5';
-            var filter = new Filter(ast, text);
+            var source = 'a == 5';
+            var filter = new Filter(ast, source);
 
             expect(filter.ast).to.eq(ast);
-            expect(filter.text).to.eq(text);
+            expect(filter.source).to.eq(source);
         });
     });
 });
