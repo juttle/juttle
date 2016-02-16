@@ -207,6 +207,7 @@ function check_juttle(options, deactivateAfter) {
 
 function run_juttle(prog, options) {
     options = options || {};
+    var graph = prog.graph;
     // make sure paths relative to the location of this file work:
     if (options.expect_file) {
         options.expect_file = path.resolve(__dirname, options.expect_file);
@@ -294,7 +295,7 @@ function run_juttle(prog, options) {
             else if (expect_data) {
                 expect(all_sinks).to.deep.equal(expect_data);
             }
-            return {sinks: all_sinks, prog:prog, errors: errors, warnings: warnings};
+            return {sinks: all_sinks, prog:prog, graph: graph, errors: errors, warnings: warnings};
         });
     });
 }
