@@ -42,6 +42,7 @@
     "pegjs": "^0.9.0",
     "request": "^2.67.0",
     "seedrandom": "^2.3.6",
+    "semver": "^5.1.0",
     "tdigest": "^0.1.1",
     "tiny-fifo-cache": "^1.0.1",
     "underscore": "^1.8.3"
