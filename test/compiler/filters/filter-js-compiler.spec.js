@@ -178,8 +178,8 @@ describe('FilterJSCompiler', function() {
         expect('a == "${"ab" + "cd"}"').to.filter(POINTS_VALUES, [ { a: 'abcd' } ]);
     });
 
-    it('compiles PropertyAccess correctly', function() {
-        // Non-computed PropertyAccess can't be tested because it refers to
+    it('compiles MemberExpression correctly', function() {
+        // Non-computed MemberExpression can't be tested because it refers to
         // module exports and we can't load modules here.
 
         expect('a[1] == 5').to.filter(POINTS_ARRAYS, [ { a: [ 4, 5, 6 ] } ]);
