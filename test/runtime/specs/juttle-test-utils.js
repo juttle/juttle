@@ -98,8 +98,10 @@ function set_stdout(stream) {
 })();
 
 
-var TestView = View.extend({
-    initialize: function(options, env) {
+class TestView extends View {
+    constructor(options, env) {
+        super(options, env);
+        this.name = 'test';
         this.sink = options.sink;
         this.eofs = options.eofs || 1;
         this.data = [];
@@ -108,19 +110,18 @@ var TestView = View.extend({
         this.times = options.sink.options && options.sink.options.times;
         this.dt = options.sink.options && options.sink.options.dt;
         this.env = env;
-    },
-    name: 'test',
-    consume: function(data) {
+    }
+    consume(data) {
         this.data = this.data.concat(utils.fromNative(data.map(_.clone)));
-    },
-    mark: function(time) {
+    }
+    mark(time) {
         if (this.marks && this.times) {
             this.data = this.data.concat(utils.fromNative([{time:time, mark:true}]));
         } else if (this.marks) {
             this.data = this.data.concat({mark:true});
         }
-    },
-    tick: function(time) {
+    }
+    tick(time) {
         if (this.ticks) {
             if (this.times) {
                 this.data = this.data.concat(utils.fromNative([{time:time, tick:true}]));
@@ -130,8 +131,8 @@ var TestView = View.extend({
                 this.data = this.data.concat({tick:true});
             }
         }
-    },
-    eof: function() {
+    }
+    eof() {
         if (--this.eofs === 0) {
             var result = {};
             result.data = utils.fromNative(this.data);
@@ -143,7 +144,7 @@ var TestView = View.extend({
             this.events.emit('end', result);
         }
     }
-});
+}
 
 function compile_juttle(options) {
     logger.debug('parsing Juttle program:', options.program);
