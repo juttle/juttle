@@ -1,6 +1,6 @@
 # Juttle
 
-[![Build Status](https://travis-ci.org/juttle/juttle.svg)](https://travis-ci.org/juttle/juttle)
+[![Build Status](https://travis-ci.org/juttle/juttle.svg?branch=master)](https://travis-ci.org/juttle/juttle)
 [![Join the chat at https://gitter.im/juttle/juttle](https://badges.gitter.im/juttle/juttle.svg)](https://gitter.im/juttle/juttle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Juttle is an analytics system for developers built upon
