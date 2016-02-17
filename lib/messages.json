@@ -118,5 +118,6 @@
   "INVALID-VIEW": "program refers to invalid client view \"{view}\"",
   "OPTION-SHOULD-BE-POSITIVE-INTEGER": "option {option} should be a positive integer",
   "OPTION-VALUE-EXCEEDED": "option {option} exceeded limit of {value}{extra}",
-  "INVALID-OPTION-COMBINATION": "option {option} can only be used with {rule}"
+  "INVALID-OPTION-COMBINATION": "option {option} can only be used with {rule}",
+  "FILTER-FEATURE-NOT-SUPPORTED": "Filters do not support {feature} in this context."
 }
