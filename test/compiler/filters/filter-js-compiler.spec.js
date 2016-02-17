@@ -185,7 +185,7 @@ describe('FilterJSCompiler', function() {
         expect('a[1] == 5').to.filter(POINTS_ARRAYS, [ { a: [ 4, 5, 6 ] } ]);
     });
 
-    // FunctionCall can't be tested because it calls a function and we can't
+    // CallExpression can't be tested because it calls a function and we can't
     // define functions here.
 
     it('compiles UnaryExpression correctly', function() {
