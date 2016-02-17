@@ -4,6 +4,7 @@ var chai = require('chai');
 var expect = chai.expect;
 
 var Filter = require('../../../lib/runtime/types/filter');
+var FilterSimplifier = require('../../../lib/compiler/filters/filter-simplifier');
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var SemanticPass = require('../../../lib/compiler/semantic');
 var _ = require('underscore');
@@ -22,6 +23,9 @@ function filterPoints(filter, points) {
     // references.
     var semantic = new SemanticPass();
     ast = semantic.sa_expr(ast);
+
+    var simplifier = new FilterSimplifier();
+    ast = simplifier.simplify(ast);
 
     var compiler = new FilterJSCompiler();
     var fn = eval(compiler.compile(ast));
