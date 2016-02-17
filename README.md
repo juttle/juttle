@@ -143,6 +143,8 @@ This is a partial list of adapters that can be installed separately. Make sure t
 * [Twitter](https://github.com/juttle/juttle-twitter-adapter/)
 * [Gmail](https://github.com/juttle/juttle-gmail-adapter/)
 * [OpenTSDB](https://github.com/juttle/juttle-opentsdb-adapter/)
+* [AWS (Amazon Web Services)](https://github.com/juttle/juttle-aws-adapter/)
+* [Amazon CloudWatch](https://github.com/juttle/juttle-cloudwatch-adapter/)
 
 Connections to external adapters are configured in the "adapters" section of the runtime configuration. See the [CLI reference](./docs/reference/cli.md) for specific instructions.
 
