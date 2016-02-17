@@ -259,6 +259,27 @@ describe('Juttle CLI Tests', function() {
                 });
         });
 
+        it('properly shows titles for multiple tables', function() {
+            return runJuttle(['-e', 'emit -from :2015-01-01: -limit 1 | (put sink = 1 | view table -title "Table1"; put sink = 2 | view table -title "Table2")'])
+                .then(function(result) {
+                    expect(result.stdout).equals(
+'Table1\n' +
+'┌──────────────────────────┬──────┐\n' +
+'│ time                     │ sink │\n' +
+'├──────────────────────────┼──────┤\n' +
+'│ 2015-01-01T00:00:00.000Z │ 1    │\n' +
+'└──────────────────────────┴──────┘\n' +
+'Table2\n' +
+'┌──────────────────────────┬──────┐\n' +
+'│ time                     │ sink │\n' +
+'├──────────────────────────┼──────┤\n' +
+'│ 2015-01-01T00:00:00.000Z │ 2    │\n' +
+'└──────────────────────────┴──────┘\n');
+                    expect(result.code).to.equal(0);
+                    expect(result.stderr).to.equal('');
+                });
+        });
+
         it('interleaves output from multiple table views in progressive mode', function() {
             return runJuttle(['-e', 'emit -from :2015-01-01: -limit 2 | (put sink = 1 | view table -progressive true; put sink = 2 | view table -progressive true)'])
                 .then(function(result) {
