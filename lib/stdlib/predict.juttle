@@ -250,6 +250,7 @@ export sub predict(field = "value", over = :w:, every=null, pct=0.5, nonneg=true
                    detrend=true, deseason=true, denoise=true, revise=true) {
     const __every = every ?? subdivide_duration(over);
     reduce -every __every time= Date.quantize(first(time), __every), *field = percentile(field, pct)
+    | unbatch
     | trend -field field -every __every -over over -revise revise
     | put T = detrend ? T : 0
     | put __detrend = *field  - T
