@@ -85,6 +85,7 @@ Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
 `-format`         | Input input format: `csv` for [CSV](https://tools.ietf.org/html/rfc4180) data, `json` for [JSON](https://tools.ietf.org/html/rfc7159) data, or `jsonl` for [JSON lines](http://jsonlines.org/) data | No; defaults to `json`
+`-append`         | Specifies if the data should be appended to the file or if the file should be overwritten | No, defaults to `false`
 
 If the file already exists it will be truncated and overwritten.
 

@@ -102,7 +102,8 @@ describe('write file adapter tests', function () {
                 return run_read_file_juttle(tmp_file, { format: format });
             })
             .then(function(result) {
-                expect(result.errors).deep.equals([]);
+                expect(result.errors.length).to.equal(0);
+                expect(result.warnings.length).to.equal(0);
                 expect(result.sinks.table.length).equal(10);
                 for(var index = 0; index < 10; index++) {
                     expect(result.sinks.table[index].message).equal('hello test ' + (index + 1));
@@ -111,4 +112,32 @@ describe('write file adapter tests', function () {
         });
     });
 
+    _.each(['csv', 'jsonl'], function(format) {
+        it('can append multiple points to a file with ' + format + ' format', function() {
+            return check_juttle({
+                program: 'emit -limit 1 ' +
+                         '| put value=1 ' +
+                         '| write file -file "' + tmp_file + '" -format "' + format + '"'
+            })
+            .then(function(result) {
+                expect(result.errors).to.deep.equal([]);
+                expect(result.warnings).to.deep.equal([]);
+                return check_juttle({
+                    program: 'emit -limit 1 ' +
+                            '| put value=2 ' +
+                            '| write file -file "' + tmp_file + '" -format "' + format + '" -append true'
+                });
+            })
+            .then(function() {
+                return run_read_file_juttle(tmp_file, { format: format });
+            })
+            .then(function(result) {
+                expect(result.errors).to.deep.equal([]);
+                expect(result.warnings).to.deep.equal([]);
+                expect(result.sinks.table.length).equal(2);
+                expect(result.sinks.table[0].value).equal(format === 'csv' ? '1' : 1);
+                expect(result.sinks.table[1].value).equal(format === 'csv' ? '2' : 2);
+            });
+        });
+    });
 });
