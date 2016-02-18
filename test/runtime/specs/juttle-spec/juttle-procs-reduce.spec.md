@@ -493,11 +493,13 @@ complains about out-of-order assignment to the `time` field in -every mode
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 6 | reduce -reset false -every :s: time = last(time) - 2 * count() * :s: | view result
+    emit -from Date.new(0) -limit 4 | reduce -reset false -every :s: time = last(time) - 2 * count() * :s: | view result
 
 ### Warnings
 
-   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:56.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:55.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
 
 complains about out-of-order assignment to the `time` field in batch mode
 -----------------------------------------------------
@@ -521,11 +523,12 @@ complains about out-of-order assignment to the `time` field with -every
 
 ### Warnings
 
-   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
+   * out-of-order assignment of time 1970-01-01T00:00:00.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
-    { time: "1970-01-01T00:00:00.000Z", n: 3 }
 
 emits grouped results in order when time is assigned
 -----------------------------------------------------
