@@ -39,6 +39,7 @@
     "moment-parser": "^0.3.0",
     "moment-timezone": "^0.4.0",
     "oboe": "^2.1.2",
+    "parse-link-header": "^0.4.1",
     "pegjs": "^0.9.0",
     "request": "^2.67.0",
     "seedrandom": "^2.3.6",

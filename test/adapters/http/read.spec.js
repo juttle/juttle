@@ -71,6 +71,33 @@ describe('HTTP read tests', function() {
         });
     });
 
+    _.each(['pageParam', 'pageUnit', 'pageStart'], (option) => {
+        it('fails when using -followLinkHeader true with ' + option, function() {
+            return check_juttle({
+                program: `read http -url "some_url" -followLinkHeader true -${option} 0`
+            })
+            .then(function() {
+                throw Error('The previous statement should have failed');
+            })
+            .catch(function(err) {
+                expect(err.toString()).to.contain('-followLinkHeader option should not be combined with -' + option);
+            });
+        });
+    });
+
+    _.each(['request', 'record'], (unit) => {
+        it(`can handle pageUnit "${unit}"`, () => {
+            return check_juttle({
+                program: `read http -pageUnit "${unit}" -url "${server.url}/status/200"`
+            })
+            .then((result) => {
+                expect(result.errors).deep.equals([]);
+                expect(result.warnings).deep.equals([]);
+                expect(result.sinks.table).to.deep.equal([]);
+            });
+        });
+    });
+
     it('fails when unknown content-type received', function() {
         return check_juttle({
             program: 'read http -url "' + server.url + '/return-headers?content-type=banana"'
@@ -268,6 +295,77 @@ describe('HTTP read tests', function() {
         })
         .catch(function(err) {
             expect(err.toString()).to.contain('filtering is not supported by read http');
+        });
+    });
+
+    it('can follow the link header when told to', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/linked" -followLinkHeader true`
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { page: 1, index: 0 },
+                { page: 2, index: 0 },
+                { page: 3, index: 0 },
+                { page: 4, index: 0 },
+                { page: 5, index: 0 }
+            ]);
+        });
+    });
+
+    it('can handle record based pagination', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/pageByRecord?limit=2" ` +
+                                '-pageParam "offset" ' +
+                                '-pageUnit "record" ' +
+                                '-pageStart 0'
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { index: 0 },
+                { index: 1 },
+                { index: 2 },
+                { index: 3 },
+                { index: 4 }
+            ]);
+        });
+    });
+
+    it('can handle request based pagination', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/pageByRequest" ` +
+                                '-pageParam "page" ' +
+                                '-pageUnit "request" ' +
+                                '-pageStart 1'
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { page: 1, index: 0 },
+                { page: 2, index: 0 },
+                { page: 3, index: 0 },
+                { page: 4, index: 0 },
+                { page: 5, index: 0 }
+            ]);
+        });
+    });
+
+
+    it('will ignore the link header by default', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/linked"`
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { page: 1, index: 0 }
+            ]);
         });
     });
 

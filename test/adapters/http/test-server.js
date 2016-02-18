@@ -343,6 +343,73 @@ class TestHTTPServer {
                 }
             });
 
+            this.app.get('/pageByRequest', (req, res) => {
+                // returns 5 pages with 1 point at a time
+                var page;
+                if (req.query['page']) {
+                    page = parseInt(req.query.page);
+                }
+
+                res.set('Content-Type', 'application/json');
+                res.status(200);
+                if (page <= 5 ) {
+                    var data = [{ page: page, index: 0 }];
+                    res.end(JSON.stringify(data));
+                } else {
+                    res.end('[]');
+                }
+            });
+
+            this.app.get('/pageByRecord', (req, res) => {
+                // returns 5 records based on the record count and limit parameter
+                var offset = parseInt(req.query['offset']);
+                var limit = parseInt(req.query['limit']);
+                
+                var left = 5 - offset;
+                res.set('Content-Type', 'application/json');
+                res.status(200);
+
+                if (left < 0) { 
+                    res.end('[]');
+                } else { 
+                    var data = [];
+                
+                    if (left < limit) { 
+                        limit = left;
+                    }
+                   
+                    for (var index = 0; index < limit; index++) {
+                        data.push({ index: offset + index});
+                    }
+
+                    res.end(JSON.stringify(data));
+                }
+            });
+
+            this.app.get('/linked', (req, res) => {
+                // returns 5 pages with 1 point at a time and provides the
+                // `Link` header needed to get the subsequent elements
+                var page = 0;
+                var next = 1;
+                if (req.query['page']) {
+                    page = parseInt(req.query.page);
+                    next = page + 1;
+                }
+
+                if (next < 5) {
+                    res.set('Link', '<' + this.url + '/linked?page=' + next + '>; rel="next"');
+                }
+
+                res.set('Content-Type', 'application/json');
+                if (page < 5 ) {
+                    var data = [{ page: next, index: 0 }];
+                    res.status(200);
+                    res.end(JSON.stringify(data));
+                } else {
+                    res.status(400);
+                }
+            });
+
             this.server = this.app.listen(port);
             this.url = 'http://localhost:' + port;
         });
