@@ -10,9 +10,9 @@
 'use strict';
 
 var _ = require('underscore');
-var AdapterRead = require('../../lib/runtime/adapter-read');
-var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
-var errors = require('../../lib/errors');
+/* globals JuttleAdapterAPI */
+var AdapterRead = JuttleAdapterAPI.AdapterRead;
+var JuttleMoment = JuttleAdapterAPI.types.JuttleMoment;
 
 class TestTimeseriesRead extends AdapterRead {
     constructor(options, params) {
@@ -21,7 +21,7 @@ class TestTimeseriesRead extends AdapterRead {
         this.logger.debug('initialize options:', options);
 
         if (!options.from && !options.to) {
-            throw errors.compileError('MISSING-TIME-RANGE');
+            throw this.compileError('MISSING-TIME-RANGE');
         }
 
         this.every = options.every || this.defaultTimeOptions().every;

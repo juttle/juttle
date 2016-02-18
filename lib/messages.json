@@ -5,6 +5,7 @@
   "SYNTAX-ERROR-WITHOUT-EXPECTED": "{message}",
 
   "INVALID-ADAPTER": "adapter {type} not registered",
+  "INCOMPATIBLE-ADAPTER": "adapter {type} incompatible with juttle {apiVersion} (wanted {adapterJuttleVersion})",
   "UNSUPPORTED-ADAPTER-METHOD": "adapter {type} does not implement {method}",
   "GROUP-BY-UNDEFINED": "group by undefined field \"{field}\"",
   "BUFFER-LIMIT-EXCEEDED": "{buffer} limit exceeded, dropping points",

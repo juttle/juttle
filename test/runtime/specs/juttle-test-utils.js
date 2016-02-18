@@ -1,15 +1,19 @@
 'use strict';
 
+// Make sure to call log-setup before requiring any other sources to make sure
+// that the configuration applies to any loggers initialized in module scope.
+require('../../../lib/cli/log-setup')();
+
 var fs = require('fs');
 var util = require('util');
 var path = require('path');
 var _ = require('underscore');
 var Promise = require('bluebird');
 var expect = require('chai').expect;
-var log4js = require('log4js');
 var JuttleLogger = require('../../../lib/logger');
 var utils = require('../../../lib/runtime').utils;
 var adapters = require('../../../lib/runtime/adapters');
+var adapterAPI = require('../../../lib/adapters/api');
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var compiler = require('../../../lib/compiler');
 var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
@@ -17,9 +21,6 @@ var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
 var View = require('../../../lib/views/view.js');
-
-// Set up logging to use log4js loggers
-JuttleLogger.getLogger = log4js.getLogger;
 
 // Configure the test adapter
 adapters.configure({
@@ -31,9 +32,6 @@ adapters.configure({
     }
 });
 
-if (! process.env.DEBUG) {
-    log4js.setGlobalLogLevel('info');
-}
 
 var logger = JuttleLogger.getLogger('juttle-tests');
 logger.debug('initializing');
@@ -396,6 +394,21 @@ function withModuleIt(description, fn, module) {
     }
 }
 
+// Wrapper around the adapter.configure method
+function configureAdapter(config) {
+    return adapters.configure(config);
+}
+
+// To facilitate unit testing of external juttle adapters, this wrapper function
+// makes sure the the JuttleAdapterAPI global is  set during the execution of
+// the specified function, which can be used to enclose a set of it() or describe()
+// calls that need to pull in portions of the adapter code for tests.
+function withAdapterAPI(fn) {
+    global.JuttleAdapterAPI = adapterAPI;
+    fn();
+    global.JuttleAdapterAPI = undefined;
+}
+
 module.exports = {
     wait_for_event: wait_for_event,
     get_times: get_times,
@@ -407,5 +420,21 @@ module.exports = {
     expect_to_fail: expect_to_fail,
     set_stdin: set_stdin,
     set_stdout: set_stdout,
+
+    // Export the utility methods as camelCase as well. Eventually we should
+    // deprecate the underscore variants.
+    waitForEvent: wait_for_event,
+    getTimes: get_times,
+    compileJuttle: compile_juttle,
+    checkJuttle: check_juttle,
+    runJuttle: run_juttle,
+    moduleResolver: module_resolver,
+    optionsFromObject: options_from_object,
+    expectToFail: expect_to_fail,
+    setStdin: set_stdin,
+    setStdout: set_stdout,
+
+    configureAdapter,
+    withAdapterAPI,
     withModuleIt
 };

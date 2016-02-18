@@ -9,9 +9,9 @@
 
 var _ = require('underscore');
 var store = {};
-var AdapterRead = require('../../lib/runtime/adapter-read');
-var AdapterWrite = require('../../lib/runtime/adapter-write');
-var errors = require('../../lib/errors');
+/* globals JuttleAdapterAPI */
+var AdapterRead = JuttleAdapterAPI.AdapterRead;
+var AdapterWrite = JuttleAdapterAPI.AdapterWrite;
 
 function TestAdapter(config) {
     class Read extends AdapterRead {
@@ -21,7 +21,7 @@ function TestAdapter(config) {
             this.debug = options.debug;
             this.key = options.key;
             if (!this.debug && !this.key) {
-                throw new errors.compileError('MISSING-OPTION', {
+                throw this.compileError('MISSING-OPTION', {
                     proc: 'read test',
                     option: 'key'
                 });
@@ -135,7 +135,7 @@ function TestAdapter(config) {
             super(options, params);
             this.key = options.key;
             if (! this.key) {
-                throw new errors.compileError('MISSING-OPTION', {
+                throw this.compileError('MISSING-OPTION', {
                     proc: 'write test',
                     option: 'key'
                 });
