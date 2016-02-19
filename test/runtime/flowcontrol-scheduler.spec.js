@@ -8,7 +8,7 @@ describe('Flow control tests', function() {
     describe('parallel reads', function() {
         it('do not flood flowgraph', function() {
             return check_juttle({
-                program: '(read testTimeseries -every :0.5s: -from :now: -to :end:; read testTimeseries -every :2s: -from :now: -to :end:) | view result',
+                program: '(read testTimeseries -lag :0s: -every :0.2s: -from :now: -to :end:; read testTimeseries -lag :0s: -every :2s: -from :now: -to :end:) | view result',
                 realtime: true
             })
             .then(function(res) {
