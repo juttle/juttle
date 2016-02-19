@@ -12,7 +12,7 @@ function processFilter(filter) {
     // We need to run the semantic pass to convert Variable nodes to field
     // references.
     var semantic = new SemanticPass();
-    ast = semantic.sa_expr(ast);
+    semantic.sa_expr(ast);
 
     var simplifier = new FilterSimplifier();
     ast = simplifier.simplify(ast);
