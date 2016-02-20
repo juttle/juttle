@@ -18,10 +18,12 @@ resetting in order to replay the correct window of points at each epoch.
     emit -from Date.new(0) -limit 8
     | put T = Duration.seconds(time - Date.new(0))
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) | put ID=5;
@@ -70,12 +72,14 @@ results are same as group A's plus 10.
     | put T = Duration.seconds(time - Date.new(0))
     | ( put name = "A" ; put name = "B", T = T + 10)
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2 ;
-        reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
-        reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2 ;
+            reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
+            reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=5;
@@ -184,10 +188,12 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     emit -from Date.new(0) -limit 4 -every :4s:
     | put T = Duration.seconds(time - Date.new(0))
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) | put ID=5;
@@ -258,12 +264,14 @@ a group witness affects reset/teardown, and this is not true in a non-groupby se
     | put T = Duration.seconds(time - Date.new(0))
     | ( put name = "A" ; put name = "B", T = T + 10)
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2;
-        reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
-        reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2;
+            reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
+            reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=5;
@@ -419,10 +427,12 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     emit -from Date.new(0) -limit 4 -every :8s:
     | put T = Duration.seconds(time - Date.new(0))
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=2;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) | put ID=3;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) | put ID=5;
@@ -529,12 +539,14 @@ a non-groupby setting.
     | put T = Duration.seconds(time - Date.new(0))
     | ( put name = "A" ; put name = "B", T = T + 10)
     | (
-        reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
-        reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2;
-        reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
-        reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
-        reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
-        reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        (
+            reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=1;
+            reduce -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=2;
+            reduce -every :2s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=8 ;
+            reduce -every :2s: -over :4s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=3;
+            reduce -every :2s: -over :4s: -forget false ID=last(ID), a = avg(T), f = first(T) by name | put ID=9;
+            reduce -reset false -every :2s: ID=last(ID), a = avg(T), f = first(T) by name | put ID=4;
+        ) | unbatch;
         batch :2s:
         | (
             reduce ID=last(ID), a = avg(T), f = first(T) by name | put ID=5;

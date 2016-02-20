@@ -37,6 +37,7 @@ reduce + put delta pattern works like reduce delta sorta-aughta
     | put n = count()
     | filter n < 4 or n > 5
     | reduce -every :0.1s: n = last(n)
+    | unbatch
     | put delta = delta("n", "empty")
     | remove n
     | view result
