@@ -118,7 +118,7 @@ describe('Juttle sinks validation', function() {
             program: 'const opts = '+ JSON.stringify(opts) +'; emit -limit 1 | view result -foo opts, "bar"'
         })
             .then(function(res) {
-                expect(sink_options(res.prog, 0).foo).to.deep.equal(opts.concat(['bar']));
+                expect(sink_options(res.prog, 0).foo).to.deep.equal([['something'], 'bar']);
             });
     });
 
