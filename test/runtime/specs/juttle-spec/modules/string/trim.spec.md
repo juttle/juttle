@@ -1,8 +1,6 @@
-The `String.trim` function
-============================
+# The `String.trim` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of incorrect type
 
   * Invalid argument type for "String.trim": expected string, received null.
 
-Returns the string trim
---------------------------------------
+## Returns the string trim
 
 ### Juttle
 

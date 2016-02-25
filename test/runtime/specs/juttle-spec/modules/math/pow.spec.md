@@ -1,8 +1,6 @@
-The `Math.pow` function
-=======================
+# The `Math.pow` function
 
-Produces an error when passed argument `x` of incorrect type
-------------------------------------------------------------
+## Produces an error when passed argument `x` of incorrect type
 
 ### Juttle
 
@@ -13,8 +11,7 @@ Produces an error when passed argument `x` of incorrect type
   * Invalid argument type for "Math.pow": expected number, received null.
 
 
-Produces an error when passed argument `y` of incorrect type
-------------------------------------------------------------
+## Produces an error when passed argument `y` of incorrect type
 
 ### Juttle
 

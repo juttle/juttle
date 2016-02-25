@@ -1,8 +1,6 @@
-The `Date.quantize` function
-============================
+# The `Date.quantize` function
 
-Produces an error when passed argument `date` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `date` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `date` of invalid type
 
   * Invalid argument type for "Date.quantize": expected date, received null.
 
-Produces an error when passed argument `duration` of invalid type
------------------------------------------------------------------
+## Produces an error when passed argument `duration` of invalid type
 
 ### Juttle
 

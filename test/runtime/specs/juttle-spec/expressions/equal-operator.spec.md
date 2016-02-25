@@ -1,8 +1,6 @@
-The `==` operator
-=================
+# The `==` operator
 
-Returns correct result when used on two `Null`s
------------------------------------------------
+## Returns correct result when used on two `Null`s
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on two `Null`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true }
 
-Returns correct result when used on two `Boolean`s
---------------------------------------------------
+## Returns correct result when used on two `Boolean`s
 
 ### Juttle
 
@@ -26,8 +23,7 @@ Returns correct result when used on two `Boolean`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `Number`s
--------------------------------------------------
+## Returns correct result when used on two `Number`s
 
 ### Juttle
 
@@ -40,8 +36,7 @@ Returns correct result when used on two `Number`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `String`s
--------------------------------------------------
+## Returns correct result when used on two `String`s
 
 ### Juttle
 
@@ -54,8 +49,7 @@ Returns correct result when used on two `String`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `RegExp`s
--------------------------------------------------
+## Returns correct result when used on two `RegExp`s
 
 ### Juttle
 
@@ -68,8 +62,7 @@ Returns correct result when used on two `RegExp`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `Date`s
------------------------------------------------
+## Returns correct result when used on two `Date`s
 
 ### Juttle
 
@@ -82,8 +75,7 @@ Returns correct result when used on two `Date`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `Duration`s
----------------------------------------------------
+## Returns correct result when used on two `Duration`s
 
 ### Juttle
 
@@ -96,8 +88,7 @@ Returns correct result when used on two `Duration`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq: true, ne: false }
 
-Returns correct result when used on two `Array`s
-------------------------------------------------
+## Returns correct result when used on two `Array`s
 
 ### Juttle
 
@@ -112,8 +103,7 @@ Returns correct result when used on two `Array`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq1: true, eq2: true, ne1: false, ne2: false }
 
-Returns correct result when used on two `Object`s
--------------------------------------------------
+## Returns correct result when used on two `Object`s
 
 ### Juttle
 
@@ -128,8 +118,7 @@ Returns correct result when used on two `Object`s
 
     { "time": "1970-01-01T00:00:00.000Z", eq1: true, eq2: true, ne1: false, ne2: false }
 
-Returns `false` when used on two values of a different type
------------------------------------------------------------
+## Returns `false` when used on two values of a different type
 
 ### Juttle
 

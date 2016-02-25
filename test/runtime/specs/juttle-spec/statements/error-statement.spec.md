@@ -1,8 +1,6 @@
-The `error` statement
-=====================
+# The `error` statement
 
-Produces an error with passed message
--------------------------------------
+## Produces an error with passed message
 
 ### Juttle
 
@@ -18,8 +16,7 @@ Produces an error with passed message
 
   * Boom!
 
-Produces an error when passed a message of invalid type
--------------------------------------------------------
+## Produces an error when passed a message of invalid type
 
 ### Juttle
 

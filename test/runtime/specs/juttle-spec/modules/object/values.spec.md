@@ -1,8 +1,6 @@
-The `Object.values` function
-=============================
+# The `Object.values` function
 
-Returns correct result with no values
-----------------------
+## Returns correct result with no values
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result with no values
 
     { "time": "1970-01-01T00:00:00.000Z", result: [] }
 
-Returns correct result with one key
-----------------------
+## Returns correct result with one key
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result with one key
 
     { "time": "1970-01-01T00:00:00.000Z", result: [1] }
 
-Returns correct result with multiple values
-----------------------
+## Returns correct result with multiple values
 
 ### Juttle
 
@@ -40,8 +36,7 @@ Returns correct result with multiple values
     { value: 1 }
     { value: 2 }
 
-Produces an error when passed argument `object` of incorrect type
------------------------------------------------------------------
+## Produces an error when passed argument `object` of incorrect type
 
 ### Juttle
 

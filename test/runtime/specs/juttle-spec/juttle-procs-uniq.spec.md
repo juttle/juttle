@@ -1,8 +1,6 @@
-Juttle uniq processor
-======================
+# Juttle uniq processor
 
-uniq on all fields
--------------------
+## uniq on all fields
 
 ### Juttle
 
@@ -20,8 +18,7 @@ uniq on all fields
     {time: "1970-01-01T00:00:03.000Z", rate: "00:00:04.000"}
 
 
-uniq on a duration
--------------------
+## uniq on a duration
 
 ### Juttle
     emit -from Date.new(0) -limit 5
@@ -36,8 +33,7 @@ uniq on a duration
     {time: "1970-01-01T00:00:01.000Z", foo: "00:00:01.000", rate: "00:00:02.000"}
     {time: "1970-01-01T00:00:03.000Z", foo: "00:00:03.000", rate: "00:00:04.000"}
 
-uniq on a non-scalar field
-----------------------------
+## uniq on a non-scalar field
 
 ### Juttle
     emit -from Date.new(0) -limit 5
@@ -52,8 +48,7 @@ uniq on a non-scalar field
     {time: "1970-01-01T00:00:01.000Z", foo: 1, obj: { i: 2 }}
     {time: "1970-01-01T00:00:03.000Z", foo: 3, obj: { i: 4 }}
 
-uniq on multiple fields
-------------------------
+## uniq on multiple fields
 
 ### Juttle
 
@@ -70,8 +65,7 @@ uniq on multiple fields
     {time: "1970-01-01T00:00:03.000Z", foo: "00:00:03.000", rate: "00:00:04.000", test: "00:00:01.000"}
     {time: "1970-01-01T00:00:04.000Z", foo: "00:00:04.000", rate: "00:00:04.000", test: "00:00:00.000"}
 
-uniq by
---------
+## uniq by
 
 ### Juttle
 
@@ -100,8 +94,7 @@ uniq by
     { x:3, y:2, n:7 }
     { x:4, y:2, n:9 }
 
-uniq by on all fields
-----------------------
+## uniq by on all fields
 
 ### Juttle
 
@@ -134,8 +127,7 @@ uniq by on all fields
     { x:3, y:2, n:8 }
     { x:4, y:2, n:9 }
 
-uniq by a non-scalar field
-----------------------------
+## uniq by a non-scalar field
 
 ### Juttle
     emit -from Date.new(0) -limit 9
@@ -154,8 +146,7 @@ uniq by a non-scalar field
     { x:{ i:4 }, y:2, n:9 }
 
 
-uniq with batched input
-------------------------
+## uniq with batched input
 
 ### Juttle
 

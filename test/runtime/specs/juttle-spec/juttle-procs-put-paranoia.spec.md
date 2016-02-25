@@ -1,13 +1,11 @@
-A paranoid workout of put reducer calling conventions.
-====================================================
+# A paranoid workout of put reducer calling conventions.
 These are thoroughly unpleasant to read, but they are thorough.  Every
 put environment in which a reducer can be invoked is covered here.  This
 is for reducer lifecycle testing, not reducer correctness, so all
 tests use avg (a reducer with expire()) and first (a reducer without
 expire).
 
-The basic set, fed a steady stream.
----------------------------------------------
+## The basic set, fed a steady stream.
 * we don't test -acc true -over :dur:, or batched -over :dur:,
 because -over performs a reset at every point in order to replay
 the correct window of points, and its interaction with other resetting
@@ -76,8 +74,7 @@ behavior is unspecified.
     { ID: 6, T: 3.5, a: 5.5 }
 
 
-The basic set, fed a steady stream of two groups
----------------------------------------------
+## The basic set, fed a steady stream of two groups
 group A results are same as single-group stream, and group B's
 results are same as group A's plus 10.
 * 3 is to verify assignment sequencing, and is skipped until PROD-3312
@@ -184,8 +181,7 @@ results are same as group A's plus 10.
     { ID: 6, T: 8, name: "B", a: 14.5 }
     { ID: 6, T: 8.5, name: "B", a: 15.5 }
 
-The basic set, fed a stream sparser than batch and -over
----------------------------------------------
+## The basic set, fed a stream sparser than batch and -over
 * 3 is to verify assignment sequencing, and is skipped until PROD-3312
 * 6 verifies windowed points are safe from overwriting
 
@@ -229,8 +225,7 @@ The basic set, fed a stream sparser than batch and -over
     { ID: 6, T: 8, a: 16 }
     { ID: 6, T: 12, a: 24 }
 
-The basic set, fed a stream of two groups sparser than batch and -over.
----------------------------------------------
+## The basic set, fed a stream of two groups sparser than batch and -over.
 group A results are same as single-group stream, and group B"s
 results are same as group As plus 10.
 * 3 is to verify assignment sequencing, and is skipped until PROD-3312

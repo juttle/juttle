@@ -1,8 +1,6 @@
-The `Math.seed` function
-========================
+# The `Math.seed` function
 
-seed wants a number
--------------------------
+## seed wants a number
 ### Juttle
     const seed = Math.seed("juttle");
     emit -from Date.new(0) -limit 5
@@ -13,8 +11,7 @@ seed wants a number
 
   * Invalid argument type for "Math.seed": expected number, received string (juttle).
 
-Seeded RNG is predictable
--------------------------
+## Seeded RNG is predictable
 ### Juttle
     const seed = Math.seed(42);
     emit -from Date.new(0) -limit 5

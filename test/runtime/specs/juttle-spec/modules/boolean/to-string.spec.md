@@ -1,8 +1,6 @@
-The `Boolean.toString` function
-===============================
+# The `Boolean.toString` function
 
-Returns correct result when passed `true`
------------------------------------------
+## Returns correct result when passed `true`
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed `true`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "true" }
 
-Returns correct result when passed `false`
-------------------------------------------
+## Returns correct result when passed `false`
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result when passed `false`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "false" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

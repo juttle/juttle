@@ -1,8 +1,6 @@
-The `Array.push` function
-==============================
+# The `Array.push` function
 
-Produces an error when passed argument `array` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `array` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `array` of invalid type
 
   * Invalid argument type for "Array.push": expected array, received null.
 
-Pushes an element
---------------------------------------
+## Pushes an element
 
 ### Juttle
 

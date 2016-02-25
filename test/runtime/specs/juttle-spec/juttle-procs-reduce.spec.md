@@ -1,9 +1,7 @@
 
-Juttle "reduce" processor (-every epoch mode)
-=========================================
+# Juttle "reduce" processor (-every epoch mode)
 
-complains if -every is not a duration
---------------------------------------
+## complains if -every is not a duration
 
 ### Juttle
 
@@ -14,8 +12,7 @@ complains if -every is not a duration
    * -every wants a duration, got 0.01
 
 
-complains if -on is not a duration or moment
-----------------------------------------------
+## complains if -on is not a duration or moment
 
 ### Juttle
 
@@ -26,8 +23,7 @@ complains if -on is not a duration or moment
    * -on wants a duration or moment, got 1
 
 
-complains if -on > -every
--------------------------
+## complains if -on > -every
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -38,8 +34,7 @@ complains if -on > -every
 
    * CompileError: reduce -on cannot be greater than -every
 
-complains if reduce -every is negative
--------------------------
+## complains if reduce -every is negative
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -50,8 +45,7 @@ complains if reduce -every is negative
 
    * CompileError: reduce -every must be a positive duration.
 
-complains if reduce -every is 0
--------------------------
+## complains if reduce -every is 0
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -62,8 +56,7 @@ complains if reduce -every is 0
 
    * CompileError: reduce -every must be a positive duration.
 
-complains if reduce -every null -on notnull
------------------------------------------------------
+## complains if reduce -every null -on notnull
 
 ### Juttle
     emit -limit 10 -from Date.new(0)
@@ -75,8 +68,7 @@ complains if reduce -every null -on notnull
 
    * CompileError: reduce -on requires -every
 
-complains if reduce -forget without by
--------------------------
+## complains if reduce -forget without by
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -87,8 +79,7 @@ complains if reduce -forget without by
 
    * CompileError: -forget option only applies when using "by"
 
-complains if reduce -forget -reset false
--------------------------
+## complains if reduce -forget -reset false
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -100,8 +91,7 @@ complains if reduce -forget -reset false
    * CompileError: cannot -forget when -reset false
 
 
-complains about a bogus option
-----------------------------------------------
+## complains about a bogus option
 
 ### Juttle
 
@@ -111,8 +101,7 @@ complains about a bogus option
 
    * unknown reduce option failure.
 
-treats reduce -every null -on null as if no every was specified
------------------------------------------------------
+## treats reduce -every null -on null as if no every was specified
 this lets us add optional -every -on parameters to subs with
 default values of null for when no -every is specified.
 
@@ -126,8 +115,7 @@ default values of null for when no -every is specified.
     {count: 5, time: "1970-01-01T00:00:05.000Z"}
     {count: 5, time: "1970-01-01T00:00:10.000Z"}
 
-basic reduce -every, historic
-------------------------------
+## basic reduce -every, historic
 
 ### Juttle
 
@@ -141,8 +129,7 @@ basic reduce -every, historic
     {"a": 2, "time": "1970-01-01T00:00:00.004Z"}
     {"a": 2, "time": "1970-01-01T00:00:00.006Z"}
 
-basic reduce -every, realtime
-------------------------------
+## basic reduce -every, realtime
 
 ### Juttle
 
@@ -157,8 +144,7 @@ basic reduce -every, realtime
     {"a": 2}
     {"a": 2}
 
-reduce -every without teardown (-acc 1)
-----------------------------------------
+## reduce -every without teardown (-acc 1)
 
 ### Juttle
 
@@ -172,8 +158,7 @@ reduce -every without teardown (-acc 1)
     { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
     { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
 
-reduce -every without teardown (-reset false)
-----------------------------------------
+## reduce -every without teardown (-reset false)
 
 ### Juttle
 
@@ -187,8 +172,7 @@ reduce -every without teardown (-reset false)
     { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
     { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
 
-reduce -every emits marks at batch boundaries
----------------------------------------------
+## reduce -every emits marks at batch boundaries
 
 ### Juttle
 
@@ -207,8 +191,7 @@ reduce -every emits marks at batch boundaries
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
     {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
 
-cascade of every-driven reducers
-----------------------------------
+## cascade of every-driven reducers
 
 ### Juttle
 
@@ -224,8 +207,7 @@ cascade of every-driven reducers
     {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
     {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
 
-accepts a sub containing a windowed reducer
--------------------------------------------
+## accepts a sub containing a windowed reducer
 
 ### Juttle
 
@@ -241,8 +223,7 @@ accepts a sub containing a windowed reducer
     {"a": 1}
     {"a": 1}
 
-reduce with calendar intervals
-------------------------------
+## reduce with calendar intervals
 
 ### Juttle
 
@@ -301,8 +282,7 @@ reduce with calendar intervals
       "days": 31
     }
 
-reduce with calendar intervals and alignment
-------------------------------
+## reduce with calendar intervals and alignment
 
 ### Juttle
 
@@ -328,8 +308,7 @@ reduce with calendar intervals and alignment
       "days": 31
     }
 
-reduce with regular intervals and alignment
-------------------------------
+## reduce with regular intervals and alignment
 
 ### Juttle
 
@@ -348,8 +327,7 @@ reduce with regular intervals and alignment
       "time": "1970-01-03T12:00:00.000Z"
     }
 
-reduce with undefined field
----------------------------
+## reduce with undefined field
 
 ### Juttle
 
@@ -365,8 +343,7 @@ reduce with undefined field
     { "count": 5, "x": 1, "y": null }
 
 
-custom reducer is torn down at batch epochs
-------------------------------------------------------------
+## custom reducer is torn down at batch epochs
 
 ### Juttle
 
@@ -391,8 +368,7 @@ custom reducer is torn down at batch epochs
     { time: "1970-01-01T00:00:10.000Z", kount: 5 }
 
 
-custom reducer is torn down at reduce epochs
-------------------------------------------------------------
+## custom reducer is torn down at reduce epochs
 
 ### Juttle
 
@@ -416,8 +392,7 @@ custom reducer is torn down at reduce epochs
     { time: "1970-01-01T00:00:10.000Z", kount: 5 }
 
 
-Warns and drops points on a runtime error
------------------------------------------
+## Warns and drops points on a runtime error
 
 ### Juttle
 
@@ -437,8 +412,7 @@ Warns and drops points on a runtime error
 
   * Invalid operand types for ">": null and number (0).
 
-Allows direct assignment to the `time` field
----------------------------------------------------
+## Allows direct assignment to the `time` field
 
 ### Juttle
 
@@ -450,8 +424,7 @@ Allows direct assignment to the `time` field
     { time: "1970-01-01T00:01:02.000Z" }
     { time: "1970-01-01T00:01:04.000Z" }
 
-complains about out-of-order points
------------------------------------
+## complains about out-of-order points
 
 ### Juttle
 
@@ -466,8 +439,7 @@ complains about out-of-order points
 
    * out-of-order point(s) dropped by reduce
 
-complains about non-time assignment to the `time` field in -every mode
------------------------------------------------------
+## complains about non-time assignment to the `time` field in -every mode
 
 ### Juttle
 
@@ -477,8 +449,7 @@ complains about non-time assignment to the `time` field in -every mode
 
    * Invalid type assigned to time: duration (00:00:01.000).
 
-complains about non-time assignment to the `time` field in batch mode
------------------------------------------------------
+## complains about non-time assignment to the `time` field in batch mode
 
 ### Juttle
 
@@ -488,8 +459,7 @@ complains about non-time assignment to the `time` field in batch mode
 
    * Invalid type assigned to time: duration (00:00:01.000).
 
-complains about out-of-order assignment to the `time` field in -every mode
------------------------------------------------------
+## complains about out-of-order assignment to the `time` field in -every mode
 
 ### Juttle
 
@@ -501,8 +471,7 @@ complains about out-of-order assignment to the `time` field in -every mode
    * out-of-order assignment of time 1969-12-31T23:59:56.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
    * out-of-order assignment of time 1969-12-31T23:59:55.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
 
-complains about out-of-order assignment to the `time` field in batch mode
------------------------------------------------------
+## complains about out-of-order assignment to the `time` field in batch mode
 
 ### Juttle
 
@@ -512,8 +481,7 @@ complains about out-of-order assignment to the `time` field in batch mode
 
    * out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
-complains about out-of-order assignment to the `time` field with -every
------------------------------------------------------
+## complains about out-of-order assignment to the `time` field with -every
 
 ### Juttle
 
@@ -530,8 +498,7 @@ complains about out-of-order assignment to the `time` field with -every
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
 
-emits grouped results in order when time is assigned
------------------------------------------------------
+## emits grouped results in order when time is assigned
 ### Juttle
     emit -from Date.new(0) -limit 20
     | put n=count()

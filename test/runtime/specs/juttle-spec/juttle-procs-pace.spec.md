@@ -1,8 +1,6 @@
-Juttle pace command
-============================================
+# Juttle pace command
 
-pace -every and -x complains
--------------------------
+## pace -every and -x complains
 ### Juttle
     emit -from :2014-01-15: -limit 6
     | pace -every :2s: -x 2
@@ -13,8 +11,7 @@ pace -every and -x complains
 
    * Specify either output period with -every or time speedup with -x
 
-pace -every and number complains
--------------------------
+## pace -every and number complains
 ### Juttle
     emit -from :2014-01-15: -limit 6
     | pace -every 2
@@ -25,8 +22,7 @@ pace -every and number complains
 
    * CompileError: -every wants a duration, got 2
 
-complains if -x is not a number
--------------------------
+## complains if -x is not a number
 ### Juttle
     emit -from :2014-01-15: -limit 6
     | pace -x :minute:
@@ -37,8 +33,7 @@ complains if -x is not a number
 
    * CompileError: -x wants a number, got :00:01:00.000:
 
-complains if -from is not a moment
--------------------------
+## complains if -from is not a moment
 ### Juttle
     emit -from :2014-01-15: -limit 6
     | pace -from 0
@@ -50,8 +45,7 @@ complains if -from is not a moment
    * CompileError: -from wants a moment, got 0
 
 
-plain pacer kicks history out at its real rate
--------------------------
+## plain pacer kicks history out at its real rate
 ### Juttle
     emit -from Date.new(0) -limit 2
     | pace
@@ -65,8 +59,7 @@ plain pacer kicks history out at its real rate
     { time: "1970-01-01T00:00:00.000Z", dt: 0 }
     { time: "1970-01-01T00:00:01.000Z", dt: 1 }
 
-pacer re-labels tick times with -from
--------------------------
+## pacer re-labels tick times with -from
 ### Juttle
     emit -from Date.new(0) -limit 2
     | pace -from :2014-01-01:
@@ -80,8 +73,7 @@ pacer re-labels tick times with -from
     { time: "2014-01-01T00:00:00.000Z", dt: 0 }
     { time: "2014-01-01T00:00:01.000Z", dt: 1 }
 
-pacer runs at double its real rate with -x
--------------------------
+## pacer runs at double its real rate with -x
 ### Juttle
     emit -from Date.new(0) -limit 3
     | pace -from :2014-01-01: -x 2
@@ -96,8 +88,7 @@ pacer runs at double its real rate with -x
     { time: "2014-01-01T00:00:01.000Z", dt: 0.5 }
     { time: "2014-01-01T00:00:02.000Z", dt: 0.5 }
 
-pacer outputs every 2 seconds with -every
--------------------------
+## pacer outputs every 2 seconds with -every
 note that the put window is over the natural data times, not wall time
 ### Juttle
     emit -from Date.new(0) -every :minute: -limit 3
@@ -113,8 +104,7 @@ note that the put window is over the natural data times, not wall time
     { time: "2014-01-01T00:01:00.000Z", dt: 2 }
     { time: "2014-01-01T00:02:00.000Z", dt: 2 }
 
-pacer outputs a batch every second with -every
--------------------------
+## pacer outputs a batch every second with -every
 ### Juttle
     emit -from Date.new(0) -limit 6
     | batch -every :2s:

@@ -1,10 +1,8 @@
-Tests for reducers in subgraphs
-===============================
+# Tests for reducers in subgraphs
 
 
 
-Reducer using reducer arg
-------------------------------
+## Reducer using reducer arg
 
 ### Juttle
 
@@ -16,8 +14,7 @@ Reducer using reducer arg
     {a: 2}
 
 
-Reducer using reducer const
----------------------------
+## Reducer using reducer const
 
 ### Juttle
 
@@ -29,8 +26,7 @@ Reducer using reducer const
     {a: 2}
 
 
-Reducer using top-level const
------------------------------
+## Reducer using top-level const
 
 ### Juttle
 
@@ -43,8 +39,7 @@ Reducer using top-level const
     {a: 2}
 
 
-Reducer using sub arg
----------------------
+## Reducer using sub arg
 
 ### Juttle
 
@@ -59,8 +54,7 @@ Reducer using sub arg
     {a: 4}
 
 
-Reducer using sub arg (multiply-instantiated sub)
--------------------------------------------------
+## Reducer using sub arg (multiply-instantiated sub)
 
 ### Juttle
 
@@ -76,8 +70,7 @@ Reducer using sub arg (multiply-instantiated sub)
     {a: 4}
 
 
-Reducer using reducer arg (multiply-instantiated sub)
------------------------------------------------------
+## Reducer using reducer arg (multiply-instantiated sub)
 
 ### Juttle
 
@@ -92,8 +85,7 @@ Reducer using reducer arg (multiply-instantiated sub)
     {a: 3}
     {a: 4}
 
-Reducer using const from sub arg (multiply-instantiated sub)
-------------------------------------------------------------
+## Reducer using const from sub arg (multiply-instantiated sub)
 
 ### Juttle
 
@@ -110,8 +102,7 @@ Reducer using const from sub arg (multiply-instantiated sub)
     {a: 4}
 
 
-Reducer using stream value (multiply-instantiated sub)
-------------------------------------------------------
+## Reducer using stream value (multiply-instantiated sub)
 
 ### Juttle
 

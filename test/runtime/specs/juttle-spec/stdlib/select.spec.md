@@ -1,8 +1,6 @@
-juttle stdlib.select module
-====================================================
+# juttle stdlib.select module
 
-min selects the minimum value
--------------------------------------
+## min selects the minimum value
 ### Juttle
     import "select.juttle" as select;
     emit -limit 5 -from Date.new(0)
@@ -14,8 +12,7 @@ min selects the minimum value
 ### Output
     {x: 1}
 
-max selects the maximum value
--------------------------------------
+## max selects the maximum value
 ### Juttle
     import "select.juttle" as select;
     emit -limit 5 -from Date.new(0)
@@ -27,8 +24,7 @@ max selects the maximum value
 ### Output
     {x: 5}
 
-median selects the median value (odd)
--------------------------------------
+## median selects the median value (odd)
 ### Juttle
     import "select.juttle" as select;
     emit -limit 5 -from Date.new(0)
@@ -40,8 +36,7 @@ median selects the median value (odd)
 ### Output
     {x: 3}
 
-median selects the median value (even)
--------------------------------------
+## median selects the median value (even)
 ### Juttle
     import "select.juttle" as select;
     emit -limit 6 -from Date.new(0)
@@ -53,8 +48,7 @@ median selects the median value (even)
 ### Output
     {x: 3}
 
-percentile selects the 75th percentile point
--------------------------------------
+## percentile selects the 75th percentile point
 ### Juttle
     import "select.juttle" as select;
     emit -limit 10 -from Date.new(0)
@@ -66,8 +60,7 @@ percentile selects the 75th percentile point
 ### Output
     {x: 8}
 
-min selects the minimum value by group
--------------------------------------
+## min selects the minimum value by group
 ### Juttle
     import "select.juttle" as select;
     emit -limit 10 -from Date.new(0)
@@ -80,8 +73,7 @@ min selects the minimum value by group
     {parity:0, x: 2}
     {parity:1, x: 1}
 
-max selects the maximum value by group
--------------------------------------
+## max selects the maximum value by group
 ### Juttle
     import "select.juttle" as select;
     emit -limit 10 -from Date.new(0)
@@ -94,8 +86,7 @@ max selects the maximum value by group
     {parity:0, x: 10}
     {parity:1, x: 9}
 
-median selects the median value by group
--------------------------------------
+## median selects the median value by group
 ### Juttle
     import "select.juttle" as select;
     emit -limit 10 -from Date.new(0)
@@ -108,8 +99,7 @@ median selects the median value by group
     {parity:0, x: 6}
     {parity:1, x: 5}
 
-percentile selects the 75th percentile point by group
--------------------------------------
+## percentile selects the 75th percentile point by group
 ### Juttle
     import "select.juttle" as select;
     emit -limit 20 -from Date.new(0)
@@ -122,8 +112,7 @@ percentile selects the 75th percentile point by group
     {parity:0, x: 16}
     {parity:1, x: 15}
 
-min selects the minimum value, batched
--------------------------------------
+## min selects the minimum value, batched
 ### Juttle
     import "select.juttle" as select;
     emit -limit 20 -from Date.new(0)
@@ -140,8 +129,7 @@ min selects the minimum value, batched
     {parity:0, x: 12}
     {parity:1, x: 11}
 
-max selects the maximum value, batched
--------------------------------------
+## max selects the maximum value, batched
 ### Juttle
     import "select.juttle" as select;
     emit -limit 20 -from Date.new(0)
@@ -158,8 +146,7 @@ max selects the maximum value, batched
     {parity:0, x: 20}
     {parity:1, x: 19}
 
-median selects the median value, batched
--------------------------------------
+## median selects the median value, batched
 ### Juttle
     import "select.juttle" as select;
     emit -limit 20 -from Date.new(0)
@@ -176,8 +163,7 @@ median selects the median value, batched
     {parity:0, x: 16}
     {parity:1, x: 15}
 
-percentile selects the 75th percentile point, batched
--------------------------------------
+## percentile selects the 75th percentile point, batched
 ### Juttle
     import "select.juttle" as select;
     emit -limit 40 -from Date.new(0)

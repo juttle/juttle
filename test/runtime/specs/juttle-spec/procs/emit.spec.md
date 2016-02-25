@@ -1,8 +1,6 @@
-The `emit` processor
-=======================
+# The `emit` processor
 
-Complains about unknown options
----------------------------------
+## Complains about unknown options
 ### Juttle
     emit -failure true
     | view result
@@ -10,8 +8,7 @@ Complains about unknown options
 ### Errors
    * unknown emit option failure.
 
-Complains if -limit isnt a number
-----------------------------------------
+## Complains if -limit isnt a number
 
 ### Juttle
 
@@ -21,8 +18,7 @@ Complains if -limit isnt a number
 
    * CompileError: -limit wants a number, got "no limits!"
 
-Complains if -hz isnt a number
-----------------------------------------
+## Complains if -hz isnt a number
 
 ### Juttle
 
@@ -32,8 +28,7 @@ Complains if -hz isnt a number
 
    * CompileError: -hz wants a number, got "so good"
 
-Complains if -every isnt a duration
-----------------------------------------
+## Complains if -every isnt a duration
 
 ### Juttle
 
@@ -43,8 +38,7 @@ Complains if -every isnt a duration
 
    * CompileError: -every wants a duration, got "so often"
 
-Complains if -from isnt a moment
-----------------------------------------
+## Complains if -from isnt a moment
 
 ### Juttle
 
@@ -54,8 +48,7 @@ Complains if -from isnt a moment
 
    * CompileError: -from wants a moment, got "never"
 
-Complains if -to isnt a moment
-----------------------------------------
+## Complains if -to isnt a moment
 
 ### Juttle
 
@@ -65,8 +58,7 @@ Complains if -to isnt a moment
 
    * CompileError: -to wants a moment, got "never"
 
-Complains if -last isnt a duration
-----------------------------------------
+## Complains if -last isnt a duration
 
 ### Juttle
 
@@ -76,8 +68,7 @@ Complains if -last isnt a duration
 
    * CompileError: -last wants a duration, got "never"
 
-Complains if -last and -from are specified
-------------------------------------------
+## Complains if -last and -from are specified
 
 ### Juttle
 
@@ -87,8 +78,7 @@ Complains if -last and -from are specified
 
    * CompileError: -last option should not be combined with -from or -to
 
-Complains if -last and -to are specified
-----------------------------------------
+## Complains if -last and -to are specified
 
 ### Juttle
 
@@ -98,8 +88,7 @@ Complains if -last and -to are specified
 
    * CompileError: -last option should not be combined with -from or -to
 
-Complains if -from and -to and -last are specified
-----------------------------------------
+## Complains if -from and -to and -last are specified
 
 ### Juttle
 
@@ -109,8 +98,7 @@ Complains if -from and -to and -last are specified
 
    * CompileError: -last option should not be combined with -from or -to
 
-Complains if -limit and -to are specified
-----------------------------------------
+## Complains if -limit and -to are specified
 
 ### Juttle
 
@@ -120,8 +108,7 @@ Complains if -limit and -to are specified
 
    * -to option should not be combined with -limit
 
-Complains if -limit and -last are specified
-----------------------------------------
+## Complains if -limit and -last are specified
 
 ### Juttle
 
@@ -131,8 +118,7 @@ Complains if -limit and -last are specified
 
    * -to option should not be combined with -limit
 
-Complains about -points that are not an array
-----------------------------------------------------
+## Complains about -points that are not an array
 
 ### Juttle
 
@@ -142,8 +128,7 @@ Complains about -points that are not an array
 
    * CompileError: emit -points wants an array of points
 
-Complains about -points that are not an array of objects
-----------------------------------------------------
+## Complains about -points that are not an array of objects
 
 ### Juttle
 
@@ -153,8 +138,7 @@ Complains about -points that are not an array of objects
 
    * CompileError: emit -points wants an array of points
 
-Complains about -points and -limit
-----------------------------------------------------
+## Complains about -points and -limit
 
 ### Juttle
 
@@ -164,8 +148,7 @@ Complains about -points and -limit
 
    * CompileError: -points option should not be combined with -limit
 
-Complains about -points and -to
-----------------------------------------------------
+## Complains about -points and -to
 
 ### Juttle
 
@@ -175,8 +158,7 @@ Complains about -points and -to
 
    * CompileError: -points option should not be combined with -from, -to, or -last
 
-Complains about -points and -last
-----------------------------------------------------
+## Complains about -points and -last
 
 ### Juttle
 
@@ -186,8 +168,7 @@ Complains about -points and -last
 
    * CompileError: -points option should not be combined with -from, -to, or -last
 
-Complains about -points with -from
-----------------------------------------------------
+## Complains about -points with -from
 
 ### Juttle
 
@@ -197,8 +178,7 @@ Complains about -points with -from
 
    * CompileError: -points option should not be combined with -from, -to, or -last
 
-Complains about a mix of timeful and timeless -points
-----------------------------------------------------
+## Complains about a mix of timeful and timeless -points
 
 ### Juttle
 
@@ -208,8 +188,7 @@ Complains about a mix of timeful and timeless -points
 
    * CompileError: emit -points must all have timestamps or have no timestamps
 
-Emits 1 point by default
------------------------------------------------------------
+## Emits 1 point by default
 
 ### Juttle
 
@@ -221,8 +200,7 @@ Emits 1 point by default
 
     { count: 1 }
 
-Emits live points by default
------------------------------------------------------------
+## Emits live points by default
 
 ### Juttle
 
@@ -238,8 +216,7 @@ Emits live points by default
     { n: 2, dt: "00:00:01.000" }
     { n: 3, dt: "00:00:02.000" }
 
-Does not emit ticks if points are generated every second
------------------------------------------------------------
+## Does not emit ticks if points are generated every second
 
 ### Juttle
 
@@ -254,8 +231,7 @@ Does not emit ticks if points are generated every second
     { n: 2, dt: "00:00:01.000" }
     { n: 3, dt: "00:00:02.000" }
 
-emits ticks in between long gaps in the points
-----------------------------------------------------------
+## emits ticks in between long gaps in the points
 
 ### Juttle
 
@@ -274,8 +250,7 @@ emits ticks in between long gaps in the points
     { tick: true, dt: "00:00:05.000" }
     { n: 3, dt: "00:00:06.000" }
 
-Does not emit any points with `-limit 0`
-----------------------------------------
+## Does not emit any points with `-limit 0`
 
 ### Juttle
 
@@ -287,8 +262,7 @@ Does not emit any points with `-limit 0`
 
 ```
 
-Emits limited points with -to
-----------------------------------------
+## Emits limited points with -to
 
 ### Juttle
 
@@ -303,8 +277,7 @@ Emits limited points with -to
     { n: 2, dt: "00:00:01.000" }
     { n: 3, dt: "00:00:02.000" }
 
-Emits properly spaced and limited points with -every
-----------------------------------------
+## Emits properly spaced and limited points with -every
 
 ### Juttle
 
@@ -319,8 +292,7 @@ Emits properly spaced and limited points with -every
     { n: 2, dt: "00:00:02.000" }
     { n: 3, dt: "00:00:04.000" }
 
-Emits properly spaced and limited points with -hz
-----------------------------------------
+## Emits properly spaced and limited points with -hz
 
 ### Juttle
 
@@ -335,8 +307,7 @@ Emits properly spaced and limited points with -hz
     { n: 2, dt: "00:00:02.000" }
     { n: 3, dt: "00:00:04.000" }
 
-Emits historic points with -from
-----------------------------------------------------
+## Emits historic points with -from
 
 ### Juttle
 
@@ -354,8 +325,7 @@ Emits historic points with -from
     { "time": "1970-01-01T00:00:01.000Z" }
     { "time": "1970-01-01T00:00:02.000Z" }
 
-Emits the right points when -from, -to, and -every are specified
-----------------------------------------------------
+## Emits the right points when -from, -to, and -every are specified
 
 ### Juttle
 
@@ -368,8 +338,7 @@ Emits the right points when -from, -to, and -every are specified
     { "time": "1970-01-01T00:00:06.000Z" }
     { "time": "1970-01-01T00:00:09.000Z" }
 
-Emits the right number of points when -from, -to, and -every are specified
-----------------------------------------------------
+## Emits the right number of points when -from, -to, and -every are specified
 
 ### Juttle
 
@@ -381,8 +350,7 @@ Emits the right number of points when -from, -to, and -every are specified
 
     { "count": 5 }
 
-Emits the right number of points when -last and -every are specified
-----------------------------------------------------
+## Emits the right number of points when -last and -every are specified
 
 ### Juttle
 
@@ -394,8 +362,7 @@ Emits the right number of points when -last and -every are specified
 
     { "count": 5 }
 
-Emits historic and live points with -from
-----------------------------------------------------
+## Emits historic and live points with -from
 
 ### Juttle
 
@@ -414,8 +381,7 @@ Emits historic and live points with -from
     { tick: true }
     { n: 5, dt: "00:00:04.000" }
 
-Emits historic and live points with -points
-----------------------------------------------------
+## Emits historic and live points with -points
 
 ### Juttle
 
@@ -435,8 +401,7 @@ Emits historic and live points with -points
     { tick: true }
     { n: 5, dt: "00:00:04.000" }
 
-Parses time string and numbers in -points
-----------------------------------------------------
+## Parses time string and numbers in -points
 
 ### Juttle
 
@@ -455,8 +420,7 @@ Parses time string and numbers in -points
     { time: "1970-01-01T00:00:01.000Z" }
     { time: "1970-01-01T00:00:02.000Z" }
 
-Complains when no points are given
-----------------------------------
+## Complains when no points are given
 
 ### Juttle
 
@@ -468,8 +432,7 @@ Complains when no points are given
     { count: 0 }
 
 
-Complains about bad time formatting in -points
-----------------------------------------------------
+## Complains about bad time formatting in -points
 
 ### Juttle
 
@@ -479,8 +442,7 @@ Complains about bad time formatting in -points
 ### Errors
    * the time field must contain a number or a string representing time.
 
-Does not add timestamps and ticks with timeless -points
---------------------------------------------------------
+## Does not add timestamps and ticks with timeless -points
 
 ### Juttle
 
@@ -496,8 +458,7 @@ Does not add timestamps and ticks with timeless -points
     { n: 4 }
     { n: 5 }
 
-Emits correct number of points when -from and -every are set
-------------------------------------------------------------
+## Emits correct number of points when -from and -every are set
 
 ### Juttle
 
@@ -508,8 +469,7 @@ Emits correct number of points when -from and -every are set
 ### Output
     { count: 24 }
 
-Emits correct number of points when -from/-to and -every are set
-----------------------------------------------------------------
+## Emits correct number of points when -from/-to and -every are set
 
 ### Juttle
 

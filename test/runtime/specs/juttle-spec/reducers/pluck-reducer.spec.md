@@ -1,8 +1,6 @@
-Juttle "pluck" reducer
-======================
+# Juttle "pluck" reducer
 
-complains if missing argument
------------------------------
+## complains if missing argument
 
 ### Juttle
 

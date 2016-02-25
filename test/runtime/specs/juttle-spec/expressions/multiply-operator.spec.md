@@ -1,8 +1,6 @@
-The `*` operator
-================
+# The `*` operator
 
-Returns correct result when used on two `Number`s
--------------------------------------------------
+## Returns correct result when used on two `Number`s
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on two `Number`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: 30 }
 
-Returns correct result when used on a `Number` and a `Duration`
----------------------------------------------------------------
+## Returns correct result when used on a `Number` and a `Duration`
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result when used on a `Number` and a `Duration`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:30.000" }
 
-Returns correct result when used on a `Duration` and a `Number`
----------------------------------------------------------------
+## Returns correct result when used on a `Duration` and a `Number`
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Returns correct result when used on a `Duration` and a `Number`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:30.000" }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 

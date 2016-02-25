@@ -1,8 +1,6 @@
-The `String.split` function
-==============================
+# The `String.split` function
 
-Produces an error when passed argument `string` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `string` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `string` of invalid type
 
   * Invalid argument type for "String.split": expected string, received null.
 
-Produces an error when passed argument `separator` of invalid type
-------------------------------------------------------------------
+## Produces an error when passed argument `separator` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `separator` of invalid type
 
   * Invalid argument type for "String.split": expected string or regular expression, received null.
 
-Splits string into an array based on a separator
-------------------------------------------------
+## Splits string into an array based on a separator
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Splits string into an array based on a separator
 
     { elements: ["joe","meg","bob","may"] } 
 
-Returns a list with a single element
---------------------------------------
+## Returns a list with a single element
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-New sink syntax
-===============
+# New sink syntax
 
-Parses new sink sytnax
-----------------------
+## Parses new sink sytnax
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Parses new sink sytnax
 
     { time: "1970-01-01T00:00:00.000Z" }
 
-Parses new sink sytnax (with options)
--------------------------------------
+## Parses new sink sytnax (with options)
 
 ### Juttle
 

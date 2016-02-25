@@ -1,8 +1,6 @@
-The `Array.sort` function
-============================
+# The `Array.sort` function
 
-Returns correct result
-----------------------
+## Returns correct result
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result
 
     { "time": "1970-01-01T00:00:00.000Z", result: ["a", "b", "c"], array: ["a", "b", "c"] }
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 

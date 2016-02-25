@@ -1,8 +1,6 @@
-The `&&` operator
-=================
+# The `&&` operator
 
-Returns correct result when used on two `Boolean`s
---------------------------------------------------
+## Returns correct result when used on two `Boolean`s
 
 ### Juttle
 
@@ -17,8 +15,7 @@ Returns correct result when used on two `Boolean`s
 
     { "time": "1970-01-01T00:00:00.000Z", ff: false, ft: false, tf: false, tt: true }
 
-Short-circuits
---------------
+## Short-circuits
 
 ### Juttle
 
@@ -35,8 +32,7 @@ Short-circuits
 
     { "time": "1970-01-01T00:00:00.000Z", result: false }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 

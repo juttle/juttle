@@ -1,8 +1,6 @@
-Read Optimization
-=================
+# Read Optimization
 
-Does not optimize read followed by a sink
------------------------------------------
+## Does not optimize read followed by a sink
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Does not optimize read followed by a sink
 
     { type: "disabled", reason: "not_optimizable" }
 
-Does not optimize if read has multiple outputs
-----------------------------------------------
+## Does not optimize if read has multiple outputs
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Does not optimize if read has multiple outputs
 
     { type: "disabled", reason: "read_multiple_outputs" }
 
-Does not optimize if the downstream node has multiple inputs
-------------------------------------------------------------
+## Does not optimize if the downstream node has multiple inputs
 
 ### Juttle
 

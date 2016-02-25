@@ -1,8 +1,6 @@
-The `String.substr` function
-===========================
+# The `String.substr` function
 
-Produces an error when passed argument `string` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `string` of invalid type
 
 ### Juttle
 
@@ -13,8 +11,7 @@ Produces an error when passed argument `string` of invalid type
   * Invalid argument type for "String.substr": expected string, received null.
 
 
-Produces an error when passed argument `start` of invalid type
---------------------------------------------------------------
+## Produces an error when passed argument `start` of invalid type
 
 ### Juttle
 
@@ -25,8 +22,7 @@ Produces an error when passed argument `start` of invalid type
   * Invalid argument type for "String.substr": expected number, received null.
 
 
-Produces an error when passed argument `length` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `length` of invalid type
 
 ### Juttle
 

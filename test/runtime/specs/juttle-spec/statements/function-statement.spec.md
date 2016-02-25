@@ -1,8 +1,6 @@
-The `function` statement
-========================
+# The `function` statement
 
-Optional parameters can be expressions
---------------------------------------
+## Optional parameters can be expressions
 
 ### Juttle
 
@@ -16,8 +14,7 @@ Optional parameters can be expressions
 
     { time: "1970-01-01T00:00:00.000Z", result: 47 }
 
-Optional parameters can depend on previous parameters
------------------------------------------------------
+## Optional parameters can depend on previous parameters
 
 ### Juttle
 
@@ -31,8 +28,7 @@ Optional parameters can depend on previous parameters
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 2] }
 
-Produces an error when a required parameter follows an optional parameter
--------------------------------------------------------------------------
+## Produces an error when a required parameter follows an optional parameter
 
 ### Juttle
 

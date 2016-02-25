@@ -1,8 +1,6 @@
-Juttle stochastic adapter
-================================================
+# Juttle stochastic adapter
 
-stochastic with no time options complains
------------------------------------------
+## stochastic with no time options complains
 ### Juttle
     read stochastic -source "cdn" | view result
 
@@ -11,8 +9,7 @@ stochastic with no time options complains
    * One of -from, -to, or -last must be specified to define a query time range
 
 
-stochastic with bad type complains
--------------------------
+## stochastic with bad type complains
 ### Juttle
     read stochastic -last :day: -source "cdn" -type 'bleat' | view result
 
@@ -20,8 +17,7 @@ stochastic with bad type complains
 
    * -type must be "metric" or "event"
 
-stochastic with FTS complains
--------------------------
+## stochastic with FTS complains
 ### Juttle
     read stochastic -last :day: -source "cdn" -last :day: "Never gonna get it" | view result
 
@@ -29,8 +25,7 @@ stochastic with FTS complains
 
    * CompileError: Free text search is not implemented for stochastic adapter.
 
-historic read
---------------------
+## historic read
 ### Juttle
     read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(60)
     | reduce count() by host, service
@@ -50,8 +45,7 @@ historic read
     { "host":"nyc.2", "service":"index", "count":422 }
     { "host":"nyc.2", "service":"authentication", "count":422 }
 
-historic read with source and a filter
---------------------------------------
+## historic read with source and a filter
 ### Juttle
     read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(60)
         host="sea.0" AND service != "index"
@@ -63,8 +57,7 @@ historic read with source and a filter
     { "host":"sea.0", "service":"search", "count":422 }
     { "host":"sea.0", "service":"authentication", "count":422 }
 
-historic read with source and a filter containing NOT
------------------------------------------------------
+## historic read with source and a filter containing NOT
 
 Regression test for PROD-8651.
 
@@ -79,8 +72,7 @@ Regression test for PROD-8651.
     { "host":"sea.0", "service":"search", "count":422 }
     { "host":"sea.0", "service":"authentication", "count":422 }
 
-historic read with source and -type metric
---------------------
+## historic read with source and -type metric
 ### Juttle
     read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(60) -type 'metric'
     | reduce count()
@@ -89,8 +81,7 @@ historic read with source and -type metric
 ### Output
     { "count":4164 }
 
-historic read with -source and -type event
---------------------
+## historic read with -source and -type event
 ### Juttle
     read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(600) -type 'event'
     | reduce count()
@@ -99,8 +90,7 @@ historic read with -source and -type event
 ### Output
     { "count":6 }
 
-don't choke on missing fields
--------------------------------
+## don't choke on missing fields
 ### Juttle
     read stochastic -source "cdn" -from Date.new(0) -to Date.new(60) host ~ "sea.0" AND value > 10
     | reduce avg(value) by host, service
@@ -111,8 +101,7 @@ don't choke on missing fields
     { "host": "sea.0", "service": "authentication", avg: 77.13041087896356 }
     { "host": "sea.0", "service": "index", avg: 54.38183514813025 }
 
-don't swallow legitimate errors
--------------------------------
+## don't swallow legitimate errors
 ### Juttle
     read stochastic -source "cdn" -from Date.new(0) -to Date.new(60) host ~ "sea.0" AND host > 10
     | view result
@@ -121,8 +110,7 @@ don't swallow legitimate errors
 
    * Invalid operand types for ">": string (sea.0) and number (10).
 
-source "search_cluster" outputs something
--------------------------------
+## source "search_cluster" outputs something
 ### Juttle
     read stochastic -source "srch_cluster" -from Date.new(0) -to Date.new(10)
     | reduce count() by host 
@@ -135,8 +123,7 @@ source "search_cluster" outputs something
     { "host": "sea.3", "count": 238 }
     { "host": "sjc.4", "count": 238 }
 
-source "saas" outputs something
--------------------------------
+## source "saas" outputs something
 ### Juttle
     read stochastic -source "saas" -from Date.new(0) -to Date.new(10)
     | reduce count() by host 
@@ -149,8 +136,7 @@ source "saas" outputs something
     { "host": "us-west.3", "count": 310 }
     { "host": "us-east.4", "count": 310 }
 
-source "ecommerce" outputs something
--------------------------------
+## source "ecommerce" outputs something
 ### Juttle
     read stochastic -source "ecommerce" -from Date.new(0) -to Date.new(10)
     | reduce count() by host 
@@ -163,8 +149,7 @@ source "ecommerce" outputs something
 	{ "host": "us-west.3", "count": 310 }
     { "host": "us-east.4", "count": 310 }
 
-source "badone" fails as expected
--------------------------
+## source "badone" fails as expected
 ### Juttle
     read stochastic -source "badone" -last :1m: | view result
 

@@ -1,8 +1,6 @@
-A reducer call
-===============
+# A reducer call
 
-Returns correct result when passed required parameters
-------------------------------------------------------
+## Returns correct result when passed required parameters
 
 ### Juttle
 
@@ -21,8 +19,7 @@ Returns correct result when passed required parameters
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 5] }
 
-Returns correct result when passed required and optional parameters
--------------------------------------------------------------------
+## Returns correct result when passed required and optional parameters
 
 ### Juttle
 
@@ -41,8 +38,7 @@ Returns correct result when passed required and optional parameters
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 2] }
 
-Produces an error when passed too few parameters
-------------------------------------------------
+## Produces an error when passed too few parameters
 
 ### Juttle
 
@@ -61,8 +57,7 @@ Produces an error when passed too few parameters
 
   * Error: reducer r expects 1 to 2 arguments but was called with 0
 
-Produces an error when passed too many parameters
--------------------------------------------------
+## Produces an error when passed too many parameters
 
 ### Juttle
 
@@ -81,8 +76,7 @@ Produces an error when passed too many parameters
 
   * Error: reducer r expects 1 to 2 arguments but was called with 3
 
-Returns correct result when passed required parameters (module)
----------------------------------------------------------------
+## Returns correct result when passed required parameters (module)
 
 ### Module `m`
 
@@ -105,8 +99,7 @@ Returns correct result when passed required parameters (module)
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 5] }
 
-Returns correct result when passed required and optional parameters (module)
-----------------------------------------------------------------------------
+## Returns correct result when passed required and optional parameters (module)
 
 ### Module `m`
 
@@ -129,8 +122,7 @@ Returns correct result when passed required and optional parameters (module)
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 2] }
 
-Produces an error when passed too few parameters (module)
----------------------------------------------------------
+## Produces an error when passed too few parameters (module)
 
 ### Module `m`
 
@@ -153,8 +145,7 @@ Produces an error when passed too few parameters (module)
 
   * Error: reducer m.r expects 1 to 2 arguments but was called with 0
 
-Produces an error when passed too many parameters (module)
-----------------------------------------------------------
+## Produces an error when passed too many parameters (module)
 
 ### Module `m`
 

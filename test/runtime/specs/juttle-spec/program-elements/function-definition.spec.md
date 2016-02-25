@@ -1,8 +1,6 @@
-Function definition
-===================
+# Function definition
 
-Returns `null` when no `return` statement is executed
------------------------------------------------------
+## Returns `null` when no `return` statement is executed
 
 ### Juttle
 

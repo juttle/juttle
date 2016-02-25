@@ -1,8 +1,6 @@
-Tests for complex parameters to subgraphs
-=========================================
+# Tests for complex parameters to subgraphs
 
-subgraph with params passed by -
---------------------------------
+## subgraph with params passed by -
 
 ### Juttle
 
@@ -16,8 +14,7 @@ subgraph with params passed by -
     { time: "1970-01-01T00:00:00.000Z" }
     { time: "1970-01-01T00:00:00.001Z" }
 
-subgraph with missing parameters
---------------------------------
+## subgraph with missing parameters
 
 ### Juttle
 
@@ -30,8 +27,7 @@ subgraph with missing parameters
 
    * Subgraph fakemit called without argument hertz
 
-subgraph with optional parameter (passed)
------------------------------------------
+## subgraph with optional parameter (passed)
 
 ### Juttle
 
@@ -45,8 +41,7 @@ subgraph with optional parameter (passed)
     { time: "1970-01-01T00:00:00.000Z" }
     { time: "1970-01-01T00:00:00.001Z" }
 
-subgraph with optional parameter (not passed)
----------------------------------------------
+## subgraph with optional parameter (not passed)
 
 ### Juttle
 
@@ -63,8 +58,7 @@ subgraph with optional parameter (not passed)
     { time: "1970-01-01T00:00:00.003Z" }
     { time: "1970-01-01T00:00:00.004Z" }
 
-subgraph with -o (unsupported)
-------------------------------
+## subgraph with -o (unsupported)
 
 ### Juttle
     const p = {st: 1};
@@ -78,8 +72,7 @@ subgraph with -o (unsupported)
 
    * Subgraph fakemit called with invalid argument o
 
-subgraph with invalid parameters
---------------------------------
+## subgraph with invalid parameters
 
 ### Juttle
 
@@ -92,8 +85,7 @@ subgraph with invalid parameters
 
    * Subgraph fakemit called with invalid argument hz
 
-subgraph with params passed by - (module)
------------------------------------------
+## subgraph with params passed by - (module)
 
 ### Module `mitt`
 
@@ -111,8 +103,7 @@ subgraph with params passed by - (module)
     { time: "1970-01-01T00:00:00.000Z" }
     { time: "1970-01-01T00:00:00.001Z" }
 
-subgraph with optional params (passed, module)
-----------------------------------------------
+## subgraph with optional params (passed, module)
 
 ### Module `mitt`
 
@@ -130,8 +121,7 @@ subgraph with optional params (passed, module)
     { time: "1970-01-01T00:00:00.000Z" }
     { time: "1970-01-01T00:00:00.001Z" }
 
-subgraph with optional params (not passed, module)
---------------------------------------------------
+## subgraph with optional params (not passed, module)
 
 ### Module `mitt`
 
@@ -152,8 +142,7 @@ subgraph with optional params (not passed, module)
     { time: "1970-01-01T00:00:00.003Z" }
     { time: "1970-01-01T00:00:00.004Z" }
 
-subgraph with missing params (module)
--------------------------------------
+## subgraph with missing params (module)
 
 ### Module `mitt`
 

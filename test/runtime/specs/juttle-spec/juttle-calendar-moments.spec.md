@@ -1,8 +1,6 @@
-Juttle calendar moments
-=======================
+# Juttle calendar moments
 
-rejects noninteger calendar durations, humanized
------------------------------------
+## rejects noninteger calendar durations, humanized
 ### Juttle
     emit -limit 1
     | put one = :1.5 months:
@@ -12,8 +10,7 @@ rejects noninteger calendar durations, humanized
 ### Errors
    * Expected
 
-rejects mixed calendar durations for quantization
------------------------------------
+## rejects mixed calendar durations for quantization
 ### Juttle
     emit -from :2014-01-15: -every :month: -limit 5
     | put t=time, m=:1/02.03:04:05:, d=Date.quantize(time, m)
@@ -22,8 +19,7 @@ rejects mixed calendar durations for quantization
 ### Errors
    * Date.quantize doesn't accept mixed calendar intervals:
 
-calendar durations
------------------------------------
+## calendar durations
 ### Juttle
     emit -limit 1
     | put one = :1 month and 3 hours: == :1/0.03:00:00:
@@ -39,8 +35,7 @@ calendar durations
     {"one":true, "two":true, "three":true, "four":true, "five":true, "six":true}
 
 
-calendar duration abbreviations work
-----------------------------------
+## calendar duration abbreviations work
 ### Juttle
     emit -limit 1
     | put one = :-M: == :1 month ago:
@@ -53,8 +48,7 @@ calendar duration abbreviations work
 ### Output
     {"one":true, "two":true, "three":true, "four":true}
 
-math with calendar durations works
-----------------------------------
+## math with calendar durations works
 ### Juttle
     emit -limit 1
     | put one = :now: - :month: == :1 month ago:
@@ -73,8 +67,7 @@ math with calendar durations works
     { "one":true, "two":true, "three":true, "four":true,
       "five":true, "six":true, "seven":true, "eight":true, "nine":true }
 
-emit increments in months
-------------------------------------
+## emit increments in months
 ### Juttle
     emit -from :2000-01-15: -every :month: -limit 5
     | view result
@@ -86,8 +79,7 @@ emit increments in months
     {"time":"2000-04-15T00:00:00.000Z"}
     {"time":"2000-05-15T00:00:00.000Z"}
 
-emit increments in years
-------------------------------------
+## emit increments in years
 ### Juttle
     emit -from :2000-01-15: -every :year: -limit 5
     | view result
@@ -99,8 +91,7 @@ emit increments in years
     {"time":"2003-01-15T00:00:00.000Z"}
     {"time":"2004-01-15T00:00:00.000Z"}
 
-quantize works for weeks
--------------------------
+## quantize works for weeks
 ### Juttle
     emit -from :2014-01-15: -every :week: -limit 5
     | put d=Date.quantize(time, :week:)
@@ -113,8 +104,7 @@ quantize works for weeks
     {"time":"2014-02-05T00:00:00.000Z","d":"2014-01-30T00:00:00.000Z"}
     {"time":"2014-02-12T00:00:00.000Z","d":"2014-02-06T00:00:00.000Z"}
 
-quantize works for months
--------------------------
+## quantize works for months
 ### Juttle
     emit -from :2014-01-15: -every :month: -limit 5
     | put d=Date.quantize(time, :month:)
@@ -127,8 +117,7 @@ quantize works for months
     {"time":"2014-04-15T00:00:00.000Z","d":"2014-04-01T00:00:00.000Z"}
     {"time":"2014-05-15T00:00:00.000Z","d":"2014-05-01T00:00:00.000Z"}
 
-quantize works for years
--------------------------
+## quantize works for years
 ### Juttle
     emit -from :2000-06-15: -every :year: -limit 5
     | put d=Date.quantize(time, :year:)
@@ -141,8 +130,7 @@ quantize works for years
     {"time":"2003-06-15T00:00:00.000Z","d":"2003-01-01T00:00:00.000Z"}
     {"time":"2004-06-15T00:00:00.000Z","d":"2004-01-01T00:00:00.000Z"}
 
-ok to subtract a plain moment from an epsilon moment
--------------------------------------------------------
+## ok to subtract a plain moment from an epsilon moment
 ### Juttle
     emit -from Date.new(0) -limit 1
     | reduce -every :s: t=max(time)
@@ -152,8 +140,7 @@ ok to subtract a plain moment from an epsilon moment
 ### Output
     {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"00:00:01.000"}
 
-ok to subtract an epsilon moment from a plain moment
--------------------------------------------------------
+## ok to subtract an epsilon moment from a plain moment
 ### Juttle
     emit -from Date.new(0) -limit 1
     | reduce -every :s: t=max(time)
@@ -163,8 +150,7 @@ ok to subtract an epsilon moment from a plain moment
 ### Output
     {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"-00:00:01.000"}
 
-quantize truncates non-calendar epsilon moments correctly
----------------------------------------------
+## quantize truncates non-calendar epsilon moments correctly
 ### Juttle
     emit -from Date.new(0) -limit 1
     | reduce -every :s: t=max(time)
@@ -174,8 +160,7 @@ quantize truncates non-calendar epsilon moments correctly
 ### Output
     {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","winning":true}
 
-noninteger day constants are handled
----------------------------------------------
+## noninteger day constants are handled
 ### Juttle
     emit -from Date.new(0) -limit 1
     | put halfday = :d:/2
@@ -184,8 +169,7 @@ noninteger day constants are handled
 ### Output
     {"time":"1970-01-01T00:00:00.000Z", "halfday":"12:00:00.000"}
 
-noninteger day math works
----------------------------------------------
+## noninteger day math works
 ### Juttle
     function fraction(interval, n) {
         // defeat the d-bit!
@@ -199,8 +183,7 @@ noninteger day math works
 ### Output
     {"time":"1970-01-01T00:00:00.000Z","before":"1969-12-31T12:00:00.000Z","after":"1970-01-01T12:00:00.000Z"}
 
-noninteger hour constants are handled
----------------------------------------------
+## noninteger hour constants are handled
 ### Juttle
     emit -from Date.new(0) -limit 1
     | put halfhour = :h:/2
@@ -209,8 +192,7 @@ noninteger hour constants are handled
 ### Output
     {"time":"1970-01-01T00:00:00.000Z", "halfhour":"00:30:00.000"}
 
-noninteger hour math works
----------------------------------------------
+## noninteger hour math works
 ### Juttle
     function fraction(interval, n) {
         // defeat the d-bit!
@@ -224,8 +206,7 @@ noninteger hour math works
 ### Output
     {"time":"1970-01-01T00:00:00.000Z","before":"1969-12-31T23:30:00.000Z","after":"1970-01-01T00:30:00.000Z"}
 
-quantize truncates calendar epsilon moments correctly
----------------------------------------------
+## quantize truncates calendar epsilon moments correctly
 ### Juttle
     emit -from Date.new(0) -limit 1
     | reduce -every :month: t=max(time)

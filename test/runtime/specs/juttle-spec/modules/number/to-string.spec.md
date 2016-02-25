@@ -1,8 +1,6 @@
-The `Number.toString` function
-==============================
+# The `Number.toString` function
 
-Returns correct result when passed a number
--------------------------------------------
+## Returns correct result when passed a number
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed a number
 
     { "time": "1970-01-01T00:00:00.000Z", result: "5" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

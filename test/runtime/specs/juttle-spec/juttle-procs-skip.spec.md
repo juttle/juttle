@@ -1,8 +1,6 @@
-Juttle "skip" processor
-======================
+# Juttle "skip" processor
 
-skips a single point with no argument
----------------------------------------------------
+## skips a single point with no argument
 
 ### Juttle
 
@@ -13,8 +11,7 @@ skips a single point with no argument
     {}
     {}
 
-skips N points with argument
----------------------------------------------------
+## skips N points with argument
 
 ### Juttle
 
@@ -25,8 +22,7 @@ skips N points with argument
     {}
     {}
 
-skips points by field, no argument
----------------------------------------------------
+## skips points by field, no argument
 
 ### Juttle
     emit -from Date.new(0) -limit 6
@@ -38,8 +34,7 @@ skips points by field, no argument
     {id:2}
     {id:3}
 
-skips points by array/object field, no argument
----------------------------------------------------
+## skips points by array/object field, no argument
 
 ### Juttle
     emit -from Date.new(0) -limit 6
@@ -51,8 +46,7 @@ skips points by array/object field, no argument
     {o:{id:2}}
     {o:{id:3}}
 
-skips points by field, numeric argument
----------------------------------------------------
+## skips points by field, numeric argument
 
 ### Juttle
     emit -from Date.new(0) -limit 9
@@ -64,8 +58,7 @@ skips points by field, numeric argument
     {id:2}
     {id:3}
 
-skips points by array/object field, numeric argument
-----------------------------------------------------
+## skips points by array/object field, numeric argument
 
 ### Juttle
     emit -from Date.new(0) -limit 9
@@ -77,8 +70,7 @@ skips points by array/object field, numeric argument
     {o:{id:2}}
     {o:{id:3}}
 
-complains about nonnumeric argument
----------------------------------------------------
+## complains about nonnumeric argument
 
 ### Juttle
     emit -from Date.new(0) -limit 9 | skip "foo" | view result

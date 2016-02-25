@@ -1,8 +1,6 @@
-The `Math.*` functions from ES5.1.
-=======================================================
+# The `Math.*` functions from ES5.1.
 
-All the constants are here
---------------------------
+## All the constants are here
 
 ### Juttle
 
@@ -24,8 +22,7 @@ All the constants are here
     "SQRT2":1.4142135623730951
     }
 
-All the functions are here
---------------------------
+## All the functions are here
 Since these are currently implemented as direct javascript
 Math.* invocations, we merely test for existence,
 to catch any accidental language removals.

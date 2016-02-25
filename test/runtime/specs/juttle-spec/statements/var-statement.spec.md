@@ -1,8 +1,6 @@
-The `var` statement
-===================
+# The `var` statement
 
-Initializes a variable to specified value
------------------------------------------
+## Initializes a variable to specified value
 
 ### Juttle
 
@@ -18,8 +16,7 @@ Initializes a variable to specified value
 
     { "time": "1970-01-01T00:00:00.000Z", result: 5 }
 
-Initializes a variable to `null` when no value is specified
------------------------------------------------------------
+## Initializes a variable to `null` when no value is specified
 
 ### Juttle
 

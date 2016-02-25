@@ -1,8 +1,6 @@
-The `String.slice` function
-===========================
+# The `String.slice` function
 
-Produces an error when passed argument `string` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `string` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `string` of invalid type
 
   * Invalid argument type for "String.slice": expected string, received null.
 
-Produces an error when passed argument `start` of invalid type
---------------------------------------------------------------
+## Produces an error when passed argument `start` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `start` of invalid type
 
   * Invalid argument type for "String.slice": expected number, received null.
 
-Produces an error when passed argument `end` of invalid type
-------------------------------------------------------------
+## Produces an error when passed argument `end` of invalid type
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when passed argument `end` of invalid type
 
   * Invalid argument type for "String.slice": expected number, received null.
 
-Returns the correct end slice of a string
------------------------------------------
+## Returns the correct end slice of a string
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Returns the correct end slice of a string
 
     { message: "Buzz" } 
 
-Returns the correct head slice of the string
---------------------------------------------
+## Returns the correct head slice of the string
 
 ### Juttle
 
@@ -56,8 +50,7 @@ Returns the correct head slice of the string
 
     { message: "Fizz" } 
 
-Returns the correct middle slice of the string
-----------------------------------------------
+## Returns the correct middle slice of the string
 
 ### Juttle
 

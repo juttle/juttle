@@ -1,8 +1,6 @@
-juttle stdlib.predict module
-====================================================
+# juttle stdlib.predict module
 
-predict with features disabled returns previous value
-----------------------------------------------------------
+## predict with features disabled returns previous value
 ### Juttle
     import "predict.juttle" as predict;
     emit -limit 5 -from Date.new(0) -every :d:
@@ -18,8 +16,7 @@ predict with features disabled returns previous value
     { time: "1970-01-04T00:00:00.000Z", value: 4, P: 3, E: -1 }
     { time: "1970-01-05T00:00:00.000Z", value: 5, P: 4, E: -1 }
 
-predict can detrend a straight line
-----------------------------------------------------------
+## predict can detrend a straight line
 ### Juttle
     import "predict.juttle" as predict;
     emit -limit 14 -from Date.new(0) -every :d:
@@ -31,8 +28,7 @@ predict can detrend a straight line
 ### Output
     { value: 14, P: 14 }
 
-predict can deseasonalize a sinewave
-----------------------------------------------------------
+## predict can deseasonalize a sinewave
 ### Juttle
     import "predict.juttle" as predict;
     const every=:d:;
@@ -47,8 +43,7 @@ predict can deseasonalize a sinewave
 ### Output
     { value: -7.818314824680304, P: -7.818314824680301 }
 
-predict can detrend and deseasonalize
-----------------------------------------------------------
+## predict can detrend and deseasonalize
 ### Juttle
     import "predict.juttle" as predict;
     const every=:d:;

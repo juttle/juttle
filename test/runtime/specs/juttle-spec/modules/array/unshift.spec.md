@@ -1,8 +1,6 @@
-The `Array.unshift` function
-==============================
+# The `Array.unshift` function
 
-Produces an error when passed argument `array` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `array` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `array` of invalid type
 
   * Invalid argument type for "Array.unshift": expected array, received null.
 
-Unshifts an element
---------------------------------------
+## Unshifts an element
 
 ### Juttle
 

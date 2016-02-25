@@ -1,8 +1,6 @@
-Simple filter terms
-===================
+# Simple filter terms
 
-Produces an error when used on term of invalid type
----------------------------------------------------
+## Produces an error when used on term of invalid type
 
 ### Juttle
 

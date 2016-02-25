@@ -1,8 +1,6 @@
-The `Date.endOf` function
-=========================
+# The `Date.endOf` function
 
-Produces an error when passed argument `date` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `date` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `date` of invalid type
 
   * Invalid argument type for "Date.endOf": expected date, received null.
 
-Produces an error when passed argument `unit` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `unit` of invalid type
 
 ### Juttle
 

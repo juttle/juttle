@@ -1,8 +1,6 @@
-Filter expressions
-==================
+# Filter expressions
 
-Parses ambiguous expressions as expression filter terms
--------------------------------------------------------
+## Parses ambiguous expressions as expression filter terms
 
 Regression test for PROD-6646.
 

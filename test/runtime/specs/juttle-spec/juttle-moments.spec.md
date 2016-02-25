@@ -1,8 +1,6 @@
-Juttle moments
-==============
+# Juttle moments
 
-:now: is the same wherever it is used
--------------------------------------
+## :now: is the same wherever it is used
 ### Juttle
     function f() {
       // the use of Math.random() below is to ensure that f()
@@ -20,8 +18,7 @@ Juttle moments
     {d: "00:00:00.000"}
 
 
-a now-relative moment is the same wherever it is used
-------------------------------------------------------
+## a now-relative moment is the same wherever it is used
 ### Juttle
     function f() { return Math.random() > 0.5 ? :-1d: : :-1d:; }
     const m = :-1d:;
@@ -33,8 +30,7 @@ a now-relative moment is the same wherever it is used
 ### Output
     {d: "00:00:00.000"}
 
-unix time (seconds since the epoch)
------------------------------------------------------------
+## unix time (seconds since the epoch)
 ### Juttle
 
     emit -limit 1
@@ -51,8 +47,7 @@ unix time (seconds since the epoch)
 
     { winning: true }
 
-reject signed unix time
------------------------------------------------------------
+## reject signed unix time
 ### Juttle
 
     emit -limit 1

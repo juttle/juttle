@@ -1,8 +1,6 @@
-The `Duration.milliseconds` function
-====================================
+# The `Duration.milliseconds` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Juttle "remove" processor
-=========================
+# Juttle "remove" processor
 
-Removes specified fields
-------------------------
+## Removes specified fields
 
 ### Juttle
 
@@ -14,8 +12,7 @@ Removes specified fields
     { time: "1970-01-01T00:00:01.000Z", d: 4 }
     { time: "1970-01-01T00:00:02.000Z", d: 4 }
 
-Ignores fields that don't exist in processed points
----------------------------------------------------
+## Ignores fields that don't exist in processed points
 
 ### Juttle
 

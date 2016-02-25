@@ -1,8 +1,6 @@
-The ternary operator
-====================
+# The ternary operator
 
-Returns correct result when used on a `Boolean`
------------------------------------------------
+## Returns correct result when used on a `Boolean`
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Returns correct result when used on a `Boolean`
 
     { "time": "1970-01-01T00:00:00.000Z", f: 0, t: 1 }
 
-Produces an error when used on operand of invalid type
-------------------------------------------------------
+## Produces an error when used on operand of invalid type
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Juttle "sort" processor
-=======================
+# Juttle "sort" processor
 
-Limits: non-batched flow
-------------------------
+## Limits: non-batched flow
 
 ### Juttle
 
@@ -14,8 +12,7 @@ Limits: non-batched flow
     {"c":2}
     {"c":3}
 
-Limits: non-batched flow, point by point
-----------------------------------------
+## Limits: non-batched flow, point by point
 
 ### Juttle
 
@@ -27,8 +24,7 @@ Limits: non-batched flow, point by point
     {"c":2}
     {"c":3}
 
-Limits: batched flow
---------------------
+## Limits: batched flow
 
 ### Juttle
 
@@ -44,8 +40,7 @@ Limits: batched flow
     {"c":2}
     {"c":3}
 
-Limits: non-batched flow, point by point, by grouping
------------------------------------------------------
+## Limits: non-batched flow, point by point, by grouping
 
 ### Juttle
 
@@ -56,8 +51,7 @@ Limits: non-batched flow, point by point, by grouping
     {"c":1,"d":1}
     {"c":2,"d":0}
 
-Limits: batched flow, by grouping
----------------------------------
+## Limits: batched flow, by grouping
 
 ### Juttle
 
@@ -71,8 +65,7 @@ Limits: batched flow, by grouping
     {"c":1,"d":1}
     {"c":2,"d":0}
 
-Timestamps: unbatched flow
---------------------------
+## Timestamps: unbatched flow
 
 ### Juttle
 
@@ -85,8 +78,7 @@ Timestamps: unbatched flow
     {"a":2}
     {"a":3}
 
-Timestamps: unbatched flow, grouping
-------------------------------------
+## Timestamps: unbatched flow, grouping
 
 ### Juttle
 
@@ -99,8 +91,7 @@ Timestamps: unbatched flow, grouping
     {"a":0,"b":0}
     {"a":2,"b":0}
 
-Timestamps: batched flow
-------------------------
+## Timestamps: batched flow
 
 ### Juttle
 
@@ -113,8 +104,7 @@ Timestamps: batched flow
     {"time":"1970-01-01T00:00:00.400Z","a":0}
     {"time":"1970-01-01T00:00:00.400Z","a":1}
 
-Timestamps: batched flow, with grouping
----------------------------------------
+## Timestamps: batched flow, with grouping
 
 ### Juttle
 
@@ -127,8 +117,7 @@ Timestamps: batched flow, with grouping
     {"time":"1970-01-01T00:00:00.400Z","a":1,"b":1}
     {"time":"1970-01-01T00:00:00.400Z","a":0,"b":0}
 
-Nested fields - arrays
----------------------------------------
+## Nested fields - arrays
 
 ### Juttle
 
@@ -144,8 +133,7 @@ Nested fields - arrays
     {"arr": [2,2,3], "value": 2}
     {"arr": [3,2,3], "value": 3}
 
-Nested fields - array length affects sorting
---------------------------------------------
+## Nested fields - array length affects sorting
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Juttle "percentile" reducer
-=====================
+# Juttle "percentile" reducer
 
-complains if missing argument
------------------------------
+## complains if missing argument
 
 ### Juttle
 
@@ -13,8 +11,7 @@ complains if missing argument
    * reducer percentile expects 1 to 2 arguments but was called with 0
 
 
-outputs null on empty stream
-----------------------------
+## outputs null on empty stream
 
 ### Juttle
 
@@ -24,8 +21,7 @@ outputs null on empty stream
     {percentile: null}
 
 
-(skip) outputs null on empty batched stream (explicit batch)
-------------------------------------------------------------
+## (skip) outputs null on empty batched stream (explicit batch)
 
 ### Juttle
 
@@ -35,8 +31,7 @@ outputs null on empty stream
     {percentile: null}
 
 
-(skip) outputs null on empty batched stream  (reduce -every)
-------------------------------------------------------------
+## (skip) outputs null on empty batched stream  (reduce -every)
 
 ### Juttle
 
@@ -46,8 +41,7 @@ outputs null on empty stream
     {percentile: null}
 
 
-outputs null on empty batch (explicit batches)
-----------------------------------------------
+## outputs null on empty batch (explicit batches)
 
 ### Juttle
 
@@ -58,8 +52,7 @@ outputs null on empty batch (explicit batches)
     {percentile: null, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs null on empty batch (reduce -every)
--------------------------------------------
+## outputs null on empty batch (reduce -every)
 
 ### Juttle
 
@@ -70,8 +63,7 @@ outputs null on empty batch (reduce -every)
     {percentile: null, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs null on empty window (reduce -every -over)
---------------------------------------------------
+## outputs null on empty window (reduce -every -over)
 
 ### Juttle
 
@@ -81,8 +73,7 @@ outputs null on empty window (reduce -every -over)
     {percentile: null, time: "1970-01-01T00:00:00.100Z"}
 
 
-complains about nonnumeric input
--------------------------------------------------------
+## complains about nonnumeric input
 ### Juttle
 
     emit -limit 1 -from Date.new(0) | put foo="bar" | reduce percentile('foo') |  view result
@@ -92,8 +83,7 @@ complains about nonnumeric input
    * percentile expects numeric fields, but received: bar
 
 
-keeps discrete values and returns data values for percentiles
-------------------------------------------------------------------------
+## keeps discrete values and returns data values for percentiles
 ### Juttle
     emit -limit 1000 -every :.001s: -from Date.new(0)
         | put x = Math.floor(count()/100)
@@ -104,8 +94,7 @@ keeps discrete values and returns data values for percentiles
 ### Output
     { median: 5, medplus: 6 }
 
-discrete case: median of an even number of points
------------------------------------------------------------------------
+## discrete case: median of an even number of points
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put x = count()
@@ -115,8 +104,7 @@ discrete case: median of an even number of points
 ### Output
     { p: 5 }
 
-discrete case: median of an odd number of points
------------------------------------------------------------------------
+## discrete case: median of an odd number of points
 ### Juttle
     emit -limit 11 -from Date.new(0)
     | put x = count()
@@ -126,8 +114,7 @@ discrete case: median of an odd number of points
 ### Output
     { p: 6 }
 
-discrete case: median of a run of duplicates
------------------------------------------------------------------------
+## discrete case: median of a run of duplicates
 ### Juttle
     emit -limit 11 -from Date.new(0)
     | put x = (count() % 3 == 0) ? count() : 0
@@ -137,8 +124,7 @@ discrete case: median of a run of duplicates
 ### Output
     { p: 0 }
 
-switches to approximation for continuous values (interpolates percentiles)
-------------------------------------------------------------------------
+## switches to approximation for continuous values (interpolates percentiles)
 ### Juttle
     emit -limit 1000 -every :.001s: -from Date.new(0)
         | (put x=Math.random() ; put x=Math.random() + 10)

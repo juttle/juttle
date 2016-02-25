@@ -1,8 +1,6 @@
-Juttle literals
-===============
+# Juttle literals
 
-Null
-----
+## Null
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Null
 
     { time: "1970-01-01T00:00:00.000Z", n: null }
 
-Booleans
---------
+## Booleans
 
 ### Juttle
 

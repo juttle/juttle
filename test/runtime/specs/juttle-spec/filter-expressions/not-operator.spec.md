@@ -1,8 +1,6 @@
-The `NOT` operator
-==================
+# The `NOT` operator
 
-Returns correct result
-----------------------
+## Returns correct result
 
 ### Juttle
 

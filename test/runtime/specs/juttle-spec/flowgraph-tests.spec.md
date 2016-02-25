@@ -1,8 +1,6 @@
-Flowgraph tests
-===============
+# Flowgraph tests
 
-Modifying a point on one branch does not modify it on another.
---------------------------------------------------------------
+## Modifying a point on one branch does not modify it on another.
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Modifying a point on one branch does not modify it on another.
     {"label":"branch1"}
     {"label":"pre"}
 
-Points with `time == null` are handled correctly
-------------------------------------------------
+## Points with `time == null` are handled correctly
 
 Regression test for #351.
 

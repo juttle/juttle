@@ -1,8 +1,6 @@
-The `Date.unix` function
-========================
+# The `Date.unix` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

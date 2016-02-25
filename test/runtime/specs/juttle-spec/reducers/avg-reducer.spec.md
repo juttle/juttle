@@ -1,8 +1,6 @@
-Juttle "avg" reducer
-======================
+# Juttle "avg" reducer
 
-complains if missing argument
------------------------------
+## complains if missing argument
 
 ### Juttle
 

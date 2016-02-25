@@ -1,8 +1,6 @@
-The `Array.join` function
-==============================
+# The `Array.join` function
 
-Produces an error when passed argument `array` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `array` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `array` of invalid type
 
   * Invalid argument type for "Array.join": expected array, received null.
 
-Produces an error when passed argument `joiner` of invalid type
-------------------------------------------------------------------
+## Produces an error when passed argument `joiner` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `joiner` of invalid type
 
   * Invalid argument type for "Array.join": expected string, received null.
 
-Splits array into an array based on a separator
-------------------------------------------------
+## Splits array into an array based on a separator
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Splits array into an array based on a separator
 
     { people: "joe,meg,bob,may" }
 
-Returns a string with a single element
---------------------------------------
+## Returns a string with a single element
 
 ### Juttle
 

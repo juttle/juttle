@@ -1,8 +1,6 @@
-The `Math.floor` function
-=========================
+# The `Math.floor` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 

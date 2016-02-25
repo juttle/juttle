@@ -1,8 +1,6 @@
-The `Math.log` function
-=======================
+# The `Math.log` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 

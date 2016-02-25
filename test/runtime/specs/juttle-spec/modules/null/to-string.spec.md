@@ -1,8 +1,6 @@
-The `Null.toString` function
-============================
+# The `Null.toString` function
 
-Returns correct result when passed `null`
------------------------------------------
+## Returns correct result when passed `null`
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed `null`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "null" }
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 

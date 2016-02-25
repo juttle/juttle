@@ -1,8 +1,6 @@
-The `Object.toString` function
-==============================
+# The `Object.toString` function
 
-Returns correct result when passed an object
--------------------------------------------
+## Returns correct result when passed an object
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed an object
 
     { result: "{ x: 1 }" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

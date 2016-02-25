@@ -1,8 +1,6 @@
-The `%` operator
-================
+# The `%` operator
 
-Returns correct result when used on two `Number`s
--------------------------------------------------
+## Returns correct result when used on two `Number`s
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on two `Number`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: 0 }
 
-Returns correct result when used on two `Duration`s
----------------------------------------------------
+## Returns correct result when used on two `Duration`s
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result when used on two `Duration`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:00.000" }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Juttle "split" processor
-=======================
+# Juttle "split" processor
 
-splits a named field
----------------------
+## splits a named field
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put foo="bar", bleat="blort", peek="frean"
@@ -13,8 +11,7 @@ splits a named field
     {time: "2000-01-01T00:00:00.000Z", name:"foo",   value:"bar",   peek:"frean"}
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
-splits with no named fields
----------------------
+## splits with no named fields
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put foo="bar", bleat="blort", peek="frean"
@@ -26,8 +23,7 @@ splits with no named fields
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort"}
     {time: "2000-01-01T00:00:00.000Z", name:"peek", value:"frean"}
 
-splits an array
-------------------
+## splits an array
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put a=String.split("we will rock you"," "), bleat="blort", peek="frean"
@@ -41,8 +37,7 @@ splits an array
     {time: "2000-01-01T00:00:00.000Z", name:"a",   value:"you",   peek:"frean"}
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
-doesnt split an array
-------------------
+## doesnt split an array
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put a=String.split("we will rock you"," "), bleat="blort", peek="frean"
@@ -53,8 +48,7 @@ doesnt split an array
     {time: "2000-01-01T00:00:00.000Z", name:"a",   value:["we", "will", "rock", "you"],  peek:"frean"}
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
-doesn't split an object
------------------------
+## doesn't split an object
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put a={"we":"will","rock":"you"}, bleat="blort", peek="frean"
@@ -65,8 +59,7 @@ doesn't split an object
     {time: "2000-01-01T00:00:00.000Z", name:"a",   value:{"we":"will","rock":"you"}, peek:"frean"}
     {time: "2000-01-01T00:00:00.000Z", name:"bleat", value:"blort", peek:"frean"}
 
-splits points without time
-------------------
+## splits points without time
 ### Juttle
     emit -from :2000-01-01: -limit 1
     | put foo="bar", bleat="blort", peek="frean", cookie="serious"
@@ -79,16 +72,14 @@ splits points without time
     {name:"bleat", value:"blort", peek:"frean", cookie:"serious"}
 
 
-complains about unknown options
----------------------------------
+## complains about unknown options
 ### Juttle
     emit -limit 1 | split -arrays 0 -failure 1 foo, bar | remove time | view result
 
 ### Errors
    * unknown
 
-complains about missing split fields
----------------------------------
+## complains about missing split fields
 ### Juttle
     emit -limit 1
     | put foo="bar", bleat="blort", peek="frean", cookie="serious"
@@ -99,8 +90,7 @@ complains about missing split fields
 ### Warnings
    * field "bar" does not exist
 
-complains about the presence of name as split field
------------------------------------------------------------------------------------------
+## complains about the presence of name as split field
 ### Juttle
     emit -limit 1 -from Date.new(0)
     | split peek, cookie, name
@@ -109,8 +99,7 @@ complains about the presence of name as split field
 ### Errors
    * CompileError: Cannot split on name
 
-is not confused by the presence of name or value fields in points
------------------------------------------------------------------------------------------
+## is not confused by the presence of name or value fields in points
 ### Juttle
     emit -limit 1 -from Date.new(0)
     | put foo="bar", bleat="blort", peek="frean", cookie="serious", name="joe", value="bigdata"
@@ -133,8 +122,7 @@ is not confused by the presence of name or value fields in points
         "time": "1970-01-01T00:00:00.000Z"
     }
 
-default splits on all fields but name and time
------------------------------------------------------------------------------------------
+## default splits on all fields but name and time
 ### Juttle
     emit -limit 1 -from Date.new(0)
     | put foo="bar", bleat="blort", peek="frean", cookie="serious", name="joe", value="bigdata"

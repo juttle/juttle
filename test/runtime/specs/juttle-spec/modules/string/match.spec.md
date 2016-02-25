@@ -1,8 +1,6 @@
-The `String.match` function
-==============================
+# The `String.match` function
 
-Returns match info when the match is successful
-----------------------------------------------------
+## Returns match info when the match is successful
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns match info when the match is successful
 
     { "time": "1970-01-01T00:00:00.000Z", result: ["bc"] }
 
-Returns `null` when the match is unsuccessful
---------------------------------------------
+## Returns `null` when the match is unsuccessful
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns `null` when the match is unsuccessful
 
     { "time": "1970-01-01T00:00:00.000Z", result: null }
 
-Produces an error when passed argument `string` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `string` of invalid type
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when passed argument `string` of invalid type
 
   * Invalid argument type for "String.match": expected string, received null.
 
-Produces an error when passed argument `regexp` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `regexp` of invalid type
 
 ### Juttle
 

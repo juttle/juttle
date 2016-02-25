@@ -1,8 +1,6 @@
-The `-` operator
-================
+# The `-` operator
 
-Returns correct result when used on two `Number`s
--------------------------------------------------
+## Returns correct result when used on two `Number`s
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on two `Number`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: 1 }
 
-Returns correct result when used on two `Date`s
------------------------------------------------
+## Returns correct result when used on two `Date`s
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result when used on two `Date`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:01.000" }
 
-Returns correct result when used on a `Date` and a `Duration`
--------------------------------------------------------------
+## Returns correct result when used on a `Date` and a `Duration`
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Returns correct result when used on a `Date` and a `Duration`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "2015-01-01T00:00:01.000Z" }
 
-Returns correct result when used on two `Duration`s
----------------------------------------------------
+## Returns correct result when used on two `Duration`s
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Returns correct result when used on two `Duration`s
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:01.000" }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 
@@ -59,8 +53,7 @@ Produces an error when used on invalid operand type combinations
 The following testcases should really be in parser tests, but we don't have
 these.
 
-Parses a `-` right before an identifier inside a subexpression
---------------------------------------------------------------
+## Parses a `-` right before an identifier inside a subexpression
 
 ### Juttle
 
@@ -73,8 +66,7 @@ Parses a `-` right before an identifier inside a subexpression
 
     { "time": "1970-01-01T00:00:00.000Z", result: -1 }
 
-Parses a `-` right before a non-identifier
-------------------------------------------
+## Parses a `-` right before a non-identifier
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-The `String.fromCharCode` function
-============================
+# The `String.fromCharCode` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of incorrect type
 
   * Invalid argument type for "String.fromCharCode": expected number, received null.
 
-fromCharCode works as expected
--------------------------------
+## fromCharCode works as expected
 
 ### Juttle
 

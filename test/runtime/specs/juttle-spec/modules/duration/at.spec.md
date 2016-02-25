@@ -1,8 +1,6 @@
-The `Duration.as` function
-===========================
+# The `Duration.as` function
 
-Produces an error when passed argument `duration` of invalid type
------------------------------------------------------------------
+## Produces an error when passed argument `duration` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `duration` of invalid type
 
   * Invalid argument type for "Duration.as": expected duration, received null.
 
-Produces an error when passed argument `unit` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `unit` of invalid type
 
 ### Juttle
 

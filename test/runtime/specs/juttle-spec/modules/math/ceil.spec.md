@@ -1,8 +1,6 @@
-The `Math.ceil` function
-========================
+# The `Math.ceil` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-The `~` operator
-================
+# The `~` operator
 
-Returns correct result when used on a `Number`
-----------------------------------------------
+## Returns correct result when used on a `Number`
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on a `Number`
 
     { "time": "1970-01-01T00:00:00.000Z", result: -6 }
 
-Produces an error when used on operand of invalid type
-------------------------------------------------------
+## Produces an error when used on operand of invalid type
 
 ### Juttle
 

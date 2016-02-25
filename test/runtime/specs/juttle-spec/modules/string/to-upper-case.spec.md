@@ -1,8 +1,6 @@
-The `String.toUpperCase` function
-=================================
+# The `String.toUpperCase` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of invalid type
 
   * Invalid argument type for "String.toUpperCase": expected string, received null.
 
-Returns the expected uppercase string
--------------------------------------
+## Returns the expected uppercase string
 
 ### Juttle
 

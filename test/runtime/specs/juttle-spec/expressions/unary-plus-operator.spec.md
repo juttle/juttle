@@ -1,8 +1,6 @@
-The unary `+` operator
-======================
+# The unary `+` operator
 
-Returns correct result when used on a `Number`
-----------------------------------------------
+## Returns correct result when used on a `Number`
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when used on a `Number`
 
     { "time": "1970-01-01T00:00:00.000Z", result: 5 }
 
-Returns correct result when used on a `Duration`
-------------------------------------------------
+## Returns correct result when used on a `Duration`
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result when used on a `Duration`
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:05.000" }
 
-Produces an error when used on operand of invalid type
-------------------------------------------------------
+## Produces an error when used on operand of invalid type
 
 ### Juttle
 

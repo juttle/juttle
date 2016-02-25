@@ -1,11 +1,9 @@
-Field dereference operator ambiguity
-====================================
+# Field dereference operator ambiguity
 
 Tests resolution of an ambiguity where `*` can be considered either a
 multiplication operator or a field dereference operator.
 
-Parses toplevel `*` as multiplication with no whitespace before and no whitespace after
----------------------------------------------------------------------------------------
+## Parses toplevel `*` as multiplication with no whitespace before and no whitespace after
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Parses toplevel `*` as multiplication with no whitespace before and no whitespac
 
   * Error: Invalid operand types for "*": duration (00:01:00.000) and string (name).
 
-Parses toplevel `*` as multiplication with no whitespace before and whitespace after
-------------------------------------------------------------------------------------
+## Parses toplevel `*` as multiplication with no whitespace before and whitespace after
 
 ### Juttle
 
@@ -26,8 +23,7 @@ Parses toplevel `*` as multiplication with no whitespace before and whitespace a
 
   * Error: Invalid operand types for "*": duration (00:01:00.000) and string (name).
 
-Parses toplevel `*` as field dereference with whitespace before and no whitespace after
----------------------------------------------------------------------------------------
+## Parses toplevel `*` as field dereference with whitespace before and no whitespace after
 
 ### Juttle
 
@@ -39,8 +35,7 @@ Parses toplevel `*` as field dereference with whitespace before and no whitespac
 
   * Invalid filter term. Valid forms are: "field == value", "value == field".
 
-Parses toplevel `*` as multiplication with whitespace before and whitespace after
----------------------------------------------------------------------------------
+## Parses toplevel `*` as multiplication with whitespace before and whitespace after
 
 ### Juttle
 
