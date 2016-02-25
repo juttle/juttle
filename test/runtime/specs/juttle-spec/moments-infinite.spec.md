@@ -1,8 +1,6 @@
-Juttle moments, infinite dates
-==============================
+# Juttle moments, infinite dates
 
-can assign :beginning: and :end: to a field
--------------------------------------------
+## can assign :beginning: and :end: to a field
 
 ### Juttle
     const long_time = :1000000y:;
@@ -16,8 +14,7 @@ can assign :beginning: and :end: to a field
     {b: "-Infinity", e: "Infinity"}
 
 
-can assign :beginning: and :end: to a field (runtime function)
---------------------------------------------------------------
+## can assign :beginning: and :end: to a field (runtime function)
 
 ### Juttle
     const long_time = :1000000y:;
@@ -36,8 +33,7 @@ can assign :beginning: and :end: to a field (runtime function)
     {b: "-Infinity", e: "Infinity"}
 
 
-can add/substract durations to :beginning:
-------------------------------------------
+## can add/substract durations to :beginning:
 
 ### Juttle
     const long_time = :1000000y:;
@@ -51,8 +47,7 @@ can add/substract durations to :beginning:
     {b: "-Infinity", c: "-Infinity", d: "-Infinity"}
 
 
-can add/substract durations to :end:
-------------------------------------------
+## can add/substract durations to :end:
 
 ### Juttle
     const long_time = :1000000y:;
@@ -66,8 +61,7 @@ can add/substract durations to :end:
     {b: "Infinity", c: "Infinity", d: "Infinity"}
 
 
-Programmatic :end: (in a put expression)
-------------------------------------
+## Programmatic :end: (in a put expression)
 
 ### Juttle
 
@@ -81,8 +75,7 @@ Programmatic :end: (in a put expression)
     {foo: true}
 
 
-Programmatic :end: (as const)
--------------------------
+## Programmatic :end: (as const)
 
 ### Juttle
 
@@ -98,8 +91,7 @@ Programmatic :end: (as const)
     {foo: true}
 
 
-Programmatic :end: (in a stream-context function)
---------------------------------------------
+## Programmatic :end: (in a stream-context function)
 
 ### Juttle
 
@@ -115,8 +107,7 @@ Programmatic :end: (in a stream-context function)
     {foo: true}
 
 
-Programmatic :beginning: (in a put expression)
----------------------------------------------
+## Programmatic :beginning: (in a put expression)
 
 ### Juttle
 
@@ -130,8 +121,7 @@ Programmatic :beginning: (in a put expression)
     {foo: false}
 
 
-Programmatic :beginning: (as const)
------------------------------------
+## Programmatic :beginning: (as const)
 
 ### Juttle
 
@@ -147,8 +137,7 @@ Programmatic :beginning: (as const)
     {foo: false}
 
 
-Programmatic :beginning: (in a stream-context function)
--------------------------------------------------------
+## Programmatic :beginning: (in a stream-context function)
 
 ### Juttle
 

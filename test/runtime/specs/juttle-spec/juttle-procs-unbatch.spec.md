@@ -1,8 +1,6 @@
-Juttle unbatch command
-======================
+# Juttle unbatch command
 
-unbatch with an argument complains
-----------------------------------
+## unbatch with an argument complains
 
 ### Juttle
     emit -from :2015-01-1: -limit 2 | unbatch -every :minute: | view result
@@ -11,8 +9,7 @@ unbatch with an argument complains
    * SyntaxError
 
 
-unbatch unbatches
------------------
+## unbatch unbatches
 
 ### Juttle
     emit -from :2015-01-01: -limit 20

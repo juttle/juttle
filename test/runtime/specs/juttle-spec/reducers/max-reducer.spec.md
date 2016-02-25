@@ -1,8 +1,6 @@
-Juttle "max" reducer
-======================
+# Juttle "max" reducer
 
-complains if missing argument
------------------------------
+## complains if missing argument
 
 ### Juttle
 
@@ -12,8 +10,7 @@ complains if missing argument
 
    * reducer max expects 1 argument but was called with 0
 
-outputs -Infinity on empty stream
----------------------------------
+## outputs -Infinity on empty stream
 
 ### Juttle
 
@@ -23,8 +20,7 @@ outputs -Infinity on empty stream
     {max: -Infinity}
 
 
-(skip) outputs -Infinity on empty batched stream (explicit batch)
-----------------------------------------------------------
+## (skip) outputs -Infinity on empty batched stream (explicit batch)
 
 ### Juttle
 
@@ -34,8 +30,7 @@ outputs -Infinity on empty stream
     {max: -Infinity}
 
 
-(skip) outputs -Infinity on empty batched stream  (reduce -every)
-----------------------------------------------------------
+## (skip) outputs -Infinity on empty batched stream  (reduce -every)
 
 ### Juttle
 
@@ -45,8 +40,7 @@ outputs -Infinity on empty stream
     {max: -Infinity}
 
 
-outputs -Infinity on empty batch (explicit batches)
----------------------------------------------------
+## outputs -Infinity on empty batch (explicit batches)
 
 ### Juttle
 
@@ -57,8 +51,7 @@ outputs -Infinity on empty batch (explicit batches)
     {max: -Infinity, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs -Infinity on empty batch (reduce -every)
-------------------------------------------------
+## outputs -Infinity on empty batch (reduce -every)
 
 ### Juttle
 
@@ -69,8 +62,7 @@ outputs -Infinity on empty batch (reduce -every)
     {max: -Infinity, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs -Infinity on empty window (reduce -every -over)
--------------------------------------------------------
+## outputs -Infinity on empty window (reduce -every -over)
 
 ### Juttle
 

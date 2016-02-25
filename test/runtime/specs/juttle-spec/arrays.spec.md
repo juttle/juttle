@@ -1,9 +1,7 @@
-Arrays
-======
+# Arrays
 
 
-Assign to array (literal index)
--------------------------------
+## Assign to array (literal index)
 
 ### Juttle
 
@@ -22,8 +20,7 @@ Assign to array (literal index)
 
 
 
-Assign to array (expression index)
-----------------------------------
+## Assign to array (expression index)
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-JuttleSpec tests
-=====================
+# JuttleSpec tests
 
-Syntax error, partial match
---------------------------------
+## Syntax error, partial match
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Syntax error, partial match
 
    * SyntaxError: Expected
 
-Runtime error, partial match
---------------------------------
+## Runtime error, partial match
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Runtime error, partial match
 
    * CompileError: unknown
 
-Warning, partial match
---------------------------------
+## Warning, partial match
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Warning, partial match
 
    * field "foo" does not exist
 
-(skip) Ticks without time
-----------------------------------
+## (skip) Ticks without time
 
 ### Juttle
 
@@ -47,8 +42,7 @@ Warning, partial match
     {"tick": true}
     {}
 
-Marks without time
-----------------------------------
+## Marks without time
 
 ### Juttle
 
@@ -62,8 +56,7 @@ Marks without time
     {"time": "1970-01-01T00:00:01.000Z"}
     {"mark": true}
 
-Marks with time
-----------------------------------
+## Marks with time
 
 ### Juttle
 
@@ -77,8 +70,7 @@ Marks with time
     {"time": "1970-01-01T00:00:01.000Z"}
     {"time": "1970-01-01T00:00:02.000Z", "mark": true}
 
-Array/Object values
--------------------
+## Array/Object values
 
 ### Juttle
 

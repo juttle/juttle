@@ -1,8 +1,6 @@
-The `String.charCodeAt` function
-============================
+# The `String.charCodeAt` function
 
-Produces an error when passed a non-string first argument
------------------------------------------------------------
+## Produces an error when passed a non-string first argument
 
 ### Juttle
 
@@ -13,8 +11,7 @@ Produces an error when passed a non-string first argument
   * Invalid argument type for "String.charCodeAt": expected string, received null.
 
 
-Produces an error when passed a non-number second argument
------------------------------------------------------------
+## Produces an error when passed a non-number second argument
 
 ### Juttle
 
@@ -24,8 +21,7 @@ Produces an error when passed a non-number second argument
 
   * Invalid argument type for "String.charCodeAt": expected number, received string (potatoes).
 
-charCodeAt works as expected
--------------------------------
+## charCodeAt works as expected
 
 ### Juttle
 

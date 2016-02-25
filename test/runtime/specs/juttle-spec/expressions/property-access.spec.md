@@ -1,8 +1,6 @@
-Property access
-===============
+# Property access
 
-Returns correct result for module const access inside a function
-----------------------------------------------------------------
+## Returns correct result for module const access inside a function
 
 Regression test for PROD-6873.
 
@@ -18,8 +16,7 @@ Regression test for PROD-6873.
 
     { time: "1970-01-01T00:00:00.000Z", result: true }
 
-Returns correct result when indexing a function call result inside a function
------------------------------------------------------------------------------
+## Returns correct result when indexing a function call result inside a function
 
 Regression test for PROD-6873.
 

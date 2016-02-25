@@ -1,8 +1,6 @@
-The `!~` operator
-=================
+# The `!~` operator
 
-Returns correct result when used on two `String`s
--------------------------------------------------
+## Returns correct result when used on two `String`s
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Returns correct result when used on two `String`s
 
     { "time": "1970-01-01T00:00:00.000Z", ma: false, nm: true }
 
-Returns correct result when used on a non-`String` and a `String`
------------------------------------------------------------------
+## Returns correct result when used on a non-`String` and a `String`
 
 ### Juttle
 
@@ -28,8 +25,7 @@ Returns correct result when used on a non-`String` and a `String`
 
     { "time": "1970-01-01T00:00:00.000Z", nm: true }
 
-Returns correct result when used on a `String` and a `RegExp`
--------------------------------------------------------------
+## Returns correct result when used on a `String` and a `RegExp`
 
 ### Juttle
 
@@ -42,8 +38,7 @@ Returns correct result when used on a `String` and a `RegExp`
 
     { "time": "1970-01-01T00:00:00.000Z", ma: false, nm: true }
 
-Returns correct result when used on a non-`String` and a `RegExp`
------------------------------------------------------------------
+## Returns correct result when used on a non-`String` and a `RegExp`
 
 ### Juttle
 
@@ -55,8 +50,7 @@ Returns correct result when used on a non-`String` and a `RegExp`
 
     { "time": "1970-01-01T00:00:00.000Z", nm: true }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 

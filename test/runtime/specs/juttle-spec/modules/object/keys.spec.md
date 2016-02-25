@@ -1,8 +1,6 @@
-The `Object.keys` function
-=============================
+# The `Object.keys` function
 
-Returns correct result with no keys
-----------------------
+## Returns correct result with no keys
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result with no keys
 
     { "time": "1970-01-01T00:00:00.000Z", result: [] }
 
-Returns correct result with one key
-----------------------
+## Returns correct result with one key
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result with one key
 
     { "time": "1970-01-01T00:00:00.000Z", result: ["a"] }
 
-Returns correct result with multiple keys
-----------------------
+## Returns correct result with multiple keys
 
 ### Juttle
 
@@ -40,8 +36,7 @@ Returns correct result with multiple keys
     { value: "a" }
     { value: "b" }
 
-Produces an error when passed argument `object` of incorrect type
------------------------------------------------------------------
+## Produces an error when passed argument `object` of incorrect type
 
 ### Juttle
 

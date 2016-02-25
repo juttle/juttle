@@ -1,8 +1,6 @@
-Juttle batch command
-============================================
+# Juttle batch command
 
-batch -every and interval complains
--------------------------
+## batch -every and interval complains
 ### Juttle
     emit -from :2014-01-15: -limit 6
     | batch -every :2s: :2s:
@@ -13,8 +11,7 @@ batch -every and interval complains
 
    * Specify either batch -every or batch :interval:
 
-batch -every and number complains
--------------------------
+## batch -every and number complains
 no bare numbers with the new -every option
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -26,8 +23,7 @@ no bare numbers with the new -every option
 
    * CompileError: -every wants a duration, got 2
 
-complains if batch -on > -every
--------------------------
+## complains if batch -on > -every
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -39,8 +35,7 @@ complains if batch -on > -every
 
    * CompileError: batch -on cannot be greater than -every
 
-complains if batch -every is negative
--------------------------
+## complains if batch -every is negative
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -52,8 +47,7 @@ complains if batch -every is negative
 
    * CompileError: batch interval must be a positive number or duration.
 
-complains if batch -every is 0
--------------------------
+## complains if batch -every is 0
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -65,8 +59,7 @@ complains if batch -every is 0
 
    * CompileError: batch interval must be a positive number or duration.
 
-complains if batch duration is negative
--------------------------
+## complains if batch duration is negative
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -78,8 +71,7 @@ complains if batch duration is negative
 
    * CompileError: batch interval must be a positive number or duration.
 
-complains if batch duration is 0
--------------------------
+## complains if batch duration is 0
 
 ### Juttle
     emit -from :2014-01-15: -limit 6
@@ -91,8 +83,7 @@ complains if batch duration is 0
 
    * CompileError: batch interval must be a positive number or duration.
 
-batching works for months
--------------------------
+## batching works for months
 ### Juttle
     emit -from :2014-01-15: -every :month: -limit 5
     | batch -every :month:
@@ -107,8 +98,7 @@ batching works for months
     {"time":"2014-06-01T00:00:00.000Z","c":1}
 
 
-batching works for years
--------------------------
+## batching works for years
 ### Juttle
     emit -from :2000-01-15: -every :month: -limit 36
     | batch -every :year:
@@ -121,8 +111,7 @@ batching works for years
     {"time":"2003-01-01T00:00:00.000Z","c":12}
 
 
-batch can align on a regular duration
-------------------------------
+## batch can align on a regular duration
 ### Juttle
     emit -from :2014-01-01: -every :10 minute: -limit 30
     | batch -every :hour: -on :00:30:00:
@@ -137,8 +126,7 @@ batch can align on a regular duration
     {"time":"2014-01-01T04:30:00.000Z","c":6}
     {"time":"2014-01-01T05:30:00.000Z","c":3}
 
-batch can align on a regular duration with a calendar interval
-------------------------------------------------------------
+## batch can align on a regular duration with a calendar interval
 ### Juttle
     emit -from :2014-01-01: -every :day: -limit 60
     | batch -every :month: -on :day 10:
@@ -151,8 +139,7 @@ batch can align on a regular duration with a calendar interval
     { "c": 20, "time": "2014-03-10T00:00:00.000Z"  }
 
 
-batch can align on a date with a calendar interval
-------------------------------------------------------------
+## batch can align on a date with a calendar interval
 ### Juttle
     emit -from :2014-01-01: -every :day: -limit 70
     | batch -every :month: -on :day 20 of this month:
@@ -165,8 +152,7 @@ batch can align on a date with a calendar interval
     { "c": 20, "time": "2014-03-20T00:00:00.000Z"  }
 
 
-batch with short interval can handle a very large time gap
-------------------------------------------------------------
+## batch with short interval can handle a very large time gap
 ### Juttle
     // The merge of two different streams will cause separate calls
     // to batch's consume() for pts1 and pts2.  With a large gap in
@@ -189,8 +175,7 @@ batch with short interval can handle a very large time gap
     { "time": "2015-03-21T00:00:00.000Z", "what": "middle" }
     { "time": "2015-03-21T00:01:00.000Z", "what": "end" }
 
-initial historic batch ignores deprecated historic tick
--------------------------------------------------
+## initial historic batch ignores deprecated historic tick
 (leave out actual ticks from result so test does not break when we
 eventually remove historic ticks)
 

@@ -1,8 +1,6 @@
-The null-coalescing operator
-============================
+# The null-coalescing operator
 
-Returns correct result
-----------------------
+## Returns correct result
 
 ### Juttle
 

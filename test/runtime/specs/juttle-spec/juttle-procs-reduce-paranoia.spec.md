@@ -1,13 +1,11 @@
-A paranoid workout of reduce reducer calling conventions.
-====================================================
+# A paranoid workout of reduce reducer calling conventions.
 These are thoroughly unpleasant to read, but they are thorough.  Every
 reduce environment in which a reducer can be invoked is covered here.  This
 is for reducer lifecycle testing, not reducer correctness, so all
 tests use avg (a reducer with expire()) and first (a reducer without
 expire).
 
-The basic set, fed a steady stream.
----------------------------------------------
+## The basic set, fed a steady stream.
 * we don't test -reset false -over :dur: because -over controls
 resetting in order to replay the correct window of points at each epoch.
 * we don't test -reset false -over :dur: because -over controls
@@ -62,8 +60,7 @@ resetting in order to replay the correct window of points at each epoch.
     { ID: 7, a: 2.5, f: 0, t: 6 }
     { ID: 7, a: 3.5, f: 0, t: 8 }
 
-The basic set, fed a steady stream of two groups
--------------------------------------------------
+## The basic set, fed a steady stream of two groups
 group A results are same as single-group stream, and group B's
 results are same as group A's plus 10.
 
@@ -177,8 +174,7 @@ results are same as group A's plus 10.
     { name: "A", ID: 11, a: 5.5, f: 4, t: 8 }
     { name: "B", ID: 11, a: 15.5, f: 14, t: 8 }
 
-The basic set, fed a stream sparser than -every but not -over
--------------------------------------------------------------
+## The basic set, fed a stream sparser than -every but not -over
 an empty epoch might not be empty when it is windowed over a longer stretch of time.
 because these reduces are not groupby, reducers are run every epoch, even for an empty window.
 * 't' in the output is the batch end time as seconds.
@@ -250,8 +246,7 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     { ID: 7, a: 4, f: 0, t: 12 }
     { ID: 7, a: 6, f: 0, t: 14 }
 
-The basic set, fed a stream of two groups sparser than -every but not -over.
---------------------------------------------------------------------------
+## The basic set, fed a stream of two groups sparser than -every but not -over.
 an empty epoch might not be empty when it is windowed over a longer stretch of time.
 for non empty windows, group A results are same as single-group stream, and group B's
 results are same as group A's plus 10.
@@ -417,8 +412,7 @@ a group witness affects reset/teardown, and this is not true in a non-groupby se
     { name: "A", ID: 11, a: 12, f: 12, t: 14 }
     { name: "B", ID: 11, a: 22, f: 22, t: 14 }
 
-The basic set, fed a stream sparser than -every and -over
----------------------------------------------
+## The basic set, fed a stream sparser than -every and -over
 because these reduces are not groupby, reducers are run every epoch, even for an empty window.
 * 't' in the output is the batch end time as seconds.
 ID=last(ID) is a placeholder so that ID appears first in output, for readability
@@ -525,8 +519,7 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     { ID: 7, a: 8, f: 0, t: 24 }
     { ID: 7, a: 12, f: 0, t: 26 }
 
-The basic set, fed a stream of two groups sparser than -every and -over.
----------------------------------------------
+## The basic set, fed a stream of two groups sparser than -every and -over.
 you know the drill. nonempty group A results are same as single-group stream, and group B's
 results are same as group A's plus 10.
 Unlike the single stream case, empty group window results should not be reported

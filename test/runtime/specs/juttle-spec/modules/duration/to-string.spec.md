@@ -1,8 +1,6 @@
-The `Duration.toString` function
-================================
+# The `Duration.toString` function
 
-Returns correct result when passed a duration
----------------------------------------------
+## Returns correct result when passed a duration
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed a duration
 
     { "time": "1970-01-01T00:00:00.000Z", result: "00:00:05.000" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

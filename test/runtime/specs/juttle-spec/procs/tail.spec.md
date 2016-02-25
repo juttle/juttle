@@ -1,8 +1,6 @@
-The `tail` processor
-====================
+# The `tail` processor
 
-Uses `1` as the default argument value
---------------------------------------
+## Uses `1` as the default argument value
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Uses `1` as the default argument value
 
     { time: "1970-01-01T00:00:04.000Z" }
 
-Inverts negative argument values
---------------------------------
+## Inverts negative argument values
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Variable
-========
+# Variable
 
-Returns a point field value when used in streaming context and the field exists
--------------------------------------------------------------------------------
+## Returns a point field value when used in streaming context and the field exists
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns a point field value when used in streaming context and the field exists
 
     { time: "1970-01-01T00:00:00.000Z", a: 5, b: 5 }
 
-Returns `null` when used in streaming context and the field does not exist
---------------------------------------------------------------------------
+## Returns `null` when used in streaming context and the field does not exist
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns `null` when used in streaming context and the field does not exist
 
     { time: "1970-01-01T00:00:00.000Z", b: null }
 
-(skip PROD-7136) Throws an error when an imported module name is used in a const declaration
----------------------------------------------------------------------------------
+## (skip PROD-7136) Throws an error when an imported module name is used in a const declaration
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Returns `null` when used in streaming context and the field does not exist
 
    * Cannot use a module as a variable
 
-(skip PROD-7136) Throws an error when an imported module name is used in a by list
-------------------------------------------------------------------------
+## (skip PROD-7136) Throws an error when an imported module name is used in a by list
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Returns `null` when used in streaming context and the field does not exist
 
    * Cannot use a module as a variable
 
-(skip PROD-7136) Throws an error when an imported module name is used in a stream expression
-------------------------------------------------------------------------
+## (skip PROD-7136) Throws an error when an imported module name is used in a stream expression
 
 ### Juttle
 
@@ -56,8 +50,7 @@ Returns `null` when used in streaming context and the field does not exist
 
    * Cannot use a module as a variable
 
-Throws an error when a built-in module name is used in a const declaration
---------------------------------------------------------------------------
+## Throws an error when a built-in module name is used in a const declaration
 
 ### Juttle
 
@@ -67,8 +60,7 @@ Throws an error when a built-in module name is used in a const declaration
 
    * Cannot use a module as a variable
 
-Throws an error when a built-in module name is used in a by list
-----------------------------------------------------------------
+## Throws an error when a built-in module name is used in a by list
 
 ### Juttle
 
@@ -78,8 +70,7 @@ Throws an error when a built-in module name is used in a by list
 
    * Cannot use a module as a variable
 
-Throws an error when a built-in module name is used in a stream expression
---------------------------------------------------------------------------
+## Throws an error when a built-in module name is used in a stream expression
 
 ### Juttle
 
@@ -89,8 +80,7 @@ Throws an error when a built-in module name is used in a stream expression
 
    * Cannot use a module as a variable
 
-Throws an error when a function name is used in a const declaration
--------------------------------------------------------------------
+## Throws an error when a function name is used in a const declaration
 
 ### Juttle
 
@@ -101,8 +91,7 @@ Throws an error when a function name is used in a const declaration
    * Cannot use a function as a variable
 
 
-Throws an error when a function name is used in a by list
----------------------------------------------------------
+## Throws an error when a function name is used in a by list
 
 ### Juttle
 
@@ -113,8 +102,7 @@ Throws an error when a function name is used in a by list
    * Cannot use a function as a variable
 
 
-Throws an error when a function name is used in a stream expression
--------------------------------------------------------------------
+## Throws an error when a function name is used in a stream expression
 
 ### Juttle
 
@@ -125,8 +113,7 @@ Throws an error when a function name is used in a stream expression
    * Cannot use a function as a variable
 
 
-Throws an error when a reducer name is used in a const declaration
-------------------------------------------------------------------
+## Throws an error when a reducer name is used in a const declaration
 
 ### Juttle
 
@@ -142,8 +129,7 @@ Throws an error when a reducer name is used in a const declaration
    * Cannot use a reducer as a variable
 
 
-Throws an error when a reducer name is used in a by list
---------------------------------------------------------
+## Throws an error when a reducer name is used in a by list
 
 ### Juttle
 
@@ -159,8 +145,7 @@ Throws an error when a reducer name is used in a by list
    * Cannot use a reducer as a variable
 
 
-Throws an error when a reducer name is used in a stream expression
-------------------------------------------------------------------
+## Throws an error when a reducer name is used in a stream expression
 
 ### Juttle
 

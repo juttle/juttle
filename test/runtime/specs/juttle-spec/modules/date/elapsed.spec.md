@@ -1,8 +1,6 @@
-The `Date.elapsed` function
-===========================
+# The `Date.elapsed` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

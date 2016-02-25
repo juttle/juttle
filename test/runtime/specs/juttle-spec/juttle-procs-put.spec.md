@@ -1,8 +1,6 @@
-Juttle "put" processor
-======================
+# Juttle "put" processor
 
-Allows direct assignment to the `time` field
----------------------------------------------------
+## Allows direct assignment to the `time` field
 
 ### Juttle
 
@@ -14,8 +12,7 @@ Allows direct assignment to the `time` field
     { time: "1970-01-01T00:01:01.000Z" }
     { time: "1970-01-01T00:01:02.000Z" }
 
-Allows indirect assignment to the `time` field
------------------------------------------------------
+## Allows indirect assignment to the `time` field
 
 ### Juttle
 
@@ -27,8 +24,7 @@ Allows indirect assignment to the `time` field
     { time: "1970-01-01T00:00:01.000Z" }
     { time: "1970-01-01T00:00:02.000Z" }
 
-complains about non-time assignment to the `time` field
------------------------------------------------------
+## complains about non-time assignment to the `time` field
 
 ### Juttle
 
@@ -38,8 +34,7 @@ complains about non-time assignment to the `time` field
 
    * Invalid type assigned to time: duration (00:00:01.000).
 
-complains about out-of-order assignment to the `time` field with a reducer
------------------------------------------------------
+## complains about out-of-order assignment to the `time` field with a reducer
 
 ### Juttle
 
@@ -53,8 +48,7 @@ complains about out-of-order assignment to the `time` field with a reducer
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
     { time: "1970-01-01T00:00:00.000Z", n: 3 }
 
-complains about out-of-order assignment to the `time` field with non-reducer expression
------------------------------------------------------
+## complains about out-of-order assignment to the `time` field with non-reducer expression
 
 ### Juttle
 
@@ -68,8 +62,7 @@ complains about out-of-order assignment to the `time` field with non-reducer exp
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
     { time: "1970-01-01T00:00:00.000Z", n: 3 }
 
-the -acc option suppresses reducer reset
------------------------------------------------------
+## the -acc option suppresses reducer reset
 
 ### Juttle
 
@@ -85,8 +78,7 @@ the -acc option suppresses reducer reset
     { time: "1970-01-01T00:00:02.000Z", c: 3 }
     { time: "1970-01-01T00:00:03.000Z", c: 4 }
 
-sequential assignments work with reducers
------------------------------------------------------
+## sequential assignments work with reducers
 
 ### Juttle
 
@@ -102,8 +94,7 @@ sequential assignments work with reducers
     { c: 3, c2: 9, two: false, again: 9, notagain: 1, ternary: 2 }
     { c: 4, c2: 16, two: false, again: 16, notagain: 1, ternary: null }
 
-sequential assignments with -over show proper results of partial windows
-------------------------------------------------------------------------
+## sequential assignments with -over show proper results of partial windows
 note the ternary count is only incremented when the condition is true.
 it gives a count of odds or evens in the current window.
 
@@ -123,8 +114,7 @@ it gives a count of odds or evens in the current window.
     { i: 4, c: 3, d: 3 }
     { i: 5, c: 3, d: 3 }
 
-assignments with -from and -over hide their results from you but not from themselves
-------------------------------------------------------------------------------------
+## assignments with -from and -over hide their results from you but not from themselves
 Like the previous test, but final result points between 0..3s are suppressed.
 intermediate sequential assignments for these points are processed as normal,
 so that the window is loaded with conforming points. this is why the first value
@@ -146,8 +136,7 @@ of d is 2 instead of 3.
     { i: 4, c: 3, d: 3 }
     { i: 5, c: 3, d: 3 }
 
-Warns and drops points on a runtime error
------------------------------------------
+## Warns and drops points on a runtime error
 
 ### Juttle
 

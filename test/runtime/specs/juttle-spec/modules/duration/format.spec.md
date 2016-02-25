@@ -1,8 +1,6 @@
-The `Duration.format` function
-==============================
+# The `Duration.format` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of invalid type
 
   * Invalid argument type for "Duration.format": expected duration, received null.
 
-formats durations with no format string
----------------------------------------------------------
+## formats durations with no format string
 
 ### Juttle
 
@@ -25,8 +22,7 @@ formats durations with no format string
 
     { time: "1970-01-01T00:00:00.000Z", result: "0d 22:10"}
 
-formats durations with a format string
----------------------------------------------------------
+## formats durations with a format string
 
 ### Juttle
 

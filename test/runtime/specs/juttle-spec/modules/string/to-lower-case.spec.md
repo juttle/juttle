@@ -1,8 +1,6 @@
-The `String.toLowerCase` function
-=================================
+# The `String.toLowerCase` function
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of invalid type
 
   * Invalid argument type for "String.toLowerCase": expected string, received null.
 
-Returns the expected lowercase string
--------------------------------------
+## Returns the expected lowercase string
 
 ### Juttle
 

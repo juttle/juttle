@@ -1,8 +1,6 @@
-The `Date.format` function
-==========================
+# The `Date.format` function
 
-Produces an error when passed argument `date` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `date` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `date` of invalid type
 
   * Invalid argument type for "Date.format": expected date, received null.
 
-Produces an error when passed argument `format` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `format` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `format` of invalid type
 
   * Invalid argument type for "Date.format": expected string, received number (23).
 
-Produces an error when passed argument `tzstring` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `tzstring` of invalid type
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when passed argument `tzstring` of invalid type
 
   * Invalid argument type for "Date.format": expected string, received null.
 
-Formats a date in different timezones (and doesnt care about Standard or DST)
-----------------------------------------------------------------------------
+## Formats a date in different timezones (and doesnt care about Standard or DST)
 
 ### Juttle
 

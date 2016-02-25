@@ -1,8 +1,6 @@
-The `Array.lastIndexOf` function
-=============================
+# The `Array.lastIndexOf` function
 
-Returns correct result with string search
-----------------------
+## Returns correct result with string search
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result with string search
 
     { "time": "1970-01-01T00:00:00.000Z", result: 2 }
 
-Returns correct result with number search
-----------------------
+## Returns correct result with number search
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result with number search
 
     { "time": "1970-01-01T00:00:00.000Z", result: 2 }
 
-Returns correct result with non-primitive search
-----------------------
+## Returns correct result with non-primitive search
 
 ### Juttle
     const a = ['a'];
@@ -34,8 +30,7 @@ Returns correct result with non-primitive search
 
     { "time": "1970-01-01T00:00:00.000Z", result: 2 }
 
-Returns correct result when item not found
---------------------------------------------
+## Returns correct result when item not found
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Returns correct result when item not found
 
     { "time": "1970-01-01T00:00:00.000Z", result: -1 }
 
-Returns correct result when non-primitive item not found
---------------------------------------------
+## Returns correct result when non-primitive item not found
 
 ### Juttle
 
@@ -56,8 +50,7 @@ Returns correct result when non-primitive item not found
 
     { "time": "1970-01-01T00:00:00.000Z", result: -1 }
 
-Produces an error when passed argument `array` of incorrect type
------------------------------------------------------------------
+## Produces an error when passed argument `array` of incorrect type
 
 ### Juttle
 

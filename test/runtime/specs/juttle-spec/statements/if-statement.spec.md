@@ -1,8 +1,6 @@
-The `if` statement
-==================
+# The `if` statement
 
-With one branch: Executes the branch depending on the condition
----------------------------------------------------------------
+## With one branch: Executes the branch depending on the condition
 
 ### Juttle
 
@@ -23,8 +21,7 @@ With one branch: Executes the branch depending on the condition
 
     { "time": "1970-01-01T00:00:00.000Z", f: null, t: 1 }
 
-With two branches: Executes one of the branches depending on the condition
---------------------------------------------------------------------------
+## With two branches: Executes one of the branches depending on the condition
 
 ### Juttle
 
@@ -45,8 +42,7 @@ With two branches: Executes one of the branches depending on the condition
 
     { "time": "1970-01-01T00:00:00.000Z", f: 0, t: 1 }
 
-Produces an error when used with a condition of invalid type
-------------------------------------------------------------
+## Produces an error when used with a condition of invalid type
 
 ### Juttle
 

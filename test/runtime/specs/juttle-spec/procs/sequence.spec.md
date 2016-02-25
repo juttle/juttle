@@ -1,8 +1,6 @@
-Sequence tests
-======================================================
+# Sequence tests
 
-matching sequence of numbers
-----------------------------
+## matching sequence of numbers
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put c = count()
@@ -15,8 +13,7 @@ matching sequence of numbers
 
 
 
-matching sequence of numbers (with by grouping)
------------------------------------------------
+## matching sequence of numbers (with by grouping)
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put c = count()
@@ -34,8 +31,7 @@ matching sequence of numbers (with by grouping)
     { host: "foo", c: 7, _seqno: 1}
 
 
-matching sequence of numbers and hosts
---------------------------------------
+## matching sequence of numbers and hosts
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put c = count()
@@ -49,8 +45,7 @@ matching sequence of numbers and hosts
     { time: "1970-01-01T00:00:06.000Z", host: "foo", c: 7, _seqno: 0}
 
 
-matching _interleaved_ sequences of numbers (with by grouping)
---------------------------------------------------------------
+## matching _interleaved_ sequences of numbers (with by grouping)
 
 ### Juttle
     // The goal is to verify that points are output in time-order, even though the
@@ -71,8 +66,7 @@ matching _interleaved_ sequences of numbers (with by grouping)
 
 
 
-non-matching sequence of numbers
---------------------------------
+## non-matching sequence of numbers
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put c = count()
@@ -85,8 +79,7 @@ non-matching sequence of numbers
 ```
 
 
-non-matching sequence of numbers and hosts (with by grouping)
-------------------------------------------------------------
+## non-matching sequence of numbers and hosts (with by grouping)
 ### Juttle
     emit -limit 10 -from Date.new(0)
     | put c = count()

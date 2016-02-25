@@ -1,8 +1,6 @@
-The `Date.toString` function
-==============================
+# The `Date.toString` function
 
-Returns correct result when passed a date
------------------------------------------
+## Returns correct result when passed a date
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed a date
 
     { "time": "1970-01-01T00:00:00.000Z", result: "2015-01-01T00:00:00.000Z" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

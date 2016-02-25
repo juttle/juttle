@@ -1,8 +1,6 @@
-A function call
-===============
+# A function call
 
-Works correctly inside a recursive function
--------------------------------------------
+## Works correctly inside a recursive function
 
 ### Juttle
 
@@ -16,8 +14,7 @@ Works correctly inside a recursive function
 
     { time: "1970-01-01T00:00:00.000Z", result: 120 }
 
-Returns correct result when passed required parameters (with optional parameters)
----------------------------------------------------------------------------------
+## Returns correct result when passed required parameters (with optional parameters)
 
 ### Juttle
 
@@ -31,8 +28,7 @@ Returns correct result when passed required parameters (with optional parameters
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 5] }
 
-Returns correct result when passed required and optional parameters (with optional parameters)
-----------------------------------------------------------------------------------------------
+## Returns correct result when passed required and optional parameters (with optional parameters)
 
 ### Juttle
 
@@ -46,8 +42,7 @@ Returns correct result when passed required and optional parameters (with option
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 2] }
 
-Produces an error when passed too few parameters (with optional parameters)
----------------------------------------------------------------------------
+## Produces an error when passed too few parameters (with optional parameters)
 
 ### Juttle
 
@@ -61,8 +56,7 @@ Produces an error when passed too few parameters (with optional parameters)
 
   * Error: function f expects 1 to 2 arguments but was called with 0
 
-Produces an error when passed too many parameters (with optional parameters)
-----------------------------------------------------------------------------
+## Produces an error when passed too many parameters (with optional parameters)
 
 ### Juttle
 
@@ -76,8 +70,7 @@ Produces an error when passed too many parameters (with optional parameters)
 
   * Error: function f expects 1 to 2 arguments but was called with 3
 
-Returns correct result when passed required parameters (module, with optional parameters)
------------------------------------------------------------------------------------------
+## Returns correct result when passed required parameters (module, with optional parameters)
 
 ### Module `m`
 
@@ -95,8 +88,7 @@ Returns correct result when passed required parameters (module, with optional pa
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 5] }
 
-Returns correct result when passed required and optional parameters (module, with optional parameters)
-------------------------------------------------------------------------------------------------------
+## Returns correct result when passed required and optional parameters (module, with optional parameters)
 
 ### Module `m`
 
@@ -114,8 +106,7 @@ Returns correct result when passed required and optional parameters (module, wit
 
     { time: "1970-01-01T00:00:00.000Z", result: [1, 2] }
 
-Produces an error when passed too few parameters (module, with optional parameters)
------------------------------------------------------------------------------------
+## Produces an error when passed too few parameters (module, with optional parameters)
 
 ### Module `m`
 
@@ -133,8 +124,7 @@ Produces an error when passed too few parameters (module, with optional paramete
 
   * Error: function m.f expects 1 to 2 arguments but was called with 0
 
-Produces an error when passed too many parameters (module, with optional parameters)
-------------------------------------------------------------------------------------
+## Produces an error when passed too many parameters (module, with optional parameters)
 
 ### Module `m`
 
@@ -152,8 +142,7 @@ Produces an error when passed too many parameters (module, with optional paramet
 
   * Error: function m.f expects 1 to 2 arguments but was called with 3
 
-Returns correct result when passed required parameters (without optional parameters)
-------------------------------------------------------------------------------------
+## Returns correct result when passed required parameters (without optional parameters)
 
 ### Juttle
 
@@ -168,8 +157,7 @@ Returns correct result when passed required parameters (without optional paramet
     { time: "1970-01-01T00:00:00.000Z", result: 1 }
 
 
-Produces an error when passed too few parameters (without optional parameters)
-------------------------------------------------------------------------------
+## Produces an error when passed too few parameters (without optional parameters)
 
 ### Juttle
 
@@ -183,8 +171,7 @@ Produces an error when passed too few parameters (without optional parameters)
 
   * Error: function f expects 1 argument but was called with 0
 
-Produces an error when passed too many parameters (without optional parameters)
--------------------------------------------------------------------------------
+## Produces an error when passed too many parameters (without optional parameters)
 
 ### Juttle
 
@@ -198,8 +185,7 @@ Produces an error when passed too many parameters (without optional parameters)
 
   * Error: function f expects 1 argument but was called with 3
 
-Returns correct result when passed required parameters (module, without optional parameters)
---------------------------------------------------------------------------------------------
+## Returns correct result when passed required parameters (module, without optional parameters)
 
 ### Module `m`
 
@@ -217,8 +203,7 @@ Returns correct result when passed required parameters (module, without optional
 
     { time: "1970-01-01T00:00:00.000Z", result: 1 }
 
-Produces an error when passed too few parameters (module, without optional parameters)
---------------------------------------------------------------------------------------
+## Produces an error when passed too few parameters (module, without optional parameters)
 
 ### Module `m`
 
@@ -236,8 +221,7 @@ Produces an error when passed too few parameters (module, without optional param
 
   * Error: function m.f expects 1 argument but was called with 0
 
-Produces an error when passed too many parameters (module, without optional parameters)
----------------------------------------------------------------------------------------
+## Produces an error when passed too many parameters (module, without optional parameters)
 
 ### Module `m`
 

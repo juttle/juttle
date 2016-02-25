@@ -1,8 +1,6 @@
-The `AND` operator
-==================
+# The `AND` operator
 
-Returns correct result
-----------------------
+## Returns correct result
 
 ### Juttle
 
@@ -17,8 +15,7 @@ Returns correct result
 
     { "time": "1970-01-01T00:00:03.000Z", c: 4, left: true, right: true }
 
-Doesn't short-circuit
----------------------
+## Doesn't short-circuit
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-The `Array.splice` function
-==============================
+# The `Array.splice` function
 
-Produces an error when passed argument `array` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `array` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `array` of invalid type
 
   * Invalid argument type for "Array.splice": expected array, received null.
 
-Produces an error when passed argument `begin` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `begin` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `begin` of invalid type
 
   * Invalid argument type for "Array.splice": expected number, received null.
 
-Produces an error when passed argument `end` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `end` of invalid type
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when passed argument `end` of invalid type
 
   * Invalid argument type for "Array.splice": expected number, received null.
 
-Splices an array
---------------------------------------
+## Splices an array
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-Head optimization
-=================
+# Head optimization
 
-Can optimize head if the adapter supports it
---------------------------------------------
+## Can optimize head if the adapter supports it
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Can optimize head if the adapter supports it
 
     { type: "head", limit: 10 }
 
-Can optimize head with an implicit limit
---------------------------------------------
+## Can optimize head with an implicit limit
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Can optimize head with an implicit limit
 
     { type: "head", limit: 1 }
 
-Does not optimize head if the adapter doesn't support it
---------------------------------------------------------
+## Does not optimize head if the adapter doesn't support it
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Does not optimize head if the adapter doesn't support it
 
     { type: "disabled", reason: "unsupported_optimization" }
 
-Does not optimize head if unsupported options are passed
---------------------------------------------------------
+## Does not optimize head if unsupported options are passed
 
 ### Juttle
 

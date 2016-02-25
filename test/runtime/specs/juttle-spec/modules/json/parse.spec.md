@@ -1,8 +1,6 @@
-The `JSON.parse` function
-=============================
+# The `JSON.parse` function
 
-Returns correct result with array
----------------------------------
+## Returns correct result with array
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result with array
 
     { "time": "1970-01-01T00:00:00.000Z", "result": [1, 2, 3] }
 
-Returns correct result with a nested object
--------------------------------------------
+## Returns correct result with a nested object
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns correct result with a nested object
 
     { "time": "1970-01-01T00:00:00.000Z", "result": [1, 2, { "key": "value" }] }
 
-Produces an error when argument `string` cannot be parsed
---------------------------------------------------------
+## Produces an error when argument `string` cannot be parsed
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when argument `string` cannot be parsed
 
   * Unexpected end of input in string ([1,2,)
 
-Produces an error when argument `string` is not a string
---------------------------------------------------------------
+## Produces an error when argument `string` is not a string
 
 ### Juttle
 

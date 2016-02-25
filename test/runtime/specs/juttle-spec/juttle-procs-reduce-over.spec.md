@@ -1,5 +1,4 @@
-Juttle reduce processor, windowed -over mode
-=========================================
+# Juttle reduce processor, windowed -over mode
 These tests give -over a workout. -over specifies a window of time
 over which each reducer computation should operate (all points within
 that window). Partial windows (at the beginning or end of a stream)
@@ -10,8 +9,7 @@ the same, in the unbatched reduce specify -from/-to equal to the beginning
 and ending epochs of the data (the batched reducer is fed these epochs as
 marks by the upstream batch, so they needn't be specified for batched operation)
 
-complains if -over is not a duration
-------------------------------------
+## complains if -over is not a duration
 ### Juttle
 
     reduce -every :s: -over 0.01 count() |  view result
@@ -20,8 +18,7 @@ complains if -over is not a duration
 
    * -over wants a duration, got 0.01
 
-put with -over works
-------------------------------------
+## put with -over works
 ### Juttle
 
     emit -from Date.new(0) -limit 6 | put -over :3s: c = count() | view result
@@ -35,8 +32,7 @@ put with -over works
     {"time": "1970-01-01T00:00:04.000Z", "c": 3}
     {"time": "1970-01-01T00:00:05.000Z", "c": 3}
 
-put with -over and -from works
-------------------------------------
+## put with -over and -from works
 ### Juttle
 
     emit -from Date.new(0) -limit 6 | put -from Date.new(0) -over :3s: c = count() | view result
@@ -50,8 +46,7 @@ put with -over and -from works
     {"time": "1970-01-01T00:00:04.000Z", "c": 3}
     {"time": "1970-01-01T00:00:05.000Z", "c": 3}
 
-put with -over -by works
-------------------------------------
+## put with -over -by works
 ### Juttle
 
     emit -points [
@@ -81,8 +76,7 @@ put with -over -by works
     { "time": "1970-01-01T00:00:06.000Z",
       "color": "blue", "c": 3 }
 
-put with -over trumps batches (they are just not relevant) but forwards them
-------------------------------------
+## put with -over trumps batches (they are just not relevant) but forwards them
 specifying -over specifies reset behavior as well, and we've decided
 this should trump any batch present.
 ### Juttle
@@ -102,8 +96,7 @@ this should trump any batch present.
     {"time": "1970-01-01T00:00:04.000Z", "over": 3, "under": 1 }
     {"time": "1970-01-01T00:00:05.000Z", "over": 3, "under": 2 }
 
-put with -over downstream from a reduce works
-------------------------------------
+## put with -over downstream from a reduce works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -133,8 +126,7 @@ put with -over downstream from a reduce works
       "over": 2
     }
 
-one-shot reduce with -over works
----------------------------------
+## one-shot reduce with -over works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -145,8 +137,7 @@ one-shot reduce with -over works
 
     { "over": 3 }
 
-batch-driven reduce with -over same as batch
--------------------------------------------------------
+## batch-driven reduce with -over same as batch
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -158,8 +149,7 @@ batch-driven reduce with -over same as batch
     { "time": "1970-01-01T00:00:03.000Z", "over": 3}
     { "time": "1970-01-01T00:00:06.000Z", "over": 3}
 
-batch-driven reduce with -over less than batch works
--------------------------------------------------------
+## batch-driven reduce with -over less than batch works
 ### Juttle
 
     emit -from Date.new(0) -limit 8
@@ -171,8 +161,7 @@ batch-driven reduce with -over less than batch works
     { "time": "1970-01-01T00:00:04.000Z", "over": 3}
     { "time": "1970-01-01T00:00:08.000Z", "over": 3}
 
-batch-driven reduce with -over greater than batch works
--------------------------------------------------------
+## batch-driven reduce with -over greater than batch works
 ### Juttle
 
     emit -from Date.new(0) -limit 9
@@ -185,8 +174,7 @@ batch-driven reduce with -over greater than batch works
     { "time": "1970-01-01T00:00:06.000Z", "over": 4}
     { "time": "1970-01-01T00:00:09.000Z", "over": 4}
 
-batch-driven reduce with -over downstream from a reduce works
--------------------------------------------------------
+## batch-driven reduce with -over downstream from a reduce works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -199,8 +187,7 @@ batch-driven reduce with -over downstream from a reduce works
     { "time": "1970-01-01T00:00:03.000Z", "over": 1}
     { "time": "1970-01-01T00:00:06.000Z", "over": 1}
 
-every-driven reduce with -over === -every is same as batch reduce
--------------------------------------------------------
+## every-driven reduce with -over === -every is same as batch reduce
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -212,8 +199,7 @@ every-driven reduce with -over === -every is same as batch reduce
     { "time": "1970-01-01T00:00:06.000Z", "over": 3}
 
 
-every-driven reduce with -over less than -every works
--------------------------------------------------------
+## every-driven reduce with -over less than -every works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -224,8 +210,7 @@ every-driven reduce with -over less than -every works
     { "time": "1970-01-01T00:00:03.000Z", "over": 2}
     { "time": "1970-01-01T00:00:06.000Z", "over": 2}
 
-every-driven reduce with -over greater than -every works
--------------------------------------------------------
+## every-driven reduce with -over greater than -every works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -236,8 +221,7 @@ every-driven reduce with -over greater than -every works
     { "time": "1970-01-01T00:00:03.000Z", "over": 3}
     { "time": "1970-01-01T00:00:06.000Z", "over": 4}
 
-cascade of every-driven reducers, first
-----------------------------------
+## cascade of every-driven reducers, first
 ### Juttle
 
     emit -from Date.new(0) -limit 3
@@ -252,8 +236,7 @@ cascade of every-driven reducers, first
     {"time":"1970-01-01T00:00:02.000Z","first3":"1970-01-01T00:00:01.000Z"}
     {"time":"1970-01-01T00:00:03.000Z","first3":"1970-01-01T00:00:02.000Z"}
 
-cascade of every-driven reducers, last
-----------------------------------
+## cascade of every-driven reducers, last
 ### Juttle
 
     emit -from Date.new(0) -limit 3
@@ -268,8 +251,7 @@ cascade of every-driven reducers, last
     {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
     {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
 
-cascade of batch-driven reducers, first
-----------------------------------
+## cascade of batch-driven reducers, first
 ### Juttle
 
     emit -from Date.new(0) -limit 3
@@ -285,8 +267,7 @@ cascade of batch-driven reducers, first
     {"time":"1970-01-01T00:00:02.000Z","first3":"1970-01-01T00:00:01.000Z"}
     {"time":"1970-01-01T00:00:03.000Z","first3":"1970-01-01T00:00:02.000Z"}
 
-cascade of batch-driven reducers, last
-----------------------------------
+## cascade of batch-driven reducers, last
 ### Juttle
 
     emit -from Date.new(0) -limit 3
@@ -302,8 +283,7 @@ cascade of batch-driven reducers, last
     {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
     {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
 
-every-driven reduce with -every faster than data and -over longer
--------------------------------------------------------
+## every-driven reduce with -every faster than data and -over longer
 
 ### Juttle
 
@@ -327,8 +307,7 @@ every-driven reduce with -every faster than data and -over longer
     {"time":"1970-01-01T00:00:12.000Z","over":1}
     {"time": "1970-01-01T00:00:13.000Z","over":2}
 
-reduce -every with -from/-to and no -over complains
-------------------------------
+## reduce -every with -from/-to and no -over complains
 
 ### Juttle
 
@@ -341,8 +320,7 @@ reduce -every with -from/-to and no -over complains
    * only when -over is specified
 
 
-batch reduce with -from/-to and no -over complains
-------------------------------
+## batch reduce with -from/-to and no -over complains
 
 ### Juttle
 
@@ -356,8 +334,7 @@ batch reduce with -from/-to and no -over complains
    * only when -over is specified
 
 
-reduce -every with leading partial window result suppressed using -from
-------------------------------
+## reduce -every with leading partial window result suppressed using -from
 
 ### Juttle
 
@@ -373,8 +350,7 @@ reduce -every with leading partial window result suppressed using -from
       "time": "1970-01-03T12:00:00.000Z"
     }
 
-reduce -every with trailing partial window result suppressed using -to
-------------------------------
+## reduce -every with trailing partial window result suppressed using -to
 
 ### Juttle
 
@@ -390,8 +366,7 @@ reduce -every with trailing partial window result suppressed using -to
       "time": "1970-01-02T12:00:00.000Z"
     }
 
-batch reduce with leading partial window result suppressed using -from
-------------------------------
+## batch reduce with leading partial window result suppressed using -from
 
 ### Juttle
 
@@ -408,8 +383,7 @@ batch reduce with leading partial window result suppressed using -from
       "time": "1970-01-03T12:00:00.000Z"
     }
 
-batch reduce with trailing partial window result suppressed using -to
-------------------------------
+## batch reduce with trailing partial window result suppressed using -to
 
 ### Juttle
 
@@ -426,8 +400,7 @@ batch reduce with trailing partial window result suppressed using -to
       "time": "1970-01-02T12:00:00.000Z"
     }
 
-reduce -every with -over, long partial windows suppressed using -to and -from
-------------------------------
+## reduce -every with -over, long partial windows suppressed using -to and -from
 
 ### Juttle
 
@@ -439,8 +412,7 @@ reduce -every with -over, long partial windows suppressed using -to and -from
     {"hours": 48, "time": "1970-01-03T12:00:00.000Z"}
     {"hours": 48, "time": "1970-01-04T12:00:00.000Z"}
 
-batch reduce with -over, long partial windows suppressed using -to and -from
-------------------------------
+## batch reduce with -over, long partial windows suppressed using -to and -from
 
 ### Juttle
 
@@ -453,8 +425,7 @@ batch reduce with -over, long partial windows suppressed using -to and -from
     {"hours": 48, "time": "1970-01-03T12:00:00.000Z"}
     {"hours": 48, "time": "1970-01-04T12:00:00.000Z"}
 
-every-driven reduce with -every faster than data and -over longer, ragged windows suppressed
--------------------------------------------------------
+## every-driven reduce with -every faster than data and -over longer, ragged windows suppressed
 
 ### Juttle
 
@@ -475,8 +446,7 @@ every-driven reduce with -every faster than data and -over longer, ragged window
     {"time":"1970-01-01T00:00:12.000Z","over":1}
     {"time":"1970-01-01T00:00:13.000Z","over":2}
 
-every-driven reduce is aligned with its start time, not the epoch
-----------------------------------------------------------------
+## every-driven reduce is aligned with its start time, not the epoch
 ### Juttle
 
     emit -every :1s: -from :-3s: -to :+1.1s:
@@ -488,8 +458,7 @@ every-driven reduce is aligned with its start time, not the epoch
 
     { "N": 3 }
 
-(skip)PROD-7471 every-driven reduce triggers an advance on ticks outside the window, ahead of eof
-----------------------------------------------------------------
+## (skip)PROD-7471 every-driven reduce triggers an advance on ticks outside the window, ahead of eof
 XXX when PROD-7331 merges, make this test fast.
 
 ### Juttle
@@ -504,8 +473,7 @@ XXX when PROD-7331 merges, make this test fast.
     {"N": 1}
     {"tick": true}
 
-(skip)PROD-7471 one-shot reduce -over/-to triggers an advance on ticks outside the window, ahead of eof
-----------------------------------------------------------------
+## (skip)PROD-7471 one-shot reduce -over/-to triggers an advance on ticks outside the window, ahead of eof
 XXX when PROD-7331 merges, make this test fast.
 
 ### Juttle
@@ -520,8 +488,7 @@ XXX when PROD-7331 merges, make this test fast.
     {"N": 1}
     {"tick": true}
 
-every-driven reduce triggers an advance on data outside the window, ahead of eof
-----------------------------------------------------------------
+## every-driven reduce triggers an advance on data outside the window, ahead of eof
 XXX when PROD-7331 merges, make this test fast.
 
 ### Juttle
@@ -535,8 +502,7 @@ XXX when PROD-7331 merges, make this test fast.
 ### Output
     { "winning":true }
 
-one-shot reduce -over/-to triggers an advance on data outside the window, ahead of eof
-----------------------------------------------------------------
+## one-shot reduce -over/-to triggers an advance on data outside the window, ahead of eof
 XXX when PROD-7331 merges, make this test fast.
 
 ### Juttle
@@ -550,8 +516,7 @@ XXX when PROD-7331 merges, make this test fast.
 ### Output
     { "winning":true }
 
-windowed count works (custom expire method)
--------------------------------------------
+## windowed count works (custom expire method)
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -562,8 +527,7 @@ windowed count works (custom expire method)
 
     { "over": 3 }
 
-windowed avg works (custom expire method)
--------------------------------------------
+## windowed avg works (custom expire method)
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -578,8 +542,7 @@ windowed avg works (custom expire method)
     {"time":"1970-01-01T00:00:03.000Z","over":1}
     {"time":"1970-01-01T00:00:04.000Z","over":2}
 
-windowed sum works (custom expire method)
--------------------------------------------
+## windowed sum works (custom expire method)
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -594,8 +557,7 @@ windowed sum works (custom expire method)
     {"time":"1970-01-01T00:00:03.000Z","over":3}
     {"time":"1970-01-01T00:00:04.000Z","over":6}
 
-windowed sigma works (custom expire method)
--------------------------------------------
+## windowed sigma works (custom expire method)
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -610,8 +572,7 @@ windowed sigma works (custom expire method)
     {"time":"1970-01-01T00:00:03.000Z","over":1}
     {"time":"1970-01-01T00:00:04.000Z","over":1}
 
-windowed min works
--------------------------------------------
+## windowed min works
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -626,8 +587,7 @@ windowed min works
     {"time":"1970-01-01T00:00:03.000Z","over":0}
     {"time":"1970-01-01T00:00:04.000Z","over":1}
 
-windowed max works
--------------------------------------------
+## windowed max works
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -642,8 +602,7 @@ windowed max works
     {"time":"1970-01-01T00:00:03.000Z","over":2}
     {"time":"1970-01-01T00:00:04.000Z","over":3}
 
-windowed first works
--------------------------------------------
+## windowed first works
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -658,8 +617,7 @@ windowed first works
     {"time":"1970-01-01T00:00:03.000Z","over":0}
     {"time":"1970-01-01T00:00:04.000Z","over":1}
 
-windowed last works
--------------------------------------------
+## windowed last works
 ### Juttle
 
     emit -from Date.new(0) -limit 4
@@ -674,8 +632,7 @@ windowed last works
     {"time":"1970-01-01T00:00:03.000Z","over":2}
     {"time":"1970-01-01T00:00:04.000Z","over":3}
 
-windowed pluck works
--------------------------------------------
+## windowed pluck works
 ### Juttle
 
     emit -from Date.new(0) -limit 6
@@ -692,8 +649,7 @@ windowed pluck works
     {"time":"1970-01-01T00:00:05.000Z","over":[2,3,4]}
     {"time":"1970-01-01T00:00:06.000Z","over":[3,4,5]}
 
-windowed percentile works
--------------------------------------------
+## windowed percentile works
 (consult pluck output to convince yourself)
 
 ### Juttle
@@ -712,8 +668,7 @@ windowed percentile works
     {"time":"1970-01-01T00:00:05.000Z","over":3}
     {"time":"1970-01-01T00:00:06.000Z","over":4}
 
-windowed count_unique works
--------------------------------------------
+## windowed count_unique works
 
 ### Juttle
 
@@ -731,8 +686,7 @@ windowed count_unique works
     {"time":"1970-01-01T00:00:05.000Z","over":2}
     {"time":"1970-01-01T00:00:06.000Z","over":2}
 
-custom windowed reducers work with expire
-------------------------------------------------------------
+## custom windowed reducers work with expire
 ### Juttle
 
     reducer count_odd(fieldname) {
@@ -790,8 +744,7 @@ custom windowed reducers work with expire
       "nodd": 2
     }
 
-custom windowed reducers work without expire
-------------------------------------------------------------
+## custom windowed reducers work without expire
 ### Juttle
 
     reducer count_odd(fieldname) {

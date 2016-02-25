@@ -1,8 +1,6 @@
-Tail optimization
-=================
+# Tail optimization
 
-Can optimize tail if the adapter supports it
---------------------------------------------
+## Can optimize tail if the adapter supports it
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Can optimize tail if the adapter supports it
 
     { type: "tail", limit: 10 }
 
-Can optimize tail with an implicit limit
---------------------------------------------
+## Can optimize tail with an implicit limit
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Can optimize tail with an implicit limit
 
     { type: "tail", limit: 1 }
 
-Does not optimize tail if the adapter doesn't support it
---------------------------------------------------------
+## Does not optimize tail if the adapter doesn't support it
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Does not optimize tail if the adapter doesn't support it
 
     { type: "disabled", reason: "unsupported_optimization" }
 
-Does not optimize tail if unsupported options are passed
---------------------------------------------------------
+## Does not optimize tail if unsupported options are passed
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Does not optimize tail if unsupported options are passed
 
     { type: "disabled", reason: "unsupported_tail_option" }
 
-Does not optimize tail by
---------------------------------------------------------
+## Does not optimize tail by
 
 ### Juttle
 

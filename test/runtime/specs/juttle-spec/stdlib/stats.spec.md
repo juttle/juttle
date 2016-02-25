@@ -1,8 +1,6 @@
-juttle stdlib.stats module
-====================================================
+# juttle stdlib.stats module
 
-reducer demean(fld) subtracts the mean
-------------------------------------------
+## reducer demean(fld) subtracts the mean
 ### Juttle
     import "stats.juttle" as stats;
     emit -limit 5 -from Date.new(0)
@@ -13,8 +11,7 @@ reducer demean(fld) subtracts the mean
 ### Output
     {x: 10, u:6, xmu: 4}
 
-reducer stddev(fld) computes the right thing
-------------------------------------------
+## reducer stddev(fld) computes the right thing
 ### Juttle
     import "stats.juttle" as stats;
     emit -limit 3 -from Date.new(0)
@@ -25,8 +22,7 @@ reducer stddev(fld) computes the right thing
 ### Output
     {s: 2}
 
-reducer z(fld) computes the right thing
-------------------------------------------
+## reducer z(fld) computes the right thing
 note the first output point is dropped because we
 tried to do Math.floor(null)
 ### Juttle
@@ -39,8 +35,7 @@ tried to do Math.floor(null)
 ### Output
     {z:1}
 
-reducer relMean(fld) divides by the mean
-------------------------------------------
+## reducer relMean(fld) divides by the mean
 ### Juttle
     import "stats.juttle" as stats;
     emit -limit 3 -from Date.new(0)
@@ -51,8 +46,7 @@ reducer relMean(fld) divides by the mean
 ### Output
     {x: 6, u:4, xdu: 1.5}
 
-reducer cv(fld) computes the coefficient of variation
-------------------------------------------------------
+## reducer cv(fld) computes the coefficient of variation
 ### Juttle
     import "stats.juttle" as stats;
     emit -limit 100 -from Date.new(0)

@@ -1,8 +1,6 @@
-The `in` operator
-=================
+# The `in` operator
 
-Returns correct result when used on any value and an `Array`
-------------------------------------------------------------
+## Returns correct result when used on any value and an `Array`
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Returns correct result when used on any value and an `Array`
 
     { "time": "1970-01-01T00:00:00.000Z", in: true, ni: false }
 
-Produces an error when used on invalid operand type combinations
-----------------------------------------------------------------
+## Produces an error when used on invalid operand type combinations
 
 ### Juttle
 

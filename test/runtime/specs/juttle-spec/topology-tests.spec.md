@@ -1,8 +1,6 @@
-Topology tests
-===============
+# Topology tests
 
-Proc after a sink
------------------
+## Proc after a sink
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Proc after a sink
 
    * keep may not come after a sink
 
-Proc before a source
---------------------
+## Proc before a source
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Proc before a source
 
    * keep may not come before a source
 
-Source inside a parellel graph in the middle of a flowgraph
------------------------------------------------------------
+## Source inside a parellel graph in the middle of a flowgraph
 
 ### Juttle
 

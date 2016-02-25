@@ -1,8 +1,6 @@
-Scoping
-=======
+# Scoping
 
-Calls like `count()` in streaming expressions always refer to the built-in reducer
-----------------------------------------------------------------------------------
+## Calls like `count()` in streaming expressions always refer to the built-in reducer
 
 Regression test for PROD-9211.
 

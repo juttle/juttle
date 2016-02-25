@@ -1,8 +1,6 @@
-The `Math.atan2` function
-=========================
+# The `Math.atan2` function
 
-Produces an error when passed argument `y` of incorrect type
-------------------------------------------------------------
+## Produces an error when passed argument `y` of incorrect type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `y` of incorrect type
 
   * Invalid argument type for "Math.atan2": expected number, received null.
 
-Produces an error when passed argument `x` of incorrect type
-------------------------------------------------------------
+## Produces an error when passed argument `x` of incorrect type
 
 ### Juttle
 

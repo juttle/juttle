@@ -1,8 +1,6 @@
-`Number` constants
-==================
+# `Number` constants
 
-All `Number` constants are present
-----------------------------------
+## All `Number` constants are present
 
 ### Juttle
 

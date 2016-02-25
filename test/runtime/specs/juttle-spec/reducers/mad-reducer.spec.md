@@ -1,8 +1,6 @@
-Juttle "mad" reducer
-=====================
+# Juttle "mad" reducer
 
-complains if missing argument
------------------------------
+## complains if missing argument
 
 ### Juttle
 
@@ -13,8 +11,7 @@ complains if missing argument
    * reducer mad expects 1 argument but was called with 0
 
 
-outputs null on empty stream
-----------------------------
+## outputs null on empty stream
 
 ### Juttle
 
@@ -24,8 +21,7 @@ outputs null on empty stream
     {mad: null}
 
 
-(skip) outputs null on empty batched stream (explicit batch)
------------------------------------------------------
+## (skip) outputs null on empty batched stream (explicit batch)
 
 ### Juttle
 
@@ -35,8 +31,7 @@ outputs null on empty stream
     {mad: null}
 
 
-(skip) outputs null on empty batched stream  (reduce -every)
------------------------------------------------------
+## (skip) outputs null on empty batched stream  (reduce -every)
 
 ### Juttle
 
@@ -46,8 +41,7 @@ outputs null on empty stream
     {mad: null}
 
 
-outputs null on empty batch (explicit batches)
-----------------------------------------------
+## outputs null on empty batch (explicit batches)
 
 ### Juttle
 
@@ -58,8 +52,7 @@ outputs null on empty batch (explicit batches)
     {mad: null, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs null on empty batch (reduce -every)
--------------------------------------------
+## outputs null on empty batch (reduce -every)
 
 ### Juttle
 
@@ -70,8 +63,7 @@ outputs null on empty batch (reduce -every)
     {mad: null, time: "1970-01-01T00:00:00.200Z"}
 
 
-outputs null on empty window (reduce -every -over)
---------------------------------------------------
+## outputs null on empty window (reduce -every -over)
 
 ### Juttle
 
@@ -81,8 +73,7 @@ outputs null on empty window (reduce -every -over)
     {mad: null, time: "1970-01-01T00:00:00.100Z"}
 
 
-computes a proper mad
---------------------------------------------------
+## computes a proper mad
 
 ### Juttle
 

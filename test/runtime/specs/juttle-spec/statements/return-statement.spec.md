@@ -1,8 +1,6 @@
-The `return` statement
-======================
+# The `return` statement
 
-Without value: Makes enclosing function return `null`
------------------------------------------------------
+## Without value: Makes enclosing function return `null`
 
 ### Juttle
 
@@ -16,8 +14,7 @@ Without value: Makes enclosing function return `null`
 
     { time: "1970-01-01T00:00:00.000Z", result: null }
 
-With value: Makes enclosing function return the value
------------------------------------------------------
+## With value: Makes enclosing function return the value
 
 ### Juttle
 

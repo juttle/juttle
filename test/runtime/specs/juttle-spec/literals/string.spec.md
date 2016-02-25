@@ -1,8 +1,6 @@
-String literal
-==============
+# String literal
 
-Simple string
--------------
+## Simple string
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Simple string
 
     { time: "1970-01-01T00:00:00.000Z", s: "abcd" }
 
-Interpolated string (`Null`)
-----------------------------
+## Interpolated string (`Null`)
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Interpolated string (`Null`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "null" }
 
-Interpolated string (`Boolean`)
--------------------------------
+## Interpolated string (`Boolean`)
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Interpolated string (`Boolean`)
 
     { time: "1970-01-01T00:00:00.000Z", s1: "true", s2: "false" }
 
-Interpolated string (`Number`)
-------------------------------
+## Interpolated string (`Number`)
 
 ### Juttle
 
@@ -45,8 +40,7 @@ Interpolated string (`Number`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "5" }
 
-Interpolated string (`String`)
-------------------------------
+## Interpolated string (`String`)
 
 ### Juttle
 
@@ -56,8 +50,7 @@ Interpolated string (`String`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "abcd" }
 
-Interpolated string (`RegExp`)
-------------------------------
+## Interpolated string (`RegExp`)
 
 ### Juttle
 
@@ -67,8 +60,7 @@ Interpolated string (`RegExp`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "/abcd/" }
 
-Interpolated string (`Date`)
-----------------------------
+## Interpolated string (`Date`)
 
 ### Juttle
 
@@ -78,8 +70,7 @@ Interpolated string (`Date`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "2015-01-01T00:00:05.000Z" }
 
-Interpolated string (`Duration`)
---------------------------------
+## Interpolated string (`Duration`)
 
 ### Juttle
 
@@ -89,8 +80,7 @@ Interpolated string (`Duration`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "00:00:05.000" }
 
-Interpolated string (`Array`)
------------------------------
+## Interpolated string (`Array`)
 
 ### Juttle
 
@@ -100,8 +90,7 @@ Interpolated string (`Array`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "[ 1, 2, 3 ]" }
 
-Interpolated string (`Object`)
-------------------------------
+## Interpolated string (`Object`)
 
 ### Juttle
 
@@ -111,8 +100,7 @@ Interpolated string (`Object`)
 
     { time: "1970-01-01T00:00:00.000Z", s: "{ a: 1, b: 2, c: 3 }" }
 
-Interpolated string (complex expression)
-----------------------------------------
+## Interpolated string (complex expression)
 
 ### Juttle
 

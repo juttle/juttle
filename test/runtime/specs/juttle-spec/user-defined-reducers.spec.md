@@ -1,8 +1,6 @@
-User-defined reducers
-=====================
+# User-defined reducers
 
-Can't contain statement blocks
-------------------------------
+## Can't contain statement blocks
 
 ### Juttle
 
@@ -16,8 +14,7 @@ Can't contain statement blocks
 
   * Cannot use a block at the top level of a reducer.
 
-Can't contain assignments
--------------------------
+## Can't contain assignments
 
 ### Juttle
 
@@ -31,8 +28,7 @@ Can't contain assignments
 
   * Cannot use an assignment at the top level of a reducer.
 
-Can't contain `if` statements
------------------------------
+## Can't contain `if` statements
 
 ### Juttle
 
@@ -47,8 +43,7 @@ Can't contain `if` statements
 
   * Cannot use an if statement at the top level of a reducer.
 
-Can't contain `return` statements
----------------------------------
+## Can't contain `return` statements
 
 ### Juttle
 

@@ -1,8 +1,6 @@
-The `JSON.stringify` function
-=============================
+# The `JSON.stringify` function
 
-Returns correct result with array
----------------------------------
+## Returns correct result with array
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Returns correct result with array
 
     { "time": "1970-01-01T00:00:00.000Z", "array": [1, 2, 3], "result": "[1,2,3]" }
 
-Returns correct result with a nested object
--------------------------------------------
+## Returns correct result with a nested object
 
 ### Juttle
 
@@ -29,8 +26,7 @@ Returns correct result with a nested object
 
     { "time": "1970-01-01T00:00:00.000Z", "nested": [1, 2, { "key": "value" }], "result": "[1,2,{\"key\":\"value\"}]" }
 
-Returns correct result with a moment
-------------------------------------
+## Returns correct result with a moment
 
 ### Juttle
 

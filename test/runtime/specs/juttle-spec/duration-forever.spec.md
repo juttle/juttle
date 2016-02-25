@@ -1,9 +1,7 @@
-Juttle moments, new functionality
-===================================
+# Juttle moments, new functionality
 
 
-can assign :forever: to a point
--------------------------------
+## can assign :forever: to a point
 
 ### Juttle
     const long_time = :1000000y:;
@@ -17,8 +15,7 @@ can assign :forever: to a point
     {f: "Infinity", g: "-Infinity"}
 
 
-can assign forever const to a point
------------------------------------
+## can assign forever const to a point
 
 ### Juttle
     const long_time = :1000000y:;
@@ -33,8 +30,7 @@ can assign forever const to a point
     {f: "Infinity", g: "-Infinity"}
 
 
-can assign forever const to a point (runtime function)
-------------------------------------------------------
+## can assign forever const to a point (runtime function)
 
 ### Juttle
     // the use of Math.random() below is to ensure that f()
@@ -51,8 +47,7 @@ can assign forever const to a point (runtime function)
     {f: "Infinity", g: "-Infinity"}
 
 
-can add/subtract durations with :forever:
------------------------------------------
+## can add/subtract durations with :forever:
 
 ### Juttle
     const long_time = :1000000y:;
@@ -66,8 +61,7 @@ can add/subtract durations with :forever:
     {f: "Infinity", g: "Infinity", h: "Infinity", i: "Infinity"}
 
 
-can add :forever: to a finite date
-----------------------------------
+## can add :forever: to a finite date
 
 ### Juttle
     const f = :now: + :forever:;
@@ -81,8 +75,7 @@ can add :forever: to a finite date
     {f: "Infinity", g: "Infinity"}
 
 
-can subtract :forever: from a finite date
------------------------------------------
+## can subtract :forever: from a finite date
 
 ### Juttle
     const f = :now: - :forever:;
@@ -97,8 +90,7 @@ can subtract :forever: from a finite date
 
 
 
-can divide/multiply numbers with :forever:
------------------------------------------
+## can divide/multiply numbers with :forever:
 
 ### Juttle
 
@@ -111,8 +103,7 @@ can divide/multiply numbers with :forever:
     {f: "Infinity", g: "Infinity", h: "Infinity"}
 
 
-can compare durations with :forever:
-------------------------------------
+## can compare durations with :forever:
 
 ### Juttle
     emit -from :-1m: -limit 10
@@ -126,8 +117,7 @@ can compare durations with :forever:
     {count: 10}
 
 
-programmatic infinite duration
-------------------------------
+## programmatic infinite duration
 
 ### Juttle
     emit -from :-1m: -limit 1
@@ -139,8 +129,7 @@ programmatic infinite duration
     {foo: true}
 
 
-programmatic infinite duration (as const)
------------------------------------------
+## programmatic infinite duration (as const)
 
 ### Juttle
     const forever = Duration.new(1/0);
@@ -153,8 +142,7 @@ programmatic infinite duration (as const)
     {foo: true}
 
 
-can add/subtract durations with negative :forever:
---------------------------------------------------
+## can add/subtract durations with negative :forever:
 
 ### Juttle
     const long_time = :1000000y:;
@@ -168,8 +156,7 @@ can add/subtract durations with negative :forever:
     {f: "-Infinity", g: "-Infinity", h: "-Infinity", i: "-Infinity"}
 
 
-can divide/multiply numbers with negative :forever:
----------------------------------------------------
+## can divide/multiply numbers with negative :forever:
 
 ### Juttle
 
@@ -183,8 +170,7 @@ can divide/multiply numbers with negative :forever:
 
 
 
-can compare durations with negative :forever:
----------------------------------------------
+## can compare durations with negative :forever:
 
 ### Juttle
     emit -from :-1m: -limit 10
@@ -199,8 +185,7 @@ can compare durations with negative :forever:
 
 
 
-programmatic negative infinite duration
----------------------------------------
+## programmatic negative infinite duration
 
 ### Juttle
     emit -from :-1m: -limit 1

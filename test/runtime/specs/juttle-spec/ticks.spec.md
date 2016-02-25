@@ -1,8 +1,6 @@
-Juttle live tick tests
-============================================
+# Juttle live tick tests
 
-(skip)PROD-7471 merge forwards ticks
--------------------------
+## (skip)PROD-7471 merge forwards ticks
 ### Juttle
     (emit -every :2s: -limit 2
     | (put slow=true ; filter time < :now:)

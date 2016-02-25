@@ -1,8 +1,6 @@
-The `String.search` function
-==============================
+# The `String.search` function
 
-Returns match position when the search is successful
-----------------------------------------------------
+## Returns match position when the search is successful
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns match position when the search is successful
 
     { "time": "1970-01-01T00:00:00.000Z", result: 1 }
 
-Returns `-1` when the search is unsuccessful
---------------------------------------------
+## Returns `-1` when the search is unsuccessful
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Returns `-1` when the search is unsuccessful
 
     { "time": "1970-01-01T00:00:00.000Z", result: -1 }
 
-Produces an error when passed argument `string` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `string` of invalid type
 
 ### Juttle
 
@@ -34,8 +30,7 @@ Produces an error when passed argument `string` of invalid type
 
   * Invalid argument type for "String.search": expected string, received null.
 
-Produces an error when passed argument `regexp` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `regexp` of invalid type
 
 ### Juttle
 

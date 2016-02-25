@@ -1,8 +1,6 @@
-The `Array.concat` function
-============================
+# The `Array.concat` function
 
-Produces an error when passed an argument of incorrect type
------------------------------------------------------------
+## Produces an error when passed an argument of incorrect type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed an argument of incorrect type
 
   * Invalid argument type for "Array.concat": expected array, received null.
 
-Concatenation works as expected
--------------------------------
+## Concatenation works as expected
 
 ### Juttle
 

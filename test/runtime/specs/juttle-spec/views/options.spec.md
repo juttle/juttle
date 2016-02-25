@@ -1,8 +1,6 @@
-View options
-============
+# View options
 
-Identifiers in multi-value options are not coerced to strings
--------------------------------------------------------------
+## Identifiers in multi-value options are not coerced to strings
 
 Regression test for #444.
 

@@ -1,8 +1,6 @@
-Juttle tests
-============
+# Juttle tests
 
-simple emit
---------------
+## simple emit
 
 ### Juttle
 
@@ -21,8 +19,7 @@ simple emit
     { time: "1970-01-01T00:00:00.008Z"}
     { time: "1970-01-01T00:00:00.009Z"}
 
-simple test1
-------------
+## simple test1
 
 ### Juttle
 
@@ -32,8 +29,7 @@ simple test1
 
     { time: "1970-01-01T00:00:00.000Z", x: "$80B"}
 
-simple emit2
----------------
+## simple emit2
 
 ### Juttle
 
@@ -52,8 +48,7 @@ simple emit2
     { time: "1970-01-01T00:00:00.008Z"}
     { time: "1970-01-01T00:00:00.009Z"}
 
-simple module test
-------------------
+## simple module test
 
 ### Module `M1`
 
@@ -68,8 +63,7 @@ simple module test
 
     { time: "1970-01-01T00:00:00.000Z", x:10}
 
-reduce shortcut with a Module
------------------------------
+## reduce shortcut with a Module
 
 ### Module `utils`
 
@@ -88,8 +82,7 @@ reduce shortcut with a Module
 
     { adder:10 }
 
-merge is the nondelaying merge
--------------------------------
+## merge is the nondelaying merge
 verify that merge does not hang onto points that could be forwarded immediately
 
 ### Juttle

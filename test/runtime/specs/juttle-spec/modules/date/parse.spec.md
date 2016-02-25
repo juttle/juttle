@@ -1,8 +1,6 @@
-The `Date.parse` function
-==========================
+# The `Date.parse` function
 
-Produces an error when passed argument `s` of invalid type
--------------------------------------------------------------
+## Produces an error when passed argument `s` of invalid type
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Produces an error when passed argument `s` of invalid type
 
   * Invalid argument type for "Date.parse": expected string, received date (2015-01-01T00:00:00.000Z).
 
-Produces an error when passed argument `format` of invalid type
----------------------------------------------------------------
+## Produces an error when passed argument `format` of invalid type
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Produces an error when passed argument `format` of invalid type
 
   * Invalid argument type for "Date.parse": expected string, received null.
 
-Complains of badly-formed dates
----------------------------------------------------------
+## Complains of badly-formed dates
 
 ### Juttle
 
@@ -35,8 +31,7 @@ Complains of badly-formed dates
   * Unable to parse date: "bad date"
 
 
-Parses a custom-formatted date
-------------------------------------------------------------
+## Parses a custom-formatted date
 
 ### Juttle
 
@@ -51,8 +46,7 @@ Parses a custom-formatted date
 
     { winning: true }
 
-Complains of dates not matching a specified format
----------------------------------------------------------
+## Complains of dates not matching a specified format
 
 ### Juttle
 
@@ -65,8 +59,7 @@ Complains of dates not matching a specified format
   * Unable to parse date: "2015-05-06T19:26:07Z"
 
 
-Parses Juttle-style date variants
-------------------------------------------------------------
+## Parses Juttle-style date variants
 
 ### Juttle
 

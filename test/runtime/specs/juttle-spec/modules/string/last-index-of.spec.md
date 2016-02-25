@@ -1,8 +1,6 @@
-The `String.lastIndexOf` function
-=================================
+# The `String.lastIndexOf` function
 
-Returns correct result
-----------------------
+## Returns correct result
 
 ### Juttle
 
@@ -13,8 +11,7 @@ Returns correct result
     { "time": "1970-01-01T00:00:00.000Z", result: 3 }
 
 
-Returns correct result when string not found
---------------------------------------------
+## Returns correct result when string not found
 
 ### Juttle
 
@@ -24,8 +21,7 @@ Returns correct result when string not found
 
     { "time": "1970-01-01T00:00:00.000Z", result: -1 }
 
-Produces an error when passed argument `string` of incorrect type
------------------------------------------------------------------
+## Produces an error when passed argument `string` of incorrect type
 
 ### Juttle
 
@@ -35,8 +31,7 @@ Produces an error when passed argument `string` of incorrect type
 
   * Invalid argument type for "String.lastIndexOf": expected string, received null.
 
-Produces an error when passed argument `searchString` of incorrect type
------------------------------------------------------------------------
+## Produces an error when passed argument `searchString` of incorrect type
 
 ### Juttle
 

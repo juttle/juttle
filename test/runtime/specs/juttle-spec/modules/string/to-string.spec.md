@@ -1,8 +1,6 @@
-The `String.toString` function
-==============================
+# The `String.toString` function
 
-Returns correct result when passed a string
--------------------------------------------
+## Returns correct result when passed a string
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed a string
 
     { result: "abcd" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 

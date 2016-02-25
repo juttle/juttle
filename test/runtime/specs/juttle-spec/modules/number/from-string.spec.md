@@ -1,9 +1,7 @@
-The `Number.fromString` function
-==============================
+# The `Number.fromString` function
 
 
-Returns correct result when passed a string representation of an integer
------------------------------------------------------------------------
+## Returns correct result when passed a string representation of an integer
 
 ### Juttle
 
@@ -14,8 +12,7 @@ Returns correct result when passed a string representation of an integer
     { "time": "1970-01-01T00:00:00.000Z", result: 1}
 
 
-Returns correct result when passed a string representation of a float
----------------------------------------------------------------------
+## Returns correct result when passed a string representation of a float
 
 ### Juttle
 
@@ -26,8 +23,7 @@ Returns correct result when passed a string representation of a float
     { "time": "1970-01-01T00:00:00.000Z", result: 1.345}
 
 
-Returns correct result when passed a string representation of an negative integer
---------------------------------------------------------------------------------
+## Returns correct result when passed a string representation of an negative integer
 
 ### Juttle
 
@@ -38,8 +34,7 @@ Returns correct result when passed a string representation of an negative intege
     { "time": "1970-01-01T00:00:00.000Z", result: -1}
 
 
-Returns correct result when passed a string representation of a negative float
-------------------------------------------------------------------------------
+## Returns correct result when passed a string representation of a negative float
 
 ### Juttle
 
@@ -51,8 +46,7 @@ Returns correct result when passed a string representation of a negative float
 
 
 
-Returns NaN when passed a string not representing a number
-----------------------------------------------------------
+## Returns NaN when passed a string not representing a number
 
 ### Juttle
 
@@ -63,8 +57,7 @@ Returns NaN when passed a string not representing a number
     { "time": "1970-01-01T00:00:00.000Z", result: NaN}
 
 
-Returns NaN when passed a non-string
-------------------------------------
+## Returns NaN when passed a non-string
 
 ### Juttle
 

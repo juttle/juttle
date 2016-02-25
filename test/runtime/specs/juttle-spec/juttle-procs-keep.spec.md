@@ -1,8 +1,6 @@
-Juttle "keep" processor
-=======================
+# Juttle "keep" processor
 
-Keeps specified fields
-----------------------
+## Keeps specified fields
 
 ### Juttle
 
@@ -15,8 +13,7 @@ Keeps specified fields
     { a: 1, b: 2, c: 3 }
 
 
-Ignores fields that don't exist in processed points
----------------------------------------------------
+## Ignores fields that don't exist in processed points
 
 ### Juttle
 

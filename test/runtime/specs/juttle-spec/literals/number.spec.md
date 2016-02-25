@@ -1,8 +1,6 @@
-Number literal
-==============
+# Number literal
 
-Simple number
--------------
+## Simple number
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Simple number
 
     { time: "1970-01-01T00:00:00.000Z", n: 5 }
 
-Infinity
---------
+## Infinity
 
 ### Juttle
 
@@ -23,8 +20,7 @@ Infinity
 
     { time: "1970-01-01T00:00:00.000Z", n: Infinity }
 
-NaN
----
+## NaN
 
 ### Juttle
 

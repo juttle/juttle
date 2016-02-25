@@ -1,10 +1,8 @@
-The `[]` operator
-=================
+# The `[]` operator
 
 Partial specification. Will be finished as part of PROD-5468.
 
-Returns correct result when used on an array (existing element)
----------------------------------------------------------------
+## Returns correct result when used on an array (existing element)
 
 ### Juttle
 
@@ -14,8 +12,7 @@ Returns correct result when used on an array (existing element)
 
     { "time": "1970-01-01T00:00:00.000Z", result: 1 }
 
-Returns correct result when used on an array (missing element)
---------------------------------------------------------------
+## Returns correct result when used on an array (missing element)
 
 ### Juttle
 
@@ -25,8 +22,7 @@ Returns correct result when used on an array (missing element)
 
     { "time": "1970-01-01T00:00:00.000Z", result: null }
 
-Returns correct result when used on an object (existing entry)
---------------------------------------------------------------
+## Returns correct result when used on an object (existing entry)
 
 ### Juttle
 
@@ -36,8 +32,7 @@ Returns correct result when used on an object (existing entry)
 
     { "time": "1970-01-01T00:00:00.000Z", result: 1 }
 
-Returns correct result when used on an object (missing entry)
--------------------------------------------------------------
+## Returns correct result when used on an object (missing entry)
 
 ### Juttle
 

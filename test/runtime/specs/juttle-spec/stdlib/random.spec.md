@@ -1,8 +1,6 @@
-juttle stdlib.random module
-====================================================
+# juttle stdlib.random module
 
-exponential produces numbers > 0 for positive scale
---------------------------------------
+## exponential produces numbers > 0 for positive scale
 ### Juttle
     import "random.juttle" as random;
     emit -limit 1000 -from Date.new(0)
@@ -14,8 +12,7 @@ exponential produces numbers > 0 for positive scale
 ### Output
     {count: 1000}
 
-normal produces some numbers
---------------------------------------
+## normal produces some numbers
 ### Juttle
     import "random.juttle" as random;
     emit -limit 1000 -from Date.new(0)
@@ -27,8 +24,7 @@ normal produces some numbers
 ### Output
     {count: 1000}
 
-poisson produces integers >= 0
---------------------------------------
+## poisson produces integers >= 0
 ### Juttle
     import "random.juttle" as random;
     emit -limit 1000 -from Date.new(0)
@@ -41,8 +37,7 @@ poisson produces integers >= 0
 ### Output
     {count: 1000}
 
-uniform produces numbers in (low...high)
---------------------------------------
+## uniform produces numbers in (low...high)
 ### Juttle
     import "random.juttle" as random;
     emit -limit 1000 -from Date.new(0)

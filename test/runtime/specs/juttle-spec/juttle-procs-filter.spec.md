@@ -1,8 +1,6 @@
-Juttle "filter" processor
-=========================
+# Juttle "filter" processor
 
-Warns and drops points on a runtime error
------------------------------------------
+## Warns and drops points on a runtime error
 
 ### Juttle
 

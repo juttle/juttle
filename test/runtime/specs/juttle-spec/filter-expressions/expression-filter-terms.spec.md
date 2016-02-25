@@ -1,8 +1,6 @@
-Expression filter terms
-=======================
+# Expression filter terms
 
-Allows using the `*"field"` syntax
-----------------------------------
+## Allows using the `*"field"` syntax
 
 Regression test for PROD-6797.
 
@@ -14,8 +12,7 @@ Regression test for PROD-6797.
 
     { time: "1970-01-01T00:00:00.000Z", a: 5 }
 
-Allows using the `*compile-expression` syntax
----------------------------------------------
+## Allows using the `*compile-expression` syntax
 
 ### Juttle
 
@@ -27,8 +24,7 @@ Allows using the `*compile-expression` syntax
 
     { time: "1970-01-01T00:00:00.000Z", a: 5 }
 
-Allows using the `#field"` syntax
----------------------------------
+## Allows using the `#field"` syntax
 
 Regression test for PROD-6797.
 
@@ -40,8 +36,7 @@ Regression test for PROD-6797.
 
     { time: "1970-01-01T00:00:00.000Z", a: 5 }
 
-The `=~` operator: Produces an error for `non-field @ *`
---------------------------------------------------------
+## The `=~` operator: Produces an error for `non-field @ *`
 
 ### Juttle
 
@@ -51,8 +46,7 @@ The `=~` operator: Produces an error for `non-field @ *`
 
   * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
-The `=~` operator: Produces an error for `field @ stream-expression`
---------------------------------------------------------------------
+## The `=~` operator: Produces an error for `field @ stream-expression`
 
 ### Juttle
 
@@ -62,8 +56,7 @@ The `=~` operator: Produces an error for `field @ stream-expression`
 
   * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
-The `!~` operator: Produces an error for `non-field @ *`
---------------------------------------------------------
+## The `!~` operator: Produces an error for `non-field @ *`
 
 ### Juttle
 
@@ -73,8 +66,7 @@ The `!~` operator: Produces an error for `non-field @ *`
 
   * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
-The `!~` operator: Produces an error for `field @ stream-expression`
---------------------------------------------------------------------
+## The `!~` operator: Produces an error for `field @ stream-expression`
 
 ### Juttle
 
@@ -84,8 +76,7 @@ The `!~` operator: Produces an error for `field @ stream-expression`
 
   * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
-Other operators: Produces an error for `non-field @ non-field`
---------------------------------------------------------------
+## Other operators: Produces an error for `non-field @ non-field`
 
 ### Juttle
 
@@ -95,8 +86,7 @@ Other operators: Produces an error for `non-field @ non-field`
 
   * Invalid filter term. Valid forms are: "field < value", "value < field".
 
-Other operators: Produces an error for `field @ stream-expression`
-------------------------------------------------------------------
+## Other operators: Produces an error for `field @ stream-expression`
 
 ### Juttle
 
@@ -106,8 +96,7 @@ Other operators: Produces an error for `field @ stream-expression`
 
   * Invalid filter term. Valid forms are: "field < value", "value < field".
 
-Other operators: Produces an error for `stream-expression @ field`
-------------------------------------------------------------------
+## Other operators: Produces an error for `stream-expression @ field`
 
 ### Juttle
 
@@ -117,8 +106,7 @@ Other operators: Produces an error for `stream-expression @ field`
 
   * Invalid filter term. Valid forms are: "field < value", "value < field".
 
-Other operators: Allows `field @ field` in `filter`
----------------------------------------------------
+## Other operators: Allows `field @ field` in `filter`
 
 ### Juttle
 
@@ -131,8 +119,7 @@ Other operators: Allows `field @ field` in `filter`
 
     { time: "1970-01-01T00:00:00.000Z", a: 5, b: 6 }
 
-Other operators: Produces an error for `field @ field` in `read`
-----------------------------------------------------------------
+## Other operators: Produces an error for `field @ field` in `read`
 
 ### Juttle
 
@@ -142,8 +129,7 @@ Other operators: Produces an error for `field @ field` in `read`
 
   * Invalid filter term. Valid forms are: "field < value", "value < field".
 
-The `=~` operator: Produces an error when RHS has an invalid type
------------------------------------------------------------------
+## The `=~` operator: Produces an error when RHS has an invalid type
 
 ### Juttle
 
@@ -153,8 +139,7 @@ The `=~` operator: Produces an error when RHS has an invalid type
 
   * Invalid filter term. Valid forms are: "field =~ string", "field =~ regexp".
 
-The `=~` operator: Returns `false` when LHS is a non-string value
------------------------------------------------------------------
+## The `=~` operator: Returns `false` when LHS is a non-string value
 
 ### Juttle
 
@@ -169,8 +154,7 @@ The `=~` operator: Returns `false` when LHS is a non-string value
     { time: "1970-01-01T00:00:02.000Z", a: "abcd" }
     { time: "1970-01-01T00:00:04.000Z", a: "abcd" }
 
-The `!~` operator: Produces an error when RHS has an invalid type
------------------------------------------------------------------
+## The `!~` operator: Produces an error when RHS has an invalid type
 
 ### Juttle
 
@@ -180,8 +164,7 @@ The `!~` operator: Produces an error when RHS has an invalid type
 
   * Invalid filter term. Valid forms are: "field !~ string", "field !~ regexp".
 
-The `!~` operator: Returns `true` when LHS is a non-string value
-----------------------------------------------------------------
+## The `!~` operator: Returns `true` when LHS is a non-string value
 
 ### Juttle
 
@@ -198,8 +181,7 @@ The `!~` operator: Returns `true` when LHS is a non-string value
     { time: "1970-01-01T00:00:03.000Z", a: null }
     { time: "1970-01-01T00:00:04.000Z", a: "abcd" }
 
-The `in` operator: Produces an error when used on operand of invalid type
--------------------------------------------------------------------------
+## The `in` operator: Produces an error when used on operand of invalid type
 
 ### Juttle
 
@@ -209,8 +191,7 @@ The `in` operator: Produces an error when used on operand of invalid type
 
   * Invalid filter term. Valid forms are: "field in array".
 
-Other operators: Produces an error when used on operand of invalid type
------------------------------------------------------------------------
+## Other operators: Produces an error when used on operand of invalid type
 
 ### Juttle
 

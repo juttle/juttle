@@ -1,10 +1,8 @@
-Tests for functions in subgraph
-===============================
+# Tests for functions in subgraph
 
 
 
-Function used in stream context inside a sub
---------------------------------------------
+## Function used in stream context inside a sub
 
 ### Juttle
 
@@ -22,8 +20,7 @@ Function used in stream context inside a sub
 
 
 
-Function using sub argument (stream context, multiply-instantiated sub)
------------------------------------------------------------------------
+## Function using sub argument (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -39,8 +36,7 @@ Function using sub argument (stream context, multiply-instantiated sub)
     {a: 4}
 
 
-Function-in-function using sub argument (stream context, multiply-instantiated sub)
------------------------------------------------------------------------------------
+## Function-in-function using sub argument (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -56,8 +52,7 @@ Function-in-function using sub argument (stream context, multiply-instantiated s
     {a: 4}
 
 
-Function using const from sub argument (stream context, multiply-instantiated sub)
-----------------------------------------------------------------------------------
+## Function using const from sub argument (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -75,8 +70,7 @@ Function using const from sub argument (stream context, multiply-instantiated su
 
 
 
-Put expression using sub argument (multiply-instantiated sub)
--------------------------------------------------------------
+## Put expression using sub argument (multiply-instantiated sub)
 
 ### Juttle
 
@@ -90,8 +84,7 @@ Put expression using sub argument (multiply-instantiated sub)
     {a: 3}
     {a: 4}
 
-Function using sub argument and stream value (multiply-instantiated sub)
-------------------------------------------------------------------------
+## Function using sub argument and stream value (multiply-instantiated sub)
 
 ### Juttle
 
@@ -106,8 +99,7 @@ Function using sub argument and stream value (multiply-instantiated sub)
     {a: 3}
     {a: 4}
 
-Function using const shadowing sub argument (multiply-instantiated sub)
------------------------------------------------------------------------
+## Function using const shadowing sub argument (multiply-instantiated sub)
 
 ### Juttle
 
@@ -126,8 +118,7 @@ Function using const shadowing sub argument (multiply-instantiated sub)
     {a: 2.5}
 
 
-Math function using sub argument and stream value (stream context, multiply-instantiated sub)
----------------------------------------------------------------------------------------------
+## Math function using sub argument and stream value (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -143,8 +134,7 @@ Math function using sub argument and stream value (stream context, multiply-inst
     {a: 6}
 
 
-Duration function using sub argument and stream value (stream context, multiply-instantiated sub)
--------------------------------------------------------------------------------------------------
+## Duration function using sub argument and stream value (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -159,8 +149,7 @@ Duration function using sub argument and stream value (stream context, multiply-
     {a: 4}
     {a: 6}
 
-Date function using sub argument and stream value (stream context, multiply-instantiated sub)
----------------------------------------------------------------------------------------------
+## Date function using sub argument and stream value (stream context, multiply-instantiated sub)
 
 ### Juttle
 
@@ -177,8 +166,7 @@ Date function using sub argument and stream value (stream context, multiply-inst
 
 
 
-String function using sub argument and stream value (stream context, multiply-instantiated sub)
------------------------------------------------------------------------------------------------
+## String function using sub argument and stream value (stream context, multiply-instantiated sub)
 
 ### Juttle
 

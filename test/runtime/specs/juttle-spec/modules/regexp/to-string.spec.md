@@ -1,8 +1,6 @@
-The `RegExp.toString` function
-==============================
+# The `RegExp.toString` function
 
-Returns correct result when passed a regexp
--------------------------------------------
+## Returns correct result when passed a regexp
 
 ### Juttle
 
@@ -12,8 +10,7 @@ Returns correct result when passed a regexp
 
     { "time": "1970-01-01T00:00:00.000Z", result: "/abcd/i" }
 
-Produces an error when passed an argument of invalid type
----------------------------------------------------------
+## Produces an error when passed an argument of invalid type
 
 ### Juttle
 
