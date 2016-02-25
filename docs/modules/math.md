@@ -113,8 +113,12 @@ Parameter  | Description   |  Required?
 Return the smallest integer greater than or equal to a specified number.
 
 ``` 
-Math.ceil(number)
+Math.ceil(number, digits)
 ```
+
+Parameter  | Description   |  Required?
+---------- | ------------- | ---------:
+`digits`   | The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point. | No
 
 _Example_
 
@@ -158,8 +162,12 @@ Parameter  | Description   | Required?
 Return the largest integer less than or equal to a number.
 
 ``` 
-Math.floor(number)
+Math.floor(number, digits)
 ```
+
+Parameter  | Description   |  Required?
+---------- | ------------- | ---------:
+`digits`   | The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point. | No
 
 _Example_
 
@@ -262,8 +270,12 @@ _Example_
 Return the value of a number rounded to the nearest integer.
 
 ``` 
-Math.round(number)
+Math.round(number, digits)
 ```
+
+Parameter  | Description   |  Required?
+---------- | ------------- | ---------:
+`digits`   | The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point. | No
 
 _Example_
 
