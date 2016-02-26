@@ -2,6 +2,12 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.5.1
+
+### Bug Fixes
+
+- Fixed a problem in which Juttle Error objects did not include the message when serialized to JSON. [[#467](https://github.com/juttle/juttle/issues/467)]
+
 ## 0.5.0
 
 ### Major Changes
