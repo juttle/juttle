@@ -61,3 +61,54 @@
 ### Errors
 
   * Invalid operand types for "=~": null and null.
+
+## '*' matches correctly
+
+### Juttle
+
+    emit -points [{ "str":"*" }, { "str":"x" }, { "str": "" }]
+      | filter str ~ "*"
+      | view result
+
+### Output
+
+    { str: "*" }
+    { str: "x" }
+    { str: "" }
+
+## '\\\\\*' matches literal '*' only
+
+### Juttle
+
+    emit -points [{ "str":"*" }, { "str":"x" }, { "str": "" }]
+      | filter str ~ "\\*"
+      | view result
+
+### Output
+
+    { str: "*" }
+
+## '?' matches correctly
+
+### Juttle
+
+    emit -points [{ "str":"?" }, { "str":"x" }, { "str": "" }]
+      | filter str ~ "?"
+      | view result
+
+### Output
+
+    { str: "?" }
+    { str: "x" }
+
+## '\\\\?' matches literal '?' only
+
+### Juttle
+
+    emit -points [{ "str":"?" }, { "str":"x" }, { "str": "" }]
+      | filter str ~ "\\?"
+      | view result
+
+### Output
+
+    { str: "?" }
