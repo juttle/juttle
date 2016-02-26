@@ -19,6 +19,18 @@ describe('Juttle basic language tests', function() {
         });
     });
 
+    it('fails cleanly with an empty sub', function() {
+        return check_juttle({
+            program: 'sub empty() {}; empty'
+        })
+        .then(function() {
+            throw new Error('this should fail');
+        })
+        .catch(function(err) {
+            expect(err.message).to.equal('A sub must contain a flowgraph.');
+        });
+    });
+
     it('succeeds with a source and single sink', function() {
         return check_juttle({
             program: 'read file -file "input/simple.json" | view sink1',
