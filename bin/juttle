@@ -115,7 +115,7 @@ adapters.configure(config.adapters);
 
 if (opts.adapters) {
     adapters.list().forEach(function(info) {
-        console.log(info.adapter, info.version, info.path);
+        console.log(info.adapter, info.version, (info.builtin ? '(builtin)' : info.path));
     });
     process.exit(0);
 }
