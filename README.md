@@ -128,6 +128,8 @@ configuration.
 
 * [file](./docs/adapters/file.md)
 * [http](./docs/adapters/http.md)
+* [http_server](./docs/adapters/http_server.md)
+* [stdio](./docs/adapters/stdio.md)
 * [stochastic](./docs/adapters/stochastic.md)
 
 #### External
