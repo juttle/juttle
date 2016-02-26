@@ -74,6 +74,7 @@
   "ON-NO-EVERY": "Cannot set -on without -every",
   "CUSTOM-ERROR": "{message}",
   "PROGRAM-WITHOUT-FLOWGRAPH": "Cannot run a program without a flowgraph.",
+  "SUB-WITHOUT-FLOWGRAPH": "A sub must contain a flowgraph.",
   "PROC-CANNOT-START-FLOWGRAPH": "{proc} cannot be used at the start of a flowgraph.",
   "PROC-MUST-START-FLOWGRAPH": "{proc} can only be used at the start of a flowgraph.",
   "PROC-CANNOT-END-FLOWGRAPH": "{proc} cannot be used at the end of a flowgraph.",
