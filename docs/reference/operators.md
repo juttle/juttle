@@ -23,12 +23,28 @@ Matching
 
 The `~` or `~=` operators implement "glob" style wildcard matching or regular expression matching on a field. The matching used depends on the type of the literal being compared.
 
-Glob matching is used when the operand is a string and supports wildcard characters `*` which matches any number of characters and `?` which matches a single character: For example:
+Glob matching is used when the operand is a string and supports wildcard characters `*` which matches any number of characters (even zero) and `?` which matches a single character: For example:
 
 ```juttle
 emit
 | put message="The quick brown fox"
 | filter message~"*qu?ck*"
+```
+
+To match literal `*` or `?`, these characters need to be escaped using `\\`:
+
+```juttle
+emit
+| put message="3*5"
+| filter message~"3\\*5"
+```
+
+will match the message, while the following example won't:
+
+```juttle
+emit
+| put message="The quick brown fox"
+| filter message~"\\*"
 ```
 
 Regular expression matching is performed when the operand is a literal regular expression. For example:
