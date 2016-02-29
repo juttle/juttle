@@ -157,6 +157,11 @@
         
             
   
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/debugging/">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
 
         
             
@@ -165,6 +170,10 @@
         <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
   
 
         
@@ -568,7 +577,7 @@
               
                 <h1 id="juttle-the-juttle-command-line"><code>juttle</code>: The Juttle Command Line</h1>
 <p><code>juttle</code> is the command line interface for running juttle programs. It reads data from configured backends via adapters, executes juttle programs, and provides terminal-oriented visualizations that allow you to view the output of programs.</p>
-<p>For more complex visualizations, you can use <a href="https://github.com/juttle/outrigger">outrigger</a>, which provides browser-based visualizations and support for <a href="../../concepts/inputs/">input controls</a>.</p>
+<p>For more complex visualizations, you can use <a href="https://github.com/juttle/juttle-engine">juttle engine</a>, which provides browser-based visualizations and support for <a href="../../concepts/inputs/">input controls</a>.</p>
 <h2 id="usage">Usage</h2>
 <p><code>juttle</code> is run as follows:</p>
 <pre><code>usage: juttle [--version] [--mode &lt;mode&gt;] [--config &lt;config&gt;] [--color/--no-color]
@@ -678,14 +687,14 @@ juttle&gt;
 &lt;input&gt;:1:6:
 1:emit limit 1 | view table
 ^
-Expected &quot;;&quot;, &quot;|&quot; or option but &quot;l&quot; found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+Expected &quot;;&quot;, &quot;|&quot; or option but &quot;l&quot; found. (SYNTAX-ERROR-WITH-EXPECTED)
 </code></pre>
 
 <pre><code>juttle&gt; import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
 &lt;input&gt;:1:1:
 1:import 'no-such-module.juttle' as mymodule; emit -limit 1 | table;
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error: could not find module &quot;no-such-module.juttle&quot; (RT-MODULE-NOT-FOUND)
+Error: could not find module &quot;no-such-module.juttle&quot; (MODULE-NOT-FOUND)
 </code></pre>
 
 <pre><code>juttle&gt; import 'm1.juttle' as mymodule; emit -limit 1 | table;
@@ -693,7 +702,7 @@ In module included from &lt;input&gt;:
 m1.juttle:1:8:
 1:export consty foo=bar;
 ^
-Expected &quot;function&quot;, &quot;reducer&quot;, &quot;sub&quot; or processor but &quot;c&quot; found. (JUTTLE-SYNTAX-ERROR-WITH-EXPECTED)
+Expected &quot;function&quot;, &quot;reducer&quot;, &quot;sub&quot; or processor but &quot;c&quot; found. (SYNTAX-ERROR-WITH-EXPECTED)
 </code></pre>
 
 <h2 id="configuration">Configuration</h2>

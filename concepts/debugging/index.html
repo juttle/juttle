@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <title>Debugging - Juttle Language Reference</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../custom_theme/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Debugging";
+    var mkdocs_page_input_path = "concepts/debugging.md";
+    var mkdocs_page_url = "/concepts/debugging/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Juttle Language Reference</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Introduction</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../..">About</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Concepts</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../overview/">Overview</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../dataflow/">Dataflow</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../programming_constructs/">Programming Constructs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../fields/">Fields</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../filtering/">Filtering</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../inputs/">Inputs</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../views/">Views</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../juttle_tutorial/">Tutorial</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sources/">Sources</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../processors/">Processors</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../sinks/">Sinks</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/">Adapters</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../adapters/parsers/">Parsers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reducers/">Reducers</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../modules/">Modules</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/time/">Time</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/data_types/">Data Types</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/operators/">Operators</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/conditionals/">Conditionals</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/cli/">CLI</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../reference/style_guide/">Style Guide</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Juttle Language Reference</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Concepts &raquo;</li>
+        
+      
+    
+    <li>Debugging</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          
+            <a href="https://github.com/juttle/juttle/blob/master/docs/concepts/debugging.md" class="icon icon-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="debugging-juttle">Debugging Juttle</h1>
+<p>As with any programming language, coding in Juttle will at some point call for debugging tools to help make sense of a program's behavior.</p>
+<div class="toc">
+<ul>
+<li><a href="#debugging-juttle">Debugging Juttle</a><ul>
+<li><a href="#turning-on-debug-logging">Turning On Debug Logging</a></li>
+<li><a href="#print-style-debugging-pass-view-text">Print-style Debugging: (pass | view text)</a></li>
+<li><a href="#debugging-bigger-data-pass-write-file">Debugging Bigger Data: (pass; write file)</a></li>
+<li><a href="#visualizing-juttle-flowgraphs">Visualizing Juttle Flowgraphs</a></li>
+<li><a href="#debugging-version-problems">Debugging Version Problems</a></li>
+<li><a href="#debugging-optimizations">Debugging Optimizations</a></li>
+<li><a href="#setting-breakpoints">Setting Breakpoints</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#got-stuck">Got Stuck?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="turning-on-debug-logging">Turning On Debug Logging</h2>
+<p>To run a Juttle program with debug logging on from the CLI, do:</p>
+<pre><code>DEBUG=* juttle &lt;program-file.juttle&gt;
+</code></pre>
+
+<p>or</p>
+<pre><code>DEBUG=* juttle -e &quot;juttle-program&quot;
+</code></pre>
+
+<p>To run programs in the browser environment with debug logging, first enable debug logs for juttle-engine: set <code>--log-config &lt;log4js-config-path&gt;</code> and specify desired log level in the log4js config, as described in <a href="https://github.com/juttle/juttle-service">this README</a>. Exposing the logs in the juttle-engine is tracked by the issue <a href="https://github.com/juttle/juttle-viewer/issues/7">juttle-viewer#7</a>.</p>
+<h2 id="print-style-debugging-pass-view-text">Print-style Debugging: (pass | view text)</h2>
+<p><img alt="construction" class="custom_emoji" height="30" src="../../images/emoji/construction.png" width="30" /> This section will be updated when issue <a href="https://github.com/juttle/juttle-viewer/issues/9">juttle-viewer#9</a> add the ability to <code>view trace</code>.</p>
+<p>Output data as it's moving through the Juttle flowgraph by inserting this statement into any flowgraph node(s):</p>
+<pre><code class="text">| (pass; view text)
+</code></pre>
+
+<p>The helper proc <code>pass</code> will allow the data to proceed to the next node of the flowgraph, while <code>view text</code> will output the same data in raw text format. If using this in a program with multiple text outputs, we can name the view for readability (the text view doesn't support title, so we'd use the table view then):</p>
+<pre><code>| (pass; view table -title 'Debug Node 1')
+</code></pre>
+
+<p>This style of debugging is particularly useful to analyze <code>join</code>, <code>filter</code> and <code>reduce</code> steps of a Juttle program, to see if the data is being transformed as you expect.</p>
+<h2 id="debugging-bigger-data-pass-write-file">Debugging Bigger Data: (pass; write file)</h2>
+<p>Programs that are amenable to debugging with <code>(pass; view text)</code> approach are necessarily those that have small numbers of data points flowing through them. Bigger data would overwhelm the console and the human looking at it. To debug such programs, we will write out the data we are snooping on, so we can look through the data file out of band. </p>
+<p>There are two possible places where to write out the data file:</p>
+<ol>
+<li>The local filesystem where the console or browser is executing;</li>
+<li>The remote filesystem where juttle-engine is executing.</li>
+</ol>
+<p>The local case is handled by:</p>
+<ul>
+<li>running the program via CLI and using <code>(pass; write file -file 'local_file_path')</code>, or</li>
+<li>running the program via juttle-engine and using <code>(pass; view file)</code> which will write the file to the browser's downloads directory;</li>
+<li>with either approach, we would then <code>read file -file 'local_file_path</code> to see the data.</li>
+</ul>
+<p>The remote case is handled by:</p>
+<ul>
+<li>running the program via juttle-engine and using <code>(pass; write file -file 'remote_file_path')</code> (any file path would be interpreted as remote, i.e. local to where the outrigger server is executing), and</li>
+<li>then running another program to read that file, namely <code>read file -file 'remote_file_path'</code>, as we cannot access the remote file in any other way (unless we have ssh access to the juttle-engine host).</li>
+</ul>
+<h2 id="visualizing-juttle-flowgraphs">Visualizing Juttle Flowgraphs</h2>
+<p>For programs with complex logic, it can be helpful to visualize how the points progress through the flowgraph. The <a href="https://github.com/juttle/juttle-flowgraph-viz">Juttle Flowgraph Visualizer</a> tool does just that, rendering a live graphical representation of your program's execution.</p>
+<p>In the visualizer, we can see points with their field names and values as they enter and exit each flowgraph node of the program. We can also rewind the program, stepping forward and backward in time. </p>
+<p>Currently only programs using the synthetic data sources such as <code>emit</code> can be visualized. We can make any Juttle program visualizable by first obtaining the JSON of points via <code>(pass; view text)</code> or <code>(pass; write file)</code>, and then release a set of those points with <code>emit -points</code> like this:</p>
+<pre><code>emit -points [ {time: t1, field: f1}, {time: t2, field: f2 } ]
+| ... // the rest of the program logic 
+</code></pre>
+
+<h2 id="debugging-version-problems">Debugging Version Problems</h2>
+<p>Sometimes programs exhibit unexpected behavior because the active versions of Juttle and adapters are mismatched due to <code>npm install</code> in an unusual location. To debug such a situation, helpful commands on the CLI are:</p>
+<pre><code>juttle --version
+juttle --adapters
+</code></pre>
+
+<p>The same information can be exposed inside a running Juttle program using the <a href="../../modules/juttle/">Juttle module</a>.</p>
+<h2 id="debugging-optimizations">Debugging Optimizations</h2>
+<p>Juttle programs that read from backends using juttle adapters will often attempt to optimize execution by handing off more than just read of raw data to the backend. See, for example, the Optimizations section of the <a href="https://github.com/juttle/juttle-elastic-adapter">juttle-elastic-adapter README</a>.</p>
+<p>To see how the adapter formed the query for the backend, follow <a href="#turning-on-debug-logging">Turning On Debug Logging</a> steps; the query API call will be printed to the juttle-engine log.</p>
+<p>If the optimizations aren't working as expected, they can be turned off by passing a flag to the <code>read</code> proc in the program:</p>
+<pre><code>read &lt;adapter&gt; -optimize false ...
+</code></pre>
+
+<p>This can help isolate the problem to an optimization bug. If you ever encounter one, please file a GitHub issue in the appropriate adapter's repository.</p>
+<h2 id="setting-breakpoints">Setting Breakpoints</h2>
+<p>This method of debugging is not yet supported for Juttle; use print-style debugging or the flowgraph visualizer instead.</p>
+<h2 id="example">Example</h2>
+<p>Say we start with this Juttle program, with the intent of joining user data against a lookup table of department/manager mapping.</p>
+<pre><code>(
+emit -points [ { user: 'u1', dept: 'd1' }, {user: 'u2', dept: 'd2'}, {user: 'u3', dept: 'd3'} ];
+emit -points [ { dept: 'd1', mgr: 'm1' }, { dept: 'd3', mgr: 'm3' }, {dept: 'd4', mgr: 'm4' } ]
+) 
+| join -table 2 -outer 1 dept
+| reduce count() by mgr
+| view table -title 'Active Managers'
+</code></pre>
+
+<p>When we run it, we end up being surprised by a 'null' manager in the output. There is also a warning that doesn't immediately make sense, as surely the field <code>mgr</code> is present in the data:</p>
+<pre><code>Warning: group by undefined field &quot;mgr&quot;
+Active Managers
+┌──────────┬──────────┐
+│ count    │ mgr      │
+├──────────┼──────────┤
+│ 1        │ m1       │
+├──────────┼──────────┤
+│ 1        │ null     │
+├──────────┼──────────┤
+│ 1        │ m3       │
+└──────────┴──────────┘
+</code></pre>
+
+<p>What happened? Let's debug by adding <code>(pass; view table)</code> into the program after the <code>join</code> step. (We could also remove everything after the <code>join</code> step from the program, but that approach is fraught with danger of losing code and getting confused about the original intention of the program.)</p>
+<pre><code>(
+emit -points [ { user: 'u1', dept: 'd1' }, {user: 'u2', dept: 'd2'}, {user: 'u3', dept: 'd3'} ];
+emit -points [ { dept: 'd1', mgr: 'm1' }, { dept: 'd3', mgr: 'm3' }, {dept: 'd4', mgr: 'm4' } ]
+) 
+| join -table 2 -outer 1 dept
+| (pass; view table)
+| reduce count() by mgr
+| view table -title 'Active Managers'
+</code></pre>
+
+<p>The output now includes this table view of the data after joining, where we can clearly see that user u2 was not matched up with any manager.</p>
+<pre><code>┌──────┬─────┬──────┐
+│ dept │ mgr │ user │
+├──────┼─────┼──────┤
+│ d1   │ m1  │ u1   │
+├──────┼─────┼──────┤
+│ d2   │     │ u2   │
+├──────┼─────┼──────┤
+│ d3   │ m3  │ u3   │
+└──────┴─────┴──────┘
+</code></pre>
+
+<p>It now makes sense why the later <code>reduce</code> step generated a point with <code>null</code> value, since there had to be a manager-less data point. We can fix that by expanding the lookup table to include department d2, or live with the warning, if the data truly must be like this.</p>
+<pre><code>(
+  emit -points [ { user: 'u1', dept: 'd1' }, {user: 'u2', dept: 'd2'}, {user: 'u3', dept: 'd3'} ];
+
+  emit -points [ { dept: 'd1', mgr: 'm1' }, {dept: 'd2', mgr: 'm2' }, { dept: 'd3', mgr: 'm3' }, {dept: 'd4', mgr: 'm4' } ]
+)
+| join -table 2 -outer 1 dept
+| reduce count() by mgr
+| view table -title 'Active Managers'
+</code></pre>
+
+<p>Output is now as expected:</p>
+<pre><code>Active Managers
+┌──────────┬──────────┐
+│ count    │ mgr      │
+├──────────┼──────────┤
+│ 1        │ m1       │
+├──────────┼──────────┤
+│ 1        │ m2       │
+├──────────┼──────────┤
+│ 1        │ m3       │
+└──────────┴──────────┘
+</code></pre>
+
+<p>The program runs without errors or warnings, and we have used the Juttle debug tool <code>(pass; view table)</code> to improve it. In cases where data points are wider, the more compact output of <code>(pass, view text)</code> works best.</p>
+<p>We could also write the data points out to a file (not needed in this example with a tiny data set, but useful in programs that read lots of data):</p>
+<pre><code>(
+emit -points [ { user: 'u1', dept: 'd1' }, {user: 'u2', dept: 'd2'}, {user: 'u3', dept: 'd3'} ];
+emit -points [ { dept: 'd1', mgr: 'm1' }, { dept: 'd3', mgr: 'm3' }, {dept: 'd4', mgr: 'm4' } ]
+) 
+| join -table 2 -outer 1 dept
+| (pass; write file -file '/tmp/debug.out')
+| reduce count() by mgr
+| view table -title 'Active Managers'
+</code></pre>
+
+<p>Now the file <code>/tmp/debug.out</code> contains the JSON array of data to help us debug.</p>
+<p>We can also see what this program does in a visual way, by running it through the <a href="https://github.com/juttle/juttle-flowgraph-viz">Juttle Flowgraph Visualizer</a>. Once installed, we visit its page in the browser, enter the original program text, and run it to see:</p>
+<p><img alt="screenshot" src="../../images/screenshots/visualizer.png" title="flowgraph visualizer screenshot" /></p>
+<p>And to get debug logging from this program, we will save the Juttle code to a file first, and then run like this:</p>
+<pre><code>$ DEBUG=* juttle active_managers.juttle
+[2016-02-05 19:12:40.739] [DEBUG] config - loading /Users/newbie/.juttle/config.json
+[2016-02-05 19:12:40.745] [DEBUG] juttle-adapter - configuring builtin adapters
+Warning: group by undefined field &quot;mgr&quot;
+Active Managers
+┌──────────┬──────────┐
+│ count    │ mgr      │
+├──────────┼──────────┤
+│ 1        │ m1       │
+├──────────┼──────────┤
+│ 1        │ null     │
+├──────────┼──────────┤
+│ 1        │ m3       │
+└──────────┴──────────┘
+</code></pre>
+
+<p>Since this program doesn't use a real data source, there's not much to log about. In programs using <code>read</code>, we'd see logging output from the juttle adapter which talks to the backend data source, including the translation of the juttle query into the backend API call.</p>
+<h2 id="got-stuck">Got Stuck?</h2>
+<p>If you are debugging a Juttle issue and get stuck, ask us a question in the <a href="https://gitter.im/juttle/juttle">gitter chat room</a>!</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../juttle_tutorial/" class="btn btn-neutral float-right" title="Tutorial"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../views/" class="btn btn-neutral" title="Views"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../views/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../juttle_tutorial/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

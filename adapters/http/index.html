@@ -157,6 +157,11 @@
         
             
   
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/debugging/">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
 
         
             
@@ -165,6 +170,10 @@
         <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
   
 
         
@@ -587,6 +596,10 @@
           -rootPath rootPath
           -includeHeaders true/false
           -format csv/json/jsonl
+          -followLinkHeader true/false
+          -pageParam parameter
+          -pageStart start
+          -pageUnit unit
 </code></pre>
 
 <table>
@@ -642,6 +655,26 @@
 <td><code>-format</code></td>
 <td>HTTP data format, supports: <code>csv</code> <code>json</code>and <code>jsonl</code></td>
 <td align="right">No; defaults to HTTP response header <code>Content-Type</code></td>
+</tr>
+<tr>
+<td><code>-followLinkHeader</code></td>
+<td>When set to true the <a href="https://tools.ietf.org/html/rfc5988">Web Linking</a> feature is enabled which allows for automatic handling of paging as specified by the <a href="https://tools.ietf.org/html/rfc5988">RFC5988</a>.</td>
+<td align="right">No; default <code>false</code></td>
+</tr>
+<tr>
+<td><code>-pageParam</code></td>
+<td>The name of the query parameter used to enable paging with multiple HTTP requests sent to the URL provided until response contains 0 records</td>
+<td align="right">No; defaults to paging behavior disabled</td>
+</tr>
+<tr>
+<td><code>-pageStart</code></td>
+<td>Initial value of the paging offset to set the <code>pageParam</code>to in the URL used to make the HTTP request</td>
+<td align="right">No; default: <code>0</code></td>
+</tr>
+<tr>
+<td><code>-pageUnit &lt;request|record&gt;</code></td>
+<td>If set to <code>request</code> then each successive HTTP paging request increments the paging query parameter by one. If set to <code>record</code> then each successive request increments the paging query parameter by the number of records returned in the previous request.</td>
+<td align="right">No; default: <code>request</code></td>
 </tr>
 </tbody>
 </table>

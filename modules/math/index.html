@@ -157,6 +157,11 @@
         
             
   
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/debugging/">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
 
         
             
@@ -165,6 +170,10 @@
         <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
   
 
         
@@ -755,9 +764,25 @@
 <hr />
 <h2 id="mathceil">Math.ceil</h2>
 <p>Return the smallest integer greater than or equal to a specified number.</p>
-<pre><code>Math.ceil(number)
+<pre><code>Math.ceil(number, digits)
 </code></pre>
 
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>digits</code></td>
+<td>The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
 <p><em>Example</em></p>
 <pre><code>function get_integer(x) { 
   return (x &gt;= 0) ? Math.floor(x) : Math.ceil(x); 
@@ -815,9 +840,25 @@ the base of the natural logarithms.</p>
 <hr />
 <h2 id="mathfloor">Math.floor</h2>
 <p>Return the largest integer less than or equal to a number.</p>
-<pre><code>Math.floor(number)
+<pre><code>Math.floor(number, digits)
 </code></pre>
 
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>digits</code></td>
+<td>The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
 <p><em>Example</em></p>
 <pre><code>function get_integer(x) { 
   return (x &gt;= 0) ? Math.floor(x) : Math.ceil(x); 
@@ -976,9 +1017,25 @@ emit -limit 1
 <hr />
 <h2 id="mathround">Math.round</h2>
 <p>Return the value of a number rounded to the nearest integer.</p>
-<pre><code>Math.round(number)
+<pre><code>Math.round(number, digits)
 </code></pre>
 
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>digits</code></td>
+<td>The number of significant digits to be used. If 0, the value is rounded to the nearest integer; if greater than 0, the value is rounded to the specified number of decimal places; if less than 0, the value is rounded to the left of the decimal point.</td>
+<td align="right">No</td>
+</tr>
+</tbody>
+</table>
 <p><em>Example</em></p>
 <pre><code>emit -limit 1
 | put a = Math.round(3.1415), b = Math.round(-0.5772), c = Math.round(1.5), d = Math.round(42)

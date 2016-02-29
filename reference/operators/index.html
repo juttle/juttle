@@ -157,6 +157,11 @@
         
             
   
+    <li class="toctree-l1 ">
+        <a class="" href="../../concepts/debugging/">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
 
         
             
@@ -165,6 +170,10 @@
         <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
   
 
         
@@ -624,10 +633,22 @@
 </table>
 <h2 id="matching">Matching</h2>
 <p>The <code>~</code> or <code>~=</code> operators implement "glob" style wildcard matching or regular expression matching on a field. The matching used depends on the type of the literal being compared.</p>
-<p>Glob matching is used when the operand is a string and supports wildcard characters <code>*</code> which matches any number of characters and <code>?</code> which matches a single character: For example:</p>
+<p>Glob matching is used when the operand is a string and supports wildcard characters <code>*</code> which matches any number of characters (even zero) and <code>?</code> which matches a single character: For example:</p>
 <pre><code class="juttle">emit
 | put message=&quot;The quick brown fox&quot;
 | filter message~&quot;*qu?ck*&quot;
+</code></pre>
+
+<p>To match literal <code>*</code> or <code>?</code>, these characters need to be escaped using <code>\\</code>:</p>
+<pre><code class="juttle">emit
+| put message=&quot;3*5&quot;
+| filter message~&quot;3\\*5&quot;
+</code></pre>
+
+<p>will match the message, while the following example won't:</p>
+<pre><code class="juttle">emit
+| put message=&quot;The quick brown fox&quot;
+| filter message~&quot;\\*&quot;
 </code></pre>
 
 <p>Regular expression matching is performed when the operand is a literal regular expression. For example:</p>

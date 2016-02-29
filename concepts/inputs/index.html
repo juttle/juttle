@@ -157,6 +157,11 @@
         
             
   
+    <li class="toctree-l1 ">
+        <a class="" href="../debugging/">Debugging</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
 
         
             
@@ -165,6 +170,10 @@
         <a class="" href="../juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
   
 
         
@@ -574,7 +583,7 @@
 
 <p>The <code>name</code> can be any valid identifier and is treated in the program like a  <a href="../programming_constructs/#consts">constant</a>. This way the value can be used as an option to a proc, an element in a filter expression, a view parameter, or more.</p>
 <p>Inputs can be declared in a Juttle program either at the top level of a flowgraph or inside a <a href="../programming_constructs/#subgraphs">subgraph</a>.</p>
-<p>Before the program is run, an application environment like <a href="http://github.com/juttle/outrigger">outrigger</a> first evaluates the flowgraph to determine which inputs are in the program and renders them for a user. Then once the user has made their selection, the application gathers the selections and includes them when running the program.</p>
+<p>Before the program is run, an application environment like <a href="http://github.com/juttle/juttle-engine">juttle engine</a> first evaluates the flowgraph to determine which inputs are in the program and renders them for a user. Then once the user has made their selection, the application gathers the selections and includes them when running the program.</p>
 <p>Note: The specific types of supported inputs and the supported options are supplied from the application environment and are not part of Juttle itself. The Juttle CLI has limited support for text and number inputs using command line options.</p>
 <p><em>Example: Parameterizing a simple program with inputs using the CLI</em></p>
 <p>A simple example of a program that accepts two inputs -- one to control the number of data points and one to control the message that is printed:</p>
