@@ -57,6 +57,18 @@
     { "host":"sea.0", "service":"search", "count":422 }
     { "host":"sea.0", "service":"authentication", "count":422 }
 
+## historic read with star quote filter
+### Juttle
+    read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(60)
+        *"host"="sea.0" AND *"service" != "index"
+    | reduce count() by host, service
+    | view result
+
+### Output
+    { "host":"sea.0", "service":null, "count":122 }
+    { "host":"sea.0", "service":"search", "count":422 }
+    { "host":"sea.0", "service":"authentication", "count":422 }
+
 ## historic read with source and a filter containing NOT
 
 Regression test for PROD-8651.
