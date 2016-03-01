@@ -45,7 +45,7 @@
     function f() {
     }
 
-    emit -from :0: -limit 1 | put result = f | view result
+    emit -from :0: -limit 1 | put result = f[1] | view result
 
 ### Errors
 
@@ -60,7 +60,7 @@
       function result() { }
     }
 
-    emit -from :0: -limit 1 | put result = r | view result
+    emit -from :0: -limit 1 | put result = r[1] | view result
 
 ### Errors
 
@@ -74,7 +74,7 @@
       pass
     }
 
-    emit -from :0: -limit 1 | put result = s | view result
+    emit -from :0: -limit 1 | put result = s[1] | view result
 
 ### Errors
 
@@ -90,7 +90,7 @@
 
     import 'm' as m;
 
-    emit -from :0: -limit 1 | put result = m | view result
+    emit -from :0: -limit 1 | put result = m[1] | view result
 
 ### Errors
 
