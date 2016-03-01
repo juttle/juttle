@@ -20,7 +20,8 @@ var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
-var View = require('../../../lib/views/view');
+var View = require('../../../lib/views/view.js');
+var check_runaway = require('../../../lib/compiler/flowgraph/check_runaway');
 
 // Configure the test adapter
 adapters.configure({
@@ -155,7 +156,7 @@ function compile_juttle(options) {
     var compile_opts = {
         modules: options.modules,
         moduleResolver: options.moduleResolver,
-        fg_processors: [implicit_views, optimize],
+        fg_processors: [check_runaway, implicit_views, optimize],
         scheduler: options.realtime ? new Scheduler() : new TestScheduler()
     };
 
