@@ -6,6 +6,7 @@ var run_juttle = juttle_test_utils.run_juttle;
 var _ = require('underscore');
 var compiler = require('../../lib/compiler');
 var optimize = require('../../lib/compiler/optimize');
+var FlowControl = require('../../lib/runtime/flow-control');
 
 
 describe('Graph API', function() {
@@ -17,7 +18,7 @@ describe('Graph API', function() {
     }
 
     function compile(juttle, processor) {
-        return compiler.compileSync(juttle, { fg_processors: [processor] });
+        return compiler.compileSync(juttle, { fg_processors: [processor], flow_control: new FlowControl() });
     }
 
     describe('get_roots()', function() {

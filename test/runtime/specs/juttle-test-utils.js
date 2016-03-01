@@ -18,6 +18,7 @@ var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 var compiler = require('../../../lib/compiler');
 var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
+var FlowControl = require('../../../lib/runtime/flow-control');
 var View = require('../../../lib/views/view.js');
 
 // Configure the test adapter
@@ -153,7 +154,8 @@ function compile_juttle(options) {
     var compile_opts = {
         modules: options.modules,
         moduleResolver: options.moduleResolver,
-        scheduler: options.realtime ? new Scheduler() : new TestScheduler()
+        scheduler: options.realtime ? new Scheduler() : new TestScheduler(),
+        flow_control: new FlowControl()
     };
 
     if (_.has(options, 'inputs')) {
