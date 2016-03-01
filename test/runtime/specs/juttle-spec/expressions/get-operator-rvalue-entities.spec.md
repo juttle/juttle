@@ -6,9 +6,7 @@
 
     const c = [ 1, 2, 3 ];
 
-    emit -from :0: -limit 1
-    | put result = c[1]
-    | view result
+    emit -from :0: -limit 1 | put result = c[1] | view result
 
 ### Output
 
