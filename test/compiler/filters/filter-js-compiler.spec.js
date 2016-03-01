@@ -9,7 +9,7 @@ var _ = require('underscore');
 var errors = require('../../../lib/errors');
 var processFilter = require('./process-filter');
 
-var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler.js');
+var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler');
 
 // Needed to evaluate compiled filters.
 var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line

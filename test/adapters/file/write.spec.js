@@ -7,7 +7,7 @@ var fs = require('fs');
 var juttle_test_utils = require('../../runtime/specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var expect_to_fail = juttle_test_utils.expect_to_fail;
-var run_read_file_juttle = require('./utils.js').run_read_file_juttle;
+var run_read_file_juttle = require('./utils').run_read_file_juttle;
 
 var tmp_file = tmp.tmpNameSync();
 

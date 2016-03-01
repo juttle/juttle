@@ -20,7 +20,7 @@ var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var implicit_views = require('../../../lib/compiler/flowgraph/implicit_views')();
 var optimize = require('../../../lib/compiler/optimize');
-var View = require('../../../lib/views/view.js');
+var View = require('../../../lib/views/view');
 
 // Configure the test adapter
 adapters.configure({
