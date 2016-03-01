@@ -29,7 +29,7 @@ var read_config = require('../lib/config/read-config');
 
 var adapters = require('../lib/runtime/adapters');
 var LocationStripper = require('../lib/cli/location-stripper');
-var ViewManager = require('../lib/views/view-mgr.js');
+var ViewManager = require('../lib/views/view-mgr');
 var CliErrors = require('../lib/cli/errors');
 var parseInputs = require('../lib/cli/inputs').parseInputs;
 var URLResolver = require('../lib/module-resolvers/url-resolver');
