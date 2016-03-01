@@ -13,21 +13,21 @@ export sub live_juttle_runs(dur1=:3M:) {
     properties_page_currentPage ='https://app.jut.io/#explorer' AND
     context_ip != '207.141.12.50'
     | reduce -every :h: run_count = count()
-    | (view timechart -title "Weekly App Juttle Program Runs" -valueField 'run_count' -display.dataDensity 0; put value=run_count)
+    | (view timechart -title "Weekly App Juttle Program Runs" -valueField 'run_count' -downsample false; put value=run_count)
 }
 
 export sub live_pageviews() {
     read -from :now: - last -space 'prod' type = 'page' properties_url ~ 'http://docs.jut.io/*'
         NOT (context_ip in ['207.141.12.50','54.149.158.203','54.68.207.93','52.10.135.75','54.148.36.156','52.24.101.163'])
     | reduce -every :h: pageviews = count(), users = count_unique(anonymousId)
-    | (view timechart -title "live pageviews" -valueField 'pageviews' -display.dataDensity 0; put value=pageviews)
+    | (view timechart -title "live pageviews" -valueField 'pageviews' -downsample false; put value=pageviews)
 }
 
 export sub live_users() {
     read -from :now: - last -space 'prod' type = 'page' properties_url ~ 'http://docs.jut.io/*'
         NOT (context_ip in ['207.141.12.50','54.149.158.203','54.68.207.93','52.10.135.75','54.148.36.156','52.24.101.163'])
     | reduce -every :h: pageviews = count(), users = count_unique(anonymousId)
-    | (view timechart -title "live users" -valueField 'users' -display.dataDensity 0; put value=users)
+    | (view timechart -title "live users" -valueField 'users' -downsample false; put value=users)
 }
 
 export sub slack_messages() {
@@ -35,7 +35,7 @@ export sub slack_messages() {
     read -from :-M: -space "slack"
         type = "message" and user_name != null
     | reduce -every :h: name="slack_messages", value = count()
-    | (view timechart -title "slack messages" -display.dataDensity 0; pass)
+    | (view timechart -title "slack messages" -downsample false; pass)
 }
 
 sub pulse(field, value, start, dur) {
@@ -90,7 +90,7 @@ posSeries -from Date.new(0) -to Date.new(0)+ 8*over -every every -over over -tre
     | predict.predict
     | (
         put name="stderr", value = sigma("E") | view tile;
-        split value, P, T, S, Y   | view timechart -keyField 'name' -display.dataDensity 0;
-        split E   | view timechart -keyField 'name' -display.dataDensity 0;
-        split Z   | view timechart -keyField 'name' -display.dataDensity 0;
+        split value, P, T, S, Y   | view timechart -keyField 'name' -downsample false;
+        split E   | view timechart -keyField 'name' -downsample false;
+        split Z   | view timechart -keyField 'name' -downsample false;
     )
