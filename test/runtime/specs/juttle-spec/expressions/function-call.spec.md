@@ -238,3 +238,69 @@
 ### Errors
 
   * Error: function m.f expects 1 argument but was called with 3
+
+## Is not executed in compile-time when inside an expression in `put`
+
+This is a regression test for #454. It relies on the fact that the `error`
+statement produces an error, but this error turns into a warning when produced
+in runtime.
+
+### Juttle
+
+    function f() {
+        error 'Boom!';
+    }
+
+    emit -from :0: -limit 10 | put a = f()
+
+### Output
+
+    
+
+### Warnings
+
+  * Boom!
+
+## Is not executed in compile-time when inside an expression in `reduce`
+
+This is a regression test for #454. It relies on the fact that the `error`
+statement produces an error, but this error turns into a warning when produced
+in runtime.
+
+### Juttle
+
+    function f() {
+        error 'Boom!';
+    }
+
+    emit -from :0: -limit 10 | reduce a = f()
+
+### Output
+
+    
+
+### Warnings
+
+  * Boom!
+
+## Is not executed in compile-time when inside an expression in `filter`
+
+This is a regression test for #454. It relies on the fact that the `error`
+statement produces an error, but this error turns into a warning when produced
+in runtime.
+
+### Juttle
+
+    function f() {
+        error 'Boom!';
+    }
+
+    emit -from :0: -limit 10 | filter f() < 5
+
+### Output
+
+    
+
+### Warnings
+
+  * Boom!
