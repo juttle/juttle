@@ -185,15 +185,19 @@ describe('HTTP read tests', function() {
         });
     });
 
-    _.each([400, 500], function(status) {
-        it('fails when response has status code of ' + status, function() {
+    _.each([
+        { status: 400, message: 'Bad Request' },
+        { status: 500, message: 'Internal Server Error' },
+        { status: 404, message: 'Not Found' }
+    ], function(response) {
+        it('fails when response has status code of ' + response.status, function() {
             return check_juttle({
-                program: 'read http -url "' + server.url + '/status/' + status + '"'
+                program: 'read http -url "' + server.url + '/status/' + response.status + '"'
             })
             .then((result) => {
                 expect(result.errors.length).equal(1);
                 expect(result.warnings).deep.equals([]);
-                expect(result.errors[0]).to.contain('internal error StatusCodeError: ' + status);
+                expect(result.errors[0]).to.contain(`HTTP request failed with ${response.status}: ${response.message}`);
             });
         });
     });
