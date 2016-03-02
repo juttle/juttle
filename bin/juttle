@@ -152,7 +152,7 @@ function perform_compile(options) {
     var compile_options = {
         stage: options.stage,
         moduleResolver: options.resolver,
-        fg_processors: [check_runaway, implicit_views(config.implicit_view || 'table'), optimize],
+        fg_processors: [check_runaway, implicit_views(config.implicit_view), optimize],
         inputs: options.inputs,
         stripLocations: options.stripLocations
     };
