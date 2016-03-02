@@ -12,6 +12,18 @@ Regression test for PROD-6797.
 
     { time: "1970-01-01T00:00:00.000Z", a: 5 }
 
+## Allows using the `*"field"` syntax in static filter expressions
+
+### Juttle
+
+    read stochastic -source 'cdn' -nhosts 3 -from :0: -to :60: *'host' = 'sea.0'
+    | reduce count() by host
+    | view result
+
+### Output
+
+    { host: "sea.0", count: 1388 }
+
 ## Allows using the `*compile-expression` syntax
 
 ### Juttle
