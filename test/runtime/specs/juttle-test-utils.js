@@ -200,6 +200,7 @@ function check_juttle(options, deactivateAfter) {
                 return done;
             });
         } else {
+            prog.deactivate();
             return done;
         }
     });
