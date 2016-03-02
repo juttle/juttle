@@ -31,9 +31,9 @@ multiplication operator or a field dereference operator.
     | reduce count()
     | view result
 
-### Errors
+### Output
 
-  * Invalid filter term. Valid forms are: "field == value", "value == field".
+    { count: 62 }
 
 ## Parses toplevel `*` as multiplication with whitespace before and whitespace after
 
