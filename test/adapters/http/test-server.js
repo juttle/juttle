@@ -364,20 +364,50 @@ class TestHTTPServer {
                 // returns 5 records based on the record count and limit parameter
                 var offset = parseInt(req.query['offset']);
                 var limit = parseInt(req.query['limit']);
-                
+
                 var left = 5 - offset;
                 res.set('Content-Type', 'application/json');
                 res.status(200);
 
-                if (left < 0) { 
+                if (left < 0) {
                     res.end('[]');
-                } else { 
+                } else {
                     var data = [];
-                
-                    if (left < limit) { 
+
+                    if (left < limit) {
                         limit = left;
                     }
-                   
+
+                    for (var index = 0; index < limit; index++) {
+                        data.push({ index: offset + index});
+                    }
+
+                    res.end(JSON.stringify(data));
+                }
+            });
+
+            this.app.get('/pageByField', (req, res) => {
+                // returns 5 records with index > after subject to the limit parameter
+                var offset = 0;
+                var limit = parseInt(req.query['limit']);
+
+                if (_.has(req.query, 'after')) {
+                    offset = parseInt(req.query['after']) + 1;
+                }
+
+                var left = 5 - offset;
+                res.set('Content-Type', 'application/json');
+                res.status(200);
+
+                if (left < 0) {
+                    res.end('[]');
+                } else {
+                    var data = [];
+
+                    if (left < limit) {
+                        limit = left;
+                    }
+
                     for (var index = 0; index < limit; index++) {
                         data.push({ index: offset + index});
                     }

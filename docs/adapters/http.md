@@ -29,7 +29,7 @@ read http -url url
 
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
-`-url`            | URL to issue the HTTP request at | Yes 
+`-url`            | URL to issue the HTTP request at | Yes
 `-method`         | HTTP method to use               | No; default: `GET`
 `-headers`        | headers to attach to the HTTP request in the form `{ key1: "value1", ..., keyN: "valueN" }` | No; default: `{}`
 `-body`           | body to send with the HTTP requests | No; default: `{}`
@@ -40,14 +40,15 @@ Parameter         |             Description          | Required?
 `-format`         | HTTP data format, supports: `csv`, `json` and `jsonl` | No; defaults to HTTP response header `Content-Type`
 `-followLinkHeader` |  When set to true the [Web Linking](https://tools.ietf.org/html/rfc5988) feature is enabled which allows for automatic handling of paging as specified by the [RFC5988](https://tools.ietf.org/html/rfc5988). | No; default `false`
 `-pageParam`      | The name of the query parameter used to enable paging with multiple HTTP requests sent to the URL provided until response contains 0 records | No; defaults to paging behavior disabled
-`-pageStart`      | Initial value of the paging offset to set the `pageParam` to in the URL used to make the HTTP request | No; default: `0`
-`-pageUnit <request|record>` | If set to `request`, then each successive HTTP paging request increments the paging query parameter by one. If set to `record`, then each successive request increments the paging query parameter by the number of records returned in the previous request. | No; default: `request`
+`-pageStart`      | Initial value of the paging offset to set the `pageParam` to in the URL used to make the HTTP request. This is ignored when `-pageUnit=field` | No; default: `0`
+`-pageUnit <request|record|field>` | If set to `request`, then each successive HTTP paging request increments the paging query parameter by one. If set to `record`, then each successive request increments the paging query parameter by the number of records returned in the previous request. If set to `field`, then each successive request sets the paging query parameter to the last value of the field with name `pageField`| No; default: `request`
+`-pageField`      | When performing pagination with `-pageUnit=field`, the field to use to obtain values that go into each successive reqeust's paging query parameter. | Yes, when `-pageUnit=field`, no otherwise
 
 Currently the `read http` adapter will automatically parse incoming data based off of the `content-type` header. Here are the currently supported content-types:
 
     * `text/csv`: for [CSV](https://tools.ietf.org/html/rfc4180) data
     * `application/json` for [JSON](https://tools.ietf.org/html/rfc7159) data
-    * `application/json` for [JSON lines](http://jsonlines.org/) data 
+    * `application/json` for [JSON lines](http://jsonlines.org/) data
 
 _Example_
 
@@ -67,6 +68,16 @@ counts for a given package. This uses the rootPath and timeField options:
 {!docs/examples/adapters/http_github_open_issues.juttle!}
 ```
 
+_Example_
+
+Example of how to access the Travis CI builds api and retrieve daily
+build counts for a given repository. This uses the -pageParam,
+-pageUnit=field, and -pageField options:
+
+```
+{!docs/examples/adapters/http_travisci_builds.juttle!}
+```
+
 ## write http
 
 Write points out of the Juttle flowgraph by making an HTTP request, with options:
@@ -80,7 +91,7 @@ write http -url url
 
 Parameter    |             Description          | Required?
 ------------ | -------------------------------- | ---------:
-`-url`       | URL to issue the HTTP request at | Yes 
+`-url`       | URL to issue the HTTP request at | Yes
 `-method`    | HTTP method to use               | No; default: `POST`
 `-headers`   | headers to attach to the HTTP request in the form `{ key1: "value1", ..., keyN: "valueN" }` | No; default: `{}`
 `-maxLength` | maximum payload length per HTTP request, as number of data points (not bytes) <br><br>If the number of data points out of the flowgraph exceeds `maxLength` then multiple HTTP requests will be sent. | No, default: 1 (each data point out of the flowgraph becomes one HTTP request)

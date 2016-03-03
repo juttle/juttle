@@ -1,0 +1,13 @@
+read http -url "https://api.travis-ci.org/repos/juttle/juttle/builds"
+    -headers {
+        'Authorization': 'token --TRAVIS-CI-AUTH-TOKEN-HERE--',
+        'Accept': 'application/vnd.travis-ci.2+json',
+        'User-Agent': 'Juttle TravisCI Testing'
+    }
+    -rootPath "builds"
+    -timeField 'finished_at'
+    -pageUnit "field"
+    -pageField "number"
+    -pageParam "after_number"
+| keep time, number, state
+| view text

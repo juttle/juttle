@@ -71,7 +71,7 @@ describe('HTTP read tests', function() {
         });
     });
 
-    _.each(['pageParam', 'pageUnit', 'pageStart'], (option) => {
+    _.each(['pageParam', 'pageUnit', 'pageStart', 'pageField'], (option) => {
         it('fails when using -followLinkHeader true with ' + option, function() {
             return check_juttle({
                 program: `read http -url "some_url" -followLinkHeader true -${option} 0`
@@ -95,6 +95,28 @@ describe('HTTP read tests', function() {
                 expect(result.warnings).deep.equals([]);
                 expect(result.sinks.table).to.deep.equal([]);
             });
+        });
+    });
+
+    it(`can handle pageUnit "field"`, () => {
+        return check_juttle({
+            program: `read http -pageUnit "field" -pageField "after" -url "${server.url}/status/200"`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            expect(result.sinks.table).to.deep.equal([]);
+        });
+    });
+
+    it(`fails when pageUnit "field" without pageField`, () => {
+        return check_juttle({
+            program: `read http -pageUnit "field" -url "${server.url}/status/200"`
+        })
+        .then((result) => {
+            throw Error('pageUnit "field" without pageField succeeded when it should have failed');
+        }).catch(function(err) {
+            expect(err.toString()).to.contain('if option pageUnit=field is specified, pageField is required');
         });
     });
 
@@ -359,6 +381,25 @@ describe('HTTP read tests', function() {
         });
     });
 
+    it('can handle field based pagination', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/pageByField?limit=2" ` +
+                                '-pageParam "after" ' +
+                                '-pageUnit "field" '+
+                                '-pageField "index" '
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { index: 0 },
+                { index: 1 },
+                { index: 2 },
+                { index: 3 },
+                { index: 4 }
+            ]);
+        });
+    });
 
     it('will ignore the link header by default', function() {
         return check_juttle({
