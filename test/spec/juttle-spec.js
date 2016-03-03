@@ -162,11 +162,6 @@ class SpecRenderer {
             }
         }
 
-        // we have to deactivate the program in order to avoid leaving things
-        // like the setInterval objects in the source proc which only get
-        // cleaned up when the program is correctly deactivated
-        parts.push('        res.prog.deactivate();');
-
         if (test.errors.length > 0) {
             parts.push([
                 '        }, function(err) {',
