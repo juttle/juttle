@@ -304,8 +304,9 @@ describe('HTTP read tests', function() {
 
     it('can follow the link header when told to', function() {
         return check_juttle({
-            program: `read http -url "${server.url}/linked" -followLinkHeader true`
-        }, 250)
+            program: `read http -url "${server.url}/linked" -followLinkHeader true`,
+            deactivateAfter: 250
+        })
         .then((result) => {
             expect(result.errors).to.deep.equal([]);
             expect(result.warnings).to.deep.equal([]);
@@ -324,8 +325,9 @@ describe('HTTP read tests', function() {
             program: `read http -url "${server.url}/pageByRecord?limit=2" ` +
                                 '-pageParam "offset" ' +
                                 '-pageUnit "record" ' +
-                                '-pageStart 0'
-        }, 250)
+                                '-pageStart 0',
+            deactivateAfter: 250
+        })
         .then((result) => {
             expect(result.errors).to.deep.equal([]);
             expect(result.warnings).to.deep.equal([]);
@@ -344,8 +346,9 @@ describe('HTTP read tests', function() {
             program: `read http -url "${server.url}/pageByRequest" ` +
                                 '-pageParam "page" ' +
                                 '-pageUnit "request" ' +
-                                '-pageStart 1'
-        }, 250)
+                                '-pageStart 1',
+            deactivateAfter: 250
+        })
         .then((result) => {
             expect(result.errors).to.deep.equal([]);
             expect(result.warnings).to.deep.equal([]);

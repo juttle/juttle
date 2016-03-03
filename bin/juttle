@@ -202,6 +202,9 @@ function perform_run(options) {
         })
         .then(function() {
             program.events.off();
+        })
+        .then(function() {
+            program.deactivate();
         });
     });
 }

@@ -20,7 +20,7 @@ describe('read http_server', function() {
     });
 
     it('ingests simple json array', function() {
-        var programFinish, program;
+        var programFinish;
         var body = [
             { 'name': 'ted', 'age': 53, 'weight': 100},
             { 'name': 'ted', 'age': 53, 'weight': 100}
@@ -30,7 +30,6 @@ describe('read http_server', function() {
             program: 'read http_server -port ' + port
         })
         .then(function(prog) {
-            program = prog;
             programFinish = run_juttle(prog);
 
             return request({
@@ -41,7 +40,6 @@ describe('read http_server', function() {
             });
         })
         .then(function() {
-            program.deactivate();
             return programFinish;
         })
         .then(function(result) {
@@ -72,8 +70,6 @@ describe('read http_server', function() {
         })
         .then(function(res) {
             expect(res.statusCode).to.equal(200);
-
-            program.deactivate();
             return programFinish;
         })
         .then(function(results) {
@@ -87,10 +83,10 @@ describe('read http_server', function() {
 
         return compile_juttle({
             program: 'read http_server -every :100ms: -port ' + port
-        }, 500)
+        })
         .then(function(prog) {
             program = prog;
-            programFinish = run_juttle(program);
+            programFinish = run_juttle(program, { deactivateAfter: 1000 });
         })
         // Wait a while before posting the data
         .delay(500)
@@ -107,8 +103,6 @@ describe('read http_server', function() {
         .delay(50)
         .then(function(res) {
             expect(res.statusCode).to.equal(200);
-
-            program.deactivate();
             return programFinish;
         })
         .then(function(results) {
@@ -137,8 +131,6 @@ describe('read http_server', function() {
         })
         .then(function(res) {
             expect(res.statusCode).to.equal(200);
-
-            program.deactivate();
             return programFinish;
         })
         .then(function(results) {
@@ -167,7 +159,6 @@ describe('read http_server', function() {
             });
         })
         .then(function() {
-            program.deactivate();
             return finish;
         })
         .then(function(results) {
@@ -196,7 +187,6 @@ describe('read http_server', function() {
             });
         })
         .then(function() {
-            program.deactivate();
             return finish;
         })
         .then(function(results) {
@@ -239,8 +229,6 @@ describe('read http_server', function() {
         })
         .then(function(res) {
             expect(res.statusCode).to.equal(415);
-
-            program.deactivate();
             return finish;
         })
         .then(function(results) {
@@ -259,7 +247,7 @@ describe('read http_server', function() {
         })
         .then(function(prog) {
             program = prog;
-            finish = run_juttle(program);
+            finish = run_juttle(program, { deactivateAfter: 50 });
 
             return request({
                 uri: 'http://localhost:' + port,
@@ -274,8 +262,6 @@ describe('read http_server', function() {
         .delay(50)
         .then(function(res) {
             expect(res.statusCode).to.equal(400);
-
-            program.deactivate();
             return finish;
         })
         .then(function(results) {
@@ -312,7 +298,6 @@ describe('read http_server', function() {
             });
         })
         .then(function() {
-            program.deactivate();
             return finish;
         })
         .then(function(results) {
@@ -340,8 +325,6 @@ describe('read http_server', function() {
         })
         .then(function(res) {
             expect(res.statusCode).to.equal(404);
-
-            program.deactivate();
             return finish;
         });
     });

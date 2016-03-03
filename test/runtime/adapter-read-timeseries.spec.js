@@ -52,8 +52,9 @@ describe('read testTimeseries', function () {
                 '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal',
-            realtime: true
-        }, 3000)
+            realtime: true,
+            deactivateAfter: 3000
+        })
         .then(function(result) {
             expect(result.graph.readEvery.milliseconds()).equal(500);
             expect(result.graph.lag.milliseconds()).equal(1000);
@@ -74,8 +75,9 @@ describe('read testTimeseries', function () {
                 '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal',
-            realtime: true
-        }, 5000)
+            realtime: true,
+            deactivateAfter: 5000
+        })
         .then(function(result) {
             var expected = [
                 { count: 0, dtProg: 0, dtReal: 3 },
@@ -94,8 +96,9 @@ describe('read testTimeseries', function () {
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal' +
                 '| view result -ticks true -dt true',
-            realtime: true
-        }, 4000)
+            realtime: true,
+            deactivateAfter: 4000
+        })
         .then(function(result) {
             var expected = [
                 { count: 0, dtProg: 0, dtReal: 2 },
@@ -114,8 +117,9 @@ describe('read testTimeseries', function () {
                 '| put dtProg = Math.floor(Duration.seconds(time - :now:)) ' +
                 '| put dtReal = Math.floor(Duration.seconds(Date.time() - time)) ' +
                 '| keep count, dtProg, dtReal',
-            realtime: true
-        }, 3000)
+            realtime: true,
+            deactivateAfter: 3000
+        })
         .then(function(result) {
             var expected = [
                 { count: 0, dtProg: -2, dtReal: 2 },

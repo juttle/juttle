@@ -379,8 +379,8 @@ describe('stochastic -source "logs"', function() {
             program: 'read stochastic -to :end: -source "cdn" -every :1s: ' +
                 '| reduce -every :1s: count()' +
                 '| view result',
-
-        }, 2000).then(function(res) {
+            deactivateAfter: 2000
+        }).then(function(res) {
             expect(res.errors).to.have.length(0);
             expect(res.warnings).to.have.length(0);
             _.each(res.sinks.result, function(point) {
