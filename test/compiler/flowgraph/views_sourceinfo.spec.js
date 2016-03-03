@@ -1,10 +1,10 @@
 'use strict';
 
 var expect = require('chai').expect;
-var compiler = require('../../lib/compiler');
-var views_sourceinfo = require('../../lib/compiler/flowgraph/views_sourceinfo');
-var juttle_test_utils = require('../runtime/specs/juttle-test-utils'); // eslint-disable-line
-var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
+var compiler = require('../../../lib/compiler');
+var views_sourceinfo = require('../../../lib/compiler/flowgraph/views_sourceinfo');
+var juttle_test_utils = require('../../runtime/specs/juttle-test-utils'); // eslint-disable-line
+var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 
 describe('Views get info on source time bounds', function() {
     function test(juttle, spec) {
