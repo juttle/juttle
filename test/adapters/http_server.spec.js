@@ -87,7 +87,7 @@ describe('read http_server', function() {
 
         return compile_juttle({
             program: 'read http_server -every :100ms: -port ' + port
-        })
+        }, 500)
         .then(function(prog) {
             program = prog;
             programFinish = run_juttle(program);
