@@ -71,7 +71,7 @@ describe('HTTP read tests', function() {
         });
     });
 
-    _.each(['pageParam', 'pageUnit', 'pageStart'], (option) => {
+    _.each(['pageParam', 'pageUnit', 'pageStart', 'pageField'], (option) => {
         it('fails when using -followLinkHeader true with ' + option, function() {
             return check_juttle({
                 program: `read http -url "some_url" -followLinkHeader true -${option} 0`
@@ -97,6 +97,29 @@ describe('HTTP read tests', function() {
             });
         });
     });
+
+    it(`can handle pageUnit "field"`, () => {
+        return check_juttle({
+            program: `read http -pageField "after" -url "${server.url}/status/200"`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            expect(result.sinks.table).to.deep.equal([]);
+        });
+    });
+
+    it(`fails when both -pageField and -pageUnit are specified`, () => {
+        return check_juttle({
+            program: `read http -pageField "after" -pageUnit "record" -url "${server.url}/status/200"`
+        })
+        .then((result) => {
+            throw Error('pageField combined with pageUnit succeeded when it should have failed');
+        }).catch(function(err) {
+            expect(err.toString()).to.contain('-pageField option should not be combined with -pageUnit');
+        });
+    });
+
 
     it('fails when unknown content-type received', function() {
         return check_juttle({
@@ -359,6 +382,41 @@ describe('HTTP read tests', function() {
         });
     });
 
+    it('can handle field based pagination', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/pageByField?limit=2" ` +
+                                '-pageParam "after" ' +
+                                '-pageField "index" '
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings).to.deep.equal([]);
+            expect(result.sinks.table).to.deep.equal([
+                { index: 0 },
+                { index: 1 },
+                { index: 2 },
+                { index: 3 },
+                { index: 4 }
+            ]);
+        });
+    });
+
+    it('can handle field based pagination when results have no values for -pageField', function() {
+        return check_juttle({
+            program: `read http -url "${server.url}/pageByField?limit=2" ` +
+                                '-pageParam "after" ' +
+                                '-pageField "nofield" '
+        })
+        .then((result) => {
+            expect(result.errors).to.deep.equal([]);
+            expect(result.warnings.length).to.equal(1);
+            expect(result.warnings).to.deep.equal(['internal error Last point in results did not contain a "nofield" field -- ending pagination']);
+            expect(result.sinks.table).to.deep.equal([
+                { index: 0 },
+                { index: 1 }
+            ]);
+        });
+    });
 
     it('will ignore the link header by default', function() {
         return check_juttle({
