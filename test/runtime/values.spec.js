@@ -87,9 +87,8 @@ describe('Values tests', function () {
                     { left: 1, right: [] },
                     { left: [], right: true }
                 ];
-
                 _.each(tests, function(test) {
-                    expect(values.compare.bind(test.left, test.right)).to.throw.error;
+                    expect(values.compare.bind(values, test.left, test.right)).to.throw(/cannot be compared/);
                 });
             });
         });
