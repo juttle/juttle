@@ -6,7 +6,6 @@ read http -url "https://api.travis-ci.org/repos/juttle/juttle/builds"
     }
     -rootPath "builds"
     -timeField 'finished_at'
-    -pageUnit "field"
     -pageField "number"
     -pageParam "after_number"
 | keep time, number, state
