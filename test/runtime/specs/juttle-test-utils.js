@@ -183,26 +183,10 @@ function compile_juttle(options) {
 }
 
 
-function check_juttle(options, deactivateAfter) {
-    /*
-     * deactivateAfter: number of milliseconds to wait before deactivating the
-     *                  program allowing for live/long running program testing
-     */
+function check_juttle(options) {
     return compile_juttle(options)
     .then(function(prog) {
-        var done = run_juttle(prog, options);
-
-        if (deactivateAfter) {
-            return Promise
-            .delay(null, deactivateAfter)
-            .then(function() {
-                prog.deactivate();
-                return done;
-            });
-        } else {
-            prog.deactivate();
-            return done;
-        }
+        return run_juttle(prog, options);
     });
 }
 
@@ -227,7 +211,7 @@ function run_juttle(prog, options) {
         expect_data = JSON.parse(raw_data);
     }
 
-    return Promise.try(function() {
+    var done = Promise.try(function() {
         var views = {};
 
         var promises = _.map(prog.get_sinks(), function(sink) {
@@ -299,6 +283,22 @@ function run_juttle(prog, options) {
             return {sinks: all_sinks, prog:prog, graph: graph, errors: errors, warnings: warnings};
         });
     });
+
+    /*
+     * deactivateAfter: number of milliseconds to wait before deactivating the
+     *                  program allowing for live/long running program testing
+     */
+    if (options.deactivateAfter) {
+        return Promise
+        .delay(null, options.deactivateAfter)
+        .then(function() {
+            prog.deactivate();
+            return done;
+        });
+    } else {
+        prog.deactivate();
+        return done;
+    }
 }
 
 
