@@ -7,7 +7,7 @@ multiplication operator or a field dereference operator.
 
 ### Juttle
 
-    read stochastic -source 'cdn' -last :minute:*'name' == 'cpu'
+    read test -last :minute:*'name' == 'cpu'
 
 ### Errors
 
@@ -17,7 +17,7 @@ multiplication operator or a field dereference operator.
 
 ### Juttle
 
-    read stochastic -source 'cdn' -last :minute:* 'name' == 'cpu'
+    read test -last :minute:* 'name' == 'cpu'
 
 ### Errors
 
@@ -27,19 +27,21 @@ multiplication operator or a field dereference operator.
 
 ### Juttle
 
-    read stochastic -source 'cdn' -last :minute: *'name' == 'cpu'
-    | reduce count()
+    (
+        read test -key "test" -last :minute: *'name' == 'cpu';
+        emit -limit 1 -from Date.new(0);
+    )
     | view result
 
 ### Output
 
-    { count: 62 }
+    { time: "1970-01-01T00:00:00.000Z" }
 
 ## Parses toplevel `*` as multiplication with whitespace before and whitespace after
 
 ### Juttle
 
-    read stochastic -source 'cdn' -last :minute: * 'name' == 'cpu'
+    read test -last :minute: * 'name' == 'cpu'
 
 ### Errors
 
