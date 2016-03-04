@@ -290,14 +290,16 @@ function run_juttle(prog, options) {
      */
     if (options.deactivateAfter) {
         return Promise
-        .delay(null, options.deactivateAfter)
+        .delay(options.deactivateAfter)
         .then(function() {
             prog.deactivate();
             return done;
         });
     } else {
-        prog.deactivate();
-        return done;
+        return done.then(function(result) {
+            prog.deactivate();
+            return result;
+        });
     }
 }
 
