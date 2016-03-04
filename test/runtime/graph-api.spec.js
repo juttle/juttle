@@ -5,12 +5,15 @@ var juttle_test_utils = require('./specs/juttle-test-utils');
 var run_juttle = juttle_test_utils.run_juttle;
 var _ = require('underscore');
 var compiler = require('../../lib/compiler');
+var optimize = require('../../lib/compiler/optimize');
 
 
 describe('Graph API', function() {
 
     function make_graph(juttle) {
-        return compiler.compileSync(juttle, { stage: 'flowgraph' });
+        // we want to compile with just optimization and verify the resulting
+        // graph in the tests below
+        return compiler.compileSync(juttle, { stage: 'flowgraph', fg_processors: [optimize] });
     }
 
     function compile(juttle, processor) {
