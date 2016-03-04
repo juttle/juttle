@@ -121,6 +121,14 @@ read twitter -from :now: -to :end: 'apple'
 ```
 
 <a name="adapters"></a>
+
+## Ecosystem
+
+Here's how the juttle module fits into the overall [Juttle Ecosystem](./docs/juttle_ecosystem.md):
+
+[![Juttle Ecosystem - Juttle](./docs/images/JuttleEcosystemDiagram.png)](./docs/juttle_ecosystem.md)
+
+
 ## Adapters
 
 Juttle includes support for a few basic [adapters](./docs/adapters/index.md)
