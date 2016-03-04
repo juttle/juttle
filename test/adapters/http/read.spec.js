@@ -120,6 +120,16 @@ describe('HTTP read tests', function() {
         });
     });
 
+    it(`fails when both -pageField and -pageStart are specified`, () => {
+        return check_juttle({
+            program: `read http -pageField "after" -pageStart 1 -url "${server.url}/status/200"`
+        })
+        .then((result) => {
+            throw Error('pageField combined with pageStart succeeded when it should have failed');
+        }).catch(function(err) {
+            expect(err.toString()).to.contain('-pageField option should not be combined with -pageStart');
+        });
+    });
 
     it('fails when unknown content-type received', function() {
         return check_juttle({
