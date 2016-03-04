@@ -8,7 +8,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read', () => {
         return check_juttle({
-            program: 'read stochastic -to :end:',
+            program: 'read test -key "foo" -to :end:',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -19,7 +19,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program from a live read to a tail 1', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | tail 1 '
+            program: 'read test -key "foo" -to :end: | tail 1 '
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -31,7 +31,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program from a superquery read to a tail 1', () => {
         return check_juttle({
-            program: 'read stochastic -from :0: -to :end: | tail 1 '
+            program: 'read test -key "foo" -from :0: -to :end: | tail 1 '
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -43,7 +43,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read with batch to a tail 1', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | batch -every :1s: | tail 1 ',
+            program: 'read test -key "foo" -to :end: | batch -every :1s: | tail 1 ',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -54,7 +54,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program from a live read to sort', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | sort field'
+            program: 'read test -key "foo" -to :end: | sort field'
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -66,7 +66,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program from a superquery read to sort', () => {
         return check_juttle({
-            program: 'read stochastic -from :0: -to :end: | sort field'
+            program: 'read test -key "foo" -from :0: -to :end: | sort field'
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -78,7 +78,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read with batch to sort', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | put field=count() | batch -every :1s: | sort field ',
+            program: 'read test -key "foo" -to :end: | put field=count() | batch -every :1s: | sort field ',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -89,7 +89,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read with reduce -every', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | reduce -every :1s: count()',
+            program: 'read test -key "foo" -to :end: | reduce -every :1s: count()',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -100,7 +100,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read with batch to reduce', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | batch :1s: | reduce count() ',
+            program: 'read test -key "foo" -to :end: | batch :1s: | reduce count() ',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -111,7 +111,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a historical read to reduce', () => {
         return check_juttle({
-            program: 'read stochastic -to :now: | reduce count() ',
+            program: 'read test -key "foo" -to :now: | reduce count() ',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
@@ -122,7 +122,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program when there are multiple read sources', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | reduce count() | view results1; read stochastic -last :1m: | reduce count() | view results2'
+            program: 'read test -key "foo" -to :end: | reduce count() | view results1; read test -key "foo" -last :1m: | reduce count() | view results2'
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -134,7 +134,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program when there are multiple levels of procs used', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | put a = count() | filter foo="bar" | reduce count() | put a = count()'
+            program: 'read test -key "foo" -to :end: | put a = count() | filter foo="bar" | reduce count() | put a = count()'
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -146,7 +146,7 @@ describe('Runaway program detection', function() {
 
     it('detects a runaway program when there are multiple reducers and one without -every', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | reduce -every :1s: count() | reduce max(m)'
+            program: 'read test -key "foo" -to :end: | reduce -every :1s: count() | reduce max(m)'
         })
         .then((results) => {
             throw Error('runaway detector failed to catch');
@@ -158,7 +158,7 @@ describe('Runaway program detection', function() {
 
     it('does not detect a runaway program from a live read to head', () => {
         return check_juttle({
-            program: 'read stochastic -to :end: | head 1',
+            program: 'read test -key "foo" -to :end: | head 1',
             deactivateAfter: 50 // stop the live program after 50ms
         })
         .then((results) => {
