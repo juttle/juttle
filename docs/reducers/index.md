@@ -69,7 +69,7 @@ Return the p<super>th</super> percentile ranked value of the specified field.
 
 Return an array of the values of a specified field in the batch.
 
-**[sigma](../reducers/sigma.md)**
+**[stdev](../reducers/stdev.md)**
 
 Return the standard deviation of the value of the specified field.
 

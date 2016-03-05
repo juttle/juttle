@@ -89,7 +89,7 @@ posSeries -from Date.new(0) -to Date.new(0)+ 8*over -every every -over over -tre
 //  | dontPredict
     | predict.predict
     | (
-        put name="stderr", value = sigma("E") | view tile;
+        put name="stderr", value = stddev("E") | view tile;
         split value, P, T, S, Y   | view timechart -keyField 'name' -display.dataDensity 0;
         split E   | view timechart -keyField 'name' -display.dataDensity 0;
         split Z   | view timechart -keyField 'name' -display.dataDensity 0;

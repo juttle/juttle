@@ -117,9 +117,9 @@ describe('Juttle reducers tests', function() {
         });
     });
 
-    it('sigma', function() {
+    it('stdev', function() {
         return check_juttle({
-            program: 'read file -file "input/simple.json" | reduce sigma=sigma(rate) | view result',
+            program: 'read file -file "input/simple.json" | reduce stdev=stdev(rate) | view result',
         }).then(function (res) {
             var sum = 0;
             var ssum = 0;
@@ -129,10 +129,10 @@ describe('Juttle reducers tests', function() {
                 ssum += point.rate * point.rate;
             });
 
-            var sigma = Math.sqrt( 1 / simpleData.length * ((ssum - sum * sum / simpleData.length)));
+            var stdev = Math.sqrt( 1 / simpleData.length * ((ssum - sum * sum / simpleData.length)));
 
             expect(res.sinks.result[0]).to.deep.equal({
-                sigma: sigma
+                stdev: stdev
             });
         });
     });

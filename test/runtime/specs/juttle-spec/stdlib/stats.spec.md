@@ -11,12 +11,12 @@
 ### Output
     {x: 10, u:6, xmu: 4}
 
-## reducer stddev(fld) computes the right thing
+## reducer stdev(fld) computes the right thing
 ### Juttle
     import "stats.juttle" as stats;
     emit -limit 3 -from Date.new(0)
     | put x = 2 * count()
-    | reduce s = stats.stddev(x)
+    | reduce s = stats.stdev(x)
     | view result
 
 ### Output
@@ -51,7 +51,7 @@ tried to do Math.floor(null)
     import "stats.juttle" as stats;
     emit -limit 100 -from Date.new(0)
     | put x = 2 * count()
-    | reduce x = last(x), u = avg(x), sd = stats.stddev(x), cv = stats.cv(x)
+    | reduce x = last(x), u = avg(x), sd = stats.stdev(x), cv = stats.cv(x)
     | put winning = cv == sd / u
     | keep winning
     | view result

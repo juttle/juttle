@@ -109,7 +109,7 @@ pages:
    - '____ min': 'reducers/min.md'
    - '____ percentile': 'reducers/percentile.md'
    - '____ pluck': 'reducers/pluck.md'
-   - '____ sigma': 'reducers/sigma.md'
+   - '____ stdev': 'reducers/stdev.md'
    - '____ sum': 'reducers/sum.md'
 
    - 'Modules': 'modules/index.md'
