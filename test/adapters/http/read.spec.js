@@ -399,7 +399,8 @@ describe('HTTP read tests', function() {
         return check_juttle({
             program: `read http -url "${server.url}/pageByField?limit=2" ` +
                                 '-pageParam "after" ' +
-                                '-pageField "index" '
+                                 '-pageField "index" ',
+            deactivateAfter: 250
         })
         .then((result) => {
             expect(result.errors).to.deep.equal([]);
@@ -418,7 +419,8 @@ describe('HTTP read tests', function() {
         return check_juttle({
             program: `read http -url "${server.url}/pageByField?limit=2" ` +
                                 '-pageParam "after" ' +
-                                '-pageField "nofield" '
+                                '-pageField "nofield" ',
+            deactivateAfter: 250
         })
         .then((result) => {
             expect(result.errors).to.deep.equal([]);
