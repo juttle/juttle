@@ -129,7 +129,7 @@ describe('Juttle reducers tests', function() {
                 ssum += point.rate * point.rate;
             });
 
-            var sigma = Math.sqrt( 1 / (simpleData.length - 1) * ((ssum - sum * sum / simpleData.length)));
+            var sigma = Math.sqrt( 1 / simpleData.length * ((ssum - sum * sum / simpleData.length)));
 
             expect(res.sinks.result[0]).to.deep.equal({
                 sigma: sigma
