@@ -20,8 +20,8 @@
 // Reducers:
 //
 //   * demean(field): de-mean the field
-//   * stddev(field): standard deviation of the field
-//   * z(field): standardized z-score wrt sample mean and stddev
+//   * stdev(field): standard deviation of the field
+//   * z(field): standardized z-score wrt sample mean and stdev
 //   * relMean(field): field as a percentage of field mean
 //   * cv(field): coefficent of variation
 //
@@ -87,7 +87,7 @@ export reducer demean(field) {
 //
 //   * field:   fieldname
 //
-export reducer stddev(field) {
+export reducer stdev(field) {
     var sum = 0;
     var ssum = 0;
     var n = 0;
@@ -123,8 +123,8 @@ export reducer stddev(field) {
 //   * field:   fieldname
 //
 // compute an approximate Z-score for an input value, using sample
-// estimates of population mean and stddev:
-//     (value - sample mean) / sample stddev
+// estimates of population mean and stdev:
+//     (value - sample mean) / sample stdev
 //
 export reducer z(field) {
     var sum = 0;
@@ -145,8 +145,8 @@ export reducer z(field) {
             return null;
         } else {
             var mean = sum / n;
-            var stddev = Math.sqrt(1/n * (ssum - sum*sum/n));
-            return (latest - mean) / stddev;
+            var stdev = Math.sqrt(1/n * (ssum - sum*sum/n));
+            return (latest - mean) / stdev;
         }
     }
     function expire() {
@@ -189,7 +189,7 @@ export reducer relMean(field) {
     }
 };
 
-// Return the coefficient of variation (stddev / mean) of the batch
+// Return the coefficient of variation (stdev / mean) of the batch
 //
 // Parameters:
 //
@@ -214,8 +214,8 @@ export reducer cv(field) {
             return null;
         } else {
             var mean = sum / n;
-            var stddev = Math.sqrt(1/n * (ssum - sum*sum/n));
-            return stddev / mean;
+            var stdev = Math.sqrt(1/n * (ssum - sum*sum/n));
+            return stdev / mean;
         }
     }
     function expire() {

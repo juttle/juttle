@@ -34,7 +34,7 @@
 // Y : portion of field predicted by smoothing
 // P : predicted value of field, T + S + Y
 // E : prediction error, P - field
-// Z : normalized error based on the sample stddev over trailing periods
+// Z : normalized error based on the sample stdev over trailing periods
 //
 
 
@@ -45,8 +45,8 @@
 //   * field:   fieldname
 //
 // compute an approximate Z-score for an input value, using sample
-// estimates of population mean and stddev:
-//     (value - sample mean) / sample stddev
+// estimates of population mean and stdev:
+//     (value - sample mean) / sample stdev
 //
 reducer z(field) {
     var sum = 0;
@@ -67,8 +67,8 @@ reducer z(field) {
             return null;
         } else {
             var mean = sum / n;
-            var stddev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
-            return (latest - mean) / stddev;
+            var stdev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            return (latest - mean) / stdev;
         }
     }
     function expire() {
@@ -244,7 +244,7 @@ sub level(field, every, offset, revise) {
 //   * Y: portion of field predicted by smoothing
 //   * P: predicted value of field, T + S + Y
 //   * E: prediction error, P - field
-//   * Z: normalized error based on the sample stddev over trailing periods
+//   * Z: normalized error based on the sample stdev over trailing periods
 //
 export sub predict(field = "value", over = :w:, every=null, pct=0.5, nonneg=true,
                    detrend=true, deseason=true, denoise=true, revise=true) {
