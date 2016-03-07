@@ -20,7 +20,7 @@
     | view result
 
 ### Output
-    {s: 2}
+    {s: 1.632993161855452}
 
 ## reducer z(fld) computes the right thing
 note the first output point is dropped because we
@@ -33,7 +33,7 @@ tried to do Math.floor(null)
     | view result
 
 ### Output
-    {z:1}
+    {z:1.224744871391589}
 
 ## reducer relMean(fld) divides by the mean
 ### Juttle
