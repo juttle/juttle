@@ -38,7 +38,7 @@ If a particular backend is not yet supported, an adapter for it can be
 added in a relatively straightforward manner using
 Juttle's backend adapter API.
 
-Under the hood, the Juttle compiler generates javascript
+Under the hood, the Juttle compiler generates JavaScript
 output that implements the Juttle dataflow computation by
 executing alongside the Juttle runtime, either in node or the
 browser.  The Juttle optimizer figures out the pattern of queries
@@ -84,7 +84,7 @@ the output of Spark can feed the input of Juttle (the Juttle Spark adapter
 is currently under development).
 An interesting future extension for Juttle would be to adapt
 the Juttle compiler and runtime to generate scala in addition to
-javascript as a target output langauge and leverage the Spark infrastructure
+JavaScript as a target output langauge and leverage the Spark infrastructure
 for Juttle programs.
 
 ## How To Navigate

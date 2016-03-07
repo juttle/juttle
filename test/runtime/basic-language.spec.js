@@ -308,7 +308,7 @@ describe('Juttle basic language tests', function() {
     });
 
 
-    it('fails if an expression has a syntax error (javascript section)', function() {
+    it('fails if an expression has a syntax error (JavaScript section)', function() {
         return check_juttle({
             program: 'const foo = 5+; read file -file "input/simple-non-monotonic-time.json" | put snarks=#grumpkins+foo | view sink1',
         })
@@ -501,7 +501,7 @@ describe('Juttle basic language tests', function() {
         });
     });
 
-    it('fails if a Javascript variable is undefined', function() {
+    it('fails if a JavaScript variable is undefined', function() {
         return check_juttle({
             program:
                 'const foo=bar;' +
@@ -522,7 +522,7 @@ describe('Juttle basic language tests', function() {
         });
     });
 
-    it('fails if a variable is redefined in the javascript section', function() {
+    it('fails if a variable is redefined in the JavaScript section', function() {
         return check_juttle({
             program:
                 'const foo=1.2;' +

@@ -10,7 +10,7 @@ and analyze live and historical data from many different backends, and then send
 output to files, data stores, alerting systems, or [streaming
 visualizations](http://github.com/juttle/juttle-viz).
 
-This repository contains the core Juttle compiler, the Javascript runtime, a set
+This repository contains the core Juttle compiler, the JavaScript runtime, a set
 of basic adapters to connect to files or http sources, and a command line
 interface with text-based and tabular views. As such it is most useful for
 learning the language, doing simple exploration of data, or powering periodic
