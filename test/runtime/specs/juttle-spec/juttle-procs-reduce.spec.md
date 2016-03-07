@@ -177,7 +177,6 @@ default values of null for when no -every is specified.
 ### Juttle
 
     emit  -hz 1000 -from Date.new(0) -limit 6
-    | batch :.001s:
     | reduce -every :0.002s: a=count()
     | put c=count()
     | view result -marks true -times true
