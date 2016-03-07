@@ -230,6 +230,22 @@ describe('Juttle modules ', function() {
             });
         });
 
+        it('Throws an error when importing modules under the same identifier', function() {
+            var resolver = moduleResolver({
+                mod1: 'const foo="bar";',
+                mod2: 'const foo="bar";'
+            });
+            return check_juttle({
+                moduleResolver: resolver,
+                program: 'import "mod1" as m; import "mod2" as m;'
+            })
+            .then(function() {
+                throw new Error('Should have thrown an error');
+            })
+            .catch(function(err) {
+                expect(err.message).to.match(/redefined import: m/);
+            });
+        });
     });
 
     describe('Modules: running', function() {
