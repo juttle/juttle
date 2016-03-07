@@ -103,7 +103,7 @@ export reducer stddev(field) {
         if (n < 2 ) {
             return null;
         } else {
-            return Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            return Math.sqrt(1/n * (ssum - sum*sum/n));
         }
     }
     function expire() {
@@ -145,7 +145,7 @@ export reducer z(field) {
             return null;
         } else {
             var mean = sum / n;
-            var stddev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            var stddev = Math.sqrt(1/n * (ssum - sum*sum/n));
             return (latest - mean) / stddev;
         }
     }
@@ -214,7 +214,7 @@ export reducer cv(field) {
             return null;
         } else {
             var mean = sum / n;
-            var stddev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
+            var stddev = Math.sqrt(1/n * (ssum - sum*sum/n));
             return stddev / mean;
         }
     }
