@@ -31,7 +31,7 @@
 
 ### Errors
 
-  * CompileError: 'f' is not exported by module m
+  * CompileError: Cannot use a function as a variable
 
 ## Produces an error when used on a module, accessing a reducer
 
@@ -50,7 +50,7 @@
 
 ### Errors
 
-  * CompileError: 'r' is not exported by module m
+  * CompileError: Cannot use a reducer as a variable
 
 ## Produces an error when used on a module, accessing a subgraph
 
@@ -68,4 +68,4 @@
 
 ### Errors
 
-  * CompileError: 's' is not exported by module m
+  * CompileError: Cannot use a subgraph as a variable
