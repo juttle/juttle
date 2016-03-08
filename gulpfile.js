@@ -177,7 +177,7 @@ gulp.task('examples-check', ['peg'], function() {
                 return compiler.compile(juttle_src, {
                     stage: 'compile',
                     moduleResolver: file_resolver.resolve,
-                    fg_processors: [implicit_views('table'), optimize]
+                    fg_processors: [implicit_views, optimize]
                 });
             })
             .then(function() {

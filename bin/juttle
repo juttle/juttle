@@ -35,9 +35,6 @@ var URLResolver = require('../lib/module-resolvers/url-resolver');
 var FileResolver = require('../lib/module-resolvers/file-resolver');
 var resolver_utils = require('../lib/module-resolvers/resolver-utils');
 var compiler = require('../lib/compiler');
-var optimize = require('../lib/compiler/optimize');
-var implicit_views = require('../lib/compiler/flowgraph/implicit_views');
-var check_runaway = require('../lib/compiler/flowgraph/check_runaway.js');
 
 var modes = _.without(compiler.stageNames, 'eval').concat('run');
 function usage() {
@@ -152,9 +149,9 @@ function perform_compile(options) {
     var compile_options = {
         stage: options.stage,
         moduleResolver: options.resolver,
-        fg_processors: [check_runaway, implicit_views(config.implicit_view), optimize],
         inputs: options.inputs,
-        stripLocations: options.stripLocations
+        stripLocations: options.stripLocations,
+        implicit_view: config.implicit_view
     };
 
     return compiler.compile(options.juttle_src, compile_options);

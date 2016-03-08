@@ -12,7 +12,10 @@ describe('Juttle Object Literal Tests', function() {
     }
 
     it('passes object literal to sink', function() {
-        var optionObject = { something: 3 };
+        var optionObject = {
+            _jut_time_bounds: [],
+            something: 3
+        };
 
         return check_juttle({
             program: 'emit -limit 1 | view result -o '+ JSON.stringify(optionObject)
@@ -24,8 +27,14 @@ describe('Juttle Object Literal Tests', function() {
     });
 
     it('correctly deals with option precendence', function() {
-        var optionObject = { foo: 'bar', something: 3 };
-        var optionObject2 = { something: 17 };
+        var optionObject = {
+            _jut_time_bounds: [],
+            foo: 'bar',
+            something: 3
+        };
+        var optionObject2 = {
+            something: 17
+        };
 
         return check_juttle({
             program: 'emit -limit 1 | view result -o '+ JSON.stringify(optionObject)
@@ -38,8 +47,13 @@ describe('Juttle Object Literal Tests', function() {
     });
 
     it('overrides option from object', function() {
-        var optionObject = { something: 3 };
-        var expectedObject = { something: 4 };
+        var optionObject = {
+            something: 3
+        };
+        var expectedObject = {
+            _jut_time_bounds: [],
+            something: 4
+        };
 
         return check_juttle({
             program: 'emit -limit 1 | view result -o '+ JSON.stringify(optionObject) +' -something 4'
@@ -51,7 +65,10 @@ describe('Juttle Object Literal Tests', function() {
     });
 
     it('overrides option with object', function() {
-        var optionObject = { something: 3 };
+        var optionObject = {
+            _jut_time_bounds: [],
+            something: 3
+        };
 
         return check_juttle({
             program: 'emit -limit 1 | view result -something 4 -o '+ JSON.stringify(optionObject)
@@ -63,7 +80,10 @@ describe('Juttle Object Literal Tests', function() {
     });
 
     it('passes object literal to sink from const', function() {
-        var optionObject = { something: 3 };
+        var optionObject = {
+            _jut_time_bounds: [],
+            something: 3
+        };
 
         return check_juttle({
             program: 'const foo = '+ JSON.stringify(optionObject) +'; emit -limit 1 | view result -o foo'
@@ -75,7 +95,10 @@ describe('Juttle Object Literal Tests', function() {
     });
 
     it('passes object literal to sink from function', function() {
-        var optionObject = { something: 3 };
+        var optionObject = {
+            _jut_time_bounds: [],
+            something: 3
+        };
 
         return check_juttle({
             program: 'function foo() { return '+ JSON.stringify(optionObject) +'; } emit -limit 1 | view result -o foo()'

@@ -168,6 +168,7 @@ describe('Juttle sinks validation', function() {
     it('handles dots for nested sink arguments', function() {
         var program = 'emit -limit 1 | view result -foo.bar.baz 5';
         var nested = {
+            _jut_time_bounds: [],
             foo: {
                 bar: {
                     baz: 5
