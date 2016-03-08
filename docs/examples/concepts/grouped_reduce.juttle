@@ -24,7 +24,7 @@ sub live_points() {
 // Read the historical points in one big batch and reduce all points to a
 // single result table.
 historical_points
-| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=stdev(value) by group
 | view table
     -columnOrder 'group','cnt','sum','avg','stdev'
     -title "Historical statistics by group";
@@ -32,7 +32,7 @@ historical_points
 // Read the historical points in 5 second batches
 historical_points
 | batch :5 seconds:
-| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=stdev(value) by group
 | view table
     -columnOrder 'time','group','cnt','sum','avg','stdev'
     -title "Historical 5-second statistics by group";
@@ -40,7 +40,7 @@ historical_points
 // Read the live points and divide into 3 second batches
 live_points
 | batch :3 seconds:
-| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=sigma(value) by group
+| reduce cnt=count(value), sum=sum(value), avg=avg(value), stdev=stdev(value) by group
 | view table
     -columnOrder 'time','group','cnt','sum','avg','stdev'
     -title "Live 3-second statistics by group";

@@ -557,12 +557,12 @@ XXX when PROD-7331 merges, make this test fast.
     {"time":"1970-01-01T00:00:03.000Z","over":3}
     {"time":"1970-01-01T00:00:04.000Z","over":6}
 
-## windowed sigma works (custom expire method)
+## windowed stdev works (custom expire method)
 ### Juttle
 
     emit -from Date.new(0) -limit 4
     | put dt = Date.unix(time)
-    | reduce -every :s: -over :3s: -to :1970-01-01T00:00:04.000Z: over = sigma(dt)
+    | reduce -every :s: -over :3s: -to :1970-01-01T00:00:04.000Z: over = stdev(dt)
     | view result
 
 ### Output

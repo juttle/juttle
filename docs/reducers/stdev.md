@@ -1,14 +1,14 @@
 ---
-title: sigma | Juttle Language Reference
+title: stdev | Juttle Language Reference
 ---
 
-sigma 
+stdev 
 =====
 
 Return the standard deviation of the value of the specified field.
 
 ``` 
-put|reduce sigma(field)
+put|reduce stdev(field)
 ```
 
 Parameter  | Description   |  Required?
@@ -22,6 +22,6 @@ This example uses the
 processor.
 
 ```
-{!docs/examples/reducers/reduce_sigma.juttle!}
+{!docs/examples/reducers/reduce_stdev.juttle!}
 ```
 
