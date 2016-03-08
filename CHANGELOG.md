@@ -2,6 +2,39 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.6.0
+
+Released 2016-03-09
+
+### Major Changes
+
+- Enabled runaway program detection. [[#473](https://github.com/juttle/juttle/issues/473)]
+- The `.` operator can now be used to access object properties (not just module exports). This allows accessing nested point fields, e.g. `put body = response.body`. [[#497](https://github.com/juttle/juttle/pull/497)]
+
+### Minor Changes
+
+- Added the `-pageField` option to `read http`. It enables paging by passing the last value of specified field as a query parameter. [[#524](https://github.com/juttle/juttle/pull/524)]
+- Removed [Bessel’s correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) from the built-in `sigma` reducer and `stddev`, `z`, and `cv` reducers in the standard library. [[#540](https://github.com/juttle/juttle/pull/540)]
+- Renamed the `sigma` built-in reducer to `stdev` (the old name still works but it is deprecated and will be removed in the future). Also renamed the `stddev` reducer in the standard library (here the old name doesn’t work anymore). [[#541](https://github.com/juttle/juttle/pull/541)]
+- Allowed the `*"field"` syntax in static filter expressions. [[#483](https://github.com/juttle/juttle/issues/483)]
+- Disallowed filtering on `time` in static filter expressions. [[#551](https://github.com/juttle/juttle/issues/551)]
+- Extended location info stripping to all compiler stages, not just `parse` and `semantic`. [[#474](https://github.com/juttle/juttle/pull/474)]
+- Made the compiler to run all flowgraph processors by default (previously it didn’t run any). [[#494](https://github.com/juttle/juttle/issues/494)]
+- Allowed setting the implicit view using compiler options. [[#494](https://github.com/juttle/juttle/issues/494)]
+- Improved error message displayed for invalid module references. [[#493](https://github.com/juttle/juttle/pull/493)]
+- Documented the [Adapter API](https://github.com/juttle/juttle/blob/master/docs/adapters/adapter_api.md). [[#304](https://github.com/juttle/juttle/issues/304)]
+- Documented the [Juttle ecosystem](https://github.com/juttle/juttle/blob/master/docs/juttle_ecosystem.md) and how the `juttle` npm package [relates to it](https://github.com/juttle/juttle#ecosystem). [[#506](https://github.com/juttle/juttle/pull/506)]
+
+### Bug Fixes
+
+- Fixed over-optimization of function calls in filter expressions. [[#454](https://github.com/juttle/juttle/issues/454)]
+- Fixed handling of HTTP errors in `read http`. [[#465](https://github.com/juttle/juttle/issues/465)]
+- Fixed missing type checks for the `[]` operator. [[#481](https://github.com/juttle/juttle/pull/481)]
+- Fixed emitting of marks in optimized `reduce -every`. [[#484](https://github.com/juttle/juttle/issues/484)]
+- Fixed handling of adapter names when displaying compilation results. [[#507](https://github.com/juttle/juttle/issues/507)]
+- Fixed `reduce -every` to be consistent with `batch | reduce` on empty flows. [[#516](https://github.com/juttle/juttle/issues/516)]
+- Fixed `reduce -every` to emit a mark at the beginning of the first batch. [[#537](https://github.com/juttle/juttle/issues/537), [#538](https://github.com/juttle/juttle/issues/538)]
+
 ## 0.5.2
 
 Released 2016-02-26
