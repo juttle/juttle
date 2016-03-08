@@ -4,17 +4,23 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ## 0.5.2
 
+Released 2016-02-26
+
 ### Bug Fixes
 
 - Expose the parsers / serializers as part of the Adapter API module since they are required for some adapters.  [[#478](https://github.com/juttle/juttle/issues/478)]
 
 ## 0.5.1
 
+Released 2016-02-25
+
 ### Bug Fixes
 
 - Fixed a problem in which Juttle Error objects did not include the message when serialized to JSON. [[#467](https://github.com/juttle/juttle/issues/467)]
 
 ## 0.5.0
+
+Released 2016-02-24
 
 ### Major Changes
 
@@ -95,6 +101,8 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ## 0.4.2
 
+Released 2016-02-11
+
 ### Bug Fixes
 
 - Work around an npm issue [[npm/#8982](https://github.com/npm/npm/issues/8982)] by running the peg parser generation as a prepublish and not a postinstall script. [[#398](https://github.com/juttle/juttle/pull/398)]
@@ -103,10 +111,14 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ### Bug Fixes
 
+Released 2016-02-10
+
 - Fixed an error occurring with `reduce` on empty batches which produced `null` `time` field. [[#351](https://github.com/juttle/juttle/issues/351)]
 - Updated Outrigger references in documentation and elsewhere to point to Juttle Engine and other components.
 
 ## 0.4.0
+
+Released 2016-02-01
 
 ### Major Changes
 
