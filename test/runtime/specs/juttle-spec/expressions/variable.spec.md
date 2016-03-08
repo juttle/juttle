@@ -60,6 +60,18 @@
 
    * Cannot use a module as a variable
 
+## Throws an error when a built-in module name is used in a const declaration (inside a member expression object)
+
+Regression test for the issue fixed by #552.
+
+### Juttle
+
+    const d = (Date + 1)[0]; emit -limit 1
+
+### Errors
+
+   * Cannot use a module as a variable
+
 ## Throws an error when a built-in module name is used in a by list
 
 ### Juttle
@@ -85,6 +97,19 @@
 ### Juttle
 
     function f() {return 1;}; const d = f; emit -limit 1
+
+### Errors
+
+   * Cannot use a function as a variable
+
+
+## Throws an error when a function name is used in a const declaration (inside a member expression object)
+
+Regression test for the issue fixed by #552.
+
+### Juttle
+
+    function f() {return 1;}; const d = (f + 1)[0]; emit -limit 1
 
 ### Errors
 
@@ -123,6 +148,24 @@
     }
 
     const d = r; emit -limit 1
+
+### Errors
+
+   * Cannot use a reducer as a variable
+
+
+## Throws an error when a reducer name is used in a const declaration (inside a member expression object)
+
+Regression test for the issue fixed by #552.
+
+### Juttle
+
+    reducer r() {
+      function update() { }
+      function result() { }
+    }
+
+    const d = (r + 1)[0]; emit -limit 1
 
 ### Errors
 
