@@ -486,4 +486,42 @@ describe('Juttle CLI Tests', function() {
             });
         });
     });
+
+    describe('interrupts', function() {
+
+        it('can be interrupted by ctrl-c for a program using emit', function() {
+            return runJuttle(
+                ['-e', 'emit -every :1s: -limit 60| view text -format "jsonl"'],
+                {
+                    env: {DEBUG: '*'},
+                    signalAfter: {
+                        signal: 'SIGINT',
+                        delay: 1000
+                    }
+                }
+            )
+            .then(function(result) {
+                expect(result.stdout).to.match(/ctrl-c received, stopping current program/);
+            });
+        });
+
+        it('can be interrupted by ctrl-c for a program using read', function() {
+            return runJuttle(
+                ['-e', 'read stochastic -source "logs" -from :now: -to :end: | view text -format "jsonl"'],
+                {
+                    env: {DEBUG: '*'},
+                    signalAfter: {
+                        signal: 'SIGINT',
+                        delay: 1000
+                    }
+                }
+            )
+            .then(function(result) {
+                expect(result.stdout).to.match(/ctrl-c received, stopping current program/);
+            });
+        });
+
+    });
+
+
 });
