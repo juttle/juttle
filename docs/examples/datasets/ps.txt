@@ -1,0 +1,5 @@
+PID TTY           TIME CMD
+463 ttys000    0:02.22 -zsh
+150 ttys000    0:00.07 /Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python -m SimpleHTTPServer
+476 ttys001    0:01.65 -zsh
+490 ttys004    0:00.32 node bin/juttle

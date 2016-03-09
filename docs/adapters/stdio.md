@@ -10,7 +10,7 @@ The `stdio` adapter allows reading points from stdin and writing points to stdou
 
 ## read stdio
 
-Supported formats are JSON array, JSON lines and CSV; see examples below.
+Supported formats are JSON array, JSON lines, column-aligned text, and CSV; see examples below.
 
 ```text
 read stdio [-format <format>] [-timeField <fieldname>]
@@ -33,6 +33,14 @@ This is an example using the CLI since this is where the stdio adapter comes in 
 
 ```bash
 cat myfile.json | juttle -e "read stdio | filter hostname = 'lemoncake' | view table"
+```
+
+_Example: count the processes holding the most open files_
+
+This is an example using column-aligned text formatting that comes as the output of UNIX commands like lsof.
+
+```bash
+lsof | juttle -e "read stdio -format 'columns' | reduce count() by COMMAND | sort count -desc | head 10 | view table"
 ```
 
 ## write stdio

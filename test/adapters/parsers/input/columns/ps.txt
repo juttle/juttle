@@ -1,0 +1,28 @@
+  PID TTY           TIME CMD
+  462 ttys000    0:00.05 login -fp demmer
+  463 ttys000    0:01.18 -zsh
+  473 ttys001    0:00.02 login -fp demmer
+  476 ttys001    0:01.52 -zsh
+84323 ttys001    0:00.50 node bin/run -j localhost:8080 -d
+  489 ttys002    0:00.02 login -fp demmer
+  490 ttys002    0:02.60 -zsh
+18853 ttys003    0:33.67 /System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby /usr/local/bin/jekyll serve
+18857 ttys003    0:01.44 /Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python /Library/Ruby/Gems/2.0.0/gems/pygments.rb-0.6.3/lib/pygments/mentos.py
+18860 ttys003    0:00.02 /Library/Ruby/Gems/2.0.0/gems/rb-fsevent-0.9.7/bin/fsevent_watch --latency 0.1 /Users/demmer/work/website
+99799 ttys003    0:00.02 login -fp demmer
+99800 ttys003    0:00.19 -zsh
+23761 ttys004    0:00.36 login -fp demmer
+23762 ttys004    0:00.37 -zsh
+34693 ttys004    0:00.00 ps -a
+47549 ttys005    0:00.02 login -fp demmer
+47550 ttys005    0:00.25 -zsh
+42329 ttys006    0:00.02 login -fp demmer
+42330 ttys006    0:03.73 -zsh
+96800 ttys006    0:00.68 node /Users/demmer/work/juttle-engine/bin/juttle-engine --port 10000 --index-path /var/folders/0k/vxk3cbn903j3v77v94wjsy5m0000gp/T/tmp-96797oDvJOZx2sVX4.tmp
+96842 ttys006    0:00.69 node /Users/demmer/work/juttle-engine/bin/juttle-engine --port 10001 --index-path /var/folders/0k/vxk3cbn903j3v77v94wjsy5m0000gp/T/tmp-9684008O8B9MYV0PN.tmp
+96896 ttys006    0:00.72 node /Users/demmer/work/juttle-engine/bin/juttle-engine --port 10002 --index-path /var/folders/0k/vxk3cbn903j3v77v94wjsy5m0000gp/T/tmp-96895wnuk95dC8I0e.tmp
+96917 ttys006    0:00.71 node /Users/demmer/work/juttle-engine/bin/juttle-engine --port 10003 --index-path /var/folders/0k/vxk3cbn903j3v77v94wjsy5m0000gp/T/tmp-96916jfFu6ZTQtNIY.tmp
+47712 ttys007    0:00.02 login -fp demmer
+47713 ttys007    0:00.09 -zsh
+47866 ttys008    0:00.02 login -fp demmer
+47867 ttys008    0:00.12 -zsh

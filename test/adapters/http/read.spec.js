@@ -138,7 +138,7 @@ describe('HTTP read tests', function() {
         .then((result) => {
             expect(result.errors.length).equal(1);
             expect(result.warnings).deep.equals([]);
-            expect(result.errors[0]).to.contain('Invalid format option value, must be one of the following: csv, json, jsonl');
+            expect(result.errors[0]).to.contain('Invalid format option value, must be one of the following');
         });
     });
 
