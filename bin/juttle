@@ -18,6 +18,14 @@ process.stdout.on('error', function( err ) {
     }
 });
 
+var current_program = undefined;
+process.on('SIGINT', function() {
+    if (current_program) {
+        logger.debug('ctrl-c received, stopping current program');
+        current_program.deactivate();
+    }
+});
+
 var _ = require('underscore');
 var fs = require('fs');
 var path = require('path');
@@ -190,6 +198,8 @@ function perform_run(options) {
             console.warn('Warning: ' + msg);
         });
 
+        current_program = program;
+
         // Start the program.
         program.activate();
 
@@ -202,6 +212,8 @@ function perform_run(options) {
         })
         .then(function() {
             program.deactivate();
+        }).finally(function() {
+            current_program = undefined;
         });
     });
 }
@@ -341,9 +353,20 @@ function setupCline() {
         if (in_multi_line) {
             multi_line_src += input + '\n';
         } else {
+
+            // Change stdin to non-raw mode so the program can be
+            // interrupted.
+            if (process.stdin.isTTY) {
+                process.stdin.setRawMode(false);
+            }
+
             perform_mode({
                 action: mode,
                 juttle_src: input
+            }).finally(function() {
+                if (process.stdin.isTTY) {
+                    process.stdin.setRawMode(true);
+                }
             });
         }
     });

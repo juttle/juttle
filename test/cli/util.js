@@ -39,6 +39,12 @@ module.exports.runJuttle = function(args, options) {
                     proc.stdin.write(options.stdin);
                 }
 
+                if (options.signalAfter) {
+                    setTimeout(function() {
+                        proc.kill(options.signalAfter.signal);
+                    }, options.signalAfter.delay);
+                }
+
                 proc.stdout.on('data', function (data) {
                     stdout += data;
                 });
