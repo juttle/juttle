@@ -203,11 +203,6 @@ function perform_run(options) {
 
         current_program = program;
 
-        // Change stdin to non-raw mode
-        if (process.stdin.isTTY) {
-            process.stdin.setRawMode(false);
-        }
-
         // Start the program.
         program.activate();
 
@@ -221,9 +216,6 @@ function perform_run(options) {
         .then(function() {
             program.deactivate();
         }).finally(function() {
-            if (process.stdin.isTTY) {
-                process.stdin.setRawMode(true);
-            }
             current_program = undefined;
         });
     });
@@ -364,9 +356,20 @@ function setupCline() {
         if (in_multi_line) {
             multi_line_src += input + '\n';
         } else {
+
+            // Change stdin to non-raw mode so the program can be
+            // interrupted.
+            if (process.stdin.isTTY) {
+                process.stdin.setRawMode(false);
+            }
+
             perform_mode({
                 action: mode,
                 juttle_src: input
+            }).finally(function() {
+                if (process.stdin.isTTY) {
+                    process.stdin.setRawMode(true);
+                }
             });
         }
     });
