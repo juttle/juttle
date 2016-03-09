@@ -110,9 +110,9 @@ class TestView extends View {
     consume(data) {
         this.data = this.data.concat(utils.fromNative(data.map(_.clone)));
     }
-    mark(time) {
+    mark(mark) {
         if (this.marks && this.times) {
-            this.data = this.data.concat(utils.fromNative([{time:time, mark:true}]));
+            this.data = this.data.concat(utils.fromNative([{time:mark.time, mark:true}]));
         } else if (this.marks) {
             this.data = this.data.concat({mark:true});
         }
@@ -234,7 +234,7 @@ function run_juttle(prog, options) {
 
         // Dispatch to correct test view
         prog.events.on('view:mark', function(data) {
-            views[data.channel].mark(data.time);
+            views[data.channel].mark(data.mark);
         });
 
         prog.events.on('view:tick', function(data) {
