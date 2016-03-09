@@ -212,3 +212,13 @@ Regression test for PROD-6797.
 ### Errors
 
   * Invalid filter term. Valid forms are: "field == value", "value == field".
+
+## Produces an error when filtering on `time`
+
+### Juttle
+
+    read test time < :now:
+
+### Errors
+
+  * Cannot filter on "time" in read. Use -to, -from, or -last instead.
