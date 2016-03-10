@@ -26,6 +26,21 @@ describe('Runaway program detection', function() {
         })
         .catch((err) => {
             expect(err.code).to.equal('RUNAWAY-PROGRAM');
+            // verify the exact location information so we know its 
+            // pointing the finger at the `read` proc
+            expect(err.info.location).to.deep.equal({
+                filename: 'main',
+                start: {
+                    line: 1,
+                    column: 1,
+                    offset: 0
+                },
+                end: {
+                    line: 1,
+                    column: 32,
+                    offset: 31 
+                }
+            });
         });
     });
 
