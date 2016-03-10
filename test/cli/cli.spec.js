@@ -31,6 +31,24 @@ describe('Juttle CLI Tests', function() {
                 });
         });
 
+        it('exits with non zero return code when the program fails to compile', function() {
+            return runJuttle([
+                '-e',
+                'read bananas'
+            ]).then(function(result) {
+                expect(result.code).to.not.equal(0);
+            });
+        });
+
+        it('exits with non zero return code when the program fails at runtime', function() {
+            return runJuttle([
+                '-e',
+                'read http -url "http://no.mans.land.com"'
+            ]).then(function(result) {
+                expect(result.code).to.not.equal(0);
+            });
+        });
+
         it('can execute juttle with the -e option', function() {
             return runJuttle([
                 '-e',

@@ -179,11 +179,13 @@ function perform_run(options) {
         });
 
         var views_done = view_mgr.setup(program);
+        var had_an_error = false;
 
         // Start listening for callbacks from the program and view
         // manager for errors/warnings/view data.
         program.events.on('error', function(msg, err) {
             console.error('Error: ' + msg, err);
+            had_an_error = true;
         });
 
         program.events.on('warning', function(msg, warn) {
@@ -192,6 +194,7 @@ function perform_run(options) {
 
         view_mgr.events.on('error', function(msg, err) {
             console.error('Error: ' + msg, err);
+            had_an_error = true;
         });
 
         view_mgr.events.on('warning', function(msg, warn) {
@@ -214,6 +217,10 @@ function perform_run(options) {
             program.deactivate();
         }).finally(function() {
             current_program = undefined;
+
+            if (had_an_error) {
+                return Promise.reject(Error('Program terminated with errors'));
+            }
         });
     });
 }
