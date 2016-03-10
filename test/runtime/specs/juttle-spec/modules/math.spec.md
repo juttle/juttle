@@ -23,7 +23,7 @@
     }
 
 ## All the functions are here
-Since these are currently implemented as direct javascript
+Since these are currently implemented as direct JavaScript
 Math.* invocations, we merely test for existence,
 to catch any accidental language removals.
 

@@ -10,7 +10,7 @@ __TOC__
 
 An Adapter is the interface between the juttle runtime and a backend data source. The backend houses a data set, comprised of data points. Each data point contains a number of fields. In most cases, each data point also contains a timestamp.
 
-For reads, the adapter's job is to interpret the options included in the juttle `read` command into a a query that selects the matching set of points, fetch the points via the query, construct Javascript objects representing those data points, and pass them to the juttle runtime. For writes, the adapter's job is to take the output of programs, convert the data points to the native form used by the backend, and write the points to the backend.
+For reads, the adapter's job is to interpret the options included in the juttle `read` command into a a query that selects the matching set of points, fetch the points via the query, construct JavaScript objects representing those data points, and pass them to the juttle runtime. For writes, the adapter's job is to take the output of programs, convert the data points to the native form used by the backend, and write the points to the backend.
 
 More sophisticated adapters work together with the juttle optimizer to push aggregation operations directly into the backend. For example, to count the number of data points in a given time period you could simply fetch all the data points and have the juttle program perform the counting. However, if supported by the backend it would be more efficient to count the number of data points directly in the backend and return the count instead. And that's exactly what many adapters do.
 
@@ -18,13 +18,13 @@ More sophisticated adapters work together with the juttle optimizer to push aggr
 
 Here are the main steps involved in writing a new adapter:
 
-1. Create a Javascript module that can be `require()`d by the juttle runtime.
+1. Create a JavaScript module that can be `require()`d by the juttle runtime.
 2. From that module, export an initialization function to define the read/write capabilities of the adapter.
 3. Implement ES6 classes deriving from AdapterRead/AdapterWrite that perform the work of reading from/writing to the backend data source.
 
 We'll go through each of these steps in more detail below.
 
-## Javascript Modules, Classes and Methods
+## JavaScript Modules, Classes and Methods
 
 We've created the skeleton of an adapter in the [juttle-adapter-template](https://github.com/juttle/juttle-adapter-template) repository on github. That repository is a good reference for the layout of files, classes, functions, etc.
 
@@ -76,7 +76,7 @@ This object contains:
         ASTVisitor: <Utility for traversing Juttle ASTs>,
         ASTTransformer: <Utility for transforming Juttle ASTs>,
         StaticFilterCompiler: <Utility for parsing filter expressions>,
-        FilterJSCompiler: <Utility for converting filter expressions into Javascript>
+        FilterJSCompiler: <Utility for converting filter expressions into JavaScript>
     },
     parsers: <Module containing parsers for csv / json / jsonl>,
     serializers: <Module containing serializers for csv / json / jsonl>,
@@ -148,7 +148,7 @@ read <adapter> [-from <moment>] [-to <moment>] [-timeField <field>] [-raw <expre
 * `-every`: A JuttleMoment. When performing live reads, poll for new data points at this interval.
 * `-raw`: A backend-specific search parameter that is passed opaquely to the adapter. For the Gmail Adapter, the `-raw` expression is passed directly through as a Gmail advanced search string.
 
-The implementation of `read` should be a Javascript class that should inherit from the `AdapterRead` base class.
+The implementation of `read` should be a JavaScript class that should inherit from the `AdapterRead` base class.
 
 It can implement / override the following methods:
 
@@ -232,7 +232,7 @@ This should return a promise that resolves when all output, including any output
 
 Unlike `read`, there are no conventions for a standard set of options supported by all adapters. In general, options related to configuration (hostnames, API keys, etc) should be specified in the adapter's configuration rather than provided as arguments to the `write` proc.
 
-The implementation of `write` should be a Javascript class that should inherit from the `AdapterWrite` base class.
+The implementation of `write` should be a JavaScript class that should inherit from the `AdapterWrite` base class.
 
 It can implement / override the following methods:
 
@@ -270,7 +270,7 @@ Called when the flow of points has ended. Returns a promise that should resolve 
 
 To log messages, use the logger instance variable, for example:
 
-```Javascript
+```javascript
 this.logger.debug(`Got ${response.messages.length} potential messages`);
 ```
 
@@ -280,7 +280,7 @@ Log messages are passed through the Juttle runtime and eventually logged to file
 
 To throw errors, use the methods `compileError` or `runtimeError` in the `AdapterRead` base class to construct an error and throw() it. Here's an example:
 
-```Javascript
+```javascript
 var unknown = _.difference(_.keys(options), this.allowed_options);
 if (unknown.length > 0) {
     throw this.compile_error('UNKNOWN-OPTION-ERROR', {

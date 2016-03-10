@@ -44,7 +44,7 @@ emit -limit 10
       points_cubed=Math.pow(num_points, 3)
 ```
 
-Users can define their own Juttle functions, using the `function` keyword. The syntax is similar to Javascript functions, although parameters can be given default values.
+Users can define their own Juttle functions, using the `function` keyword. The syntax is similar to JavaScript functions, although parameters can be given default values.
 
 ```
 function functionName(parameter1[=default_value1], parameter2[=default_value2]...) {

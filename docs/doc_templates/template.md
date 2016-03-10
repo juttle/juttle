@@ -49,7 +49,7 @@ Syntax of a juttle proc/etc is presented below in a code block, with no section 
 function makeFencedCodeBlock() {
   // here is a code sample in a fenced code block
   // don't use four-space-indenting approach, we prefer fencing with triple backticks
-  // this uses javascript syntax highlighting
+  // this uses JavaScript syntax highlighting
 }
 ```
 

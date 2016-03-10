@@ -4,7 +4,7 @@
 
 The Juttle Ecosystem consists of the following projects:
 
-* [juttle](https://github.com/juttle/juttle) contains the core Juttle compiler, the Javascript runtime, a set of basic adapters to connect to files or http sources, and a command line interface with text-based and tabular views.
+* [juttle](https://github.com/juttle/juttle) contains the core Juttle compiler, the JavaScript runtime, a set of basic adapters to connect to files or http sources, and a command line interface with text-based and tabular views.
 
 * [juttle-engine](https://github.com/juttle/juttle-engine) is an execution environment for Juttle, which packages together the following components into a complete development and visualization environment.
 
@@ -12,7 +12,7 @@ The Juttle Ecosystem consists of the following projects:
 
 * [juttle-viz](https://github.com/juttle/juttle-viz) is a visualization library based on D3 that can render the results of Juttle programs as streaming charts.
 
-* [juttle-client-library](https://github.com/juttle/juttle-client-library) is a client-side Javascript application that interacts with juttle-service to execute juttle programs and render the results in the browser, including support for programmable input controls.
+* [juttle-client-library](https://github.com/juttle/juttle-client-library) is a client-side JavaScript application that interacts with juttle-service to execute juttle programs and render the results in the browser, including support for programmable input controls.
 
 * [juttle-viewer](https://github.com/juttle/juttle-client-viewer) is a development and presentation application for juttle programs that packages juttle-client-library, juttle-viz, and application logic to select and run juttle programs using a remote juttle engine (either packaged within juttle-engine or standalone).
 

@@ -13,7 +13,7 @@ Null       | Non-existing or unknown value
 Boolean    | A logical truth value, either "true" or "false"
 Number     | A number in IEEE 754 64-bit double-precision format
 String     | Zero or more Unicode characters
-RegExp     | A regular expression, [as implemented in Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+RegExp     | A regular expression, [as implemented in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 Date       | An exact moment in time, represented by a number
 Duration   | An interval between to moments in time, represented by a numerical length
 Array      | An ordered sequence of zero or more values
