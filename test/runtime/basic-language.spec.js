@@ -283,7 +283,7 @@ describe('Juttle basic language tests', function() {
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
-            expect(err.message).to.match(/function .* not exported by/);
+            expect(err.message).to.match(/.* is not defined/);
         });
     });
 
@@ -296,7 +296,7 @@ describe('Juttle basic language tests', function() {
         })
         .catch(function(err) {
             expect(err.name).to.equal('CompileError');
-            expect(err.message).to.match(/sub .* not exported by/);
+            expect(err.message).to.match(/.* not exported by/);
         });
     });
 

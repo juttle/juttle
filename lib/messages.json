@@ -86,7 +86,7 @@
   "NON-TOPLEVEL-IMPORT": "Cannot import from within a {entity}",
   "CYCLIC-IMPORT": "Import cycle detected ({path})",
   "REDUCER-TOPLEVEL-STATEMENT": "Cannot use {thing} at the top level of a reducer.",
-  "NOT-EXPORTED": "{thing} '{name}' is not exported by module {module}",
+  "NOT-EXPORTED": "'{name}' is not exported by module {module}",
   "WRONG-ARG-COUNT-SINGULAR": "{type} {name} expects 1 argument but was called with {actual_count}",
   "WRONG-ARG-COUNT-PLURAL": "{type} {name} expects {expected_count} arguments but was called with {actual_count}",
   "WRONG-ARG-COUNT-RANGE": "{type} {name} expects {min_count} to {max_count} arguments but was called with {actual_count}",
