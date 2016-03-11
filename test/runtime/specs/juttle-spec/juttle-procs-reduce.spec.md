@@ -199,13 +199,13 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    {"mark": true, "time": "1970-01-01T00:00:00.000Z"}
+    {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.000Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.002Z"}
+    {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.002Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.004Z"}
+    {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.004Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
+    {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.006Z"}
 
 ## reduce -every produces aggregate for empty flow
 

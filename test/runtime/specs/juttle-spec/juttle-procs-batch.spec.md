@@ -180,12 +180,28 @@ no bare numbers with the new -every option
 eventually remove historic ticks)
 
 ### Juttle
-    emit -limit 2 -every :2s: -from Date.new(0)
-    | filter time >= Date.new(2)
+    emit -limit 2 -every :2s: -from :0:
+    | filter time >= :2:
     | batch :2s:
     | view result -marks true -times true
 
 ### Output
-    { "time": "1970-01-01T00:00:02.000Z", "mark": true }
+    { "time": "1970-01-01T00:00:02.000Z", "interval": "00:00:02.000", "mark": true }
     { "time": "1970-01-01T00:00:02.000Z" }
-    { "time": "1970-01-01T00:00:04.000Z", "mark": true }
+    { "time": "1970-01-01T00:00:04.000Z", "interval": "00:00:02.000", "mark": true }
+
+## batch includes intervals in marks
+
+### Juttle
+    emit -limit 3 -every :1s: -from :0:
+    | batch -every :1s:
+    | view result -marks true -times true
+
+### Output
+    { "time": "1970-01-01T00:00:00.000Z", "interval": "00:00:01.000", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z" }
+    { "time": "1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "mark": true }
+    { "time": "1970-01-01T00:00:01.000Z" }
+    { "time": "1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "mark": true }
+    { "time": "1970-01-01T00:00:02.000Z" }
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "mark": true }
