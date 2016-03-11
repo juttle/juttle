@@ -20,7 +20,8 @@ Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-format`         | Input file format, supports: `csv`, `json`, `jsonl`, or `grok` for text [parseable by grok](parsers/index.md) | No; defaults to `json`
 `-timeField`      | Name of the field in the data which contains a valid timestamp  | No; defaults to `time`
-`-pattern`        | When `-format='grok'` you can specify the grok matching pattern here. More information on grok [here](parsers/grok.md)  | No
+`-pattern`        | When `-format 'grok'` you can specify the grok matching pattern here. More information on grok [here](parsers/grok.md)  | No
+`-separator`      | When `-format 'csv'`  you can specify the separator between columns in a CSV file. | No: defaults to `,`
 
 The data is assumed to contain valid timestamps in a field named `time` by default; a different name for the time field may be specified with `-timeField` option. If the data contains fields `time` and another named field specified with `-timeField`, the original contents of field `time` will be overwritten by the valid timestamp from `timeField`. 
 Timeless data, which contains no timestamps, is acceptable; however certain operations which expect time to be present in the points, such as `reduce -every :interval:`, will execute with warnings or error out. Timeless data can be joined in the Juttle flowgraph with other data which contains timestamps; a common use case for reading timeless data from a file or another backend is to join it with streaming data for enrichment.
