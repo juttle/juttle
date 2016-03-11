@@ -115,7 +115,7 @@ gulp.task('test-coverage', ['peg', 'juttle-spec', 'instrument'], function() {
                 global: {
                     statements: 93,
                     branches: 87,
-                    functions: 92,
+                    functions: 91,
                     lines: 93
                 }
             }
