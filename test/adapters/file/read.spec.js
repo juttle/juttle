@@ -69,6 +69,29 @@ describe('read file adapter tests', function () {
                     });
             });
 
+            it('throws an error on a corrupt file', function() {
+                var file_name = corrupt + '.' + format;
+                return run_read_file_juttle(file_name, {format: format, timeField: 'mytime'})
+                    .then(function(result) {
+                        var expected;
+                        switch(format) {
+                            case 'csv':
+                                expected = 'Invalid CSV data: Error: Row length does not match headers';
+                                break;
+                            case 'json':
+                                expected = 'Invalid JSON data: Error: Malformed object key should start with \" \nLn: 4\nCol: 3\nChr: X';
+                                break;
+                            case 'jsonl':
+                                expected = 'Invalid JSONL data: Error: Invalid JSON (Unexpected \"X\" at position 102 in state STOP)';
+                                break;
+                            default:
+                                throw new Error('implement test for ' + format);
+                        }
+                        expect(result.errors).deep.equals([expected]);
+                        expect(result.sinks.table).deep.equal([]);
+                    });
+            });
+
             it('emits a warning if specified timeField does not exist', function() {
                 var options = {timeField: 'foo', format: format};
                 return run_read_file_juttle(file_name, options)
