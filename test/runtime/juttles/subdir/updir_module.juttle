@@ -1,0 +1,3 @@
+import "../module" as m3;
+
+export const up_value=m3.value;

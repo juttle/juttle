@@ -4,13 +4,13 @@ var expect = require('chai').expect;
 var path = require('path');
 var FileResolver = require('../../lib/module-resolvers/file-resolver');
 
-function resolveWith(module, path) {
+function resolveWith(module, path, module_name, importer_path) {
 
     var modulePath = process.env.JUTTLE_MODULE_PATH;
     process.env.JUTTLE_MODULE_PATH = path;
 
     var file_resolver = new FileResolver();
-    return file_resolver.resolve(module)
+    return file_resolver.resolve(module, module_name, importer_path)
     .finally(function() {
         process.env.JUTTLE_MODULE_PATH = modulePath;
     });
@@ -73,6 +73,20 @@ describe('file-resolver', function() {
         return resolveWith('module1', modulePath)
         .then(function(result) {
             expect(result.source).to.equal('// first module1\n');
+        });
+    });
+
+    it('can resolve by filename', function() {
+        return resolveWith(`${__dirname}/input/modules1/foo`, [])
+        .then(function(result) {
+            expect(result.name).to.equal(`${__dirname}/input/modules1/foo.juttle`);
+        });
+    });
+
+    it('can resolve by relative filename', function() {
+        return resolveWith(`./input/modules1/foo`, [], 'main', `${__dirname}/test.juttle`)
+        .then(function(result) {
+            expect(result.name).to.equal(`${__dirname}/input/modules1/foo.juttle`);
         });
     });
 });

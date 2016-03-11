@@ -10,6 +10,7 @@ var expect = require('chai').expect;
 
 var parser = require('../../lib/parser');
 
+var FileResolver = require('../../lib/module-resolvers/file-resolver');
 
 describe('Juttle modules ', function() {
 
@@ -460,6 +461,49 @@ describe('Juttle modules ', function() {
             })
             .catch(function(err) {
                 expect(err.message).to.contain('Import cycle detected (cycle1 -> cycle3 -> cycle2 -> cycle1)');
+            });
+        });
+
+        describe('With the file resolver', function() {
+            var file_resolver = new FileResolver();
+            it('Can import a module from a relative pathname', function() {
+                return check_juttle({
+                    moduleResolver: file_resolver.resolve,
+                    program: `import "${__dirname}/juttles/index.juttle" as m; emit -limit 1 | put x=m.value | view sink`,
+                })
+                .then(function(res) {
+                    expect(res.sinks.sink[0].x).to.equal(10);
+                });
+            });
+
+            it('Can import a module from a directory', function() {
+                return check_juttle({
+                    moduleResolver: file_resolver.resolve,
+                    program: `import "${__dirname}/juttles" as m; emit -limit 1 | put x=m.value | view sink`,
+                })
+                .then(function(res) {
+                    expect(res.sinks.sink[0].x).to.equal(10);
+                });
+            });
+
+            it('Can import a nested set of modules from relative pathnames', function() {
+                return check_juttle({
+                    moduleResolver: file_resolver.resolve,
+                    program: `import "${__dirname}/juttles/subdir/index.juttle" as m; emit -limit 1 | put x=m.value | view sink`,
+                })
+                .then(function(res) {
+                    expect(res.sinks.sink[0].x).to.equal(10);
+                });
+            });
+
+            it('Can import a nested set of modules from relative pathnames with duplicates', function() {
+                return check_juttle({
+                    moduleResolver: file_resolver.resolve,
+                    program: `import "${__dirname}/juttles/subdir/subdir2/index.juttle" as m; emit -limit 1 | put x=m.value | view sink`,
+                })
+                .then(function(res) {
+                    expect(res.sinks.sink[0].x).to.equal(10);
+                });
             });
         });
     });
