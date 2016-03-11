@@ -5,38 +5,27 @@ var TextInput = require('../../lib/inputs/text-input');
 
 describe('text input', () => {
     describe('valid cases', () => {
-        it('handles normal text input with default and value', () => {
-            let inputObj = {
-                id: 'id',
-                type: 'text',
-                value: 'default value',
-                options: {
-                    default: 'default value'
-                }
-            };
+        const testObj = {
+            id: 'id',
+            type: 'text',
+            value: 'default value',
+            options: {
+                default: 'default value'
+            }
+        };
 
-            let input = new TextInput('id', inputObj.options);
-            expect(input.toObj()).to.deep.equal(inputObj);
+        function updateTestObj(update) {
+            return Object.assign({}, testObj, update);
+        }
+
+        it('handles normal text input with default and value', () => {
+            let input = new TextInput('id', testObj.options);
+            expect(input.toObj()).to.deep.equal(testObj);
 
             input.setValue('other value');
-            expect(input.toObj()).to.deep.equal(Object.assign({}, inputObj, {
+            expect(input.toObj()).to.deep.equal(updateTestObj({
                 value: 'other value'
             }));
-        });
-
-        it('not setting value returns default', () => {
-            let input = new TextInput('id', {
-                default: 'my default'
-            });
-
-            expect(input.toObj()).to.deep.equal({
-                id: 'id',
-                type: 'text',
-                value: 'my default',
-                options: {
-                    default: 'my default'
-                }
-            });
         });
 
         it('not setting value or default has value of emptry string', () => {
@@ -56,14 +45,12 @@ describe('text input', () => {
             });
             input.setValue(10);
 
-            expect(input.toObj()).to.deep.equal({
-                id: 'id',
-                type: 'text',
+            expect(input.toObj()).to.deep.equal(updateTestObj({
                 value: '10',
                 options: {
                     default: 5
                 }
-            });
+            }));
         });
     });
 
