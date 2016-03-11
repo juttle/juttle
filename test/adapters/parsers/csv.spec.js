@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var expect = require('chai').expect;
 var fs = require('fs');
 var parsers = require('../../../lib/adapters/parsers');
@@ -119,4 +120,59 @@ describe('parsers/csv', function() {
         });
     });
 
+    _.each({
+        tsv: {
+            separator: '\t'
+        },
+        csv: {
+            separator: ','
+        }
+    }, (options, type) => {
+        var pointFile = path.resolve(__dirname, `input/${type}/point.${type}`);
+        var pointsFile = path.resolve(__dirname, `input/${type}/points.${type}`);
+        var invalidFile = path.resolve(__dirname, `input/${type}/invalid.${type}`);
+
+        it(`fails when given an invalid ${type} stream, with ${JSON.stringify(options)}`, () => {
+            var csv = parsers.getParser('csv', options);
+            return csv.parseStream(fs.createReadStream(invalidFile), () => {})
+            .then(() => {
+                throw Error('previous statement should have failed');
+            })
+            .catch((err) => {
+                expect(err.toString()).to.contain('Error: Invalid CSV data');
+            });
+        });
+
+        it(`can parse a file with a single ${type} point, with ${JSON.stringify(options)}`, () => {
+            var csv = parsers.getParser('csv', options);
+            var results = [];
+            return csv.parseStream(fs.createReadStream(pointFile), (result) => {
+                results.push(result);
+            })
+            .then(() => {
+                expect(results).to.deep.equal([[
+                    {
+                        'time': '2014-01-01T00:00:00.000Z',
+                        'foo': '1'
+                    }
+                ]]);
+            });
+        });
+
+        it(`can parse a file with multiple ${type} points, with ${JSON.stringify(options)}`, () => {
+            var csv = parsers.getParser('csv', options);
+            var results = [];
+            return csv.parseStream(fs.createReadStream(pointsFile), (result) => {
+                results.push(result);
+            })
+            .then(() => {
+                expect(results.length).equal(1);
+                expect(results).to.deep.equal([[
+                    { 'time': '2014-01-01T00:00:01.000Z', 'foo': '1' },
+                    { 'time': '2014-01-01T00:00:02.000Z', 'foo': '2' },
+                    { 'time': '2014-01-01T00:00:03.000Z', 'foo': '3' }
+                ]]);
+            });
+        });
+    });
 });
