@@ -19,4 +19,11 @@ describe('parsers/base', function() {
         }).to.throw('option pattern can only be used with format="grok"');
     });
 
+    it('fails when using -separator with invalid -format', function() {
+        expect(function() {
+            parsers.getParser('json', {
+                separator: ','
+            });
+        }).to.throw('option separator can only be used with format="csv"');
+    });
 });

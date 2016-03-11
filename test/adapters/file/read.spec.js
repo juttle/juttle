@@ -27,6 +27,8 @@ describe('read file adapter tests', function () {
     var syslog = path.resolve(__dirname, '../parsers/input/logs/syslog');
     var badSyslog = path.resolve(__dirname, '../parsers/input/logs/bad-syslog');
 
+    var tsvFile = path.resolve(__dirname, '../parsers/input/tsv/points.tsv');
+
     it('fails when you provide an unknown option', function() {
         return run_read_file_juttle(tmp_file, {foo: 'bar'})
         .then(function() {
@@ -351,5 +353,20 @@ describe('read file adapter tests', function () {
             });
         }, 'node-grok');
 
+    });
+
+    it('can read a TSV file', () => {
+        return check_juttle({
+            program: 'read file -file "' + tsvFile  + '" -format "csv" -separator "\t"'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { time: '2014-01-01T00:00:01.000Z', foo: '1' },
+                { time: '2014-01-01T00:00:02.000Z', foo: '2' },
+                { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
     });
 });
