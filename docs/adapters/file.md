@@ -10,7 +10,7 @@ The `file` adapter allows reading points from, or writing points to, a file on t
 
 ## read file
 
-Supported file formats are JSON array, JSON lines, CSV and unstructured logs (with grok parsing); see examples below.
+Supported file formats are JSON array, JSON lines, CSV, column-aligned text, and unstructured logs (with grok parsing); see examples below.
 
 ```text
 read file -file <path> [-format <format>] [-timeField <fieldname>]
@@ -19,7 +19,7 @@ read file -file <path> [-format <format>] [-timeField <fieldname>]
 Parameter         |             Description          | Required?
 ----------------- | -------------------------------- | ---------:
 `-file`           | File path on the local filesystem, absolute or relative to the current working directory  | Yes
-`-format`         | Input file format, supports: `csv`, `json`, `jsonl`, or `grok` for text [parseable by grok](parsers/index.md) | No; defaults to `json`
+`-format`         | Input file format, supports: `csv`, `json`, `jsonl`, `columns`, or `grok` for text [parseable by grok](parsers/index.md) | No; defaults to `json`
 `-timeField`      | Name of the field in the data which contains a valid timestamp  | No; defaults to `time`
 `-pattern`        | When `-format 'grok'` you can specify the grok matching pattern here. More information on grok [here](parsers/grok.md)  | No
 `-separator`      | When `-format 'csv'`  you can specify the separator between columns in a CSV file. | No: defaults to `,`
