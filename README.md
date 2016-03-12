@@ -27,7 +27,7 @@ production.
 
 To learn more, see the [documentation site](https://juttle.github.io/juttle) to read about why juttle exists,
 get an [overview](https://juttle.github.io/juttle/concepts/overview) of the language, learn about the
-[dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), see the list of [supported visualizations](https://juttle.github.io/juttle-viz), and more. For information about the Juttle development project, see the [wiki](https://github.com/juttle/juttle/wiki).
+[dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), see the list of [supported visualizations](https://juttle.github.io/juttle-viz), step through the [tutorial](http://juttle.github.io/juttle/concepts/juttle_tutorial), and more. For information about the Juttle development project, see the [wiki](https://github.com/juttle/juttle/wiki).
 
 ## Installation
 
@@ -72,7 +72,7 @@ Here are some more examples of what you can do with Juttle.
 
 Note that most of these examples require the use of external systems using [adapters](#adapters) and refer to the visualizations embedded in Juttle Engine, so they are meant to be illustrative and not necessarily functional out of the box.
 
-For runnable end-to-end examples of juttle usage, see the [Juttle Engine examples](https://github.com/juttle/juttle-engine/tree/master/examples).
+For runnable end-to-end examples of juttle usage, see the [Juttle Engine examples](https://github.com/juttle/juttle-engine/tree/master/examples), or step through the [tutorial](http://juttle.github.io/juttle/concepts/juttle_tutorial).
 
 ### Hello world
 
