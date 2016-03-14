@@ -14,19 +14,19 @@
 
   * Cannot use a block at the top level of a reducer.
 
-## Can't contain assignments
+## Can't contain expression statements
 
 ### Juttle
 
     reducer r() {
-      v = 5;
+      5;
     }
 
     emit
 
 ### Errors
 
-  * Cannot use an assignment at the top level of a reducer.
+  * Cannot use an expression statement at the top level of a reducer.
 
 ## Can't contain `if` statements
 
