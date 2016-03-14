@@ -25,7 +25,7 @@ describe('parsers/csv', function() {
             throw Error('previous statement should have failed');
         })
         .catch(function(err) {
-            expect(err.toString()).to.contain('Error: Invalid CSV data');
+            expect(err.toString()).to.contain('Invalid CSV data: "1,2" at line 1 does not match header line');
         });
     });
 
