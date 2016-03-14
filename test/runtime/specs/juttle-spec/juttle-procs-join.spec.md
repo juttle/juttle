@@ -933,12 +933,12 @@ timestamps better make sense.
     ) | join -table 1 id | view result
 
 ### Output
-    {time:"1970-01-01T00:00:03.000Z", "id":1, "name":"FRED", "n":1 }
-    {time:"1970-01-01T00:00:03.000Z", "id":2, "name":"WILMA", "n":2 }
-    {time:"1970-01-01T00:00:03.000Z", "id":3, "name":"DINO", "n":3 }
-    {time:"1970-01-01T00:00:06.000Z", "id":1, "name":"FRED", "n":6 }
-    {time:"1970-01-01T00:00:09.000Z", "id":2, "name":"WILMA", "n":7 }
-    {time:"1970-01-01T00:00:09.000Z", "id":3, "name":"DINO", "n":8 }
+    {time:"1970-01-01T00:00:03.000Z", "id":1,"name":"FRED", "n":1 }
+    {time:"1970-01-01T00:00:03.000Z", "id":2,"name":"WILMA", "n":2 }
+    {time:"1970-01-01T00:00:03.000Z", "id":3,"name":"DINO", "n":3 }
+    {time:"1970-01-01T00:00:06.000Z", "id":1,"name":"FRED", "n":6 }
+    {time:"1970-01-01T00:00:09.000Z", "id":2,"name":"WILMA", "n":7 }
+    {time:"1970-01-01T00:00:09.000Z", "id":3,"name":"DINO", "n":8 }
 
 ## ticks advance -table in live outer join of a point stream of ids
 because a tick arrives between the first and 2nd table update, the first is
@@ -1079,3 +1079,65 @@ marked complete and participates in early joins. Later joins get the second tabl
     {"time":"1970-01-01T00:00:07.000Z","x":1,"z":8,"y":2}
     {"time":"1970-01-01T00:00:08.000Z","x":1,"z":9,"y":2}
     {"time":"1970-01-01T00:00:09.000Z","x":1,"z":10,"y":2}
+
+## batched join preserves mark calendarness of calendar intervals (join on shorter)
+
+### Juttle
+
+    (
+        emit -limit 2 -every :1M: -from :0: | put first=true, m=count() | batch :1M:;
+        emit -limit 4 -every :1M: -from :0: | put second=true, n=count() | batch :2M:
+    )
+    | join -outer 1
+    | view result -times true -marks true
+
+### Output
+
+    { "time": "1970-01-01T00:00:00.000Z", "interval": "1M", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z", "first": true, "m": 1 }
+    { "time": "1970-02-01T00:00:00.000Z", "interval": "1M", "mark": true }
+    { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1 }
+    { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 2 }
+    { "time": "1970-03-01T00:00:00.000Z", "interval": "1M", "mark": true }
+
+## batched join preserves mark calendarness of calendar intervals (join on longer)
+
+### Juttle
+
+    (
+        emit -limit 2 -every :1M: -from :0: | put first=true, m=count() | batch :1M:;
+        emit -limit 4 -every :1M: -from :0: | put second=true, n=count() | batch :2M:
+    )
+    | join -outer 2
+    | view result -times true -marks true
+
+### Output
+
+    { "time": "1970-01-01T00:00:00.000Z", "interval": "2M", "mark": true }
+    { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1}
+    { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 2}
+    { "time": "1970-03-01T00:00:00.000Z", "interval": "2M", "mark": true }
+    { "time": "1970-05-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 3}
+    { "time": "1970-05-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 4}
+    { "time": "1970-05-01T00:00:00.000Z", "interval": "2M", "mark": true }
+
+## batched join falls back to non-calendar intervals
+
+### Juttle
+
+    (
+        emit -limit 2 -every :1M: -from :0: | put first=true, m=count()  | batch :1M:;
+        emit -limit 4 -every :1M: -from :0: | put second=true, n=count() | batch :60d:
+    )
+    | join -outer 2
+    | view result -times true -marks true
+
+### Output
+
+    { "time": "1970-01-01T00:00:00.000Z", "interval": "60.00:00:00.000", "mark": true }
+    { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1}
+    { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 2}
+    { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 3}
+    { "time": "1970-03-02T00:00:00.000Z", "interval": "60.00:00:00.000", "mark": true }
+    { "time": "1970-05-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 4}
+    { "time": "1970-05-01T00:00:00.000Z", "interval": "60.00:00:00.000", "mark": true }
