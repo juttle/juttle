@@ -1,4 +1,18 @@
-# Assignment statement
+# Expression statement
+
+## Supports non-assignment expressions
+
+### Juttle
+
+    function f() {
+      5;
+    }
+
+    emit -from :0: -limit 1 | put result = f() | view result
+
+### Output
+
+    { "time": "1970-01-01T00:00:00.000Z", result: null }
 
 ## Supports the `*=` operator
 
