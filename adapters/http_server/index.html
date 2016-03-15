@@ -34,6 +34,16 @@
   <script src="../../js/theme.js"></script> 
 
   
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45515012-3', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -613,17 +623,17 @@ incoming http requests.</p>
 </tr>
 <tr>
 <td><code>-method</code></td>
-<td>HTTP method to use <br><br> Currently only supports <code>POST</code>or <code>PUT</code></td>
+<td>HTTP method to use <br><br> Currently only supports <code>POST</code> or <code>PUT</code>.</td>
 <td align="right">No; default: <code>POST</code></td>
 </tr>
 <tr>
 <td><code>-timeField</code></td>
-<td>The name of the field to use as the time field <br><br>The specified field will be renamed to <code>time</code>in the body of the HTTP request. If the points already contain a field called <code>time</code> that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.</td>
-<td align="right">No; defaults to keeping the <code>time</code>field as is</td>
+<td>The name of the field to use as the time field <br><br>The specified field will be renamed to <code>time</code> in the body of the HTTP request. If the points already contain a field called <code>time</code>, that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.</td>
+<td align="right">No; defaults to keeping the <code>time</code> field as is</td>
 </tr>
 <tr>
 <td><code>-rootPath</code></td>
-<td>When the incoming data is JSON, use the specified path into the incoming object (expressed as <code>field1.field2</code> to emit points</td>
+<td>When the incoming data is JSON, use the specified path into the incoming object (expressed as <code>field1.field2</code>) to emit points</td>
 <td align="right">No</td>
 </tr>
 </tbody>
@@ -654,7 +664,7 @@ incoming http requests.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../stdio/" class="btn btn-neutral float-right" title="____ STDIO Adapter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../stdio/" class="btn btn-neutral float-right" title="____ STDIO Adapter">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../http/" class="btn btn-neutral" title="____ HTTP Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>

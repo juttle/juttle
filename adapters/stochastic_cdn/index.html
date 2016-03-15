@@ -34,6 +34,16 @@
   <script src="../../js/theme.js"></script> 
 
   
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45515012-3', 'auto');
+      ga('send', 'pageview');
+  </script>
+  
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -618,7 +628,7 @@ with demand throughout the day.</p>
 </tr>
 <tr>
 <td><code>-host_names</code></td>
-<td>A list of host names to use, in which case <code>-nhosts</code>is ignored and the number of hosts equals the number of specified host names</td>
+<td>A list of host names to use, in which case <code>-nhosts</code> is ignored and the number of hosts equals the number of specified host names</td>
 <td align="right">No; when nhosts is more than 1, and -host_names is omitted, host names are randomly generated</td>
 </tr>
 <tr>
@@ -690,7 +700,7 @@ with demand throughout the day.</p>
 </tr>
 <tr>
 <td><code>-to</code></td>
-<td>Stream points whose time stamps are less than the specified moment, which is less than or equal to :now:  <p>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. </p><p>:information_source: <code>Note:</code>To stream live data only, omit <code>-from</code>and specify <code>-to :end:</code> To combine historical and live data, specify a <code>-from</code>value in the past and <code>-to :end:</code></td>
+<td>Stream points whose time stamps are less than the specified moment, which is less than or equal to :now:  <p>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. </p><p>:information_source: <code>Note:</code> To stream live data only, omit <code>-from</code> and specify <code>-to :end:</code>. To combine historical and live data, specify a <code>-from</code> value in the past and <code>-to :end:</code>.</td>
 <td align="right">Required if -from is not present; defaults to :now:</td>
 </tr>
 <tr>
@@ -804,7 +814,7 @@ field depends on the metric:</p>
 </tr>
 <tr>
 <td><code>responses</code></td>
-<td>The number of HTTP responses for this service <p>This metric type also includes a <code>code</code>field that is one of 200, 404, or 500. The <code>value</code>is the event count for this period.</td>
+<td>The number of HTTP responses for this service <p>This metric type also includes a <code>code</code> field that is one of 200, 404, or 500. The <code>value</code> is the event count for this period.</td>
 </tr>
 <tr>
 <td><code>response_ms</code></td>
@@ -832,7 +842,7 @@ value field depends on the event type:</p>
 <tbody>
 <tr>
 <td><code>server_error</code></td>
-<td>For server response events, only HTTP error events are emitted and "value" is the HTTP error code (500) <p>An additional <code>cust_id</code>field contains the ID of the requestor.</td>
+<td>For server response events, only HTTP error events are emitted and "value" is the HTTP error code (500) <p>An additional <code>cust_id</code> field contains the ID of the requestor.</td>
 </tr>
 <tr>
 <td><code>syslog</code></td>
@@ -895,7 +905,7 @@ name = 'requests' OR name = 'cpu' OR name = 'response_ms' OR name = 'disk'
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../stochastic_logs/" class="btn btn-neutral float-right" title="____ Logs Source"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../stochastic_logs/" class="btn btn-neutral float-right" title="____ Logs Source">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../stochastic/" class="btn btn-neutral" title="____ Stochastic Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>
