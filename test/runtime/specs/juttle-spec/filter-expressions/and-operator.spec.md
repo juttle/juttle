@@ -19,7 +19,7 @@
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 4
+    emit -from Date.new(0) -limit 1
       | filter x != null AND x < null
       | view result
 

@@ -45,6 +45,10 @@
     { "host":"nyc.2", "service":"index", "count":422 }
     { "host":"nyc.2", "service":"authentication", "count":422 }
 
+### Warnings
+
+  * group by undefined field "service"
+
 ## historic read with source and a filter
 ### Juttle
     read stochastic -source "cdn" -nhosts 3 -from Date.new(0) -to Date.new(60)
@@ -56,6 +60,10 @@
     { "host":"sea.0", "service":null, "count":122 }
     { "host":"sea.0", "service":"search", "count":422 }
     { "host":"sea.0", "service":"authentication", "count":422 }
+
+### Warnings
+
+  * group by undefined field "service"
 
 ## historic read with source and a filter containing NOT
 
@@ -71,6 +79,10 @@ Regression test for PROD-8651.
     { "host":"sea.0", "service":null, "count":122 }
     { "host":"sea.0", "service":"search", "count":422 }
     { "host":"sea.0", "service":"authentication", "count":422 }
+
+### Warnings
+
+  * group by undefined field "service"
 
 ## historic read with source and -type metric
 ### Juttle

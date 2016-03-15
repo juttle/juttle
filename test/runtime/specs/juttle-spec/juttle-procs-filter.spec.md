@@ -18,3 +18,4 @@
 ### Warnings
 
   * Invalid operand types for ">": null and number (0).
+  * Invalid operand types for ">": null and number (0).
