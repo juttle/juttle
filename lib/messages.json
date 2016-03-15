@@ -125,5 +125,10 @@
   "INVALID-OPTION-COMBINATION": "option {option} can only be used with {rule}",
   "FILTER-FEATURE-NOT-SUPPORTED": "Filters do not support {feature} in this context.",
   "HTTP-ERROR": "HTTP request failed with {status}: {message}",
-  "CANNOT-FILTER-ON-TIME": "Cannot filter on \"time\" in read. Use -to, -from, or -last instead."
+  "CANNOT-FILTER-ON-TIME": "Cannot filter on \"time\" in read. Use -to, -from, or -last instead.",
+
+  "UNKNOWN-INPUT": "Unknown input type {input_type}",
+  "INPUT-REQ-PARAMS-MISSING": "Input \"{input_id}\" is missing the follow required param(s): {missing_params}",
+  "INPUT-INVALID-PARAM": "Input \"{input_id}\" has an invalid param \"{param}\" with value \"{param_value}\": {message}",
+  "INPUT-INVALID-VALUE": "Invalid value \"{value}\" for input \"{input_id}\": {message}"
 }

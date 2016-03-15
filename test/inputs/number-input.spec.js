@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var NumberInput = require('../../lib/inputs/number-input');
+var expectError = require('./input-test-utils').expectError;
 
 describe('number input', () => {
     describe('valid cases', () => {
@@ -9,7 +10,7 @@ describe('number input', () => {
             id: 'id',
             type: 'number',
             value: 1,
-            options: {
+            params: {
                 default: 1
             }
         };
@@ -19,7 +20,7 @@ describe('number input', () => {
         }
 
         it('handles normal input with default and value', () => {
-            let input = new NumberInput('id', testObj.options);
+            let input = new NumberInput('id', testObj.params);
             expect(input.toObj()).to.deep.equal(testObj);
 
             input.setValue(2);
@@ -36,17 +37,25 @@ describe('number input', () => {
 
     describe('error cases', () => {
         it('non number default throws error', () => {
-            expect(() => {
-                new NumberInput('id', {
-                    default: { 'obj': 5 }
-                });
-            }).to.throw(/invalid input value/);
+            let err = expectError(() => new NumberInput('id', { default: { 'obj': 5 } }));
+
+            expect(err.code).to.equal('INPUT-INVALID-PARAM');
+            expect(err.info).to.contain({
+                input_id: 'id',
+                param: 'default'
+            });
+            expect(err.info.param_value).to.eql({ 'obj': 5 });
         });
 
         it('setting string value throws error', () => {
             let input = new NumberInput('id');
+            let err = expectError(() => input.setValue('hi'));
 
-            expect(() => input.setValue('hi')).to.throw(/invalid input value/);
+            expect(err.code).to.equal('INPUT-INVALID-VALUE');
+            expect(err.info).to.contain({
+                input_id: 'id',
+                value: 'hi'
+            });
         });
     });
 });

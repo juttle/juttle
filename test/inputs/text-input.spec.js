@@ -2,6 +2,7 @@
 
 var expect = require('chai').expect;
 var TextInput = require('../../lib/inputs/text-input');
+var expectError = require('./input-test-utils').expectError;
 
 describe('text input', () => {
     describe('valid cases', () => {
@@ -9,7 +10,7 @@ describe('text input', () => {
             id: 'id',
             type: 'text',
             value: 'default value',
-            options: {
+            params: {
                 default: 'default value'
             }
         };
@@ -19,7 +20,7 @@ describe('text input', () => {
         }
 
         it('handles normal text input with default and value', () => {
-            let input = new TextInput('id', testObj.options);
+            let input = new TextInput('id', testObj.params);
             expect(input.toObj()).to.deep.equal(testObj);
 
             input.setValue('other value');
@@ -35,7 +36,7 @@ describe('text input', () => {
                 id: 'id',
                 type: 'text',
                 value: '',
-                options: {}
+                params: {}
             });
         });
 
@@ -47,8 +48,8 @@ describe('text input', () => {
 
             expect(input.toObj()).to.deep.equal(updateTestObj({
                 value: '10',
-                options: {
-                    default: 5
+                params: {
+                    default: '5'
                 }
             }));
         });
@@ -56,11 +57,16 @@ describe('text input', () => {
 
     describe('error cases', () => {
         it('non string or number default throws error', () => {
-            expect(() => {
-                new TextInput('id', {
-                    default: { 'obj': 5 }
-                });
-            }).to.throw(/invalid input value/);
+            let err = expectError(() => {
+                new TextInput('id', { default: { 'obj': 5 } });
+            });
+
+            expect(err.code).to.equal('INPUT-INVALID-PARAM');
+            expect(err.info).to.contain({
+                input_id: 'id',
+                param: 'default'
+            });
+            expect(err.info.param_value).to.deep.equal({ 'obj': 5 });
         });
 
         it('non string or number value throws error', () => {
@@ -68,7 +74,11 @@ describe('text input', () => {
                 default: 'default'
             });
 
-            expect(input.setValue.bind(input, [1, 2])).to.throw(/invalid input value/);
+            let err = expectError(() => input.setValue([1, 2]));
+
+            expect(err.code).to.equal('INPUT-INVALID-VALUE');
+            expect(err.info.input_id).to.equal('id');
+            expect(err.info.value).to.eql([1, 2]);
         });
     });
 });
