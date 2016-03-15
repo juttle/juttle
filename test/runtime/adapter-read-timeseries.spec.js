@@ -102,12 +102,10 @@ describe('read testTimeseries', function () {
         .then(function(result) {
             var expected = [
                 { tick: true, dt: '00:00:00.000'},
-                { tick: true, dt: '00:00:01.000'},
-                { tick: true, dt: '00:00:02.000'},
                 { count: 0, dtProg: 0, dtReal: 2 },
-                { tick: true, dt: '00:00:03.000'},
-                { tick: true, dt: '00:00:04.000'},
+                { tick: true, dt: '00:00:01.000'},
                 { count: 1, dtProg: 2, dtReal: 2 },
+                { tick: true, dt: '00:00:02.000'},
             ];
             expect(result.sinks.result).deep.equal(expected);
         });
