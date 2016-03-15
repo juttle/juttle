@@ -355,6 +355,10 @@
         
             
   
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../parsers/">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -668,13 +672,18 @@
 </tr>
 <tr>
 <td><code>-pageStart</code></td>
-<td>Initial value of the paging offset to set the <code>pageParam</code>to in the URL used to make the HTTP request</td>
+<td>Initial value of the paging offset to set the <code>pageParam</code>to in the URL used to make the HTTP request.</td>
 <td align="right">No; default: <code>0</code></td>
 </tr>
 <tr>
 <td><code>-pageUnit &lt;request|record&gt;</code></td>
 <td>If set to <code>request</code> then each successive HTTP paging request increments the paging query parameter by one. If set to <code>record</code> then each successive request increments the paging query parameter by the number of records returned in the previous request.</td>
 <td align="right">No; default: <code>request</code></td>
+</tr>
+<tr>
+<td><code>-pageField</code></td>
+<td>If set, then each successive HTTP paging request sets the paging query parameter to the last value of the field with name <code>pageField</code> Cannot be used with <code>pageStart</code>or <code>pageUnit</code></td>
+<td align="right">No</td>
 </tr>
 </tbody>
 </table>
@@ -744,6 +753,24 @@ read http -url &quot;https://api.github.com/repos/${owner}/${repo}/issues?page=$
           -headers { 'User-Agent': 'http-adapter-example' }
 | keep title, created_at, state, number
 | put time=Date.new(created_at)
+| view text
+</code></pre>
+
+<p><em>Example</em></p>
+<p>Example of how to access the Travis CI builds api and retrieve daily
+build counts for a given repository. This uses the -pageParam,
+-pageUnit=field, and -pageField options:</p>
+<pre><code>read http -url &quot;https://api.travis-ci.org/repos/juttle/juttle/builds&quot;
+    -headers {
+        'Authorization': 'token --TRAVIS-CI-AUTH-TOKEN-HERE--',
+        'Accept': 'application/vnd.travis-ci.2+json',
+        'User-Agent': 'Juttle TravisCI Testing'
+    }
+    -rootPath &quot;builds&quot;
+    -timeField 'finished_at'
+    -pageField &quot;number&quot;
+    -pageParam &quot;after_number&quot;
+| keep time, number, state
 | view text
 </code></pre>
 

@@ -1,2 +1,0 @@
-read file -file '/tmp/github_data_joined.json' -from :2015-06-01: -to :2015-07-01:
-| write elastic

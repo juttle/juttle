@@ -1,3 +1,0 @@
-read file -file '/tmp/data.json'
-| reduce -every :day: count=count() by type
-| view timechart

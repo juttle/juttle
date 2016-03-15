@@ -6,12 +6,12 @@ sub historical_points() {
   | put value = Math.floor(Math.random() * 100)
 }
 historical_points 
-| reduce avg(value), stdev = sigma(value)
+| reduce avg(value), stdev = stdev(value)
 | view table -title "Historical average and standard deviation"
 ;
 historical_points 
 | batch 5 
-| reduce avg(value), stdev = sigma(value) 
+| reduce avg(value), stdev = stdev(value) 
 | view table
     -update "append" 
     -title "Historical 5-second average and standard deviation"
@@ -25,7 +25,7 @@ sub live_points() {
 }
 live_points 
 | batch 3 
-| reduce avg(value), stdev = sigma(value)
+| reduce avg(value), stdev = stdev(value)
 | view table 
     -update "append" 
     -title "Live 3-second average and standard deviation"

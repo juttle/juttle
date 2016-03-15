@@ -1,5 +1,0 @@
-read file -file '/tmp/data.json'
-|(
-  reduce total_points = count();
-  head 1
-)

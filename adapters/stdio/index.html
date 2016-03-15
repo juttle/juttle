@@ -355,6 +355,10 @@
         
             
   
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../parsers/">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -587,7 +591,7 @@
 </ul>
 </div>
 <h2 id="read-stdio">read stdio</h2>
-<p>Supported formats are JSON array, JSON lines and CSV; see examples below.</p>
+<p>Supported formats are JSON array, JSON lines, column-aligned text, and CSV; see examples below.</p>
 <pre><code class="text">read stdio [-format &lt;format&gt;] [-timeField &lt;fieldname&gt;]
 </code></pre>
 
@@ -612,8 +616,13 @@
 </tr>
 <tr>
 <td><code>-pattern</code></td>
-<td>When <code>-format='grok'</code>you can specify the grok matching pattern here. More information on grok <a href="../parsers/grok/">here</a></td>
+<td>When <code>-format 'grok'</code>you can specify the grok matching pattern here. More information on grok <a href="../parsers/grok/">here</a></td>
 <td align="right">No</td>
+</tr>
+<tr>
+<td><code>-separator</code></td>
+<td>When <code>-format 'csv'</code> you can specify the separator between columns in a CSV file.</td>
+<td align="right">No: defaults to <code>,</code></td>
 </tr>
 </tbody>
 </table>
@@ -623,6 +632,11 @@ Timeless data, which contains no timestamps, is acceptable; however certain oper
 <p><em>Example: redirect a JSON file to your juttle program</em></p>
 <p>This is an example using the CLI since this is where the stdio adapter comes in handy:</p>
 <pre><code class="bash">cat myfile.json | juttle -e &quot;read stdio | filter hostname = 'lemoncake' | view table&quot;
+</code></pre>
+
+<p><em>Example: count the processes holding the most open files</em></p>
+<p>This is an example using column-aligned text formatting that comes as the output of UNIX commands like lsof.</p>
+<pre><code class="bash">lsof | juttle -e &quot;read stdio -format 'columns' | reduce count() by COMMAND | sort count -desc | head 10 | view table&quot;
 </code></pre>
 
 <h2 id="write-stdio">write stdio</h2>

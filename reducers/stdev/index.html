@@ -7,7 +7,7 @@
   
   
   
-  <title>____ sigma - Juttle Language Reference</title>
+  <title>____ stdev - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ sigma";
-    var mkdocs_page_input_path = "reducers/sigma.md";
-    var mkdocs_page_url = "/reducers/sigma/";
+    var mkdocs_page_name = "____ stdev";
+    var mkdocs_page_input_path = "reducers/stdev.md";
+    var mkdocs_page_url = "/reducers/stdev/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -355,6 +355,10 @@
         
             
   
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../adapters/parsers/">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -559,12 +563,12 @@
         
       
     
-    <li>____ sigma</li>
+    <li>____ stdev</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/sigma.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/stdev.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -575,9 +579,9 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="sigma">sigma</h1>
+                <h1 id="stdev">stdev</h1>
 <p>Return the standard deviation of the value of the specified field.</p>
-<pre><code>put|reduce sigma(field)
+<pre><code>put|reduce stdev(field)
 </code></pre>
 
 <table>
@@ -608,12 +612,12 @@ sub historical_points() {
   | put value = Math.floor(Math.random() * 100)
 }
 historical_points 
-| reduce avg(value), stdev = sigma(value)
+| reduce avg(value), stdev = stdev(value)
 | view table -title &quot;Historical average and standard deviation&quot;
 ;
 historical_points 
 | batch 5 
-| reduce avg(value), stdev = sigma(value) 
+| reduce avg(value), stdev = stdev(value) 
 | view table
     -update &quot;append&quot; 
     -title &quot;Historical 5-second average and standard deviation&quot;
@@ -627,7 +631,7 @@ sub live_points() {
 }
 live_points 
 | batch 3 
-| reduce avg(value), stdev = sigma(value)
+| reduce avg(value), stdev = stdev(value)
 | view table 
     -update &quot;append&quot; 
     -title &quot;Live 3-second average and standard deviation&quot;

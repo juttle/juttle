@@ -355,6 +355,10 @@
         
             
   
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../adapters/parsers/">Parsers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -616,11 +620,11 @@ emit -limit 1000 -from Date.new(0)
 | reduce
    pure_mean = avg(pure),
    pure_median = percentile(pure, 0.5),
-   pure_sd = sigma(pure),
+   pure_sd = stdev(pure),
    pure_mad = mad(pure) * 1.48, // the 1.48 factor scales normal MAD to be same as normal SD
    mixed_mean = avg(mixed),
    mixed_median = percentile(mixed, 0.5),
-   mixed_sd = sigma(mixed),
+   mixed_sd = stdev(mixed),
    mixed_mad = mad(mixed) * 1.48
 | view table -columnOrder ['pure_mean', 'pure_sd', 'pure_median', 'pure_mad', 'mixed_mean', 'mixed_sd', 'mixed_median', 'mixed_mad']
 </code></pre>

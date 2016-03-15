@@ -1,3 +1,0 @@
-read file -file '/tmp/data.json'
-| reduce -over :2 weeks: -every :day: count=count()
-| view timechart

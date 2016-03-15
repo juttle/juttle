@@ -1,2 +1,0 @@
-read elastic -from :2015-01-01: -to :2015-07-02: 'logging'
-| reduce by repo_name
