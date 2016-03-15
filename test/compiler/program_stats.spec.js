@@ -265,10 +265,10 @@ describe('Program instrumentation', function() {
         imports: 1
     });
 
-    test('input a: text -default ""; input b: dropdown -default ""; emit | view view', {
+    test('input a: text -default ""; input b: select -items ["a", "b"]; emit | view view', {
         inputs: {
             text: 1,
-            dropdown: 1
+            select: 1
         },
         input_total: 2,
         source_total: 1,

@@ -1,11 +1,15 @@
 'use strict';
 
-var expect = require('chai').expect;
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
 var juttle_test_utils = require('../runtime/specs/juttle-test-utils');
 var compile_juttle = juttle_test_utils.compile_juttle;
 var check_juttle = juttle_test_utils.check_juttle;
 var input_default_fns = require('../spec/input-default-functions');
 var Filter = require('../../lib/runtime/types/filter');
+
+chai.use(chaiAsPromised);
+var expect = chai.expect;
 
 describe('Juttle inputs', function() {
 
@@ -14,7 +18,7 @@ describe('Juttle inputs', function() {
     });
 
     it('gadgets in a const declaration', function() {
-        return check_juttle({program: 'input a: number; input b: message; ' +
+        return check_juttle({program: 'input a: number; input b: text; ' +
                                 'emit -from :0: -limit a | put message=b | view sink',
                     inputs: {
                         a: 1,
@@ -79,14 +83,26 @@ describe('Juttle inputs', function() {
 
     // Regression test for PROD-7780.
     it('gadgets with an array without [...] as an option', function() {
-        return check_juttle({program: 'input d: dropdown -items "a", "b", "c";' +
+        return check_juttle({program: 'input d: select -items "a", "b", "c";' +
                                 'emit -from :0: -limit 1 | view sink',
                              inputs: {
                                  d: 'a'
                              }});
     });
 
-    describe('gadgets producing a filter', function() {
+    describe('inputs depending on inputs', function() {
+        it('label gets populated with view of input', () => {
+            return check_juttle({
+                program: 'input a: text; input b: text -label a;' +
+                         'emit | view sink'
+            })
+            .then((res) => {
+                // console.log(res);
+            });
+        });
+    });
+
+    describe.skip('gadgets producing a filter', function() {
         it('returns correct result with a valid filter', function() {
             return check_juttle({program: 'input f: filter; ' +
                                  'emit -from :0: -limit 3 | put c = count() | filter f | view sink',
@@ -159,21 +175,18 @@ describe('Juttle inputs', function() {
                 });
         });
 
-        it('is filled-in using the supplied implicit default function when there is no -default and no value is supplied', function() {
+        it('is filled-in using the with input default when there is no -default and no value is supplied', function() {
             return check_juttle({program: 'input a: text;' +
                                     'emit -from :0: -limit 1 | put message = a | view sink',
-                        inputs: {},
-                        input_defaults: {
-                            text: function(input) { return 'implicit default'; }
-                        }})
+                        inputs: {}})
                 .then(function(res) {
                     expect(res.sinks.sink.length).equal(1);
-                    expect(res.sinks.sink[0].message).equal('implicit default');
+                    expect(res.sinks.sink[0].message).equal('');
                 });
         });
 
         it('handles arrays', function() {
-            return check_juttle({program: 'input d: dropdown -items [["a", "b", "c"]];' +
+            return check_juttle({program: 'input d: select -items [["a", "b", "c"]];' +
                                     'emit -from :0: -limit 1 | put message = d | view sink',
                         inputs: {d: ['a', 'b', 'c']},
                         input_defaults: input_default_fns})
@@ -184,14 +197,45 @@ describe('Juttle inputs', function() {
         });
 
 
-        it('is "" when no implicit default function is supplied, there is no -default, and no value is supplied', function() {
+        it('is "" when there is no -default, and no value is supplied', function() {
             return check_juttle({program: 'input a: text;' +
                                     'emit -from :0: -limit 1 | put message = a | view sink',
                         inputs: {}})
                 .then(function(res) {
                     expect(res.sinks.sink.length).equal(1);
-                    expect(res.sinks.sink[0].message).equal(null);
+                    expect(res.sinks.sink[0].message).equal('');
                 });
         });
+    });
+
+    describe('error conditions', () => {
+        it('unknown input throws error', () => {
+            let promise = check_juttle({
+                program: 'input a: invalid; emit;'
+            });
+
+            expect(promise).to.be.rejectedWith(/Unknown input "invalid"/);
+        });
+
+        it('input value of array for text input throws error', () => {
+            let promise = check_juttle({
+                program: 'input a: text -default "default";' +
+                    'emit -from :0: -limit 1 | put message = a | view sink',
+                inputs: { a: ['a', 'b', 'c'] },
+            });
+
+            expect(promise).to.be.rejectedWith(/Invalid value "a,b,c" from input "a"/);
+        });
+
+        it('input value of string for number input throws error', () => {
+            let promise = check_juttle({
+                program: 'input a: number -default 0;' +
+                    'emit -from :0: -limit 1 | put message = a | view sink',
+                inputs: { a: 'error' }
+            });
+
+            expect(promise).to.be.rejectedWith(/Invalid value "error" from input "a"/);
+        });
+
     });
 });
