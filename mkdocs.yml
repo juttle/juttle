@@ -5,6 +5,8 @@ docs_dir: docs
 repo_url: https://github.com/juttle/juttle
 repo_docs_dir: docs
 
+google_analytics: ['UA-45515012-3', 'auto']
+
 dev_addr: '0.0.0.0:8000'
 
 theme: readthedocs
@@ -128,4 +130,3 @@ pages:
    - 'Conditionals': 'reference/conditionals.md'
    - 'CLI': 'reference/cli.md'
    - 'Style Guide': 'reference/style_guide.md'
-
