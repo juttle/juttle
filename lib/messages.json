@@ -79,6 +79,7 @@
   "PROC-MUST-END-FLOWGRAPH": "{proc} can only be used at the end of a flowgraph.",
   "WRONG-PROC-TYPE": "{proc} is a not a {type} proc.",
   "CANNOT-USE-AS-VARIABLE": "Cannot use a {thing} as a variable",
+  "CANNOT-USE-AS-FUNCTION-OR-REDUCER": "Cannot use an expression as a function or a reducer",
   "MISSING-FUNCTION-IN-REDUCER": "missing {function} in reducer {reducer}",
   "NON-TOPLEVEL-EXPORT": "Cannot export from within a {entity}",
   "NON-TOPLEVEL-IMPORT": "Cannot import from within a {entity}",
