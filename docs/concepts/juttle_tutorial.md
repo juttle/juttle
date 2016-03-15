@@ -229,7 +229,7 @@ step, we might want to know how many data points there are; the size of the data
 
 Let's look at aggregations first, and start by using the [`count()`](../reducers/count.md) reducer (aggregation functions are called "reducers" in Juttle), which simply counts the number of points that flow through it.
 
-*05_count_points.juttle* [[RUN](http://demo.juttle.io/?path=/examples/github-tutorial/github-tutorial/05_count_points.juttle)]
+*05_count_points.juttle* [[RUN](http://demo.juttle.io/?path=/examples/github-tutorial/05_count_points.juttle)]
 
 ```juttle
 read file -file '/tmp/data.json'
