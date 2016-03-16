@@ -22,6 +22,7 @@
     "bluebird": "^2.9.30",
     "cli-table": "^0.3.1",
     "cline": "^0.8.2",
+    "clone": "^1.0.2",
     "content-type": "^1.0.1",
     "csv-write-stream": "^1.0.0",
     "double-ended-queue": "^0.9.7",
