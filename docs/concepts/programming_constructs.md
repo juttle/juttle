@@ -192,7 +192,7 @@ You can reference the imported symbol(s) like this:
 ```
 
 -  local_name is the local name from the import command above.
--  symbol_name is the name of the exported subgraph, constant, function, 
+-  symbol_name is the name of the exported subgraph, constant, function,
    or other code fragment from the imported program file.
 
 Module Behavior
@@ -215,7 +215,7 @@ When defining or importing modules:
 
 _Example: export from module_
 
-This juttle module exports a function, a subgraph, and a constant. 
+This juttle module exports a function, a subgraph, and a constant.
 
 ```juttle
 export const pi = 3.14;                                // exported constant
@@ -223,8 +223,8 @@ const not_exported = 2;                                     // not exported
 export function double(x) { return x * not_exported; } // exported function
 
 export sub stamper(mark) {                             // exported subgraph
-	put stamp = mark
-	| put stamp2 = mark
+    put stamp = mark
+    | put stamp2 = mark
 }
 
 // top-level flowgraph is not exported
