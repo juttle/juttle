@@ -28,7 +28,7 @@
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 3 | put n=count(), time = :s: | view result
+    emit -from Date.new(0) -limit 1 | put n=count(), time = :s: | view result
 
 ### Warnings
 
@@ -43,6 +43,7 @@
 ### Warnings
 
    * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
@@ -56,6 +57,7 @@
 
 ### Warnings
 
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
    * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
@@ -152,4 +154,5 @@ of d is 2 instead of 3.
 
 ### Warnings
 
+  * Invalid operand types for ">": null and number (0).
   * Invalid operand types for ">": null and number (0).

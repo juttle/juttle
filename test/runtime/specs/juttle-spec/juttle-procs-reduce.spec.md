@@ -387,6 +387,9 @@ default values of null for when no -every is specified.
     { "count": 5, "x": 0, "y": null }
     { "count": 5, "x": 1, "y": null }
 
+### Warnings
+
+  * group by undefined field "y"
 
 ## custom reducer is torn down at batch epochs
 
@@ -456,18 +459,23 @@ default values of null for when no -every is specified.
 ### Warnings
 
   * Invalid operand types for ">": null and number (0).
+  * Invalid operand types for ">": null and number (0).
 
 ## Allows direct assignment to the `time` field
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 6 | reduce -every :2s: time = first(time) + :1m: | view result
+    emit -from Date.new(0) -limit 4 | reduce -every :2s: time = first(time) + :1m: | view result
 
 ### Output
 
     { time: "1970-01-01T00:01:00.000Z" }
     { time: "1970-01-01T00:01:02.000Z" }
-    { time: "1970-01-01T00:01:04.000Z" }
+
+### Warnings
+
+   * out-of-order assignment of time
+   * out-of-order assignment of time
 
 ## complains about out-of-order points
 
@@ -521,11 +529,12 @@ default values of null for when no -every is specified.
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 6 | batch :s: | reduce -reset false time = last(time) - 2 * count() * :s: | view result
+    emit -from Date.new(0) -limit 2 | batch :s: | reduce -reset false time = last(time) - 2 * count() * :s: | view result
 
 ### Warnings
 
    * out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
 
 ## complains about out-of-order assignment to the `time` field with -every
 

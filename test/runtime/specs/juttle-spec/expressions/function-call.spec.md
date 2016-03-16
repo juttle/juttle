@@ -251,7 +251,7 @@ in runtime.
         error 'Boom!';
     }
 
-    emit -from :0: -limit 10 | put a = f()
+    emit -from :0: -limit 1 | put a = f()
 
 ### Output
 
@@ -273,7 +273,7 @@ in runtime.
         error 'Boom!';
     }
 
-    emit -from :0: -limit 10 | reduce a = f()
+    emit -from :0: -limit 1 | reduce a = f()
 
 ### Output
 
@@ -295,7 +295,7 @@ in runtime.
         error 'Boom!';
     }
 
-    emit -from :0: -limit 10 | filter f() < 5
+    emit -from :0: -limit 1 | filter f() < 5
 
 ### Output
 

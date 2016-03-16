@@ -1,10 +1,24 @@
 # Juttle "sort" processor
 
+## Limits: sort emits warning about dropped points
+
+### Juttle
+
+    emit -limit 2 -hz 10 | put c=count() | sort -limit 1 c | keep c | view result
+
+### Output
+
+    
+
+### Warnings
+
+  * sort limit exceeded, dropping points
+
 ## Limits: non-batched flow
 
 ### Juttle
 
-    emit -limit 10 -hz 10 | put c=count() | sort -limit 3 c | keep c | view result
+    emit -limit 3 -hz 10 | put c=count() | sort -limit 3 c | keep c | view result
 
 ### Output
 
@@ -16,7 +30,7 @@
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 10 -hz 10 | put c=count() | sort -limit 3 c | keep c | view result
+    emit -from Date.new(0) -limit 3 -hz 10 | put c=count() | sort -limit 3 c | keep c | view result
 
 ### Output
 
@@ -28,7 +42,7 @@
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 10 -hz 10 | batch 0.5 | put c=count() | sort -limit 3 c
+    emit -from Date.new(0) -limit 10 -hz 10 | batch 0.5 | put c=count() | sort -limit 4 c
       | keep c | view result
 
 ### Output
@@ -36,15 +50,22 @@
     {"c":1}
     {"c":2}
     {"c":3}
+    {"c":4}
     {"c":1}
     {"c":2}
     {"c":3}
+    {"c":4}
+
+### Warnings
+
+  * sort limit exceeded, dropping points
+  * sort limit exceeded, dropping points
 
 ## Limits: non-batched flow, point by point, by grouping
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 10 -hz 10 | put c=count(), d=c%2 | sort -limit 2 c by d | keep c, d| sort c | view result
+    emit -from Date.new(0) -limit 2 -hz 10 | put c=count(), d=c%2 | sort -limit 2 c by d | keep c, d| sort c | view result
 
 ### Output
 
@@ -55,15 +76,24 @@
 
 ### Juttle
 
-    emit -from Date.new(0) -limit 10 -hz 10 | batch 0.5 | put c=count(), d=c%2 | sort -limit 2 c by d
+    emit -from Date.new(0) -limit 10 -hz 10 | batch 0.5 | put c=count(), d=c%4 | sort -limit 4 c by d
       | sort c | keep c, d | view result
 
 ### Output
 
     {"c":1,"d":1}
-    {"c":2,"d":0}
+    {"c":2,"d":2}
+    {"c":3,"d":3}
+    {"c":4,"d":0}
     {"c":1,"d":1}
-    {"c":2,"d":0}
+    {"c":2,"d":2}
+    {"c":3,"d":3}
+    {"c":4,"d":0}
+
+### Warnings
+
+  * sort limit exceeded, dropping points
+  * sort limit exceeded, dropping points
 
 ## Timestamps: unbatched flow
 

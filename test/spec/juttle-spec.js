@@ -151,15 +151,15 @@ class SpecRenderer {
         if (test.output !== null) {
             parts.push('            expect(res.sinks.result).to.deep.equal(' + util.inspect(test.output, { depth: null }) + ');');
         }
-        if (test.errors.length > 0) {
-            for (var erri=0 ; erri < test.errors.length ; erri++) {
-                parts.push('            expect(res.errors[' + erri + ']).to.include(' + JSON.stringify(test.errors[erri]) + ');');
-            }
+
+        parts.push('            expect(res.errors.length, "Expected test to emit ' + test.errors.length + ' errors: " + JSON.stringify(res.errors)).to.equal(' + test.errors.length + ');');
+        for (var erri=0 ; erri < test.errors.length ; erri++) {
+            parts.push('            expect(res.errors[' + erri + ']).to.include(' + JSON.stringify(test.errors[erri]) + ');');
         }
-        if (test.warnings.length > 0) {
-            for (var warni=0 ; warni < test.warnings.length ; warni++) {
-                parts.push('            expect(res.warnings[' + warni + ']).to.include(' + JSON.stringify(test.warnings[warni]) + ');');
-            }
+
+        parts.push('            expect(res.warnings.length, "Expected test to emit ' + test.warnings.length + ' warnings: " + JSON.stringify(res.warnings)).to.equal(' + test.warnings.length + ');');
+        for (var warni=0 ; warni < test.warnings.length ; warni++) {
+            parts.push('            expect(res.warnings[' + warni + ']).to.include(' + JSON.stringify(test.warnings[warni]) + ');');
         }
 
         if (test.errors.length > 0) {

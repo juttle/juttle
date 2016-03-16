@@ -42,7 +42,7 @@
     emit -limit 6 -from Date.new(0)
     | put x = count()
     | select.median -field 'x'
-    | sort parity
+    | keep x
     | view result
 
 ### Output

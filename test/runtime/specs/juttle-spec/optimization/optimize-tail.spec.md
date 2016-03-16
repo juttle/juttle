@@ -44,7 +44,7 @@
 
 ### Juttle
 
-    read test -debug 'optimization' | tail 10 by bananas | view result
+    read test -debug 'optimization' | tail 10 by type | view result
 
 ### Output
 
