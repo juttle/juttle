@@ -159,7 +159,8 @@ function perform_compile(options) {
         moduleResolver: options.resolver,
         inputs: options.inputs,
         stripLocations: options.stripLocations,
-        implicit_view: config.implicit_view
+        implicit_view: config.implicit_view,
+        filename: options.filename
     };
 
     return compiler.compile(options.juttle_src, compile_options);
@@ -245,8 +246,9 @@ function perform_mode(options)
 
     var perform_options = {
         juttle_src: options.juttle_src,
-        resolver: function(module_name) {
-            return resolver(module_name)
+        filename: options.filename ? options.filename : 'main',
+        resolver: function(module_path, module_name, importer_path) {
+            return resolver(module_path, module_name, importer_path)
                 .then(function(module) {
                     modules[module.name] = module.source;
                     return module;
@@ -337,7 +339,7 @@ function setupCline() {
         perform_mode({
             action: mode,
             juttle_src: juttle_src,
-            filename: args.path
+            filename: path.resolve(args.path)
         });
     });
 
@@ -430,7 +432,7 @@ if (opts._.length > 1) {
         action: mode,
         juttle_src: juttle_src,
         prompt_when_done: false,
-        filename: opts._[0]
+        filename: path.resolve(opts._[0])
     })
     .then(function() {
         process.exit(0);
