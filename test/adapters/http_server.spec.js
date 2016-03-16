@@ -276,7 +276,7 @@ describe('read http_server', function() {
             return finish;
         })
         .then(function(results) {
-            expect(results.errors).to.deep.equal(['Invalid CSV data: Error: Row length does not match headers']);
+            expect(results.errors).to.deep.equal(['Invalid CSV data: "Red Dragon, 24.04" at line 2 does not match header line']);
             expect(results.sinks.table.length).to.equal(1);
         });
     });

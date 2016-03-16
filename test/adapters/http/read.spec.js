@@ -470,7 +470,7 @@ describe('HTTP read tests', function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '"} ' +
                              '          -url "' + server.url + '/objects?foo=' +
-                             Array(2048).join('X') + '&count=100" | head 1'
+                             Array(8*1024).join('X') + '&count=100" | head 1'
                 })
                 .then((result) => {
                     expect(result.errors.length).to.be.equal(0);
@@ -491,7 +491,7 @@ describe('HTTP read tests', function() {
                 return check_juttle({
                     program: 'read http -headers { Accept: "' + contentType + '"} ' +
                              '          -url "' + server.url + '/objects?foo=' +
-                             Array(2048).join('X') + '&count=100" | head 2 | head 1'
+                             Array(8*1024).join('X') + '&count=100" | head 2 | head 1'
                 })
                 .then((result) => {
                     expect(result.errors.length).to.be.equal(0);
