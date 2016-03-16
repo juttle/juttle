@@ -1,0 +1,3 @@
+emit -points [{array: ["banana", "pajama"]}]
+| put elements = Array.slice(array, 0, 1)
+| keep elements, array

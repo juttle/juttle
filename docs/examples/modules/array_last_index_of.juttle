@@ -1,0 +1,1 @@
+emit -points [{result: Array.lastIndexOf(['A','B', 'B'], 'B')}]
