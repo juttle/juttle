@@ -43,6 +43,7 @@ var URLResolver = require('../lib/module-resolvers/url-resolver');
 var FileResolver = require('../lib/module-resolvers/file-resolver');
 var resolver_utils = require('../lib/module-resolvers/resolver-utils');
 var compiler = require('../lib/compiler');
+var errors = require('../lib/errors');
 
 var modes = _.without(compiler.stageNames, 'eval').concat('run');
 function usage() {
@@ -219,11 +220,6 @@ function perform_run(options) {
     });
 }
 
-function is_juttle_error(e)
-{
-    return (_.has(e.info, 'location') && _.has(e.info.location, 'start'));
-}
-
 function perform_mode(options)
 {
     if (options.prompt_when_done === undefined) {
@@ -273,15 +269,14 @@ function perform_mode(options)
         // Log the full error object at debug level to get the stack trace
         logger.debug('juttle error:', e, e.stack, Object.keys(e));
 
-        // If the error doesn't have a location, it's not a juttle error. Just re-throw it.
-        if (is_juttle_error(e)) {
-            console.error(CliErrors.show_in_context({
-                err: e,
+        // If it's a juttle error, try to show it in context and go
+        // back to the prompt. Otherwise, re-throw it.
+        if (e instanceof errors.JuttleError) {
+            CliErrors.handle_juttle_error(e, {
                 program: options.juttle_src,
                 modules: modules,
                 filename: options.filename
-            }));
-
+            });
             if (options.prompt_when_done) {
                 cli.prompt(prompt);
             } else {
