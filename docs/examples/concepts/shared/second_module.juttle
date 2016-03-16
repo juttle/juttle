@@ -1,1 +1,4 @@
+// examples-check:ignore
+// This module exports a single constant value.
+
 export const value = 10;

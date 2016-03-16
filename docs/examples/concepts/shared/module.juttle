@@ -1,3 +1,7 @@
+// examples-check:ignore
+// This module imports a second module and then exports the value from
+// that module.
+
 import './second_module.juttle' as mod2;
 
 export const myvalue=mod2.value;
