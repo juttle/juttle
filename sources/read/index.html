@@ -617,17 +617,17 @@
 </tr>
 <tr>
 <td><code>-to</code></td>
-<td>End time, exclusive: stream points whose time stamps are less than the specified moment, which is less than or equal to :now: <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. <br><br>:information_source: <code>Note:</code> To stream live data only, omit -from and use <code>-to :end:</code>. To combine historical and live data, specify a -from value in the past and use <code>-to :end:</code>.</td>
+<td>End time, exclusive: stream points whose time stamps are less than the specified moment, which is less than or equal to :now: <br><br>See <a href="../../reference/time/">Time notation in Juttle</a> for syntax information. <br><br>:information_source: <code>Note:</code>To stream live data only, omit -from and use <code>-to :end:</code> To combine historical and live data, specify a -from value in the past and use <code>-to :end:</code></td>
 <td align="right">Depending on the adapter</td>
 </tr>
 <tr>
 <td><code>-last</code></td>
-<td>Shorthand syntax for to <code>-from (:now: - duration) -to :now:</code>, this specifies a historical time window of the specified duration that ends at the present moment.</td>
+<td>Shorthand syntax for to <code>-from (:now: - duration) -to :now:</code> this specifies a historical time window of the specified duration that ends at the present moment.</td>
 <td align="right">No</td>
 </tr>
 <tr>
 <td><code>adapter-options</code></td>
-<td>Additional <code>-&lt;key&gt; &lt;value&gt;</code> options specific to reading from the chosen backend, handled by the adapter.</td>
+<td>Additional <code>-&lt;key&gt; &lt;value&gt;</code>options specific to reading from the chosen backend, handled by the adapter.</td>
 <td align="right">See adapter documentation</td>
 </tr>
 <tr>
@@ -649,7 +649,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../processors/" class="btn btn-neutral float-right" title="Processors">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../processors/" class="btn btn-neutral float-right" title="Processors"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../emit/" class="btn btn-neutral" title="____ emit"><span class="icon icon-circle-arrow-left"></span> Previous</a>

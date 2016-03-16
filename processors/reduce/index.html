@@ -616,7 +616,7 @@ optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving
 </tr>
 <tr>
 <td><code>-over</code></td>
-<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code> interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code> updates a trailing hourly average every minute). <br><br>When <code>-over</code> is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code> has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code>. <br><br>If <code>-over</code> is :forever:, the reducer emits results cumulatively, over all points seen so far. <br><br>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
+<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <br><br>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> <br><br>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. <br><br>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
 <td align="right">No; defaults to not using a moving window.</td>
 </tr>
 <tr>
@@ -631,22 +631,22 @@ optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving
 </tr>
 <tr>
 <td><code>-from</code></td>
-<td>When used with <code>-over</code>, the start time of the earliest full window of data.</td>
+<td>When used with <code>-over</code> the start time of the earliest full window of data.</td>
 <td align="right">No; if not specified, the earliest window begins with the earliest point or batch received.</td>
 </tr>
 <tr>
 <td><code>-to</code></td>
-<td>When used with <code>-over</code>, the end time of the last full window of data.</td>
+<td>When used with <code>-over</code> the end time of the last full window of data.</td>
 <td align="right">No; if not specified, the last point or batch time stamp received is assumed.</td>
 </tr>
 <tr>
 <td><code>-on</code></td>
-<td>A time alignment for <code>-every</code>. It may be a duration or a calendar offset less than <code>-every</code>. For example, <code>-every :hour: -on :00:30:00:</code> runs every hour on the half-hour, while <code>-every :month: -on :day 10:</code> runs a monthly computation on day 10 of the month.</td>
-<td align="right">No; if <code>-on</code> is not specified, output batches are aligned with the UNIX epoch, as if from a batch node.</td>
+<td>A time alignment for <code>-every</code> It may be a duration or a calendar offset less than <code>-every</code> For example, <code>-every :hour: -on :00:30:00:</code>runs every hour on the half-hour, while <code>-every :month: -on :day 10:</code>runs a monthly computation on day 10 of the month.</td>
+<td align="right">No; if <code>-on</code>is not specified, output batches are aligned with the UNIX epoch, as if from a batch node.</td>
 </tr>
 <tr>
 <td><code>fieldname=expr</code></td>
-<td>An assignment expression, where <code>expr</code> can be a <a href="../../reducers/">reducer</a> or a constant value. See <a href="#note-2">Note 2</a>.</td>
+<td>An assignment expression, where <code>expr</code>can be a <a href="../../reducers/">reducer</a> or a constant value. See <a href="#note-2">Note 2</a>.</td>
 <td align="right">At least one</td>
 </tr>
 <tr>
@@ -817,7 +817,7 @@ call_record
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../remove/" class="btn btn-neutral float-right" title="____ remove">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../remove/" class="btn btn-neutral float-right" title="____ remove"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../put/" class="btn btn-neutral" title="____ put"><span class="icon icon-circle-arrow-left"></span> Previous</a>
