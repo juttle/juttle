@@ -1,0 +1,3 @@
+import './second_module.juttle' as mod2;
+
+export const myvalue=mod2.value;
