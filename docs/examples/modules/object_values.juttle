@@ -1,0 +1,4 @@
+emit -points [{result: Object.values({'a': 1, 'b': 2})}]
+| split result
+| sort value
+| keep value

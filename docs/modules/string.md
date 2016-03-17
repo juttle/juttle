@@ -53,7 +53,7 @@ These are the basic string coercion rules:
     "myvalue", use `-option 'myvalue'`.
 
 - Arguments for reducer calls are not subject to string coercion
-    
+
     For example, if your program includes `reduce count(host)` then host
     must be defined elsewhere in your program. If you want to reduce by
     counting the instances of each value of your data's host field, use
@@ -103,11 +103,51 @@ regular expression, like this:
 
 ***
 
+## String.charAt
+
+Given a string and an index, returns the character at that index in the string. Returns an empty string if the index is out of bounds.
+```
+String.charAt(string, index)
+```
+
+Parameter  |  Description  |  Required?
+---------- | ------------- | ---------:
+`string`   | The string to return a character from   |  Yes
+`index`   | The index in `string` of the character to return|  Yes
+
+_Example_
+
+```
+{!docs/examples/modules/string_char_at.juttle!}
+```
+
+***
+
+## String.charCodeAt
+
+Given a string and an index, returns the character code at that index in the string. Returns `null` if the index is out of bounds.
+```
+String.charCodeAt(string, index)
+```
+
+Parameter  |  Description  |  Required?
+---------- | ------------- | ---------:
+`string`   | The string to return a character from   |  Yes
+`index`   | The index in `string` of the character code to return|  Yes
+
+_Example_
+
+```
+{!docs/examples/modules/string_char_code_at.juttle!}
+```
+
+***
+
 ## String.concat
 
 Combine two or more strings and return a new string.
 
-``` 
+```
 String.concat(string1, string2 [, string3 [, ..] ])
 ```
 
@@ -124,6 +164,25 @@ _Example_
 
 ***
 
+## String.fromCharCode
+
+Given a character code, returns a one-character string consisting of the character for that code.
+```
+String.fromCharCode(code)
+```
+
+Parameter  |  Description  |  Required?
+---------- | ------------- | ---------:
+`code`   | The code of the character to be stringified  |  Yes
+
+_Example_
+
+```
+{!docs/examples/modules/string_from_char_code.juttle!}
+```
+
+***
+
 ## String.indexOf
 
 Perform a substring search and return the index of the first match, or
@@ -131,7 +190,7 @@ Perform a substring search and return the index of the first match, or
 [String.search](../modules/string.md#stringsearch)
 for regex-based searches.
 
-``` 
+```
 String.indexOf(string, searchstring)
 ```
 
@@ -152,7 +211,7 @@ _Example: Find the first instance of "voodoo"_
 
 Return the length of a string.
 
-``` 
+```
 String.length(string)
 ```
 
@@ -164,11 +223,31 @@ _Example_
 
 ***
 
+## String.match
+
+Given a string and a regular expression, returns an array containing the matching substring and any captured substrings if the string matches the regular expression. Returns `null` if the string does not match the regular expression.
+```
+String.match(string, regexp)
+```
+
+Parameter  |  Description  |  Required?
+---------- | ------------- | ---------:
+`string`   | The string to check for a match   |  Yes
+`regexp`   | The regular expression to check `string` with |  Yes
+
+_Example_
+
+```
+{!docs/examples/modules/string_match.juttle!}
+```
+
+***
+
 ## String.replace
 
 Replace all or part of a string with another string.
 
-``` 
+```
 String.replace("original_string", "string_to_replace", "replacement_string")
 ```
 
@@ -184,7 +263,7 @@ _Example: Transform "hayneedlehay" into "hayFOUNDhay"_
 {!docs/examples/modules/string_replace_1.juttle!}
 ```
 
-_Example: Transform "hayneeeeeeedlehay" (or a similar string with one or more "e" characters) into "hayFOUNDhay"_ 
+_Example: Transform "hayneeeeeeedlehay" (or a similar string with one or more "e" characters) into "hayFOUNDhay"_
 
 ```
 {!docs/examples/modules/string_replace_2.juttle!}
@@ -198,7 +277,7 @@ Search for a match between a regular expression and a string. See also
 [String.indexOf](../modules/string.md#stringindexof)
 for simple substring searches.
 
-``` 
+```
 String.search(string, regexp)
 ```
 
@@ -219,7 +298,7 @@ _Example_
 
 Extract a section of a string and return it as a new string. See also [String.substr](../modules/string.md#stringsubstr) for length-based extraction.
 
-``` 
+```
 String.slice(string, beginSlice[, endSlice])
 ```
 
@@ -228,7 +307,7 @@ Parameter  |  Description  |  Required?
 `string`   | The string from which to extract the slice  |  Yes
 `beginSlice` | The zero-based index at which to begin extraction <p>If this value is negative, it is treated as `(sourceLength+beginSlice)`` where sourceLength is the length of the string. For example, if beginSlice is -3 it is treated as sourceLength-3, or three characters before the end of the string. </p>  |  Yes  
 `endSlice`  | The zero-based index at which to end extraction <p>If negative, it is treated as (sourceLength-endSlice) where sourceLength is the length of the string.  </p> |  No; defaults to the end of the string
-   
+
 _Example_
 
 ```
@@ -242,7 +321,7 @@ _Example_
 Split a string into an array of strings by separating the string into
 substrings.
 
-``` 
+```
 String.split(string, separator)
 ```
 
@@ -250,7 +329,7 @@ Parameter  | Description   |  Required?
 ---------- | ------------- | ---------:
 `string`   | The string to split. String is converted to an array of characters.   |  Yes
 `separator` |   One or more characters to use for separating the string. The separator is treated as if it is an empty string.  |   Yes
-      
+
 _Example_
 
 ```
@@ -263,7 +342,7 @@ _Example_
 
 Extract a portion of a string beginning at the `start` location through the specified `length` number of characters. Similar to [String.slice](../modules/string.md#stringslice), except the optional parameter is `length` rather than ending offset.
 
-``` 
+```
 String.substr(string, start[, length])
 ```
 
@@ -281,7 +360,7 @@ _Example: substr parameters_
 {!docs/examples/modules/string_substr_1.juttle!}
 ```
 
-_Example: using substr to shorten a name_ 
+_Example: using substr to shorten a name_
 
 ```
 {!docs/examples/modules/string_substr_2.juttle!}
@@ -293,7 +372,7 @@ _Example: using substr to shorten a name_
 
 Convert a string to lowercase characters.
 
-``` 
+```
 String.toLowerCase(string)
 ```
 
@@ -313,7 +392,7 @@ _Example: Convert a camel-case string to lowercase_
 
 Convert a string to uppercase characters.
 
-``` 
+```
 String.toUpperCase(string)
 ```
 
@@ -329,3 +408,19 @@ _Example: Convert a camel-case string to uppercase_
 
 ***
 
+## String.trim
+
+Returns the given string, minus any leading or trailing whitespace.
+```
+String.trim(string)
+```
+
+Parameter  | Description   |  Required?
+---------- | ------------- | ---------:
+`string`   | The string to trim | Yes
+
+_Example_
+
+```
+{!docs/examples/modules/string_trim.juttle!}
+```

@@ -1,0 +1,2 @@
+emit -points [{hello: 'hello'}]
+| put message = String.charCodeAt(hello, 1)
