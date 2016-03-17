@@ -12,7 +12,7 @@ var processFilter = require('./process-filter');
 var FilterJSCompiler = require('../../../lib/compiler/filters/filter-js-compiler');
 
 // Needed to evaluate compiled filters.
-var juttle = require('../../../lib/runtime/runtime');   // eslint-disable-line
+var juttle = require('../../../lib/runtime');   // eslint-disable-line
 
 function filterPoints(filter, points) {
     var compiler = new FilterJSCompiler();
