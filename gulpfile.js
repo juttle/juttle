@@ -161,7 +161,13 @@ gulp.task('examples-check', ['peg'], function() {
             var juttles = [];
             var ext = path.extname(file.path);
             var contents = fs.readFileSync(file.path, 'utf8');
-            if (ext === '.juttle') {
+
+            // Skip files containing 'examples-check:ignore'. These
+            // are files like modules that can't be compiled on their
+            // own.
+            if (contents.indexOf('examples-check:ignore') > 0) {
+                juttles = [];
+            } else if (ext === '.juttle') {
                 juttles = [contents];
             } else if (ext === '.md') {
                 var tokens = marked.lexer(contents);
@@ -177,7 +183,8 @@ gulp.task('examples-check', ['peg'], function() {
                 return compiler.compile(juttle_src, {
                     stage: 'compile',
                     moduleResolver: file_resolver.resolve,
-                    fg_processors: [implicit_views, optimize]
+                    fg_processors: [implicit_views, optimize],
+                    filename: file.path
                 });
             })
             .then(function() {

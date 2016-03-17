@@ -181,7 +181,7 @@ describe('Juttle CLI Tests', function() {
         it('returns errors for modules containing a syntax error', function() {
             return runJuttle([
                 '-e',
-                'import "test/cli/juttles/syntax-error.juttle" as error;',
+                'import "./test/cli/juttles/syntax-error.juttle" as error;',
             ]).then(function(result) {
                 expect(result.code).to.equal(1);
                 expect(result.stderr).to.include('In module included from <input>');

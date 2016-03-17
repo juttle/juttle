@@ -1,0 +1,7 @@
+// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_nested.juttle.
+
+import "./shared/module.juttle" as mod;
+
+emit -limit 1 | put val=mod.myvalue | view table;
+

@@ -1,0 +1,3 @@
+import "../index.juttle" as m3;
+
+export const value = m3.value;

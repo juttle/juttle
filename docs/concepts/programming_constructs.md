@@ -159,10 +159,27 @@ location, then in another program you can import it as a module, using the
     import "<module_path>" as local_name;
 ```
 
-How the `<module_path>` is resolved depends on the specific capabilities of the
-application in which Juttle is running. For the Juttle CLI, it can be either a
-relative or absolute filesystem path or a URL to a remote Juttle file containing
-exported code.
+`<module_path>` can either refer to a *user import* or a *system
+import*.
+
+User imports are references to individual modules. User imports can
+either be a url, a full pathname starting with `/`, or a relative
+pathname starting with `./` or `../`. All other paths are considered
+system imports.
+
+When resolving user imports with relative pathnames, the pathname is
+always applied relative to the file doing the import. See the below
+examples for details.
+
+System imports load predefined modules from standard
+locations. Examples of system imports are the
+[Juttle Standard Library](./juttle_standard_library.md). For system
+imports, module_path is a path suffix that is combined with one of the
+standard locations to result in a full pathname.
+
+For both user and system imports, when referring to files, a `.juttle`
+extension will be added if not present, and when referring to
+directories, an `/index.juttle` will be added.
 
 Once it is resolved, the import statement pulls all exported symbols from the
 specified Juttle module and makes them available under the specified local
@@ -175,7 +192,7 @@ You can reference the imported symbol(s) like this:
 ```
 
 -  local_name is the local name from the import command above.
--  symbol_name is the name of the exported subgraph, constant, function, 
+-  symbol_name is the name of the exported subgraph, constant, function,
    or other code fragment from the imported program file.
 
 Module Behavior
@@ -198,7 +215,7 @@ When defining or importing modules:
 
 _Example: export from module_
 
-This juttle module exports a function, a subgraph, and a constant. 
+This juttle module exports a function, a subgraph, and a constant.
 
 ```juttle
 export const pi = 3.14;                                // exported constant
@@ -206,8 +223,8 @@ const not_exported = 2;                                     // not exported
 export function double(x) { return x * not_exported; } // exported function
 
 export sub stamper(mark) {                             // exported subgraph
-	put stamp = mark
-	| put stamp2 = mark
+    put stamp = mark
+    | put stamp2 = mark
 }
 
 // top-level flowgraph is not exported
@@ -216,18 +233,45 @@ emit
 | view table;
 ```
 
-_Example: import by filename_
+_Example: user import by filename_
 
 This example assumes that the program with exports is saved at path
-`docs/examples/concepts/export_module.juttle`.
+`docs/examples/concepts/export_module.juttle`, and that the program
+being run is at `docs/examples/concepts/import_module.juttle`.
 
 ```juttle-no-syntax-check
 // This program is runnable from CLI from the juttle repo root,
 // juttle docs/examples/concepts/import_module.juttle
 
-import 'docs/examples/concepts/export_module.juttle' as my_module;
+import './export_module.juttle' as my_module;
 emit
 | my_module.stamper -mark 'test'
+```
+
+_Example: modules importing modules with relative paths_
+
+This example uses the following files:
+
+`docs/examples/concepts/import_module_nested.juttle`:
+```juttle-no-syntax-check
+// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_nested.juttle.
+
+import "./shared/module.juttle" as mod;
+
+emit -limit 1 | put val=mod.myvalue | view table;
+```
+
+`docs/examples/concepts/shared/module.juttle`:
+```juttle-no-syntax-check
+import './second_module.juttle' as mod2;
+
+export const myvalue=mod2.value;
+```
+
+`docs/examples/concepts/shared/second_module.juttle`:
+```juttle-no-syntax-check
+export const value = 10;
 ```
 
 _Example: import by URL_
@@ -244,6 +288,22 @@ import 'https://gist.githubusercontent.com/jut-test/273396ac4efcc838687b/raw/dde
   as this_module;
 emit
 | this_module.stamper -mark "test"
+```
+
+_Example: using system import_
+
+This example loads the file `random` from the juttle standard
+library. Note the use of the implied `.juttle` extension that is added
+when resolving.
+
+```juttle-no-syntax-check
+// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_from_stdlib.juttle
+
+import "random" as random;
+emit -limit 3 -from :0:
+| put pure = random.normal(0, 1)
+
 ```
 
 Subgraphs
