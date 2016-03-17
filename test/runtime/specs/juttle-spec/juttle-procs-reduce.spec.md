@@ -172,24 +172,20 @@ default values of null for when no -every is specified.
     { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
     { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
 
-## reduce -every emits marks at batch boundaries
+## reduce -every ignores upstream batches and does not emit any
 
 ### Juttle
 
     emit  -hz 1000 -from Date.new(0) -limit 6
     | reduce -every :0.002s: a=count()
     | put c=count()
-    | view result -marks true -times true
+    | view result
 
 ### Output
 
-    {"mark": true, "time": "1970-01-01T00:00:00.000Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
+    {"a": 2, "c": 2, "time": "1970-01-01T00:00:00.004Z"}
+    {"a": 2, "c": 3, "time": "1970-01-01T00:00:00.006Z"}
 
 ## batch | reduce emits marks at batch boundaries
 
@@ -472,11 +468,6 @@ default values of null for when no -every is specified.
     { time: "1970-01-01T00:01:00.000Z" }
     { time: "1970-01-01T00:01:02.000Z" }
 
-### Warnings
-
-   * out-of-order assignment of time
-   * out-of-order assignment of time
-
 ## complains about out-of-order points
 
 ### Juttle
@@ -520,10 +511,13 @@ default values of null for when no -every is specified.
 
 ### Warnings
 
-   * out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
-   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
-   * out-of-order assignment of time 1969-12-31T23:59:56.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
-   * out-of-order assignment of time 1969-12-31T23:59:55.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:56.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:55.000Z after 1969-12-31T23:59:58.000Z, point(s) dropped
+
+### Output
+
+    { "time": "1969-12-31T23:59:58.000Z" }
 
 ## complains about out-of-order assignment to the `time` field in batch mode
 
@@ -546,12 +540,12 @@ default values of null for when no -every is specified.
 
 ### Warnings
 
-   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
-   * out-of-order assignment of time 1970-01-01T00:00:00.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
-   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
+   * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
+    { time: "1970-01-01T00:00:00.000Z", n: 3 }
 
 ## emits grouped results in order when time is assigned
 ### Juttle
