@@ -1,0 +1,3 @@
+emit -points [{hello: ['hello'], world: ['world']}]
+| put message = Array.concat(hello, [], world)
+| keep message

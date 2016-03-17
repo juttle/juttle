@@ -1,0 +1,2 @@
+emit -points [{array: ['a','b']}] 
+| put result = Array.shift(array)
