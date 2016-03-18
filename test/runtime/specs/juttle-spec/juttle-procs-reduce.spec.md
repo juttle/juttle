@@ -191,51 +191,6 @@ default values of null for when no -every is specified.
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
     {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
 
-## batch | reduce emits marks at batch boundaries
-
-### Juttle
-
-    emit  -hz 1000 -from Date.new(0) -limit 6
-    | batch :0.002s:
-    | reduce a=count()
-    | put c=count()
-    | view result -marks true -times true
-
-### Output
-
-    {"mark": true, "time": "1970-01-01T00:00:00.000Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
-
-## reduce -every produces aggregate for empty flow
-
-### Juttle
-
-    emit -limit 0 -from Date.new(0)
-    | reduce -every :0.002s: count()
-    | view result -marks true -times true
-
-### Output
-
-    { "count": 0 }
-
-## batch | reduce produces aggregate for empty flow
-
-### Juttle
-
-    emit -limit 0 -from Date.new(0)
-    | batch :0.002s:
-    | reduce count()
-    | view result -marks true -times true
-
-### Output
-
-    { "count": 0 }
-
 ## cascade of every-driven reducers
 
 ### Juttle
