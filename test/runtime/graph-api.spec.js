@@ -202,7 +202,7 @@ describe('Graph API', function() {
                 var sink = _.findWhere(graph.get_leaves(), {type: 'View'});
                 graph.remove_edge(put, sink);
                 // add a new sink just so that it doesn't complain about
-                graph.add_edge(put, graph.append_node('View', 'newView'));
+                graph.add_edge(put, graph.add_node('View', 'newView'));
             });
             return run_juttle(program).then(function(res) {
                 expect(res.sinks.result.sort()).deep.equal([
