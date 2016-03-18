@@ -64,6 +64,66 @@
     { time: "1970-01-01T00:00:00.000Z", n: 1 }
     { time: "1970-01-01T00:00:00.000Z", n: 3 }
 
+## Allows direct assignment to the `interval` field
+
+### Juttle
+
+    emit -from Date.new(0) -limit 3
+    | reduce -every :s: count()
+    | put interval = interval + :1m:
+    | view result
+
+### Output
+
+    { time: "1970-01-01T00:00:01.000Z", "interval":"00:01:01.000", "count": 1 }
+    { time: "1970-01-01T00:00:02.000Z", "interval":"00:01:01.000", "count": 1 }
+    { time: "1970-01-01T00:00:03.000Z", "interval":"00:01:01.000", "count": 1 }
+
+## Allows indirect assignment to the `interval` field
+
+### Juttle
+
+    emit -from Date.new(0) -limit 3
+    | reduce -every :s: count()
+    | put *"interval" = interval + :1m:
+    | view result
+
+### Output
+
+    { time: "1970-01-01T00:00:01.000Z", "interval":"00:01:01.000", "count": 1 }
+    { time: "1970-01-01T00:00:02.000Z", "interval":"00:01:01.000", "count": 1 }
+    { time: "1970-01-01T00:00:03.000Z", "interval":"00:01:01.000", "count": 1 }
+
+## complains about non-duration assignment to the `interval` field
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | put n=count(), interval = n | view result
+
+### Warnings
+
+   * Invalid type assigned to interval: number (1).
+
+## complains about negative duration assignment to the `interval` field
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | put n=count(), interval = -:24h: | view result
+
+### Warnings
+
+   * Duration assigned to interval must be positive: duration (-1d).
+
+## complains about empty duration assignment to the `interval` field
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | put n=count(), interval = :0h: | view result
+
+### Warnings
+
+   * Duration assigned to interval must be positive: duration (00:00:00.000).
+
 ## the -acc option suppresses reducer reset
 
 ### Juttle

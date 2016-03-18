@@ -16,6 +16,7 @@
   "POINT-MISSING-TIME": "point is missing a time in {field}",
   "TIMELESS-POINTS": "encountered point(s) without the time field",
   "TYPE-ERROR": "{message}",
+  "VALUE-ERROR": "{message}",
   "NO-FREE-TEXT": "Free text search is not implemented in this context.",
   "ADAPTER-UNSUPPORTED-FILTER": "{filter} is not supported by {proc}.",
   "ADAPTER-UNSUPPORTED-TIME-OPTION": "Unsupported value for {option} option: {message}",
