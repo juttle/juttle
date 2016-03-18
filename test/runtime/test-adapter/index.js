@@ -12,7 +12,6 @@ var store = {};
 /* globals JuttleAdapterAPI */
 var AdapterRead = JuttleAdapterAPI.AdapterRead;
 var AdapterWrite = JuttleAdapterAPI.AdapterWrite;
-var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
 
 function TestAdapter(config) {
     class Read extends AdapterRead {
@@ -42,11 +41,7 @@ function TestAdapter(config) {
             }
             this.optimization_info = params.optimization_info;
 
-            if (optimization_info.count) {
-                this.count = optimization_info.count;
-            } else if (optimization_info.count_every) {
-                this.count_every = JuttleMoment.duration(optimization_info.count_every.value);
-            }
+            this.count = optimization_info.count;
             if (optimization_info.hasOwnProperty('limit')) {
                 this.limit = optimization_info.limit;
             }
@@ -82,16 +77,6 @@ function TestAdapter(config) {
 
             if (this.count) {
                 points = [{count: points.length}];
-            } else if (this.count_every) {
-                points = _.chain(points).groupBy((pt) => {
-                    return pt.time.quantize(this.count_every).milliseconds();
-                })
-                .map((pts) => {
-                    return {count: pts.length, time: pts[0].time};
-                })
-                .sortBy(function(pt) {
-                    return pt.time.milliseconds();
-                }).value();
             }
 
             return Promise.resolve({
@@ -135,21 +120,13 @@ function TestAdapter(config) {
         optimize_reduce: function(read, reduce, graph, optimization_info) {
             var reduce_is_count = reduce && reduce.reducers &&
                 reduce.reducers.length === 1 && reduce.reducers[0].name === 'count' &&
-                reduce.reducers[0].arguments.length === 0 && !reduce.groupby;
+                reduce.reducers[0].arguments.length === 0 && !reduce.groupby &&
+                !_.findWhere(reduce.options, {id: 'every'});
 
-            if (!reduce_is_count) {
-                return;
-            }
-
-            var every = _.findWhere(reduce.options, {id: 'every'});
-
-            if (every) {
-                optimization_info.count_every = every.val;
-            } else {
+            if (reduce_is_count) {
                 optimization_info.count = true;
+                return true;
             }
-
-            return true;
         }
     };
 
