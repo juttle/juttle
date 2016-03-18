@@ -106,48 +106,6 @@ describe('adapter API tests', function () {
         });
     });
 
-    it('optimizes reduce -every', function() {
-        var write_program = `
-            const points = [
-                {time: :2016-03-01T23:51:55.153Z:},
-                {time: :2016-03-01T23:52:55.155Z:},
-                {time: :2016-03-01T23:53:55.155Z:},
-                {time: :2016-03-01T23:54:55.155Z:},
-                {time: :2016-03-01T23:57:55.155Z:},
-            ];
-            emit -points points
-            | put message = "hello"
-            | write test -key "test_reduce_every"`;
-
-        return check_juttle({program: write_program})
-            .then(function() {
-                var read_program = `
-                    read test -key "test_reduce_every"
-                        | reduce -every :2m: count() | sort count -desc`;
-                return check_juttle({program: read_program});
-            })
-            .then(function(result) {
-                expect(result.sinks.table).deep.equal([
-                    { count: 1, time: '2016-03-01T23:52:00.000Z' },
-                    { count: 2, time: '2016-03-01T23:54:00.000Z' },
-                    { count: 1, time: '2016-03-01T23:56:00.000Z' },
-                    { count: 1, time: '2016-03-01T23:58:00.000Z' }
-                ]);
-                var read_program_with_on = `
-                    read test -key "test_reduce_every"
-                        | reduce -every :2m: -on :30s: count() | sort count -desc`;
-                return check_juttle({program: read_program_with_on});
-            })
-            .then(function(result) {
-                expect(result.sinks.table).deep.equal([
-                    { time: '2016-03-01T23:52:30.000Z', count: 1 },
-                    { time: '2016-03-01T23:54:30.000Z', count: 2 },
-                    { time: '2016-03-01T23:56:30.000Z', count: 1 },
-                    { time: '2016-03-01T23:58:30.000Z', count: 1 }
-                ]);
-            });
-    });
-
     it('optimizes multiple nodes', function() {
         var program = 'read test -key "test3" | head 4 | head 3 | head 1';
         return check_juttle({
