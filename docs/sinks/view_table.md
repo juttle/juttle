@@ -29,7 +29,7 @@ Parameter  |  Description  |  Required?
 ---------- | ------------- | ---------:
 `-title`  |  The title of the table  |  No; defaults to no title
 `-limit`  |  The maximum number of total data points to display  |  No; defaults to the first 1000 to avoid consuming unbounded memory
-`-progressive`  |  A boolean specifying whether the table should be displayed gradually as data arrives or all at once when the data stream ends  | No; defaults to `true`
+`-progressive`  | Whether the table should display data gradually. If set to `true` or a positive duration, then the table starts displaying data after the specified amount of time (`:1s:` by default). If `false` then the table does not display anything until the program is done. | No; default is `true` if the program contains one view, `false` if there is more than one
 `-columnOrder`  |  An array of field names specifying the order of the table columns from left to right. If the data stream includes unspecified fields, these are displayed to the right of the specified ones, in alphabetical order.  |  No; default is 'time','name','value' followed by the remaining columns in alphabetical order
 
 _Example: Table with ordered columns_
