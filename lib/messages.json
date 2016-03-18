@@ -124,5 +124,6 @@
   "INVALID-OPTION-COMBINATION": "option {option} can only be used with {rule}",
   "FILTER-FEATURE-NOT-SUPPORTED": "Filters do not support {feature} in this context.",
   "HTTP-ERROR": "HTTP request failed with {status}: {message}",
-  "CANNOT-FILTER-ON-TIME": "Cannot filter on \"time\" in read. Use -to, -from, or -last instead."
+  "CANNOT-FILTER-ON-TIME": "Cannot filter on \"time\" in read. Use -to, -from, or -last instead.",
+  "INDEX-OUT-OF-BOUNDS": "Index out of bounds: {index}."
 }
