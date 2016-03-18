@@ -172,7 +172,7 @@ default values of null for when no -every is specified.
     { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
     { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
 
-## reduce -every emits marks at batch boundaries
+## reduce -every ignores upstream batches and does not emit any
 
 ### Juttle
 
@@ -180,16 +180,13 @@ default values of null for when no -every is specified.
     | batch :.001s:
     | reduce -every :0.002s: a=count()
     | put c=count()
-    | view result -marks true -times true
+    | view result
 
 ### Output
 
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
-    {"mark": true, "time": "1970-01-01T00:00:00.006Z"}
+    {"a": 2, "c": 2, "time": "1970-01-01T00:00:00.004Z"}
+    {"a": 2, "c": 3, "time": "1970-01-01T00:00:00.006Z"}
 
 ## cascade of every-driven reducers
 
