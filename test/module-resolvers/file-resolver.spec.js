@@ -2,6 +2,11 @@
 
 var expect = require('chai').expect;
 var path = require('path');
+
+// This loads some test adapters that the tests rely upon. The adapter
+// 'test' does have a module directory, while 'testAdapter' does not.
+var juttle_test_utils = require('../runtime/specs/juttle-test-utils'); //eslint-disable-line
+
 var FileResolver = require('../../lib/module-resolvers/file-resolver');
 
 function resolveWith(module, path, module_name, importer_path) {
@@ -89,4 +94,39 @@ describe('file-resolver', function() {
             expect(result.name).to.equal(`${__dirname}/input/modules1/foo.juttle`);
         });
     });
+
+    it('can resolve by adapter-prefixed path', function() {
+        return resolveWith(`adapters/test/index.juttle`, [], 'main')
+        .then(function(result) {
+            expect(result.name).to.equal('adapters/test/index.juttle');
+        });
+    });
+
+    it('can resolve by adapter-prefixed path with implied index.juttle', function() {
+        return resolveWith(`adapters/test`, [], 'main')
+        .then(function(result) {
+            expect(result.name).to.equal('adapters/test');
+        });
+    });
+
+    it('fails to resolve for adapter that does not not exist', function() {
+        return resolveWith(`adapters/noSuchAdapter/index.juttle`, [], 'main')
+        .then(function() {
+            throw Error('Previous statement should have failed');
+        })
+        .catch(function(err) {
+            expect(err.toString()).to.contain('could not find module: adapters/noSuchAdapter/index.juttle');
+        });
+    });
+
+    it('fails to resolve for adapter that does not have any modules', function() {
+        return resolveWith(`adapters/testTimeseries/index.juttle`, [], 'main')
+        .then(function() {
+            throw Error('Previous statement should have failed');
+        })
+        .catch(function(err) {
+            expect(err.toString()).to.contain('could not find module: adapters/testTimeseries/index.juttle');
+        });
+    });
+
 });
