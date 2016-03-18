@@ -183,7 +183,6 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    {"mark": true, "time": "1970-01-01T00:00:00.000Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
     {"mark": true, "time": "1970-01-01T00:00:00.002Z"}
     {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
@@ -467,7 +466,6 @@ default values of null for when no -every is specified.
 
 ### Warnings
 
-   * out-of-order assignment of time 1969-12-31T23:59:58.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
    * out-of-order assignment of time 1969-12-31T23:59:57.000Z after 1970-01-01T00:00:01.000Z, point(s) dropped
    * out-of-order assignment of time 1969-12-31T23:59:56.000Z after 1970-01-01T00:00:02.000Z, point(s) dropped
    * out-of-order assignment of time 1969-12-31T23:59:55.000Z after 1970-01-01T00:00:03.000Z, point(s) dropped
