@@ -4,6 +4,7 @@ var juttle_test_utils = require('./specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var expect = require('chai').expect;
 var path = require('path');
+var _ = require('underscore');
 var adapters = require('../../lib/runtime/adapters');
 var TestAdapterClone = require('./test-adapter-clone');
 
@@ -133,6 +134,48 @@ describe('adapter API tests', function () {
             expect(result.prog.graph.adapter.limit).equal(1);
             expect(result.prog.graph.adapter.count).equal(true);
         });
+    });
+    
+    it('optimizes sort', function() {
+        var write_program = `
+            const points = [
+                {code: 5},
+                {code : 8},
+                {code: 2},
+                {code: 2},
+                {code: 9},
+            ];
+            emit -points points
+            | write test -key "test_sort"`;
+            
+        var unsortedResult;
+
+        return check_juttle({program: write_program})
+            .then(function() {
+                var read_program_unsorted = 'read test -key "test_sort"';
+                return check_juttle({program: read_program_unsorted});
+            })
+            .then(function(result) {
+                unsortedResult = result.sinks.table;
+                expect(unsortedResult).to.have.length(5);
+                expect(unsortedResult[0].code).to.equal(5);
+                
+                var read_program_sorted = `
+                    read test -key "test_sort"
+                        | sort code`;
+                return check_juttle({program: read_program_sorted});
+            })
+            .then(function(result) {
+                var optimization_info = result.prog.graph.adapter.optimization_info;
+                expect(optimization_info).to.eql({
+                    sort: 'code'
+                });
+                
+                var sortedResult = result.sinks.table;
+                expect(sortedResult).to.not.deep.equal(unsortedResult);
+                
+                expect(sortedResult).to.deep.equal(_.sortBy(unsortedResult, 'code'));
+            });
     });
 
     it('delays loading of configured adapters', function() {
