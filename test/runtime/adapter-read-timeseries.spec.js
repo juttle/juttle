@@ -3,6 +3,7 @@
 var juttle_test_utils = require('./specs/juttle-test-utils');
 var check_juttle = juttle_test_utils.check_juttle;
 var expect = require('chai').expect;
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 
 describe('read testTimeseries', function () {
     it('requires -from or -to', function() {
@@ -129,6 +130,29 @@ describe('read testTimeseries', function () {
                 { count: 4, dtProg: 2, dtReal: 1 }
             ];
             expect(result.sinks.table).deep.equal(expected);
+        });
+    });
+
+    it('optimizes a live read -every', function() {
+        return check_juttle({
+            program: 'read testTimeseries -to :end: | reduce -every :s: count()',
+            realtime: true,
+            deactivateAfter: 3000
+        })
+        .then(function(result) {
+            var second = JuttleMoment.duration(1);
+            result.prog.graph.adapter.time_ranges.forEach(function(range, i) {
+                var from = range.from;
+                var to = range.to;
+                expect(JuttleMoment.quantize(to, second).milliseconds()).equal(to.milliseconds());
+                if (i > 0) {
+                    expect(JuttleMoment.quantize(from, second).milliseconds()).equal(from.milliseconds());
+                    expect(JuttleMoment.add(from, second).eq(to)).equal(true);
+                }
+            });
+
+            expect(result.graph.readEvery.milliseconds()).equal(1000);
+            expect(result.graph.lag.milliseconds()).equal(1000);
         });
     });
 });

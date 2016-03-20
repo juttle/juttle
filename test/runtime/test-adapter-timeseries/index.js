@@ -26,6 +26,10 @@ class TestTimeseriesRead extends AdapterRead {
 
         this.every = options.every || this.defaultTimeOptions().every;
         this.count = 0;
+        this.time_ranges = []; // for tests
+        if (params.optimization_info._reduce_every) {
+            this.optimized_reduce_every = JuttleMoment.duration(params.optimization_info._reduce_every);
+        }
     }
 
     periodicLiveRead() {
@@ -40,6 +44,7 @@ class TestTimeseriesRead extends AdapterRead {
     }
 
     read(from, to, limit, state) {
+        this.time_ranges.push({from: from, to: to});
         // Use the state to store the next timestamp to send.
         if (! state) {
             state = from.clone();
@@ -59,6 +64,13 @@ class TestTimeseriesRead extends AdapterRead {
             state = state.add(this.every);
         }
 
+        if (this.optimized_reduce_every) {
+            points = [{
+                time: JuttleMoment.quantize(from, this.optimized_reduce_every),
+                count: points.length
+            }];
+        }
+
         return Promise.resolve({
             points: points,
             readEnd: state.gte(to) ? to : null,
@@ -67,10 +79,24 @@ class TestTimeseriesRead extends AdapterRead {
     }
 }
 
+var optimizer = {
+    optimize_reduce: function(read, reduce, graph, optimization_info) {
+        var reduce_is_count_every = reduce && reduce.reducers &&
+            reduce.reducers.length === 1 && reduce.reducers[0].name === 'count' &&
+            reduce.reducers[0].arguments.length === 0 && !reduce.groupby &&
+            graph.node_has_option(reduce, 'every');
+
+        if (reduce_is_count_every) {
+            return true;
+        }
+    }
+};
+
 function TestTimeseriesAdapter() {
     return {
         name: 'testTimeseries',
-        read: TestTimeseriesRead
+        read: TestTimeseriesRead,
+        optimizer: optimizer
     };
 }
 
