@@ -36,6 +36,10 @@ describe('read stdio adapter tests', function() {
 
     var tsvFile = path.resolve(__dirname, '../parsers/input/tsv/points.tsv');
 
+    var csvFileWithIncompleteLines = path.resolve(__dirname, '../parsers/input/csv/invalid.csv');
+    var csvFileWithComments = path.resolve(__dirname, '../parsers/input/csv/points-with-comments.csv');
+    var csvFileWithEmptyLines = path.resolve(__dirname, '../parsers/input/csv/points-with-empty-lines.csv');
+
     it('fails when given an unknown option' , function() {
         juttle_test_utils.set_stdin(fs.createReadStream(emptyFile));
 
@@ -262,6 +266,55 @@ describe('read stdio adapter tests', function() {
                 { time: '2014-01-01T00:00:01.000Z', foo: '1' },
                 { time: '2014-01-01T00:00:02.000Z', foo: '2' },
                 { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with comments', () => {
+        juttle_test_utils.set_stdin(fs.createReadStream(csvFileWithComments));
+
+        return check_juttle({
+            program: 'read stdio -format "csv" -commentSymbol "#"'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { time: '2014-01-01T00:00:01.000Z', foo: '1' },
+                { time: '2014-01-01T00:00:02.000Z', foo: '2' },
+                { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with empty lines', () => {
+        juttle_test_utils.set_stdin(fs.createReadStream(csvFileWithEmptyLines));
+
+        return check_juttle({
+            program: 'read stdio -format "csv" -ignoreEmptyLines true'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { time: '2014-01-01T00:00:01.000Z', foo: '1' },
+                { time: '2014-01-01T00:00:02.000Z', foo: '2' },
+                { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with incomplete lines', () => {
+        juttle_test_utils.set_stdin(fs.createReadStream(csvFileWithIncompleteLines));
+
+        return check_juttle({
+            program: 'read stdio -format "csv" -allowIncompleteLines true'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { a: '1', b: '2', c: '' }
             ]);
         });
     });

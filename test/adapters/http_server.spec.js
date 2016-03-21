@@ -365,4 +365,142 @@ describe('read http_server', function() {
             expect(err.toString()).to.contain('unknown read-http_server option unknown.');
         });
     });
+
+    it('ingests CSV data with tabs separating row elements', function() {
+        var program, finish;
+        var body = 'product\tamount\tsaleTime'
+            + '\nNike Shoes\t1000.00\t2016-01-16'
+            + '\nRed Dragon\t35.06\t2016-01-17';
+
+        return compile_juttle({
+            program: 'read http_server -port ' + port + ' -timeField "saleTime" -separator "\t"'
+        })
+        .then(function(prog) {
+            program = prog;
+            finish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:' + port,
+                method: 'POST',
+                headers: { 'Content-Type': 'text/csv' },
+                body: body
+            });
+        })
+        .then(function() {
+            program.deactivate();
+            return finish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table.length).to.equal(2);
+            expect(results.sinks.table[0].product).to.equal('Nike Shoes');
+
+            // verify time has been parsed
+            expect(results.sinks.table[0].time).to.equal('2016-01-16T00:00:00.000Z');
+        });
+    });
+
+    it('ingests CSV data with comments', function() {
+        var program, finish;
+        var body = 'product,amount,saleTime'
+            + '\nNike Shoes,1000.00,2016-01-16'
+            + '\n# just a comment'
+            + '\nRed Dragon,35.06,2016-01-17'
+            + '\n# just a comment';
+
+        return compile_juttle({
+            program: 'read http_server -port ' + port + ' -timeField "saleTime" -commentSymbol "#"'
+        })
+        .then(function(prog) {
+            program = prog;
+            finish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:' + port,
+                method: 'POST',
+                headers: { 'Content-Type': 'text/csv' },
+                body: body
+            });
+        })
+        .then(function() {
+            program.deactivate();
+            return finish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table.length).to.equal(2);
+            expect(results.sinks.table[0].product).to.equal('Nike Shoes');
+
+            // verify time has been parsed
+            expect(results.sinks.table[0].time).to.equal('2016-01-16T00:00:00.000Z');
+        });
+    });
+
+    it('ingests CSV data with empty lines', function() {
+        var program, finish;
+        var body = 'product,amount,saleTime'
+            + '\nNike Shoes,1000.00,2016-01-16'
+            + '\n'
+            + '\nRed Dragon,35.06,2016-01-17'
+            + '\n';
+
+        return compile_juttle({
+            program: 'read http_server -port ' + port + ' -timeField "saleTime" -ignoreEmptyLines true'
+        })
+        .then(function(prog) {
+            program = prog;
+            finish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:' + port,
+                method: 'POST',
+                headers: { 'Content-Type': 'text/csv' },
+                body: body
+            });
+        })
+        .then(function() {
+            program.deactivate();
+            return finish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table.length).to.equal(2);
+            expect(results.sinks.table[0].product).to.equal('Nike Shoes');
+
+            // verify time has been parsed
+            expect(results.sinks.table[0].time).to.equal('2016-01-16T00:00:00.000Z');
+        });
+    });
+
+    it('ingests CSV data with incomplete lines', function() {
+        var program, finish;
+        var body = 'product,amount,saleTime'
+            + '\nNike Shoes,1000.00,2016-01-16'
+            + '\nRed Dragon,35.06,2016-01-17'
+            + '\nBlue Dragon,55.09';
+
+        return compile_juttle({
+            program: 'read http_server -port ' + port + ' -timeField "saleTime" -allowIncompleteLines true'
+        })
+        .then(function(prog) {
+            program = prog;
+            finish = run_juttle(program);
+
+            return request({
+                uri: 'http://localhost:' + port,
+                method: 'POST',
+                headers: { 'Content-Type': 'text/csv' },
+                body: body
+            });
+        })
+        .then(function() {
+            program.deactivate();
+            return finish;
+        })
+        .then(function(results) {
+            expect(results.sinks.table).to.deep.equal([
+                { product: 'Nike Shoes',  amount: '1000.00', time: '2016-01-16T00:00:00.000Z' },
+                { product: 'Red Dragon', amount: '35.06',   time: '2016-01-17T00:00:00.000Z' },
+                { product: 'Blue Dragon',  amount: '55.09',  saleTime: '' }
+            ]);
+        });
+    });
+
 });
