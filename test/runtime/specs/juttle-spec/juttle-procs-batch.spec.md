@@ -91,11 +91,11 @@ no bare numbers with the new -every option
     | view result
 
 ### Output
-    {"time":"2014-02-01T00:00:00.000Z","c":1}
-    {"time":"2014-03-01T00:00:00.000Z","c":1}
-    {"time":"2014-04-01T00:00:00.000Z","c":1}
-    {"time":"2014-05-01T00:00:00.000Z","c":1}
-    {"time":"2014-06-01T00:00:00.000Z","c":1}
+    {"time":"2014-02-01T00:00:00.000Z","c":1, "interval": "1M"}
+    {"time":"2014-03-01T00:00:00.000Z","c":1, "interval": "1M"}
+    {"time":"2014-04-01T00:00:00.000Z","c":1, "interval": "1M"}
+    {"time":"2014-05-01T00:00:00.000Z","c":1, "interval": "1M"}
+    {"time":"2014-06-01T00:00:00.000Z","c":1, "interval": "1M"}
 
 
 ## batching works for years
@@ -106,9 +106,9 @@ no bare numbers with the new -every option
     | view result
 
 ### Output
-    {"time":"2001-01-01T00:00:00.000Z","c":12}
-    {"time":"2002-01-01T00:00:00.000Z","c":12}
-    {"time":"2003-01-01T00:00:00.000Z","c":12}
+    {"time":"2001-01-01T00:00:00.000Z","c":12, "interval": "12M"}
+    {"time":"2002-01-01T00:00:00.000Z","c":12, "interval": "12M"}
+    {"time":"2003-01-01T00:00:00.000Z","c":12, "interval": "12M"}
 
 
 ## batch can align on a regular duration
@@ -119,12 +119,12 @@ no bare numbers with the new -every option
     | view result
 
 ### Output
-    {"time":"2014-01-01T00:30:00.000Z","c":3}
-    {"time":"2014-01-01T01:30:00.000Z","c":6}
-    {"time":"2014-01-01T02:30:00.000Z","c":6}
-    {"time":"2014-01-01T03:30:00.000Z","c":6}
-    {"time":"2014-01-01T04:30:00.000Z","c":6}
-    {"time":"2014-01-01T05:30:00.000Z","c":3}
+    {"time":"2014-01-01T00:30:00.000Z","c":3, "interval": "01:00:00.000" }
+    {"time":"2014-01-01T01:30:00.000Z","c":6, "interval": "01:00:00.000" }
+    {"time":"2014-01-01T02:30:00.000Z","c":6, "interval": "01:00:00.000" }
+    {"time":"2014-01-01T03:30:00.000Z","c":6, "interval": "01:00:00.000" }
+    {"time":"2014-01-01T04:30:00.000Z","c":6, "interval": "01:00:00.000" }
+    {"time":"2014-01-01T05:30:00.000Z","c":3, "interval": "01:00:00.000" }
 
 ## batch can align on a regular duration with a calendar interval
 ### Juttle
@@ -134,9 +134,9 @@ no bare numbers with the new -every option
     | view result
 
 ### Output
-    { "c": 9, "time": "2014-01-10T00:00:00.000Z"  }
-    { "c": 31, "time": "2014-02-10T00:00:00.000Z"  }
-    { "c": 20, "time": "2014-03-10T00:00:00.000Z"  }
+    { "c": 9, "time": "2014-01-10T00:00:00.000Z", "interval": "1M" }
+    { "c": 31, "time": "2014-02-10T00:00:00.000Z", "interval": "1M" }
+    { "c": 20, "time": "2014-03-10T00:00:00.000Z", "interval": "1M" }
 
 
 ## batch can align on a date with a calendar interval
@@ -147,9 +147,9 @@ no bare numbers with the new -every option
     | view result
 
 ### Output
-    { "c": 19, "time": "2014-01-20T00:00:00.000Z"  }
-    { "c": 31, "time": "2014-02-20T00:00:00.000Z"  }
-    { "c": 20, "time": "2014-03-20T00:00:00.000Z"  }
+    { "c": 19, "time": "2014-01-20T00:00:00.000Z", "interval": "1M" }
+    { "c": 31, "time": "2014-02-20T00:00:00.000Z", "interval": "1M" }
+    { "c": 20, "time": "2014-03-20T00:00:00.000Z", "interval": "1M" }
 
 
 ## batch with short interval can handle a very large time gap

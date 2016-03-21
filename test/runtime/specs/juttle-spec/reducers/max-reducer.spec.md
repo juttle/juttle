@@ -27,7 +27,7 @@
     emit -limit -1 -from Date.new(0) | batch :s: | reduce max('foo') |  view result
 
 ### Output
-    {max: -Infinity}
+    {max: -Infinity, interval: "00:00:01.000"}
 
 
 ## (skip) outputs -Infinity on empty batched stream  (reduce -every)
@@ -37,7 +37,7 @@
     emit -limit -1 -from Date.new(0) | reduce -every :s: max('foo') |  view result
 
 ### Output
-    {max: -Infinity}
+    {max: -Infinity, interval: "00:00:01.000"}
 
 
 ## outputs -Infinity on empty batch (explicit batches)
@@ -47,8 +47,8 @@
     emit -limit 2 -every :0.1s: -from Date.new(0) | batch :0.1s: | reduce max('foo') |  view result
 
 ### Output
-    {max: -Infinity, time: "1970-01-01T00:00:00.100Z"}
-    {max: -Infinity, time: "1970-01-01T00:00:00.200Z"}
+    {max: -Infinity, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}
+    {max: -Infinity, time: "1970-01-01T00:00:00.200Z", interval: "00:00:00.100"}
 
 
 ## outputs -Infinity on empty batch (reduce -every)
@@ -58,8 +58,8 @@
     emit -limit 2 -every :0.1s: -from Date.new(0) | reduce -every :0.1s: max('foo') |  view result
 
 ### Output
-    {max: -Infinity, time: "1970-01-01T00:00:00.100Z"}
-    {max: -Infinity, time: "1970-01-01T00:00:00.200Z"}
+    {max: -Infinity, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}
+    {max: -Infinity, time: "1970-01-01T00:00:00.200Z", interval: "00:00:00.100"}
 
 
 ## outputs -Infinity on empty window (reduce -every -over)
@@ -69,4 +69,4 @@
     emit -limit 1 -every :0.1s: -from Date.new(0) | reduce -every :0.1s: -over :0.1s: max('foo') |  view result
 
 ### Output
-    {max: -Infinity, time: "1970-01-01T00:00:00.100Z"}
+    {max: -Infinity, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}

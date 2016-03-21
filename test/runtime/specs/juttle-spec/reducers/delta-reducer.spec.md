@@ -33,7 +33,7 @@
     | filter n < 4 or n > 5
     | reduce -every :0.1s: n = last(n)
     | put delta = delta("n", "empty")
-    | remove n
+    | remove n, interval
     | view result
 
 ### Output

@@ -120,7 +120,7 @@
     | batch :10s:
     | select.min -field 'x' -by 'parity'
     | sort parity
-    | remove time
+    | keep x, parity
     | view result
 
 ### Output
@@ -137,7 +137,7 @@
     | batch :10s:
     | select.max -field 'x' -by 'parity'
     | sort parity
-    | remove time
+    | keep x, parity
     | view result
 
 ### Output
@@ -154,7 +154,7 @@
     | batch :10s:
     | select.median -field 'x' -by 'parity'
     | sort parity
-    | remove time
+    | keep x, parity
     | view result
 
 ### Output
@@ -171,7 +171,7 @@
     | batch :20s:
     | select.percentile -field 'x' -p 0.75  -by 'parity'
     | sort parity
-    | remove time
+    | keep x, parity
     | view result
 
 ### Output

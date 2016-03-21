@@ -29,6 +29,7 @@ resetting in order to replay the correct window of points at each epoch.
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a
+    | remove interval
     | view result
 
 ### Output
@@ -84,6 +85,7 @@ results are same as group A's plus 10.
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a, name
+    | remove interval
     | view result
 
 ### Output
@@ -193,6 +195,7 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a
+    | remove interval
     | view result
 
 ### Output
@@ -270,6 +273,7 @@ a group witness affects reset/teardown, and this is not true in a non-groupby se
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a, name
+    | remove interval
     | view result
 
 ### Output
@@ -426,6 +430,7 @@ ID=last(ID) is a placeholder so that ID appears first in output, for readability
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a
+    | remove interval
     | view result
 
 ### Output
@@ -539,6 +544,7 @@ a non-groupby setting.
     )
     | put t = (time != null) ? Duration.seconds(time - Date.new(0)) : 0
     | sort ID, t, a, name
+    | remove interval
     | view result
 
 ### Output

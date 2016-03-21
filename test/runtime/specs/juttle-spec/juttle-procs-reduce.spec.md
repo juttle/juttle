@@ -112,8 +112,8 @@ default values of null for when no -every is specified.
     | view result
 
 ### Output
-    {count: 5, time: "1970-01-01T00:00:05.000Z"}
-    {count: 5, time: "1970-01-01T00:00:10.000Z"}
+    {count: 5, interval: "00:00:05.000", time: "1970-01-01T00:00:05.000Z"}
+    {count: 5, interval: "00:00:05.000", time: "1970-01-01T00:00:10.000Z"}
 
 ## basic reduce -every, historic
 
@@ -125,9 +125,9 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    {"a": 2, "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "time": "1970-01-01T00:00:00.006Z"}
+    {"a": 2, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.002Z"}
+    {"a": 2, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.004Z"}
+    {"a": 2, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.006Z"}
 
 ## basic reduce -every, realtime
 
@@ -155,8 +155,8 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
-    { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
+    { "min": 1, "interval": "00:00:00.005", "time": "1970-01-01T00:00:00.005Z"}
+    { "min": 1, "interval": "00:00:00.005", "time": "1970-01-01T00:00:00.010Z"}
 
 ## reduce -every without teardown (-reset false)
 
@@ -169,8 +169,8 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { "min": 1, "time": "1970-01-01T00:00:00.005Z"}
-    { "min": 1, "time": "1970-01-01T00:00:00.010Z"}
+    { "min": 1, "interval": "00:00:00.005", "time": "1970-01-01T00:00:00.005Z"}
+    { "min": 1, "interval": "00:00:00.005", "time": "1970-01-01T00:00:00.010Z"}
 
 ## reduce -every ignores upstream batches and does not emit any
 
@@ -183,9 +183,9 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "c": 2, "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "c": 3, "time": "1970-01-01T00:00:00.006Z"}
+    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z", "interval": "00:00:00.002"}
+    {"a": 2, "c": 2, "time": "1970-01-01T00:00:00.004Z", "interval": "00:00:00.002"}
+    {"a": 2, "c": 3, "time": "1970-01-01T00:00:00.006Z", "interval": "00:00:00.002"}
 
 ## batch | reduce emits marks at batch boundaries
 
@@ -200,11 +200,11 @@ default values of null for when no -every is specified.
 ### Output
 
     {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.000Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.002Z"}
+    {"a": 2, "c": 1, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.002Z"}
     {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.002Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.004Z"}
+    {"a": 2, "c": 1, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.004Z"}
     {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.004Z"}
-    {"a": 2, "c": 1, "time": "1970-01-01T00:00:00.006Z"}
+    {"a": 2, "c": 1, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.006Z"}
     {"mark": true, "interval": "00:00:00.002", "time": "1970-01-01T00:00:00.006Z"}
 
 ## reduce -every produces aggregate for empty flow
@@ -217,7 +217,7 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { "count": 0 }
+    { "count": 0, "interval":"00:00:00.002" }
 
 ## batch | reduce produces aggregate for empty flow
 
@@ -244,9 +244,9 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","last3":"1970-01-01T00:00:00.000Z"}
-    {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
-    {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
+    {"time":"1970-01-01T00:00:01.000Z","last3":"1970-01-01T00:00:00.000Z","interval":"00:00:01.000"}
+    {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z","interval":"00:00:01.000"}
+    {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z","interval":"00:00:01.000"}
 
 ## accepts a sub containing a windowed reducer
 
@@ -276,51 +276,63 @@ default values of null for when no -every is specified.
 
     {
       "time": "1970-02-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-03-01T00:00:00.000Z",
-      "days": 28
+      "days": 28,
+      "interval": "1M"
     }
     {
       "time": "1970-04-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-05-01T00:00:00.000Z",
-      "days": 30
+      "days": 30,
+      "interval": "1M"
     }
     {
       "time": "1970-06-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-07-01T00:00:00.000Z",
-      "days": 30
+      "days": 30,
+      "interval": "1M"
     }
     {
       "time": "1970-08-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-09-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-10-01T00:00:00.000Z",
-      "days": 30
+      "days": 30,
+      "interval": "1M"
     }
     {
       "time": "1970-11-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-12-01T00:00:00.000Z",
-      "days": 30
+      "days": 30,
+      "interval": "1M"
     }
     {
       "time": "1971-01-01T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
 
 ## reduce with calendar intervals and alignment
@@ -334,19 +346,23 @@ default values of null for when no -every is specified.
 ### Output
     {
       "time": "1970-01-10T00:00:00.000Z",
-      "days": 9
+      "days": 9,
+      "interval": "1M"
     }
     {
       "time": "1970-02-10T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
     {
       "time": "1970-03-10T00:00:00.000Z",
-      "days": 28
+      "days": 28,
+      "interval": "1M"
     }
     {
       "time": "1970-04-10T00:00:00.000Z",
-      "days": 31
+      "days": 31,
+      "interval": "1M"
     }
 
 ## reduce with regular intervals and alignment
@@ -359,13 +375,16 @@ default values of null for when no -every is specified.
 
 ### Output
     { "hours": 12,
-      "time": "1970-01-01T12:00:00.000Z"
+      "time": "1970-01-01T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 24,
-      "time": "1970-01-02T12:00:00.000Z"
+      "time": "1970-01-02T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 12,
-      "time": "1970-01-03T12:00:00.000Z"
+      "time": "1970-01-03T12:00:00.000Z",
+      "interval": "1d"
     }
 
 ## reduce with undefined field
@@ -408,8 +427,8 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { time: "1970-01-01T00:00:05.000Z", kount: 5 }
-    { time: "1970-01-01T00:00:10.000Z", kount: 5 }
+    { time: "1970-01-01T00:00:05.000Z", "interval": "00:00:05.000", kount: 5 }
+    { time: "1970-01-01T00:00:10.000Z", "interval": "00:00:05.000", kount: 5 }
 
 
 ## custom reducer is torn down at reduce epochs
@@ -432,8 +451,8 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { time: "1970-01-01T00:00:05.000Z", kount: 5 }
-    { time: "1970-01-01T00:00:10.000Z", kount: 5 }
+    { time: "1970-01-01T00:00:05.000Z", "interval": "00:00:05.000", kount: 5 }
+    { time: "1970-01-01T00:00:10.000Z", "interval": "00:00:05.000", kount: 5 }
 
 
 ## Warns and drops points on a runtime error
@@ -448,9 +467,9 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { time: "1970-01-01T00:00:01.000Z", x: true }
-    { time: "1970-01-01T00:00:03.000Z", x: true }
-    { time: "1970-01-01T00:00:05.000Z", x: true }
+    { time: "1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", x: true }
+    { time: "1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", x: true }
+    { time: "1970-01-01T00:00:05.000Z", "interval": "00:00:01.000", x: true }
 
 ### Warnings
 
@@ -465,8 +484,8 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { time: "1970-01-01T00:01:00.000Z" }
-    { time: "1970-01-01T00:01:02.000Z" }
+    { time: "1970-01-01T00:01:00.000Z", "interval": "00:00:02.000" }
+    { time: "1970-01-01T00:01:02.000Z", "interval": "00:00:02.000" }
 
 ## complains about out-of-order points
 
@@ -517,7 +536,7 @@ default values of null for when no -every is specified.
 
 ### Output
 
-    { "time": "1969-12-31T23:59:58.000Z" }
+    { "time": "1969-12-31T23:59:58.000Z", interval: "00:00:01.000" }
 
 ## complains about out-of-order assignment to the `time` field in batch mode
 
@@ -544,8 +563,8 @@ default values of null for when no -every is specified.
    * out-of-order assignment of time 1969-12-31T23:59:59.000Z after 1970-01-01T00:00:00.000Z, point(s) dropped
 
 ### Output
-    { time: "1970-01-01T00:00:00.000Z", n: 1 }
-    { time: "1970-01-01T00:00:00.000Z", n: 3 }
+    { time: "1970-01-01T00:00:00.000Z", "interval": "00:00:01.000", n: 1 }
+    { time: "1970-01-01T00:00:00.000Z", "interval": "00:00:01.000", n: 3 }
 
 ## emits grouped results in order when time is assigned
 ### Juttle

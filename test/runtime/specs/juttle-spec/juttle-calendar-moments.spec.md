@@ -138,7 +138,7 @@
     | view result
 
 ### Output
-    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"00:00:01.000"}
+    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"00:00:01.000","interval":"00:00:01.000"}
 
 ## ok to subtract an epsilon moment from a plain moment
 ### Juttle
@@ -148,7 +148,7 @@
     | view result
 
 ### Output
-    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"-00:00:01.000"}
+    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","dt":"-00:00:01.000","interval":"00:00:01.000"}
 
 ## quantize truncates non-calendar epsilon moments correctly
 ### Juttle
@@ -158,7 +158,7 @@
     | view result
 
 ### Output
-    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","winning":true}
+    {"time":"1970-01-01T00:00:01.000Z","t":"1970-01-01T00:00:00.000Z","winning":true,"interval":"00:00:01.000"}
 
 ## noninteger day constants are handled
 ### Juttle
@@ -214,4 +214,4 @@
     | view result
 
 ### Output
-    {"time":"1970-02-01T00:00:00.000Z","t":"1970-01-01T00:00:00.000Z","winning":true}
+    {"time":"1970-02-01T00:00:00.000Z","t":"1970-01-01T00:00:00.000Z","winning":true,"interval":"1M"}

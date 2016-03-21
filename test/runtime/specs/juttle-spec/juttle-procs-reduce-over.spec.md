@@ -109,18 +109,21 @@ this should trump any batch present.
 
     {
       "time": "1970-01-01T00:00:02.000Z",
+      "interval": "00:00:02.000",
       "count": 2,
       "sum": 2,
       "over": 1
     }
     {
       "time": "1970-01-01T00:00:04.000Z",
+      "interval": "00:00:02.000",
       "count": 2,
       "sum": 4,
       "over": 2
     }
     {
       "time": "1970-01-01T00:00:06.000Z",
+      "interval": "00:00:02.000",
       "count": 2,
       "sum": 4,
       "over": 2
@@ -146,8 +149,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 3}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 3}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 3}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 3}
 
 ## batch-driven reduce with -over less than batch works
 ### Juttle
@@ -158,8 +161,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:04.000Z", "over": 3}
-    { "time": "1970-01-01T00:00:08.000Z", "over": 3}
+    { "time": "1970-01-01T00:00:04.000Z", "interval": "00:00:04.000", "over": 3}
+    { "time": "1970-01-01T00:00:08.000Z", "interval": "00:00:04.000", "over": 3}
 
 ## batch-driven reduce with -over greater than batch works
 ### Juttle
@@ -170,9 +173,9 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 3}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 4}
-    { "time": "1970-01-01T00:00:09.000Z", "over": 4}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 3}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 4}
+    { "time": "1970-01-01T00:00:09.000Z", "interval": "00:00:03.000", "over": 4}
 
 ## batch-driven reduce with -over downstream from a reduce works
 ### Juttle
@@ -184,8 +187,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 1}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 1}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 1}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 1}
 
 ## every-driven reduce with -over === -every is same as batch reduce
 ### Juttle
@@ -195,8 +198,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 3}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 3}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 3}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 3}
 
 
 ## every-driven reduce with -over less than -every works
@@ -207,8 +210,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 2}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 2}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 2}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 2}
 
 ## every-driven reduce with -over greater than -every works
 ### Juttle
@@ -218,8 +221,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    { "time": "1970-01-01T00:00:03.000Z", "over": 3}
-    { "time": "1970-01-01T00:00:06.000Z", "over": 4}
+    { "time": "1970-01-01T00:00:03.000Z", "interval": "00:00:03.000", "over": 3}
+    { "time": "1970-01-01T00:00:06.000Z", "interval": "00:00:03.000", "over": 4}
 
 ## cascade of every-driven reducers, first
 ### Juttle
@@ -232,9 +235,9 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","first3":"1970-01-01T00:00:00.000Z"}
-    {"time":"1970-01-01T00:00:02.000Z","first3":"1970-01-01T00:00:01.000Z"}
-    {"time":"1970-01-01T00:00:03.000Z","first3":"1970-01-01T00:00:02.000Z"}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:00.000Z"}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:01.000Z"}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:02.000Z"}
 
 ## cascade of every-driven reducers, last
 ### Juttle
@@ -247,9 +250,9 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","last3":"1970-01-01T00:00:00.000Z"}
-    {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
-    {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:00.000Z"}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:01.000Z"}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:02.000Z"}
 
 ## cascade of batch-driven reducers, first
 ### Juttle
@@ -263,9 +266,9 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","first3":"1970-01-01T00:00:00.000Z"}
-    {"time":"1970-01-01T00:00:02.000Z","first3":"1970-01-01T00:00:01.000Z"}
-    {"time":"1970-01-01T00:00:03.000Z","first3":"1970-01-01T00:00:02.000Z"}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:00.000Z"}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:01.000Z"}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "first3":"1970-01-01T00:00:02.000Z"}
 
 ## cascade of batch-driven reducers, last
 ### Juttle
@@ -279,9 +282,9 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","last3":"1970-01-01T00:00:00.000Z"}
-    {"time":"1970-01-01T00:00:02.000Z","last3":"1970-01-01T00:00:01.000Z"}
-    {"time":"1970-01-01T00:00:03.000Z","last3":"1970-01-01T00:00:02.000Z"}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:00.000Z"}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:01.000Z"}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "last3":"1970-01-01T00:00:02.000Z"}
 
 ## every-driven reduce with -every faster than data and -over longer
 
@@ -293,19 +296,19 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":1}
-    {"time":"1970-01-01T00:00:02.000Z","over":1}
-    {"time":"1970-01-01T00:00:03.000Z","over":1}
-    {"time":"1970-01-01T00:00:04.000Z","over":2}
-    {"time":"1970-01-01T00:00:05.000Z","over":1}
-    {"time":"1970-01-01T00:00:06.000Z","over":1}
-    {"time":"1970-01-01T00:00:07.000Z","over":2}
-    {"time":"1970-01-01T00:00:08.000Z","over":1}
-    {"time":"1970-01-01T00:00:09.000Z","over":1}
-    {"time":"1970-01-01T00:00:10.000Z","over":2}
-    {"time":"1970-01-01T00:00:11.000Z","over":1}
-    {"time":"1970-01-01T00:00:12.000Z","over":1}
-    {"time": "1970-01-01T00:00:13.000Z","over":2}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:05.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:06.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:07.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:08.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:09.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:10.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:11.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:12.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:13.000Z", "interval": "00:00:01.000", "over":2}
 
 ## reduce -every with -from/-to and no -over complains
 
@@ -344,10 +347,12 @@ this should trump any batch present.
 
 ### Output
     { "hours": 24,
-      "time": "1970-01-02T12:00:00.000Z"
+      "time": "1970-01-02T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 12,
-      "time": "1970-01-03T12:00:00.000Z"
+      "time": "1970-01-03T12:00:00.000Z",
+      "interval": "1d"
     }
 
 ## reduce -every with trailing partial window result suppressed using -to
@@ -360,10 +365,12 @@ this should trump any batch present.
 
 ### Output
     { "hours": 12,
-      "time": "1970-01-01T12:00:00.000Z"
+      "time": "1970-01-01T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 24,
-      "time": "1970-01-02T12:00:00.000Z"
+      "time": "1970-01-02T12:00:00.000Z",
+      "interval": "1d"
     }
 
 ## batch reduce with leading partial window result suppressed using -from
@@ -377,10 +384,12 @@ this should trump any batch present.
 
 ### Output
     { "hours": 24,
-      "time": "1970-01-02T12:00:00.000Z"
+      "time": "1970-01-02T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 12,
-      "time": "1970-01-03T12:00:00.000Z"
+      "time": "1970-01-03T12:00:00.000Z",
+      "interval": "1d"
     }
 
 ## batch reduce with trailing partial window result suppressed using -to
@@ -394,10 +403,12 @@ this should trump any batch present.
 
 ### Output
     { "hours": 12,
-      "time": "1970-01-01T12:00:00.000Z"
+      "time": "1970-01-01T12:00:00.000Z",
+      "interval": "1d"
     }
     { "hours": 24,
-      "time": "1970-01-02T12:00:00.000Z"
+      "time": "1970-01-02T12:00:00.000Z",
+      "interval": "1d"
     }
 
 ## reduce -every with -over, long partial windows suppressed using -to and -from
@@ -409,8 +420,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    {"hours": 48, "time": "1970-01-03T12:00:00.000Z"}
-    {"hours": 48, "time": "1970-01-04T12:00:00.000Z"}
+    {"hours": 48, "time": "1970-01-03T12:00:00.000Z", "interval": "1d"}
+    {"hours": 48, "time": "1970-01-04T12:00:00.000Z", "interval": "1d"}
 
 ## batch reduce with -over, long partial windows suppressed using -to and -from
 
@@ -422,8 +433,8 @@ this should trump any batch present.
     | view result
 
 ### Output
-    {"hours": 48, "time": "1970-01-03T12:00:00.000Z"}
-    {"hours": 48, "time": "1970-01-04T12:00:00.000Z"}
+    {"hours": 48, "time": "1970-01-03T12:00:00.000Z", "interval": "1d"}
+    {"hours": 48, "time": "1970-01-04T12:00:00.000Z", "interval": "1d"}
 
 ## every-driven reduce with -every faster than data and -over longer, ragged windows suppressed
 
@@ -435,16 +446,16 @@ this should trump any batch present.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:04.000Z","over":2}
-    {"time":"1970-01-01T00:00:05.000Z","over":1}
-    {"time":"1970-01-01T00:00:06.000Z","over":1}
-    {"time":"1970-01-01T00:00:07.000Z","over":2}
-    {"time":"1970-01-01T00:00:08.000Z","over":1}
-    {"time":"1970-01-01T00:00:09.000Z","over":1}
-    {"time":"1970-01-01T00:00:10.000Z","over":2}
-    {"time":"1970-01-01T00:00:11.000Z","over":1}
-    {"time":"1970-01-01T00:00:12.000Z","over":1}
-    {"time":"1970-01-01T00:00:13.000Z","over":2}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:05.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:06.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:07.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:08.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:09.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:10.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:11.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:12.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:13.000Z", "interval": "00:00:01.000", "over":2}
 
 ## every-driven reduce is aligned with its start time, not the epoch
 ### Juttle
@@ -537,10 +548,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":0.5}
-    {"time":"1970-01-01T00:00:03.000Z","over":1}
-    {"time":"1970-01-01T00:00:04.000Z","over":2}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":0.5}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":2}
 
 ## windowed sum works (custom expire method)
 ### Juttle
@@ -552,10 +563,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":1}
-    {"time":"1970-01-01T00:00:03.000Z","over":3}
-    {"time":"1970-01-01T00:00:04.000Z","over":6}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":3}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":6}
 
 ## windowed stdev works (custom expire method)
 ### Juttle
@@ -567,10 +578,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":0.5}
-    {"time":"1970-01-01T00:00:03.000Z","over":0.816496580927726}
-    {"time":"1970-01-01T00:00:04.000Z","over":0.816496580927726}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":0.5}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":0.816496580927726}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":0.816496580927726}
 
 ## windowed min works
 ### Juttle
@@ -582,10 +593,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":0}
-    {"time":"1970-01-01T00:00:03.000Z","over":0}
-    {"time":"1970-01-01T00:00:04.000Z","over":1}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":1}
 
 ## windowed max works
 ### Juttle
@@ -597,10 +608,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":1}
-    {"time":"1970-01-01T00:00:03.000Z","over":2}
-    {"time":"1970-01-01T00:00:04.000Z","over":3}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":3}
 
 ## windowed first works
 ### Juttle
@@ -612,10 +623,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":0}
-    {"time":"1970-01-01T00:00:03.000Z","over":0}
-    {"time":"1970-01-01T00:00:04.000Z","over":1}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":1}
 
 ## windowed last works
 ### Juttle
@@ -627,10 +638,10 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":1}
-    {"time":"1970-01-01T00:00:03.000Z","over":2}
-    {"time":"1970-01-01T00:00:04.000Z","over":3}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":0}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":1}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":2}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":3}
 
 ## windowed pluck works
 ### Juttle
@@ -642,12 +653,12 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":[0]}
-    {"time":"1970-01-01T00:00:02.000Z","over":[0,1]}
-    {"time":"1970-01-01T00:00:03.000Z","over":[0,1,2]}
-    {"time":"1970-01-01T00:00:04.000Z","over":[1,2,3]}
-    {"time":"1970-01-01T00:00:05.000Z","over":[2,3,4]}
-    {"time":"1970-01-01T00:00:06.000Z","over":[3,4,5]}
+    {"time":"1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "over":[0]}
+    {"time":"1970-01-01T00:00:02.000Z", "interval": "00:00:01.000", "over":[0,1]}
+    {"time":"1970-01-01T00:00:03.000Z", "interval": "00:00:01.000", "over":[0,1,2]}
+    {"time":"1970-01-01T00:00:04.000Z", "interval": "00:00:01.000", "over":[1,2,3]}
+    {"time":"1970-01-01T00:00:05.000Z", "interval": "00:00:01.000", "over":[2,3,4]}
+    {"time":"1970-01-01T00:00:06.000Z", "interval": "00:00:01.000", "over":[3,4,5]}
 
 ## windowed percentile works
 (consult pluck output to convince yourself)
@@ -661,12 +672,12 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":0}
-    {"time":"1970-01-01T00:00:02.000Z","over":0}
-    {"time":"1970-01-01T00:00:03.000Z","over":1}
-    {"time":"1970-01-01T00:00:04.000Z","over":2}
-    {"time":"1970-01-01T00:00:05.000Z","over":3}
-    {"time":"1970-01-01T00:00:06.000Z","over":4}
+    {"time":"1970-01-01T00:00:01.000Z","over":0, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:02.000Z","over":0, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:03.000Z","over":1, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:04.000Z","over":2, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:05.000Z","over":3, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:06.000Z","over":4, "interval": "00:00:01.000"}
 
 ## windowed count_unique works
 
@@ -679,12 +690,12 @@ XXX when PROD-7331 merges, make this test fast.
 
 ### Output
 
-    {"time":"1970-01-01T00:00:01.000Z","over":1}
-    {"time":"1970-01-01T00:00:02.000Z","over":2}
-    {"time":"1970-01-01T00:00:03.000Z","over":2}
-    {"time":"1970-01-01T00:00:04.000Z","over":2}
-    {"time":"1970-01-01T00:00:05.000Z","over":2}
-    {"time":"1970-01-01T00:00:06.000Z","over":2}
+    {"time":"1970-01-01T00:00:01.000Z","over":1, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:02.000Z","over":2, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:03.000Z","over":2, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:04.000Z","over":2, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:05.000Z","over":2, "interval": "00:00:01.000"}
+    {"time":"1970-01-01T00:00:06.000Z","over":2, "interval": "00:00:01.000"}
 
 ## custom windowed reducers work with expire
 ### Juttle

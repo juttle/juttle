@@ -1197,9 +1197,9 @@ describe('Juttle procs tests', function() {
             })
             .then(function (res) {
                 var expected_value = [
-                    {time: new Date(2).toISOString(), a: 2},
-                    {time: new Date(4).toISOString(), a: 2},
-                    {time: new Date(6).toISOString(), a: 2}
+                    {time: new Date(2).toISOString(), a: 2, interval: '00:00:00.002'},
+                    {time: new Date(4).toISOString(), a: 2, interval: '00:00:00.002'},
+                    {time: new Date(6).toISOString(), a: 2, interval: '00:00:00.002'}
                 ];
                 expect(res.sinks.result).to.deep.equal(expected_value);
             });
@@ -1214,9 +1214,9 @@ describe('Juttle procs tests', function() {
             })
             .then(function (res) {
                 var expected_value = [
-                    {time: new Date(start + 2).toISOString(), a: 2},
-                    {time: new Date(start + 4).toISOString(), a: 2},
-                    {time: new Date(start + 6).toISOString(), a: 2}
+                    {time: new Date(start + 2).toISOString(), a: 2, interval: '00:00:00.002'},
+                    {time: new Date(start + 4).toISOString(), a: 2, interval: '00:00:00.002'},
+                    {time: new Date(start + 6).toISOString(), a: 2, interval: '00:00:00.002'}
                 ];
                 expect(res.sinks.result).to.deep.equal(expected_value);
             });
