@@ -32,7 +32,8 @@ describe('Juttle Module Tests', function() {
                 builtin: true,
                 module: '(builtin)',
                 version: version,
-                path: path.resolve(__dirname, '../../lib/adapters/file/index.js')
+                path: path.resolve(__dirname, '../../lib/adapters/file/index.js'),
+                loaded: true
             });
 
             expect(adapterList).to.contain({
@@ -40,7 +41,8 @@ describe('Juttle Module Tests', function() {
                 builtin: false,
                 version: '(unknown)',
                 module: '(unknown)',
-                path: '(unable to load adapter)'
+                path: '(unable to load adapter)',
+                loaded: false
             });
 
             expect(adapterList).to.contain({
@@ -48,7 +50,8 @@ describe('Juttle Module Tests', function() {
                 builtin: false,
                 module: 'test-adapter',
                 version: '0.1.0',
-                path: path.resolve(__dirname, './test-adapter')
+                path: path.resolve(__dirname, './test-adapter'),
+                loaded: true
             });
 
             expect(result.sinks.result).to.deep.equal(adapterList);

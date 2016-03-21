@@ -173,9 +173,10 @@ examples for details.
 
 System imports load predefined modules from standard
 locations. Examples of system imports are the
-[Juttle Standard Library](./juttle_standard_library.md). For system
-imports, module_path is a path suffix that is combined with one of the
-standard locations to result in a full pathname.
+[Juttle Standard Library](./juttle_standard_library.md) or
+[adapter modules](../adapters/adapter_api.md#Adapter Modules). For
+system imports, module_path is a path suffix that is combined with one
+of the standard locations to result in a full pathname.
 
 For both user and system imports, when referring to files, a `.juttle`
 extension will be added if not present, and when referring to
@@ -304,6 +305,22 @@ import "random" as random;
 emit -limit 3 -from :0:
 | put pure = random.normal(0, 1)
 
+```
+
+_Example: adapter modules_
+
+This example loads the file `aggregations.juttle` from the aws
+adapter. Note the use of the implied `.juttle` extension in the import
+statement.
+
+```juttle-no-syntax-check
+import "adapters/aws/aggregations" as Adapter_aws;
+
+read aws product='EC2'
+| Adapter_aws.aggregate_EC2
+| filter demographic='EC2 Instance Type'
+| keep demographic, name, value
+| view table
 ```
 
 Subgraphs

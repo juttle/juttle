@@ -21,6 +21,7 @@ Here are the main steps involved in writing a new adapter:
 1. Create a JavaScript module that can be `require()`d by the juttle runtime.
 2. From that module, export an initialization function to define the read/write capabilities of the adapter.
 3. Implement ES6 classes deriving from AdapterRead/AdapterWrite that perform the work of reading from/writing to the backend data source.
+4. (Optional) Write [juttle modules](../concepts/programming_constructs.md#Modules) that provide useful functionality and include them with the adapter.
 
 We'll go through each of these steps in more detail below.
 
@@ -287,6 +288,25 @@ if (unknown.length > 0) {
         option: unknown[0]
     });
 }
+```
+
+## Adapter Modules
+
+An adapter may also include juttle modules that provide useful functionality for users writing juttle programs. An example of this is the [AWS adapter](https://github.com/juttle/juttle-aws-adapter), which includes modules that provide aggregations of raw data points into demographic and aggregate information.
+
+By convention, all files below the directory `<adapter installation dir>/juttle` are made available to juttle programs. They can be imported using the path `adapters/<adapter name>/<path-to-module-file>`. The path below the root `adapters/<adapter name>` should correspond to the path below `juttle`. Here's an example directory layout:
+
+```juttle-no-syntax-check
+// assuming .../node_modules/juttle-aws-adapter/juttle/aggregations.juttle exists
+
+import 'adapters/aws/aggregations.juttle' as Adapter_aws;
+
+read aws product='EC2'
+| Adapter_aws.aggregate_EC2
+| filter demographic='EC2 Instance Type'
+| keep demographic, name, value
+| view table
+
 ```
 
 ## Additional Resources
