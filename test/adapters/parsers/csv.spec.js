@@ -13,19 +13,71 @@ describe('parsers/csv', function() {
     var pointsFile = path.resolve(__dirname, 'input/csv/points.csv');
     var invalidFile = path.resolve(__dirname, 'input/csv/invalid.csv');
 
+    var pointsFileWithComments = path.resolve(__dirname, 'input/csv/points-with-comments.csv');
+    var pointsFileWithEmptyLines = path.resolve(__dirname, 'input/csv/points-with-empty-lines.csv');
+
     it('can instantiate a csv parser', function() {
         var csv = parsers.getParser('csv');
         expect(csv).to.not.be.undefined;
     });
 
-    it('fails when given an invalid CSV stream', function() {
+    it('fails when given an invalid CSV stream', () => {
         var csv = parsers.getParser('csv');
-        return csv.parseStream(fs.createReadStream(invalidFile), function() {})
-        .then(function() {
+        return csv.parseStream(fs.createReadStream(invalidFile), () => {})
+        .then(() => {
             throw Error('previous statement should have failed');
         })
-        .catch(function(err) {
+        .catch((err) => {
             expect(err.toString()).to.contain('Invalid CSV data: "1,2" at line 1 does not match header line');
+        });
+    });
+
+    it('can parse incomplete rows in a CSV stream', () => {
+        var csv = parsers.getParser('csv', {
+            allowIncompleteLines: true
+        });
+        var results = [];
+        return csv.parseStream(fs.createReadStream(invalidFile), (points) => {
+            results.push(points);
+        })
+        .then(() => {
+            expect(results).to.deep.equal([
+                [{ a: '1', b: '2', c: ''}]
+            ]);
+        });
+    });
+
+    it('can parse CSV stream with comment lines start with #', () => {
+        var csv = parsers.getParser('csv', {
+            commentSymbol: '#'
+        });
+        var results = [];
+        return csv.parseStream(fs.createReadStream(pointsFileWithComments), (points) => {
+            results.push(points);
+        })
+        .then(() => {
+            expect(results).to.deep.equal([[
+                { 'time': '2014-01-01T00:00:01.000Z', 'foo': '1' },
+                { 'time': '2014-01-01T00:00:02.000Z', 'foo': '2' },
+                { 'time': '2014-01-01T00:00:03.000Z', 'foo': '3' }
+            ]]);
+        });
+    });
+
+    it('can parse CSV stream with blank lines', () => {
+        var csv = parsers.getParser('csv', {
+            ignoreEmptyLines: true
+        });
+        var results = [];
+        return csv.parseStream(fs.createReadStream(pointsFileWithEmptyLines), (points) => {
+            results.push(points);
+        })
+        .then(() => {
+            expect(results).to.deep.equal([[
+                { 'time': '2014-01-01T00:00:01.000Z', 'foo': '1' },
+                { 'time': '2014-01-01T00:00:02.000Z', 'foo': '2' },
+                { 'time': '2014-01-01T00:00:03.000Z', 'foo': '3' }
+            ]]);
         });
     });
 

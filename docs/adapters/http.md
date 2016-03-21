@@ -25,6 +25,10 @@ read http -url url
           -pageParam parameter
           -pageStart start
           -pageUnit unit
+          -separator character
+          -commentSymbol character
+          -ignoreEmptyLines true/false
+          -allowIncompleteLines true/false
 ```
 
 Parameter         |             Description          | Required?
@@ -43,6 +47,10 @@ Parameter         |             Description          | Required?
 `-pageStart`      | Initial value of the paging offset to set the `pageParam` to in the URL used to make the HTTP request. | No; default: `0`
 `-pageUnit <request|record>` | If set to `request`, then each successive HTTP paging request increments the paging query parameter by one. If set to `record`, then each successive request increments the paging query parameter by the number of records returned in the previous request. | No; default: `request`
 `-pageField`      | If set, then each successive HTTP paging request sets the paging query parameter to the last value of the field with name `pageField`. Cannot be used with `pageStart` or `pageUnit`. | No
+`-separator`  | When `-format 'csv'` is used, you can specify the separator between columns in a CSV file. | No: defaults to `,`
+`-commentSymbol`    | When `-format 'csv'` is used, you can specify the comment character that prefixes comment lines in a CSV file. | No: defaults to `,`
+`-ignoreEmptyLines`     | When `-format 'csv'` is used, you can skip empty lines in a CSV file. | No: defaults to `false`
+`-allowIncompleteLines` | When `-format 'csv'` is used, you can allow for parsing of incomplete lines in a CSV file. | No: defaults to `false`
 
 Currently the `read http` adapter will automatically parse incoming data based off of the `content-type` header. Here are the currently supported content-types:
 

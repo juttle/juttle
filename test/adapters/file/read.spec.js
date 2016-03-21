@@ -29,6 +29,10 @@ describe('read file adapter tests', function () {
 
     var tsvFile = path.resolve(__dirname, '../parsers/input/tsv/points.tsv');
 
+    var csvFileWithIncompleteLines = path.resolve(__dirname, '../parsers/input/csv/invalid.csv');
+    var csvFileWithComments = path.resolve(__dirname, '../parsers/input/csv/points-with-comments.csv');
+    var csvFileWithEmptyLines = path.resolve(__dirname, '../parsers/input/csv/points-with-empty-lines.csv');
+
     it('fails when you provide an unknown option', function() {
         return run_read_file_juttle(tmp_file, {foo: 'bar'})
         .then(function() {
@@ -366,6 +370,49 @@ describe('read file adapter tests', function () {
                 { time: '2014-01-01T00:00:01.000Z', foo: '1' },
                 { time: '2014-01-01T00:00:02.000Z', foo: '2' },
                 { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with comments', () => {
+        return check_juttle({
+            program: 'read file -file "' + csvFileWithComments  + '" -format "csv" -commentSymbol "#"'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { time: '2014-01-01T00:00:01.000Z', foo: '1' },
+                { time: '2014-01-01T00:00:02.000Z', foo: '2' },
+                { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with empty lines', () => {
+        return check_juttle({
+            program: 'read file -file "' + csvFileWithEmptyLines + '" -format "csv" -ignoreEmptyLines true'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { time: '2014-01-01T00:00:01.000Z', foo: '1' },
+                { time: '2014-01-01T00:00:02.000Z', foo: '2' },
+                { time: '2014-01-01T00:00:03.000Z', foo: '3' }
+            ]);
+        });
+    });
+
+    it('can read a CSV file with incomplete lines', () => {
+        return check_juttle({
+            program: 'read file -file "' + csvFileWithIncompleteLines + '" -format "csv" -allowIncompleteLines true'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table).to.deep.equal([
+                { a: '1', b: '2', c: '' }
             ]);
         });
     });

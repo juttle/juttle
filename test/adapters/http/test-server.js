@@ -169,13 +169,13 @@ class TestHTTPServer {
                 */
                 var points = [];
                 var timeField = req.query.timeField;
-                var count = req.query.count;
+                var count = parseInt(req.query.count);
                 var from = req.query.from ? new Date(req.query.from) : new Date();
                 var every = req.query.every ? parseInt(req.query.every) : 1;
                 var rootPath = req.query.rootPath;
 
                 var now = from;
-                for (var index = 0; index < parseInt(count); index++) {
+                for (var index = 0; index < count; index++) {
                     var point = {};
 
                     // copy all fields except timeField and count to each point
@@ -207,6 +207,21 @@ class TestHTTPServer {
                     }, (err, csv) => {
                         if (err) {
                             throw err;
+                        }
+
+                        if (req.headers['insertline'] !== undefined) {
+                            // insert the specified line into the CSV data
+                            // at a few locations
+                            var line = req.headers['insertline'];
+                            var lines = csv.split('\n');
+                            lines.splice(count/2, 0, line);
+                            lines.splice(count, 0, line);
+                            lines.splice(count/4, 0, line);
+                            csv = lines.join('\n');
+                        }
+
+                        if (req.headers['separatorchar'] !== undefined) {
+                            csv = csv.replace(/,/g, req.headers['separatorchar']);
                         }
 
                         if (req.headers['return-content-type']) {

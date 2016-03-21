@@ -321,6 +321,71 @@ describe('HTTP read tests', function() {
 
     });
 
+    it('can read multiple data points from TSV with with "|" separator', () => {
+        return check_juttle({
+            program: `read http
+                        -headers { Accept: "text/csv", SeparatorChar: "|" }
+                        -url "${server.url}/points?count=100&timeField=time&foo=bar&fizz=buzz"
+                        -separator "|"`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            expect(result.sinks.table.length).equal(100);
+            expect(result.sinks.table[0].time).to.not.be.undefined;
+            expect(result.sinks.table[0].fizz).to.be.equal('buzz');
+        });
+    });
+
+    it('can read multiple data points from CSV with with comments', () => {
+        return check_juttle({
+            program: `read http
+                        -headers { Accept: "text/csv", InsertLine: "# just a comment" }
+                        -url "${server.url}/points?count=100&timeField=time&foo=bar&fizz=buzz"
+                        -commentSymbol "#"`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            expect(result.sinks.table.length).equal(100);
+            expect(result.sinks.table[0].time).to.not.be.undefined;
+            expect(result.sinks.table[0].fizz).to.be.equal('buzz');
+        });
+    });
+
+    it('can read multiple data points from CSV with with empty lines', () => {
+        return check_juttle({
+            program: `read http
+                        -headers { Accept: "text/csv", InsertLine: "" }
+                        -url "${server.url}/points?count=100&timeField=time&foo=bar&fizz=buzz"
+                        -ignoreEmptyLines true`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            expect(result.sinks.table.length).equal(100);
+            expect(result.sinks.table[0].time).to.not.be.undefined;
+            expect(result.sinks.table[0].fizz).to.be.equal('buzz');
+        });
+    });
+
+    it('can read multiple data points from CSV with with incomplete lines', () => {
+        return check_juttle({
+            program: `read http
+                        -headers { Accept: "text/csv", InsertLine: "2016-03-17T18:31:45.327Z" }
+                        -url "${server.url}/points?count=100&timeField=time&foo=bar&fizz=buzz"
+                        -allowIncompleteLines true`
+        })
+        .then((result) => {
+            expect(result.errors).deep.equals([]);
+            expect(result.warnings).deep.equals([]);
+            // 3 incomplete lines were added
+            expect(result.sinks.table.length).equal(103);
+            expect(result.sinks.table[0].time).to.not.be.undefined;
+            expect(result.sinks.table[0].fizz).to.be.equal('buzz');
+        });
+    });
+
     it('fails when you pass a filter expression', function() {
         var url = server.url + '/points?count=10&timeField=time&from=2014-01-01T00:00:00.000Z';
         return check_juttle({

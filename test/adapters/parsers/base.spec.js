@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var expect = require('chai').expect;
 var parsers = require('../../../lib/adapters/parsers');
 
@@ -19,11 +20,18 @@ describe('parsers/base', function() {
         }).to.throw('option pattern can only be used with format="grok"');
     });
 
-    it('fails when using -separator with invalid -format', function() {
-        expect(function() {
-            parsers.getParser('json', {
-                separator: ','
-            });
-        }).to.throw('option separator can only be used with format="csv"');
+    _.each([
+        'separator',
+        'commentSymbol',
+        'ignoreEmptyLines',
+        'allowIncompleteLines'
+    ], (option) => {
+        it(`fails when using -${option} with invalid -format`, () => {
+            expect(() => {
+                var options = {};
+                options[option] = 'foo';
+                parsers.getParser('json', options);
+            }).to.throw(`option ${option} can only be used with format="csv"`);
+        });
     });
 });
