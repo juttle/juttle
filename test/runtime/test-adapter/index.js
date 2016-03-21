@@ -42,6 +42,11 @@ function TestAdapter(config) {
             this.optimization_info = params.optimization_info;
 
             this.count = optimization_info.count;
+            
+            if (optimization_info.sort) {
+                this.sortField = optimization_info.sort;
+            }
+        
             if (optimization_info.hasOwnProperty('limit')) {
                 this.limit = optimization_info.limit;
             }
@@ -69,6 +74,10 @@ function TestAdapter(config) {
             // Otherwise just emit whatever is stored for the given key
             else {
                 points = store[this.key] || [];
+            }
+            
+            if (this.sortField) {
+                points = _.sortBy(points, this.sortField);
             }
 
             if (this.hasOwnProperty('limit')) {
@@ -115,6 +124,23 @@ function TestAdapter(config) {
 
             optimization_info.type = 'tail';
             optimization_info.limit = limit;
+            return true;
+        },
+        optimize_sort: function(read, sort, graph, optimization_info) {
+            if (optimization_info.type && optimization_info.type !== 'sort') {
+                return false;
+            }
+            
+            var sortCols = graph.node_get_option(sort, 'columns');
+            if (
+                sortCols.length !== 1 || sortCols[0].direction ||
+                graph.node_get_option(sort, 'limit') ||
+                graph.node_get_option(sort, 'groupby')
+                ) {
+                return false;
+            }
+            
+            optimization_info.sort = graph.node_get_option(sort, 'columns')[0].field;
             return true;
         },
         optimize_reduce: function(read, reduce, graph, optimization_info) {
