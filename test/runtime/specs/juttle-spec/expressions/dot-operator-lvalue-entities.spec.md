@@ -17,7 +17,7 @@
 
     { time: "1970-01-01T00:00:00.000Z", result: { a: 1, b: 5, c: 3 } }
 
-## (Skip) Assigns correctly when used on a point field
+## Assigns correctly when used on a point field
 
 ### Juttle
 
