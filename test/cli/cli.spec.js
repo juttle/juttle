@@ -208,6 +208,18 @@ describe('Juttle CLI Tests', function() {
             });
         });
 
+        it('returns runtime errors with locations', function() {
+            return runJuttle([
+                '-e',
+                `read file -file "${__dirname}/test.csv" -format "csv"`,
+            ]).then(function(result) {
+                expect(result.code).to.equal(1);
+                expect(result.stderr).to.include('main:1:1');
+                expect(result.stderr).to.include('Error: Invalid CSV data');
+                expect(result.stderr).to.include('INVALID-DATA');
+            });
+        });
+
         it('can execute a juttle that writes to a file', function() {
             var filename = tmp.tmpNameSync();
             return runJuttle(['-e', 'emit -limit 3 -hz 3 | put value=count() | keep value | view file -filename "' + filename + '"'])
