@@ -1,0 +1,7 @@
+{
+  "name": "test-adapter-conf",
+  "version": "0.1.0",
+  "description": "",
+  "author": "",
+  "juttleAdapterAPI": "^0.5.0"
+}
