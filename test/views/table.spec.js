@@ -3,6 +3,8 @@
 var expect = require('chai').expect;
 var TableView = require('../../lib/views').TableView;
 var streams = require('memory-streams');
+var Promise = require('bluebird');
+var JuttleMoment = require('../../lib/runtime/types/juttle-moment');
 
 
 describe('table view', function () {
@@ -100,7 +102,7 @@ describe('table view', function () {
         expect(lines[7]).to.match(/│.*false.*│/);
     });
 
-    it('progressive mode truncates columns in subsequent batches', function() {
+    it('progressive mode does not truncate columns in subsequent batches if they arrive quickly', function() {
         var stream = new streams.WritableStream();
         var table = new TableView({
             fstream: stream,
@@ -126,23 +128,70 @@ describe('table view', function () {
 
         var lines = stream.toString().split('\n');
         expect(lines).to.deep.equal([
-            '┌───────────────────────────────────┐',
-            '│ key                               │',
-            '├───────────────────────────────────┤',
-            '│ short                             │',
-            '├───────────────────────────────────┤',
-            '│ a bit longer                      │',
-            '├───────────────────────────────────┤',
-            '│ very much longer by far           │',
-            '├───────────────────────────────────┤',
-            '│ shorter                           │',
-            '├───────────────────────────────────┤',
-            '│ very very very very very much lo… │',
-            '└───────────────────────────────────┘',
-            '' ]);
+            '┌─────────────────────────────────────────────┐',
+            '│ key                                         │',
+            '├─────────────────────────────────────────────┤',
+            '│ short                                       │',
+            '├─────────────────────────────────────────────┤',
+            '│ a bit longer                                │',
+            '├─────────────────────────────────────────────┤',
+            '│ very much longer by far                     │',
+            '├─────────────────────────────────────────────┤',
+            '│ shorter                                     │',
+            '├─────────────────────────────────────────────┤',
+            '│ very very very very very much longer by far │',
+            '└─────────────────────────────────────────────┘',
+            ''
+        ]);
     });
 
-    it('warns if subsequent points arrive late with different keys', function() {
+    it('progressive mode truncates columns in subsequent batches after a delay', function() {
+        var stream = new streams.WritableStream();
+        var table = new TableView({
+            fstream: stream,
+            progressive: JuttleMoment.duration(10, 'ms')
+        },{
+            color: false
+        });
+
+        var batch1 = [
+            { key: 'short' },
+            { key: 'a bit longer' },
+            { key: 'very much longer by far' },
+            { key: 'shorter' }
+        ];
+
+        var batch2 = [
+            { key: 'very very very very very much longer by far' }
+        ];
+
+        table.consume(batch1);
+        return Promise.delay(50)
+        .then(function() {
+            table.consume(batch2);
+            table.eof();
+
+            var lines = stream.toString().split('\n');
+            expect(lines).to.deep.equal([
+                '┌─────────────────────────┐',
+                '│ key                     │',
+                '├─────────────────────────┤',
+                '│ short                   │',
+                '├─────────────────────────┤',
+                '│ a bit longer            │',
+                '├─────────────────────────┤',
+                '│ very much longer by far │',
+                '├─────────────────────────┤',
+                '│ shorter                 │',
+                '├─────────────────────────┤',
+                '│ very very very very ve… │',
+                '└─────────────────────────┘',
+                ''
+            ]);
+        });
+    });
+
+    it('does not warn if subsequent points arrive quickly with different keys', function() {
         var stream = new streams.WritableStream();
         var table = new TableView({
             fstream: stream,
@@ -162,15 +211,50 @@ describe('table view', function () {
 
         var lines = stream.toString().split('\n');
         expect(lines).to.deep.equal([
-            '┌──────────┐',
-            '│ key1     │',
-            '├──────────┤',
-            '│ val1     │',
-            '├──────────┤',
-            '│          │',
-            '└──────────┘',
+            '┌──────────┬──────────┐',
+            '│ key1     │ key2     │',
+            '├──────────┼──────────┤',
+            '│ val1     │          │',
+            '├──────────┼──────────┤',
+            '│          │ val2     │',
+            '└──────────┴──────────┘',
             ''
         ]);
-        expect(warnings).to.deep.equal(['view table: Ignoring new point key(s) "key2"']);
+        expect(warnings).to.deep.equal([]);
+    });
+
+    it('warns if subsequent points arrive late with different keys', function() {
+        var stream = new streams.WritableStream();
+        var table = new TableView({
+            fstream: stream,
+            progressive: JuttleMoment.duration(10, 'ms')
+        },{
+            color: false
+        });
+
+        var warnings = [];
+        table.events.on('warning', function(msg) {
+            warnings.push(msg);
+        });
+
+        table.consume([{key1: 'val1'}]);
+        return Promise.delay(50)
+        .then(function() {
+            table.consume([{key2: 'val2'}]);
+            table.eof();
+
+            var lines = stream.toString().split('\n');
+            expect(lines).to.deep.equal([
+                '┌──────────┐',
+                '│ key1     │',
+                '├──────────┤',
+                '│ val1     │',
+                '├──────────┤',
+                '│          │',
+                '└──────────┘',
+                ''
+            ]);
+            expect(warnings).to.deep.equal(['view table: Ignoring new point key(s) "key2"']);
+        });
     });
 });
