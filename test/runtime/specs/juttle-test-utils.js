@@ -233,20 +233,20 @@ function run_juttle(prog, options) {
         var warnings = [];
 
         // Dispatch to correct test view
-        prog.events.on('view:mark', function(data) {
-            views[data.channel].mark(data.mark);
+        prog.events.on('view:mark', function(event) {
+            views[event.channel].mark(event.data);
         });
 
-        prog.events.on('view:tick', function(data) {
-            views[data.channel].tick(data.time);
+        prog.events.on('view:tick', function(event) {
+            views[event.channel].tick(event.data);
         });
 
-        prog.events.on('view:eof', function(data) {
-            views[data.channel].eof();
+        prog.events.on('view:eof', function(event) {
+            views[event.channel].eof();
         });
 
-        prog.events.on('view:points', function(data) {
-            views[data.channel].consume(data.points);
+        prog.events.on('view:points', function(event) {
+            views[event.channel].consume(event.data);
         });
 
         prog.events.on('error', function(err) {
