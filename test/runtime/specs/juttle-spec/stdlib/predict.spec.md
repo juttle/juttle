@@ -2,7 +2,7 @@
 
 ## predict with features disabled returns previous value
 ### Juttle
-    import "predict.juttle" as predict;
+    import "predict" as predict;
     emit -limit 5 -from Date.new(0) -every :d:
     | put value = count()
     | predict.predict -over :w: -every :d: -detrend false -deseason false -denoise false -revise false
@@ -18,7 +18,7 @@
 
 ## predict can detrend a straight line
 ### Juttle
-    import "predict.juttle" as predict;
+    import "predict" as predict;
     emit -limit 14 -from Date.new(0) -every :d:
     | put value = count()
     | predict.predict -over :w: -every :d: -deseason false
@@ -30,7 +30,7 @@
 
 ## predict can deseasonalize a sinewave
 ### Juttle
-    import "predict.juttle" as predict;
+    import "predict" as predict;
     const every=:d:;
     const over=:w:;
     emit -from Date.new(0) -to Date.new(0)+4*over -every every
@@ -45,7 +45,7 @@
 
 ## predict can detrend and deseasonalize
 ### Juttle
-    import "predict.juttle" as predict;
+    import "predict" as predict;
     const every=:d:;
     const over=:w:;
     emit -from Date.new(0) -to Date.new(0)+4*over -every every
