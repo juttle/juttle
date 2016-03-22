@@ -2,7 +2,7 @@
 
 ## min selects the minimum value
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 5 -from Date.new(0)
     | put x = count()
     | select.min -field 'x'
@@ -14,7 +14,7 @@
 
 ## max selects the maximum value
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 5 -from Date.new(0)
     | put x = count()
     | select.max -field 'x'
@@ -26,7 +26,7 @@
 
 ## median selects the median value (odd)
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 5 -from Date.new(0)
     | put x = count()
     | select.median -field 'x'
@@ -38,7 +38,7 @@
 
 ## median selects the median value (even)
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 6 -from Date.new(0)
     | put x = count()
     | select.median -field 'x'
@@ -50,7 +50,7 @@
 
 ## percentile selects the 75th percentile point
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 10 -from Date.new(0)
     | put x = count()
     | select.percentile -field 'x' -p 0.75
@@ -62,7 +62,7 @@
 
 ## min selects the minimum value by group
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 10 -from Date.new(0)
     | put x = count(), parity = x % 2
     | select.min -field 'x' -by 'parity'
@@ -75,7 +75,7 @@
 
 ## max selects the maximum value by group
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 10 -from Date.new(0)
     | put x = count(), parity = x % 2
     | select.max -field 'x' -by 'parity'
@@ -88,7 +88,7 @@
 
 ## median selects the median value by group
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 10 -from Date.new(0)
     | put x = count(), parity = x % 2
     | select.median -field 'x' -by 'parity'
@@ -101,7 +101,7 @@
 
 ## percentile selects the 75th percentile point by group
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 20 -from Date.new(0)
     | put x = count(), parity = x % 2
     | select.percentile -field 'x' -p 0.75  -by 'parity'
@@ -114,7 +114,7 @@
 
 ## min selects the minimum value, batched
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 20 -from Date.new(0)
     | put x = count(), parity = x % 2
     | batch :10s:
@@ -131,7 +131,7 @@
 
 ## max selects the maximum value, batched
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 20 -from Date.new(0)
     | put x = count(), parity = x % 2
     | batch :10s:
@@ -148,7 +148,7 @@
 
 ## median selects the median value, batched
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 20 -from Date.new(0)
     | put x = count(), parity = x % 2
     | batch :10s:
@@ -165,7 +165,7 @@
 
 ## percentile selects the 75th percentile point, batched
 ### Juttle
-    import "select.juttle" as select;
+    import "select" as select;
     emit -limit 40 -from Date.new(0)
     | put x = count(), parity = x % 2
     | batch :20s:

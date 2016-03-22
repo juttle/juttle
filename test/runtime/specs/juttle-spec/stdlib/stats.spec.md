@@ -2,7 +2,7 @@
 
 ## reducer demean(fld) subtracts the mean
 ### Juttle
-    import "stats.juttle" as stats;
+    import "stats" as stats;
     emit -limit 5 -from Date.new(0)
     | put x = 2 * count()
     | reduce x = last(x), u = avg(x), xmu = stats.demean(x)
@@ -13,7 +13,7 @@
 
 ## reducer stdev(fld) computes the right thing
 ### Juttle
-    import "stats.juttle" as stats;
+    import "stats" as stats;
     emit -limit 3 -from Date.new(0)
     | put x = 2 * count()
     | reduce s = stats.stdev(x)
@@ -26,7 +26,7 @@
 note the first output point is dropped because we
 tried to do Math.floor(null)
 ### Juttle
-    import "stats.juttle" as stats;
+    import "stats" as stats;
     emit -limit 3 -from Date.new(0)
     | put x = 2 * count()
     | reduce z = stats.z(x)
@@ -37,7 +37,7 @@ tried to do Math.floor(null)
 
 ## reducer relMean(fld) divides by the mean
 ### Juttle
-    import "stats.juttle" as stats;
+    import "stats" as stats;
     emit -limit 3 -from Date.new(0)
     | put x = 2 * count()
     | reduce x = last(x), u = avg(x), xdu = stats.relMean(x)
@@ -48,7 +48,7 @@ tried to do Math.floor(null)
 
 ## reducer cv(fld) computes the coefficient of variation
 ### Juttle
-    import "stats.juttle" as stats;
+    import "stats" as stats;
     emit -limit 100 -from Date.new(0)
     | put x = 2 * count()
     | reduce x = last(x), u = avg(x), sd = stats.stdev(x), cv = stats.cv(x)
