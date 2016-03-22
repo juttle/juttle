@@ -1093,7 +1093,7 @@ marked complete and participates in early joins. Later joins get the second tabl
 
 ### Output
 
-    { "time": "1970-01-01T00:00:00.000Z", "interval": "1M", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z", "mark": true }
     { "time": "1970-01-01T00:00:00.000Z", "first": true, "m": 1 }
     { "time": "1970-02-01T00:00:00.000Z", "interval": "1M", "mark": true }
     { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1 }
@@ -1113,7 +1113,7 @@ marked complete and participates in early joins. Later joins get the second tabl
 
 ### Output
 
-    { "time": "1970-01-01T00:00:00.000Z", "interval": "2M", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z", "mark": true }
     { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1}
     { "time": "1970-03-01T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 2}
     { "time": "1970-03-01T00:00:00.000Z", "interval": "2M", "mark": true }
@@ -1134,7 +1134,7 @@ marked complete and participates in early joins. Later joins get the second tabl
 
 ### Output
 
-    { "time": "1970-01-01T00:00:00.000Z", "interval": "60.00:00:00.000", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z", "mark": true }
     { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 1}
     { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 2}
     { "time": "1970-03-02T00:00:00.000Z", "first": true, "second": true, "m": 2, "n": 3}

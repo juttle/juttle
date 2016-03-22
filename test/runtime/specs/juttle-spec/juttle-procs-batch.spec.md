@@ -186,7 +186,7 @@ eventually remove historic ticks)
     | view result -marks true -times true
 
 ### Output
-    { "time": "1970-01-01T00:00:02.000Z", "interval": "00:00:02.000", "mark": true }
+    { "time": "1970-01-01T00:00:02.000Z", "mark": true }
     { "time": "1970-01-01T00:00:02.000Z" }
     { "time": "1970-01-01T00:00:04.000Z", "interval": "00:00:02.000", "mark": true }
 
@@ -198,7 +198,7 @@ eventually remove historic ticks)
     | view result -marks true -times true
 
 ### Output
-    { "time": "1970-01-01T00:00:00.000Z", "interval": "00:00:01.000", "mark": true }
+    { "time": "1970-01-01T00:00:00.000Z", "mark": true }
     { "time": "1970-01-01T00:00:00.000Z" }
     { "time": "1970-01-01T00:00:01.000Z", "interval": "00:00:01.000", "mark": true }
     { "time": "1970-01-01T00:00:01.000Z" }
