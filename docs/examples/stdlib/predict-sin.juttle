@@ -1,0 +1,16 @@
+/*
+ * Looking closely at the output you'll see how the `E` (error) value gets
+ * quite small after about 2 cycles through the `x` value hitting 0 which 
+ * matches the natural cyclical behavior of the `sin(x)` function. Once the
+ * `predict` sub has seen "enough" cycles and figured out the seasonality 
+ * it will start to produce more accurate predictions as you can see in the
+ * output
+ */
+import "predict" as predict;
+
+emit -from :1 minute ago: -to :now: -every :1s:
+| put x=count(), value = Math.sin(50*x)
+// noneg=false, because sin(x) obviously has negative values
+| predict.predict -over :1s: -every :1s: -nonneg false
+| keep time, name, value, P, E
+| view table -columnOrder 'time', 'name', 'value', 'P', 'E'
