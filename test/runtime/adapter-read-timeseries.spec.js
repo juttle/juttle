@@ -155,4 +155,13 @@ describe('read testTimeseries', function () {
             expect(result.graph.lag.milliseconds()).equal(1000);
         });
     });
+
+    it('rejects read -every | reduce -every', function() {
+        var failing_read = check_juttle({
+            program: 'read testTimeseries -every :s: | reduce -every :m: count()'
+        });
+
+        var message = 'cannot read -every | reduce -every';
+        return juttle_test_utils.expect_to_fail(failing_read, message);
+    });
 });
