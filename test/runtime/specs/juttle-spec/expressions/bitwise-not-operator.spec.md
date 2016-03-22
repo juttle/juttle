@@ -19,3 +19,15 @@
 ### Errors
 
   * Invalid operand type for "~": null.
+
+## Produces an error when used on a string literal
+
+Regression test for #650.
+
+### Juttle
+
+    emit -from Date.new(0) -limit 1 | put result = ~'abcd' | view result
+
+### Errors
+
+  * Invalid operand type for "~": string (abcd).
