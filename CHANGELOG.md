@@ -2,6 +2,51 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.7.0
+
+### Major Changes
+
+- Made `reduce -every` not emit marks at the end of epoch. This reverts the opposite change done in 0.5.0. [[#594](https://github.com/juttle/juttle/issues/594)]
+- Reworked file-based module import to distinguish between system and user module imports and allow relative imports. [[#513](https://github.com/juttle/juttle/issues/513)]
+- Added support for parsing column-based inputs (such as output of Unix commands like `ps`, `lsof`, etc.) to `file` and `stdio` adapters (`-format 'columns'`). [[#37](https://github.com/juttle/juttle/issues/37)]
+- The `[]` and `.` operators can now be used on left-hand side of assignments. This allows assigning into nested point fields, e.g. `put response.code = 404`. [[#419](https://github.com/juttle/juttle/issues/419)]
+- The `[]` and `.` operators can now be used in filters in `read`. This allows filtering by nested point fields, e.g. `read ... response.code = 200`. [[#384](https://github.com/juttle/juttle/pull/384)]
+
+### Minor Changes
+
+- Added the `-separator`, `-commentSymbol`, `-ignoreEmptyLines`, and `-allowIncompleteLines` CSV options to `read file`, `read stdio`, `read http`, and `read http_server`. [[#582](https://github.com/juttle/juttle/issues/582), [#603](https://github.com/juttle/juttle/issues/603)]
+- Added support for bundling Juttle modules with adapters. [[#325](https://github.com/juttle/juttle/issues/325)]
+- Added support for indexed assignment in assignment expressions. [[#587](https://github.com/juttle/juttle/pull/587)]
+- Added support for more operators in assignment statements. [[#588](https://github.com/juttle/juttle/pull/588)]
+- Added support for expression statements. [[#426](https://github.com/juttle/juttle/issues/426)]
+- Changed representation of marks to objects. [[#567](https://github.com/juttle/juttle/pull/567)]
+- Modified `view:points`, `view:mark`, and `view:tick` events to always put the payload into a `data` property. [[#633](https://github.com/juttle/juttle/pull/633)]
+- Made passing of time bounds to views work also with `emit`. [[#639](https://github.com/juttle/juttle/pull/639)]
+- Added line and column information to CSV parsing errors. [[#592](https://github.com/juttle/juttle/pull/592)]
+- Added infrastructure for `sort` optimization. [[#628](https://github.com/juttle/juttle/pull/628)]
+- Improved `read file` so that it emits points in batches. [[#527](https://github.com/juttle/juttle/pull/527)]
+- Improved heuristic used when rendering `view table` in progressive mode in order to compute column widths better. [[#621](https://github.com/juttle/juttle/issues/621)]
+- Made errors in `read` include full stack trace in the debug log. [[#583](https://github.com/juttle/juttle/pull/583)]
+- Added Juttle tutorial. [[#285](https://github.com/juttle/juttle/pull/285)]
+- Documented and tested the standard library. [[#391](https://github.com/juttle/juttle/issues/391), [#392](https://github.com/juttle/juttle/issues/392)]
+
+### Bug Fixes
+
+- Fixed problems with interrupting the CLI using <kbd>Ctrl+C</kbd> in some situations. [[#31](https://github.com/juttle/juttle/issues/31)]
+- Fixed semantics of JuttleSpec error/warning assertions. [[#430](https://github.com/juttle/juttle/issues/430)]
+- Fixed throwing errors when an import is redefined. [[#520](https://github.com/juttle/juttle/issues/520)]
+- Fixed several incorrect error messages. [[#561](https://github.com/juttle/juttle/pull/561), [#566](https://github.com/juttle/juttle/pull/566), [#573](https://github.com/juttle/juttle/pull/573)]
+- Fixed detection and displaying of Juttle errors in the CLI. [[#563](https://github.com/juttle/juttle/issues/563)]
+- Fixed handling of runtime errors in the CLI. [[#565](https://github.com/juttle/juttle/issues/565)]
+- Fixed `fg_processors` processing when an empty array is passed. [[#571](https://github.com/juttle/juttle/pull/571)]
+- Fixed missing location information in runaway program errors. [[#572](https://github.com/juttle/juttle/issues/572)]
+- Fixed CLI exit status when executed Juttle program fails. [[#575](https://github.com/juttle/juttle/issues/575)]
+- Fixed wording of runaway program errors. [[#577](https://github.com/juttle/juttle/issues/577)]
+- Fixed processing of argument of the `*` operator. [[#598](https://github.com/juttle/juttle/issues/598)]
+- Removed deceleration towards real time from `pace`. [[#608](https://github.com/juttle/juttle/issues/608)]
+- Fixed reducer argument coercion. [[#646](https://github.com/juttle/juttle/issues/646)]
+- Fix handling of unary operators on string literals. [[#650](https://github.com/juttle/juttle/issues/650)]
+
 ## 0.6.0
 
 Released 2016-03-09
