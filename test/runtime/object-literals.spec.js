@@ -13,7 +13,11 @@ describe('Juttle Object Literal Tests', function() {
 
     it('passes object literal to sink', function() {
         var optionObject = {
-            _jut_time_bounds: [],
+            _jut_time_bounds: [{
+                from: null,
+                to: null,
+                last: null
+            }],
             something: 3
         };
 
