@@ -219,8 +219,8 @@ You would get:
 
 When juttle programs contain [modules](..//concepts/programming_constructs.md#modules), `juttle` resolves modules by searching the following paths, in this order:
 
-*The current working directory
-*Any paths listed in the environment variable `JUTTLE_MODULE_PATH`, which is a colon-separated list of directories.
+* The current working directory
+* Any paths listed in the environment variable `JUTTLE_MODULE_PATH`, which is a colon-separated list of directories.
 
 The first module file found is used.
 
