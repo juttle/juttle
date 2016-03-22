@@ -28,7 +28,6 @@ describe('Juttle Object Literal Tests', function() {
 
     it('correctly deals with option precendence', function() {
         var optionObject = {
-            _jut_time_bounds: [],
             foo: 'bar',
             something: 3
         };
@@ -42,7 +41,7 @@ describe('Juttle Object Literal Tests', function() {
         })
             .then(function(res) {
                 var options = sink_options(res.prog, 0);
-                expect(_(options).omit('now')).to.deep.equal(_(optionObject).extend(optionObject2));
+                expect(_(options).omit('now', '_jut_time_bounds')).to.deep.equal(_(optionObject).extend(optionObject2));
             });
     });
 
@@ -51,7 +50,6 @@ describe('Juttle Object Literal Tests', function() {
             something: 3
         };
         var expectedObject = {
-            _jut_time_bounds: [],
             something: 4
         };
 
@@ -60,13 +58,12 @@ describe('Juttle Object Literal Tests', function() {
         })
             .then(function(res) {
                 var options = sink_options(res.prog, 0);
-                expect(_(options).omit('now')).to.deep.equal(expectedObject);
+                expect(_(options).omit('now', '_jut_time_bounds')).to.deep.equal(expectedObject);
             });
     });
 
     it('overrides option with object', function() {
         var optionObject = {
-            _jut_time_bounds: [],
             something: 3
         };
 
@@ -75,13 +72,12 @@ describe('Juttle Object Literal Tests', function() {
         })
             .then(function(res) {
                 var options = sink_options(res.prog, 0);
-                expect(_(options).omit('now')).to.deep.equal(optionObject);
+                expect(_(options).omit('now', '_jut_time_bounds')).to.deep.equal(optionObject);
             });
     });
 
     it('passes object literal to sink from const', function() {
         var optionObject = {
-            _jut_time_bounds: [],
             something: 3
         };
 
@@ -90,13 +86,12 @@ describe('Juttle Object Literal Tests', function() {
         })
             .then(function(res) {
                 var options = sink_options(res.prog, 0);
-                expect(_(options).omit('now')).to.deep.equal(optionObject);
+                expect(_(options).omit('now', '_jut_time_bounds')).to.deep.equal(optionObject);
             });
     });
 
     it('passes object literal to sink from function', function() {
         var optionObject = {
-            _jut_time_bounds: [],
             something: 3
         };
 
@@ -105,7 +100,7 @@ describe('Juttle Object Literal Tests', function() {
         })
             .then(function(res) {
                 var options = sink_options(res.prog, 0);
-                expect(_(options).omit('now')).to.deep.equal(optionObject);
+                expect(_(options).omit('now', '_jut_time_bounds')).to.deep.equal(optionObject);
             });
     });
 
