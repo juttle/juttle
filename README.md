@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/juttle/juttle.svg?branch=master)](https://travis-ci.org/juttle/juttle)
 [![Join the chat at https://gitter.im/juttle/juttle](https://badges.gitter.im/juttle/juttle.svg)](https://gitter.im/juttle/juttle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Juttle is an analytics system for developers that simplifies and empowers data
+[Juttle](http://juttle.github.io/) is an analytics system for developers that simplifies and empowers data
 driven application development. At the core of Juttle is a [dataflow
 language](./docs/concepts/dataflow.md) that lets you query, transform, enrich,
 and analyze live and historical data from many different backends, and then send
@@ -25,7 +25,7 @@ application](https://github.com/juttle/juttle-viewer) and a full set of
 programs with rich charts and dynamic input controls in development or
 production.
 
-To learn more, see the [documentation site](https://juttle.github.io/juttle) to read about why juttle exists,
+Visit the [project website](http://juttle.github.io/) to get an overview of the project and see how it can fit into your stack. To learn more about the language, see the [documentation site](https://juttle.github.io/juttle) to read about why juttle exists,
 get an [overview](https://juttle.github.io/juttle/concepts/overview) of the language, learn about the
 [dataflow features](https://juttle.github.io/juttle/concepts/dataflow) and how to [program in juttle](https://juttle.github.io/juttle/concepts/programming_constructs), see the list of [supported visualizations](https://juttle.github.io/juttle-viz), step through the [tutorial](http://juttle.github.io/juttle/concepts/juttle_tutorial), and more. For information about the Juttle development project, see the [wiki](https://github.com/juttle/juttle/wiki).
 
