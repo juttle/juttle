@@ -19,6 +19,8 @@ var compiler = require('../../../lib/compiler');
 var Scheduler = require('../../../lib/runtime/scheduler').Scheduler;
 var TestScheduler = require('../../../lib/runtime/scheduler').TestScheduler;
 var View = require('../../../lib/views/view.js');
+var FileResolver = require('../../../lib/module-resolvers/file-resolver');
+var resolver_utils = require('../../../lib/module-resolvers/resolver-utils');
 
 // Configure the test adapter
 adapters.configure({
@@ -310,19 +312,22 @@ function wait_for_event(program, type, checker) {
 }
 
 function module_resolver(modules) {
-    return function(name) {
-        var filename = __dirname + '/../../../lib/stdlib/' + name;
-        if (fs.existsSync(filename)) {
-            return Promise.resolve({ name: name, source: fs.readFileSync(filename, 'utf8') });
-        }
 
+    var file_resolver = new FileResolver();
+
+    var direct_resolver = function(name) {
         var module = modules[name];
         if (module) {
             return Promise.resolve({ name: name, source: module });
         }
 
-        throw new Error('Unknown module: ' + name);
+        return Promise.reject(new Error('Unknown module: ' + name));
     };
+
+    return resolver_utils.multiple([
+        direct_resolver,
+        file_resolver.resolve
+    ]);
 }
 
 function options_from_object(options) {
