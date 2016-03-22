@@ -1,10 +1,14 @@
 ---
-title: Random Module | Juttle Language Reference
+title: Select Module | Juttle Language Reference
 ---
 
 # Select
 
-Select points from a stream satisfying particular properties
+Select points from a stream satisfying particular properties.
+
+The functionality provided by this module is similar to built-in reducers such as `max(fieldA)`, `min(fieldB)`; the difference is that reducers would place a single specified field into the resulting data point, while subgraphs in the select module would forward the entire data point with all its fields.
+
+Since all select methods are subgraphs, they can be used only in stream context.
 
 ## max - sub
 

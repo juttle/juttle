@@ -7,7 +7,15 @@ title: Random Module | Juttle Language Reference
 Functions and reducers to generate random samples from common probability
 distributions.
 
+For random generators implemented as reducers (normal, poisson), note that they cannot be called from function context, but only from stream context. Random generators provided as functions can be called in either context.
+
 # exponential - function
+
+Generates random numbers following the [exponential distribution](https://en.wikipedia.org/wiki/Exponential_distribution).
+
+Callable from function or stream context.
+
+Returns x ~ Exp(scale).
 
 ```
 ... | put value=random.exponential(2) | ...
@@ -15,17 +23,17 @@ distributions.
 
 Argument    |         Description          |
 ----------- | ---------------------------- |
-`scale`     | 1 / lambda                   |
+`scale`     | 1 / lambda, where lambda is the rate parameter |
 
 
 # normal - reducer
 
-Uses Marsaglia polar method (improved [Box-Muller transform](https://en.wikipedia.org/wiki/Marsaglia_polar_method))
+Generates random numbers following the [normal, or Gaussian, distribution](https://en.wikipedia.org/wiki/Normal_distribution). Uses Marsaglia polar method (improved [Box-Muller transform](https://en.wikipedia.org/wiki/Marsaglia_polar_method))
 for the computation.
 
-This is written as a custom reducer because generated values come in pairs,
-and we want to save one for next time. We also need to work around not being
-able to call a function recursively in stream context.
+Callable only from stream context.
+
+Returns x ~ N(loc, scale).
 
 ```
 ... | put x = random.normal(0,Math.sqrt(0.2)), y = random.normal(0, 1) | ...
@@ -38,10 +46,11 @@ Options    |         Description          |
 
 # poisson - reducer
 
-Uses Knuth's algorithm for the computation.
+Generates random [Poisson-distributed](https://en.wikipedia.org/wiki/Poisson_distribution) numbers that represent the number of event occurrences per interval (therefore, this generator outputs whole nonnegative integers). Uses Knuth's algorithm for the computation.
 
-This is written as a custom reducer to work around not being able to call a
-function recursively in stream context.
+Callable only from stream context.
+
+Returns x ~ Poisson(lam).
 
 ```
 ... | put lambda_1=random.poisson(1) | ...
@@ -49,12 +58,16 @@ function recursively in stream context.
 
 Options    |               Description               |
 ---------- | --------------------------------------- |
-`lam`      | average events per draw, should be >= 0 |
+`lam`      | rate parameter, defining the average number of events in an interval, should be >= 0 |
 
 # uniform - function
 
-Uniformly distributed number generator between the `low` and `high` bound
-arguments.
+Generates random numbers between the `low` and `high` bound
+arguments, following [uniform distribution](https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)).
+
+Callable from function or stream context.
+
+Returns x ~ U(low..high).
 
 ```
 ... | put value=uniform(0, 24)

@@ -8,8 +8,8 @@ Trend, seasonality, and noise estimation for metric streams.
 
 ## predict - reducer
 
-Predict is a sub which consumes a metric stream and emits a prediction stream
-based on estimated trend, seasonality, and a smoothed version of the input.
+Predict is a subgraph which consumes a metric stream and emits a prediction stream based on estimated trend, seasonality, and a smoothed version of the input. As any sub, it can only be used in stream context.
+
 Prediction errors (the difference between predict's output and the input) can
 signal anomalies in the stream.
 
@@ -30,7 +30,7 @@ Option       |                           Description                            
 `-deseason`  | if false, do not remove estimated cyclic effect                      | No, default: `true`
 `-denoise`   | if false, do not smooth the detrended/deseasoned value               | No, default: `true`
 
-predict is intended to be used with a historic or superquery that includes
+predict is intended to be used with a historic read or superquery (combination of historic and live data stream) that includes
 enough history to initialize its estimators. predict can begin emitting
 prediction points almost immediately, though the early points will simply be
 de-meaned. After 2 periods have gone by, trend and seasonality (at the
@@ -43,7 +43,7 @@ Each output point contains the following fields:
 
 Field    |                          Description
 -------- | ----------------------------------------------------------------
-`*field` | average value of input field over `-every`
+fieldname (the value of the `-field` option) | average value of field over `-every` interval
 `T`      | portion of field predicted by the trend estimator
 `S`      | portion of field predicted by seasonality
 `Y`      | portion of field predicted by smoothing

@@ -4,7 +4,7 @@ title: Stats Module | Juttle Language Reference
 
 # Stats
 
-Streaming statistics for juttle data flows
+Streaming statistics for time series data.
 
 The stdlib stats module offers "standardization" of metric time series --
 shifting and re-scaling based on estimates of their center and scale. This
@@ -12,6 +12,8 @@ places streams into a standard form for comparison with others, or for
 thresholding based on deviations from the center. Besides "z-score"
 standardization using the sample mean and estimated standard deviation,
 there is a robust variant (MAD) and mean-relative (CV).
+
+All stats methods are reducers, and therefore can only be used in stream context.
 
 ## demean - reducer
 
@@ -54,7 +56,7 @@ Option    |                   Description                      | Required?
 Return the last observed value as a percentage of the batch mean
 
 ```
-... | reduce value=relmean(value) | ...
+... | reduce value=relMean(value) | ...
 ```
 
 Option    |                   Description                      | Required?
