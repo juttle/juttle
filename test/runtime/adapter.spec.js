@@ -135,7 +135,7 @@ describe('adapter API tests', function () {
             expect(result.prog.graph.adapter.count).equal(true);
         });
     });
-    
+
     it('optimizes sort', function() {
         var write_program = `
             const points = [
@@ -147,7 +147,7 @@ describe('adapter API tests', function () {
             ];
             emit -points points
             | write test -key "test_sort"`;
-            
+
         var unsortedResult;
 
         return check_juttle({program: write_program})
@@ -159,7 +159,7 @@ describe('adapter API tests', function () {
                 unsortedResult = result.sinks.table;
                 expect(unsortedResult).to.have.length(5);
                 expect(unsortedResult[0].code).to.equal(5);
-                
+
                 var read_program_sorted = `
                     read test -key "test_sort"
                         | sort code`;
@@ -170,10 +170,10 @@ describe('adapter API tests', function () {
                 expect(optimization_info).to.eql({
                     sort: 'code'
                 });
-                
+
                 var sortedResult = result.sinks.table;
                 expect(sortedResult).to.not.deep.equal(unsortedResult);
-                
+
                 expect(sortedResult).to.deep.equal(_.sortBy(unsortedResult, 'code'));
             });
     });
