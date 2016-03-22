@@ -45,8 +45,13 @@ describe('Views get info on source time bounds', function() {
     var last = JuttleMoment.duration(1, 'hour');
 
     test('read stochastic -source "cdn" -from :' + from.valueOf() + ': | view view ', [[{from: from, to: null, last: null}]]);
+    test('emit -from :' + from.valueOf() + ': | view view ', [[{from: from, to: null, last: null}]]);
+
     test('read stochastic -source "cdn" -from :' + from.valueOf() + ': -to :' + to.valueOf() + ': | view view ', [[{from: from, to: to, last: null}]]);
+    test('emit -from :' + from.valueOf() + ': -to :' + to.valueOf() + ': | view view ', [[{from: from, to: to, last: null}]]);
+
     test('read stochastic -last :' + last.valueOf() + ': -source "cdn" | view view ', [[{from: null, to: null, last: last}]]);
+    test('emit -last :' + last.valueOf() + ': | view view ', [[{from: null, to: null, last: last}]]);
 
     test('read stochastic -source "cdn" -from :' + from.valueOf() + ': | view view; read stochastic -last :' + last.valueOf() + ': -source "cdn"  | view view ',
          [[{from: from, to: null, last: null}], [{from: null, to: null, last: last}]]);
