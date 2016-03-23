@@ -13,6 +13,7 @@ that you can use to enhance your Juttle programs.
    * [Random](random.md)
    * [Stats](stats.md)
    * [Select](select.md)
+   * [Fields](fields.md)
 
 To use these modules, place an import statement into the Juttle program (no "stdlib" prefix needed), for example:
 

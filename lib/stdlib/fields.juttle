@@ -1,0 +1,54 @@
+// Manipulate fields within a stream with these field reducers
+
+// Return an array of last N values of a field
+//
+// Parameters:
+//
+//   * field: ("value") field to tail
+//   * length: (1) number of recent values to retain
+export reducer tail(field, length=1) {
+    var data = [];
+
+    function update() {
+        if (*field != null) { 
+            Array.push(data, *field);
+
+            if (Array.length(data) > length) {
+                Array.shift(data);
+            }
+        }
+    }
+
+    function result() {
+        return data;
+    }
+}
+
+// Return the Nth most recent value of a field
+//
+// Parameters:
+//
+//   * field: ("value") name of value field
+//   * nth: (1) index of the index value to keep track of
+//   * undef: (null) value to return before nth value has been seen
+export reducer prior(field, N=1, undef=null) {
+    var data = [];
+
+    function update() {
+        if (*field != null) { 
+            Array.push(data, *field);
+
+            if (Array.length(data) > N) {
+                Array.shift(data);
+            }
+        }
+    }
+
+    function result() {
+        if (Array.length(data) == N) {
+            return data[0];
+        } else {
+            return undef;
+        }
+    }
+}
