@@ -37,49 +37,8 @@
 // Z : normalized error based on the sample stdev over trailing periods
 //
 
+import "stats.juttle" as stats;
 
-// Return the sample Z-score of the specified field.
-//
-// Parameters:
-//
-//   * field:   fieldname
-//
-// compute an approximate Z-score for an input value, using sample
-// estimates of population mean and stdev:
-//     (value - sample mean) / sample stdev
-//
-reducer z(field) {
-    var sum = 0;
-    var ssum = 0;
-    var n = 0;
-    var latest = null;
-    function update() {
-        var v = *field;
-        if (v != null) {
-            latest = v;
-            sum = sum + v;
-            ssum = ssum + v*v;
-            n = n + 1;
-        }
-    }
-    function result() {
-        if (n < 2 ) {
-            return null;
-        } else {
-            var mean = sum / n;
-            var stdev = Math.sqrt(1/(n-1) * (ssum - sum*sum/n));
-            return (latest - mean) / stdev;
-        }
-    }
-    function expire() {
-        var v = *field;
-        if (v != null) {
-            sum = sum - v;
-            ssum = ssum - v*v;
-            n = n - 1;
-        }
-    }
-};
 
 // Return the Nth lagged value of a field
 //
@@ -264,6 +223,6 @@ export sub predict(field = "value", over = :w:, every=null, pct=0.5, nonneg=true
     | put P = (S ?? 0) + (T ?? 0) + Y
     | put P = nonneg ? Math.max(P, 0) : P
     | put E = P - *field
-    | put -over 3*over Z = z('E')
+    | put -over 3*over Z = stats.z('E')
     | remove __LT, __detrend, __deseason, __offset, M
 }
