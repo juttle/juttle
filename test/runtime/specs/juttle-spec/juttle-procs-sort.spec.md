@@ -12,7 +12,7 @@
 
 ### Warnings
 
-  * sort limit exceeded, dropping points
+  * sort limit of 1 exceeded, dropping points
 
 ## Limits: non-batched flow
 
@@ -58,8 +58,9 @@
 
 ### Warnings
 
-  * sort limit exceeded, dropping points
-  * sort limit exceeded, dropping points
+  * sort limit of 4 exceeded, dropping points
+  * sort limit of 4 exceeded, dropping points
+
 
 ## Limits: non-batched flow, point by point, by grouping
 
@@ -92,8 +93,8 @@
 
 ### Warnings
 
-  * sort limit exceeded, dropping points
-  * sort limit exceeded, dropping points
+  * sort limit of 4 exceeded, dropping points
+  * sort limit of 4 exceeded, dropping points
 
 ## Timestamps: unbatched flow
 
