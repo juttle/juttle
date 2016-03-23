@@ -186,7 +186,11 @@ function perform_run(options) {
         // Start listening for callbacks from the program and view
         // manager for errors/warnings/view data.
         program.events.on('error', function(msg, err) {
-            console.error('Error: ' + msg, err);
+            CliErrors.handle_error(err, {
+                program: options.juttle_src,
+                modules: options.modules,
+                filename: options.filename
+            });
             had_an_error = true;
         });
 
@@ -195,7 +199,11 @@ function perform_run(options) {
         });
 
         view_mgr.events.on('error', function(msg, err) {
-            console.error('Error: ' + msg, err);
+            CliErrors.handle_error(err, {
+                program: options.juttle_src,
+                modules: options.modules,
+                filename: options.filename
+            });
             had_an_error = true;
         });
 
@@ -249,6 +257,7 @@ function perform_mode(options)
 
     var perform_options = {
         juttle_src: options.juttle_src,
+        modules: modules,
         filename: options.filename ? options.filename : 'main',
         resolver: function(module_path, module_name, importer_path) {
             return resolver(module_path, module_name, importer_path)
@@ -273,24 +282,19 @@ function perform_mode(options)
             cli.prompt(prompt);
         }
     }).catch(function(e) {
-        // Log the full error object at debug level to get the stack trace
-        logger.debug('juttle error:', e, e.stack, Object.keys(e));
 
-        // If it's a juttle error, try to show it in context and go
-        // back to the prompt. Otherwise, re-throw it.
-        if (e instanceof errors.JuttleError) {
-            CliErrors.handle_juttle_error(e, {
-                program: options.juttle_src,
-                modules: modules,
-                filename: options.filename
-            });
-            if (options.prompt_when_done) {
-                cli.prompt(prompt);
-            } else {
-                return Promise.reject(e);
-            }
+        CliErrors.handle_error(e, {
+            program: options.juttle_src,
+            modules: modules,
+            filename: options.filename
+        });
+
+        // If it's a juttle error and we're in the REPL, go back to
+        // the prompt. Otherwise, re-throw it.
+        if (e instanceof errors.JuttleError &&
+            options.prompt_when_done) {
+            cli.prompt(prompt);
         } else {
-            console.error('Error: ' + e.message);
             return Promise.reject(e);
         }
     });
