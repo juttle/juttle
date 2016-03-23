@@ -136,6 +136,13 @@ describe('StaticFilterCompiler', () => {
         );
     });
 
+    it('doesn\'t compile MemberExpression', () => {
+        expect('a.b < 5').to.failToCompile(
+            NumberLiteralCompiler,
+            'Filters do not support nested fields in this context.'
+        );
+    });
+
     it('doesn\'t compile UnaryExpression', () => {
         expect('NOT a < 5').to.failToCompile(
             EmptyCompiler,
