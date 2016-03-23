@@ -19,6 +19,19 @@ Options    |                     Description                 | Required?
 
 The result is a field containing the N last values of the field specified.
 
+## head - reducer
+
+```
+... | reduce hosts = fields.head(hostname, 5) | ...
+```
+
+Options    |                     Description                 | Required?
+---------- | ----------------------------------------------- | --------- :
+`field`    | the field name to store the values of in a list | Yes
+`length`   | the number of initial values to retain          | No, default: `1`
+
+The result is a field containing the N first values of the field specified.
+
 ## prior - reducer
 
 ```

@@ -24,6 +24,26 @@ export reducer tail(field, length=1) {
     }
 }
 
+// Return an array of first N values of a field
+//
+// Parameters:
+//
+//   * field: ("value") field to tail
+//   * length: (1) number of initial values to retain
+export reducer head(field, length=1) {
+    var data = [];
+
+    function update() {
+        if (*field != null && Array.length(data) < length) {
+            Array.push(data, *field);
+        }
+    }
+
+    function result() {
+        return data;
+    }
+}
+
 // Return the Nth most recent value of a field
 //
 // Parameters:
