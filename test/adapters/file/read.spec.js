@@ -87,7 +87,10 @@ describe('read file adapter tests', function () {
                 return run_read_file_juttle('bogus', {format: format})
                 .then(function(result) {
                     expect(result.errors.length).equal(1);
-                    expect(result.errors[0]).match(/ENOENT/);
+                    expect(result.error_objs[0].name).to.equal('RuntimeError');
+                    expect(result.error_objs[0].code).to.equal('INTERNAL-ERROR');
+                    expect(result.error_objs[0].message).to.include('ENOENT: no such file or directory');
+                    expect(result.errors[0]).to.include('ENOENT: no such file or directory');
                 });
             });
 

@@ -232,6 +232,7 @@ function run_juttle(prog, options) {
         });
 
         var errors = [];
+        var error_objs = [];
         var warnings = [];
 
         // Dispatch to correct test view
@@ -251,8 +252,9 @@ function run_juttle(prog, options) {
             views[event.channel].consume(event.data);
         });
 
-        prog.events.on('error', function(err) {
-            errors.push(err);
+        prog.events.on('error', function(msg, err) {
+            errors.push(msg);
+            error_objs.push(err);
         });
 
         prog.events.on('warning', function(warn) {
@@ -278,7 +280,7 @@ function run_juttle(prog, options) {
             else if (expect_data) {
                 expect(all_sinks).to.deep.equal(expect_data);
             }
-            return {sinks: all_sinks, prog:prog, graph: graph, errors: errors, warnings: warnings};
+            return {sinks: all_sinks, prog:prog, graph: graph, errors: errors, error_objs: error_objs, warnings: warnings};
         });
     });
 
