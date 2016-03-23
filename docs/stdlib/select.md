@@ -66,3 +66,39 @@ Options      |         Description           | Required?
 
 Only the point with the exact median value for the `field` name
 provided will be forwarded.
+
+## top - sub
+
+```
+... | select.top -n number -by field | ...
+```
+
+Options  |                              Description                              | Required?
+-------- | --------------------------------------------------------------------- | --------- :
+`n`      | how many of the points with the highest values of `by` to keep        | Yes
+`by`     | name of the field to sort by before figuring out the top `n` to keep  | Yes
+`limit`  | the limit value to pass to sort if you happen to exceed the default limit | No, default: see [sort](../processors/sort.md) documentation
+
+Sort the inbound stream by the `by` field and return the `n` points that have
+highest value of the `by` field.
+
+**Note** Since `top` uses `sort` to sort by the `by` field we drop the `time` field
+from the individual points.
+
+## bottom - sub
+
+```
+... | select.bottom -n number -by field | ...
+```
+
+Options  |                                Description                                | Required?
+-------- | ------------------------------------------------------------------------- | --------- :
+`n`      | how many of the points with the lowest values of `by` to keep             | Yes
+`by`     | name of the field to sort by before figuring out the bottom `n` to keep   | Yes
+`limit`  | the limit value to pass to sort if you happen to exceed the default limit | No, default: see [sort](../processors/sort.md) documentation
+
+Sort the inbound stream by the `by` field and return the `n` points that have
+lowest value of the `by` field.
+
+**Note** Since `top` uses `sort` to sort by the `by` field we drop the `time` field
+from the individual points.

@@ -59,3 +59,30 @@ export sub percentile(field, p, by=[]) {
 export sub median(field, by=[]) {
     percentile -field field -p 0.5 -by by
 }
+
+//
+// forward the top N points ordered by the `by` field provided
+//
+// Parameters:
+//
+//   * n: number of points to forward
+//   * by: field to sort by
+//   * limit: the limit to pass to sort
+//
+export sub top(n, by, limit=null) {
+    sort -limit limit by -desc | head n
+} 
+
+//
+// forward the bottom N points ordered by the `by` field provided
+//
+// Parameters:
+//
+//   * n: number of points to forward
+//   * by: field to sort by
+//   * limit: the limit to pass to sort
+//
+export sub bottom(n, by, limit=null) {
+    sort -limit limit by | head n
+} 
+
