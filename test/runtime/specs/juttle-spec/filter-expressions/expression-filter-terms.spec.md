@@ -29,7 +29,7 @@ Regression test for PROD-6797.
 ### Juttle
 
     const field = "a";
-    
+
     emit -from Date.new(0) -limit 1 | put a = 5 | filter *field == 5 | view result
 
 ### Output
@@ -222,3 +222,25 @@ Regression test for PROD-6797.
 ### Errors
 
   * Cannot filter on "time" in read. Use -to, -from, or -last instead.
+
+## Produces an error when filtering on a dynamic field
+
+### Juttle
+
+    function f() {}
+    read test f()[1] < 5
+
+### Errors
+
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
+
+## Produces an error when filtering on a dynamic property of a field
+
+### Juttle
+
+    function f() {}
+    read test field[f()] < 5
+
+### Errors
+
+  * Invalid filter term. Valid forms are: "field < value", "value < field".
