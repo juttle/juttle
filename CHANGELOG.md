@@ -2,6 +2,12 @@
 
 This file documents all notable changes to Juttle. The release numbering uses [semantic versioning](http://semver.org).
 
+## 0.7.1
+
+### Bug Fixes
+
+- Ensure that all adapter read errors are returned as instances of `JuttleError` so they can be displayed in the context of the running program. [[#657](https://github.com/juttle/juttle/pull/657)]
+
 ## 0.7.0
 
 ### Major Changes
