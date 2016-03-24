@@ -27,18 +27,6 @@ Option    |                   Description                      | Required?
 --------- | -------------------------------------------------- | ---------:
 `-field`  | name of the field to apply the reduce operation on |  Yes
 
-## stdev - reducer
-
-Return the standard deviation of a specified field over a batch
-
-```
-... | reduce value=stdev(value) | ...
-```
-
-Option    |                   Description                      | Required?
---------- | -------------------------------------------------- | ---------:
-`-field`  | name of the field to apply the reduce operation on |  Yes
-
 ## z - reducer
 
 Return the sample Z-score of the specified field.
