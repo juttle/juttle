@@ -23,7 +23,7 @@ Ordering is numeric (for number values) or alphabetical (for string
 values). It also supports multi-key sorting in ascending or descending
 order for alphabetical and numerical comparisons.
 
-:information_source: `Note:` Sorting is limited to 10,000 data points by default. To sort more points, use the -limit flag to set a higher value.
+:information_source: `Note:` Sorting is limited to 100,000 data points by default. To sort more points, use the -limit flag to set a higher value.
 
 _Example: Output a table of sorted random values_
 

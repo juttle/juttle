@@ -8,7 +8,7 @@
   "INCOMPATIBLE-ADAPTER": "adapter {type} incompatible with juttle {apiVersion} (wanted {adapterJuttleVersion})",
   "UNSUPPORTED-ADAPTER-METHOD": "adapter {type} does not implement {method}",
   "GROUP-BY-UNDEFINED": "group by undefined field \"{field}\"",
-  "BUFFER-LIMIT-EXCEEDED": "{buffer} limit exceeded, dropping points",
+  "BUFFER-LIMIT-EXCEEDED": "{buffer} limit of {limit} exceeded, dropping points",
   "POINTS-ARRIVED-LATE": "late arriving point(s) dropped by {proc}",
   "POINTS-OUT-OF-ORDER": "out-of-order point(s) dropped by {proc}",
   "TIME-OUT-OF-ORDER": "out-of-order assignment of time {badTime} after {goodTime}, point(s) dropped",
