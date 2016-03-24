@@ -179,3 +179,133 @@
     {parity:1, x: 15}
     {parity:0, x: 36}
     {parity:1, x: 35}
+
+## top selects the 5 largest values
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 10 -from Date.new(0)
+    | put x = 10-count()
+    | select.top -n 5 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    {x: 9}
+    {x: 8}
+    {x: 7}
+    {x: 6}
+    {x: 5}
+
+## bottom selects the 5 smallest values
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 10 -from Date.new(0)
+    | put x = 10-count()
+    | select.bottom -n 5 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    {x: 0}
+    {x: 1}
+    {x: 2}
+    {x: 3}
+    {x: 4}
+
+## top selects the largest value per batch
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 9 -from Date.new(0)
+    | put x = count()
+    | batch -every :3s:
+    | select.top -n 1 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    { x: 3 }
+    { x: 6 }
+    { x: 9 }
+
+## bottom selects the smallest value per batch
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 9 -from Date.new(0)
+    | put x = count()
+    | batch -every :3s:
+    | select.bottom -n 1 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    { x: 1 }
+    { x: 4 }
+    { x: 7 }
+
+## top selects the 5 largest values from 3 element stream
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 3 -from Date.new(0)
+    | put x = 3-count()
+    | select.top -n 5 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    {x: 2}
+    {x: 1}
+    {x: 0}
+
+## bottom selects the 5 smallest values from 3 element stream
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 3 -from Date.new(0)
+    | put x = 3-count()
+    | select.bottom -n 5 -by 'x'
+    | keep x
+    | view result
+
+### Output
+    {x: 0}
+    {x: 1}
+    {x: 2}
+
+## top can correctly modify the underlying sort limit
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 6 -from Date.new(0)
+    | put x = 6-count()
+    | select.top -n 5 -by 'x' -limit 5
+    | keep x
+    | view result
+
+### Warnings
+ 
+  * sort limit of 5 exceeded, dropping points
+
+### Output
+    {x: 5}
+    {x: 4}
+    {x: 3}
+    {x: 2}
+    {x: 1}
+
+## bottom can correctly modify the underlying sort limit
+### Juttle
+    import "select.juttle" as select;
+    emit -limit 6 -from Date.new(0)
+    | put x = 6-count()
+    | select.bottom -n 5 -by 'x' -limit 5
+    | keep x
+    | view result
+
+### Warnings
+ 
+  * sort limit of 5 exceeded, dropping points
+
+### Output
+    {x: 1}
+    {x: 2}
+    {x: 3}
+    {x: 4}
+    {x: 5}
