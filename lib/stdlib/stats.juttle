@@ -20,7 +20,6 @@
 // Reducers:
 //
 //   * demean(field): de-mean the field
-//   * stdev(field): standard deviation of the field
 //   * z(field): standardized z-score wrt sample mean and stdev
 //   * relMean(field): field as a percentage of field mean
 //   * cv(field): coefficent of variation
@@ -76,41 +75,6 @@ export reducer demean(field) {
         var v = *field;
         if (v != null) {
             sum = sum - v;
-            n = n - 1;
-        }
-    }
-};
-
-// Return the standard deviation of a specified field over a batch
-//
-// Parameters:
-//
-//   * field:   fieldname
-//
-export reducer stdev(field) {
-    var sum = 0;
-    var ssum = 0;
-    var n = 0;
-    function update() {
-        var v = *field;
-        if (v != null) {
-            sum = sum + v;
-            ssum = ssum + v*v;
-            n = n + 1;
-        }
-    }
-    function result() {
-        if (n < 2 ) {
-            return null;
-        } else {
-            return Math.sqrt(1/n * (ssum - sum*sum/n));
-        }
-    }
-    function expire() {
-        var v = *field;
-        if (v != null) {
-            sum = sum - v;
-            ssum = ssum - v*v;
             n = n - 1;
         }
     }

@@ -22,28 +22,6 @@
 ### Output
     {x: 0, u:0, xmu: 0}
 
-## reducer stdev(fld) computes the right thing
-### Juttle
-    import "stats" as stats;
-    emit -limit 3 -from Date.new(0)
-    | put x = 2 * count()
-    | reduce s = stats.stdev(x)
-    | view result
-
-### Output
-    {s: 1.632993161855452}
-
-## reducer stdev(fld) handles a stream of zeros
-### Juttle
-    import "stats.juttle" as stats;
-    emit -limit 3 -from Date.new(0)
-    | put x = 0
-    | reduce s = stats.stdev(x)
-    | view result
-
-### Output
-    {s: 0}
-
 ## reducer z(fld) computes the right thing
 note the first output point is dropped because we
 tried to do Math.floor(null)
@@ -97,7 +75,7 @@ tried to do Math.floor(null)
     import "stats" as stats;
     emit -limit 100 -from Date.new(0)
     | put x = 2 * count()
-    | reduce x = last(x), u = avg(x), sd = stats.stdev(x), cv = stats.cv(x)
+    | reduce x = last(x), u = avg(x), sd = stdev(x), cv = stats.cv(x)
     | put winning = cv == sd / u
     | keep winning
     | view result
@@ -110,7 +88,7 @@ tried to do Math.floor(null)
     import "stats.juttle" as stats;
     emit -limit 5 -from Date.new(0)
     | put x = 0
-    | reduce x = last(x), u = avg(x), sd = stats.stdev(x), cv = stats.cv(x)
+    | reduce x = last(x), u = avg(x), sd = stdev(x), cv = stats.cv(x)
     | view result
 
 ### Output
