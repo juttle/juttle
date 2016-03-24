@@ -4,11 +4,17 @@ This file documents all notable changes to Juttle. The release numbering uses [s
 
 ## 0.7.1
 
+Released 2016-03-24
+
 ### Bug Fixes
 
 - Ensure that all adapter read errors are returned as instances of `JuttleError` so they can be displayed in the context of the running program. [[#657](https://github.com/juttle/juttle/pull/657)]
+- Include the value of the sort limit in the warning message when the limit is exceeded, and properly document the default limit. [[#655](https://github.com/juttle/juttle/pull/655)]
+- Display the full stack trace for unexpected internal errors. [[#564](https://github.com/juttle/juttle/issues/564)]
 
 ## 0.7.0
+
+Released 2016-03-23
 
 ### Major Changes
 
