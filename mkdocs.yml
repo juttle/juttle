@@ -99,6 +99,7 @@ pages:
    - 'Reducers': 'reducers/index.md'
 
    - '____ User-defined Reducers': 'reducers/juttle_reducers_user-defined.md'
+   - '____ Time-windowed Reducers': 'reducers/juttle_reducers_timewindows.md'
    - '____ avg': 'reducers/avg.md'
    - '____ count': 'reducers/count.md'
    - '____ count_unique': 'reducers/count_unique.md'
@@ -125,6 +126,9 @@ pages:
    
    - 'Standard Library': 'stdlib/index.md'
    - '____ predict': 'stdlib/predict.md'
+   - '____ random': 'stdlib/random.md'
+   - '____ select': 'stdlib/select.md'
+   - '____ stats': 'stdlib/stats.md'
 
    - 'Time': 'reference/time.md'
    - 'Data Types': 'reference/data_types.md'

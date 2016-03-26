@@ -30,7 +30,7 @@ estimate for the contaminated distribution remains close to its value
 for the dominant (pure) distribution, unlike the standard deviation.
 
 This example uses a module from the
-[standard library](../concepts/juttle_standard_library.md).
+[standard library](../stdlib/index.md).
 
 ```
 {!docs/examples/reducers/reduce_mad.juttle!}
