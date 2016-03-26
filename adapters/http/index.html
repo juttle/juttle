@@ -656,12 +656,12 @@
 </tr>
 <tr>
 <td><code>-timeField</code></td>
-<td>The name of the field to use as the time field <br><br>The specified field will be renamed to <code>time</code> in the body of the HTTP request. If the points already contain a field called <code>time</code>, that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.</td>
-<td align="right">No; defaults to keeping the <code>time</code> field as is</td>
+<td>The name of the field to use as the time field <br><br>The specified field will be renamed to <code>time</code>in the body of the HTTP request. If the points already contain a field called <code>time</code> that field is overwritten. This is useful when the source data contains a time field whose values are not valid time stamps.</td>
+<td align="right">No; defaults to keeping the <code>time</code>field as is</td>
 </tr>
 <tr>
 <td><code>-rootPath</code></td>
-<td>When the incoming data is JSON, use the specified path into the incoming object (expressed as <code>field1.field2</code>) to emit points</td>
+<td>When the incoming data is JSON, use the specified path into the incoming object (expressed as <code>field1.field2</code> to emit points</td>
 <td align="right">No</td>
 </tr>
 <tr>
@@ -676,7 +676,7 @@
 </tr>
 <tr>
 <td><code>-format</code></td>
-<td>HTTP data format, supports: <code>csv</code>, <code>json</code> and <code>jsonl</code></td>
+<td>HTTP data format, supports: <code>csv</code> <code>json</code>and <code>jsonl</code></td>
 <td align="right">No; defaults to HTTP response header <code>Content-Type</code></td>
 </tr>
 <tr>
@@ -691,37 +691,37 @@
 </tr>
 <tr>
 <td><code>-pageStart</code></td>
-<td>Initial value of the paging offset to set the <code>pageParam</code> to in the URL used to make the HTTP request.</td>
+<td>Initial value of the paging offset to set the <code>pageParam</code>to in the URL used to make the HTTP request.</td>
 <td align="right">No; default: <code>0</code></td>
 </tr>
 <tr>
 <td><code>-pageUnit &lt;request|record&gt;</code></td>
-<td>If set to <code>request</code>, then each successive HTTP paging request increments the paging query parameter by one. If set to <code>record</code>, then each successive request increments the paging query parameter by the number of records returned in the previous request.</td>
+<td>If set to <code>request</code> then each successive HTTP paging request increments the paging query parameter by one. If set to <code>record</code> then each successive request increments the paging query parameter by the number of records returned in the previous request.</td>
 <td align="right">No; default: <code>request</code></td>
 </tr>
 <tr>
 <td><code>-pageField</code></td>
-<td>If set, then each successive HTTP paging request sets the paging query parameter to the last value of the field with name <code>pageField</code>. Cannot be used with <code>pageStart</code> or <code>pageUnit</code>.</td>
+<td>If set, then each successive HTTP paging request sets the paging query parameter to the last value of the field with name <code>pageField</code> Cannot be used with <code>pageStart</code>or <code>pageUnit</code></td>
 <td align="right">No</td>
 </tr>
 <tr>
 <td><code>-separator</code></td>
-<td>When <code>-format 'csv'</code> is used, you can specify the separator between columns in a CSV file.</td>
+<td>When <code>-format 'csv'</code>is used, you can specify the separator between columns in a CSV file.</td>
 <td align="right">No: defaults to <code>,</code></td>
 </tr>
 <tr>
 <td><code>-commentSymbol</code></td>
-<td>When <code>-format 'csv'</code> is used, you can specify the comment character that prefixes comment lines in a CSV file.</td>
+<td>When <code>-format 'csv'</code>is used, you can specify the comment character that prefixes comment lines in a CSV file.</td>
 <td align="right">No: defaults to <code>,</code></td>
 </tr>
 <tr>
 <td><code>-ignoreEmptyLines</code></td>
-<td>When <code>-format 'csv'</code> is used, you can skip empty lines in a CSV file.</td>
+<td>When <code>-format 'csv'</code>is used, you can skip empty lines in a CSV file.</td>
 <td align="right">No: defaults to <code>false</code></td>
 </tr>
 <tr>
 <td><code>-allowIncompleteLines</code></td>
-<td>When <code>-format 'csv'</code> is used, you can allow for parsing of incomplete lines in a CSV file.</td>
+<td>When <code>-format 'csv'</code>is used, you can allow for parsing of incomplete lines in a CSV file.</td>
 <td align="right">No: defaults to <code>false</code></td>
 </tr>
 </tbody>
@@ -847,7 +847,7 @@ build counts for a given repository. This uses the -pageParam,
 </tr>
 <tr>
 <td><code>-maxLength</code></td>
-<td>maximum payload length per HTTP request, as number of data points (not bytes) <br><br>If the number of data points out of the flowgraph exceeds <code>maxLength</code> then multiple HTTP requests will be sent.</td>
+<td>maximum payload length per HTTP request, as number of data points (not bytes) <br><br>If the number of data points out of the flowgraph exceeds <code>maxLength</code>then multiple HTTP requests will be sent.</td>
 <td align="right">No, default: 1 (each data point out of the flowgraph becomes one HTTP request)</td>
 </tr>
 </tbody>
@@ -898,7 +898,7 @@ emit -limit 5
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../http_server/" class="btn btn-neutral float-right" title="____ HTTP Server Adapter">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../http_server/" class="btn btn-neutral float-right" title="____ HTTP Server Adapter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../file/" class="btn btn-neutral" title="____ File Adapter"><span class="icon icon-circle-arrow-left"></span> Previous</a>

@@ -609,9 +609,13 @@
 <li><a href="#regexptostring">RegExp.toString()</a></li>
 </ul>
 </li>
+<li><a href="#stringcharat">String.charAt</a></li>
+<li><a href="#stringcharcodeat">String.charCodeAt</a></li>
 <li><a href="#stringconcat">String.concat</a></li>
+<li><a href="#stringfromcharcode">String.fromCharCode</a></li>
 <li><a href="#stringindexof">String.indexOf</a></li>
 <li><a href="#stringlength">String.length</a></li>
+<li><a href="#stringmatch">String.match</a></li>
 <li><a href="#stringreplace">String.replace</a></li>
 <li><a href="#stringsearch">String.search</a></li>
 <li><a href="#stringslice">String.slice</a></li>
@@ -619,6 +623,7 @@
 <li><a href="#stringsubstr">String.substr</a></li>
 <li><a href="#stringtolowercase">String.toLowerCase</a></li>
 <li><a href="#stringtouppercase">String.toUpperCase</a></li>
+<li><a href="#stringtrim">String.trim</a></li>
 </ul>
 </li>
 </ul>
@@ -696,6 +701,70 @@ regular expression, like this:</p>
 </code></pre>
 
 <hr />
+<h2 id="stringcharat">String.charAt</h2>
+<p>Given a string and an index, returns the character at that index in the string. Returns an empty string if the index is out of bounds.</p>
+<pre><code>String.charAt(string, index)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to return a character from</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>The index in <code>string</code>of the character to return</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{hello: 'hello'}]
+| put message = String.charAt(hello, 1)
+</code></pre>
+
+<hr />
+<h2 id="stringcharcodeat">String.charCodeAt</h2>
+<p>Given a string and an index, returns the character code at that index in the string. Returns <code>null</code> if the index is out of bounds.</p>
+<pre><code>String.charCodeAt(string, index)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to return a character from</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td>The index in <code>string</code>of the character code to return</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{hello: 'hello'}]
+| put message = String.charCodeAt(hello, 1)
+</code></pre>
+
+<hr />
 <h2 id="stringconcat">String.concat</h2>
 <p>Combine two or more strings and return a new string.</p>
 <pre><code>String.concat(string1, string2 [, string3 [, ..] ])
@@ -711,6 +780,33 @@ below, <code>String.concat</code> could also be replaced by <code>host + "." + d
 | put fqdn = String.concat(host, &quot;.&quot;, domain) 
 | view text
 
+</code></pre>
+
+<hr />
+<h2 id="stringfromcharcode">String.fromCharCode</h2>
+<p>Given a character code, returns a one-character string consisting of the character for that code.</p>
+<pre><code>String.fromCharCode(code)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td>The code of the character to be stringified</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit
+| put message = String.fromCharCode(123)
 </code></pre>
 
 <hr />
@@ -764,6 +860,37 @@ for regex-based searches.</p>
 </code></pre>
 
 <hr />
+<h2 id="stringmatch">String.match</h2>
+<p>Given a string and a regular expression, returns an array containing the matching substring and any captured substrings if the string matches the regular expression. Returns <code>null</code> if the string does not match the regular expression.</p>
+<pre><code>String.match(string, regexp)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to check for a match</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>regexp</code></td>
+<td>The regular expression to check <code>string</code>with</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{result: String.match(&quot;abcd&quot;, /bc/)}]
+</code></pre>
+
+<hr />
 <h2 id="stringreplace">String.replace</h2>
 <p>Replace all or part of a string with another string.</p>
 <pre><code>String.replace(&quot;original_string&quot;, &quot;string_to_replace&quot;, &quot;replacement_string&quot;)
@@ -801,7 +928,7 @@ for regex-based searches.</p>
 | view text
 </code></pre>
 
-<p><em>Example: Transform "hayneeeeeeedlehay" (or a similar string with one or more "e" characters) into "hayFOUNDhay"</em> </p>
+<p><em>Example: Transform "hayneeeeeeedlehay" (or a similar string with one or more "e" characters) into "hayFOUNDhay"</em></p>
 <pre><code>emit -from :0: -limit 1 
 | put result = String.replace(&quot;hayneeeeeeedlehay&quot;, /ne+dle/, &quot;FOUND&quot;) 
 | view text
@@ -932,12 +1059,12 @@ substrings.</p>
 </tr>
 <tr>
 <td><code>start</code></td>
-<td>The character index at which to begin extraction. <br><br>The <code>start</code> location of zero (0) maps to the first character of the string; the index of the last character is <code>String.length - 1</code> . <br><br>If <code>start</code> is positive, it is used as character index counting from the start of the string. If <code>start</code> equals or exceeds the length of the string, an empty string will be returned. <br><br>If <code>start</code> value is negative, it is used as character index counting from the end of the string. If the absolute value of a negative <code>start</code> exceeds the length of the string, zero will be used as the starting index.</td>
+<td>The character index at which to begin extraction. <br><br>The <code>start</code>location of zero (0) maps to the first character of the string; the index of the last character is <code>String.length - 1</code>. <br><br>If <code>start</code>is positive, it is used as character index counting from the start of the string. If <code>start</code>equals or exceeds the length of the string, an empty string will be returned. <br><br>If <code>start</code>value is negative, it is used as character index counting from the end of the string. If the absolute value of a negative <code>start</code>exceeds the length of the string, zero will be used as the starting index.</td>
 <td align="right">Yes</td>
 </tr>
 <tr>
 <td><code>length</code></td>
-<td>The number of characters to extract. <br><br>If <code>length</code> extends beyond the end of the string, fewer characters than <code>length</code> will be returned. If <code>length</code> is zero or negative, an empty string will be returned.</td>
+<td>The number of characters to extract. <br><br>If <code>length</code>extends beyond the end of the string, fewer characters than <code>length</code>will be returned. If <code>length</code>is zero or negative, an empty string will be returned.</td>
 <td align="right">No; defaults to extracting until the end of the string is reached.</td>
 </tr>
 </tbody>
@@ -952,7 +1079,7 @@ substrings.</p>
       ss_65 = String.substr(s, -6, 5)  // World
 </code></pre>
 
-<p><em>Example: using substr to shorten a name</em> </p>
+<p><em>Example: using substr to shorten a name</em></p>
 <pre><code>// convert a long identifier into a short label
 
 emit -points [
@@ -1022,6 +1149,31 @@ emit -points [
 </code></pre>
 
 <hr />
+<h2 id="stringtrim">String.trim</h2>
+<p>Returns the given string, minus any leading or trailing whitespace.</p>
+<pre><code>String.trim(string)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>string</code></td>
+<td>The string to trim</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{string: ' hello \t'}]
+| put trim = String.trim(string)
+</code></pre>
               
             </div>
           </div>
@@ -1029,7 +1181,7 @@ emit -points [
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../stdlib/" class="btn btn-neutral float-right" title="Standard Library">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../stdlib/" class="btn btn-neutral float-right" title="Standard Library"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../object/" class="btn btn-neutral" title="____ Object"><span class="icon icon-circle-arrow-left"></span> Previous</a>

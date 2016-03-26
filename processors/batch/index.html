@@ -612,14 +612,14 @@ each segment spanning a specified interval of time.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>-every</code> or <code>batch-interval</code></td>
+<td><code>-every</code>or <code>batch-interval</code></td>
 <td>The time interval for batches, specified as one of the following: <dl><dt>n</dt><dd>The number of seconds in the time interval </dd><dt>:duration:</dt><dd>The time interval expressed as a <a href="../../reference/time/">moment literal</a></dd></dl></td>
 <td align="right">Yes</td>
 </tr>
 <tr>
 <td><code>-on</code></td>
-<td>A time alignment for the batches. It may be a duration or a calendar offset less than batch interval. For example, <code>-every :hour: -on :00:30:00:</code> batches points over an hour on the half-hour, while <code>-every :month: -on :day 10:</code> batches monthly starting on day 10 of the month. If the beginning or ending of your data does not align evenly with these times, the first and last batch will contain less than the specified interval.</td>
-<td align="right">No; if <code>-on</code> is not specified, output batches are aligned with the UNIX epoch. If <code>batch-interval</code> equals one day, then batch boundaries are at midnight UTC.</td>
+<td>A time alignment for the batches. It may be a duration or a calendar offset less than batch interval. For example, <code>-every :hour: -on :00:30:00:</code>batches points over an hour on the half-hour, while <code>-every :month: -on :day 10:</code>batches monthly starting on day 10 of the month. If the beginning or ending of your data does not align evenly with these times, the first and last batch will contain less than the specified interval.</td>
+<td align="right">No; if <code>-on</code>is not specified, output batches are aligned with the UNIX epoch. If <code>batch-interval</code>equals one day, then batch boundaries are at midnight UTC.</td>
 </tr>
 </tbody>
 </table>
@@ -700,7 +700,7 @@ all at once, this example generates data in real time, divides into batches, and
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../filter/" class="btn btn-neutral float-right" title="____ filter">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../filter/" class="btn btn-neutral float-right" title="____ filter"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../" class="btn btn-neutral" title="Processors"><span class="icon icon-circle-arrow-left"></span> Previous</a>

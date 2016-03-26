@@ -1,0 +1,1 @@
+emit -points [{result: Object.toString({x: 1})}]

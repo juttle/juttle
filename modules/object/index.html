@@ -602,6 +602,8 @@
 <ul>
 <li><a href="#object">Object</a><ul>
 <li><a href="#objectkeys">Object.keys</a></li>
+<li><a href="#objecttostring">Object.toString</a></li>
+<li><a href="#objectvalues">Object.values</a></li>
 </ul>
 </li>
 </ul>
@@ -631,6 +633,59 @@
 <pre><code>emit -from :0: -limit 1
 | put result = Object.keys({'a': 1, 'b': 2})
 </code></pre>
+
+<h2 id="objecttostring">Object.toString</h2>
+<p>Returns a string representation of an object.</p>
+<pre><code>Object.toString(object)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>object</code></td>
+<td>The object to stringify</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{result: Object.toString({x: 1})}]
+</code></pre>
+
+<h2 id="objectvalues">Object.values</h2>
+<p>Scan an object containing key/value pairs and return a list of its values.</p>
+<pre><code>Object.values(object)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>object</code></td>
+<td>The object from which to pluck values</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example</em></p>
+<pre><code>emit -points [{result: Object.values({'a': 1, 'b': 2})}]
+| split result
+| sort value
+| keep value
+</code></pre>
               
             </div>
           </div>
@@ -638,7 +693,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../string/" class="btn btn-neutral float-right" title="____ String">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../string/" class="btn btn-neutral float-right" title="____ String"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../number/" class="btn btn-neutral" title="____ Number"><span class="icon icon-circle-arrow-left"></span> Previous</a>
