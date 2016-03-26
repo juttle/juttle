@@ -1,0 +1,2 @@
+emit
+| put message = String.fromCharCode(123)
