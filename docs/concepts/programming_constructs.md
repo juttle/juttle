@@ -173,7 +173,7 @@ examples for details.
 
 System imports load predefined modules from standard
 locations. Examples of system imports are the
-[Juttle Standard Library](./juttle_standard_library.md) or
+[Juttle Standard Library](../stdlib/index.md) or
 [adapter modules](../adapters/adapter_api.md#Adapter Modules). For
 system imports, module_path is a path suffix that is combined with one
 of the standard locations to result in a full pathname.
