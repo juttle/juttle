@@ -7,7 +7,7 @@
   
   
   
-  <title>____ stdev - Juttle Language Reference</title>
+  <title>____ random - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ stdev";
-    var mkdocs_page_input_path = "reducers/stdev.md";
-    var mkdocs_page_url = "/reducers/stdev/";
+    var mkdocs_page_name = "____ random";
+    var mkdocs_page_input_path = "stdlib/random.md";
+    var mkdocs_page_url = "/stdlib/random/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -379,7 +379,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Reducers</a>
+        <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -489,7 +489,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../stdlib/">Standard Library</a>
+        <a class="" href="../">Standard Library</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -594,12 +594,12 @@
         
       
     
-    <li>____ stdev</li>
+    <li>____ random</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/stdev.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/stdlib/random.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -610,64 +610,114 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="stdev">stdev</h1>
-<p>Return the standard deviation of the value of the specified field.</p>
-<pre><code>put|reduce stdev(field)
+                <h1 id="random">Random</h1>
+<p>Functions and reducers to generate random samples from common probability
+distributions.</p>
+<p>For random generators implemented as reducers (normal, poisson), note that they cannot be called from function context, but only from stream context. Random generators provided as functions can be called in either context.</p>
+<h1 id="exponential-function">exponential - function</h1>
+<p>Generates random numbers following the <a href="https://en.wikipedia.org/wiki/Exponential_distribution">exponential distribution</a>.</p>
+<p>Callable from function or stream context.</p>
+<p>Returns x ~ Exp(scale).</p>
+<pre><code>... | put value=random.exponential(2) | ...
 </code></pre>
 
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Argument</th>
 <th>Description</th>
-<th align="right">Required?</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>field</code></td>
-<td>The field to compute</td>
-<td align="right">Yes</td>
+<td><code>scale</code></td>
+<td>1 / lambda, where lambda is the rate parameter</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<p><em>Example</em></p>
-<p>This example uses the
-<a href="../../processors/batch/">batch</a>
-processor.</p>
-<pre><code>// On historical data, you can apply reducer to get a single computation,
-// or batch your historical data by time, then reduce per batch period.
-
-sub historical_points() { 
-  emit -from :0: -limit 10 
-  | put value = Math.floor(Math.random() * 100)
-}
-historical_points 
-| reduce avg(value), stdev = stdev(value)
-| view table -title &quot;Historical average and standard deviation&quot;
-;
-historical_points 
-| batch 5 
-| reduce avg(value), stdev = stdev(value) 
-| view table
-    -update &quot;append&quot; 
-    -title &quot;Historical 5-second average and standard deviation&quot;
-;
-
-// On live streaming data, you must batch by time, then reduce per batch period.
-
-sub live_points() {
-  emit -limit 10 
-  | put cnt = count(), value = Math.floor(Math.random() * 100)
-}
-live_points 
-| batch 3 
-| reduce avg(value), stdev = stdev(value)
-| view table 
-    -update &quot;append&quot; 
-    -title &quot;Live 3-second average and standard deviation&quot;
-;
+<h1 id="normal-reducer">normal - reducer</h1>
+<p>Generates random numbers following the <a href="https://en.wikipedia.org/wiki/Normal_distribution">normal, or Gaussian, distribution</a>. Uses Marsaglia polar method (improved <a href="https://en.wikipedia.org/wiki/Marsaglia_polar_method">Box-Muller transform</a>)
+for the computation.</p>
+<p>Callable only from stream context.</p>
+<p>Returns x ~ N(loc, scale).</p>
+<pre><code>... | put x = random.normal(0,Math.sqrt(0.2)), y = random.normal(0, 1) | ...
 </code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loc</code></td>
+<td>mean</td>
+<td></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>standard deviation</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="poisson-reducer">poisson - reducer</h1>
+<p>Generates random <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson-distributed</a> numbers that represent the number of event occurrences per interval (therefore, this generator outputs whole nonnegative integers). Uses Knuth's algorithm for the computation.</p>
+<p>Callable only from stream context.</p>
+<p>Returns x ~ Poisson(lam).</p>
+<pre><code>... | put lambda_1=random.poisson(1) | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lam</code></td>
+<td>rate parameter, defining the average number of events in an interval, should be &gt;= 0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h1 id="uniform-function">uniform - function</h1>
+<p>Generates random numbers between the <code>low</code> and <code>high</code> bound
+arguments, following <a href="https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)">uniform distribution</a>.</p>
+<p>Callable from function or stream context.</p>
+<p>Returns x ~ U(low..high).</p>
+<pre><code>... | put value=uniform(0, 24)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>low</code></td>
+<td>lower bound</td>
+<td></td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td>upper bound</td>
+<td></td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -675,10 +725,10 @@ live_points
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../sum/" class="btn btn-neutral float-right" title="____ sum"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../select/" class="btn btn-neutral float-right" title="____ select"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../pluck/" class="btn btn-neutral" title="____ pluck"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../predict/" class="btn btn-neutral" title="____ predict"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -706,10 +756,10 @@ live_points
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../pluck/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../predict/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../sum/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../select/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

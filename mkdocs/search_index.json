@@ -1371,6 +1371,16 @@
             "title": "Time windows with user-defined reducers"
         }, 
         {
+            "location": "/reducers/juttle_reducers_timewindows/", 
+            "text": "Moving time windows\n\n\nReducers can operate over moving time windows.\n\n\nWith the \nreduce\n\nprocessor, three parameters are used to define a moving time window:\n\n-over\n, \n-every\n, and \n-on\n. With \nput\n,\nonly \n-over\n is used. The \n-over\n parameter is known as the window,\nbecause it specifies a moving window of points up to the moment at which\nthe reducer is run. The window may be greater or less than the interval\n\n-every\n, but is typically some multiple of \n-every\n.\n\n\nFor example, the snippet below emits a new point every hour at 15\nminutes past the hour, using all points received in the past 6 hours:\n\n\nreduce\n  -over :6 hours:\n  -every :hour:\n  -on :00:15:00: a = avg(foo)\n| ...\n\n\n\n\nIts first point will be at 15 minutes after the first hour in which data\narrives, and it will continue emitting points every hour at 15 minutes\npast the hour, each being the average of points received over the\npreceding 6 hours. It ignores any upstream batch marks, and does not\nemit any batch marks of its own.\n\n\nWhen an \n-over\n window is specified,\nThe optional parameters \n-from :moment:\n and \n-to :moment:\n\nallow you to explicitly state the range of time covered by the stream.\nFor example, if you were computing a trailing yearly average from points\nthat fall on the 15th of each month, \n-from :2013-01-01:\n and \n-to :2015-01-01:\n \nlet you specify that two full years of time is\nrepresented by these points. Without it, yearly averages involving the\nfirst month would not be produced, because the points themselves only\nspan part of a month. And if there was no data for the final months, the\n\n-to\n parameter would force results to be produced for those empty months.\n\n\nIf you want the reduce to be driven by an upstream batch processor, but\nwith a window of different size than the batch interval, specify \n\n-over\n without \n-every\n. reduce will emit a point when it\nreceives a batch mark, using points within the current window. In this\nuse, the batch triggers computation according to its interval, but the\n\n-over\n parameter controls which points are used by reduce in its computation.\n\n\nWhen using a put processor, only \n-over\n may be specified, since it runs on\neach point as it is received.", 
+            "title": "____ Time-windowed Reducers"
+        }, 
+        {
+            "location": "/reducers/juttle_reducers_timewindows/#moving-time-windows", 
+            "text": "Reducers can operate over moving time windows.  With the  reduce \nprocessor, three parameters are used to define a moving time window: -over ,  -every , and  -on . With  put ,\nonly  -over  is used. The  -over  parameter is known as the window,\nbecause it specifies a moving window of points up to the moment at which\nthe reducer is run. The window may be greater or less than the interval -every , but is typically some multiple of  -every .  For example, the snippet below emits a new point every hour at 15\nminutes past the hour, using all points received in the past 6 hours:  reduce\n  -over :6 hours:\n  -every :hour:\n  -on :00:15:00: a = avg(foo)\n| ...  Its first point will be at 15 minutes after the first hour in which data\narrives, and it will continue emitting points every hour at 15 minutes\npast the hour, each being the average of points received over the\npreceding 6 hours. It ignores any upstream batch marks, and does not\nemit any batch marks of its own.  When an  -over  window is specified,\nThe optional parameters  -from :moment:  and  -to :moment: \nallow you to explicitly state the range of time covered by the stream.\nFor example, if you were computing a trailing yearly average from points\nthat fall on the 15th of each month,  -from :2013-01-01:  and  -to :2015-01-01:  \nlet you specify that two full years of time is\nrepresented by these points. Without it, yearly averages involving the\nfirst month would not be produced, because the points themselves only\nspan part of a month. And if there was no data for the final months, the -to  parameter would force results to be produced for those empty months.  If you want the reduce to be driven by an upstream batch processor, but\nwith a window of different size than the batch interval, specify  -over  without  -every . reduce will emit a point when it\nreceives a batch mark, using points within the current window. In this\nuse, the batch triggers computation according to its interval, but the -over  parameter controls which points are used by reduce in its computation.  When using a put processor, only  -over  may be specified, since it runs on\neach point as it is received.", 
+            "title": "Moving time windows"
+        }, 
+        {
             "location": "/reducers/avg/", 
             "text": "avg\n\n\nReturn the average of the values of a specified field.\n\n\nput|reduce avg(field)\n\n\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nfield\n\n\nThe name of the field to average\n\n\nYes\n\n\n\n\n\n\n\n\nExample\n\n\nThis example uses the \nbatch\n processor.\n\n\n// On historical data, you can apply reducer to get a single computation,\n// or batch your historical data by time, then reduce per batch period.\n\nsub historical_points() {\n  emit -from :0: -limit 10 \n  | put cnt = count(), value = Math.random()\n}\nhistorical_points \n| reduce avg(value) \n| view table \n  -title \nHistorical average\n\n  ;\nhistorical_points \n| batch 5 \n| reduce avg(value) \n| view table \n  -update \nappend\n \n  -title \nHistorical 5-second average\n\n  ;\n\n// On live streaming data, you must batch by time, then reduce per batch period.\n\nsub live_points() {\n  emit -limit 10 \n  | put cnt = count(), value = Math.random()\n}\nlive_points \n| batch 2 \n| reduce avg(value) \n| view table \n  -update \nappend\n \n  -title \nLive 2-second average\n\n  ;", 
             "title": "____ avg"
@@ -2059,6 +2069,106 @@
             "location": "/stdlib/predict/#output", 
             "text": "Each output point contains the following fields:     Field  Description      fieldname (the value of the  -field option)  average value of field over  -every interval    T  portion of field predicted by the trend estimator    S  portion of field predicted by seasonality    Y  portion of field predicted by smoothing    P  predicted value of field,  T + S + Y    E  prediction error,  P - field    Z  normalized error based on the sample  stdev over trailing periods     Example: using predict to predict the next value of Math.sin(x) function  // Example showing how the `predict` sub can be used to predict the output of a\n// `Math.sin` function over time. Looking closely at the output you'll see\n// how the `E` (error) value gets quite small after about 2 cycles through,\n// which matches the natural cyclical behavior of the `sin(x)` function.\n// Once the * `predict` sub has seen  enough  cycles and figured out\n// the seasonality it will start to produce more accurate predictions.\n\nimport  predict  as predict;\n\nemit -from :1 minute ago: -to :now: -every :1s:\n| put x=count(), value = Math.sin(50*x)\n// noneg=false, because sin(x) obviously has negative values\n| predict.predict -over :1s: -every :1s: -nonneg false\n| keep time, name, value, P, E\n| view table -columnOrder 'time', 'name', 'value', 'P', 'E'", 
             "title": "Output"
+        }, 
+        {
+            "location": "/stdlib/random/", 
+            "text": "Random\n\n\nFunctions and reducers to generate random samples from common probability\ndistributions.\n\n\nFor random generators implemented as reducers (normal, poisson), note that they cannot be called from function context, but only from stream context. Random generators provided as functions can be called in either context.\n\n\nexponential - function\n\n\nGenerates random numbers following the \nexponential distribution\n.\n\n\nCallable from function or stream context.\n\n\nReturns x ~ Exp(scale).\n\n\n... | put value=random.exponential(2) | ...\n\n\n\n\n\n\n\n\n\n\nArgument\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nscale\n\n\n1 / lambda, where lambda is the rate parameter\n\n\n\n\n\n\n\n\n\n\nnormal - reducer\n\n\nGenerates random numbers following the \nnormal, or Gaussian, distribution\n. Uses Marsaglia polar method (improved \nBox-Muller transform\n)\nfor the computation.\n\n\nCallable only from stream context.\n\n\nReturns x ~ N(loc, scale).\n\n\n... | put x = random.normal(0,Math.sqrt(0.2)), y = random.normal(0, 1) | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nloc\n\n\nmean\n\n\n\n\n\n\n\n\nscale\n\n\nstandard deviation\n\n\n\n\n\n\n\n\n\n\npoisson - reducer\n\n\nGenerates random \nPoisson-distributed\n numbers that represent the number of event occurrences per interval (therefore, this generator outputs whole nonnegative integers). Uses Knuth's algorithm for the computation.\n\n\nCallable only from stream context.\n\n\nReturns x ~ Poisson(lam).\n\n\n... | put lambda_1=random.poisson(1) | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nlam\n\n\nrate parameter, defining the average number of events in an interval, should be \n= 0\n\n\n\n\n\n\n\n\n\n\nuniform - function\n\n\nGenerates random numbers between the \nlow\n and \nhigh\n bound\narguments, following \nuniform distribution\n.\n\n\nCallable from function or stream context.\n\n\nReturns x ~ U(low..high).\n\n\n... | put value=uniform(0, 24)\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\n\n\nlow\n\n\nlower bound\n\n\n\n\n\n\n\n\nhigh\n\n\nupper bound", 
+            "title": "____ random"
+        }, 
+        {
+            "location": "/stdlib/random/#random", 
+            "text": "Functions and reducers to generate random samples from common probability\ndistributions.  For random generators implemented as reducers (normal, poisson), note that they cannot be called from function context, but only from stream context. Random generators provided as functions can be called in either context.", 
+            "title": "Random"
+        }, 
+        {
+            "location": "/stdlib/random/#exponential-function", 
+            "text": "Generates random numbers following the  exponential distribution .  Callable from function or stream context.  Returns x ~ Exp(scale).  ... | put value=random.exponential(2) | ...     Argument  Description       scale  1 / lambda, where lambda is the rate parameter", 
+            "title": "exponential - function"
+        }, 
+        {
+            "location": "/stdlib/random/#normal-reducer", 
+            "text": "Generates random numbers following the  normal, or Gaussian, distribution . Uses Marsaglia polar method (improved  Box-Muller transform )\nfor the computation.  Callable only from stream context.  Returns x ~ N(loc, scale).  ... | put x = random.normal(0,Math.sqrt(0.2)), y = random.normal(0, 1) | ...     Options  Description       loc  mean     scale  standard deviation", 
+            "title": "normal - reducer"
+        }, 
+        {
+            "location": "/stdlib/random/#poisson-reducer", 
+            "text": "Generates random  Poisson-distributed  numbers that represent the number of event occurrences per interval (therefore, this generator outputs whole nonnegative integers). Uses Knuth's algorithm for the computation.  Callable only from stream context.  Returns x ~ Poisson(lam).  ... | put lambda_1=random.poisson(1) | ...     Options  Description       lam  rate parameter, defining the average number of events in an interval, should be  = 0", 
+            "title": "poisson - reducer"
+        }, 
+        {
+            "location": "/stdlib/random/#uniform-function", 
+            "text": "Generates random numbers between the  low  and  high  bound\narguments, following  uniform distribution .  Callable from function or stream context.  Returns x ~ U(low..high).  ... | put value=uniform(0, 24)     Options  Description       low  lower bound     high  upper bound", 
+            "title": "uniform - function"
+        }, 
+        {
+            "location": "/stdlib/select/", 
+            "text": "Select\n\n\nSelect points from a stream satisfying particular properties.\n\n\nThe functionality provided by this module is similar to built-in reducers such as \nmax(fieldA)\n, \nmin(fieldB)\n; the difference is that reducers would place a single specified field into the resulting data point, while subgraphs in the select module would forward the entire data point with all its fields.\n\n\nSince all select methods are subgraphs, they can be used only in stream context.\n\n\nmax - sub\n\n\n... | select.max -field fieldname | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nfield\n\n\nthe field name to check\n\n\nYes\n\n\n\n\n\n\nby\n\n\nlist of fields to group by\n\n\nNo, default: \n[]\n\n\n\n\n\n\n\n\nOnly the point with the largest value for the \nfield\n name provided will be\nforwarded.\n\n\nmin - sub\n\n\n... | select.min -field fieldname | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nfield\n\n\nthe field name to check\n\n\nYes\n\n\n\n\n\n\nby\n\n\nlist of fields to group by\n\n\nNo, default: \n[]\n\n\n\n\n\n\n\n\nOnly the point with the smallest value for the \nfield\n name provided will be\nforwarded.\n\n\npercentile - sub\n\n\n... | select.percentile -field fieldname -p percentile | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nfield\n\n\nthe field name to check\n\n\nYes\n\n\n\n\n\n\npercentile\n\n\nthe expected percentile value\n\n\nYes\n\n\n\n\n\n\nby\n\n\nlist of fields to group by\n\n\nNo, default: \n[]\n\n\n\n\n\n\n\n\nOnly the point with the expected percentile value for the \nfield\n name\nprovided will be forwarded.\n\n\nmedian - sub\n\n\n... | select.median -field fieldname  | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nfield\n\n\nthe field name to check\n\n\nYes\n\n\n\n\n\n\nby\n\n\nlist of fields to group by\n\n\nNo, default: \n[]\n\n\n\n\n\n\n\n\nOnly the point with the exact median value for the \nfield\n name\nprovided will be forwarded.\n\n\ntop - sub\n\n\n... | select.top -n number -by field | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nn\n\n\nhow many of the points with the highest values of \nby\nto keep\n\n\nYes\n\n\n\n\n\n\nby\n\n\nname of the field to sort by before figuring out the top \nn\nto keep\n\n\nYes\n\n\n\n\n\n\nlimit\n\n\nthe limit value to pass to sort if you happen to exceed the default limit\n\n\nNo, default: see \nsort\n documentation\n\n\n\n\n\n\n\n\nSort the inbound stream by the \nby\n field and return the \nn\n points that have\nhighest value of the \nby\n field.\n\n\nNote\n Since \ntop\n uses \nsort\n to sort by the \nby\n field we drop the \ntime\n field\nfrom the individual points.\n\n\nbottom - sub\n\n\n... | select.bottom -n number -by field | ...\n\n\n\n\n\n\n\n\n\n\nOptions\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\nn\n\n\nhow many of the points with the lowest values of \nby\nto keep\n\n\nYes\n\n\n\n\n\n\nby\n\n\nname of the field to sort by before figuring out the bottom \nn\nto keep\n\n\nYes\n\n\n\n\n\n\nlimit\n\n\nthe limit value to pass to sort if you happen to exceed the default limit\n\n\nNo, default: see \nsort\n documentation\n\n\n\n\n\n\n\n\nSort the inbound stream by the \nby\n field and return the \nn\n points that have\nlowest value of the \nby\n field.\n\n\nNote\n Since \ntop\n uses \nsort\n to sort by the \nby\n field we drop the \ntime\n field\nfrom the individual points.", 
+            "title": "____ select"
+        }, 
+        {
+            "location": "/stdlib/select/#select", 
+            "text": "Select points from a stream satisfying particular properties.  The functionality provided by this module is similar to built-in reducers such as  max(fieldA) ,  min(fieldB) ; the difference is that reducers would place a single specified field into the resulting data point, while subgraphs in the select module would forward the entire data point with all its fields.  Since all select methods are subgraphs, they can be used only in stream context.", 
+            "title": "Select"
+        }, 
+        {
+            "location": "/stdlib/select/#max-sub", 
+            "text": "... | select.max -field fieldname | ...     Options  Description  Required?      field  the field name to check  Yes    by  list of fields to group by  No, default:  []     Only the point with the largest value for the  field  name provided will be\nforwarded.", 
+            "title": "max - sub"
+        }, 
+        {
+            "location": "/stdlib/select/#min-sub", 
+            "text": "... | select.min -field fieldname | ...     Options  Description  Required?      field  the field name to check  Yes    by  list of fields to group by  No, default:  []     Only the point with the smallest value for the  field  name provided will be\nforwarded.", 
+            "title": "min - sub"
+        }, 
+        {
+            "location": "/stdlib/select/#percentile-sub", 
+            "text": "... | select.percentile -field fieldname -p percentile | ...     Options  Description  Required?      field  the field name to check  Yes    percentile  the expected percentile value  Yes    by  list of fields to group by  No, default:  []     Only the point with the expected percentile value for the  field  name\nprovided will be forwarded.", 
+            "title": "percentile - sub"
+        }, 
+        {
+            "location": "/stdlib/select/#median-sub", 
+            "text": "... | select.median -field fieldname  | ...     Options  Description  Required?      field  the field name to check  Yes    by  list of fields to group by  No, default:  []     Only the point with the exact median value for the  field  name\nprovided will be forwarded.", 
+            "title": "median - sub"
+        }, 
+        {
+            "location": "/stdlib/select/#top-sub", 
+            "text": "... | select.top -n number -by field | ...     Options  Description  Required?      n  how many of the points with the highest values of  by to keep  Yes    by  name of the field to sort by before figuring out the top  n to keep  Yes    limit  the limit value to pass to sort if you happen to exceed the default limit  No, default: see  sort  documentation     Sort the inbound stream by the  by  field and return the  n  points that have\nhighest value of the  by  field.  Note  Since  top  uses  sort  to sort by the  by  field we drop the  time  field\nfrom the individual points.", 
+            "title": "top - sub"
+        }, 
+        {
+            "location": "/stdlib/select/#bottom-sub", 
+            "text": "... | select.bottom -n number -by field | ...     Options  Description  Required?      n  how many of the points with the lowest values of  by to keep  Yes    by  name of the field to sort by before figuring out the bottom  n to keep  Yes    limit  the limit value to pass to sort if you happen to exceed the default limit  No, default: see  sort  documentation     Sort the inbound stream by the  by  field and return the  n  points that have\nlowest value of the  by  field.  Note  Since  top  uses  sort  to sort by the  by  field we drop the  time  field\nfrom the individual points.", 
+            "title": "bottom - sub"
+        }, 
+        {
+            "location": "/stdlib/stats/", 
+            "text": "Stats\n\n\nStreaming statistics for time series data.\n\n\nThe stdlib stats module offers \"standardization\" of metric time series --\nshifting and re-scaling based on estimates of their center and scale. This\nplaces streams into a standard form for comparison with others, or for\nthresholding based on deviations from the center. Besides \"z-score\"\nstandardization using the sample mean and estimated standard deviation,\nthere is a robust variant (MAD) and mean-relative (CV).\n\n\nAll stats methods are reducers, and therefore can only be used in stream context.\n\n\ndemean - reducer\n\n\nReturn the difference between the last observed value and the batch average.\n\n\n... | reduce value=demean(value) | ...\n\n\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\n-field\n\n\nname of the field to apply the reduce operation on\n\n\nYes\n\n\n\n\n\n\n\n\nz - reducer\n\n\nReturn the sample Z-score of the specified field.\n\n\n... | reduce value=z(value) | ...\n\n\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\n-field\n\n\nname of the field to apply the reduce operation on\n\n\nYes\n\n\n\n\n\n\n\n\nrelMean - reducer\n\n\nReturn the last observed value as a percentage of the batch mean\n\n\n... | reduce value=relMean(value) | ...\n\n\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\n-field\n\n\nname of the field to apply the reduce operation on\n\n\nYes\n\n\n\n\n\n\n\n\ncv - reducer\n\n\nReturn the coefficient of variation (stdev / mean) of the batch\n\n\n... | reduce value=cv(value) | ...\n\n\n\n\n\n\n\n\n\n\nOption\n\n\nDescription\n\n\nRequired?\n\n\n\n\n\n\n\n\n\n\n-field\n\n\nname of the field to apply the reduce operation on\n\n\nYes", 
+            "title": "____ stats"
+        }, 
+        {
+            "location": "/stdlib/stats/#stats", 
+            "text": "Streaming statistics for time series data.  The stdlib stats module offers \"standardization\" of metric time series --\nshifting and re-scaling based on estimates of their center and scale. This\nplaces streams into a standard form for comparison with others, or for\nthresholding based on deviations from the center. Besides \"z-score\"\nstandardization using the sample mean and estimated standard deviation,\nthere is a robust variant (MAD) and mean-relative (CV).  All stats methods are reducers, and therefore can only be used in stream context.", 
+            "title": "Stats"
+        }, 
+        {
+            "location": "/stdlib/stats/#demean-reducer", 
+            "text": "Return the difference between the last observed value and the batch average.  ... | reduce value=demean(value) | ...     Option  Description  Required?      -field  name of the field to apply the reduce operation on  Yes", 
+            "title": "demean - reducer"
+        }, 
+        {
+            "location": "/stdlib/stats/#z-reducer", 
+            "text": "Return the sample Z-score of the specified field.  ... | reduce value=z(value) | ...     Option  Description  Required?      -field  name of the field to apply the reduce operation on  Yes", 
+            "title": "z - reducer"
+        }, 
+        {
+            "location": "/stdlib/stats/#relmean-reducer", 
+            "text": "Return the last observed value as a percentage of the batch mean  ... | reduce value=relMean(value) | ...     Option  Description  Required?      -field  name of the field to apply the reduce operation on  Yes", 
+            "title": "relMean - reducer"
+        }, 
+        {
+            "location": "/stdlib/stats/#cv-reducer", 
+            "text": "Return the coefficient of variation (stdev / mean) of the batch  ... | reduce value=cv(value) | ...     Option  Description  Required?      -field  name of the field to apply the reduce operation on  Yes", 
+            "title": "cv - reducer"
         }, 
         {
             "location": "/reference/time/", 

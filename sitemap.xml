@@ -348,6 +348,12 @@
     </url>
         
     <url>
+     <loc>None/reducers/juttle_reducers_timewindows/</loc>
+     <lastmod>2016-03-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>None/reducers/avg/</loc>
      <lastmod>2016-03-26</lastmod>
      <changefreq>daily</changefreq>
@@ -487,6 +493,24 @@
         
     <url>
      <loc>None/stdlib/predict/</loc>
+     <lastmod>2016-03-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/stdlib/random/</loc>
+     <lastmod>2016-03-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/stdlib/select/</loc>
+     <lastmod>2016-03-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/stdlib/stats/</loc>
      <lastmod>2016-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url>

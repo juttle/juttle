@@ -7,7 +7,7 @@
   
   
   
-  <title>____ stdev - Juttle Language Reference</title>
+  <title>____ select - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ stdev";
-    var mkdocs_page_input_path = "reducers/stdev.md";
-    var mkdocs_page_url = "/reducers/stdev/";
+    var mkdocs_page_name = "____ select";
+    var mkdocs_page_input_path = "stdlib/select.md";
+    var mkdocs_page_url = "/stdlib/select/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -379,7 +379,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Reducers</a>
+        <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -489,7 +489,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../stdlib/">Standard Library</a>
+        <a class="" href="../">Standard Library</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -594,12 +594,12 @@
         
       
     
-    <li>____ stdev</li>
+    <li>____ select</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/stdev.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/stdlib/select.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -610,15 +610,18 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="stdev">stdev</h1>
-<p>Return the standard deviation of the value of the specified field.</p>
-<pre><code>put|reduce stdev(field)
+                <h1 id="select">Select</h1>
+<p>Select points from a stream satisfying particular properties.</p>
+<p>The functionality provided by this module is similar to built-in reducers such as <code>max(fieldA)</code>, <code>min(fieldB)</code>; the difference is that reducers would place a single specified field into the resulting data point, while subgraphs in the select module would forward the entire data point with all its fields.</p>
+<p>Since all select methods are subgraphs, they can be used only in stream context.</p>
+<h2 id="max-sub">max - sub</h2>
+<pre><code>... | select.max -field fieldname | ...
 </code></pre>
 
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Options</th>
 <th>Description</th>
 <th align="right">Required?</th>
 </tr>
@@ -626,48 +629,172 @@
 <tbody>
 <tr>
 <td><code>field</code></td>
-<td>The field to compute</td>
+<td>the field name to check</td>
 <td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>list of fields to group by</td>
+<td align="right">No, default: <code>[]</code></td>
 </tr>
 </tbody>
 </table>
-<p><em>Example</em></p>
-<p>This example uses the
-<a href="../../processors/batch/">batch</a>
-processor.</p>
-<pre><code>// On historical data, you can apply reducer to get a single computation,
-// or batch your historical data by time, then reduce per batch period.
-
-sub historical_points() { 
-  emit -from :0: -limit 10 
-  | put value = Math.floor(Math.random() * 100)
-}
-historical_points 
-| reduce avg(value), stdev = stdev(value)
-| view table -title &quot;Historical average and standard deviation&quot;
-;
-historical_points 
-| batch 5 
-| reduce avg(value), stdev = stdev(value) 
-| view table
-    -update &quot;append&quot; 
-    -title &quot;Historical 5-second average and standard deviation&quot;
-;
-
-// On live streaming data, you must batch by time, then reduce per batch period.
-
-sub live_points() {
-  emit -limit 10 
-  | put cnt = count(), value = Math.floor(Math.random() * 100)
-}
-live_points 
-| batch 3 
-| reduce avg(value), stdev = stdev(value)
-| view table 
-    -update &quot;append&quot; 
-    -title &quot;Live 3-second average and standard deviation&quot;
-;
+<p>Only the point with the largest value for the <code>field</code> name provided will be
+forwarded.</p>
+<h2 id="min-sub">min - sub</h2>
+<pre><code>... | select.min -field fieldname | ...
 </code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field</code></td>
+<td>the field name to check</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>list of fields to group by</td>
+<td align="right">No, default: <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Only the point with the smallest value for the <code>field</code> name provided will be
+forwarded.</p>
+<h2 id="percentile-sub">percentile - sub</h2>
+<pre><code>... | select.percentile -field fieldname -p percentile | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field</code></td>
+<td>the field name to check</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>percentile</code></td>
+<td>the expected percentile value</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>list of fields to group by</td>
+<td align="right">No, default: <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Only the point with the expected percentile value for the <code>field</code> name
+provided will be forwarded.</p>
+<h2 id="median-sub">median - sub</h2>
+<pre><code>... | select.median -field fieldname  | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>field</code></td>
+<td>the field name to check</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>list of fields to group by</td>
+<td align="right">No, default: <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Only the point with the exact median value for the <code>field</code> name
+provided will be forwarded.</p>
+<h2 id="top-sub">top - sub</h2>
+<pre><code>... | select.top -n number -by field | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td>how many of the points with the highest values of <code>by</code>to keep</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>name of the field to sort by before figuring out the top <code>n</code>to keep</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>the limit value to pass to sort if you happen to exceed the default limit</td>
+<td align="right">No, default: see <a href="../../processors/sort/">sort</a> documentation</td>
+</tr>
+</tbody>
+</table>
+<p>Sort the inbound stream by the <code>by</code> field and return the <code>n</code> points that have
+highest value of the <code>by</code> field.</p>
+<p><strong>Note</strong> Since <code>top</code> uses <code>sort</code> to sort by the <code>by</code> field we drop the <code>time</code> field
+from the individual points.</p>
+<h2 id="bottom-sub">bottom - sub</h2>
+<pre><code>... | select.bottom -n number -by field | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n</code></td>
+<td>how many of the points with the lowest values of <code>by</code>to keep</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>by</code></td>
+<td>name of the field to sort by before figuring out the bottom <code>n</code>to keep</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>limit</code></td>
+<td>the limit value to pass to sort if you happen to exceed the default limit</td>
+<td align="right">No, default: see <a href="../../processors/sort/">sort</a> documentation</td>
+</tr>
+</tbody>
+</table>
+<p>Sort the inbound stream by the <code>by</code> field and return the <code>n</code> points that have
+lowest value of the <code>by</code> field.</p>
+<p><strong>Note</strong> Since <code>top</code> uses <code>sort</code> to sort by the <code>by</code> field we drop the <code>time</code> field
+from the individual points.</p>
               
             </div>
           </div>
@@ -675,10 +802,10 @@ live_points
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../sum/" class="btn btn-neutral float-right" title="____ sum"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../stats/" class="btn btn-neutral float-right" title="____ stats"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../pluck/" class="btn btn-neutral" title="____ pluck"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../random/" class="btn btn-neutral" title="____ random"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -706,10 +833,10 @@ live_points
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../pluck/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../random/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../sum/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../stats/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

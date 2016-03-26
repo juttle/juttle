@@ -443,6 +443,10 @@
         
             
   
+
+        
+            
+  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -488,6 +492,18 @@
         <a class="" href="../../stdlib/">Standard Library</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+
+        
+            
   
 
         
@@ -596,7 +612,7 @@
               
                 <h1 id="reduce">reduce</h1>
 <p>Accumulate collections of points and aggregate them using reducers,
-optionally within a <a href="../reducers/juttle_reducers_timewindows.md">moving time window</a></p>
+optionally within a <a href="../../reducers/juttle_reducers_timewindows/">moving time window</a></p>
 <pre><code>reduce [-every duration [-on duration-or-calendar-offset]]
   [-over duration]
   [-reset true|false]
@@ -621,7 +637,7 @@ optionally within a <a href="../reducers/juttle_reducers_timewindows.md">moving 
 </tr>
 <tr>
 <td><code>-over</code></td>
-<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <br><br>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> <br><br>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. <br><br>See <a href="../reducers/juttle_reducers_timewindows.md">Moving time windows</a> for more information about moving time windows.</td>
+<td>The moving time window over which the value will be computed, as a <a href="../../modules/juttle_time_moment_literals">duration literal</a>. This is typically some multiple of the <code>-every</code>interval (for example, <code>reduce -every :minute: -over :hour: value=avg(value)</code>updates a trailing hourly average every minute). <br><br>When <code>-over</code>is specified, results will only be produced for full windows of data. No results will be produced until <code>-over</code>has passed after the first point. No result will be produced for any final points that span interval less than <code>-over</code> <br><br>If <code>-over</code>is :forever:, the reducer emits results cumulatively, over all points seen so far. <br><br>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows.</td>
 <td align="right">No; defaults to not using a moving window.</td>
 </tr>
 <tr>

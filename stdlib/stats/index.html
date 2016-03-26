@@ -7,7 +7,7 @@
   
   
   
-  <title>____ stdev - Juttle Language Reference</title>
+  <title>____ stats - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ stdev";
-    var mkdocs_page_input_path = "reducers/stdev.md";
-    var mkdocs_page_url = "/reducers/stdev/";
+    var mkdocs_page_name = "____ stats";
+    var mkdocs_page_input_path = "stdlib/stats.md";
+    var mkdocs_page_url = "/stdlib/stats/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -379,7 +379,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Reducers</a>
+        <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -489,7 +489,7 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../../stdlib/">Standard Library</a>
+        <a class="" href="../">Standard Library</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
   
@@ -594,12 +594,12 @@
         
       
     
-    <li>____ stdev</li>
+    <li>____ stats</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/stdev.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/stdlib/stats.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -610,64 +610,99 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="stdev">stdev</h1>
-<p>Return the standard deviation of the value of the specified field.</p>
-<pre><code>put|reduce stdev(field)
+                <h1 id="stats">Stats</h1>
+<p>Streaming statistics for time series data.</p>
+<p>The stdlib stats module offers "standardization" of metric time series --
+shifting and re-scaling based on estimates of their center and scale. This
+places streams into a standard form for comparison with others, or for
+thresholding based on deviations from the center. Besides "z-score"
+standardization using the sample mean and estimated standard deviation,
+there is a robust variant (MAD) and mean-relative (CV).</p>
+<p>All stats methods are reducers, and therefore can only be used in stream context.</p>
+<h2 id="demean-reducer">demean - reducer</h2>
+<p>Return the difference between the last observed value and the batch average.</p>
+<pre><code>... | reduce value=demean(value) | ...
 </code></pre>
 
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Option</th>
 <th>Description</th>
 <th align="right">Required?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>field</code></td>
-<td>The field to compute</td>
+<td><code>-field</code></td>
+<td>name of the field to apply the reduce operation on</td>
 <td align="right">Yes</td>
 </tr>
 </tbody>
 </table>
-<p><em>Example</em></p>
-<p>This example uses the
-<a href="../../processors/batch/">batch</a>
-processor.</p>
-<pre><code>// On historical data, you can apply reducer to get a single computation,
-// or batch your historical data by time, then reduce per batch period.
-
-sub historical_points() { 
-  emit -from :0: -limit 10 
-  | put value = Math.floor(Math.random() * 100)
-}
-historical_points 
-| reduce avg(value), stdev = stdev(value)
-| view table -title &quot;Historical average and standard deviation&quot;
-;
-historical_points 
-| batch 5 
-| reduce avg(value), stdev = stdev(value) 
-| view table
-    -update &quot;append&quot; 
-    -title &quot;Historical 5-second average and standard deviation&quot;
-;
-
-// On live streaming data, you must batch by time, then reduce per batch period.
-
-sub live_points() {
-  emit -limit 10 
-  | put cnt = count(), value = Math.floor(Math.random() * 100)
-}
-live_points 
-| batch 3 
-| reduce avg(value), stdev = stdev(value)
-| view table 
-    -update &quot;append&quot; 
-    -title &quot;Live 3-second average and standard deviation&quot;
-;
+<h2 id="z-reducer">z - reducer</h2>
+<p>Return the sample Z-score of the specified field.</p>
+<pre><code>... | reduce value=z(value) | ...
 </code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-field</code></td>
+<td>name of the field to apply the reduce operation on</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relmean-reducer">relMean - reducer</h2>
+<p>Return the last observed value as a percentage of the batch mean</p>
+<pre><code>... | reduce value=relMean(value) | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-field</code></td>
+<td>name of the field to apply the reduce operation on</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cv-reducer">cv - reducer</h2>
+<p>Return the coefficient of variation (stdev / mean) of the batch</p>
+<pre><code>... | reduce value=cv(value) | ...
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-field</code></td>
+<td>name of the field to apply the reduce operation on</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div>
@@ -675,10 +710,10 @@ live_points
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../sum/" class="btn btn-neutral float-right" title="____ sum"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../reference/time/" class="btn btn-neutral float-right" title="Time"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../pluck/" class="btn btn-neutral" title="____ pluck"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../select/" class="btn btn-neutral" title="____ select"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -706,10 +741,10 @@ live_points
           <a href="https://github.com/juttle/juttle" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../pluck/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../select/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../sum/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../reference/time/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
