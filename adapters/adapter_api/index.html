@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -603,6 +608,7 @@
 <li>Create a JavaScript module that can be <code>require()</code>d by the juttle runtime.</li>
 <li>From that module, export an initialization function to define the read/write capabilities of the adapter.</li>
 <li>Implement ES6 classes deriving from AdapterRead/AdapterWrite that perform the work of reading from/writing to the backend data source.</li>
+<li>(Optional) Write <a href="../../concepts/programming_constructs/#Modules">juttle modules</a> that provide useful functionality and include them with the adapter.</li>
 </ol>
 <p>We'll go through each of these steps in more detail below.</p>
 <h2 id="javascript-modules-classes-and-methods">JavaScript Modules, Classes and Methods</h2>
@@ -788,6 +794,21 @@ if (unknown.length &gt; 0) {
 }
 </code></pre>
 
+<h2 id="adapter-modules">Adapter Modules</h2>
+<p>An adapter may also include juttle modules that provide useful functionality for users writing juttle programs. An example of this is the <a href="https://github.com/juttle/juttle-aws-adapter">AWS adapter</a>, which includes modules that provide aggregations of raw data points into demographic and aggregate information.</p>
+<p>By convention, all files below the directory <code>&lt;adapter installation dir&gt;/juttle</code> are made available to juttle programs. They can be imported using the path <code>adapters/&lt;adapter name&gt;/&lt;path-to-module-file&gt;</code>. The path below the root <code>adapters/&lt;adapter name&gt;</code> should correspond to the path below <code>juttle</code>. Here's an example directory layout:</p>
+<pre><code class="juttle-no-syntax-check">// assuming .../node_modules/juttle-aws-adapter/juttle/aggregations.juttle exists
+
+import 'adapters/aws/aggregations.juttle' as Adapter_aws;
+
+read aws product='EC2'
+| Adapter_aws.aggregate_EC2
+| filter demographic='EC2 Instance Type'
+| keep demographic, name, value
+| view table
+
+</code></pre>
+
 <h2 id="additional-resources">Additional Resources</h2>
 <p>When it comes time to finish and publish your adapter, here are some useful checklists to follow to ensure that the adapter is fully tested and has a consistent structure to existing adapters.</p>
 <ul>
@@ -802,7 +823,7 @@ if (unknown.length &gt; 0) {
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../parsers/" class="btn btn-neutral float-right" title="Parsers"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../parsers/" class="btn btn-neutral float-right" title="Parsers">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../stochastic_search_cluster/" class="btn btn-neutral" title="____ Search Cluster Source"><span class="icon icon-circle-arrow-left"></span> Previous</a>

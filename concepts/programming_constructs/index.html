@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -713,10 +718,24 @@ location, then in another program you can import it as a module, using the
 <pre><code>    import &quot;&lt;module_path&gt;&quot; as local_name;
 </code></pre>
 
-<p>How the <code>&lt;module_path&gt;</code> is resolved depends on the specific capabilities of the
-application in which Juttle is running. For the Juttle CLI, it can be either a
-relative or absolute filesystem path or a URL to a remote Juttle file containing
-exported code.</p>
+<p><code>&lt;module_path&gt;</code> can either refer to a <em>user import</em> or a <em>system
+import</em>.</p>
+<p>User imports are references to individual modules. User imports can
+either be a url, a full pathname starting with <code>/</code>, or a relative
+pathname starting with <code>./</code> or <code>../</code>. All other paths are considered
+system imports.</p>
+<p>When resolving user imports with relative pathnames, the pathname is
+always applied relative to the file doing the import. See the below
+examples for details.</p>
+<p>System imports load predefined modules from standard
+locations. Examples of system imports are the
+<a href="./juttle_standard_library.md">Juttle Standard Library</a> or
+<a href="../../adapters/adapter_api/#Adapter Modules">adapter modules</a>. For
+system imports, module_path is a path suffix that is combined with one
+of the standard locations to result in a full pathname.</p>
+<p>For both user and system imports, when referring to files, a <code>.juttle</code>
+extension will be added if not present, and when referring to
+directories, an <code>/index.juttle</code> will be added.</p>
 <p>Once it is resolved, the import statement pulls all exported symbols from the
 specified Juttle module and makes them available under the specified local
 namespace.</p>
@@ -726,7 +745,7 @@ namespace.</p>
 
 <ul>
 <li>local_name is the local name from the import command above.</li>
-<li>symbol_name is the name of the exported subgraph, constant, function, 
+<li>symbol_name is the name of the exported subgraph, constant, function,
    or other code fragment from the imported program file.</li>
 </ul>
 <h2 id="module-behavior">Module Behavior</h2>
@@ -748,7 +767,7 @@ namespace.</p>
 </li>
 </ul>
 <p><em>Example: export from module</em></p>
-<p>This juttle module exports a function, a subgraph, and a constant. </p>
+<p>This juttle module exports a function, a subgraph, and a constant.</p>
 <pre><code class="juttle">export const pi = 3.14;                                // exported constant
 const not_exported = 2;                                     // not exported
 export function double(x) { return x * not_exported; } // exported function
@@ -764,15 +783,37 @@ emit
 | view table;
 </code></pre>
 
-<p><em>Example: import by filename</em></p>
+<p><em>Example: user import by filename</em></p>
 <p>This example assumes that the program with exports is saved at path
-<code>docs/examples/concepts/export_module.juttle</code>.</p>
+<code>docs/examples/concepts/export_module.juttle</code>, and that the program
+being run is at <code>docs/examples/concepts/import_module.juttle</code>.</p>
 <pre><code class="juttle-no-syntax-check">// This program is runnable from CLI from the juttle repo root,
 // juttle docs/examples/concepts/import_module.juttle
 
-import 'docs/examples/concepts/export_module.juttle' as my_module;
+import './export_module.juttle' as my_module;
 emit
 | my_module.stamper -mark 'test'
+</code></pre>
+
+<p><em>Example: modules importing modules with relative paths</em></p>
+<p>This example uses the following files:</p>
+<p><code>docs/examples/concepts/import_module_nested.juttle</code>:</p>
+<pre><code class="juttle-no-syntax-check">// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_nested.juttle.
+
+import &quot;./shared/module.juttle&quot; as mod;
+
+emit -limit 1 | put val=mod.myvalue | view table;
+</code></pre>
+
+<p><code>docs/examples/concepts/shared/module.juttle</code>:</p>
+<pre><code class="juttle-no-syntax-check">import './second_module.juttle' as mod2;
+
+export const myvalue=mod2.value;
+</code></pre>
+
+<p><code>docs/examples/concepts/shared/second_module.juttle</code>:</p>
+<pre><code class="juttle-no-syntax-check">export const value = 10;
 </code></pre>
 
 <p><em>Example: import by URL</em></p>
@@ -786,6 +827,32 @@ import 'https://gist.githubusercontent.com/jut-test/273396ac4efcc838687b/raw/dde
   as this_module;
 emit
 | this_module.stamper -mark &quot;test&quot;
+</code></pre>
+
+<p><em>Example: using system import</em></p>
+<p>This example loads the file <code>random</code> from the juttle standard
+library. Note the use of the implied <code>.juttle</code> extension that is added
+when resolving.</p>
+<pre><code class="juttle-no-syntax-check">// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_from_stdlib.juttle
+
+import &quot;random&quot; as random;
+emit -limit 3 -from :0:
+| put pure = random.normal(0, 1)
+
+</code></pre>
+
+<p><em>Example: adapter modules</em></p>
+<p>This example loads the file <code>aggregations.juttle</code> from the aws
+adapter. Note the use of the implied <code>.juttle</code> extension in the import
+statement.</p>
+<pre><code class="juttle-no-syntax-check">import &quot;adapters/aws/aggregations&quot; as Adapter_aws;
+
+read aws product='EC2'
+| Adapter_aws.aggregate_EC2
+| filter demographic='EC2 Instance Type'
+| keep demographic, name, value
+| view table
 </code></pre>
 
 <h1 id="subgraphs">Subgraphs</h1>
@@ -832,7 +899,7 @@ for tips on working with the contents of fields from within a subgraph.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../fields/" class="btn btn-neutral float-right" title="Fields"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../fields/" class="btn btn-neutral float-right" title="Fields">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../dataflow/" class="btn btn-neutral" title="Dataflow"><span class="icon icon-circle-arrow-left"></span> Previous</a>

@@ -1,0 +1,1 @@
+emit -points [{people: Array.join(['joe','meg','bob','may'], ',')}]

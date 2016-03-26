@@ -1,3 +1,6 @@
-import "random.juttle" as random;
+// This program is runnable from CLI from the juttle repo root,
+// juttle docs/examples/concepts/import_module_from_stdlib.juttle
+
+import "random" as random;
 emit -limit 3 -from :0:
 | put pure = random.normal(0, 1)

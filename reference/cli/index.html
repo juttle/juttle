@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -764,8 +769,10 @@ it to <code>text</code> like so:</p>
 
 <h2 id="module-resolution">Module Resolution</h2>
 <p>When juttle programs contain <a href="../../concepts/programming_constructs/#modules">modules</a>, <code>juttle</code> resolves modules by searching the following paths, in this order:</p>
-<p><em>The current working directory
-</em>Any paths listed in the environment variable <code>JUTTLE_MODULE_PATH</code>, which is a colon-separated list of directories.</p>
+<ul>
+<li>The current working directory</li>
+<li>Any paths listed in the environment variable <code>JUTTLE_MODULE_PATH</code>, which is a colon-separated list of directories.</li>
+</ul>
 <p>The first module file found is used.</p>
 <h2 id="configuring-adapters">Configuring Adapters</h2>
 <p>Connections to <a href="../../adapters/">external adapters</a> are configured in the "adapters" section of the configuration. Each entry should be the name of the adapter along with any adapter-specific configuration. By default, the CLI will try to load the adapter by executing <code>require(adapter)</code> but if the <code>path</code> attribute exists then it will try to load the adapter from the specified path.</p>
@@ -791,7 +798,7 @@ it to <code>text</code> like so:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../style_guide/" class="btn btn-neutral float-right" title="Style Guide"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../style_guide/" class="btn btn-neutral float-right" title="Style Guide">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../conditionals/" class="btn btn-neutral" title="Conditionals"><span class="icon icon-circle-arrow-left"></span> Previous</a>

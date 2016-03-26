@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -593,8 +598,20 @@
 <div class="toc">
 <ul>
 <li><a href="#array">Array</a><ul>
-<li><a href="#arraylength">Array.length</a></li>
+<li><a href="#arrayconcat">Array.concat</a></li>
 <li><a href="#arrayindexof">Array.indexOf</a></li>
+<li><a href="#arrayjoin">Array.join</a></li>
+<li><a href="#arraylastindexof">Array.lastIndexOf</a></li>
+<li><a href="#arraylength">Array.length</a></li>
+<li><a href="#arraypop">Array.pop</a></li>
+<li><a href="#arraypush">Array.push</a></li>
+<li><a href="#arrayreverse">Array.reverse</a></li>
+<li><a href="#arrayshift">Array.shift</a></li>
+<li><a href="#arrayslice">Array.slice</a></li>
+<li><a href="#arraysort">Array.sort</a></li>
+<li><a href="#arraysplice">Array.splice</a></li>
+<li><a href="#arraytostring">Array.toString</a></li>
+<li><a href="#arrayunshift">Array.unshift</a></li>
 </ul>
 </li>
 </ul>
@@ -602,9 +619,9 @@
 <p>Arrays can be declared as constants in a flowgraph or variables in
 <a href="../../concepts/programming_constructs/#functions">user defined functions</a>. To create an array from your data in a Juttle pipeline, use the <a href="../../reducers/pluck/">pluck</a> reducer.</p>
 <p>The Array module exposes a limited set of operations on array variables.</p>
-<h2 id="arraylength">Array.length</h2>
-<p>Return the number of items in an array.</p>
-<pre><code>Array.length(array)
+<h2 id="arrayconcat">Array.concat</h2>
+<p>Combine the elements of a list of arrays into a single array</p>
+<pre><code>Array.concat(array1, array2, ...)
 </code></pre>
 
 <table>
@@ -617,19 +634,26 @@
 </thead>
 <tbody>
 <tr>
-<td><code>array</code></td>
-<td>The array to measure</td>
+<td><code>array1</code></td>
+<td>The first elements in the resulting array</td>
 <td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>array2</code></td>
+<td>Elements to append to array1</td>
+<td align="right">No</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td>Any number of additional arrays</td>
+<td align="right">No</td>
 </tr>
 </tbody>
 </table>
-<p><em>Example: Create an array containing a random number of values, then count them</em></p>
-<pre><code>const random_length=(Math.round(Math.random()*10));
-;
-emit -limit random_length -every :.1 second:
-| put values=(Math.round(Math.random()*10))
-| reduce pluck(values)
-| put length=Array.length(pluck)
+<p><em>Example: Concatenate <code>["hello"]</code>, <code>[]</code> and <code>["world"]</code> into <code>["hello", "world"]</code></em></p>
+<pre><code>emit -points [{hello: ['hello'], world: ['world']}]
+| put message = Array.concat(hello, [], world)
+| keep message
 </code></pre>
 
 <h2 id="arrayindexof">Array.indexOf</h2>
@@ -666,6 +690,366 @@ emit -limit random_length -every :.1 second:
 | put searchvalue=(Math.round(Math.random()*10))
 | put index=Array.indexOf(pluck, searchvalue)
 </code></pre>
+
+<h2 id="arrayjoin">Array.join</h2>
+<p>Combine the elements of an array into a string</p>
+<pre><code>Array.join(array, separator)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array whose elements to join</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>Separator to delimit the joined elements</td>
+<td align="right">No; defaults to <code>','</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Join ['joe','meg','bob','may'] into the string 'joe,meg,bob,may'</em></p>
+<pre><code>emit -points [{people: Array.join(['joe','meg','bob','may'], ',')}]
+</code></pre>
+
+<h2 id="arraylastindexof">Array.lastIndexOf</h2>
+<p>Search an array and return the zero-based index of the last match, or
+-1 if there is no match.</p>
+<pre><code>Array.lastIndexOf(array, searchvalue)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>The array to search</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>searchvalue</code></td>
+<td>The value for which to search</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Search for a random integer in an array of random integers</em></p>
+<pre><code>emit -points [{result: Array.lastIndexOf(['A','B', 'B'], 'B')}]
+</code></pre>
+
+<h2 id="arraylength">Array.length</h2>
+<p>Return the number of items in an array.</p>
+<pre><code>Array.length(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>The array to measure</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Create an array containing a random number of values, then count them</em></p>
+<pre><code>const random_length=(Math.round(Math.random()*10));
+;
+emit -limit random_length -every :.1 second:
+| put values=(Math.round(Math.random()*10))
+| reduce pluck(values)
+| put length=Array.length(pluck)
+</code></pre>
+
+<h2 id="arraypop">Array.pop</h2>
+<p>Remove the last element of an array and return it</p>
+<pre><code>Array.pop(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to pop an element from</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Pop the element 'b' off ['a', 'b']</em></p>
+<pre><code>emit -points [{array: ['a','b']}]
+| put result = Array.pop(array)
+</code></pre>
+
+<h2 id="arraypush">Array.push</h2>
+<p>Add an element to the end of an array</p>
+<pre><code>Array.push(array, element)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to add <code>element</code> to</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>Element to add</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Push <code>'pajama'</code> and <code>'potatoes'</code> into the array <code>['banana']</code></em></p>
+<pre><code>emit -points [{array: [&quot;banana&quot;]}]
+| put elements = Array.push(array, 'pajama', 'potatoes')
+</code></pre>
+
+<h2 id="arrayreverse">Array.reverse</h2>
+<p>Reverse the order of elements in an array</p>
+<pre><code>Array.reverse(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array reverse</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Reverse ['a', 'b'], yielding ['b', 'a']</em></p>
+<pre><code>emit -points [{array: ['a','b']}]
+| put result = Array.reverse(array)
+</code></pre>
+
+<h2 id="arrayshift">Array.shift</h2>
+<p>Removes and returns the first element of an array</p>
+<pre><code>Array.shift(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to take first element from</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Take the element <code>'a'</code> out of <code>['a', 'b']</code></em></p>
+<pre><code>emit -points [{array: ['a','b']}] 
+| put result = Array.shift(array)
+</code></pre>
+
+<h2 id="arrayslice">Array.slice</h2>
+<p>Returns a subarray of the given array</p>
+<pre><code>Array.slice(array, start, end)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to return a slice of</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>Index of subarray start</td>
+<td align="right">No; defaults to 0</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>Index of subarray end</td>
+<td align="right">No; defaults to end of array</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Take the slice <code>['banana']</code> of the array <code>['banana', 'pajama']</code></em></p>
+<pre><code>emit -points [{array: [&quot;banana&quot;, &quot;pajama&quot;]}]
+| put elements = Array.slice(array, 0, 1)
+| keep elements, array
+</code></pre>
+
+<h2 id="arraysort">Array.sort</h2>
+<p>Sort an array. If the array contains numbers, they are sorted in increasing order. If it contains strings, they are sorted alphabetically. Sorting a mixed array is an error.</p>
+<pre><code>Array.sort(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to sort</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Sort <code>['c', 'a', 'b']</code>, yielding <code>['a', 'b', 'c']</code>.</em></p>
+<pre><code>emit -points [{array: ['c', 'a','b']}]
+| put result = Array.sort(array)
+</code></pre>
+
+<h2 id="arraysplice">Array.splice</h2>
+<p>Removes and returns a subarray, and replaces the subarray with given elements in the input array</p>
+<pre><code>Array.splice(array, start, end, elements...)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to splice</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>Start of subarray to replace</td>
+<td align="right">No; defaults to 0</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>End of subarray</td>
+<td align="right">No; defaults to end of <code>array</code></td>
+</tr>
+<tr>
+<td><code>elements</code></td>
+<td>List of elements to add</td>
+<td align="right">No; defaults to none</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Replace <code>'banana'</code> with <code>'potatoes'</code> and return <code>['banana']</code> given the array <code>['banana', 'pajama']</code>.</em></p>
+<pre><code>emit -points [{array: [&quot;banana&quot;, &quot;pajama&quot;]}]
+| put elements = Array.splice(array, 0, 1, 'potatoes')
+</code></pre>
+
+<h2 id="arraytostring">Array.toString</h2>
+<p>Returns a string representation of a given array.</p>
+<pre><code>Array.toString(array)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>The array to stringify</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Stringify <code>["hello", "goodbye"]</code>, yielding the string <code>["hello", "goodbye"]</code>.</em></p>
+<pre><code>emit -points [{result: Array.toString([&quot;hello&quot;, &quot;goodbye&quot;])}]
+</code></pre>
+
+<h2 id="arrayunshift">Array.unshift</h2>
+<p>Add an element to the beginning of an array</p>
+<pre><code>Array.unshift(array, element)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>Array to add element to</td>
+<td align="right">Yes</td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>Element to add</td>
+<td align="right">Yes</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: Add <code>'pajama'</code> and <code>'potatoes'</code> to the beginning of <code>['banana']</code></em></p>
+<pre><code>emit -points [{array: [&quot;banana&quot;]}]
+| put elements = Array.unshift(array, 'pajama', 'potatoes')
+</code></pre>
               
             </div>
           </div>
@@ -673,7 +1057,7 @@ emit -limit random_length -every :.1 second:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../date/" class="btn btn-neutral float-right" title="____ Date"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../date/" class="btn btn-neutral float-right" title="____ Date">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../" class="btn btn-neutral" title="Modules"><span class="icon icon-circle-arrow-left"></span> Previous</a>

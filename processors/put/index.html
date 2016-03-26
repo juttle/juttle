@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -590,7 +595,7 @@
             <div class="section">
               
                 <h1 id="put">put</h1>
-<p>Set the specified field of each point to the result of an expression, optionally computed over a <a href="../../reducers/juttle_reducers_timewindows/">moving time window</a>.</p>
+<p>Set the specified field of each point to the result of an expression, optionally computed over a <a href="../reducers/juttle_reducers_timewindows.md">moving time window</a>.</p>
 <pre><code>put [-over duration]
   [-reset true|false]
   fieldname1=expr1 [, fieldnameN=exprN]
@@ -608,8 +613,8 @@
 <tbody>
 <tr>
 <td><code>-over</code></td>
-<td>The moving time window over which the value will be computed, as a <a href="../../reference/time/">duration literal</a>. <p>If <code>-over</code>is :forever:, the results are cumulative, over all points seen so far. </p><p>See <a href="../../reducers/juttle_reducers_timewindows/">Moving time windows</a> for more information about moving time windows. </p></td>
-<td align="right">No; if <code>-over</code>is not specified, all points since the beginning of the current batch are used</td>
+<td>The moving time window over which the value will be computed, as a <a href="../../reference/time/">duration literal</a>. <p>If <code>-over</code> is :forever:, the results are cumulative, over all points seen so far. </p><p>See <a href="../reducers/juttle_reducers_timewindows.md">Moving time windows</a> for more information about moving time windows. </p></td>
+<td align="right">No; if <code>-over</code> is not specified, all points since the beginning of the current batch are used</td>
 </tr>
 <tr>
 <td><code>-reset</code></td>
@@ -680,7 +685,7 @@ read stochastic -source 'cdn' -from :2013-12-31: -to :2014-01-05: -daily .5 -sou
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../reduce/" class="btn btn-neutral float-right" title="____ reduce"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../reduce/" class="btn btn-neutral float-right" title="____ reduce">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../pass/" class="btn btn-neutral" title="____ pass"><span class="icon icon-circle-arrow-left"></span> Previous</a>

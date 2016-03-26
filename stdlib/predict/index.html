@@ -7,7 +7,7 @@
   
   
   
-  <title>____ Time Windowed Reducers - Juttle Language Reference</title>
+  <title>____ predict - Juttle Language Reference</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "____ Time Windowed Reducers";
-    var mkdocs_page_input_path = "reducers/juttle_reducers_timewindows.md";
-    var mkdocs_page_url = "/reducers/juttle_reducers_timewindows/";
+    var mkdocs_page_name = "____ predict";
+    var mkdocs_page_input_path = "stdlib/predict.md";
+    var mkdocs_page_url = "/stdlib/predict/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -180,10 +180,6 @@
         <a class="" href="../../concepts/juttle_tutorial/">Tutorial</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
-  
-
-        
-            
   
 
         
@@ -383,13 +379,9 @@
             
   
     <li class="toctree-l1 ">
-        <a class="" href="../">Reducers</a>
+        <a class="" href="../../reducers/">Reducers</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
-  
-
-        
-            
   
 
         
@@ -493,6 +485,19 @@
             
   
     <li class="toctree-l1 ">
+        <a class="" href="../">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
         <a class="" href="../../reference/time/">Time</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
     </li>
@@ -573,12 +578,12 @@
         
       
     
-    <li>____ Time Windowed Reducers</li>
+    <li>____ predict</li>
     <li class="wy-breadcrumbs-aside">
       
         
           
-            <a href="https://github.com/juttle/juttle/blob/master/docs/reducers/juttle_reducers_timewindows.md" class="icon icon-github"> Edit on GitHub</a>
+            <a href="https://github.com/juttle/juttle/blob/master/docs/stdlib/predict.md" class="icon icon-github"> Edit on GitHub</a>
           
         
       
@@ -589,47 +594,130 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="moving-time-windows">Moving time windows</h1>
-<p>Reducers can operate over moving time windows.</p>
-<p>With the <a href="../../processors/reduce/">reduce</a>
-processor, three parameters are used to define a moving time window:
-<code>-over</code>, <code>-every</code>, and <code>-on</code>. With <a href="../../processors/put/">put</a>,
-only <code>-over</code> is used. The <code>-over</code> parameter is known as the window,
-because it specifies a moving window of points up to the moment at which
-the reducer is run. The window may be greater or less than the interval
-<code>-every</code>, but is typically some multiple of <code>-every</code>.</p>
-<p>For example, the snippet below emits a new point every hour at 15
-minutes past the hour, using all points received in the past 6 hours:</p>
-<pre><code>reduce
-  -over :6 hours:
-  -every :hour:
-  -on :00:15:00: a = avg(foo)
-| ...
+                <h1 id="predict">Predict</h1>
+<p>Trend, seasonality, and noise estimation for metric streams.</p>
+<h2 id="predict-reducer">predict - reducer</h2>
+<p>Predict is a subgraph which consumes a metric stream and emits a prediction stream based on estimated trend, seasonality, and a smoothed version of the input. As any sub, it can only be used in stream context.</p>
+<p>Prediction errors (the difference between predict's output and the input) can
+signal anomalies in the stream.</p>
+<h3 id="usage">Usage</h3>
+<pre><code>... | predict [-field field] [-over duration] [-every duration] [-pct percentile] [-nonneg true/false] [-detrend true/false] [-deseason true/false] [-denoise true/false]
 </code></pre>
 
-<p>Its first point will be at 15 minutes after the first hour in which data
-arrives, and it will continue emitting points every hour at 15 minutes
-past the hour, each being the average of points received over the
-preceding 6 hours. It ignores any upstream batch marks, and does not
-emit any batch marks of its own.</p>
-<p>When an <code>-over</code> window is specified,
-The optional parameters <code>-from :moment:</code> and <code>-to :moment:</code>
-allow you to explicitly state the range of time covered by the stream.
-For example, if you were computing a trailing yearly average from points
-that fall on the 15th of each month, <code>-from :2013-01-01:</code> and <code>-to :2015-01-01:</code> 
-let you specify that two full years of time is
-represented by these points. Without it, yearly averages involving the
-first month would not be produced, because the points themselves only
-span part of a month. And if there was no data for the final months, the
-<code>-to</code> parameter would force results to be produced for those empty months.</p>
-<p>If you want the reduce to be driven by an upstream batch processor, but
-with a window of different size than the batch interval, specify 
-<code>-over</code> without <code>-every</code>. reduce will emit a point when it
-receives a batch mark, using points within the current window. In this
-use, the batch triggers computation according to its interval, but the
-<code>-over</code> parameter controls which points are used by reduce in its computation.</p>
-<p>When using a put processor, only <code>-over</code> may be specified, since it runs on
-each point as it is received.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+<th align="right">Required?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-field</code></td>
+<td>name of metric field to predict</td>
+<td align="right">No, default: <code>value</code></td>
+</tr>
+<tr>
+<td><code>-over</code></td>
+<td>period: the length of one repeating cycle in the input metric.</td>
+<td align="right">No, default: <code>:1 week:</code></td>
+</tr>
+<tr>
+<td><code>-every</code></td>
+<td>interval between emitted prediction points</td>
+<td align="right">No, default: is based on period</td>
+</tr>
+<tr>
+<td><code>-pct</code></td>
+<td>percentile to retain during initial reduction to every-spaced values</td>
+<td align="right">No, default: <code>0.5</code></td>
+</tr>
+<tr>
+<td><code>-nonneg</code></td>
+<td>do not allow predictions to become negative.</td>
+<td align="right">No, default: <code>true</code></td>
+</tr>
+<tr>
+<td><code>-detrend</code></td>
+<td>if false, do not remove estimated trend</td>
+<td align="right">No, default: <code>true</code></td>
+</tr>
+<tr>
+<td><code>-deseason</code></td>
+<td>if false, do not remove estimated cyclic effect</td>
+<td align="right">No, default: <code>true</code></td>
+</tr>
+<tr>
+<td><code>-denoise</code></td>
+<td>if false, do not smooth the detrended/deseasoned value</td>
+<td align="right">No, default: <code>true</code></td>
+</tr>
+</tbody>
+</table>
+<p>predict is intended to be used with a historic read or superquery (combination of historic and live data stream) that includes
+enough history to initialize its estimators. predict can begin emitting
+prediction points almost immediately, though the early points will simply be
+de-meaned. After 2 periods have gone by, trend and seasonality (at the
+resolution of -every) will switch on, and after 3 periods have passed all
+estimators have full windows of data.</p>
+<h3 id="output">Output</h3>
+<p>Each output point contains the following fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fieldname (the value of the <code>-field</code> option)</td>
+<td>average value of field over <code>-every</code> interval</td>
+</tr>
+<tr>
+<td><code>T</code></td>
+<td>portion of field predicted by the trend estimator</td>
+</tr>
+<tr>
+<td><code>S</code></td>
+<td>portion of field predicted by seasonality</td>
+</tr>
+<tr>
+<td><code>Y</code></td>
+<td>portion of field predicted by smoothing</td>
+</tr>
+<tr>
+<td><code>P</code></td>
+<td>predicted value of field, <code>T + S + Y</code></td>
+</tr>
+<tr>
+<td><code>E</code></td>
+<td>prediction error, <code>P</code> - field</td>
+</tr>
+<tr>
+<td><code>Z</code></td>
+<td>normalized error based on the sample <code>stdev</code> over trailing periods</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example: using predict to predict the next value of Math.sin(x) function</em></p>
+<pre><code>// Example showing how the `predict` sub can be used to predict the output of a
+// `Math.sin` function over time. Looking closely at the output you'll see
+// how the `E` (error) value gets quite small after about 2 cycles through,
+// which matches the natural cyclical behavior of the `sin(x)` function.
+// Once the * `predict` sub has seen &quot;enough&quot; cycles and figured out
+// the seasonality it will start to produce more accurate predictions.
+
+import &quot;predict&quot; as predict;
+
+emit -from :1 minute ago: -to :now: -every :1s:
+| put x=count(), value = Math.sin(50*x)
+// noneg=false, because sin(x) obviously has negative values
+| predict.predict -over :1s: -every :1s: -nonneg false
+| keep time, name, value, P, E
+| view table -columnOrder 'time', 'name', 'value', 'P', 'E'
+</code></pre>
               
             </div>
           </div>
@@ -637,10 +725,10 @@ each point as it is received.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../juttle_reducers_user-defined/" class="btn btn-neutral float-right" title="____ User-defined Reducers"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../reference/time/" class="btn btn-neutral float-right" title="Time">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../" class="btn btn-neutral" title="Reducers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../" class="btn btn-neutral" title="Standard Library"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -671,7 +759,7 @@ each point as it is received.</p>
         <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../juttle_reducers_user-defined/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../reference/time/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

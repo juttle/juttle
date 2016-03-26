@@ -191,10 +191,6 @@
   
 
         
-            
-  
-
-        
     </ul>
 <li>
           
@@ -447,10 +443,6 @@
         
             
   
-
-        
-            
-  
     <li class="toctree-l1 ">
         <a class="" href="../../modules/">Modules</a>
 <!-- Removed the subsection list that duplicates subsection title in most cases -->
@@ -483,6 +475,19 @@
 
         
             
+  
+
+        
+            
+  
+
+        
+            
+  
+    <li class="toctree-l1 ">
+        <a class="" href="../../stdlib/">Standard Library</a>
+<!-- Removed the subsection list that duplicates subsection title in most cases -->
+    </li>
   
 
         
@@ -642,7 +647,7 @@ input points.</p>
 </tr>
 <tr>
 <td><code>-zip &lt;true | :duration:&gt;</code></td>
-<td>Streaming one-to-one join of each input point or batch with the points or batched on the other inputs having the nearest time stamp. <br><br>If one stream has more points than the others, extra points are dropped, such that any point is joined at most once. <br><br>If specified, the <code>duration</code>is the maximum acceptable difference in time stamps between matched groups of points. If instead <code>-zip true</code>is specified, there is no limit to the difference in time stamps.</td>
+<td>Streaming one-to-one join of each input point or batch with the points or batched on the other inputs having the nearest time stamp. <br><br>If one stream has more points than the others, extra points are dropped, such that any point is joined at most once. <br><br>If specified, the <code>duration</code> is the maximum acceptable difference in time stamps between matched groups of points. If instead <code>-zip true</code> is specified, there is no limit to the difference in time stamps.</td>
 <td align="right">No; mutually exclusive with -nearest and -once.</td>
 </tr>
 <tr>
@@ -657,7 +662,7 @@ input points.</p>
 </tr>
 <tr>
 <td><code>-outer inputNumber</code></td>
-<td>Perform an outer join preserving the specified input stream. Input streams are numbered top to bottom (or left to right) from 1 in the program (that is, <code>-outer 1</code>specifies an outer left join where the first series in the flowgraph is preserved). When a point on the outer input does not have a matching join key on the other inputs, <code>-outer</code>forwards it unchanged, or partially joined against any matching inputs. Without <code>-outer</code> an inner join is performed, which only produces points when all inputs match.</td>
+<td>Perform an outer join preserving the specified input stream. Input streams are numbered top to bottom (or left to right) from 1 in the program (that is, <code>-outer 1</code> specifies an outer left join where the first series in the flowgraph is preserved). When a point on the outer input does not have a matching join key on the other inputs, <code>-outer</code> forwards it unchanged, or partially joined against any matching inputs. Without <code>-outer</code>, an inner join is performed, which only produces points when all inputs match.</td>
 <td align="right">No; defaults to inner join.</td>
 </tr>
 <tr>
@@ -859,7 +864,7 @@ output points containing both the part name and its board name.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../keep/" class="btn btn-neutral float-right" title="____ keep"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../keep/" class="btn btn-neutral float-right" title="____ keep">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../head/" class="btn btn-neutral" title="____ head"><span class="icon icon-circle-arrow-left"></span> Previous</a>

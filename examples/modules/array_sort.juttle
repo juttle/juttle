@@ -1,0 +1,2 @@
+emit -points [{array: ['c', 'a','b']}]
+| put result = Array.sort(array)
