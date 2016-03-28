@@ -9,15 +9,16 @@ For more complex visualizations, you can use [juttle engine](https://github.com/
 `juttle` is run as follows:
 
 ```
-usage: juttle [--version] [--mode <mode>] [--config <config>] [--color/--no-color]
-              [--show-locations] [--optimize] [--input name=val] [juttle-file]
+usage: juttle [--version] [--adapters] [--mode <mode>] [--view-mode <cli|text|raw>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]
      --version show juttle CLI version
+     --adapters show versions and paths to all configured adapters
      --mode <mode>: one of "parse", "semantic", "build", "flowgraph", "compile", "run"
      --config <config>: path to the juttle interpreter configuration file
      --optimize runs optimization
      --show-locations displays locations in the parse tree
      --color/--no-color turns CLI output coloring on and off
      --input name=val defines input `name` with value `val`
+     --view-mode: render view mode either using cli views, always as text, or show the raw points
      --e <juttle-src>: run the juttle source and exit
      [juttle-file]: run the provided juttle file and exit
 ```
@@ -109,6 +110,8 @@ clear, \c - clear the terminal screen
 
 ## Views
 
+By default the juttle CLI supports the following view types:
+
 ###table
 `juttle` supports [table](../sinks/view_table.md) and [text](../sinks/view_text.md) views:
 
@@ -133,6 +136,8 @@ juttle>
 ```
 
 If a program does not contain a view, `juttle` automatically adds one based on the value of the `implicit_view` configuration item (see below).
+
+By default, the CLI will reject any programs containing unsupported view types, such as those supported by `juttle-viz`. The `--view-mode` option allows for execution and debugging of these programs. When run with `--view-mode=text`, the CLI will map all views as if they were a simple `text` view, i.e. render the view output as JSON. When run with `--view-mode=raw`, the CLI will print the details of the underlying messages that would be sent to the visual views had the program been run in an environment like `juttle-engine`.
 
 ## Errors
 
