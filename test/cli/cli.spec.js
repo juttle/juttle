@@ -427,6 +427,79 @@ describe('Juttle CLI Tests', function() {
             });
         });
 
+        it('can output data for visual views in raw mode', function() {
+            return runJuttle([
+                '--view-mode=raw',
+                '-e',
+                'emit -from :0: -limit 5 | (view timechart; reduce count() | view barchart)'
+            ]).then(function(result) {
+                expect(result.stderr).to.equal('');
+                expect(result.code).to.equal(0);
+                expect(result.stdout.split('\n')).to.deep.equal([
+                    '{',
+                    '    "view": "view0",',
+                    '    "options": {',
+                    '        "_jut_time_bounds": [',
+                    '            {',
+                    '                "from": "1970-01-01T00:00:00.000Z",',
+                    '                "to": null,',
+                    '                "last": null',
+                    '            }',
+                    '        ],',
+                    '        "id": "view0",',
+                    '        "progressive": false',
+                    '    }',
+                    '}',
+                    '{',
+                    '    "view": "view1",',
+                    '    "options": {',
+                    '        "_jut_time_bounds": [',
+                    '            {',
+                    '                "from": "1970-01-01T00:00:00.000Z",',
+                    '                "to": null,',
+                    '                "last": null',
+                    '            }',
+                    '        ],',
+                    '        "id": "view1",',
+                    '        "progressive": false',
+                    '    }',
+                    '}',
+                    '{"view":"view0","type":"points","data":[{"time":"1970-01-01T00:00:00.000Z"}]}',
+                    '{"view":"view0","type":"points","data":[{"time":"1970-01-01T00:00:01.000Z"}]}',
+                    '{"view":"view0","type":"points","data":[{"time":"1970-01-01T00:00:02.000Z"}]}',
+                    '{"view":"view0","type":"points","data":[{"time":"1970-01-01T00:00:03.000Z"}]}',
+                    '{"view":"view0","type":"points","data":[{"time":"1970-01-01T00:00:04.000Z"}]}',
+                    '{"view":"view0","type":"eof"}',
+                    '{"view":"view1","type":"points","data":[{"count":5}]}',
+                    '{"view":"view1","type":"eof"}',
+                    ''
+                ]);
+            });
+        });
+
+        it('can output data for visual views in text mode', function() {
+            return runJuttle([
+                '--view-mode=text',
+                '-e',
+                'emit -from :0: -limit 5 | (view timechart; reduce count() | view barchart)'
+            ]).then(function(result) {
+                expect(result.stderr).to.equal('');
+                expect(result.code).to.equal(0);
+                expect(result.stdout.split('\n')).to.deep.equal([
+                    '[',
+                    '{"time":"1970-01-01T00:00:00.000Z"},',
+                    '{"time":"1970-01-01T00:00:01.000Z"},',
+                    '{"time":"1970-01-01T00:00:02.000Z"},',
+                    '{"time":"1970-01-01T00:00:03.000Z"},',
+                    '{"time":"1970-01-01T00:00:04.000Z"}',
+                    ']',
+                    '[',
+                    '{"count":5}',
+                    ']',
+                    ''
+                ]);
+            });
+        });
     });
 
     describe('juttle REPL', function() {

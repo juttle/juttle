@@ -47,7 +47,7 @@ var errors = require('../lib/errors');
 
 var modes = _.without(compiler.stageNames, 'eval').concat('run');
 function usage() {
-    console.log('usage: juttle [--version] [--adapters] [--mode <mode>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
+    console.log('usage: juttle [--version] [--adapters] [--mode <mode>] [--view-mode <cli|text|raw>] [--config <config>] [--color/--no-color] [--show-locations] [--optimize] [--input name=val] [juttle-file]');
     console.log('     --version show juttle CLI version');
     console.log('     --adapters show versions and paths to all configured adapters');
     console.log('     --mode <mode>: one of ' + modes.map(JSON.stringify).join(', '));
@@ -56,6 +56,7 @@ function usage() {
     console.log('     --show-locations displays locations in the parse tree');
     console.log('     --color/--no-color turns CLI output coloring on and off');
     console.log('     --input name=val defines input `name` with value `val`');
+    console.log('     --view-mode: render view mode either using cli views, always as text, or show the raw points');
     console.log('     --e <juttle-src>: run the juttle source and exit');
     console.log('     [juttle-file]: run the provided juttle file and exit');
     process.exit(1);
@@ -66,7 +67,8 @@ var defaults = {
     input: false,
     e: '',
     mode: 'run',
-    config: null
+    config: null,
+    'view-mode': 'cli'
 };
 
 var opts = minimist(process.argv.slice(2), {boolean: ['optimize']});
@@ -175,6 +177,7 @@ function perform_run(options) {
     return perform_compile(options).then(function(program) {
         var view_mgr = new ViewManager({
             program: program,
+            mode: opts['view-mode'],
             view_classes: view_classes
         },{ // env
             color: (opts.color ? true : false) && (opts.no_color ? false : true)
