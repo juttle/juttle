@@ -480,9 +480,8 @@ describe('Juttle CLI Tests', function() {
                 '-e', 'emit -from :2016-01-01: -limit 1 | view text -format "jsonl"'
             ])
             .then(function(result) {
-                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
-                expect(result.stdout).to.not.match(/\[DEBUG\]/);
-                expect(result.stdout).to.not.match(/\[INFO\]/);
+                expect(result.stdout).to.equal('{"time":"2016-01-01T00:00:00.000Z"}\n');
+                expect(result.stderr).to.equal('');
             });
         });
 
@@ -494,10 +493,10 @@ describe('Juttle CLI Tests', function() {
                 }
             )
             .then(function(result) {
-                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
-                expect(result.stdout).to.match(/\[DEBUG\] cli/);
-                expect(result.stdout).to.match(/\[DEBUG\] juttle-adapter/);
-                expect(result.stdout).to.match(/\[DEBUG\] proc-emit/);
+                expect(result.stdout).to.equal('{"time":"2016-01-01T00:00:00.000Z"}\n');
+                expect(result.stderr).to.match(/\[DEBUG\] cli/);
+                expect(result.stderr).to.match(/\[DEBUG\] juttle-adapter/);
+                expect(result.stderr).to.match(/\[DEBUG\] proc-emit/);
             });
         });
 
@@ -509,10 +508,10 @@ describe('Juttle CLI Tests', function() {
                 }
             )
             .then(function(result) {
-                expect(result.stdout).to.contain('{"time":"2016-01-01T00:00:00.000Z"}');
-                expect(result.stdout).to.match(/\[DEBUG\] cli/);
-                expect(result.stdout).to.match(/\[DEBUG\] juttle-adapter/);
-                expect(result.stdout).to.not.match(/\[DEBUG\] proc-emit/);
+                expect(result.stdout).to.equal('{"time":"2016-01-01T00:00:00.000Z"}\n');
+                expect(result.stderr).to.match(/\[DEBUG\] cli/);
+                expect(result.stderr).to.match(/\[DEBUG\] juttle-adapter/);
+                expect(result.stderr).to.not.match(/\[DEBUG\] proc-emit/);
             });
         });
     });
@@ -531,7 +530,7 @@ describe('Juttle CLI Tests', function() {
                 }
             )
             .then(function(result) {
-                expect(result.stdout).to.match(/ctrl-c received, stopping current program/);
+                expect(result.stderr).to.match(/ctrl-c received, stopping current program/);
             });
         });
 
@@ -547,7 +546,7 @@ describe('Juttle CLI Tests', function() {
                 }
             )
             .then(function(result) {
-                expect(result.stdout).to.match(/ctrl-c received, stopping current program/);
+                expect(result.stderr).to.match(/ctrl-c received, stopping current program/);
             });
         });
 
