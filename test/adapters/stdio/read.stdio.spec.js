@@ -79,7 +79,7 @@ describe('read stdio adapter tests', function() {
             .then(function(result) {
                 expect(result.errors.length).to.equal(1);
                 expect(result.warnings).deep.equals([]);
-                expect(result.errors[0]).to.contain('Error: Invalid ' + format.toUpperCase() + ' data');
+                expect(result.errors[0]).to.contain('Invalid ' + format.toUpperCase() + ' data');
             });
         });
 
@@ -316,6 +316,47 @@ describe('read stdio adapter tests', function() {
             expect(result.sinks.table).to.deep.equal([
                 { a: '1', b: '2', c: '' }
             ]);
+        });
+    });
+
+    it('can read stream data correctly', () => {
+        // fake stdin which emits 1 points every 100ms for 20 iterations
+        juttle_test_utils.set_stdin({
+            on: (event, callback) => {},
+
+            pipe: (destination, options) => {
+                function writeIt(writesLeft) {
+                    if (writesLeft > 0) {
+                        writesLeft--;
+                        destination.write(JSON.stringify({
+                            index: writesLeft,
+                            foo: 'bar'
+                        }) + '\n');
+                        setTimeout(writeIt, 1, writesLeft);
+                    } else {
+                        destination.end();
+                    }
+                }
+
+                writeIt(2048);
+            }
+        });
+
+        return check_juttle({
+            // we can verify that the data was actually streamed if the "distance"
+            // between dispatching each point is greater than 1s otherwise we're 
+            // certain that the points were all dispatched only when the stream
+            // eof'ed and read was able to receive those points and flush them out
+            program: 'read stdio -format "jsonl" ' + 
+                     '| put dtime=Date.time() ' + 
+                     '| reduce last=last(dtime), first=first(dtime) ' + 
+                     '| put distance=Duration.as(last-first, "seconds") ' + 
+                     '| keep distance'
+        })
+        .then(function(result) {
+            expect(result.errors.length).to.equal(0);
+            expect(result.warnings.length).to.equal(0);
+            expect(result.sinks.table[0].distance).to.be.greaterThan(1);
         });
     });
 });
