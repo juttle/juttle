@@ -376,7 +376,7 @@ describe('stochastic -source "logs"', function() {
     });
     it('emits points continously to the live stream', function() {
         return check_juttle({
-            program: 'read stochastic -to :end: -source "cdn" -every :1s: ' +
+            program: 'read stochastic -to :end: -source "cdn" ' +
                 '| reduce -every :1s: count()' +
                 '| view result',
             deactivateAfter: 2000
