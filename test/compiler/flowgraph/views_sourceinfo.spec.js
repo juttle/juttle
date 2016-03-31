@@ -5,11 +5,12 @@ var compiler = require('../../../lib/compiler');
 var views_sourceinfo = require('../../../lib/compiler/flowgraph/views_sourceinfo');
 var juttle_test_utils = require('../../runtime/specs/juttle-test-utils'); // eslint-disable-line
 var JuttleMoment = require('../../../lib/runtime/types/juttle-moment');
+var FlowControl = require('../../../lib/runtime/flow-control');
 
 describe('Views get info on source time bounds', function() {
     function test(juttle, spec) {
         it(juttle, function() {
-            var prog = compiler.compileSync(juttle, {fg_processors: [views_sourceinfo]});
+            var prog = compiler.compileSync(juttle, {fg_processors: [views_sourceinfo], flow_control: new FlowControl()});
             var views = prog.get_views();
             var expected, actual;
 
