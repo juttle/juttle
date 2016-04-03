@@ -27,5 +27,5 @@ Regression test for #351.
 
 ### Output
 
-    { time: null }
-    { time: null }
+    { time: null, interval: "00:00:01.000" }
+    { time: null, interval: "00:00:01.000" }

@@ -114,7 +114,7 @@ class TestView extends View {
     }
     mark(mark) {
         if (this.marks && this.times) {
-            this.data = this.data.concat(utils.fromNative([{time:mark.time, mark:true}]));
+            this.data = this.data.concat(utils.fromNative([_.extend({mark: true}, mark)]));
         } else if (this.marks) {
             this.data = this.data.concat({mark:true});
         }

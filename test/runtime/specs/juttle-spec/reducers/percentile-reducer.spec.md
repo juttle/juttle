@@ -28,7 +28,7 @@
     emit -limit -1 -from Date.new(0) | batch :s: | reduce percentile('foo') |  view result
 
 ### Output
-    {percentile: null}
+    {percentile: null, interval: "00:00:00.100"}
 
 
 ## (skip) outputs null on empty batched stream  (reduce -every)
@@ -38,7 +38,7 @@
     emit -limit -1 -from Date.new(0) | reduce -every :s: percentile('foo') |  view result
 
 ### Output
-    {percentile: null}
+    {percentile: null, interval: "00:00:00.100"}
 
 
 ## outputs null on empty batch (explicit batches)
@@ -48,8 +48,8 @@
     emit -limit 2 -every :0.1s: -from Date.new(0) | batch :0.1s: | reduce percentile('foo') |  view result
 
 ### Output
-    {percentile: null, time: "1970-01-01T00:00:00.100Z"}
-    {percentile: null, time: "1970-01-01T00:00:00.200Z"}
+    {percentile: null, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}
+    {percentile: null, time: "1970-01-01T00:00:00.200Z", interval: "00:00:00.100"}
 
 
 ## outputs null on empty batch (reduce -every)
@@ -59,8 +59,8 @@
     emit -limit 2 -every :0.1s: -from Date.new(0) | reduce -every :0.1s: percentile('foo') |  view result
 
 ### Output
-    {percentile: null, time: "1970-01-01T00:00:00.100Z"}
-    {percentile: null, time: "1970-01-01T00:00:00.200Z"}
+    {percentile: null, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}
+    {percentile: null, time: "1970-01-01T00:00:00.200Z", interval: "00:00:00.100"}
 
 
 ## outputs null on empty window (reduce -every -over)
@@ -70,7 +70,7 @@
     emit -limit 1 -every :0.1s: -from Date.new(0) | reduce -every :0.1s: -over :0.1s: percentile('foo') |  view result
 
 ### Output
-    {percentile: null, time: "1970-01-01T00:00:00.100Z"}
+    {percentile: null, time: "1970-01-01T00:00:00.100Z", interval: "00:00:00.100"}
 
 
 ## complains about nonnumeric input
