@@ -250,6 +250,49 @@ By default, the runtime will try to load the adapter from an npm module matching
 
 To load an adapter from a different location, add a `path` attribute to the adapter configuration that contains the module path to be used when loading the adapter.
 
+For multiple instances of the same adapter, a configuration can look like one of the following:
+
+```
+{
+    "adapters": {
+        "elastic": [
+            {
+                "id": "local",
+                "address": "localhost",
+                "port": 9200
+            },
+            {
+                "id": "prod",
+                "address": "prodHost",
+                "port": 9200
+            }
+        ]
+    }
+}
+```
+or 
+```
+{
+    "adapters": {
+        "elastic": {
+            "instances": [
+                {
+                    "id": "local",
+                    "address": "localhost",
+                    "port": 9200
+                },
+                {
+                    "id": "prod",
+                    "address": "prodHost",
+                    "port": 9200
+                }
+            ],
+            "path": "path/to/elastic/module"
+        }
+    }
+}
+```
+
 ## Logging
 
 `juttle` uses [log4js](http://stritti.github.io/log4js/) for logging, and can be controlled via the standard `log4js.json` file. In addition, unless the environment variable `DEBUG` is set to 1, `juttle` sets the default log level to 'info'.
