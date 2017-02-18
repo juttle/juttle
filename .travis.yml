@@ -7,24 +7,25 @@ cache:
 addons:
   apt:
     sources:
-        - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-        - g++-4.8
+      - g++-4.8
 
 before_install:
-    - export CXX="g++-4.8"
- 
-node_js:
-    - '4.2'
-    - '5.0'
+  - export CXX="g++-4.8"
 
-before_script:
-    - npm install -g gulp
+node_js:
+  - '4.2'
+  - '5.0'
+
+install:
+  - npm install
+  - npm install -g gulp
       # grok parser tests need node-grok
-    - npm install node-grok@1.0.5
+  - npm install node-grok@1.0.5
 
 script:
-    - gulp lint examples-check test-coverage
+  - gulp lint examples-check test-coverage
 
 notifications:
   slack:
