@@ -25,6 +25,7 @@ class TestTimeseriesRead extends AdapterRead {
         }
 
         this.every = options.every || this.defaultTimeOptions().every;
+        this.density = options.density || 1; // points per batch
         this.count = 0;
         this.time_ranges = []; // for tests
         if (params.optimization_info._reduce_every) {
@@ -43,6 +44,8 @@ class TestTimeseriesRead extends AdapterRead {
         });
     }
 
+    static allowedOptions() { return super.commonOptions().concat(['density']); }
+
     read(from, to, limit, state) {
         this.time_ranges.push({from: from, to: to});
         // Use the state to store the next timestamp to send.
@@ -51,6 +54,7 @@ class TestTimeseriesRead extends AdapterRead {
         }
 
         var points = [];
+
         while (points.length < limit) {
             if (state.gte(to)) {
                 break;
@@ -61,7 +65,7 @@ class TestTimeseriesRead extends AdapterRead {
                 count: this.count++
             });
 
-            state = state.add(this.every);
+            state = state.add(this.every.divide(this.density));
         }
 
         if (this.optimized_reduce_every) {
