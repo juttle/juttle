@@ -102,6 +102,7 @@ describe('read testTimeseries', function () {
         })
         .then(function(result) {
             var expected = [
+                { tick: true, dt: '00:00:00.000'},
                 { count: 0, dtProg: 0, dtReal: 2 },
                 { tick: true, dt: '00:00:01.000'},
                 { count: 1, dtProg: 2, dtReal: 2 },
